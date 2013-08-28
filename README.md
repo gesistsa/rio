@@ -14,3 +14,10 @@ x <- import("iris.csv")
 y <- import("iris.rds")
 z <- import("iris.dta")
 ```
+
+## Installation
+
+```R
+require(devtools)
+install_github("rio", "chainsawriot")
+```
