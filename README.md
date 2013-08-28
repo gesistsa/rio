@@ -1,6 +1,6 @@
 # rio
 
-The aim of `rio` is to make data file I/O in R as easy as possible. The swiss-army knife-sytle functions `export` and `import` provide painless data file I/O experience.
+The aim of `rio` is to make data file I/O in R as easy as possible. The swiss-army knife-style functions `export` and `import` provide painless data file I/O experience.
 
 ## example
 
