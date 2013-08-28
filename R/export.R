@@ -4,10 +4,12 @@
 #'
 #' @param x data frame or matrix to be written into a file.
 #' @param file a character string naming a file.
-#' @param format a character string code of file format
+#' @param format a character string code of file format. The following file formats are supported: txt, rds, csv and dta.
 #' @param row.names a logical value ('TRUE' or 'FALSE') indicating whether the row names of 'x' are to be written along with 'x'
 #' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... additional arguments for the underlying export functions.
+#' @examples
+#' export(iris, "iris.csv")
 #' @export
 
 export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) {
@@ -33,9 +35,11 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
 #' This function imports a data frame or matrix from a data file with the file format based on the file extension.
 #'
 #' @param file a character string naming a file.
-#' @param format a character string code of file format
+#' @param format a character string code of file format. The following file formats are supported: txt, rds, csv, dta, sav, mtp and rec.
 #' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... Additional arguments for the underlying export functions.
+#' @examples
+#' #x <- import("iris.dta")
 #' @export
 
 import <- function(file="", format=NULL, header=TRUE, ... ) {

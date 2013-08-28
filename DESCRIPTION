@@ -4,7 +4,12 @@ Version: 0.1.1
 Maintainer: Chung-hong Chan <chainsawtiney@gmail.com>
 Author: Chung-hong Chan <chainsawtiney@gmail.com>, Geoffrey CH Chan
     <gefchchan@gmail.com>
-Description: Rio is a set of tool aims to simplify the process of importing/exporting data. The import() and export() functions will determine data file format base on the file extension, without the need to select appropriate read/write function for the specific data file format. For example, exporting the iris data into a csv file can be achieved with the following command: export(iris, "iris.csv")
+Description: Rio is a set of tool aims to simplify the process of
+    importing/exporting data. The import() and export() functions will
+    determine data file format base on the file extension, without the need to
+    select appropriate read/write function for the specific data file format.
+    For example, exporting the iris data into a csv file can be achieved with
+    the following command: export(iris, "iris.csv")
 Depends:
     R (>= 2.15.0)
 Imports:
