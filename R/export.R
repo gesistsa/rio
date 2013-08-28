@@ -1,16 +1,15 @@
 #' Writing data frame or matrix into a file
 #'
-#' This function exports a data frame or matrix to a file with file format based on the file extension.
+#' This function exports a data frame or matrix into a data file with file format based on the file extension.
 #'
 #' @param x data frame or matrix to be written into a file.
 #' @param file a character string naming a file.
-#' @param guess a logocal value ('TRUE' or 'FALSE'). If 'TRUE', the file format will be chosen based on the file extension.
-#' @param format a character string code of file format, will override the 'guess' option
+#' @param format a character string code of file format
 #' @param row.names a logical value ('TRUE' or 'FALSE') indicating whether the row names of 'x' are to be written along with 'x'
 #' @param ... additional arguments for the underlying export functions.
 #' @export
 
-export <- function(x, file="", guess=TRUE, format=NULL, row.names=FALSE, ... ) {
+export <- function(x, file="", format=NULL, row.names=FALSE, ... ) {
   if (!is.data.frame(x) & !is.matrix(x)) {
     stop("x is not a data frame or matrix.")
   }
@@ -30,15 +29,14 @@ export <- function(x, file="", guess=TRUE, format=NULL, row.names=FALSE, ... ) {
 
 #' Reading data frame or matrix from a file
 #'
-#' This function imports a data frame or matrix from a file with the file format based on the file extension.
+#' This function imports a data frame or matrix from a data file with the file format based on the file extension.
 #'
 #' @param file a character string naming a file.
-#' @param guess a logocal value ('TRUE' or 'FALSE'). If 'TRUE', the file format will be chosen based on the file extension.
-#' @param format a character string code of file format, will override the 'guess' option
+#' @param format a character string code of file format
 #' @param ... Additional arguments for the underlying export functions.
 #' @export
 
-import <- function(file="", guess=TRUE, format=NULL, ... ) {
+import <- function(file="", format=NULL, ... ) {
   format <- .guess(file, format)
   x <- switch(format,
               txt=read.table(file=file, sep="\t", ...), ##tab-seperate txt file
@@ -53,6 +51,13 @@ import <- function(file="", guess=TRUE, format=NULL, ... ) {
   return(x)
 }
 
+#convert <- function(in_file, out_file, in_format=NULL, out_format=NULL, row.names=FALSE, ...) {
+#    export(import(file=in_file, format=in_format, ...), file=out_file, format=out_format, row.names=row.names, ...)
+#}
+
+
+#### internal helper function to handle the pre-condition of the import and export functions
+#### Not export and no doc
 
 .guess <- function(filename, format=NULL) {
   # guess the file format of filename based on file extension
@@ -61,11 +66,7 @@ import <- function(file="", guess=TRUE, format=NULL, ... ) {
   if (!is.character(filename)) {
     stop("Filename is not a string")
   }
-  if (!is.null(format)) {
-    guess_format <- format
-  } else {
-    guess_format <- str_extract(tolower(filename), "\\.(txt|csv|dta|sav|sas|rec|rds|mtp)$")
-  }
+  guess_format <- ifelse(!is.null(format), tolower(format), str_extract(tolower(filename), "\\.(txt|csv|dta|sav|sas|rec|rds|mtp)$"))
   if (is.na(guess_format)) {
     stop("Unknown file format")
   } else {

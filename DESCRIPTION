@@ -1,12 +1,12 @@
 Package: rio
 Title: A swiss-army knife for data file I/O
-Version: 0.1
+Version: 0.11
 Maintainer: Chung-hong Chan <chainsawtiney@gmail.com>
 Author: Chung-hong Chan <chainsawtiney@gmail.com>, Geoffrey CH Chan
     <gefchchan@gmail.com>
 Description: Rio makes it easier to work with data file input and output.
 Depends:
-    R (>= 3.0.0)
+    R (>= 2.15.0)
 Imports:
     stringr,
     foreign,
