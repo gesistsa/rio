@@ -14,7 +14,7 @@
   \item{header}{a logical value indicating whether the file
   contains the names of the variables as its first line.}
 
-  \item{...}{Additional arguments for the underlying export
+  \item{...}{Additional arguments for the underlying import
   functions.}
 }
 \description{

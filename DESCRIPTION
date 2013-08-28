@@ -4,7 +4,7 @@ Version: 0.1.1
 Maintainer: Chung-hong Chan <chainsawtiney@gmail.com>
 Author: Chung-hong Chan <chainsawtiney@gmail.com>, Geoffrey CH Chan
     <gefchchan@gmail.com>
-Description: Rio is a set of tool aims to simplify the process of
+Description: Rio is a set of tools aims to simplify the process of
     importing/exporting data. The import() and export() functions will
     determine data file format base on the file extension, without the need to
     select appropriate read/write function for the specific data file format.

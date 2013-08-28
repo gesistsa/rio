@@ -37,7 +37,7 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
 #' @param file a character string naming a file.
 #' @param format a character string code of file format. The following file formats are supported: txt, rds, csv, dta, sav, mtp and rec.
 #' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
-#' @param ... Additional arguments for the underlying export functions.
+#' @param ... Additional arguments for the underlying import functions.
 #' @examples
 #' #x <- import("iris.dta")
 #' @export
