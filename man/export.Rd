@@ -3,7 +3,7 @@
 \title{Writing data frame or matrix into a file}
 \usage{
   export(x, file = "", format = NULL, row.names = FALSE,
-    ...)
+    header = TRUE, ...)
 }
 \arguments{
   \item{x}{data frame or matrix to be written into a file.}
@@ -15,6 +15,9 @@
   \item{row.names}{a logical value ('TRUE' or 'FALSE')
   indicating whether the row names of 'x' are to be written
   along with 'x'}
+
+  \item{header}{a logical value indicating whether the file
+  contains the names of the variables as its first line.}
 
   \item{...}{additional arguments for the underlying export
   functions.}

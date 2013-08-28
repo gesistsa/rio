@@ -6,10 +6,11 @@
 #' @param file a character string naming a file.
 #' @param format a character string code of file format
 #' @param row.names a logical value ('TRUE' or 'FALSE') indicating whether the row names of 'x' are to be written along with 'x'
+#' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... additional arguments for the underlying export functions.
 #' @export
 
-export <- function(x, file="", format=NULL, row.names=FALSE, ... ) {
+export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) {
   if (!is.data.frame(x) & !is.matrix(x)) {
     stop("x is not a data frame or matrix.")
   }
@@ -19,7 +20,7 @@ export <- function(x, file="", format=NULL, row.names=FALSE, ... ) {
   format <- .guess(file)
   ### DRY(don't repeat yourself) way of doing this, rather than a series of if-else statement
   switch(format,
-         txt=write.table(x, file=file, sep="\t", row.names=row.names,...), ##tab-seperate txt file
+         txt=write.table(x, file=file, sep="\t", row.names=row.names, col.names=header,...), ##tab-seperate txt file
          rds=saveRDS(x, file=file, ...),
          csv=write.csv(x, file=file, row.names=row.names, ...), 
          dta=write.dta(x, file=file, ...), ### stata
@@ -33,13 +34,14 @@ export <- function(x, file="", format=NULL, row.names=FALSE, ... ) {
 #'
 #' @param file a character string naming a file.
 #' @param format a character string code of file format
+#' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... Additional arguments for the underlying export functions.
 #' @export
 
-import <- function(file="", format=NULL, ... ) {
+import <- function(file="", format=NULL, header=TRUE, ... ) {
   format <- .guess(file, format)
   x <- switch(format,
-              txt=read.table(file=file, sep="\t", ...), ##tab-seperate txt file
+              txt=read.table(file=file, sep="\t", header=header, ...), ##tab-seperate txt file
               rds=readRDS(file=file, ...),
               csv=read.csv(file=file, ...),
               dta=read.dta(file=file, ...),
