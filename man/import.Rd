@@ -21,7 +21,19 @@
   This function imports a data frame or matrix from a data
   file with the file format based on the file extension.
 }
+\note{
+  For csv and txt files with row names exported from
+  export(), additional ... argument of row.names might be
+  useful to specify the column of the table which contain
+  row names. See example below.
+}
 \examples{
 #x <- import("iris.dta")
+myIris <- datasets::iris
+export(myIris, "myIris.csv", row.names=TRUE)
+myIris2 <- import("myIris.csv") ### with the additional spurious column
+head(myIris2)
+myIris3 <- import("myIris.csv", row.names=1)
+head(myIris3)
 }
 

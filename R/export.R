@@ -38,8 +38,15 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
 #' @param format a character string code of file format. The following file formats are supported: txt, rds, csv, dta, sav, mtp and rec.
 #' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... Additional arguments for the underlying import functions.
+#' @note For csv and txt files with row names exported from export(), additional ... argument of row.names might be useful to specify the column of the table which contain row names. See example below. 
 #' @examples
 #' #x <- import("iris.dta")
+#' myIris <- datasets::iris
+#' export(myIris, "myIris.csv", row.names=TRUE)
+#' myIris2 <- import("myIris.csv") ### with the additional spurious column
+#' head(myIris2)
+#' myIris3 <- import("myIris.csv", row.names=1)
+#' head(myIris3)
 #' @export
 
 import <- function(file="", format=NULL, header=TRUE, ... ) {
