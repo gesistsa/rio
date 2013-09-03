@@ -54,7 +54,7 @@ import <- function(file="", format=NULL, header=TRUE, ... ) {
   x <- switch(format,
               txt=read.table(file=file, sep="\t", header=header, ...), ##tab-seperate txt file
               rds=readRDS(file=file, ...),
-              csv=read.csv(file=file, ...),
+              csv=read.csv(file=file, header=header, ...),
               dta=read.dta(file=file, ...),
               sav=read.spss(file=file,to.data.frame=TRUE, ...),
               mtp=read.mtp(file=file, ...),
