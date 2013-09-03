@@ -1,6 +1,6 @@
 Package: rio
 Title: A Swiss-army knife for data file I/O
-Version: 0.1.1
+Version: 0.1.2
 Maintainer: Chung-hong Chan <chainsawtiney@gmail.com>
 Author: Chung-hong Chan <chainsawtiney@gmail.com>, Geoffrey CH Chan
     <gefchchan@gmail.com>
