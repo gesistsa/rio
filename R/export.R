@@ -35,7 +35,7 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
          },
          rds = saveRDS(x, file=file, ...),
          csv = write.csv(x, file=file, row.names=row.names, ...), 
-         Rdata = save(x, file = file, ...),
+         rdata = save(x, file = file, ...),
          sav = haven::write_sav(data = x, path = file),
          dta = haven::write_dta(data = x, path = file),
          dbf = foreign::write.dbf(dataframe = x, file = file, ...),
@@ -75,7 +75,7 @@ import <- function(file="", format=NULL, header=TRUE, ... ) {
               fwf = utils::read.fwf(file = file, header = header, ...),
               rds = readRDS(file=file, ...),
               csv = read.csv(file=file, header=header, ...),
-              Rdata = { e <- new.env(); load(file = file, envir = e, ...); get(ls(e)[1], e) }, # return first object from a .Rdata
+              rdata = { e <- new.env(); load(file = file, envir = e, ...); get(ls(e)[1], e) }, # return first object from a .Rdata
               dta = haven::read_dta(path = file),
               dbf = foreign::read.dbf(file = file, ...),
               dif = utils::read.DIF(file = file, ...),
@@ -126,7 +126,7 @@ convert <- function(in_file, out_file, in_opts=list(), out_opts=list()) {
   }
   guess_format <- ifelse(!is.null(format), tolower(format), 
                          str_extract(tolower(filename), 
-                         "\\.(txt|tsv|csv|json|Rdata|dta|sav|por|rec|rds|dbf|syd|dif|fwf|mtp|xlsx|sas7bdat|xpt)$"))
+                         "\\.(txt|tsv|csv|json|rdata|dta|sav|por|rec|rds|dbf|syd|dif|fwf|mtp|xlsx|sas7bdat|xpt)$"))
   if(filename == "clipboard") {
     return("clipboard")
   } else if (is.na(guess_format)) {
