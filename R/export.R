@@ -4,7 +4,7 @@
 #'
 #' @param x data frame or matrix to be written into a file.
 #' @param file a character string naming a file.
-#' @param format a character string code of file format. The following file formats are supported: txt, rds, csv and dta.
+#' @param format a character string code of file format. The following file formats are supported: txt, csv, tsv, rds, Rdata, json, dbf, dta, xlsx, and arff.
 #' @param row.names a logical value ('TRUE' or 'FALSE') indicating whether the row names of 'x' are to be written along with 'x'
 #' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... additional arguments for the underlying export functions.
@@ -21,12 +21,26 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
     x <- as.data.frame(x)
   }
   format <- .guess(file)
-  ### DRY(don't repeat yourself) way of doing this, rather than a series of if-else statement
   switch(format,
-         txt=write.table(x, file=file, sep="\t", row.names=row.names, col.names=header,...), ##tab-seperate txt file
-         rds=saveRDS(x, file=file, ...),
-         csv=write.csv(x, file=file, row.names=row.names, ...), 
-         dta=write.dta(x, file=file, ...), ### stata
+         txt = write.table(x, file=file, sep="\t", row.names=row.names, col.names=header, ...),
+         tsv = write.table(x, file=file, sep="\t", row.names=row.names, col.names=header, ...),
+         clipboard = {
+            if(Sys.info()["sysname"] == "Darwin") {
+                clip <- pipe("pbcopy", "w")                       
+                write.table(x, file = clip, sep="\t", row.names=row.names, col.names=header, ...)
+                close(clip)
+            } else if(Sys.info()["sysname"] == "Windows") {
+                write.table(x, file="clipboard", sep="\t", row.names=row.names, col.names=header, ...)
+            }
+         },
+         rds = saveRDS(x, file=file, ...),
+         csv = write.csv(x, file=file, row.names=row.names, ...), 
+         Rdata = save(x, file = file, ...),
+         dta = foreign::write.dta(x, file=file, ...),
+         dbf = foreign::write.dbf(dataframe = x, file = file, ...),
+         json = cat(jsonlite::toJSON(x, ...), file = file),
+         arff = foreign::write.arff(x = x, file = file, ...),
+         xlsx = openxlsx::write.xlsx(x = x, file = file, ...),
          stop("Unknown file format")
          )
   invisible(file)
@@ -37,7 +51,7 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
 #' This function imports a data frame or matrix from a data file with the file format based on the file extension.
 #'
 #' @param file a character string naming a file.
-#' @param format a character string code of file format. The following file formats are supported: txt, rds, csv, dta, sav, mtp and rec.
+#' @param format a character string code of file format. The following file formats are supported: txt, tsv, csv, rds, Rdata, dta, sav, mtp, json, dif, rec, dbf, syd, xlsx, arff, and fwf (fixed-width format; requires a \code{widths} argument).
 #' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... Additional arguments for the underlying import functions.
 #' @return An R dataframe.
@@ -55,13 +69,22 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
 import <- function(file="", format=NULL, header=TRUE, ... ) {
   format <- .guess(file, format)
   x <- switch(format,
-              txt=read.table(file=file, sep="\t", header=header, ...), ##tab-seperate txt file
-              rds=readRDS(file=file, ...),
-              csv=read.csv(file=file, header=header, ...),
-              dta=read.dta(file=file, ...),
-              sav=read.spss(file=file,to.data.frame=TRUE, ...),
-              mtp=read.mtp(file=file, ...),
-              rec=read.epiinfo(file=file, ...),
+              txt = read.table(file=file, sep="\t", header=header, ...),
+              tsv = read.table(file=file, sep="\t", header=header, ...),
+              fwf = utils::read.fwf(file = file, header = header, ...),
+              rds = readRDS(file=file, ...),
+              csv = read.csv(file=file, header=header, ...),
+              Rdata = { e <- new.env(); load(file = file, envir = e, ...); get(ls(e)[1], e) }, # return first object from a .Rdata
+              dta = foreign::read.dta(file=file, ...),
+              dbf = foreign::read.dbf(file = file, ...),
+              dif = utils::read.DIF(file = file, ...),
+              sav = foreign::read.spss(file=file, to.data.frame=TRUE, ...),
+              mtp = foreign::read.mtp(file=file, ...),
+              syd = foreign::read.systat(file = file, to.data.frame = TRUE),
+              json = jsonlite::fromJSON(file = file, ...),
+              rec = foreign::read.epiinfo(file=file, ...),
+              arff = foreign::read.arff(file = file),
+              xlsx = openxlsx::read.xlsx(xlsxFile = file, colNames = header, ...),
               stop("Unknown file format")
               )
   return(x)
@@ -81,6 +104,7 @@ import <- function(file="", format=NULL, header=TRUE, ... ) {
 #' convert("iris.csv", "iris.dta")
 #' import("iris.dta")
 #' @export
+
 convert <- function(in_file, out_file, in_opts=list(), out_opts=list()) {
     invisible(do.call("export", c(list(file = out_file, x = do.call("import", c(list(file=in_file), in_opts))), out_opts)))
 }
@@ -96,8 +120,10 @@ convert <- function(in_file, out_file, in_opts=list(), out_opts=list()) {
   if (!is.character(filename)) {
     stop("Filename is not a string")
   }
-  guess_format <- ifelse(!is.null(format), tolower(format), str_extract(tolower(filename), "\\.(txt|csv|dta|sav|sas|rec|rds|mtp)$"))
-  if (is.na(guess_format)) {
+  guess_format <- ifelse(!is.null(format), tolower(format), str_extract(tolower(filename), "\\.(txt|tsv|csv|json|Rdata|dta|sav|sas|rec|rds|dbf|syd|dif|fwf|mtp|xlsx)$"))
+  if(filename == "clipboard") {
+    return("clipboard")
+  } else if (is.na(guess_format)) {
     stop("Unknown file format")
   } else {
     return(str_replace(guess_format, "\\.", ""))

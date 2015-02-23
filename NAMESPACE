@@ -3,7 +3,5 @@
 export(convert)
 export(export)
 export(import)
-import(foreign)
-import(testthat)
 importFrom(stringr,str_extract)
 importFrom(stringr,str_replace)

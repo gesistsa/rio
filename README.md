@@ -7,19 +7,33 @@ The aim of `rio` is to make data file I/O in R as easy as possible. The swiss-ar
 *Export*
 
 * txt (tab-seperated)
+* tsv
 * csv
 * rds
+* Rdata
+* json
 * dta (Stata)
+* xlsx (Excel)
+* arff (Attribute-Relation File Format; Weka)
+* clipboard (on Mac and Windows only)
 
 *Import*
 
 * txt (tab-seperated)
+* tsv
 * csv
 * rds
+* Rdata
+* json
 * dta (Stata)
 * sav (SPSS)
 * mtp (Minitab)
 * rec (Epiinfo)
+* syd (Systat)
+* dif (Data Interchange Format)
+* dbf ("XBASE" database files)
+* xlsx (Excel)
+* arff (Attribute-Relation File Format; Weka)
 
 ## Examples
 
