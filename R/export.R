@@ -8,6 +8,7 @@
 #' @param row.names a logical value ('TRUE' or 'FALSE') indicating whether the row names of 'x' are to be written along with 'x'
 #' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... additional arguments for the underlying export functions.
+#' @return The name of the output file (invisibly).
 #' @examples
 #' export(iris, "iris.csv")
 #' @export
@@ -28,6 +29,7 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
          dta=write.dta(x, file=file, ...), ### stata
          stop("Unknown file format")
          )
+  invisible(file)
 }
 
 #' Reading data frame or matrix from a file
@@ -38,6 +40,7 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
 #' @param format a character string code of file format. The following file formats are supported: txt, rds, csv, dta, sav, mtp and rec.
 #' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... Additional arguments for the underlying import functions.
+#' @return An R dataframe.
 #' @note For csv and txt files with row names exported from export(), additional ... argument of row.names might be useful to specify the column of the table which contain row names. See example below. 
 #' @examples
 #' #x <- import("iris.dta")
@@ -64,9 +67,23 @@ import <- function(file="", format=NULL, header=TRUE, ... ) {
   return(x)
 }
 
-#convert <- function(in_file, out_file, in_format=NULL, out_format=NULL, row.names=FALSE, ...) {
-#    export(import(file=in_file, format=in_format, ...), file=out_file, format=out_format, row.names=row.names, ...)
-#}
+#' Convert from one file format to another
+#'
+#' This function constructs a data frame from a data and exports to the specified format based on the file extension.
+#'
+#' @param in_file a character string naming an input file.
+#' @param out_file a character string naming an output file.
+#' @param in_opts a named list of options to be passed to \code{\link{import}}
+#' @param out_opts a named list of options to be passed to \code{\link{export}}
+#' @return The name of the output file (invisibly).
+#' @examples
+#' export(iris, "iris.csv")
+#' convert("iris.csv", "iris.dta")
+#' import("iris.dta")
+#' @export
+convert <- function(in_file, out_file, in_opts=list(), out_opts=list()) {
+    invisible(do.call("export", c(list(file = out_file, x = do.call("import", c(list(file=in_file), in_opts))), out_opts)))
+}
 
 
 #### internal helper function to handle the pre-condition of the import and export functions

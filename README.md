@@ -1,17 +1,17 @@
 # rio
 
-The aim of `rio` is to make data file I/O in R as easy as possible. The swiss-army knife-style functions `export` and `import` provide painless data file I/O experience.
+The aim of `rio` is to make data file I/O in R as easy as possible. The swiss-army knife-style functions `export` and `import` provide painless data file I/O experience and the `convert` function allows the user to convert between file formats.
 
-## Supported file format
+## Supported file formats
 
-Export
+*Export*
 
 * txt (tab-seperated)
 * csv
 * rds
 * dta (Stata)
 
-Import
+*Import*
 
 * txt (tab-seperated)
 * csv
@@ -21,23 +21,29 @@ Import
 * mtp (Minitab)
 * rec (Epiinfo)
 
-## example
+## Examples
 
 ```R
-require(rio)
+library(rio)
+
+# export
 export(iris, "iris.csv")
 export(iris, "iris.rds")
 export(iris, "iris.dta")
 
+# import
 x <- import("iris.csv")
 y <- import("iris.rds")
 z <- import("iris.dta")
+
+# convert
+convert("iris.csv", "iris.dta")
 ```
 
-## Installation
+## Package Installation
 
 ```R
-require(devtools)
-install_github("rio", "chainsawriot")
+library("devtools")
+install_github("chainsawriot/rio")
 ```
 
