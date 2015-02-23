@@ -4,7 +4,7 @@
 #'
 #' @param x data frame or matrix to be written into a file.
 #' @param file a character string naming a file.
-#' @param format a character string code of file format. The following file formats are supported: txt, csv, tsv, rds, Rdata, json, dbf, dta, xlsx, and arff.
+#' @param format a character string code of file format. The following file formats are supported: txt, csv, tsv, rds, Rdata, json, dbf, sav, dta, xlsx, and arff.
 #' @param row.names a logical value ('TRUE' or 'FALSE') indicating whether the row names of 'x' are to be written along with 'x'
 #' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... additional arguments for the underlying export functions.
@@ -36,7 +36,8 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
          rds = saveRDS(x, file=file, ...),
          csv = write.csv(x, file=file, row.names=row.names, ...), 
          Rdata = save(x, file = file, ...),
-         dta = foreign::write.dta(x, file=file, ...),
+         sav = haven::write_sav(data = x, path = file),
+         dta = haven::write_dta(data = x, path = file),
          dbf = foreign::write.dbf(dataframe = x, file = file, ...),
          json = cat(jsonlite::toJSON(x, ...), file = file),
          arff = foreign::write.arff(x = x, file = file, ...),
@@ -51,7 +52,7 @@ export <- function(x, file="", format=NULL, row.names=FALSE, header=TRUE, ... ) 
 #' This function imports a data frame or matrix from a data file with the file format based on the file extension.
 #'
 #' @param file a character string naming a file.
-#' @param format a character string code of file format. The following file formats are supported: txt, tsv, csv, rds, Rdata, dta, sav, mtp, json, dif, rec, dbf, syd, xlsx, arff, and fwf (fixed-width format; requires a \code{widths} argument).
+#' @param format a character string code of file format. The following file formats are supported: txt, tsv, csv, rds, Rdata, dta, sav, por, mtp, json, dif, rec, dbf, sas7bdat, syd, xlsx, arff, xpt, and fwf (fixed-width format; requires a \code{widths} argument).
 #' @param header a logical value indicating whether the file contains the names of the variables as its first line. 
 #' @param ... Additional arguments for the underlying import functions.
 #' @return An R dataframe.
@@ -75,15 +76,18 @@ import <- function(file="", format=NULL, header=TRUE, ... ) {
               rds = readRDS(file=file, ...),
               csv = read.csv(file=file, header=header, ...),
               Rdata = { e <- new.env(); load(file = file, envir = e, ...); get(ls(e)[1], e) }, # return first object from a .Rdata
-              dta = foreign::read.dta(file=file, ...),
+              dta = haven::read_dta(path = file),
               dbf = foreign::read.dbf(file = file, ...),
               dif = utils::read.DIF(file = file, ...),
-              sav = foreign::read.spss(file=file, to.data.frame=TRUE, ...),
+              sav = haven::read_sav(file=file),
+              por = haven::read_por(file=file),
+              sas7bdat = haven::read_sas(b7dat = file, ...),
               mtp = foreign::read.mtp(file=file, ...),
               syd = foreign::read.systat(file = file, to.data.frame = TRUE),
               json = jsonlite::fromJSON(file = file, ...),
               rec = foreign::read.epiinfo(file=file, ...),
               arff = foreign::read.arff(file = file),
+              xpt = foreign::read.xport(file = file),
               xlsx = openxlsx::read.xlsx(xlsxFile = file, colNames = header, ...),
               stop("Unknown file format")
               )
@@ -120,7 +124,9 @@ convert <- function(in_file, out_file, in_opts=list(), out_opts=list()) {
   if (!is.character(filename)) {
     stop("Filename is not a string")
   }
-  guess_format <- ifelse(!is.null(format), tolower(format), str_extract(tolower(filename), "\\.(txt|tsv|csv|json|Rdata|dta|sav|sas|rec|rds|dbf|syd|dif|fwf|mtp|xlsx)$"))
+  guess_format <- ifelse(!is.null(format), tolower(format), 
+                         str_extract(tolower(filename), 
+                         "\\.(txt|tsv|csv|json|Rdata|dta|sav|por|rec|rds|dbf|syd|dif|fwf|mtp|xlsx|sas7bdat|xpt)$"))
   if(filename == "clipboard") {
     return("clipboard")
   } else if (is.na(guess_format)) {

@@ -12,10 +12,12 @@ The aim of `rio` is to make data file I/O in R as easy as possible. The swiss-ar
 * rds
 * Rdata
 * json
+* dbf ("XBASE" database files)
 * dta (Stata)
+* sav (SPSS)
 * xlsx (Excel)
-* arff (Attribute-Relation File Format; Weka)
-* clipboard (on Mac and Windows only)
+* arff (Weka Attribute-Relation File Format)
+* clipboard (on Mac and Windows only; as tab-separated data)
 
 *Import*
 
@@ -27,18 +29,21 @@ The aim of `rio` is to make data file I/O in R as easy as possible. The swiss-ar
 * json
 * dta (Stata)
 * sav (SPSS)
+* por (SPSS portable)
+* sas7bdat (SAS)
+* xpt (SAS XPORT)
 * mtp (Minitab)
 * rec (Epiinfo)
 * syd (Systat)
 * dif (Data Interchange Format)
 * dbf ("XBASE" database files)
 * xlsx (Excel)
-* arff (Attribute-Relation File Format; Weka)
+* arff (Weka Attribute-Relation File Format)
 
 ## Examples
 
 ```R
-library(rio)
+library("rio")
 
 # export
 export(iris, "iris.csv")
@@ -60,4 +65,3 @@ convert("iris.csv", "iris.dta")
 library("devtools")
 install_github("chainsawriot/rio")
 ```
-

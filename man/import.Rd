@@ -9,7 +9,7 @@ import(file = "", format = NULL, header = TRUE, ...)
 \arguments{
 \item{file}{a character string naming a file.}
 
-\item{format}{a character string code of file format. The following file formats are supported: txt, tsv, csv, rds, Rdata, dta, sav, mtp, json, dif, rec, dbf, syd, xlsx, arff, and fwf (fixed-width format; requires a \code{widths} argument).}
+\item{format}{a character string code of file format. The following file formats are supported: txt, tsv, csv, rds, Rdata, dta, sav, por, mtp, json, dif, rec, dbf, sas7bdat, syd, xlsx, arff, xpt, and fwf (fixed-width format; requires a \code{widths} argument).}
 
 \item{header}{a logical value indicating whether the file contains the names of the variables as its first line.}
 

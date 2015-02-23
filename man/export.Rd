@@ -12,7 +12,7 @@ export(x, file = "", format = NULL, row.names = FALSE, header = TRUE,
 
 \item{file}{a character string naming a file.}
 
-\item{format}{a character string code of file format. The following file formats are supported: txt, csv, tsv, rds, Rdata, json, dbf, dta, xlsx, and arff.}
+\item{format}{a character string code of file format. The following file formats are supported: txt, csv, tsv, rds, Rdata, json, dbf, sav, dta, xlsx, and arff.}
 
 \item{row.names}{a logical value ('TRUE' or 'FALSE') indicating whether the row names of 'x' are to be written along with 'x'}
 

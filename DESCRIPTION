@@ -16,9 +16,11 @@ Depends:
 Imports:
     stringr,
     foreign,
+    haven,
     utils,
     openxlsx,
-    jsonlite,
+    jsonlite
+Suggests:
     testthat
 License: GPL-2
 Collate:
