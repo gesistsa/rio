@@ -11,7 +11,14 @@
 \value{The name of the output file (invisibly).}
 \description{This function constructs a data frame from a data and exports to the specified format based on the file extension.}
 \examples{
+# create a file to convert
 export(iris, "iris.csv")
+
+# perform conversion and open converted file
 convert("iris.csv", "iris.dta")
-import("iris.dta")
+head(import("iris.dta"))
+
+# cleanup
+unlink("iris.csv")
+unlink("iris.dta")
 }

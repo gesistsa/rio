@@ -25,20 +25,22 @@ import.rdata <- function(file, ...) {
 
 import <- function(file, format, ...) {
     if(missing(format))
-        format <- get_ext(file)
+        fmt <- get_ext(file)
+    else
+        fmt <- tolower(format)
     if(grepl("^https://", file)) {
         temp_file <- tempfile(fileext = format)
         on.exit(unlink(temp_file))
         curl_download(file, temp_file, mode = "wb")
         file <- temp_file
     }
-    x <- switch(format,
+    x <- switch(fmt,
                 txt = import.tsv(file = file, ...),
                 tsv = import.tsv(file = file, ...),
                 fwf = import.fwf(file = file, ...),
-                rds = import.rds(file = file, ...),
+                rds = readRDS(file = file, ...),
                 csv = import.csv(file = file, ...),
-                rdata = readRDS(file = file, ...),
+                rdata = import.rdata(file = file, ...),
                 dta = read_dta(path = file),
                 dbf = read.dbf(file = file, ...),
                 dif = read.DIF(file = file, ...),

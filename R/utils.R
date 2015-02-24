@@ -1,11 +1,10 @@
-type_list <- list(
-    dta = "dta",
-    stata = "dta",
-    spss = "sav",
-    excel = "xlsx"
-)
-
 get_type <- function(fmt) {
+    type_list <- list(
+        dta = "dta",
+        stata = "dta",
+        spss = "sav",
+        excel = "xlsx"
+    )
     type <- type_list[[tolower(fmt)]]
     if(is.null(type)) {
         stop("Unrecognized file format")
@@ -24,6 +23,6 @@ get_ext <- function(file) {
     } else if (fmt == "") {
         stop("'file' has no extension")
     } else {
-        return(fmt)
+        return(tolower(fmt))
     }
 }

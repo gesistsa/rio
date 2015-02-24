@@ -2,7 +2,7 @@
 \alias{export}
 \title{Write data.frame or matrix to a file}
 \usage{
-    export(x, file = "", format = NULL, ...)
+    export(x, file, format, ...)
 }
 \arguments{
     \item{x}{A data frame or matrix to be written into a file.}
@@ -21,6 +21,10 @@ export(iris, "iris.csv")
 
 # specify only `format`
 "iris.dta" %in% dir()
-export(iris, format = "Stata")
+export(iris, format = "stata")
 "iris.dta" %in% dir()
+
+# cleanup
+unlink("iris.csv")
+unlink("iris.dta")
 }

@@ -6,7 +6,7 @@ export.txt <- function(x, file, sep = "\t", row.names = FALSE, header = TRUE, ..
     write.table(x, file = file, sep = sep, row.names = row.names, col.names = header, ...)
 }
 
-export.clipboard <- function(x, ...) {
+export.clipboard <- function(x, row.names = FALSE, header = TRUE, ...) {
     if(Sys.info()["sysname"] == "Darwin") {
             clip <- pipe("pbcopy", "w")                                             
             write.table(x, file = clip, sep="\t", row.names = row.names, col.names = header, ...)
@@ -23,14 +23,14 @@ export <- function(x, file, format, ...) {
         fmt <- get_type(format)
         file <- paste0(as.character(substitute(x)), ".", fmt)
     } else if(!missing(file)) {
-        format <- get_ext(file)
+        fmt <- get_ext(file)
     }
     if (!is.data.frame(x) & !is.matrix(x)) {
         stop("x is not a data frame or matrix.")
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
-    switch(format,
+    switch(fmt,
          txt = export.txt(x, file = file, ...),
          tsv = export.txt(x, file = file, ...),
          clipboard = export.clipboard(x, ...),
