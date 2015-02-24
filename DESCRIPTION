@@ -14,7 +14,7 @@ Description: Rio is a set of tools aims to simplify the process of
     For example, exporting the iris data into a csv file can be achieved with
     the following command: export(iris, "iris.csv")
 Depends: R (>= 2.15.0)
-Imports: tools, utils, foreign, haven, openxlsx, jsonlite
+Imports: tools, utils, foreign, haven, openxlsx, jsonlite, curl
 Suggests: testthat
 License: GPL-2
 VignetteBuilder: knitr

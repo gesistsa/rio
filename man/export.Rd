@@ -2,14 +2,12 @@
 \alias{export}
 \title{Write data.frame or matrix to a file}
 \usage{
-    export(x, file = "", format = NULL, row.names = FALSE, header = TRUE, ...)
+    export(x, file = "", format = NULL, ...)
 }
 \arguments{
     \item{x}{A data frame or matrix to be written into a file.}
     \item{file}{A character string naming a file. Must specify \code{file} and/or \code{format}.}
     \item{format}{An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}.}
-    \item{row.names}{A logical value indicating whether the row names of \code{x} should be written along with \code{x}.}
-    \item{header}{A logical value indicating whether the file contains the names of the variables as its first line.}
     \item{...}{Additional arguments for the underlying export functions.}
 }
 \value{The name of the output file as a character string (invisibly).}
@@ -18,5 +16,11 @@
 The following file formats are supported: txt, csv, tsv, rds, Rdata, json, dbf, sav, dta, xlsx, and arff.
 }
 \examples{
+# specify `file`
 export(iris, "iris.csv")
+
+# specify only `format`
+"iris.dta" %in% dir()
+export(iris, format = "Stata")
+"iris.dta" %in% dir()
 }

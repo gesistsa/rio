@@ -1,5 +1,5 @@
 type_list <- list(
-    dta = "dta"
+    dta = "dta",
     stata = "dta",
     spss = "sav",
     excel = "xlsx"

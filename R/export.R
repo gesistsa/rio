@@ -1,3 +1,7 @@
+export.csv <- function(x, file, row.names = FALSE, ...) {
+    write.csv(x, file = file, row.names = row.names, ...)
+}
+
 export.txt <- function(x, file, sep = "\t", row.names = FALSE, header = TRUE, ...) {
     write.table(x, file = file, sep = sep, row.names = row.names, col.names = header, ...)
 }
@@ -31,7 +35,7 @@ export <- function(x, file, format, ...) {
          tsv = export.txt(x, file = file, ...),
          clipboard = export.clipboard(x, ...),
          rds = saveRDS(x, file = file, ...),
-         csv = write.csv(x, file = file, row.names = row.names, ...), 
+         csv = export.csv(x, file = file, ...), 
          rdata = save(x, file = file, ...),
          sav = write_sav(data = x, path = file),
          dta = write_dta(data = x, path = file),
