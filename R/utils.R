@@ -1,13 +1,29 @@
-.guess <- function(filename) {
-    if (!is.character(filename)) {
-        stop("'filename' is not a string")
-    }
-    guess_format <- file_ext(filename)
-    if(filename == "clipboard") {
-        return("clipboard")
-    } else if (is.na(guess_format)) {
-        stop("Unknown file format")
+type_list <- list(
+    dta = "dta"
+    stata = "dta",
+    spss = "sav",
+    excel = "xlsx"
+)
+
+get_type <- function(fmt) {
+    type <- type_list[[tolower(fmt)]]
+    if(is.null(type)) {
+        stop("Unrecognized file format")
     } else {
-        return(guess_format)
+        return(type)
+    }
+}
+
+get_ext <- function(file) {
+    if (!is.character(file)) {
+        stop("'file' is not a string")
+    }
+    fmt <- file_ext(file)
+    if(file == "clipboard") {
+        return("clipboard")
+    } else if (fmt == "") {
+        stop("'file' has no extension")
+    } else {
+        return(fmt)
     }
 }
