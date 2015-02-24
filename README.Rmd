@@ -70,6 +70,8 @@ if(!require("devtools")){
 install_github("leeper/rio")
 ```
 
+[![Build Status](https://travis-ci.org/leeper/rio.png?branch=master)](https://travis-ci.org/leeper/rio)
+
 ## Examples ##
 
 Because **rio** is meant to streamline data I/O, the package is extremely easy to use. Here are some examples of reading, writing, and converting data files.
