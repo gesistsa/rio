@@ -81,34 +81,10 @@ Because **rio** is meant to streamline data I/O, the package is extremely easy t
 
 ```r
 library("rio")
-```
 
-```
-## Error in library("rio"): there is no package called 'rio'
-```
-
-```r
 export(iris, "iris.csv")
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "export"
-```
-
-```r
 export(iris, "iris.rds")
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "export"
-```
-
-```r
 export(iris, "iris.dta")
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "export"
 ```
 
 ### Import ###
@@ -116,43 +92,17 @@ export(iris, "iris.dta")
 
 ```r
 library("rio")
-```
 
-```
-## Error in library("rio"): there is no package called 'rio'
-```
-
-```r
 x <- import("iris.csv")
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "import"
-```
-
-```r
 y <- import("iris.rds")
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "import"
-```
-
-```r
 z <- import("iris.dta")
-```
 
-```
-## Error in eval(expr, envir, enclos): could not find function "import"
-```
-
-```r
 # confirm identical
 identical(iris, x)
 ```
 
 ```
-## Error in identical(iris, x): object 'x' not found
+## [1] FALSE
 ```
 
 ```r
@@ -160,7 +110,7 @@ identical(x, y)
 ```
 
 ```
-## Error in identical(x, y): object 'x' not found
+## [1] FALSE
 ```
 
 ```r
@@ -168,7 +118,7 @@ identical(y, z)
 ```
 
 ```
-## Error in identical(y, z): object 'y' not found
+## [1] FALSE
 ```
 
 ### Convert ###
@@ -176,18 +126,8 @@ identical(y, z)
 
 ```r
 library("rio")
-```
 
-```
-## Error in library("rio"): there is no package called 'rio'
-```
-
-```r
 convert("iris.csv", "iris.dta")
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "convert"
 ```
 
 
