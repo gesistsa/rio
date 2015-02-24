@@ -1,5 +1,20 @@
+import.csv <- function(file, header = TRUE, ...) {
+    read.csv(file = file, header = header, ...)
+}
+
 import.tsv <- function(file, sep = "\t", header = TRUE, ...) {
     read.table(file = file, sep = sep, header = header, ...)
+}
+
+import.fwf <- function(file = file, header = TRUE, widths, ...) {
+    if(missing(widths)) {
+        stop("Import of fixed-width format data requires a 'widths' argument")
+    }
+    read.fwf(file = file, widths = widths, ...)
+}
+
+import.xlsx <- function(file = file, header = TRUE, ...) {
+    read.xlsx(xlsxFile = file, colNames = header, ...)
 }
 
 import.rdata <- function(file, ...) {
@@ -8,15 +23,21 @@ import.rdata <- function(file, ...) {
     get(ls(e)[1], e) # return first object from a .Rdata
 }
 
-import <- function(file, format, header = TRUE, ...) {
-    if(is.missing(format))
+import <- function(file, format, ...) {
+    if(missing(format))
         format <- get_ext(file)
+    if(grepl("^https://", file)) {
+        temp_file <- tempfile(fileext = format)
+        on.exit(unlink(temp_file))
+        curl_download(file, temp_file, mode = "wb")
+        file <- temp_file
+    }
     x <- switch(format,
                 txt = import.tsv(file = file, ...),
                 tsv = import.tsv(file = file, ...),
-                fwf = read.fwf(file = file, header = header, ...),
+                fwf = import.fwf(file = file, ...),
                 rds = import.rds(file = file, ...),
-                csv = read.csv(file = file, header = header, ...),
+                csv = import.csv(file = file, ...),
                 rdata = readRDS(file = file, ...),
                 dta = read_dta(path = file),
                 dbf = read.dbf(file = file, ...),
@@ -30,7 +51,7 @@ import <- function(file, format, header = TRUE, ...) {
                 rec = read.epiinfo(file = file, ...),
                 arff = read.arff(file = file),
                 xpt = read.xport(file = file),
-                xlsx = read.xlsx(xlsxFile = file, colNames = header, ...),
+                xlsx = import.xlsx(file = file, ...),
                 stop("Unrecognized file format")
                 )
     return(x)
