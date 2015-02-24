@@ -1,16 +1,16 @@
-import.csv <- function(file, header = TRUE, ...) {
-    read.csv(file = file, header = header, ...)
+import.csv <- function(file, header = TRUE, stringsAsFactors = FALSE, ...) {
+    read.csv(file = file, header = header, stringsAsFactors = FALSE, ...)
 }
 
 import.tsv <- function(file, sep = "\t", header = TRUE, ...) {
-    read.table(file = file, sep = sep, header = header, ...)
+    read.table(file = file, sep = sep, header = header, stringsAsFactors = FALSE, ...)
 }
 
 import.fwf <- function(file = file, header = TRUE, widths, ...) {
     if(missing(widths)) {
         stop("Import of fixed-width format data requires a 'widths' argument")
     }
-    read.fwf(file = file, widths = widths, ...)
+    read.fwf(file = file, widths = widths, stringsAsFactors = FALSE, ...)
 }
 
 import.xlsx <- function(file = file, header = TRUE, ...) {
