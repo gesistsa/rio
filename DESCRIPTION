@@ -1,7 +1,9 @@
 Package: rio
-Title: A Swiss-army knife for data file I/O
+Type: Package
+Title: A Swiss-army knife for data I/O
 Version: 0.1.3
-Maintainer: Chung-hong Chan <chainsawtiney@gmail.com>
+Date: 2015-02-24
+Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Authors@R: c(person("Chung-hong", "Chan", role = c("aut", "cre"), email = "chainsawtiney@gmail.com"),
 	         person("Geoffrey CH", "Chan", role = "aut", email = "gefchchan@gmail.com"),
              person("Thomas J.", "Leeper", role = "aut", email = "thosjleeper@gmail.com"))
@@ -11,18 +13,8 @@ Description: Rio is a set of tools aims to simplify the process of
     select appropriate read/write function for the specific data file format.
     For example, exporting the iris data into a csv file can be achieved with
     the following command: export(iris, "iris.csv")
-Depends:
-    R (>= 2.15.0)
-Imports:
-    stringr,
-    foreign,
-    haven,
-    utils,
-    openxlsx,
-    jsonlite
-Suggests:
-    testthat
+Depends: R (>= 2.15.0)
+Imports: stringr, foreign, haven, utils, openxlsx, jsonlite
+Suggests: testthat
 License: GPL-2
-Collate:
-    'export.R'
-    'rio-package.r'
+VignetteBuilder: knitr

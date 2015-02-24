@@ -74,8 +74,7 @@ Because **rio** is meant to streamline data I/O, the package is extremely easy t
 
 ### Export ###
 
-
-```r
+```{r}
 library("rio")
 
 export(iris, "iris.csv")
@@ -85,8 +84,7 @@ export(iris, "iris.dta")
 
 ### Import ###
 
-
-```r
+```{r}
 library("rio")
 
 x <- import("iris.csv")
@@ -95,35 +93,20 @@ z <- import("iris.dta")
 
 # confirm identical
 identical(iris, x)
-```
-
-```
-## [1] TRUE
-```
-
-```r
 identical(x, y)
-```
-
-```
-## [1] TRUE
-```
-
-```r
 identical(y, z)
-```
-
-```
-## [1] FALSE
 ```
 
 ### Convert ###
 
-
-```r
+```{r}
 library("rio")
 
 convert("iris.csv", "iris.dta")
 ```
 
-
+```{r, echo=FALSE, results="hide"}
+unlink("iris.csv")
+unlink("iris.dta")
+unlink("iris.rds")
+```
