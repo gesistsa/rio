@@ -6,9 +6,9 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
  - `convert` wraps `import` and `export` to allow the user to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](http://www.openmetadata.org/site/?page_id=1089))
 
 The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Two of these are important. First, **rio** uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, **rio** allows almost all common data formats to be read with the same function. Second, when importing tabular data (CSV, TSV, etc.), **rio** does not convert strings to factors.
- 
+
 Another weakness of the base R data I/O functions is that they only support import of web-based data from websites serving HTTP, not HTTPS. For example, data stored on GitHub as publicly visible files cannot be read directly into R without either manually downloading them or reading them in via **RCurl** or **httr**. **rio** removes those steps by supporting HTTPS imports automatically.
- 
+
 The package also wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. Namely, the package uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files and [**fastread**](https://github.com/hadley/fastread) for reading simple text-delimited and fixed-width file formats.
 
 ## Supported file formats ##
@@ -67,6 +67,7 @@ if(!require("devtools")){
     install.packages("devtools")
     library("devtools")
 }
+install_github("hadley/haven")
 install_github("leeper/rio")
 ```
 
