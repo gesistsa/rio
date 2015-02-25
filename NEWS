@@ -1,5 +1,7 @@
 # CHANGES TO v0.1.3 #
 
+ * Added experimental support for reading from compressed archives (.zip and .tar).
+ * Added experimental support for writing to fixed-width format.
  * Set `stringsAsFactors = FALSE` as default for reading tabular data. (#4)
  * Added support for HTTPS imports. (#1, h/t Christopher Gandrud)
  * Added support for automatic file naming in `export` based on object name and file format. (#5)

@@ -1,3 +1,24 @@
+import.zip <- function(file, ...) {
+    file_list <- unzip(file, list = TRUE)
+    if(nrow(file_list) > 1)
+        stop("Zip archive contains multiple files")
+    else {
+        unzip(file, exdir = tempdir())
+        import(paste0(tempdir(),"/", file), ...)
+    }
+}
+
+import.tar <- function(file, ...) {
+    file_list <- unzip(file, list = TRUE)
+    if(nrow(file_list) > 1)
+        stop("Tar archive contains multiple files")
+    else {
+        untar(file, exdir = tempdir())
+        import(paste0(tempdir(),"/", file), ...)
+    }
+}
+
+
 import.csv <- function(file, header = TRUE, stringsAsFactors = FALSE, ...) {
     read.csv(file = file, header = header, stringsAsFactors = FALSE, ...)
 }
@@ -61,6 +82,8 @@ import <- function(file, format, ...) {
                 arff = read.arff(file = file),
                 xlsx = import.xlsx(file = file, ...),
                 fortran = import.fortran(file = file, ...),
+                zip = import.zip(file = file, ...),
+                tar = import.tar(file = file, ...),
                 stop("Unrecognized file format")
                 )
     return(x)

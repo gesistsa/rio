@@ -29,6 +29,8 @@ get_type <- function(fmt) {
         xlsx = "xlsx",
         excel = "xlsx",
         fortran = "fortran",
+        zip = "zip",
+        tar = "tar",
         clipboard = "clipboard"
     )
     type <- type_list[[tolower(fmt)]]
