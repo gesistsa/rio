@@ -9,7 +9,7 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
  
 Another weakness of the base R data I/O functions is that they only support import of web-based data from websites serving HTTP, not HTTPS. For example, data stored on GitHub as publicly visible files cannot be read directly into R without either manually downloading them or reading them in via **RCurl** or **httr**. **rio** removes those steps by supporting HTTPS imports automatically.
  
-The package also wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. Namely, the package uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files and [**fastread**](https://github.com/hadley/fastread) for reading simple text-delimited and fixed-width file formats.
+The package also wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. Namely, the package uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files and will eventually use [**fastread**](https://github.com/hadley/fastread) for intuitive import of simple text-delimited and fixed-width file formats.
 
 ## Supported file formats ##
 
