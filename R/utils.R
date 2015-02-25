@@ -14,6 +14,9 @@ get_type <- function(fmt) {
 }
 
 get_ext <- function(file) {
+    if (!is.character(file)) {
+        stop("'file' is not a string")
+    }
     fmt <- file_ext(file)
     if(file == "clipboard") {
         return("clipboard")
