@@ -4,9 +4,10 @@ Title: A Swiss-army knife for data I/O
 Version: 0.1.3
 Date: 2015-02-25
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
-Authors@R: c(person("Chung-hong", "Chan", role = c("aut", "cre"), email = "chainsawtiney@gmail.com"),
+Authors@R: c(person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
 	         person("Geoffrey CH", "Chan", role = "aut", email = "gefchchan@gmail.com"),
-             person("Thomas J.", "Leeper", role = "aut", email = "thosjleeper@gmail.com"))
+             person("Thomas J.", "Leeper", role = c("aut", "cre"), email = "thosjleeper@gmail.com"),
+             person("Christopher", "Gandrud", role = "aut"))
 Description: Rio is a set of tools aims to simplify the process of
     importing/exporting data. The import() and export() functions will
     determine data file format base on the file extension, without the need to

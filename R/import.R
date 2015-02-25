@@ -52,12 +52,18 @@ import.rdata <- function(file, ...) {
 }
 
 import <- function(file, format, ...) {
-    if(missing(format))
-        fmt <- get_ext(file)
+    if(missing(format)) {
+        if (!grepl("^http.*://", file)) {
+            fmt <- get_ext(file)
+        }
+        else if (grepl("^http.*://", file)) {
+            fmt <- gsub("(.*\\/)([^.]+)\\.", "", file)
+        }
+    }
     else
         fmt <- tolower(format)
     if(grepl("^https://", file)) {
-        temp_file <- tempfile(fileext = format)
+        temp_file <- tempfile(fileext = fmt)
         on.exit(unlink(temp_file))
         curl_download(file, temp_file, mode = "wb")
         file <- temp_file
