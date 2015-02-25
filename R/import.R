@@ -64,6 +64,7 @@ import <- function(file, format, ...) {
     }
     x <- switch(fmt,
                 tsv = import.tsv(file = file, ...),
+                txt = import.tsv(file = file, ...),
                 fwf = import.fwf(file = file, ...),
                 rds = readRDS(file = file, ...),
                 csv = import.csv(file = file, ...),
