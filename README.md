@@ -15,42 +15,26 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 
 **rio** supports a variety of different file formats for import and export.
 
-*Import*
-
-* txt (tab-seperated)
-* tsv
-* csv
-* rds
-* Rdata
-* json
-* dta (Stata)
-* sav (SPSS)
-* por (SPSS portable)
-* sas7bdat (SAS)
-* xpt (SAS XPORT)
-* mtp (Minitab)
-* rec (Epiinfo)
-* syd (Systat)
-* dif (Data Interchange Format)
-* dbf ("XBASE" database files)
-* xlsx (Excel)
-* arff (Weka Attribute-Relation File Format)
-
-**Export**
-
-* txt (tab-seperated)
-* tsv
-* csv
-* rds
-* Rdata
-* json
-* dbf ("XBASE" database files)
-* dta (Stata)
-* sav (SPSS)
-* xlsx (Excel)
-* arff (Weka Attribute-Relation File Format)
-* clipboard (on Mac and Windows only; as tab-separated data)
-
+| Format | Import | Export |
+| ------ | ------ | ------ |
+| Tab-separated data (.tsv) | Yes | Yes |
+| Comma-separated data (.csv) | Yes | Yes |
+| Fixed-width format data (.fwf) | Yes | Experimental |
+| Serialized R objects (.rds) | Yes | Yes |
+| Saved R ojbects (.RData) | Yes | Yes |
+| JSON (.json) | Yes | Yes |
+| Stata (.dta) | Yes | Yes |
+| SPSS and SPSS portable (.sav and .por) | Yes | Yes (.sav only) |
+| SAS and SAS XPORT (.sas7bdat and .xpt) | Yes |  |
+| Minitab (.mtp) | Yes |  |
+| Epiinfo (.rec) | Yes |  |
+| Systat (.syd) | Yes |  |
+| Data Interchange Format (.dif) | Yes |  |
+| "XBASE" database files (.dbf) | Yes | Yes |
+| Excel (.xlsx) | Yes | Yes |
+| Weka Attribute-Relation File Format (.arff) | Yes | Yes |
+| Fortran data (no recognized extension) | Yes |  |
+| Clipboard (as tab-separated) |  | Yes (Mac and Windows) |
 
 ## Package Installation ##
 
@@ -98,14 +82,6 @@ y <- import("iris.rds")
 z <- import("iris.dta")
 
 # confirm identical
-identical(iris, x)
-```
-
-```
-## [1] FALSE
-```
-
-```r
 identical(x, y)
 ```
 

@@ -2,17 +2,35 @@ export.csv <- function(x, file, row.names = FALSE, ...) {
     write.csv(x, file = file, row.names = row.names, ...)
 }
 
-export.txt <- function(x, file, sep = "\t", row.names = FALSE, header = TRUE, ...) {
+export.tsv <- function(x, file, sep = "\t", row.names = FALSE, header = TRUE, ...) {
     write.table(x, file = file, sep = sep, row.names = row.names, col.names = header, ...)
+}
+
+export.fwf <- function(x, file, sep = " ", row.names = FALSE, quote = FALSE, col.names = FALSE, 
+                       fmt.numeric = "%0.7f", fmt.factor = "%", ...) {
+    dat <- lapply(x, function(col) {
+        if(is.numeric(col)) {
+            return(sprintf(fmt = fmt.numeric, col))
+        } else if(is.character(col)) {
+            col <- as.numeric(as.factor(col))
+            return(sprintf(fmt = paste0("%0", max(nchar(as.character(col))), "s"), col))
+        } else if(is.factor(col)) {
+            return(sprintf(fmt = fmt.factor, as.numeric(col)))
+        } else if(is.logical(col)) {
+            return(sprintf("%i",col))
+        }
+    })
+    dat <- do.call(cbind, x)
+    write.table(dat, row.names = row.names, sep = sep, quote = quote, col.names = col.names, ...)
 }
 
 export.clipboard <- function(x, row.names = FALSE, header = TRUE, ...) {
     if(Sys.info()["sysname"] == "Darwin") {
-            clip <- pipe("pbcopy", "w")                                             
-            write.table(x, file = clip, sep="\t", row.names = row.names, col.names = header, ...)
-            close(clip)
+        clip <- pipe("pbcopy", "w")                                             
+        write.table(x, file = clip, sep="\t", row.names = row.names, col.names = header, ...)
+        close(clip)
     } else if(Sys.info()["sysname"] == "Windows") {
-            write.table(x, file="clipboard", sep="\t", row.names = row.names, col.names = header, ...)
+        write.table(x, file="clipboard", sep="\t", row.names = row.names, col.names = header, ...)
     }
 }
 
@@ -31,8 +49,9 @@ export <- function(x, file, format, ...) {
         x <- as.data.frame(x)
     }
     switch(fmt,
-         txt = export.txt(x, file = file, ...),
-         tsv = export.txt(x, file = file, ...),
+         txt = export.tsv(x, file = file, ...),
+         tsv = export.tsv(x, file = file, ...),
+         fwf = export.fwf(x, file = file, ...),
          clipboard = export.clipboard(x, ...),
          rds = saveRDS(x, file = file, ...),
          csv = export.csv(x, file = file, ...), 

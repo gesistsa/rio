@@ -1,9 +1,35 @@
 get_type <- function(fmt) {
     type_list <- list(
+        txt = "tsv", # decide on this
+        tsv = "tsv",
+        csv = "csv",
+        fwf = "fwf",
+        rds = "rds",
+        rdata = "rdata",
         dta = "dta",
         stata = "dta",
+        dbf = "dbf",
+        dif = "dif",
         spss = "sav",
-        excel = "xlsx"
+        sav = "sav",
+        por = "por",
+        sas = "sas7bdat",
+        sas7bdat = "sas7bdat",
+        xpt = "xpt",
+        xport = "xpt",
+        mtp = "mtp",
+        minitab = "mtp",
+        syd = "syd",
+        systat = "syd",
+        json = "json",
+        rec = "rec",
+        epiinfo = "rec",
+        arff = "arff",
+        weka = "arff",
+        xlsx = "xlsx",
+        excel = "xlsx",
+        fortran = "fortran",
+        clipboard = "clipboard"
     )
     type <- type_list[[tolower(fmt)]]
     if(is.null(type)) {

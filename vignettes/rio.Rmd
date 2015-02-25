@@ -11,56 +11,132 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
 
 By making import and export easy, it's an obvious next step to also use R as a simple data conversion utility. Transferring data files between various proprietary formats is always a pain and often expensive. The `convert` function therefore combines `import` and `export` to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](http://www.openmetadata.org/site/?page_id=1089)).
 
-## Import ##
+## Supported file formats ##
 
-**rio** supports a huge number of file formats for data import. At the present time, this includes:
+**rio** supports a variety of different file formats for import and export.
 
-* txt (tab-seperated)
-* tsv
-* csv
-* rds
-* Rdata
-* json
-* dta (Stata)
-* sav (SPSS)
-* por (SPSS portable)
-* sas7bdat (SAS)
-* xpt (SAS XPORT)
-* mtp (Minitab)
-* rec (Epiinfo)
-* syd (Systat)
-* dif (Data Interchange Format)
-* dbf ("XBASE" database files)
-* xlsx (Excel)
-* arff (Weka Attribute-Relation File Format)
+| Format | Import | Export |
+| ------ | ------ | ------ |
+| Tab-separated data (.tsv) | Yes | Yes |
+| Comma-separated data (.csv) | Yes | Yes |
+| Fixed-width format data (.fwf) | Yes | Experimental |
+| Serialized R objects (.rds) | Yes | Yes |
+| Saved R ojbects (.RData) | Yes | Yes |
+| JSON (.json) | Yes | Yes |
+| Stata (.dta) | Yes | Yes |
+| SPSS and SPSS portable (.sav and .por) | Yes | Yes (.sav only) |
+| SAS and SAS XPORT (.sas7bdat and .xpt) | Yes |  |
+| Minitab (.mtp) | Yes |  |
+| Epiinfo (.rec) | Yes |  |
+| Systat (.syd) | Yes |  |
+| Data Interchange Format (.dif) | Yes |  |
+| "XBASE" database files (.dbf) | Yes | Yes |
+| Excel (.xlsx) | Yes | Yes |
+| Weka Attribute-Relation File Format (.arff) | Yes | Yes |
+| Fortran data (no recognized extension) | Yes |  |
+| Clipboard (as tab-separated) |  | Yes (Mac and Windows) |
 
-[Examples coming here soon...]
+### Import ###
 
-## Export ##
+**rio** allows you to import files in almost any format using one, typically single-argument, function. `import` infers the file format from the file's extension and calls the appropriate data import function for you, returning a simple data.frame. This works for any for the formats listed above.
+
+```{r, echo=FALSE, results='hide'}
+library("rio")
+
+export(iris, "iris.csv")
+export(iris, "iris.rds")
+export(iris, "iris.dta")
+export(iris, "iris_noext", format = "csv")
+```
+
+```{r}
+library("rio")
+
+x <- import("iris.csv")
+y <- import("iris.rds")
+z <- import("iris.dta")
+
+# confirm identical
+identical(x, y)
+identical(y, z)
+```
+
+If for some reason a file does not have an extension, or has a file extension that does not match its actual type, you can manually specify a file format to override the format inference step. For example, we can read in a CSV file that does not have a file extension by specifying `csv`:
+
+```{r}
+head(import("iris_noext", format = "csv"))
+```
+
+
+```{r, echo=FALSE, results='hide'}
+unlink("iris.csv")
+unlink("iris.rds")
+unlink("iris.dta")
+unlink("iris_noext")
+```
+
+
+### Export ###
 
 The export capabilities of **rio** are somewhat more limited than the import capabilities, given the availability of different functions in various R packages and because import functions are often written to make use of data from other applications and it never seems to be a development priority to have functions to export to the formats used by other applications. That said, **rio** currently supports the following formats:
 
-* txt (tab-seperated)
-* tsv
-* csv
-* rds
-* Rdata
-* json
-* dbf ("XBASE" database files)
-* dta (Stata)
-* sav (SPSS)
-* xlsx (Excel)
-* arff (Weka Attribute-Relation File Format)
-* clipboard (on Mac and Windows only; as tab-separated data)
 
+```{r}
+library("rio")
 
-[Examples coming here soon...]
+export(iris, "iris.csv")
+export(iris, "iris.rds")
+export(iris, "iris.dta")
+```
+
+It is also easy to use `export` as part of an R pipeline (from magrittr or dplyr). For example, the following code uses `export` to save the results of a simple data transformation:
+
+```{r}
+mtcars %>% subset(hp > 100) %>%  aggregate(. ~ cyl + am, data = ., FUN = mean) %>% export(file = "mtcars2.dta")
+```
+
+```{r, echo=FALSE, results='hide'}
+unlink("iris.csv")
+unlink("iris.rds")
+unlink("iris.dta")
+unlink("mtcars2.dta")
+```
 
 ## Convert ##
 
 The `convert` function links `import` and `export` by constructing a dataframe from the imported file and immediately writing it back to disk. `convert` invisibly returns the file name of the exported file, so that it can be used to programmatically access the new file.
 
-[Examples coming here soon...]
+Because `convert` is just a thin wrapper for `import` and `export`, it is very easy to use. For example, we can convert 
+
+```{r}
+# create file to convert
+export(iris, "iris.dta")
+
+# convert Stata to SPSS
+convert("iris.dta", "iris.sav")
+```
+
+`convert` also accepts lists of arguments for controlling import (`in_opts`) and export (`out_opts`). This can be useful for passing additional arguments to import or export methods. This could be useful, for example, for reading in a fixed-width format file and converting it to a comma-separated values file:
+
+```{r}
+# create an ambiguous file
+fwf <- tempfile(fileext = ".fwf")
+cat(file = fwf, "123456", "987654", sep = "\n")
+
+# see two ways to read in the file
+identical(import(fwf, widths = c(1,2,3)), import(fwf, widths = c(1,-2,3)))
+
+# convert to CSV
+convert(fwf, "fwf.csv", in_opts = list(widths = c(1,2,3)))
+import("fwf.csv") # check conversion
+```
+
+```{r, echo=FALSE, results='hide'}
+unlink("iris.dta")
+unlink("iris.sav")
+unlink("fwf.csv")
+unlink(fwf)
+```
 
 It is also possible to use **rio** on the command-line by calling `Rscript` with the `-e` (expression) argument. For example, to convert a file from Stata (.dta) to comma-separated values (.csv), simply do the following:
 
