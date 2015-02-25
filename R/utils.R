@@ -45,7 +45,12 @@ get_ext <- function(file) {
     if (!is.character(file)) {
         stop("'file' is not a string")
     }
-    fmt <- file_ext(file)
+    if(!grepl("^http.*://", file)) {
+        fmt <- file_ext(file)
+    }
+    else if(grepl("^http.*://", file)) {
+        fmt <- gsub("(.*\\/)([^.]+)\\.", "", file)
+    }
     if(file == "clipboard") {
         return("clipboard")
     } else if (fmt == "") {
