@@ -24,14 +24,8 @@ import.rdata <- function(file, ...) {
 }
 
 import <- function(file, format, ...) {
-    if(missing(format)) {
-        if (!grepl("^http.*://", file)) {
-            fmt <- get_ext(file)
-        }
-        else if (grepl("^http.*://", file)) {
-            fmt <- gsub("(.*\\/)([^.]+)\\.", "", file)
-        }
-    }
+    if(missing(format))
+        fmt <- get_ext(file)
     else
         fmt <- tolower(format)
     if(grepl("^https://", file)) {
