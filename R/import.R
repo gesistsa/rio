@@ -24,7 +24,6 @@ import.rdata <- function(file, ...) {
 }
 
 import <- function(file, format, ...) {
-    if(missing(file)) stop("file is required.", .call = F)
     if(missing(format)) {
         if (!grepl("^http.*://", file)) {
             fmt <- get_ext(file)
