@@ -92,6 +92,7 @@ export(iris, "iris.dta")
 It is also easy to use `export` as part of an R pipeline (from magrittr or dplyr). For example, the following code uses `export` to save the results of a simple data transformation:
 
 ```{r}
+library("magrittr")
 mtcars %>% subset(hp > 100) %>%  aggregate(. ~ cyl + am, data = ., FUN = mean) %>% export(file = "mtcars2.dta")
 ```
 
