@@ -22,7 +22,7 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | Pipe-separated data (.psv) | Yes | Yes |
 | Fixed-width format data (.fwf) | Yes | Experimental |
 | Serialized R objects (.rds) | Yes | Yes |
-| Saved R ojbects (.RData) | Yes | Yes |
+| Saved R objects (.RData) | Yes | Yes |
 | JSON (.json) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |
 | SPSS and SPSS portable (.sav and .por) | Yes | Yes (.sav only) |
@@ -65,31 +65,33 @@ Because **rio** is meant to streamline data I/O, the package is extremely easy t
 
 ### Export ###
 
+Exporting data is handled with one function, `export`:
+
 
 ```r
 library("rio")
 
-export(iris, "iris.csv")
-export(iris, "iris.rds")
-export(iris, "iris.dta")
+export(mtcars, "mtcars.csv") # comma-separated values
+export(mtcars, "mtcars.rds") # R serialized
+export(mtcars, "mtcars.sav") # SPSS
 ```
 
 ### Import ###
 
+Importing data is handled with one function, `import`:
+
 
 ```r
-library("rio")
-
-x <- import("iris.csv")
-y <- import("iris.rds")
-z <- import("iris.dta")
+x <- import("mtcars.csv")
+y <- import("mtcars.rds")
+z <- import("mtcars.sav")
 
 # confirm data match
 all.equal(x, y, check.attributes = FALSE)
 ```
 
 ```
-## [1] "Component \"Species\": target is character, current is factor"
+## [1] TRUE
 ```
 
 ```r
@@ -97,16 +99,25 @@ all.equal(x, z, check.attributes = FALSE)
 ```
 
 ```
-## [1] "Component \"Species\": target is character, current is labelled"
+## [1] TRUE
 ```
+
+Note: Because of inconsistencies across underlying packages, the data.frame returned by `import` might vary slightly (in variable classes and attributes) depending on file type.
 
 ### Convert ###
 
+The `convert` function links `import` and `export` by constructing a dataframe from the imported file and immediately writing it back to disk. `convert` invisibly returns the file name of the exported file, so that it can be used to programmatically access the new file.
+
 
 ```r
-library("rio")
-
-convert("iris.csv", "iris.dta")
+convert("mtcars.sav", "mtcars.dta")
 ```
+
+It is also possible to use **rio** on the command-line by calling `Rscript` with the `-e` (expression) argument. For example, to convert a file from Stata (.dta) to comma-separated values (.csv), simply do the following:
+
+```
+Rscript -e "rio::convert('iris.dta', 'iris.csv')"
+```
+
 
 
