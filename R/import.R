@@ -63,6 +63,7 @@ import <- function(file, format, ...) {
         file <- temp_file
     }
     x <- switch(fmt,
+                r = dget(file = file),
                 tsv = import.tsv(file = file, ...),
                 txt = import.tsv(file = file, ...),
                 fwf = import.fwf(file = file, ...),

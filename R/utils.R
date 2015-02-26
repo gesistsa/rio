@@ -31,6 +31,7 @@ get_type <- function(fmt) {
         fortran = "fortran",
         zip = "zip",
         tar = "tar",
+        r = "r",
         clipboard = "clipboard"
     )
     type <- type_list[[tolower(fmt)]]

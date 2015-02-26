@@ -51,6 +51,7 @@ export <- function(x, file, format, ...) {
         x <- as.data.frame(x)
     }
     switch(fmt,
+         r = dput(x, file = file, ...),
          txt = export.tsv(x, file = file, ...),
          tsv = export.tsv(x, file = file, ...),
          fwf = export.fwf(x, file = file, ...),
