@@ -7,14 +7,9 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 
 The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Two of these are important. First, **rio** uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, **rio** allows almost all common data formats to be read with the same function. Second, when importing tabular data (CSV, TSV, etc.), **rio** does not convert strings to factors.
 
-Another weakness of the base R data I/O functions is that they only support import of web-based data from websites serving HTTP, not HTTPS. For example, data stored on GitHub as publicly visible files cannot be read directly into R without either manually downloading them or reading them in via **RCurl** or **httr**. **rio** removes those steps by supporting HTTPS imports automatically.
-<<<<<<< HEAD
+Another weakness of the common data import functions is that they only support import of web-based data from websites serving HTTP, not HTTPS. For example, data stored on GitHub as publicly visible files cannot be read directly into R without either manually downloading them or reading them in via **RCurl** or **httr**. The `import` function negates the needs for those steps by supporting HTTPS automatically. Similarly, `import` also reads from single-file .zip and .tar archives automatically, without the need to explicitly decompress them.
  
 The package also wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. Namely, the package uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files and will eventually use [**fastread**](https://github.com/hadley/fastread) for intuitive import of text-delimited and fixed-width file formats.
-=======
-
-The package also wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. Namely, the package uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files and [**fastread**](https://github.com/hadley/fastread) for reading simple text-delimited and fixed-width file formats.
->>>>>>> efa5bb2e6b099fa348451ac602277b3f131728f6
 
 ## Supported file formats ##
 
@@ -30,14 +25,15 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | JSON (.json) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |
 | SPSS and SPSS portable (.sav and .por) | Yes | Yes (.sav only) |
+| "XBASE" database files (.dbf) | Yes | Yes |
+| Excel (.xlsx) | Yes | Yes |
+| Weka Attribute-Relation File Format (.arff) | Yes | Yes |
+| R syntax (.R) | Yes | Yes |
 | SAS and SAS XPORT (.sas7bdat and .xpt) | Yes |  |
 | Minitab (.mtp) | Yes |  |
 | Epiinfo (.rec) | Yes |  |
 | Systat (.syd) | Yes |  |
 | Data Interchange Format (.dif) | Yes |  |
-| "XBASE" database files (.dbf) | Yes | Yes |
-| Excel (.xlsx) | Yes | Yes |
-| Weka Attribute-Relation File Format (.arff) | Yes | Yes |
 | Fortran data (no recognized extension) | Yes |  |
 | Clipboard (as tab-separated) |  | Yes (Mac and Windows) |
 
@@ -85,9 +81,9 @@ x <- import("iris.csv")
 y <- import("iris.rds")
 z <- import("iris.dta")
 
-# confirm identical
-identical(x, y)
-identical(y, z)
+# confirm data match
+all.equal(x, y, check.attributes = FALSE)
+all.equal(x, z, check.attributes = FALSE)
 ```
 
 ### Convert ###

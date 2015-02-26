@@ -11,9 +11,26 @@
     \item{...}{Additional arguments for the underlying export functions.}
 }
 \value{The name of the output file as a character string (invisibly).}
-\description{This function exports a data frame or matrix into a file with file format based on the file extension (or the manually specified format).
+\description{This function exports a data frame or matrix into a file with file format based on the file extension (or the manually specified format, if \code{format} is specified).
 
-The following file formats are supported: txt, csv, tsv, rds, Rdata, json, dbf, sav, dta, xlsx, and arff.
+\code{export} supports many file formats. See the documentation for the underlying export functions for optional arguments that can be passed via \code{...}
+
+\itemize{
+    \item Tab-separated data (.tsv), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
+    \item Comma-separated data (.csv), using \code{\link[utils]{write.csv}} with \code{row.names = FALSE}
+    \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
+    \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
+    \item Saved R ojbects (.RData), using \code{\link[base]{save}}
+    \item JSON (.json), using \code{\link[jsonlite]{toJSON}}
+    \item Stata (.dta), using \code{\link[haven]{write_dta}}
+    \item SPSS and SPSS portable (.sav), using \code{\link[haven]{write_sav}}
+    \item "XBASE" database files (.dbf), using \code{\link[foreign]{write.dbf}}
+    \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{write.arff}}
+    \item R syntax object (.R), using \code{\link[base]{dput}}
+    \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}
+    \item Clipboard export, using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
+}
+
 }
 \examples{
 # specify `file`
