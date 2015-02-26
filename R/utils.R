@@ -31,6 +31,7 @@ get_type <- function(fmt) {
         fortran = "fortran",
         zip = "zip",
         tar = "tar",
+        dump = "dump",
         r = "r",
         clipboard = "clipboard"
     )

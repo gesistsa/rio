@@ -23,10 +23,10 @@
     \item Saved R ojbects (.RData), using \code{\link[base]{save}}
     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}
     \item Stata (.dta), using \code{\link[haven]{write_dta}}
-    \item SPSS and SPSS portable (.sav), using \code{\link[haven]{write_sav}}
+    \item SPSS (.sav), using \code{\link[haven]{write_sav}}
     \item "XBASE" database files (.dbf), using \code{\link[foreign]{write.dbf}}
     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{write.arff}}
-    \item R syntax object (.R), using \code{\link[base]{dput}}
+    \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'}
     \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}
     \item Clipboard export, using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
 }

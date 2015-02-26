@@ -52,6 +52,7 @@ export <- function(x, file, format, ...) {
     }
     switch(fmt,
          r = dput(x, file = file, ...),
+         dump = dump(as.character(substitute(x)), file = file, ...),
          txt = export.tsv(x, file = file, ...),
          tsv = export.tsv(x, file = file, ...),
          fwf = export.fwf(x, file = file, ...),
