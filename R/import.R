@@ -4,7 +4,7 @@ import.zip <- function(file, ...) {
         stop("Zip archive contains multiple files")
     else {
         unzip(file, exdir = tempdir())
-        import(paste0(tempdir(),"/", file), ...)
+        import(paste0(tempdir(),"/", file_list$Name), ...)
     }
 }
 
@@ -14,7 +14,7 @@ import.tar <- function(file, ...) {
         stop("Tar archive contains multiple files")
     else {
         untar(file, exdir = tempdir())
-        import(paste0(tempdir(),"/", file), ...)
+        import(paste0(tempdir(),"/", file_list$Name), ...)
     }
 }
 
