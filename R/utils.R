@@ -1,8 +1,12 @@
 get_type <- function(fmt) {
     type_list <- list(
-        txt = "tsv", # decide on this
+        txt = "tsv",
         tsv = "tsv",
         csv = "csv",
+        "," = "csv",
+        ";" = "csv2",
+        psv = "psv",
+        "|" = "psv",
         fwf = "fwf",
         rds = "rds",
         rdata = "rdata",

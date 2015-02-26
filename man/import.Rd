@@ -6,7 +6,7 @@
 }
 \arguments{
     \item{file}{A character string naming a file, URL, or single-file .zip or .tar archive.}
-    \item{format}{An optional character string code of file format, which can be used to override the format inferred from \code{file}.}
+    \item{format}{An optional character string code of file format, which can be used to override the format inferred from \code{file}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), and \dQuote{|} (for pipe-separated values).}
     \item{...}{Additional arguments for the underlying import functions.}
 }
 \value{An R data.frame.}
@@ -17,9 +17,10 @@
 \itemize{
     \item Tab-separated data (.tsv), using \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
     \item Comma-separated data (.csv), using \code{\link[utils]{read.csv}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
+    \item Pipe-separated data (.psv), using \code{\link[utils]{read.table}} with \code{sep = '|'}, \code{row.names = FALSE}, and \code{stringsAsFactors = FALSE}
     \item Fixed-width format data (.fwf), using \code{\link[utils]{read.fwf}} (which requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}
     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
-    \item Saved R ojbects (.RData), using \code{\link[base]{load}} for single-object .Rdata files
+    \item Saved R objects (.RData), using \code{\link[base]{load}} for single-object .Rdata files
     \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
     \item Stata (.dta), using \code{\link[haven]{read_dta}}
     \item SPSS and SPSS portable (.sav and .por), using \code{\link[haven]{read_sav}} and \code{\link[haven]{read_por}}

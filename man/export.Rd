@@ -7,7 +7,7 @@
 \arguments{
     \item{x}{A data frame or matrix to be written into a file.}
     \item{file}{A character string naming a file. Must specify \code{file} and/or \code{format}.}
-    \item{format}{An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}.}
+    \item{format}{An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.}
     \item{...}{Additional arguments for the underlying export functions.}
 }
 \value{The name of the output file as a character string (invisibly).}
@@ -18,9 +18,10 @@
 \itemize{
     \item Tab-separated data (.tsv), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
     \item Comma-separated data (.csv), using \code{\link[utils]{write.csv}} with \code{row.names = FALSE}
+    \item Pipe-separated data (.psv), using \code{\link[utils]{write.table}} with \code{sep = '|'} and \code{row.names = FALSE}
     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
-    \item Saved R ojbects (.RData), using \code{\link[base]{save}}
+    \item Saved R objects (.RData), using \code{\link[base]{save}}
     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}
     \item Stata (.dta), using \code{\link[haven]{write_dta}}
     \item SPSS (.sav), using \code{\link[haven]{write_sav}}

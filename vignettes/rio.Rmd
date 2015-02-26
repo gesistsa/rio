@@ -19,9 +19,10 @@ By making import and export easy, it's an obvious next step to also use R as a s
 | ------ | ------ | ------ |
 | Tab-separated data (.tsv) | Yes | Yes |
 | Comma-separated data (.csv) | Yes | Yes |
+| Pipe-separated data (.psv) | Yes | Yes |
 | Fixed-width format data (.fwf) | Yes | Experimental |
 | Serialized R objects (.rds) | Yes | Yes |
-| Saved R ojbects (.RData) | Yes | Yes |
+| Saved R objects (.RData) | Yes | Yes |
 | JSON (.json) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |
 | SPSS and SPSS portable (.sav and .por) | Yes | Yes (.sav only) |

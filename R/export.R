@@ -2,7 +2,7 @@ export.csv <- function(x, file, row.names = FALSE, ...) {
     write.csv(x, file = file, row.names = row.names, ...)
 }
 
-export.tsv <- function(x, file, sep = "\t", row.names = FALSE, header = TRUE, ...) {
+export.delim <- function(x, file, sep = "\t", row.names = FALSE, header = TRUE, ...) {
     write.table(x, file = file, sep = sep, row.names = row.names, col.names = header, ...)
 }
 
@@ -51,14 +51,16 @@ export <- function(x, file, format, ...) {
         x <- as.data.frame(x)
     }
     switch(fmt,
+         txt = export.delim(x, file = file, ...),
+         tsv = export.delim(x, file = file, ...),
+         csv = export.delim(x, file = file, sep = ",", dec = ".", ...),
+         csv2 = export.delim(file = file, sep = ";", dec = ",", ...),
+         psv = import.delim(file = file, sep = "|", ...),
+         fwf = export.fwf(x, file = file, ...),
          r = dput(x, file = file, ...),
          dump = dump(as.character(substitute(x)), file = file, ...),
-         txt = export.tsv(x, file = file, ...),
-         tsv = export.tsv(x, file = file, ...),
-         fwf = export.fwf(x, file = file, ...),
          clipboard = export.clipboard(x, ...),
          rds = saveRDS(x, file = file, ...),
-         csv = export.csv(x, file = file, ...), 
          rdata = save(x, file = file, ...),
          sav = write_sav(data = x, path = file),
          dta = write_dta(data = x, path = file),

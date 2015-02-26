@@ -22,7 +22,7 @@ import.csv <- function(file, header = TRUE, stringsAsFactors = FALSE, ...) {
     read.csv(file = file, header = header, stringsAsFactors = stringsAsFactors, ...)
 }
 
-import.tsv <- function(file, sep = "\t", header = TRUE, stringsAsFactors = FALSE, ...) {
+import.delim <- function(file, sep = "\t", header = TRUE, stringsAsFactors = FALSE, ...) {
     read.table(file = file, sep = sep, header = header, stringsAsFactors = stringsAsFactors, ...)
 }
 
@@ -63,11 +63,13 @@ import <- function(file, format, ...) {
     }
     x <- switch(fmt,
                 r = dget(file = file),
-                tsv = import.tsv(file = file, ...),
-                txt = import.tsv(file = file, ...),
+                tsv = import.delim(file = file, ...),
+                txt = import.delim(file = file, ...),
                 fwf = import.fwf(file = file, ...),
                 rds = readRDS(file = file, ...),
-                csv = import.csv(file = file, ...),
+                csv = import.delim(file = file, sep = ",", ...),
+                csv2 = import.delim(file = file, sep = ";", dec = ",", ...),
+                psv = import.delim(file = file, sep = "|", ...),
                 rdata = import.rdata(file = file, ...),
                 dta = read_dta(path = file),
                 dbf = read.dbf(file = file, ...),
