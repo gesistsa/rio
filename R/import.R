@@ -20,18 +20,18 @@ import.tar <- function(file, ...) {
 
 
 import.csv <- function(file, header = TRUE, stringsAsFactors = FALSE, ...) {
-    read.csv(file = file, header = header, stringsAsFactors = FALSE, ...)
+    read.csv(file = file, header = header, stringsAsFactors = stringsAsFactors, ...)
 }
 
-import.tsv <- function(file, sep = "\t", header = TRUE, ...) {
-    read.table(file = file, sep = sep, header = header, stringsAsFactors = FALSE, ...)
+import.tsv <- function(file, sep = "\t", header = TRUE, stringsAsFactors = FALSE, ...) {
+    read.table(file = file, sep = sep, header = header, stringsAsFactors = stringsAsFactors, ...)
 }
 
-import.fwf <- function(file = file, header = TRUE, widths, ...) {
+import.fwf <- function(file = file, header = TRUE, widths, stringsAsFactors = FALSE, ...) {
     if(missing(widths)) {
         stop("Import of fixed-width format data requires a 'widths' argument")
     }
-    read.fwf(file = file, widths = widths, stringsAsFactors = FALSE, ...)
+    read.fwf(file = file, widths = widths, header = header, stringsAsFactors = stringsAsFactors, ...)
 }
 
 import.fortran <- function(file = file, style, ...) {
