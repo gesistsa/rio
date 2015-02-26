@@ -25,14 +25,15 @@ By making import and export easy, it's an obvious next step to also use R as a s
 | JSON (.json) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |
 | SPSS and SPSS portable (.sav and .por) | Yes | Yes (.sav only) |
+| "XBASE" database files (.dbf) | Yes | Yes |
+| Excel (.xlsx) | Yes | Yes |
+| Weka Attribute-Relation File Format (.arff) | Yes | Yes |
+| R syntax (.R) | Yes | Yes |
 | SAS and SAS XPORT (.sas7bdat and .xpt) | Yes |  |
 | Minitab (.mtp) | Yes |  |
 | Epiinfo (.rec) | Yes |  |
 | Systat (.syd) | Yes |  |
 | Data Interchange Format (.dif) | Yes |  |
-| "XBASE" database files (.dbf) | Yes | Yes |
-| Excel (.xlsx) | Yes | Yes |
-| Weka Attribute-Relation File Format (.arff) | Yes | Yes |
 | Fortran data (no recognized extension) | Yes |  |
 | Clipboard (as tab-separated) |  | Yes (Mac and Windows) |
 

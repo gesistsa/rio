@@ -18,7 +18,6 @@ import.tar <- function(file, ...) {
     }
 }
 
-
 import.csv <- function(file, header = TRUE, stringsAsFactors = FALSE, ...) {
     read.csv(file = file, header = header, stringsAsFactors = stringsAsFactors, ...)
 }
@@ -27,7 +26,7 @@ import.tsv <- function(file, sep = "\t", header = TRUE, stringsAsFactors = FALSE
     read.table(file = file, sep = sep, header = header, stringsAsFactors = stringsAsFactors, ...)
 }
 
-import.fwf <- function(file = file, header = TRUE, widths, stringsAsFactors = FALSE, ...) {
+import.fwf <- function(file = file, header = FALSE, widths, stringsAsFactors = FALSE, ...) {
     if(missing(widths)) {
         stop("Import of fixed-width format data requires a 'widths' argument")
     }
