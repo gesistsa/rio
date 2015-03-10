@@ -5,11 +5,11 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
  - `export` and `import` provide a painless data I/O experience by automatically choosing the appropriate data read or write function based on file extension
  - `convert` wraps `import` and `export` to allow the user to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](http://www.openmetadata.org/site/?page_id=1089))
 
-The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Two of these are important. First, **rio** uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, **rio** allows almost all common data formats to be read with the same function. Second, when importing tabular data (CSV, TSV, etc.), **rio** does not convert strings to factors.
+The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Three of these are important. First, **rio** uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, **rio** allows almost all common data formats to be read with the same function. For text-delimited file formats, the package uses `data.table::fread` to automatically determine the file format regardless of the extension. So, a CSV that is actually tab-separated will still be correctly read in. Second, when importing tabular data (CSV, TSV, etc.), **rio** does not convert strings to factors.
 
 Another weakness of the common data import functions is that they only support import of web-based data from websites serving HTTP, not HTTPS. For example, data stored on GitHub as publicly visible files cannot be read directly into R without either manually downloading them or reading them in via **RCurl** or **httr**. The `import` function negates the needs for those steps by supporting HTTPS automatically. Similarly, `import` also reads from single-file .zip and .tar archives automatically, without the need to explicitly decompress them.
  
-The package also wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. Namely, the package uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files and will eventually use [**fastread**](https://github.com/hadley/fastread) for intuitive import of text-delimited and fixed-width file formats.
+The package also wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. Namely, the package uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files and uses [the `fread` function from **data.table**](https://github.com/Rdatatable/data.table) for intuitive import of text-delimited and fixed-width file formats.
 
 ## Supported file formats ##
 
@@ -53,7 +53,6 @@ if(!require("devtools")){
     install.packages("devtools")
     library("devtools")
 }
-install_github("hadley/haven")
 install_github("leeper/rio")
 ```
 

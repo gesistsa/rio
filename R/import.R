@@ -1,41 +1,45 @@
-import.zip <- function(file, ...) {
+import.zip <- function(file, which = 1, ...) {
     file_list <- unzip(file, list = TRUE)
     if(nrow(file_list) > 1)
-        stop("Zip archive contains multiple files")
+        warning("Zip archive contains multiple files. Attempting first file.")
     else {
         unzip(file, exdir = tempdir())
-        import(paste0(tempdir(),"/", file_list$Name), ...)
+        import(paste0(tempdir(),"/", file_list$Name[which]), ...)
     }
 }
 
-import.tar <- function(file, ...) {
+import.tar <- function(file, which = 1, ...) {
     file_list <- unzip(file, list = TRUE)
     if(nrow(file_list) > 1)
-        stop("Tar archive contains multiple files")
+        stop("Tar archive contains multiple files. Attempting first file.")
     else {
         untar(file, exdir = tempdir())
-        import(paste0(tempdir(),"/", file_list$Name), ...)
+        import(paste0(tempdir(),"/", file_list$Name[which]), ...)
     }
 }
 
-import.csv <- function(file, header = TRUE, stringsAsFactors = FALSE, ...) {
-    read.csv(file = file, header = header, stringsAsFactors = stringsAsFactors, ...)
-}
-
-import.delim <- function(file, sep = "\t", header = TRUE, stringsAsFactors = FALSE, ...) {
-    read.table(file = file, sep = sep, header = header, stringsAsFactors = stringsAsFactors, ...)
+import.delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
+    if(fread) {
+        fread(input = file, sep = sep, sep2 = "auto", header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
+    } else {
+        if(missing(sep) || is.null(sep) || sep == "auto")
+            sep <- "\t"
+        if(missing(header) || is.null(header) || header == "auto")
+            header <- TRUE
+        read.table(file = file, sep = sep, header = header, stringsAsFactors = stringsAsFactors, ...)
+    }
 }
 
 import.fwf <- function(file = file, header = FALSE, widths, stringsAsFactors = FALSE, ...) {
     if(missing(widths)) {
-        stop("Import of fixed-width format data requires a 'widths' argument")
+        stop("Import of fixed-width format data requires a 'widths' argument. See `? read.fwf`.")
     }
     read.fwf(file = file, widths = widths, header = header, stringsAsFactors = stringsAsFactors, ...)
 }
 
 import.fortran <- function(file = file, style, ...) {
     if(missing(style)) {
-        stop("Import of Fortran format data requires a 'style' argument. See 'format' in read.fortran")
+        stop("Import of Fortran format data requires a 'style' argument. See `? read.fortran`.")
     }
     read.fortran(file = file, format = style, ...)
 }
@@ -44,13 +48,13 @@ import.xlsx <- function(file = file, header = TRUE, ...) {
     read.xlsx(xlsxFile = file, colNames = header, ...)
 }
 
-import.rdata <- function(file, ...) {
+import.rdata <- function(file, which = 1, ...) {
     e <- new.env()
     load(file = file, envir = e, ...)
-    get(ls(e)[1], e) # return first object from a .Rdata
+    get(ls(e)[which], e)
 }
 
-import <- function(file, format, ...) {
+import <- function(file, format, fread = TRUE, ...) {
     if(missing(format))
         fmt <- get_ext(file)
     else
@@ -63,13 +67,13 @@ import <- function(file, format, ...) {
     }
     x <- switch(fmt,
                 r = dget(file = file),
-                tsv = import.delim(file = file, ...),
-                txt = import.delim(file = file, ...),
+                tsv = import.delim(file = file, fread = fread, sep = "\t", ...),
+                txt = import.delim(file = file, fread = fread, sep = "\t", ...),
                 fwf = import.fwf(file = file, ...),
                 rds = readRDS(file = file, ...),
-                csv = import.delim(file = file, sep = ",", ...),
-                csv2 = import.delim(file = file, sep = ";", dec = ",", ...),
-                psv = import.delim(file = file, sep = "|", ...),
+                csv = import.delim(file = file, fread = fread, sep = ",", ...),
+                csv2 = import.delim(file = file, fread = fread, sep = ";", dec = ",", ...),
+                psv = import.delim(file = file, fread = fread, sep = "|", ...),
                 rdata = import.rdata(file = file, ...),
                 dta = read_dta(path = file),
                 dbf = read.dbf(file = file, ...),
