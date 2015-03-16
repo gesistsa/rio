@@ -46,8 +46,8 @@
 export(iris, "myIris.csv", row.names = TRUE)
 iris2 <- import("myIris.csv") # with the additional spurious column
 head(iris2)
-iris3 <- import("myIris.csv", row.names = 1)
-head(iris3)
+#iris3 <- import("myIris.csv", row.names = 1)
+#head(iris3)
 
-identical(iris3, iris3)
+#identical(iris3, iris3)
 }
