@@ -2,18 +2,22 @@ export.csv <- function(x, file, row.names = FALSE, ...) {
     write.csv(x, file = file, row.names = row.names, ...)
 }
 
-export.delim <- function(x, file, sep = "\t", row.names = FALSE, header = TRUE, ...) {
-    write.table(x, file = file, sep = sep, row.names = row.names, col.names = header, ...)
+export.delim <- function(x, file, sep = "\t", row.names = FALSE,
+                         col.names = TRUE, ...) {
+    write.table(x, file = file, sep = sep, row.names = row.names,
+                col.names = col.names, ...)
 }
 
-export.fwf <- function(x, file, sep = " ", row.names = FALSE, quote = FALSE, col.names = FALSE, 
+export.fwf <- function(x, file, sep = " ", row.names = FALSE, quote = FALSE,
+                       col.names = FALSE,
                        fmt.numeric = "%0.7f", fmt.factor = "%", ...) {
     dat <- lapply(x, function(col) {
         if(is.numeric(col)) {
             return(sprintf(fmt = fmt.numeric, col))
         } else if(is.character(col)) {
             col <- as.numeric(as.factor(col))
-            return(sprintf(fmt = paste0("%0", max(nchar(as.character(col))), "s"), col))
+            return(sprintf(fmt = paste0("%0", max(nchar(as.character(col))),
+                   "s"), col))
         } else if(is.factor(col)) {
             return(sprintf(fmt = fmt.factor, as.numeric(col)))
         } else if(is.logical(col)) {
@@ -21,16 +25,19 @@ export.fwf <- function(x, file, sep = " ", row.names = FALSE, quote = FALSE, col
         }
     })
     dat <- do.call(cbind, x)
-    write.table(dat, row.names = row.names, sep = sep, quote = quote, col.names = col.names, ...)
+    write.table(dat, row.names = row.names, sep = sep, quote = quote,
+                col.names = col.names, ...)
 }
 
-export.clipboard <- function(x, row.names = FALSE, header = TRUE, ...) {
+export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, ...) {
     if(Sys.info()["sysname"] == "Darwin") {
-        clip <- pipe("pbcopy", "w")                                             
-        write.table(x, file = clip, sep="\t", row.names = row.names, col.names = header, ...)
+        clip <- pipe("pbcopy", "w")
+        write.table(x, file = clip, sep="\t", row.names = row.names,
+                    col.names = header, ...)
         close(clip)
     } else if(Sys.info()["sysname"] == "Windows") {
-        write.table(x, file="clipboard", sep="\t", row.names = row.names, col.names = header, ...)
+        write.table(x, file="clipboard", sep="\t", row.names = row.names,
+                    col.names = col.names, ...)
     }
 }
 
@@ -44,7 +51,7 @@ export <- function(x, file, format, ...) {
     } else if(!missing(format)) {
         fmt <- get_type(format)
         file <- paste0(as.character(substitute(x)), ".", fmt)
-    } 
+    }
     if (!is.data.frame(x) & !is.matrix(x)) {
         stop("x is not a data frame or matrix.")
     } else if (is.matrix(x)) {

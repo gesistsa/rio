@@ -2,7 +2,7 @@ Package: rio
 Type: Package
 Title: A Swiss-army knife for data I/O
 Version: 0.1.3
-Date: 2015-03-10
+Date: 2015-03-16
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Authors@R: c(person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
 	         person("Geoffrey CH", "Chan", role = "aut", email = "gefchchan@gmail.com"),
@@ -10,7 +10,7 @@ Authors@R: c(person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@g
              person("Christopher", "Gandrud", role = "aut"))
 Description: rio provides streamlined data import and export for R. The core advantage of rio is that it makes assumptions that the user is probably willing to make. The import and export functions will determine data structure from the file extension, without the need to select the appropriate read/write function. rio also wraps fast, efficient import/export packages for performance enhancements, natively imports web-based data sources and compressed data files, and sets reasonable defaults for data import and export.
 Depends: R (>= 2.15.0)
-Imports: tools, utils, foreign, haven, openxlsx, jsonlite, curl, data.table
+Imports: tools, utils, foreign, haven, openxlsx, readODS, jsonlite, curl, data.table
 Suggests: testthat, knitr, magrittr
 License: GPL-2
 VignetteBuilder: knitr

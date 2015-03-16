@@ -34,6 +34,7 @@
     \item Epiinfo (.rec), using \code{\link[foreign]{read.epiinfo}}
     \item Systat (.syd), using \code{\link[foreign]{read.systat}}
     \item Data Interchange Format (.dif), using \code{\link[utils]{read.DIF}}
+    \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read.ods}}
     \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
 }
 }
