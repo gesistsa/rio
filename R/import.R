@@ -78,7 +78,7 @@ import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
 
 import.xml <- function(file, colClasses = NULL, homogeneous = NA, collectNames = TRUE, 
                        nodes = list(), stringsAsFactors = FALSE, ...) {
-    xmlToDataFrame(file = xmlParse(file, ...), colClasses = colClasses, homogeneous = homogeneous, 
+    xmlToDataFrame(doc = xmlParse(file, ...), colClasses = colClasses, homogeneous = homogeneous, 
                    collectNames = collectNames, nodes = nodes, stringsAsFactors = stringsAsFactors)
 }
 
@@ -112,7 +112,7 @@ import <- function(file, format, fread = TRUE, ...) {
                 xpt = read.xport(file = file),
                 mtp = read.mtp(file = file, ...),
                 syd = read.systat(file = file, to.data.frame = TRUE),
-                json = fromJSON(file = file, ...),
+                json = fromJSON(txt = file, ...),
                 rec = read.epiinfo(file = file, ...),
                 arff = read.arff(file = file),
                 xlsx = import.xlsx(file = file, ...),
