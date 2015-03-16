@@ -2,7 +2,7 @@
 \alias{import}
 \title{Read data.frame or matrix from a file}
 \usage{
-    import(file, format, ...)
+    import(file, format, fread = TRUE, ...)
 }
 \arguments{
     \item{file}{A character string naming a file, URL, or single-file .zip or .tar archive.}

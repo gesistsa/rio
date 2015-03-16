@@ -47,7 +47,7 @@ export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, ...) {
     if(Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbcopy", "w")
         write.table(x, file = clip, sep="\t", row.names = row.names,
-                    col.names = header, ...)
+                    col.names = col.names, ...)
         close(clip)
     } else if(Sys.info()["sysname"] == "Windows") {
         write.table(x, file="clipboard", sep="\t", row.names = row.names,
