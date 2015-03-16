@@ -1,5 +1,6 @@
 # CHANGES TO v0.1.3 #
 
+ * Added support for export to simple XML documents. (#12)
  * Added support for import from simple XML documents via `XML::xmlToDataFrame`. (#12)
  * Added support for import from ODS spreadsheet formats. (#12, h/t Chung-hong Chan)
  * Use `data.table::fread` by default for reading delimited files. (#3)

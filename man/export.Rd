@@ -29,6 +29,7 @@
     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{write.arff}}
     \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'}
     \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}
+    \item XML (.xml), using a custom method to create an XML tree and write to disk using \code{\link[XML]{saveXML}}
     \item Clipboard export, using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
 }
 

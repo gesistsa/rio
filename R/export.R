@@ -29,6 +29,20 @@ export.fwf <- function(x, file, sep = " ", row.names = FALSE, quote = FALSE,
                 col.names = col.names, ...)
 }
 
+export.xml <- function(x, file, ...) {
+    root <- newXMLNode(as.character(substitute(x)))
+    for(i in 1:nrow(x)){
+        obs <- newXMLNode("Observation", parent = root)
+        rowname <- newXMLNode("rowname", parent = obs)
+        xmlValue(rowname) <- rownames(x)[i]
+        for(j in 1:ncol(x)) {
+            obs_value <- newXMLNode(names(x)[j], parent = obs)
+            xmlValue(obs_value) <- x[i,j]
+        }
+    }
+    invisible(saveXML(doc = root, file = file, ...))
+}
+
 export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, ...) {
     if(Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbcopy", "w")
@@ -75,6 +89,7 @@ export <- function(x, file, format, ...) {
          json = cat(toJSON(x, ...), file = file),
          arff = write.arff(x = x, file = file, ...),
          xlsx = write.xlsx(x = x, file = file, ...),
+         xml = export.xml(x, file = file, ...), 
          stop("Unrecognized file format")
          )
     invisible(file)

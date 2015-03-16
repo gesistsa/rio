@@ -30,13 +30,13 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | Excel (.xlsx) | Yes | Yes |
 | Weka Attribute-Relation File Format (.arff) | Yes | Yes |
 | R syntax (.R) | Yes | Yes |
+| Shallow XML documents (.xml) | Yes | Yes |
 | SAS and SAS XPORT (.sas7bdat and .xpt) | Yes |  |
 | Minitab (.mtp) | Yes |  |
 | Epiinfo (.rec) | Yes |  |
 | Systat (.syd) | Yes |  |
 | Data Interchange Format (.dif) | Yes |  |
 | OpenDocument Spreadsheet  (.ods) | Yes |  |
-| XML documents (.xml) | Yes |  |
 | Fortran data (no recognized extension) | Yes |  |
 | Clipboard (as tab-separated) |  | Yes (Mac and Windows) |
 

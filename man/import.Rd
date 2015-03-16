@@ -35,6 +35,7 @@
     \item Systat (.syd), using \code{\link[foreign]{read.systat}}
     \item Data Interchange Format (.dif), using \code{\link[utils]{read.DIF}}
     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read.ods}}
+    \item Shallow XML documents (.xml), using \code{\link[XML]{xmlToDataFrame}}. Note: optional arguments not recognized by \code{xmlToDataFrame} are passed to \code{\link[XML]{xmlParse}}.
     \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
 }
 }
