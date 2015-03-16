@@ -77,9 +77,9 @@ import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
 }
 
 import.xml <- function(file, colClasses = NULL, homogeneous = NA, collectNames = TRUE, 
-                       nodes, stringsAsFactors = FALSE, ...) {
+                       stringsAsFactors = FALSE, ...) {
     xmlToDataFrame(doc = xmlParse(file, ...), colClasses = colClasses, homogeneous = homogeneous, 
-                   collectNames = collectNames, nodes = nodes, stringsAsFactors = stringsAsFactors)
+                   collectNames = collectNames, stringsAsFactors = stringsAsFactors)
 }
 
 import <- function(file, format, fread = TRUE, ...) {
