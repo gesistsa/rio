@@ -37,7 +37,8 @@ get_type <- function(fmt) {
         tar = "tar",
         dump = "dump",
         r = "r",
-        clipboard = "clipboard"
+        clipboard = "clipboard",
+        ods = "ods"
     )
     type <- type_list[[tolower(fmt)]]
     if(is.null(type)) {
