@@ -50,6 +50,28 @@ import.rdata <- function(file, ...) {
     get(ls(e)[1], e) # return first object from a .Rdata
 }
 
+import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
+    handlingODSheader <- function(x) {
+        colnames(x) <- x[1,]
+        g <- x[2:nrow(x),]
+        rownames(g) <- seq(from = 1, to = nrow(g))
+        return(g)
+    }
+    if (getNrOfSheetsInODS(file) > 1 & is.null(sheet)) {
+        warning("ODS file imported is multi-sheet, a list of data.frame will be returned")
+    } else if (getNrOfSheetsInODS(file) == 1) {
+        sheet <- 1
+    }
+    res <- read.ods(file = file, sheet = sheet, ...)
+    if (header & !is.data.frame(res)) {
+        res <- lapply(res, handlingODSheader)
+    }
+    if (header & is.data.frame(res)) {
+        res <- handlingODSheader(res)
+    }
+    return(res)
+}
+
 import <- function(file, format, ...) {
     if(missing(format))
         fmt <- get_ext(file)
@@ -87,6 +109,7 @@ import <- function(file, format, ...) {
                 fortran = import.fortran(file = file, ...),
                 zip = import.zip(file = file, ...),
                 tar = import.tar(file = file, ...),
+                ods = import.ods(file = file, ...),
                 stop("Unrecognized file format")
                 )
     return(x)

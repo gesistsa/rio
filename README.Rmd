@@ -35,6 +35,7 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | Epiinfo (.rec) | Yes |  |
 | Systat (.syd) | Yes |  |
 | Data Interchange Format (.dif) | Yes |  |
+| OpenDocument Spreadsheet  (.ods) | Yes |  |
 | Fortran data (no recognized extension) | Yes |  |
 | Clipboard (as tab-separated) |  | Yes (Mac and Windows) |
 
