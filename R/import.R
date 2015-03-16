@@ -76,6 +76,12 @@ import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
     return(res)
 }
 
+import.xml <- function(file, colClasses = NULL, homogeneous = NA, collectNames = TRUE, 
+                       nodes = list(), stringsAsFactors = FALSE, ...) {
+    xmlToDataFrame(file = xmlParse(file, ...), colClasses = colClasses, homogeneous = homogeneous, 
+                   collectNames = collectNames, nodes = nodes, stringsAsFactors = stringsAsFactors)
+}
+
 import <- function(file, format, fread = TRUE, ...) {
     if(missing(format))
         fmt <- get_ext(file)
@@ -114,6 +120,7 @@ import <- function(file, format, fread = TRUE, ...) {
                 zip = import.zip(file = file, ...),
                 tar = import.tar(file = file, ...),
                 ods = import.ods(file = file, ...),
+                xml = import.xml(file = file, ...), 
                 stop("Unrecognized file format")
                 )
     return(x)

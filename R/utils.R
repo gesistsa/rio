@@ -38,7 +38,8 @@ get_type <- function(fmt) {
         dump = "dump",
         r = "r",
         clipboard = "clipboard",
-        ods = "ods"
+        ods = "ods",
+        xml = "xml"
     )
     type <- type_list[[tolower(fmt)]]
     if(is.null(type)) {
