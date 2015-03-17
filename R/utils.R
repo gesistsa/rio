@@ -43,7 +43,8 @@ get_type <- function(fmt) {
     )
     type <- type_list[[tolower(fmt)]]
     if(is.null(type)) {
-        stop("Unrecognized file format")
+        stop("Unrecognized file format. Try specifying with the format argument.",
+             call. = F)
     } else {
         return(type)
     }
@@ -58,6 +59,7 @@ get_ext <- function(file) {
     }
     else if(grepl("^http.*://", file)) {
         fmt <- gsub("(.*\\/)([^.]+)\\.", "", file)
+        get_type(fmt)
     }
     if(file == "clipboard") {
         return("clipboard")

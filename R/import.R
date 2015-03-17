@@ -76,9 +76,9 @@ import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
     return(res)
 }
 
-import.xml <- function(file, colClasses = NULL, homogeneous = NA, collectNames = TRUE, 
+import.xml <- function(file, colClasses = NULL, homogeneous = NA, collectNames = TRUE,
                        stringsAsFactors = FALSE, ...) {
-    xmlToDataFrame(doc = xmlParse(file, ...), colClasses = colClasses, homogeneous = homogeneous, 
+    xmlToDataFrame(doc = xmlParse(file, ...), colClasses = colClasses, homogeneous = homogeneous,
                    collectNames = collectNames, stringsAsFactors = stringsAsFactors)
 }
 
@@ -87,7 +87,7 @@ import <- function(file, format, fread = TRUE, ...) {
         fmt <- get_ext(file)
     else
         fmt <- tolower(format)
-    if(grepl("^https://", file)) {
+    if(grepl("^http.*://", file)) {
         temp_file <- tempfile(fileext = fmt)
         on.exit(unlink(temp_file))
         curl_download(file, temp_file, mode = "wb")
@@ -120,7 +120,7 @@ import <- function(file, format, fread = TRUE, ...) {
                 zip = import.zip(file = file, ...),
                 tar = import.tar(file = file, ...),
                 ods = import.ods(file = file, ...),
-                xml = import.xml(file = file, ...), 
+                xml = import.xml(file = file, ...),
                 stop("Unrecognized file format")
                 )
     return(x)
