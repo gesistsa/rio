@@ -44,15 +44,18 @@ export.xml <- function(x, file, ...) {
     invisible(saveXML(doc = root, file = file, ...))
 }
 
-export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, ...) {
+export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
     if(Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbcopy", "w")
-        write.table(x, file = clip, sep="\t", row.names = row.names,
+        write.table(x, file = clip, sep = sep, row.names = row.names,
                     col.names = col.names, ...)
         close(clip)
     } else if(Sys.info()["sysname"] == "Windows") {
-        write.table(x, file="clipboard", sep="\t", row.names = row.names,
+        write.table(x, file="clipboard", sep = sep, row.names = row.names,
                     col.names = col.names, ...)
+    } else {
+        stop("Writing to clipboard not supported on your OS")
+        return(NULL)
     }
 }
 
@@ -81,7 +84,6 @@ export <- function(x, file, format, ...) {
          fwf = export.fwf(x, file = file, ...),
          r = dput(x, file = file, ...),
          dump = dump(as.character(substitute(x)), file = file, ...),
-         clipboard = export.clipboard(x, ...),
          rds = saveRDS(x, file = file, ...),
          rdata = save(x, file = file, ...),
          sav = write_sav(data = x, path = file),
@@ -91,6 +93,7 @@ export <- function(x, file, format, ...) {
          arff = write.arff(x = x, file = file, ...),
          xlsx = write.xlsx(x = x, file = file, ...),
          xml = export.xml(x, file = file, ...), 
+         clipboard = export.clipboard(x, ...),
          stop("Unrecognized file format")
          )
     invisible(file)

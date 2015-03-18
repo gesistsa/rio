@@ -82,6 +82,21 @@ import.xml <- function(file, colClasses = NULL, homogeneous = NA, collectNames =
                    collectNames = collectNames, stringsAsFactors = stringsAsFactors)
 }
 
+import.clipboard <- function(header = TRUE, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
+    if(Sys.info()["sysname"] == "Darwin") {
+        clip <- pipe("pbpaste")
+        read.table(x, file = clip, sep = sep, row.names = row.names,
+                    col.names = col.names, ...)
+        close(clip)
+    } else if(Sys.info()["sysname"] == "Windows") {
+        read.table(x, file = "clipboard", sep = sep, header = header, row.names = row.names,
+                   col.names = col.names, ...)
+    } else {
+        stop("Reading from clipboard not supported on your OS")
+        return(NULL)
+    }
+}
+
 import <- function(file, format, fread = TRUE, ...) {
     if(missing(format))
         fmt <- get_ext(file)
@@ -121,6 +136,7 @@ import <- function(file, format, fread = TRUE, ...) {
                 tar = import.tar(file = file, ...),
                 ods = import.ods(file = file, ...),
                 xml = import.xml(file = file, ...),
+                clipboard = import.clipboard(...),
                 stop("Unrecognized file format")
                 )
     return(x)

@@ -38,7 +38,7 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | Data Interchange Format (.dif) | Yes |  |
 | OpenDocument Spreadsheet  (.ods) | Yes |  |
 | Fortran data (no recognized extension) | Yes |  |
-| Clipboard (as tab-separated) |  | Yes (Mac and Windows) |
+| Clipboard (default is tsv) | Yes (Mac and Windows) | Yes (Mac and Windows) |
 
 ## Package Installation ##
 

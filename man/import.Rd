@@ -36,6 +36,7 @@
     \item Data Interchange Format (.dif), using \code{\link[utils]{read.DIF}}
     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read.ods}}
     \item Shallow XML documents (.xml), using \code{\link[XML]{xmlToDataFrame}}. Note: optional arguments not recognized by \code{xmlToDataFrame} are passed to \code{\link[XML]{xmlParse}}.
+    \item Clipboard import, using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
     \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
 }
 }

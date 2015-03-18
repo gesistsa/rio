@@ -38,7 +38,7 @@ By making import and export easy, it's an obvious next step to also use R as a s
 | Data Interchange Format (.dif) | Yes |  |
 | OpenDocument Spreadsheet  (.ods) | Yes |  |
 | Fortran data (no recognized extension) | Yes |  |
-| Clipboard (as tab-separated) |  | Yes (Mac and Windows) |
+| Clipboard (default is tsv) | Yes (Mac and Windows) | Yes (Mac and Windows) |
 
 ### Import ###
 
