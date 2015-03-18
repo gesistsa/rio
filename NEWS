@@ -5,8 +5,8 @@
  * Added support for import from ODS spreadsheet formats. (#12, h/t Chung-hong Chan)
  * Use `data.table::fread` by default for reading delimited files. (#3)
  * Added support for import and export of `dput` and `dget` objects. (#10)
- * Added support for reading from compressed archives (.zip and .tar).
- * Added experimental support for writing to fixed-width format.
+ * Added support for reading from compressed archives (.zip and .tar). (#7)
+ * Added support for writing to fixed-width format. (#8)
  * Set `stringsAsFactors = FALSE` as default for reading tabular data. (#4)
  * Added support for HTTPS imports. (#1, h/t Christopher Gandrud)
  * Added support for automatic file naming in `export` based on object name and file format. (#5)
@@ -14,7 +14,7 @@
  * Added vignette, knitr-generated README.md, and updated documentation. (#2)
  * Added some non-exported functions to simplify argument passing and streamline package API. (#6)
  * Separated `import`, `export`, `convert`, and utilities into separate source code files.
- * Expanded the set of supported file types/extensions, switched SPSS, SAS, and Stata formats to haven.
+ * Expanded the set of supported file types/extensions, switched SPSS, SAS, and Stata formats to **haven**.
 
 # CHANGES TO v0.1.2 #
 

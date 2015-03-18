@@ -9,23 +9,24 @@ export.delim <- function(x, file, sep = "\t", row.names = FALSE,
 }
 
 export.fwf <- function(x, file, sep = " ", row.names = FALSE, quote = FALSE,
-                       col.names = FALSE,
-                       fmt.numeric = "%0.7f", fmt.factor = "%", ...) {
+                       col.names = FALSE, fmt.factor = "%0.7f", ...) {
     dat <- lapply(x, function(col) {
-        if(is.numeric(col)) {
-            return(sprintf(fmt = fmt.numeric, col))
-        } else if(is.character(col)) {
+        if(is.character(col)) {
             col <- as.numeric(as.factor(col))
-            return(sprintf(fmt = paste0("%0", max(nchar(as.character(col))),
-                   "s"), col))
         } else if(is.factor(col)) {
-            return(sprintf(fmt = fmt.factor, as.numeric(col)))
+            col <- as.numeric(col)
+        }
+        if(is.numeric(col)) {
+            s <- strsplit(as.character(col), ".", fixed = TRUE)
+            m1 <- max(nchar(sapply(s, `[`, 1)), na.rm = TRUE)
+            m2 <- max(nchar(sapply(s, `[`, 2)), na.rm = TRUE)
+            return(formatC(sprintf(fmt = paste0("%0.",m2,"f"), col), width = (m1+m2+1)))
         } else if(is.logical(col)) {
             return(sprintf("%i",col))
         }
     })
-    dat <- do.call(cbind, x)
-    write.table(dat, row.names = row.names, sep = sep, quote = quote,
+    dat <- do.call(cbind, dat)
+    write.table(dat, file = file, row.names = row.names, sep = sep, quote = quote,
                 col.names = col.names, ...)
 }
 

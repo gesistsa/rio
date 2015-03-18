@@ -20,7 +20,7 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | Tab-separated data (.tsv) | Yes | Yes |
 | Comma-separated data (.csv) | Yes | Yes |
 | Pipe-separated data (.psv) | Yes | Yes |
-| Fixed-width format data (.fwf) | Yes | Experimental |
+| Fixed-width format data (.fwf) | Yes | ExperimentaYes |
 | Serialized R objects (.rds) | Yes | Yes |
 | Saved R objects (.RData) | Yes | Yes |
 | JSON (.json) | Yes | Yes |
