@@ -82,15 +82,13 @@ import.xml <- function(file, colClasses = NULL, homogeneous = NA, collectNames =
                    collectNames = collectNames, stringsAsFactors = stringsAsFactors)
 }
 
-import.clipboard <- function(header = TRUE, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
+import.clipboard <- function(header = TRUE, sep = "\t", ...) {
     if(Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbpaste")
-        read.table(file = clip, sep = sep, row.names = row.names,
-                    col.names = col.names, ...)
+        read.table(file = clip, sep = sep, ...)
         close(clip)
     } else if(Sys.info()["sysname"] == "Windows") {
-        read.table(file = "clipboard", sep = sep, header = header, row.names = row.names,
-                   col.names = col.names, ...)
+        read.table(file = "clipboard", sep = sep, header = header, ...)
     } else {
         stop("Reading from clipboard not supported on your OS")
         return(NULL)
