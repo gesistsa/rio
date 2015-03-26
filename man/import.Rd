@@ -28,6 +28,7 @@
     \item "XBASE" database files (.dbf), using \code{\link[foreign]{read.dbf}}
     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{read.arff}}
     \item R syntax object (.R), using \code{\link[base]{dget}}
+    \item Excel legacy files (.xls), using \code{\link[readxl]{read_excel}}
     \item Excel (.xlsx), using \code{\link[openxlsx]{read.xlsx}}
     \item SAS (.sas7bdat) and SAS XPORT (.xpt), using \code{\link[haven]{read_sas}} and \code{\link[foreign]{read.xport}}
     \item Minitab (.mtp), using \code{\link[foreign]{read.mtp}}

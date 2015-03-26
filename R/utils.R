@@ -30,6 +30,7 @@ get_type <- function(fmt) {
         epiinfo = "rec",
         arff = "arff",
         weka = "arff",
+        xls = "xls",
         xlsx = "xlsx",
         excel = "xlsx",
         fortran = "fortran",
@@ -44,10 +45,9 @@ get_type <- function(fmt) {
     type <- type_list[[tolower(fmt)]]
     if(is.null(type)) {
         stop("Unrecognized file format. Try specifying with the format argument.",
-             call. = F)
-    } else {
-        return(type)
-    }
+             call. = FALSE)
+    } 
+    return(type)
 }
 
 get_ext <- function(file) {
