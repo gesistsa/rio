@@ -28,8 +28,7 @@
     \item "XBASE" database files (.dbf), using \code{\link[foreign]{read.dbf}}
     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{read.arff}}
     \item R syntax object (.R), using \code{\link[base]{dget}}
-    \item Excel legacy files (.xls), using \code{\link[readxl]{read_excel}}
-    \item Excel (.xlsx), using \code{\link[openxlsx]{read.xlsx}}
+    \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}
     \item SAS (.sas7bdat) and SAS XPORT (.xpt), using \code{\link[haven]{read_sas}} and \code{\link[foreign]{read.xport}}
     \item Minitab (.mtp), using \code{\link[foreign]{read.mtp}}
     \item Epiinfo (.rec), using \code{\link[foreign]{read.epiinfo}}
@@ -52,8 +51,8 @@ d <- import("iris.tsv", format = "csv")
 str(d)
 
 # import CSV as a `data.table`
-class(import("iris.csv", data.table = TRUE))
-class(import("iris.csv", data.table = FALSE))
+class(import("iris1.csv", data.table = TRUE))
+class(import("iris1.csv", data.table = FALSE))
 
 # pass arguments to underlying import function
 iris1 <- import("iris1.csv")

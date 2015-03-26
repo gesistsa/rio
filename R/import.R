@@ -44,13 +44,9 @@ import.fortran <- function(file = file, style, ...) {
     read.fortran(file = file, format = style, ...)
 }
 
-import.xls <- function(file = file, ...) {
+import.excel <- function(file = file, ...) {
     out <- read_excel(path = file, ...)
     class(out) <- "data.frame"
-}
-
-import.xlsx <- function(file = file, header = TRUE, ...) {
-    read.xlsx(xlsxFile = file, colNames = header, ...)
 }
 
 import.rdata <- function(file, which = 1, ...) {
@@ -133,8 +129,8 @@ import <- function(file, format, fread = TRUE, ...) {
                 json = fromJSON(txt = file, ...),
                 rec = read.epiinfo(file = file, ...),
                 arff = read.arff(file = file),
-                xls = import.xls(file = file, ...),
-                xlsx = import.xlsx(file = file, ...),
+                xls = import.excel(file = file, ...),
+                xlsx = import.excel(file = file, ...),
                 fortran = import.fortran(file = file, ...),
                 zip = import.zip(file = file, ...),
                 tar = import.tar(file = file, ...),
