@@ -1,6 +1,7 @@
 get_type <- function(fmt) {
     type_list <- list(
         txt = "tsv",
+        "\t" = "tsv",
         tsv = "tsv",
         csv = "csv",
         "," = "csv",
@@ -68,4 +69,12 @@ get_ext <- function(file) {
     } else {
         return(tolower(fmt))
     }
+}
+
+set_class <- function(x, class = "data.frame") {
+    #if("package:data.table" %in% search())
+    #    return(data.table(x))
+    #if("package:dplyr" %in% search())
+    #    return(structure(x, class = c("tbl_df", class(x))))
+    return(structure(x, class = class))
 }

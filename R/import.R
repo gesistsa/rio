@@ -44,18 +44,13 @@ import.fortran <- function(file = file, style, ...) {
     read.fortran(file = file, format = style, ...)
 }
 
-import.excel <- function(file = file, ...) {
-    out <- read_excel(path = file, ...)
-    class(out) <- "data.frame"
-}
-
 import.rdata <- function(file, which = 1, ...) {
     e <- new.env()
     load(file = file, envir = e, ...)
     get(ls(e)[which], e)
 }
 
-import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
+import.ods <- function(file, header = TRUE, sheet = 1, ...) {
     handlingODSheader <- function(x) {
         colnames(x) <- x[1,]
         g <- x[2:nrow(x),]
@@ -92,7 +87,6 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
         read.table(file = "clipboard", sep = sep, header = header, ...)
     } else {
         stop("Reading from clipboard not supported on your OS")
-        return(NULL)
     }
 }
 
@@ -117,20 +111,20 @@ import <- function(file, format, fread = TRUE, ...) {
                 csv2 = import.delim(file = file, fread = fread, sep = ";", dec = ",", ...),
                 psv = import.delim(file = file, fread = fread, sep = "|", ...),
                 rdata = import.rdata(file = file, ...),
-                dta = read_dta(path = file),
+                dta = set_class(read_dta(path = file)),
                 dbf = read.dbf(file = file, ...),
                 dif = read.DIF(file = file, ...),
-                sav = read_sav(path = file),
-                por = read_por(path = file),
-                sas7bdat = read_sas(b7dat = file, ...),
+                sav = set_class(read_sav(path = file)),
+                por = set_class(read_por(path = file)),
+                sas7bdat = set_class(read_sas(b7dat = file, ...)),
                 xpt = read.xport(file = file),
                 mtp = read.mtp(file = file, ...),
                 syd = read.systat(file = file, to.data.frame = TRUE),
                 json = fromJSON(txt = file, ...),
                 rec = read.epiinfo(file = file, ...),
                 arff = read.arff(file = file),
-                xls = import.excel(file = file, ...),
-                xlsx = import.excel(file = file, ...),
+                xls = set_class(read_excel(path = file, ...)),
+                xlsx = set_class(read_excel(path = file, ...)),
                 fortran = import.fortran(file = file, ...),
                 zip = import.zip(file = file, ...),
                 tar = import.tar(file = file, ...),
