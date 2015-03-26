@@ -30,20 +30,36 @@
     \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'}
     \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}
     \item XML (.xml), using a custom method to create an XML tree and write to disk using \code{\link[XML]{saveXML}}
-    \item Clipboard export, using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
+    \item Clipboard export (on Windows and Mac OS), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
 }
 
 }
 \examples{
-# specify `file`
+# specify only `file` argument
 export(iris, "iris.csv")
 
-# specify only `format`
+# specify only `format` argument
 "iris.dta" %in% dir()
 export(iris, format = "stata")
 "iris.dta" %in% dir()
 
+# specify `file` and `format` to override default format
+export(iris, file = "iris.txt", format = "csv")
+
+# export to JSON
+export(iris, "iris.json")
+
+# pass arguments to underlying export function
+export(iris, "iris.csv", col.names = FALSE)
+
+# write data to .R syntax file and append additional data
+export(iris, file = "data.R", format = "dump")
+export(mtcars, file = "data.R", format = "dump", append = TRUE)
+source("data.R", echo = TRUE)
+
 # cleanup
 unlink("iris.csv")
 unlink("iris.dta")
+unlink("iris.json")
+unlink("data.R")
 }

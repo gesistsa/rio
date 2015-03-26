@@ -36,19 +36,34 @@
     \item Data Interchange Format (.dif), using \code{\link[utils]{read.DIF}}
     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read.ods}}
     \item Shallow XML documents (.xml), using \code{\link[XML]{xmlToDataFrame}}. Note: optional arguments not recognized by \code{xmlToDataFrame} are passed to \code{\link[XML]{xmlParse}}.
-    \item Clipboard import, using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
+    \item Clipboard import (on Windows and Mac OS), using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
     \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
 }
 }
 \note{For csv and txt files with row names exported from \code{\link{export}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.}
 \examples{
+# create CSV to import
+export(iris, "iris1.csv")
 
-# rownames in exported file
-export(iris, "myIris.csv", row.names = TRUE)
-iris2 <- import("myIris.csv") # with the additional spurious column
-head(iris2)
-#iris3 <- import("myIris.csv", row.names = 1)
-#head(iris3)
+# specify `format` to override default format
+export(iris, "iris.tsv", format = "csv")
+d <- import("iris.tsv", format = "csv")
+str(d)
 
-#identical(iris3, iris3)
+# import CSV as a `data.table`
+class(import("iris.csv", data.table = TRUE))
+class(import("iris.csv", data.table = FALSE))
+
+# pass arguments to underlying import function
+iris1 <- import("iris1.csv")
+identical(names(iris), names(iris1))
+
+export(iris, "iris2.csv", col.names = FALSE)
+iris2 <- import("iris2.csv")
+identical(names(iris), names(iris2))
+
+# cleanup
+unlink("iris.tsv")
+unlink("iris1.csv")
+unlink("iris2.csv")
 }

@@ -12,17 +12,28 @@
 \description{This function constructs a data frame from a data file using code{\link{import}} and uses \code{\link{export}} to write the data to disk in the format indicated by the file extension.}
 \examples{
 # create a file to convert
-export(iris, "iris.csv")
+export(iris, "iris.dta")
 
-# perform conversion and open converted file
-convert("iris.csv", "iris.dta")
-head(import("iris.dta"))
+# convert Stata to CSV and open converted file
+convert("iris.dta", "iris.csv")
+head(import("iris.csv"))
 
 # correct an erroneous file format
 export(iris, "iris.csv", format = "tsv")
 convert("iris.csv", "iris.csv", in_opts = list(format = "tsv"))
 
+# convert serialized R data.frame to JSON
+export(iris, "iris.rds")
+convert("iris.rds", "iris.json")
+
 # cleanup
 unlink("iris.csv")
 unlink("iris.dta")
+unlink("iris.rds")
+unlink("iris.json")
+
+\dontrun{
+# convert from the command line:
+Rscript -e "rio::convert('iris.dta', 'iris.csv')"
+}
 }

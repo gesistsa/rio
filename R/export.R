@@ -63,7 +63,7 @@ export <- function(x, file, format, ...) {
     if(missing(file) & missing(format)) {
         stop("Must specify 'file' and/or 'format'")
     } else if(!missing(file) & !missing(format)) {
-        fmt <- format
+        fmt <- tolower(format)
     } else if(!missing(file) & missing(format)) {
         fmt <- get_ext(file)
     } else if(!missing(format)) {
