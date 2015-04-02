@@ -58,7 +58,8 @@ import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
         return(g)
     }
     if (getNrOfSheetsInODS(file) > 1 & is.null(sheet)) {
-        warning("ODS file imported is multi-sheet, a list of data.frame will be returned")
+        warning(paste0("There are ", getNrOfSheetsInODS(file), " sheets in the ODS file. Only the first sheet will be returned. Use sheet option from read.ods to select which sheet to import."))
+        sheet <- 1
     } else if (getNrOfSheetsInODS(file) == 1) {
         sheet <- 1
     }
