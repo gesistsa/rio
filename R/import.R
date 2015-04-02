@@ -50,7 +50,7 @@ import.rdata <- function(file, which = 1, ...) {
     get(ls(e)[which], e)
 }
 
-import.ods <- function(file, header = TRUE, sheet = 1, ...) {
+import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
     handlingODSheader <- function(x) {
         colnames(x) <- x[1,]
         g <- x[2:nrow(x),]
