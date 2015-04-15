@@ -60,7 +60,6 @@ if(!require("devtools")){
     install.packages("devtools")
     library("devtools")
 }
-install_github("hadley/readxl")
 install_github("leeper/rio")
 ```
 
