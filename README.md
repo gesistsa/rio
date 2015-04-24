@@ -7,13 +7,13 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 
 The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Five of these are important:
 
- 1. **rio** uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, **rio** allows almost all common data formats to be read with the same function.
+ 1. **rio** uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, **rio** allows almost all common data formats to be read with the same function. [The **reader** package](http://cran.r-project.org/web/packages/reader/index.html) does something similar for reading certain text formats and R binary files, but **rio** supports a much broader set of file types for import and export.
  2. For text-delimited file formats, the package uses `data.table::fread` to automatically determine the file format regardless of the extension. So, a CSV that is actually tab-separated will still be correctly read in. 
  3. When importing tabular data (CSV, TSV, etc.), **rio** does not convert strings to factors.
  4. The data import functions in base R only support import of local files or web-based data from websites serving HTTP, not SSL (HTTPS). For example, data stored on GitHub as publicly visible files cannot be read directly into R without either manually downloading them or reading them in via **RCurl** or **httr**. `import` supports HTTPS automatically.
  5. `import` reads from single-file .zip and .tar archives automatically, without the need to explicitly decompress them first.
  
-The package also wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. Namely, the package uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files and uses [the `fread` function from **data.table**](https://github.com/Rdatatable/data.table) for intuitive import of text-delimited and fixed-width file formats.
+The package also wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. Namely, the package uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files, [the `fread` function from **data.table**](https://github.com/Rdatatable/data.table) for intuitive import of text-delimited and fixed-width file formats, and [**readxl**](https://github.com/hadley/readxl) for reading from Excel workbooks.
 
 ## Supported file formats ##
 
@@ -64,6 +64,7 @@ install_github("leeper/rio")
 ```
 
 [![Build Status](https://travis-ci.org/leeper/rio.png?branch=master)](https://travis-ci.org/leeper/rio)
+![Downloads](http://cranlogs.r-pkg.org/badges/rio)
 
 ## Examples ##
 
