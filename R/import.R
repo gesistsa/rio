@@ -91,7 +91,7 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
     }
 }
 
-import <- function(file, format, fread = TRUE, ...) {
+import <- function(file, format, fread = TRUE, preview = FALSE, ...) {
     if(missing(format))
         fmt <- get_ext(file)
     else
@@ -134,5 +134,9 @@ import <- function(file, format, fread = TRUE, ...) {
                 clipboard = import.clipboard(...),
                 stop("Unrecognized file format")
                 )
+    if (preview & is.data.frame(x)) {
+        cat("First and last row of the imported data.frame\n")
+        print(rbind(head(x,1), tail(x,1)))
+    }
     return(x)
 }
