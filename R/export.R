@@ -94,6 +94,13 @@ export <- function(x, file, format, ...) {
          xlsx = write.xlsx(x = x, file = file, ...),
          xml = export.xml(x, file = file, ...), 
          clipboard = export.clipboard(x, ...),
+         jpg = stop(stop_for_export(fmt)),
+         png = stop(stop_for_export(fmt)),
+         tiff = stop(stop_for_export(fmt)),
+         matlab = stop(stop_for_export(fmt)),
+         xpt = stop(stop_for_export(fmt)),
+         gexf = stop(stop_for_export(fmt)),
+         npy = stop(stop_for_export(fmt)),
          stop("Unrecognized file format")
          )
     invisible(file)

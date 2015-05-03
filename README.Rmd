@@ -29,14 +29,14 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | Saved R objects (.RData) | Yes | Yes |
 | JSON (.json) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |
-| SPSS and SPSS portable (.sav and .por) | Yes | Yes (.sav only) |
+| SPSS and SPSS portable | Yes (.sav and .por) | Yes (.sav only) |
 | "XBASE" database files (.dbf) | Yes | Yes |
 | Excel (.xls) | Yes |  |
 | Excel (.xlsx) | Yes | Yes |
 | Weka Attribute-Relation File Format (.arff) | Yes | Yes |
 | R syntax (.R) | Yes | Yes |
 | Shallow XML documents (.xml) | Yes | Yes |
-| SAS and SAS XPORT (.sas7bdat and .xpt) | Yes |  |
+| SAS and SAS XPORT | Yes (.sas7bdat and .xpt) |  |
 | Minitab (.mtp) | Yes |  |
 | Epiinfo (.rec) | Yes |  |
 | Systat (.syd) | Yes |  |
@@ -44,6 +44,8 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | OpenDocument Spreadsheet  (.ods) | Yes |  |
 | Fortran data (no recognized extension) | Yes |  |
 | Clipboard (default is tsv) | Yes (Mac and Windows) | Yes (Mac and Windows) |
+
+Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
 
 ## Package Installation ##
 

@@ -132,6 +132,16 @@ import <- function(file, format, fread = TRUE, ...) {
                 ods = import.ods(file = file, ...),
                 xml = import.xml(file = file, ...),
                 clipboard = import.clipboard(...),
+                gnumeric = stop(stop_for_import(fmt)),
+                jpg = stop(stop_for_import(fmt)),
+                png = stop(stop_for_import(fmt)),
+                bmp = stop(stop_for_import(fmt)),
+                tiff = stop(stop_for_import(fmt)),
+                sss = stop(stop_for_import(fmt)),
+                sdmx = stop(stop_for_import(fmt)),
+                matlab = stop(stop_for_import(fmt)),
+                gexf = stop(stop_for_import(fmt)),
+                npy = stop(stop_for_import(fmt)),
                 stop("Unrecognized file format")
                 )
     return(x)

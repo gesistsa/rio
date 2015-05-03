@@ -41,7 +41,21 @@ get_type <- function(fmt) {
         r = "r",
         clipboard = "clipboard",
         ods = "ods",
-        xml = "xml"
+        xml = "xml",
+        # unsupported formats
+        gnumeric = "gnumeric",
+        jpeg = "jpg",
+        jpg = "jpg",
+        png = "png",
+        bmp = "bmp",
+        tif = "tiff",
+        tiff = "tiff",
+        sss = "sss",
+        sdmx = "sdmx",
+        mat = "matlab",
+        matlab = "matlab",
+        gexf = "gexf",
+        npy = "npy"
     )
     type <- type_list[[tolower(fmt)]]
     if(is.null(type)) {
