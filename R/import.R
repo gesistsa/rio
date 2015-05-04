@@ -87,7 +87,7 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
     } else if(Sys.info()["sysname"] == "Windows") {
         read.table(file = "clipboard", sep = sep, header = header, ...)
     } else {
-        stop("Reading from clipboard not supported on your OS")
+        stop("Reading from clipboard is not supported on your OS")
     }
 }
 
@@ -132,6 +132,7 @@ import <- function(file, format, fread = TRUE, ...) {
                 ods = import.ods(file = file, ...),
                 xml = import.xml(file = file, ...),
                 clipboard = import.clipboard(...),
+                # unsupported formats
                 gnumeric = stop(stop_for_import(fmt)),
                 jpg = stop(stop_for_import(fmt)),
                 png = stop(stop_for_import(fmt)),
@@ -142,6 +143,7 @@ import <- function(file, format, fread = TRUE, ...) {
                 matlab = stop(stop_for_import(fmt)),
                 gexf = stop(stop_for_import(fmt)),
                 npy = stop(stop_for_import(fmt)),
+                # unrecognized format
                 stop("Unrecognized file format")
                 )
     return(x)

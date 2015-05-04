@@ -8,7 +8,7 @@ export.delim <- function(x, file, sep = "\t", row.names = FALSE,
                 col.names = col.names, ...)
 }
 
-export.fwf <- function(x, file, sep = " ", row.names = FALSE, quote = FALSE,
+export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE,
                        col.names = FALSE, fmt.factor = "%0.7f", ...) {
     dat <- lapply(x, function(col) {
         if(is.character(col)) {
@@ -26,6 +26,9 @@ export.fwf <- function(x, file, sep = " ", row.names = FALSE, quote = FALSE,
         }
     })
     dat <- do.call(cbind, dat)
+    n <- nchar(dat[1,])
+    dict <- paste0(names(n), ":\t", c(1, cumsum(n)+1), "-", cumsum(n), "\n")
+    message("Columns:\n", paste0(dict[-length(dict)], collapse = ""))
     write.table(dat, file = file, row.names = row.names, sep = sep, quote = quote,
                 col.names = col.names, ...)
 }
@@ -54,7 +57,7 @@ export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, sep = "\t",
         write.table(x, file="clipboard", sep = sep, row.names = row.names,
                     col.names = col.names, ...)
     } else {
-        stop("Writing to clipboard not supported on your OS")
+        stop("Writing to clipboard is not supported on your OS")
         return(NULL)
     }
 }
@@ -71,37 +74,39 @@ export <- function(x, file, format, ...) {
         file <- paste0(as.character(substitute(x)), ".", fmt)
     }
     if (!is.data.frame(x) & !is.matrix(x)) {
-        stop("x is not a data frame or matrix.")
+        stop("`x` is not a data.frame or matrix")
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
     switch(fmt,
-         txt = export.delim(x, file = file, ...),
-         tsv = export.delim(x, file = file, ...),
-         csv = export.delim(x, file = file, sep = ",", dec = ".", ...),
-         csv2 = export.delim(file = file, sep = ";", dec = ",", ...),
-         psv = import.delim(file = file, sep = "|", ...),
-         fwf = export.fwf(x, file = file, ...),
-         r = dput(x, file = file, ...),
-         dump = dump(as.character(substitute(x)), file = file, ...),
-         rds = saveRDS(x, file = file, ...),
-         rdata = save(x, file = file, ...),
-         sav = write_sav(data = x, path = file),
-         dta = write_dta(data = x, path = file),
-         dbf = write.dbf(dataframe = x, file = file, ...),
-         json = cat(toJSON(x, ...), file = file),
-         arff = write.arff(x = x, file = file, ...),
-         xlsx = write.xlsx(x = x, file = file, ...),
-         xml = export.xml(x, file = file, ...), 
-         clipboard = export.clipboard(x, ...),
-         jpg = stop(stop_for_export(fmt)),
-         png = stop(stop_for_export(fmt)),
-         tiff = stop(stop_for_export(fmt)),
-         matlab = stop(stop_for_export(fmt)),
-         xpt = stop(stop_for_export(fmt)),
-         gexf = stop(stop_for_export(fmt)),
-         npy = stop(stop_for_export(fmt)),
-         stop("Unrecognized file format")
-         )
+           txt = export.delim(x, file = file, ...),
+           tsv = export.delim(x, file = file, ...),
+           csv = export.delim(x, file = file, sep = ",", dec = ".", ...),
+           csv2 = export.delim(x, file = file, sep = ";", dec = ",", ...),
+           psv = export.delim(x, file = file, sep = "|", ...),
+           fwf = export.fwf(x, file = file, ...),
+           r = dput(x, file = file, ...),
+           dump = dump(as.character(substitute(x)), file = file, ...),
+           rds = saveRDS(x, file = file, ...),
+           rdata = save(x, file = file, ...),
+           sav = write_sav(data = x, path = file),
+           dta = write_dta(data = x, path = file),
+           dbf = write.dbf(dataframe = x, file = file, ...),
+           json = cat(toJSON(x, ...), file = file),
+           arff = write.arff(x = x, file = file, ...),
+           xlsx = write.xlsx(x = x, file = file, ...),
+           xml = export.xml(x, file = file, ...), 
+           clipboard = export.clipboard(x, ...),
+           # unsupported formats
+           jpg = stop(stop_for_export(fmt)),
+           png = stop(stop_for_export(fmt)),
+           tiff = stop(stop_for_export(fmt)),
+           matlab = stop(stop_for_export(fmt)),
+           xpt = stop(stop_for_export(fmt)),
+           gexf = stop(stop_for_export(fmt)),
+           npy = stop(stop_for_export(fmt)),
+           # unrecognized format
+           stop("Unrecognized file format")
+           )
     invisible(file)
 }
