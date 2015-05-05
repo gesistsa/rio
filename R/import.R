@@ -91,7 +91,7 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
     }
 }
 
-import <- function(file, format, fread = TRUE, ...) {
+import <- function(file, format, setclass, ...) {
     if(missing(format))
         fmt <- get_ext(file)
     else
@@ -104,28 +104,28 @@ import <- function(file, format, fread = TRUE, ...) {
     }
     x <- switch(fmt,
                 r = dget(file = file),
-                tsv = import.delim(file = file, fread = fread, sep = "\t", ...),
-                txt = import.delim(file = file, fread = fread, sep = "\t", ...),
+                tsv = import.delim(file = file, sep = "\t", ...),
+                txt = import.delim(file = file, sep = "\t", ...),
                 fwf = import.fwf(file = file, ...),
                 rds = readRDS(file = file, ...),
-                csv = import.delim(file = file, fread = fread, sep = ",", ...),
-                csv2 = import.delim(file = file, fread = fread, sep = ";", dec = ",", ...),
-                psv = import.delim(file = file, fread = fread, sep = "|", ...),
+                csv = import.delim(file = file, sep = ",", ...),
+                csv2 = import.delim(file = file, sep = ";", dec = ",", ...),
+                psv = import.delim(file = file, sep = "|", ...),
                 rdata = import.rdata(file = file, ...),
-                dta = set_class(read_dta(path = file)),
+                dta = read_dta(path = file),
                 dbf = read.dbf(file = file, ...),
                 dif = read.DIF(file = file, ...),
-                sav = set_class(read_sav(path = file)),
-                por = set_class(read_por(path = file)),
-                sas7bdat = set_class(read_sas(b7dat = file, ...)),
+                sav = read_sav(path = file),
+                por = read_por(path = file),
+                sas7bdat = read_sas(b7dat = file, ...),
                 xpt = read.xport(file = file),
                 mtp = read.mtp(file = file, ...),
                 syd = read.systat(file = file, to.data.frame = TRUE),
                 json = fromJSON(txt = file, ...),
                 rec = read.epiinfo(file = file, ...),
                 arff = read.arff(file = file),
-                xls = set_class(read_excel(path = file, ...)),
-                xlsx = set_class(read_excel(path = file, ...)),
+                xls = read_excel(path = file, ...),
+                xlsx = read_excel(path = file, ...),
                 fortran = import.fortran(file = file, ...),
                 zip = import.zip(file = file, ...),
                 tar = import.tar(file = file, ...),
@@ -146,5 +146,12 @@ import <- function(file, format, fread = TRUE, ...) {
                 # unrecognized format
                 stop("Unrecognized file format")
                 )
-    return(x)
+    if(missing(setclass)) {
+        return(set_class(x))
+    } else {
+        a <- list(...)
+        if("data.table" %in% names(a) && isTRUE(a[["data.table"]]))
+            setclass <- "data.table"
+        return(set_class(x, class = setclass))
+    }
 }

@@ -2,15 +2,15 @@
 \alias{import}
 \title{Read data.frame or matrix from a file}
 \usage{
-    import(file, format, fread = TRUE, ...)
+    import(file, format, setclass, ...)
 }
 \arguments{
     \item{file}{A character string naming a file, URL, or single-file .zip or .tar archive.}
     \item{format}{An optional character string code of file format, which can be used to override the format inferred from \code{file}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), and \dQuote{|} (for pipe-separated values).}
-    \item{fread}{A logical indicating whether to use \code{\link[data.table]{fread}} for reading in delimited text files. It is ignored for all other file types. Default is \code{TRUE}. If \code{TRUE}, the default is to return a data.frame structure, rather than \code{fread}'s default of a data.table; to obtain a data.table, pass an additional \code{data.table = TRUE} argument to \code{import}.}
+    \item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, all the return object is always a \dQuote{data.frame}. Reasonable values for this might be \dQuote{tbl_df} (if using dplyr) or \dQuote{data.table} (if using data.table). Warnings will be produced if a class is used from a package that is not loaded and/or available.}
     \item{...}{Additional arguments for the underlying import functions.}
 }
-\value{An R data.frame.}
+\value{An R data.frame. If \code{setclass} is used, this data.frame may have additional class attribute values.}
 \description{This function imports a data frame or matrix from a data file with the file format based on the file extension (or the manually specified format, if \code{format} is specified).
 
 \code{import} supports the following file formats:
@@ -47,12 +47,11 @@ export(iris, "iris1.csv")
 
 # specify `format` to override default format
 export(iris, "iris.tsv", format = "csv")
-d <- import("iris.tsv", format = "csv")
-str(d)
+stopifnot(identical(import("iris1.csv"), import("iris.tsv", format = "csv")))
 
 # import CSV as a `data.table`
-class(import("iris1.csv", data.table = TRUE))
-class(import("iris1.csv", data.table = FALSE))
+stopifnot(inherits(import("iris1.csv", setclass = "data.table"), "data.table"))
+stopifnot(inherits(import("iris1.csv", setclass = "data.table"), "data.table"))
 
 # pass arguments to underlying import function
 iris1 <- import("iris1.csv")
@@ -61,6 +60,9 @@ identical(names(iris), names(iris1))
 export(iris, "iris2.csv", col.names = FALSE)
 iris2 <- import("iris2.csv")
 identical(names(iris), names(iris2))
+
+# set class for the response data.frame as "tbl_df" (from dplyr)
+stopifnot(inherits(import("iris1.csv", setclass = "tbl_df"), "tbl_df"))
 
 # cleanup
 unlink("iris.tsv")
