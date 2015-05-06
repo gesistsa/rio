@@ -73,7 +73,7 @@ import.xlsx <- function(file = file, readxl = TRUE, ...) {
     if(readxl) {
         read_excel(path = file, ...)
     } else {
-        read.xlsx((xlsxFile = file, ...)
+        read.xlsx(xlsxFile = file, ...)
     }
 }
 
