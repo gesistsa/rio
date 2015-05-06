@@ -1,7 +1,7 @@
 # CHANGES TO v0.1.4 #
 
  * `import` always returns a data.frame, unless `setclass` is specified. (#22)
- * Added support for import from legacy Excel (.xls) files `readxl::read_excel`. (#19)
+ * Added support for import from legacy Excel (.xls) files `readxl::read_excel`, making its use optional. (#19)
  * Added support for import from and export to the system clipboard on Windows and Mac OS.
  * Added support for export to simple XML documents. (#12)
  * Added support for import from simple XML documents via `XML::xmlToDataFrame`. (#12)
@@ -17,7 +17,7 @@
  * Added vignette, knitr-generated README.md, and updated documentation. (#2)
  * Added some non-exported functions to simplify argument passing and streamline package API. (#6)
  * Separated `import`, `export`, `convert`, and utilities into separate source code files.
- * Expanded the set of supported file types/extensions, switched SPSS, SAS, and Stata formats to **haven**.
+ * Expanded the set of supported file types/extensions, switched SPSS, SAS, and Stata formats to **haven**, making its use optional.
 
 # CHANGES TO v0.1.2 #
 

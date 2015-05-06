@@ -8,7 +8,7 @@
     \item{file}{A character string naming a file, URL, or single-file .zip or .tar archive.}
     \item{format}{An optional character string code of file format, which can be used to override the format inferred from \code{file}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), and \dQuote{|} (for pipe-separated values).}
     \item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, all the return object is always a \dQuote{data.frame}. Reasonable values for this might be \dQuote{tbl_df} (if using dplyr) or \dQuote{data.table} (if using data.table). Warnings will be produced if a class is used from a package that is not loaded and/or available.}
-    \item{...}{Additional arguments for the underlying import functions.}
+    \item{...}{Additional arguments passed to the underlying import functions. For example, this can control column classes for delimited file types, or control the use of haven for Stata and SPSS or readxl for Excel (.xlsx) format. See details below.}
 }
 \value{An R data.frame. If \code{setclass} is used, this data.frame may have additional class attribute values.}
 \description{This function imports a data frame or matrix from a data file with the file format based on the file extension (or the manually specified format, if \code{format} is specified).
@@ -23,12 +23,12 @@
     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
     \item Saved R objects (.RData), using \code{\link[base]{load}} for single-object .Rdata files
     \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
-    \item Stata (.dta), using \code{\link[haven]{read_dta}}
-    \item SPSS and SPSS portable (.sav and .por), using \code{\link[haven]{read_sav}} and \code{\link[haven]{read_por}}
+    \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
+    \item SPSS and SPSS portable (.sav and .por), using \code{\link[haven]{read_sav}} and \code{\link[haven]{read_por}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used for .sav files.
     \item "XBASE" database files (.dbf), using \code{\link[foreign]{read.dbf}}
     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{read.arff}}
     \item R syntax object (.R), using \code{\link[base]{dget}}
-    \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}
+    \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. If \code{readxl = FALSE}, \code{\link[openxlsx]{read.xlsx}} can be used.
     \item SAS (.sas7bdat) and SAS XPORT (.xpt), using \code{\link[haven]{read_sas}} and \code{\link[foreign]{read.xport}}
     \item Minitab (.mtp), using \code{\link[foreign]{read.mtp}}
     \item Epiinfo (.rec), using \code{\link[foreign]{read.epiinfo}}

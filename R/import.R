@@ -44,10 +44,37 @@ import.fortran <- function(file = file, style, ...) {
     read.fortran(file = file, format = style, ...)
 }
 
+import.dta <- function(file = file, haven = TRUE, ...) {
+    if(haven) {
+        a <- list(...)
+        if(length(a)) 
+            warning("File imported using haven. Arguments to '...' ignored.")
+        read_dta(path = file)
+    } else {
+        read.dta(file = file, ...)
+    }
+}
+
+import.sav <- function(file = file, haven = TRUE, ...) {
+    if(haven) {
+        read_sav(path = file)
+    } else {
+        read.spss(file = file, to.data.frame = TRUE, ...)
+    }
+}
+
 import.rdata <- function(file, which = 1, ...) {
     e <- new.env()
     load(file = file, envir = e, ...)
     get(ls(e)[which], e)
+}
+
+import.xlsx <- function(file = file, readxl = TRUE, ...) {
+    if(readxl) {
+        read_excel(path = file, ...)
+    } else {
+        read.xlsx((xlsxFile = file, ...)
+    }
 }
 
 import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
@@ -112,10 +139,10 @@ import <- function(file, format, setclass, ...) {
                 csv2 = import.delim(file = file, sep = ";", dec = ",", ...),
                 psv = import.delim(file = file, sep = "|", ...),
                 rdata = import.rdata(file = file, ...),
-                dta = read_dta(path = file),
+                dta = import.dta(file = file, ...), 
                 dbf = read.dbf(file = file, ...),
                 dif = read.DIF(file = file, ...),
-                sav = read_sav(path = file),
+                sav = import.sav(file = file, ...),
                 por = read_por(path = file),
                 sas7bdat = read_sas(b7dat = file, ...),
                 xpt = read.xport(file = file),
@@ -125,7 +152,7 @@ import <- function(file, format, setclass, ...) {
                 rec = read.epiinfo(file = file, ...),
                 arff = read.arff(file = file),
                 xls = read_excel(path = file, ...),
-                xlsx = read_excel(path = file, ...),
+                xlsx = import.xlsx(file = file, ...),
                 fortran = import.fortran(file = file, ...),
                 zip = import.zip(file = file, ...),
                 tar = import.tar(file = file, ...),
