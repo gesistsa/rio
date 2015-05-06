@@ -30,11 +30,11 @@ import.delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
     }
 }
 
-import.fwf <- function(file = file, header = FALSE, widths, stringsAsFactors = FALSE, ...) {
+import.fwf <- function(file = file, header = FALSE, widths, ...) {
     if(missing(widths)) {
         stop("Import of fixed-width format data requires a 'widths' argument. See `? read.fwf`.")
     }
-    read.fwf(file = file, widths = widths, header = header, stringsAsFactors = stringsAsFactors, ...)
+    read.fwf2(file = file, widths = widths, header = header, ...)
 }
 
 import.fortran <- function(file = file, style, ...) {

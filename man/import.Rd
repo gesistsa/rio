@@ -19,7 +19,7 @@
     \item Tab-separated data (.tsv), using \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE} (or, if \code{fread = TRUE}, \code{\link[data.table]{fread}})
     \item Comma-separated data (.csv), using \code{\link[utils]{read.csv}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE} (or, if \code{fread = TRUE}, \code{\link[data.table]{fread}})
     \item Pipe-separated data (.psv), using \code{\link[utils]{read.table}} with \code{sep = '|'}, \code{row.names = FALSE}, and \code{stringsAsFactors = FALSE} (or, if \code{fread = TRUE}, \code{\link[data.table]{fread}})
-    \item Fixed-width format data (.fwf), using \code{\link[utils]{read.fwf}} (which requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}
+    \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils]{read.fwf}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}
     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
     \item Saved R objects (.RData), using \code{\link[base]{load}} for single-object .Rdata files
     \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
