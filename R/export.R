@@ -8,8 +8,7 @@ export.delim <- function(x, file, sep = "\t", row.names = FALSE,
                 col.names = col.names, ...)
 }
 
-export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE,
-                       col.names = FALSE, fmt.factor = "%0.7f", ...) {
+export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, ...) {
     dat <- lapply(x, function(col) {
         if(is.character(col)) {
             col <- as.numeric(as.factor(col))
@@ -26,9 +25,11 @@ export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE,
         }
     })
     dat <- do.call(cbind, dat)
-    n <- nchar(dat[1,])
+    n <- nchar(dat[1,]) + c(rep(nchar(sep), ncol(dat)-1), 0)
     dict <- paste0(names(n), ":\t", c(1, cumsum(n)+1), "-", cumsum(n), "\n")
     message("Columns:\n", paste0(dict[-length(dict)], collapse = ""))
+    if(sep == "")
+        message('Read in with `import("', file, '", widths = c(', paste0(n, collapse = ","), '))`\n')
     write.table(dat, file = file, row.names = row.names, sep = sep, quote = quote,
                 col.names = col.names, ...)
 }
