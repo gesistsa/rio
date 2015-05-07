@@ -1,4 +1,4 @@
-# CHANGES TO v0.1.4 #
+# CHANGES TO v0.2 #
 
  * `import` always returns a data.frame, unless `setclass` is specified. (#22)
  * Added support for import from legacy Excel (.xls) files `readxl::read_excel`, making its use optional. (#19)
