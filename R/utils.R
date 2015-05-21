@@ -35,8 +35,6 @@ get_type <- function(fmt) {
         xlsx = "xlsx",
         excel = "xlsx",
         fortran = "fortran",
-        zip = "zip",
-        tar = "tar",
         dump = "dump",
         r = "r",
         clipboard = "clipboard",

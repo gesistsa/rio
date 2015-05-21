@@ -1,3 +1,9 @@
+# CHANGES TO v0.2.1 #
+
+ * Improved support for importing from compressed directories, especially web-based compressed directories. (#38)
+ * Add import dependency on curl >= 0.6 to facilitate content type parsing and format inference from URL redirects. (#36)
+ * Add bit64 to `Suggests` to remove an `import` warning.
+
 # CHANGES TO v0.2 #
 
  * `import` always returns a data.frame, unless `setclass` is specified. (#22)

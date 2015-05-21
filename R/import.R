@@ -1,20 +1,27 @@
-import.zip <- function(file, which = 1, ...) {
+parse.zip <- function(file, which = 1, ...) {
     file_list <- unzip(file, list = TRUE)
     if(nrow(file_list) > 1)
         warning("Zip archive contains multiple files. Attempting first file.")
     else {
         unzip(file, exdir = tempdir())
-        import(paste0(tempdir(),"/", file_list$Name[which]), ...)
+        paste0(tempdir(),"/", file_list$Name[which])
     }
 }
 
-import.tar <- function(file, which = 1, ...) {
-    file_list <- unzip(file, list = TRUE)
-    if(nrow(file_list) > 1)
-        stop("Tar archive contains multiple files. Attempting first file.")
-    else {
+parse.tar <- function(file, which = 1, ...) {
+    e <- file_ext(file)
+    if(e == "tar") {
+        file_list <- untar(file, list = TRUE)
+        if(nrow(file_list) > 1)
+            stop("Tar archive contains multiple files. Attempting first file.")
         untar(file, exdir = tempdir())
-        import(paste0(tempdir(),"/", file_list$Name[which]), ...)
+        paste0(tempdir(),"/", file_list$Name[which])
+    } else if(e == "gz") {
+        file_list <- untar(file, list = TRUE, compressed = TRUE)
+        if(nrow(file_list) > 1)
+            stop("Tar archive contains multiple files. Attempting first file.")
+        untar(file, exdir = tempdir(), compressed = TRUE)
+        paste0(tempdir(),"/", file_list$Name[which])
     }
 }
 
@@ -119,15 +126,24 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
 }
 
 import <- function(file, format, setclass, ...) {
-    if(missing(format))
-        fmt <- get_ext(file)
-    else
-        fmt <- tolower(format)
     if(grepl("^http.*://", file)) {
         temp_file <- tempfile(fileext = fmt)
         on.exit(unlink(temp_file))
-        curl_download(file, temp_file, mode = "wb")
+        u <- curl_fetch_memory(file)
+        writeBin(object = u$content, con = temp_file)
+        #parse_headers(u$headers) # placeholder
+        fmt <- get_ext(file)
         file <- temp_file
+    }
+    if(grepl("zip$", file)) {
+        file <- parse.zip(file)
+    } else if(grepl("tar$", file) | grepl("gz$", file)) {
+        file <- parse.tar(file)
+    }
+    if(missing(format)) {
+        fmt <- get_ext(file)
+    } else {
+        fmt <- tolower(format)
     }
     x <- switch(fmt,
                 r = dget(file = file),
@@ -154,12 +170,12 @@ import <- function(file, format, setclass, ...) {
                 xls = read_excel(path = file, ...),
                 xlsx = import.xlsx(file = file, ...),
                 fortran = import.fortran(file = file, ...),
-                zip = import.zip(file = file, ...),
-                tar = import.tar(file = file, ...),
                 ods = import.ods(file = file, ...),
                 xml = import.xml(file = file, ...),
                 clipboard = import.clipboard(...),
                 # unsupported formats
+                tar = stop(stop_for_import(fmt)),
+                zip = stop(stop_for_import(fmt)),
                 gnumeric = stop(stop_for_import(fmt)),
                 jpg = stop(stop_for_import(fmt)),
                 png = stop(stop_for_import(fmt)),

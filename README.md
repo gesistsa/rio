@@ -79,10 +79,25 @@ Exporting data is handled with one function, `export`:
 
 ```r
 library("rio")
+```
 
+```
+## 
+## Attaching package: 'rio'
+## 
+## The following objects are masked _by_ '.GlobalEnv':
+## 
+##     convert, export, import
+```
+
+```r
 export(mtcars, "mtcars.csv") # comma-separated values
 export(mtcars, "mtcars.rds") # R serialized
 export(mtcars, "mtcars.sav") # SPSS
+```
+
+```
+## Error in export(mtcars, "mtcars.sav"): could not find function "write_sav"
 ```
 
 ### Import ###
@@ -94,7 +109,13 @@ Importing data is handled with one function, `import`:
 x <- import("mtcars.csv")
 y <- import("mtcars.rds")
 z <- import("mtcars.sav")
+```
 
+```
+## Error in import.sav(file = file, ...): could not find function "read_sav"
+```
+
+```r
 # confirm data match
 all.equal(x, y, check.attributes = FALSE)
 ```
@@ -108,7 +129,13 @@ all.equal(x, z, check.attributes = FALSE)
 ```
 
 ```
-## [1] TRUE
+## [1] "Length mismatch: comparison on first 6 components"   
+## [2] "Component 1: target is numeric, current is character"
+## [3] "Component 2: Numeric: lengths (32, 1) differ"        
+## [4] "Component 3: target is numeric, current is raw"      
+## [5] "Component 4: target is numeric, current is POSIXct"  
+## [6] "Component 5: Numeric: lengths (32, 6) differ"        
+## [7] "Component 6: target is numeric, current is raw"
 ```
 
 Note: Because of inconsistencies across underlying packages, the data.frame returned by `import` might vary slightly (in variable classes and attributes) depending on file type.
@@ -120,6 +147,10 @@ The `convert` function links `import` and `export` by constructing a dataframe f
 
 ```r
 convert("mtcars.sav", "mtcars.dta")
+```
+
+```
+## Error in import.sav(file = file, ...): could not find function "read_sav"
 ```
 
 It is also possible to use **rio** on the command-line by calling `Rscript` with the `-e` (expression) argument. For example, to convert a file from Stata (.dta) to comma-separated values (.csv), simply do the following:
