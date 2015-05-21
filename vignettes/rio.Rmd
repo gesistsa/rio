@@ -64,8 +64,8 @@ y <- import("iris.rds")
 z <- import("iris.dta")
 
 # confirm identical
-identical(x, y)
-identical(y, z)
+all.equal(x, y, check.attributes = FALSE)
+all.equal(x, z, check.attributes = FALSE)
 ```
 
 If for some reason a file does not have an extension, or has a file extension that does not match its actual type, you can manually specify a file format to override the format inference step. For example, we can read in a CSV file that does not have a file extension by specifying `csv`:
