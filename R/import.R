@@ -127,12 +127,16 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
 
 import <- function(file, format, setclass, ...) {
     if(grepl("^http.*://", file)) {
+        if(missing(format)) {
+            fmt <- get_ext(file)
+        } else {
+            fmt <- get_type(format)
+        }
         temp_file <- tempfile(fileext = fmt)
         on.exit(unlink(temp_file))
         u <- curl_fetch_memory(file)
         writeBin(object = u$content, con = temp_file)
         #parse_headers(u$headers) # placeholder
-        fmt <- get_ext(file)
         file <- temp_file
     }
     if(grepl("zip$", file)) {
@@ -143,7 +147,7 @@ import <- function(file, format, setclass, ...) {
     if(missing(format)) {
         fmt <- get_ext(file)
     } else {
-        fmt <- tolower(format)
+        fmt <- get_type(format)
     }
     x <- switch(fmt,
                 r = dget(file = file),
