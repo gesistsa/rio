@@ -132,7 +132,7 @@ import <- function(file, format, setclass, ...) {
         } else {
             fmt <- get_type(format)
         }
-        temp_file <- tempfile(fileext = fmt)
+        temp_file <- tempfile(fileext = paste0(".", fmt))
         on.exit(unlink(temp_file))
         u <- curl_fetch_memory(file)
         writeBin(object = u$content, con = temp_file)
