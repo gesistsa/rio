@@ -125,11 +125,13 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
     }
 }
 
-import <- function(file, format, setclass, ...) {
+import <- function(file, format, setclass, expandurl = TRUE, ...) {
     if(grepl("^http.*://", file)) {
         if(missing(format)) {
-            l_url <- expand_urls(file, warn = F, .progress = F)
-            if (!is.na(l_url$expanded_url)) file <- l_url$expanded_url
+            if (isTRUE(expandurl)) {
+                l_url <- expand_urls(file, warn = F, .progress = F)
+                if (!is.na(l_url$expanded_url)) file <- l_url$expanded_url
+        }
             fmt <- get_ext(file)
         } else {
             fmt <- get_type(format)
