@@ -1,6 +1,6 @@
 # Changes TO v0.2.2 #
 
-- Uses the longurl to expand shortened URLS so that their file type
+- Uses the longurl package to expand shortened URLS so that their file type
 can be easily determined. 
 
 # CHANGES TO v0.2.1 #
