@@ -1,8 +1,8 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.2.2
-Date: 2015-05-25
+Version: 0.2.3
+Date: 2015-06-30
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Authors@R: c(person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
              person("Geoffrey CH", "Chan", role = "aut", email = "gefchchan@gmail.com"),
@@ -10,7 +10,7 @@ Authors@R: c(person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@g
              person("Christopher", "Gandrud", role = "aut"))
 Description: Streamlined data import and export by making assumptions that the user is probably willing to make: 'import()' and 'export()' determine the data structure from the file extension, reasonable defaults are used for data import and export (e.g., 'stringsAsFactors=FALSE'), web-based import is natively supported (including from SSL/HTTPS), compressed files can be read directly without explicit decompression, and fast import packages are used where appropriate.
 Depends: R (>= 2.15.0)
-Imports: tools, utils, foreign, haven, openxlsx, readODS, jsonlite, XML, curl (>= 0.6), data.table, readxl
+Imports: tools, utils, foreign, haven, longurl, openxlsx, readODS, jsonlite, XML, curl (>= 0.6), data.table, readxl
 Suggests: bit64, testthat, knitr, magrittr
 License: GPL-2
 VignetteBuilder: knitr

@@ -54,7 +54,7 @@ import.fortran <- function(file = file, style, ...) {
 import.dta <- function(file = file, haven = TRUE, ...) {
     if(haven) {
         a <- list(...)
-        if(length(a)) 
+        if(length(a))
             warning("File imported using haven. Arguments to '...' ignored.")
         read_dta(path = file)
     } else {
@@ -125,9 +125,13 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
     }
 }
 
-import <- function(file, format, setclass, ...) {
+import <- function(file, format, setclass, expandurl = TRUE, ...) {
     if(grepl("^http.*://", file)) {
         if(missing(format)) {
+            if (isTRUE(expandurl)) {
+                l_url <- expand_urls(file, warn = F, .progress = F)
+                if (!is.na(l_url$expanded_url)) file <- l_url$expanded_url
+        }
             fmt <- get_ext(file)
         } else {
             fmt <- get_type(format)
@@ -159,7 +163,7 @@ import <- function(file, format, setclass, ...) {
                 csv2 = import.delim(file = file, sep = ";", dec = ",", ...),
                 psv = import.delim(file = file, sep = "|", ...),
                 rdata = import.rdata(file = file, ...),
-                dta = import.dta(file = file, ...), 
+                dta = import.dta(file = file, ...),
                 dbf = read.dbf(file = file, ...),
                 dif = read.DIF(file = file, ...),
                 sav = import.sav(file = file, ...),
