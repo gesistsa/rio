@@ -1,3 +1,8 @@
+# Changes TO v0.2.2 #
+
+- Uses the longurl package to expand shortened URLS so that their file type
+can be easily determined. 
+
 # CHANGES TO v0.2.1 #
 
  * Improved support for importing from compressed directories, especially web-based compressed directories. (#38)
