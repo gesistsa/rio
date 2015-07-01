@@ -199,10 +199,11 @@ import <- function(file, format, setclass, expandurl = TRUE, ...) {
                 )
     if(missing(setclass)) {
         return(set_class(x))
-    } else {
-        a <- list(...)
-        if("data.table" %in% names(a) && isTRUE(a[["data.table"]]))
-            setclass <- "data.table"
-        return(set_class(x, class = setclass))
     }
+    
+    a <- list(...)
+    if("data.table" %in% names(a) && isTRUE(a[["data.table"]])){
+        setclass <- "data.table"
+    }
+    return(set_class(x, class = setclass))
 }
