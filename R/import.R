@@ -51,11 +51,12 @@ import.fortran <- function(file = file, style, ...) {
     read.fortran(file = file, format = style, ...)
 }
 
-import.dta <- function(file = file, haven = TRUE, ...) {
+import.dta <- function(file = file, haven = TRUE, col.labs = FALSE ...) {
     if(haven) {
         a <- list(...)
         if(length(a))
-            warning("File imported using haven. Arguments to '...' ignored.")
+          warning("File imported using haven. Arguments to '...' ignored.")
+        if(col.labs) return(read_dta(path = file))
         x <- read_dta(path = file)
         xinfo <- list(var.labels = sapply(x, attr, which = "label"),
                       label.table = sapply(x, attr, which = "labels"))
