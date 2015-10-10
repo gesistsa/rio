@@ -25,6 +25,17 @@ parse.tar <- function(file, which = 1, ...) {
     }
 }
 
+cleanup.haven <- function(x) {
+    xinfo <- list(var.labels = sapply(x, attr, which = "label"),
+                  label.table = sapply(x, attr, which = "labels"))
+    discrete <- sapply(x, function(y) length(unique(attr(y, "labels"))) >= length(na.omit(unique(y))))
+    x[discrete] <- lapply(x[discrete], haven::as_factor)
+    x[sapply(x, is.numeric)] <- lapply(x[sapply(x, is.numeric)], function(y) {attr(y, "labels") <- NULL; return(unclass(y))})
+    x[] <- lapply(x, function(y) {attr(y, "label") <- NULL; return(y)})
+    for(a in names(xinfo)) {attr(x, a) <- xinfo[[a]]}
+    return(x)
+}
+
 import.delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
     if(fread) {
         fread(input = file, sep = sep, sep2 = "auto", header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
@@ -51,24 +62,37 @@ import.fortran <- function(file = file, style, ...) {
     read.fortran(file = file, format = style, ...)
 }
 
-import.dta <- function(file = file, haven = TRUE, ...) {
+import.dta <- function(file = file, haven = TRUE, column.labels = FALSE, ...) {
     if(haven) {
         a <- list(...)
         if(length(a))
             warning("File imported using haven. Arguments to '...' ignored.")
-        read_dta(path = file)
+        if(column.labels) return(read_dta(path = file))
+        cleanup.haven(read_dta(path = file))
     } else {
         read.dta(file = file, ...)
     }
 }
 
-import.sav <- function(file = file, haven = TRUE, ...) {
+import.sav <- function(file = file, haven = TRUE, column.labels = FALSE, ...) {
     if(haven) {
-        read_sav(path = file)
+        if(column.labels) return(read_sav(path = file))
+        cleanup.haven(read_sav(path = file))
     } else {
         read.spss(file = file, to.data.frame = TRUE, ...)
     }
 }
+
+import.por <- function(file = file, column.labels = FALSE, ...) {
+    if(column.labels) return(read_por(path = file))
+    cleanup.haven(read_por(path = file))
+}
+
+import.sas <- function(file = file, column.labels = FALSE, ...) {
+    if(column.labels) return(read_sas(b7dat = file, ...))
+    cleanup.haven(read_sas(b7dat = file, ...))
+}
+
 
 import.rdata <- function(file, which = 1, ...) {
     e <- new.env()
@@ -167,8 +191,8 @@ import <- function(file, format, setclass, expandurl = TRUE, ...) {
                 dbf = read.dbf(file = file, ...),
                 dif = read.DIF(file = file, ...),
                 sav = import.sav(file = file, ...),
-                por = read_por(path = file),
-                sas7bdat = read_sas(b7dat = file, ...),
+                por = import.por(file = file, ...),
+                sas7bdat = import.sas(file = file, ...),
                 xpt = read.xport(file = file),
                 mtp = read.mtp(file = file, ...),
                 syd = read.systat(file = file, to.data.frame = TRUE),
