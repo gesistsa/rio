@@ -1,5 +1,6 @@
 # CHANGES TO v0.2.4 #
 
+ * Added support for importing CSVY (http://csvy.org/) formatted files. (#52)
  * Added import dependency on data.table 1.9.5. (#39)
 
 # CHANGES TO v0.2.2 #

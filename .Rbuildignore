@@ -2,4 +2,5 @@
 .gitignore
 .Rbuildignore
 .travis.yml
+appveyor.yml
 README.Rmd
