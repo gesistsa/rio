@@ -1,7 +1,10 @@
-# Changes TO v0.2.2 #
+# CHANGES TO v0.2.4 #
 
-- Uses the longurl package to expand shortened URLS so that their file type
-can be easily determined. 
+ * Added import dependency on data.table 1.9.5. (#39)
+
+# CHANGES TO v0.2.2 #
+
+ * Uses the longurl package to expand shortened URLs so that their file type can be easily determined. 
 
 # CHANGES TO v0.2.1 #
 
