@@ -1,5 +1,6 @@
 # CHANGES TO v0.2.4 #
 
+ * Modified behavior so that files imported using haven now store variable metadata at the data.frame level by default (unlike the default behavior in haven, which can cause problems). (#37, h/t Ista Zahn)
  * Added support for importing CSVY (http://csvy.org/) formatted files. (#52)
  * Added import dependency on data.table 1.9.5. (#39)
 
