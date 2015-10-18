@@ -37,6 +37,28 @@ import.delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
     }
 }
 
+import.csvy <- function(file, ...) {
+    # read in whole file
+    f <- readLines(file)
+
+    # identify yaml delimiters
+    g <- grep("^---", f)
+    if (length(g) > 2) {
+    stop("More than 2 yaml delimiters found in file")
+    } else if (length(g) == 1) {
+    stop("Only one yaml delimiter found")
+    } else if (length(g) == 0) {
+    stop("No yaml delimiters found")
+    }
+
+    # extract yaml front matter and convert to R list
+    y <- yaml.load(paste(f[(g[1]+1):(g[2]-1)], collapse = "\n"))
+    y$fields
+
+    # load the data
+    import.delim(text = f[(g[2]+1):length(f)], ...)
+}
+
 import.fwf <- function(file = file, header = FALSE, widths, ...) {
     if(missing(widths)) {
         stop("Import of fixed-width format data requires a 'widths' argument. See `? read.fwf`.")
@@ -161,6 +183,7 @@ import <- function(file, format, setclass, expandurl = TRUE, ...) {
                 rds = readRDS(file = file, ...),
                 csv = import.delim(file = file, sep = ",", ...),
                 csv2 = import.delim(file = file, sep = ";", dec = ",", ...),
+                csvy = import.csvy(file = file, ...),
                 psv = import.delim(file = file, sep = "|", ...),
                 rdata = import.rdata(file = file, ...),
                 dta = import.dta(file = file, ...),
