@@ -23,6 +23,7 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | ------ | ------ | ------ |
 | Tab-separated data (.tsv) | Yes | Yes |
 | Comma-separated data (.csv) | Yes | Yes |
+| CSVY (CSV + YAML metadata header) (.csvy) | Yes | No |
 | Pipe-separated data (.psv) | Yes | Yes |
 | Fixed-width format data (.fwf) | Yes | Yes |
 | Serialized R objects (.rds) | Yes | Yes |
@@ -65,8 +66,11 @@ if(!require("devtools")){
 install_github("leeper/rio")
 ```
 
-[![Build Status](https://travis-ci.org/leeper/rio.png?branch=master)](https://travis-ci.org/leeper/rio)
+[![CRAN Version](http://www.r-pkg.org/badges/version/rio)](http://cran.r-project.org/package=rio)
 ![Downloads](http://cranlogs.r-pkg.org/badges/rio)
+[![Travis-CI Build Status](https://travis-ci.org/leeper/rio.png?branch=master)](https://travis-ci.org/leeper/rio)
+[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/40ua5l06jw0gjyjb?svg=true)](https://ci.appveyor.com/project/leeper/rio)
+[![codecov.io](http://codecov.io/github/leeper/rio/coverage.svg?branch=master)](http://codecov.io/github/leeper/rio?branch=master)
 
 ## Examples ##
 
