@@ -24,13 +24,13 @@
     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
     \item Saved R objects (.RData), using \code{\link[base]{load}} for single-object .Rdata files
     \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
-    \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
-    \item SPSS and SPSS portable (.sav and .por), using \code{\link[haven]{read_sav}} and \code{\link[haven]{read_por}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used for .sav files.
+    \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used. If \code{haven = TRUE} metadata will be stored as object-level attributes by default; if \code{column.labels = TRUE} metadata will be stored as column-level attributes.
+    \item SPSS and SPSS portable (.sav and .por), using \code{\link[haven]{read_sav}} and \code{\link[haven]{read_por}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used for .sav files.  If \code{haven = TRUE} metadata will be stored as object-level attributes by default; if \code{column.labels = TRUE} metadata will be stored as column-level attributes.
     \item "XBASE" database files (.dbf), using \code{\link[foreign]{read.dbf}}
     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{read.arff}}
     \item R syntax object (.R), using \code{\link[base]{dget}}
     \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. If \code{readxl = FALSE}, \code{\link[openxlsx]{read.xlsx}} can be used.
-    \item SAS (.sas7bdat) and SAS XPORT (.xpt), using \code{\link[haven]{read_sas}} and \code{\link[foreign]{read.xport}}
+    \item SAS (.sas7bdat) and SAS XPORT (.xpt), using \code{\link[haven]{read_sas}} and \code{\link[foreign]{read.xport}}.  If \code{haven = TRUE} metadata will be stored as object-level attributes by default; if \code{column.labels = TRUE} metadata will be stored as column-level attributes.
     \item Minitab (.mtp), using \code{\link[foreign]{read.mtp}}
     \item Epiinfo (.rec), using \code{\link[foreign]{read.epiinfo}}
     \item Systat (.syd), using \code{\link[foreign]{read.systat}}
