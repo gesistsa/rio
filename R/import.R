@@ -163,6 +163,43 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
     }
 }
 
+import.sql <- function(){
+    switch(db_type,
+           mysql = import.mysql(),
+           postgresql = import.pg(),
+           sqlite = import.sqlite(),
+           stop("Unrecognized file format"))
+}
+
+import.mysql <- function(dbname, host, port, username, password, table, ...){
+  if (!requireNamespace("dplyr", quitely = TRUE)){
+    stop('dplyr package required to connect to MySQL sources', call. = FALSE)
+  }
+  library(dplyr)
+  db <- dplyr::src_mysql(dbname, host, port, username, password)
+  result <- dplyr::collect(dplyr::tbl(db, from = table, ...))
+  result
+}
+
+import.pg <- function(dbname, host, port, username, password, table, ...){
+  if (!requireNamespace("dplyr", quitely = TRUE)){
+    stop('dplyr package required to connect to PostgreSQL sources', call. = FALSE)
+  }
+  library(dplyr)
+  db <- dplyr::src_postgres(dbname, host, port, username, password)
+  result <- dplyr::collect(dplyr::tbl(db, from = table, ...))
+  result
+}
+
+import.sqlite <- function(file, table, ...){
+  if (!requireNamespace("dplyr", quitely = TRUE)){
+    stop('dplyr package required to connect to SQLite sources', call. = FALSE)
+  }
+  db <- dplyr::src_sqlite(path = file)
+  result <- dplyr::tbl(db, from = table, ...)
+  result
+}
+
 import <- function(file, format, setclass, expandurl = TRUE, ...) {
     if(grepl("^http.*://", file)) {
         if(missing(format)) {
@@ -220,6 +257,7 @@ import <- function(file, format, setclass, expandurl = TRUE, ...) {
                 ods = import.ods(file = file, ...),
                 xml = import.xml(file = file, ...),
                 clipboard = import.clipboard(...),
+                sql = import.sql(...),
                 # unsupported formats
                 tar = stop(stop_for_import(fmt)),
                 zip = stop(stop_for_import(fmt)),
