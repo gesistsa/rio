@@ -163,29 +163,29 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
     }
 }
 
-import.sql <- function(db_type){
+import.sql <- function(x, db_type, ...){
     switch(db_type,
-           mysql = import.mysql(),
-           postgresql = import.pg(),
-           sqlite = import.sqlite(),
+           mysql = import.mysql(x, ...),
+           postgresql = import.pg(x, ...),
+           sqlite = import.sqlite(x, ...),
            stop("Unrecognized file format"))
 }
 
-import.mysql <- function(dbname, host, port, username, password, table, ...){
+import.mysql <- function(x, dbname, host, port, username, password, ...){
   db <- dplyr::src_mysql(dbname, host, port, username, password)
-  result <- dplyr::collect(dplyr::tbl(db, from = table, ...))
+  result <- dplyr::collect(dplyr::tbl(db, from = x, ...))
   result
 }
 
-import.pg <- function(dbname, host, port, username, password, table, ...){
+import.pg <- function(x, dbname, host, port, username, password, ...){
   db <- dplyr::src_postgres(dbname, host, port, username, password)
-  result <- dplyr::collect(dplyr::tbl(db, from = table, ...))
+  result <- dplyr::collect(dplyr::tbl(db, from = x, ...))
   result
 }
 
-import.sqlite <- function(file, table, ...){
+import.sqlite <- function(x, file, ...){
   db <- dplyr::src_sqlite(path = file)
-  result <- dplyr::tbl(db, from = table, ...)
+  result <- dplyr::tbl(db, from = x, ...)
   result
 }
 
