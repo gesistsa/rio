@@ -66,8 +66,8 @@ export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, sep = "\t",
 export.sql <- function(x, table, db_type, ...){
     switch(db_type,
            mysql = export.mysql(...),
-           postgresql = import.pg(...),
-           sqlite = import.sqlite(...),
+           postgresql = export.pg(...),
+           sqlite = export.sqlite(...),
            stop("Unrecognized file format"))
 }
 
