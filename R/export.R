@@ -63,6 +63,30 @@ export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, sep = "\t",
     }
 }
 
+export.sql <- function(x, table, db_type, ...){
+    switch(db_type,
+           mysql = export.mysql(...),
+           postgresql = import.pg(...),
+           sqlite = import.sqlite(...),
+           stop("Unrecognized file format"))
+}
+
+export.mysql <- function(x, table, dbname, host, port, username, password){
+  db <- dplyr::src_mysql(dbname, host, port, username, password)
+  dbWriteTable(db, value = x, name = table, append = T, row.names = FALSE)
+}
+
+
+export.pg <- function(x, table, dbname, host, port, username, password){
+  db <- dplyr::src_postgres(dbname, host, port, username, password)
+  dbWriteTable(db, value = x, name = table, append = T, row.names = FALSE)
+}
+
+export.sqlite <- function(x, table, file){
+  db <- dplyr::src_sqlite(path = file)
+  dbWriteTable(db, value = x, name = table, append = T, row.names = FALSE)
+}
+           
 export <- function(x, file, format, ...) {
     if(missing(file) & missing(format)) {
         stop("Must specify 'file' and/or 'format'")
