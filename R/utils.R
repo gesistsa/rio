@@ -84,8 +84,8 @@ get_ext <- function(file) {
 }
 
 cleanup.haven <- function(x) {
-    xinfo <- list(var.labels = sapply(x, attr, which = "label"),
-                  label.table = sapply(x, attr, which = "labels"))
+    xinfo <- list(var.labels = sapply(x, attr, which = "label", exact = TRUE),
+                  label.table = sapply(x, attr, which = "labels", exact = TRUE))
     discrete <- sapply(x, function(y) length(unique(attr(y, "labels"))) >= length(na.omit(unique(y))))
     x[discrete] <- lapply(x[discrete], as_factor)
     x[sapply(x, is.numeric)] <- lapply(x[sapply(x, is.numeric)], function(y) {
