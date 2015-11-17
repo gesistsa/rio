@@ -53,7 +53,8 @@ get_type <- function(fmt) {
         mat = "matlab",
         matlab = "matlab",
         gexf = "gexf",
-        npy = "npy"
+        npy = "npy",
+        sql = "sql"
     )
     type <- type_list[[tolower(fmt)]]
     if(is.null(type)) {

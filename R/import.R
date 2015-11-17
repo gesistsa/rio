@@ -163,6 +163,32 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
     }
 }
 
+import.sql <- function(x, db_type, ...){
+    switch(db_type,
+           mysql = import.mysql(x, ...),
+           postgresql = import.pg(x, ...),
+           sqlite = import.sqlite(x, ...),
+           stop("Unrecognized file format"))
+}
+
+import.mysql <- function(x, dbname, host, port, username, password, ...){
+  db <- dplyr::src_mysql(dbname, host, port, username, password)
+  result <- dplyr::collect(dplyr::tbl(db, from = x, ...))
+  result
+}
+
+import.pg <- function(x, dbname, host, port, username, password, ...){
+  db <- dplyr::src_postgres(dbname, host, port, username, password)
+  result <- dplyr::collect(dplyr::tbl(db, from = x, ...))
+  result
+}
+
+import.sqlite <- function(x, file, ...){
+  db <- dplyr::src_sqlite(path = file)
+  result <- dplyr::tbl(db, from = x, ...)
+  result
+}
+
 import <- function(file, format, setclass, expandurl = TRUE, ...) {
     if(grepl("^http.*://", file)) {
         if(missing(format)) {
@@ -220,6 +246,7 @@ import <- function(file, format, setclass, expandurl = TRUE, ...) {
                 ods = import.ods(file = file, ...),
                 xml = import.xml(file = file, ...),
                 clipboard = import.clipboard(...),
+                sql = import.sql(...),
                 # unsupported formats
                 tar = stop(stop_for_import(fmt)),
                 zip = stop(stop_for_import(fmt)),
