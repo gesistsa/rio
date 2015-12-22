@@ -173,7 +173,7 @@ import <- function(file, format, setclass, ...) {
             fmt <- get_type(format)
         } 
         # try to extract format from URL
-        try(fmt <- get_ext(file), silent = TRUE)
+        fmt <- try(get_ext(file), silent = TRUE)
         if (inherits(fmt, "try-error")) {
             fmt <- "TMP"
         }
@@ -183,9 +183,9 @@ import <- function(file, format, setclass, ...) {
         u <- curl_fetch_memory(file)
         writeBin(object = u$content, con = temp_file)
         
-        if (exists(fmt) && fmt == "TMP") {
+        if (fmt == "TMP") {
             # try to extract format from curl's final URL
-            try(fmt <- get_ext(u$url), silent = TRUE)
+            fmt <- try(get_ext(u$url), silent = TRUE)
             if (inherits(fmt, "try-error")) {
                 # try to extract format from headers
                 h1 <- parse_headers(u$headers)
