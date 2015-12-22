@@ -1,8 +1,16 @@
+# rio functions to export
 export(convert)
 export(export)
 export(import)
+
+# utility functions to import
 importFrom(tools, file_ext)
 importFrom(urltools, url_parse)
+importFrom(yaml, yaml.load)
+importFrom(utils, installed.packages, untar, unzip)
+importFrom(curl, curl_download, curl_fetch_memory, parse_headers)
+
+# import and export functions from other packages
 importFrom(data.table, fread)
 importFrom(haven, read_dta, read_sav, read_por, read_sas)
 importFrom(haven, write_sav, write_dta)
@@ -12,11 +20,9 @@ importFrom(foreign, read.dta, read.spss)
 importFrom(foreign, write.dbf, write.arff)
 importFrom(utils, read.table, read.csv, read.fwf, read.DIF, read.fortran)
 importFrom(utils, write.table, write.csv)
-importFrom(utils, installed.packages, untar, unzip)
 importFrom(readODS, read.ods, getNrOfSheetsInODS)
 importFrom(XML, xmlParse, xmlToDataFrame)
 importFrom(XML, newXMLNode, xmlValue, "xmlValue<-", saveXML)
 importFrom(jsonlite, fromJSON, toJSON)
 importFrom(openxlsx, read.xlsx, write.xlsx)
 importFrom(readxl, read_excel)
-importFrom(curl, curl_download, curl_fetch_memory, parse_headers)

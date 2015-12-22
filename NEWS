@@ -1,3 +1,7 @@
+# CHANGES TO v0.2.6 #
+
+ * Cleaned up NAMESPACE file.
+
 # CHANGES TO v0.2.5 #
 
  * If file format for a remote file cannot be identified from the supplied URL or the final URL reported by `curl::curl_fetch_memory()`, the HTTP headers are checked for a filename in the Content-Disposition header. (#36)
