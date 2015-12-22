@@ -168,7 +168,7 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
 }
 
 import <- function(file, format, setclass, expandurl = TRUE, ...) {
-    if(grepl("^http.*://", file)) {
+    if (grepl("^http.*://", file)) {
         if(missing(format)) {
             if (isTRUE(expandurl)) {
                 l_url <- expand_urls(file, warn = FALSE, .progress = FALSE)
@@ -187,12 +187,12 @@ import <- function(file, format, setclass, expandurl = TRUE, ...) {
         #parse_headers(u$headers) # placeholder
         file <- temp_file
     }
-    if(grepl("zip$", file)) {
+    if (grepl("zip$", file)) {
         file <- parse.zip(file)
     } else if(grepl("tar$", file) | grepl("gz$", file)) {
         file <- parse.tar(file)
     }
-    if(missing(format)) {
+    if (missing(format)) {
         fmt <- get_ext(file)
     } else {
         fmt <- get_type(format)

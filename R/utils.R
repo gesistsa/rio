@@ -4,6 +4,7 @@ get_type <- function(fmt) {
         "\t" = "tsv",
         tsv = "tsv",
         csv = "csv",
+        csv2 = "csv2",
         "," = "csv",
         ";" = "csv2",
         psv = "psv",
@@ -56,10 +57,10 @@ get_type <- function(fmt) {
         npy = "npy"
     )
     type <- type_list[[tolower(fmt)]]
-    if(is.null(type)) {
+    if (is.null(type)) {
         stop("Unrecognized file format. Try specifying with the format argument.",
              call. = FALSE)
-    } 
+    }
     return(type)
 }
 

@@ -1,5 +1,6 @@
 # CHANGES TO v0.2.5 #
 
+ * Fixed a bug related to importing European-style ("csv2") format files. (#44)
  * Updated CSVY import to embed variable-level metadata. (#52)
  * Use `urltools::url_parse()` to extract file extensions from complex URLs (e.g., those with query arguments). (#56)
  * Fixed NAMESPACE notes for base packages. (#58)
