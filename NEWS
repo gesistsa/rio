@@ -1,5 +1,7 @@
 # CHANGES TO v0.2.5 #
 
+ * If file format for a remote file cannot be identified from the supplied URL or the final URL reported by `curl::curl_fetch_memory()`, the HTTP headers are checked for a filename in the Content-Disposition header. (#36)
+ * Removed longurl dependency. This is no longer needed because we can identify formats using curl's url argument.
  * Fixed a bug related to importing European-style ("csv2") format files. (#44)
  * Updated CSVY import to embed variable-level metadata. (#52)
  * Use `urltools::url_parse()` to extract file extensions from complex URLs (e.g., those with query arguments). (#56)
