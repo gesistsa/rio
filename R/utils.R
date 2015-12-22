@@ -70,8 +70,8 @@ get_ext <- function(file) {
     if(!grepl("^http.*://", file)) {
         fmt <- file_ext(file)
     } else if(grepl("^http.*://", file)) {
-        file <- get_type(url_parse(file)$path)
-        fmt <- gsub("(.*\\/)([^.]+)\\.", "", file)
+        file <- url_parse(file)$path
+        fmt <- file_ext(file)
         get_type(fmt)
     }
     if(file == "clipboard") {

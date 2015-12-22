@@ -171,9 +171,11 @@ import <- function(file, format, setclass, expandurl = TRUE, ...) {
     if(grepl("^http.*://", file)) {
         if(missing(format)) {
             if (isTRUE(expandurl)) {
-                l_url <- expand_urls(file, warn = F, .progress = F)
-                if (!is.na(l_url$expanded_url)) file <- l_url$expanded_url
-        }
+                l_url <- expand_urls(file, warn = FALSE, .progress = FALSE)
+                if (!is.na(l_url$expanded_url[1])) {
+                    file <- l_url$expanded_url[1]
+                }
+            }
             fmt <- get_ext(file)
         } else {
             fmt <- get_type(format)
