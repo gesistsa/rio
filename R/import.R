@@ -53,10 +53,14 @@ import.csvy <- function(file, ...) {
 
     # extract yaml front matter and convert to R list
     y <- yaml.load(paste(f[(g[1]+1):(g[2]-1)], collapse = "\n"))
-    y$fields
-
+    
     # load the data
-    import.delim(text = f[(g[2]+1):length(f)], ...)
+    out <- import.delim(file = paste0(f[(g[2]+1):length(f)], collapse = "\n"), ...)
+    for (i in seq_along(y$fields)) {
+        attr(out[, i], "title") <- y$fields[[i]][["title"]]
+        attr(out[, i], "description") <- y$fields[[i]][["description"]]
+    }
+    structure(out, names = sapply(y$fields, `[`, "name"))
 }
 
 import.fwf <- function(file = file, header = FALSE, widths, ...) {
