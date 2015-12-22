@@ -60,7 +60,11 @@ import.csvy <- function(file, ...) {
         attr(out[, i], "title") <- y$fields[[i]][["title"]]
         attr(out[, i], "description") <- y$fields[[i]][["description"]]
     }
-    structure(out, names = sapply(y$fields, `[`, "name"))
+    if ("fields" %in% names(y)) {
+        structure(out, names = sapply(y$fields, `[`, "name"))
+    } else {
+        out
+    }
 }
 
 import.fwf <- function(file = file, header = FALSE, widths, ...) {
