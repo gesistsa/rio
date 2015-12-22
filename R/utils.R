@@ -5,6 +5,7 @@ get_type <- function(fmt) {
         tsv = "tsv",
         csv = "csv",
         csv2 = "csv2",
+        csvy = "csvy",
         "," = "csv",
         ";" = "csv2",
         psv = "psv",
