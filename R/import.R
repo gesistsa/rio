@@ -183,7 +183,7 @@ import <- function(file, format, setclass, ...) {
         u <- curl_fetch_memory(file)
         writeBin(object = u$content, con = temp_file)
         
-        if (fmt == "TMP") {
+        if (exists(fmt) && fmt == "TMP") {
             # try to extract format from curl's final URL
             try(fmt <- get_ext(u$url), silent = TRUE)
             if (inherits(fmt, "try-error")) {
