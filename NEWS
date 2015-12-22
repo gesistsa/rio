@@ -1,5 +1,6 @@
 # CHANGES TO v0.2.5 #
 
+ * Use `urltools::url_parse()` to extract file extensions from complex URLs (e.g., those with query arguments). (#56)
  * Fixed NAMESPACE notes for base packages. (#58)
 
 # CHANGES TO v0.2.4 #

@@ -69,8 +69,8 @@ get_ext <- function(file) {
     }
     if(!grepl("^http.*://", file)) {
         fmt <- file_ext(file)
-    }
-    else if(grepl("^http.*://", file)) {
+    } else if(grepl("^http.*://", file)) {
+        file <- get_type(url_parse(file)$path)
         fmt <- gsub("(.*\\/)([^.]+)\\.", "", file)
         get_type(fmt)
     }
