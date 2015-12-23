@@ -1,5 +1,6 @@
 # CHANGES TO v0.2.7 #
 
+ * Added test sutie to test file conversion.
  * Expanded test suite to include test of all export formats.
 
 # CHANGES TO v0.2.6 #
