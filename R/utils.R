@@ -69,14 +69,14 @@ get_ext <- function(file) {
     if (!is.character(file)) {
         stop("'file' is not a string")
     }
-    if(!grepl("^http.*://", file)) {
+    if (!grepl("^http.*://", file)) {
         fmt <- file_ext(file)
     } else if(grepl("^http.*://", file)) {
         file <- url_parse(file)$path
         fmt <- file_ext(file)
         get_type(fmt)
     }
-    if(file == "clipboard") {
+    if (file == "clipboard") {
         return("clipboard")
     } else if (fmt == "") {
         stop("'file' has no extension")
