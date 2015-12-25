@@ -204,7 +204,7 @@ import <- function(file, format, setclass, ...) {
                 fwf = import.fwf(file = file, ...),
                 rds = readRDS(file = file, ...),
                 csv = import.delim(file = file, sep = ",", ...),
-                csv2 = import.delim(file = file, sep = ";", dec = ",", ...),
+                csv2 = import.delim(file = file, sep = ";", ...),
                 csvy = import.csvy(file = file, ...),
                 psv = import.delim(file = file, sep = "|", ...),
                 rdata = import.rdata(file = file, ...),
