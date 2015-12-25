@@ -8,6 +8,8 @@ test_that("Function suggestions for unsupported import and export", {
 test_that("Error for unsupported file types", {
     expect_error(import("test.mat"), "Unrecognized file format")
     expect_error(export(data.frame(1), "test.mat"), "Unrecognized file format")
+    expect_error(get_type("faketype"), "Unrecognized file format. Try specifying with the format argument.")
+    expect_that(get_ext("noextension"), equals("'file' has no extension"))
 })
 
 test_that("Error for mixed support file types", {

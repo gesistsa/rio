@@ -2,45 +2,45 @@ context("Exports")
 require("datasets")
 
 test_that("Export to TSV", {
-    export(iris, "iris.tsv")
+    expect_true(export(iris, "iris.tsv") %in% dir())
 })
 test_that("Export to CSV", {
-    export(iris, "iris.csv")
+    expect_true(export(iris, "iris.csv") %in% dir())
 })
 test_that("Export to PSV", {
-    export(iris, "iris.psv")
+    expect_true(export(iris, "iris.psv") %in% dir())
 })
 test_that("Export to FWF", {
-    export(iris, "iris.fwf")
+    expect_true(export(iris, "iris.fwf") %in% dir())
 })
 test_that("Export to RDS", {
-    export(iris, "iris.RDS")
+    expect_true(export(iris, "iris.RDS") %in% dir())
 })
 test_that("Export to RDATA", {
-    export(iris, "iris.Rdata")
+    expect_true(export(iris, "iris.Rdata") %in% dir())
 })
 test_that("Export to JSON", {
-    export(iris, "iris.json")
+    expect_true(export(iris, "iris.json") %in% dir())
 })
 test_that("Export to Stata", {
-    export(iris, "iris.dta")
+    expect_true(export(iris, "iris.dta") %in% dir())
 })
 test_that("Export to SPSS (.sav)", {
-    export(iris, "iris.sav")
+    expect_true(export(iris, "iris.sav") %in% dir())
 })
 test_that("Export to XBASE", {
-    export(iris, "iris.dbf")
+    expect_true(export(iris, "iris.dbf") %in% dir())
 })
 #test_that("Export to Excel (.xls)", {})
 test_that("Export to Excel (.xlsx)", {
-    export(iris, "iris.xlsx")
+    expect_true(export(iris, "iris.xlsx") %in% dir())
 })
 test_that("Export to Weka", {
-    export(iris, "iris.arff")
+    expect_true(export(iris, "iris.arff") %in% dir())
 })
 test_that("Export to .R dump file", {
-    export(iris, "iris.R")
+    expect_true(export(iris, "iris.R") %in% dir())
 })
 test_that("Export to XML", {
-    export(iris, "iris.xml")
+    expect_true(export(iris, "iris.xml") %in% dir())
 })
