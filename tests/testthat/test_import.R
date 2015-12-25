@@ -2,10 +2,13 @@ context("Import")
 
 #test_that("Import from TSV", {})
 test_that("Import from CSV", {
-  noheadercsv <- import("noheader.csv", header = FALSE)
-  expect_that(colnames(noheadercsv)[1], equals("V1"), label = "Header is correctly specified")
+    noheadercsv <- import(system.file("examples", "noheader.csv", package = "rio"), header = FALSE)
+    expect_that(colnames(noheadercsv)[1], equals("V1"), label = "Header is correctly specified")
 })
-#test_that("Import from CSVY", {})
+test_that("Import from CSVY", {
+    d <- import(system.file("examples", "example.csvy", package = "rio"))
+    expect_true(inherits(d, "data.frame"))
+})
 #test_that("Import from PSV", {})
 #test_that("Import from FWF", {})
 #test_that("Import from RDS", {})

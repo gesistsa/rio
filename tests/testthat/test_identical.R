@@ -33,5 +33,5 @@ test_that("Data identical (optional arguments)", {
     expect_equivalent(import(export(mtcars, "mtcars.csv", format = "csv2"), format = "csv2"), mtcars)
     expect_equivalent(import(export(mtcars, "mtcars.csv"), nrows = 4), mtcars[1:4,])
     expect_equivalent(import(export(mtcars, "mtcars.csv", format = "tsv"), format = "tsv"), mtcars)
-    expect_equivalent(import(export(mtcars, "mtcars", format = "csv"), format = "csv"), mtcars)
+    expect_true(all.equal(import(export(mtcars, "mtcars", format = "csv"), format = "csv"), mtcars, check.attributes = FALSE))
 })

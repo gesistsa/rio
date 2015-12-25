@@ -182,50 +182,10 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
 
 import <- function(file, format, setclass, ...) {
     if (grepl("^http.*://", file)) {
-        if (!missing(format)) {
-            fmt <- get_type(format)
-        } 
-        # try to extract format from URL
-        fmt <- try(get_ext(file), silent = TRUE)
-        if (inherits(fmt, "try-error")) {
-            fmt <- "TMP"
-        }
-        # save file locally
-        temp_file <- tempfile(fileext = paste0(".", fmt))
-        on.exit(unlink(temp_file))
-        u <- curl_fetch_memory(file)
-        writeBin(object = u$content, con = temp_file)
-        
-        if (fmt == "TMP") {
-            # try to extract format from curl's final URL
-            fmt <- try(get_ext(u$url), silent = TRUE)
-            if (inherits(fmt, "try-error")) {
-                # try to extract format from headers
-                h1 <- parse_headers(u$headers)
-                # check `Content-Disposition` header
-                if (any(grepl("^Content-Disposition", h1))) {
-                    h <- h1[grep("filename", h1)]
-                    if (length(h)) {
-                        file <- regmatches(h, regexpr("(?<=\")(.*)(?<!\")", h, perl = TRUE))
-                        if (!length(file)) {
-                            file <- regmatches(h, regexpr("(?<=filename=)(.*)", h, perl = TRUE))
-                        }
-                        file <- paste0(dirname(temp_file), "/", file)
-                        file.rename(temp_file, file)
-                    }
-                }
-                # check `Content-Type` header
-                #if (any(grepl("^Content-Type", h1))) {
-                #    h <- h1[grep("^Content-Type", h1)]
-                #    ## PARSE MIME TYPE
-                #}
-            } else {
-                file <- sub("TMP$", fmt, temp_file)
-                file.rename(temp_file, file)
-            }
-        } else {
-            file <- temp_file
-        }
+        file <- remote_to_local(file, format)
+    }
+    if (!file.exists(file)) {
+        stop("No such file")
     }
     if (grepl("zip$", file)) {
         file <- parse.zip(file)

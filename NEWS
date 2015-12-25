@@ -1,5 +1,6 @@
 # CHANGES TO v0.2.7 #
 
+ * Refactored remote file retrieval into separate (non-exported) function used by `import()`. (#62)
  * Added test sutie to test file conversion.
  * Expanded test suite to include test of all export formats.
 
