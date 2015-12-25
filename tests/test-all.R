@@ -1,2 +1,3 @@
 library("testthat")
-test_check("rio")
+library("rio")
+test_check("rio", reporter = "summary")

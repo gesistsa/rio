@@ -6,17 +6,17 @@ test_that("Function suggestions for unsupported import and export", {
 })
 
 test_that("Error for unsupported file types", {
-    expect_error(import("test.mat"), "Unrecognized file format")
-    expect_error(export(data.frame(1), "test.mat"), "Unrecognized file format")
+    expect_error(import("test.faketype"), "Unrecognized file format")
+    expect_error(export(data.frame(1), "test.faketype"), "Unrecognized file format")
     expect_error(get_type("faketype"), "Unrecognized file format. Try specifying with the format argument.")
-    expect_that(get_ext("noextension"), equals("'file' has no extension"))
+    expect_error(get_ext("noextension"), "'file' has no extension")
 })
 
 test_that("Error for mixed support file types", {
     expect_error(import("test.gnumeric"), "gnumeric format not supported. Consider using the `gnumeric::read.gnumeric.sheet` function")
     expect_error(export(data.frame(1), "test.gnumeric"), "Unrecognized file format")
     expect_error(import("test.por"), "The system cannot find the file specified")
-    expect_error(export(data.frame(1), "test.por"), "Unrecognized file format")
+    expect_error(export(data.frame(1), "test.faketype"), "Unrecognized file format")
 })
 
 test_that("Only export data.frame or matrix", {
