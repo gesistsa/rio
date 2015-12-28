@@ -13,3 +13,8 @@ test_that("Import Remote File from Shortened URL", {
     shorturl <- "https://goo.gl/KPFiaK"
     expect_true(inherits(import(shorturl), "data.frame"), label = "Import remote file")
 })
+
+test_that("Import from Google Sheets", {
+    googleurl <- "https://docs.google.com/spreadsheets/d/1I9mJsS5QnXF2TNNntTy-HrcdHmIF9wJ8ONYvEJTXSNo/edit#gid=0"
+    expect_true(inherits(import(googleurl), "data.frame"), label = "Import google sheets")
+})

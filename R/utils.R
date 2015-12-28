@@ -85,6 +85,21 @@ get_ext <- function(file) {
     }
 }
 
+
+convert_google_url <- function(url, export_as = "csv") {
+    ## convert a google sheets url to google csv export URL
+    ## extract the doc-id and append /export?format = csv to it. (default)
+    ## references: https://github.com/maxconway/gsheet/blob/master/R/gsheet2text.R
+    google_key <- regmatches(url, regexpr("[[:alnum:]_-]{30,}", url))
+    if (grepl('gid=[[:digit:]]+', url)) {
+        gidpart <- paste0(regmatches(url, regexpr("gid=[[:digit:]]+", url)))
+    } else {
+        gidpart <- "gid=0"
+    }
+    return(paste0('https://docs.google.com/spreadsheets/d/', google_key, '/export?', gidpart, '&format=', export_as))
+}
+
+
 remote_to_local <- function(file, format) {
     if (!missing(format)) {
         fmt <- get_type(format)
@@ -93,6 +108,11 @@ remote_to_local <- function(file, format) {
     fmt <- try(get_ext(file), silent = TRUE)
     if (inherits(fmt, "try-error")) {
         fmt <- "TMP"
+    }
+    # handle google sheets urls
+    if (grepl("docs\\.google\\.com/spreadsheets", file)) {
+        file <- convert_google_url(file)
+        fmt <- "csv"
     }
     # save file locally
     temp_file <- tempfile(fileext = paste0(".", fmt))

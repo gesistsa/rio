@@ -39,6 +39,7 @@
     \item Shallow XML documents (.xml), using \code{\link[XML]{xmlToDataFrame}}. Note: optional arguments not recognized by \code{xmlToDataFrame} are passed to \code{\link[XML]{xmlParse}}.
     \item Clipboard import (on Windows and Mac OS), using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
     \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
+    \item Google Sheets, as Comma-separated data (.csv)
 }
 }
 \note{For csv and txt files with row names exported from \code{\link{export}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.}
