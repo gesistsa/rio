@@ -89,7 +89,6 @@ get_ext <- function(file) {
 convert_google_url <- function(url, export_as = "csv") {
     ## convert a google sheets url to google csv export URL
     ## extract the doc-id and append /export?format = csv to it. (default)
-    ## references: https://github.com/maxconway/gsheet/blob/master/R/gsheet2text.R
     google_key <- regmatches(url, regexpr("[[:alnum:]_-]{30,}", url))
     if (grepl('gid=[[:digit:]]+', url)) {
         gidpart <- paste0(regmatches(url, regexpr("gid=[[:digit:]]+", url)))
