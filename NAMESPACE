@@ -5,9 +5,10 @@ export(import)
 
 # utility functions to import
 importFrom(tools, file_ext)
+importFrom(stats, na.omit)
+importFrom(utils, installed.packages, untar, unzip)
 importFrom(urltools, url_parse)
 importFrom(yaml, yaml.load)
-importFrom(utils, installed.packages, untar, unzip)
 importFrom(curl, curl_download, curl_fetch_memory, parse_headers)
 
 # import and export functions from other packages

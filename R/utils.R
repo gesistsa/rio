@@ -153,7 +153,7 @@ remote_to_local <- function(file, format) {
 cleanup.haven <- function(x) {
     xinfo <- list(var.labels = sapply(x, attr, which = "label", exact = TRUE),
                   label.table = sapply(x, attr, which = "labels", exact = TRUE))
-    discrete <- sapply(x, function(y) length(unique(attr(y, "labels"))) >= length(na.omit(unique(y))))
+    discrete <- sapply(x, function(y) length(unique(attr(y, "labels"))) >= length(stats::na.omit(unique(y))))
     x[discrete] <- lapply(x[discrete], as_factor)
     x[sapply(x, is.numeric)] <- lapply(x[sapply(x, is.numeric)], function(y) {
         attr(y, "labels") <- NULL
