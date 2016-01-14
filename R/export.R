@@ -8,7 +8,7 @@ export.delim <- function(x, file, sep = "\t", row.names = FALSE,
                 col.names = col.names, ...)
 }
 
-export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, ...) {
+export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, digits = getOption("digits", 7), ...) {
     dat <- lapply(x, function(col) {
         if (is.character(col)) {
             col <- as.numeric(as.factor(col))
@@ -19,6 +19,9 @@ export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, col.
             s <- strsplit(as.character(col), ".", fixed = TRUE)
             m1 <- max(nchar(sapply(s, `[`, 1)), na.rm = TRUE)
             m2 <- max(nchar(sapply(s, `[`, 2)), na.rm = TRUE)
+            if (!is.finite(m2)) {
+                m2 <- digits
+            }
             return(formatC(sprintf(fmt = paste0("%0.",m2,"f"), col), width = (m1+m2+1)))
         } else if(is.logical(col)) {
             return(sprintf("%i",col))
