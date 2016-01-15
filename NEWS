@@ -1,3 +1,30 @@
+# CHANGES TO v0.2.13 #
+
+ * Import stats package for `na.omit()`.
+
+# CHANGES TO v0.2.11 #
+
+ * Added support for direct import from Google Sheets. (#60, #63, h/t Chung-hong Chan)
+
+# CHANGES TO v0.2.7 #
+
+ * Refactored remote file retrieval into separate (non-exported) function used by `import()`. (#62)
+ * Added test sutie to test file conversion.
+ * Expanded test suite to include test of all export formats.
+
+# CHANGES TO v0.2.6 #
+
+ * Cleaned up NAMESPACE file.
+
+# CHANGES TO v0.2.5 #
+
+ * If file format for a remote file cannot be identified from the supplied URL or the final URL reported by `curl::curl_fetch_memory()`, the HTTP headers are checked for a filename in the Content-Disposition header. (#36)
+ * Removed longurl dependency. This is no longer needed because we can identify formats using curl's url argument.
+ * Fixed a bug related to importing European-style ("csv2") format files. (#44)
+ * Updated CSVY import to embed variable-level metadata. (#52)
+ * Use `urltools::url_parse()` to extract file extensions from complex URLs (e.g., those with query arguments). (#56)
+ * Fixed NAMESPACE notes for base packages. (#58)
+
 # CHANGES TO v0.2.4 #
 
  * Modified behavior so that files imported using haven now store variable metadata at the data.frame level by default (unlike the default behavior in haven, which can cause problems). (#37, h/t Ista Zahn)

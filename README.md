@@ -3,7 +3,7 @@
 The aim of **rio** is to make data file I/O in R as easy as possible by implementing three simple functions in Swiss-army knife style:
 
  - `export` and `import` provide a painless data I/O experience by automatically choosing the appropriate data read or write function based on file extension
- - `convert` wraps `import` and `export` to allow the user to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](http://www.openmetadata.org/site/?page_id=1089))
+ - `convert` wraps `import` and `export` to allow the user to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](http://www.openmetadata.org/site/?page_id=1089)). [Luca Braglia](https://lbraglia.github.io/) has created a Shiny app called [rioweb](https://github.com/lbraglia/rioweb) that provides access to the file conversion features of rio.
 
 The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Five of these are important:
 
@@ -44,6 +44,7 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | Data Interchange Format (.dif) | Yes |  |
 | OpenDocument Spreadsheet  (.ods) | Yes |  |
 | Fortran data (no recognized extension) | Yes |  |
+| [Google Sheets](https://www.google.com/sheets/about/) | Yes |  |
 | Clipboard (default is tsv) | Yes (Mac and Windows) | Yes (Mac and Windows) |
 
 Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.

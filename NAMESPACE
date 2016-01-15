@@ -1,7 +1,17 @@
+# rio functions to export
 export(convert)
 export(export)
 export(import)
+
+# utility functions to import
 importFrom(tools, file_ext)
+importFrom(stats, na.omit)
+importFrom(utils, installed.packages, untar, unzip)
+importFrom(urltools, url_parse)
+importFrom(yaml, yaml.load)
+importFrom(curl, curl_download, curl_fetch_memory, parse_headers)
+
+# import and export functions from other packages
 importFrom(data.table, fread)
 importFrom(haven, read_dta, read_sav, read_por, read_sas)
 importFrom(haven, write_sav, write_dta)
@@ -17,5 +27,3 @@ importFrom(XML, newXMLNode, xmlValue, "xmlValue<-", saveXML)
 importFrom(jsonlite, fromJSON, toJSON)
 importFrom(openxlsx, read.xlsx, write.xlsx)
 importFrom(readxl, read_excel)
-importFrom(curl, curl_download, curl_fetch_memory)
-importFrom(longurl, expand_urls)

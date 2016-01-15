@@ -10,12 +10,12 @@ export.delim <- function(x, file, sep = "\t", row.names = FALSE,
 
 export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, ...) {
     dat <- lapply(x, function(col) {
-        if(is.character(col)) {
+        if (is.character(col)) {
             col <- as.numeric(as.factor(col))
         } else if(is.factor(col)) {
             col <- as.numeric(col)
         }
-        if(is.numeric(col)) {
+        if (is.numeric(col)) {
             s <- strsplit(as.character(col), ".", fixed = TRUE)
             m1 <- max(nchar(sapply(s, `[`, 1)), na.rm = TRUE)
             m2 <- max(nchar(sapply(s, `[`, 2)), na.rm = TRUE)
@@ -36,11 +36,11 @@ export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, col.
 
 export.xml <- function(x, file, ...) {
     root <- newXMLNode(as.character(substitute(x)))
-    for(i in 1:nrow(x)){
+    for (i in 1:nrow(x)) {
         obs <- newXMLNode("Observation", parent = root)
         rowname <- newXMLNode("rowname", parent = obs)
         xmlValue(rowname) <- rownames(x)[i]
-        for(j in 1:ncol(x)) {
+        for (j in 1:ncol(x)) {
             obs_value <- newXMLNode(names(x)[j], parent = obs)
             xmlValue(obs_value) <- x[i,j]
         }
@@ -49,12 +49,12 @@ export.xml <- function(x, file, ...) {
 }
 
 export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
-    if(Sys.info()["sysname"] == "Darwin") {
+    if (Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbcopy", "w")
         write.table(x, file = clip, sep = sep, row.names = row.names,
                     col.names = col.names, ...)
         close(clip)
-    } else if(Sys.info()["sysname"] == "Windows") {
+    } else if (Sys.info()["sysname"] == "Windows") {
         write.table(x, file="clipboard", sep = sep, row.names = row.names,
                     col.names = col.names, ...)
     } else {
@@ -64,13 +64,13 @@ export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, sep = "\t",
 }
 
 export <- function(x, file, format, ...) {
-    if(missing(file) & missing(format)) {
+    if (missing(file) & missing(format)) {
         stop("Must specify 'file' and/or 'format'")
-    } else if(!missing(file) & !missing(format)) {
+    } else if (!missing(file) & !missing(format)) {
         fmt <- tolower(format)
-    } else if(!missing(file) & missing(format)) {
+    } else if (!missing(file) & missing(format)) {
         fmt <- get_ext(file)
-    } else if(!missing(format)) {
+    } else if (!missing(format)) {
         fmt <- get_type(format)
         file <- paste0(as.character(substitute(x)), ".", fmt)
     }
