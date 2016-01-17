@@ -170,7 +170,7 @@ import.importfile_mtp <- function(file = file, format, ...){
 }
 
 import.importfile_syd <- function(file = file, format, ...){
-  read.systat(file = file, to.data.frmae = TRUE, ...)
+  read.systat(file = file, to.data.frame = TRUE, ...)
 }
 
 import.importfile_json <- function(file = file, format, ...){
