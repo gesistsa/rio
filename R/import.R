@@ -27,119 +27,184 @@ parse.tar <- function(file, which = 1, ...) {
     }
 }
 
-import.delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
-    if (fread) {
-        fread(input = file, sep = sep, sep2 = "auto", header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
-    } else {
-        if (missing(sep) || is.null(sep) || sep == "auto") {
-            sep <- "\t"
-        }
-        if (missing(header) || is.null(header) || header == "auto") {
-            header <- TRUE
-        }
-        read.table(file = file, sep = sep, header = header, stringsAsFactors = stringsAsFactors, ...)
+import.delim <- function(file = file, fread = TRUE, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
+  if (fread) {
+    fread(input = file, sep = sep, sep2 = "auto", header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
+  } else {
+    if (missing(sep) || is.null(sep) || sep == "auto") {
+      sep <- "\t"
     }
+    if (missing(header) || is.null(header) || header == "auto") {
+      header <- TRUE
+    }
+    read.table(file = file, sep = sep, header = header, stringsAsFactors = stringsAsFactors, ...)
+  }
 }
 
-import.csvy <- function(file, ...) {
-    # read in whole file
-    f <- readLines(file)
-
-    # identify yaml delimiters
-    g <- grep("^---", f)
-    if (length(g) > 2) {
-        stop("More than 2 yaml delimiters found in file")
-    } else if (length(g) == 1) {
-        stop("Only one yaml delimiter found")
-    } else if (length(g) == 0) {
-        stop("No yaml delimiters found")
-    }
-
-    # extract yaml front matter and convert to R list
-    y <- yaml.load(paste(f[(g[1]+1):(g[2]-1)], collapse = "\n"))
-    
-    # load the data
-    out <- import.delim(file = paste0(f[(g[2]+1):length(f)], collapse = "\n"), ...)
-    for (i in seq_along(y$fields)) {
-        attr(out[, i], "title") <- y$fields[[i]][["title"]]
-        attr(out[, i], "description") <- y$fields[[i]][["description"]]
-    }
-    if ("fields" %in% names(y)) {
-        structure(out, names = sapply(y$fields, `[`, "name"))
-    } else {
-        out
-    }
+import.rio_r <- function(file = file, format, ...){
+  dget(file = file, ...)
 }
 
-import.fwf <- function(file = file, header = FALSE, widths, ...) {
-    if (missing(widths)) {
-        stop("Import of fixed-width format data requires a 'widths' argument. See `? read.fwf`.")
-    }
-    read.fwf2(file = file, widths = widths, header = header, ...)
+import.rio_tsv <- function(file = file, format, ...){
+  import.delim(file = file, sep = "\t", ...)
 }
 
-import.fortran <- function(file, style, ...) {
+import.rio_txt <- function(file = file, format, ...){
+  import.delim(file = file, sep = "\t", ...)
+}
+
+import.rio_fwf <- function(file = file, format, header = FALSE, widths, ...) {
+  if (missing(widths)) {
+    stop("Import of fixed-width format data requires a 'widths' argument. See `? read.fwf`.")
+  }
+  read.fwf2(file = file, widths = widths, header = header, ...)
+}
+
+import.rio_rds <- function(file = file, format, ...){
+  readRDS(file = file, ...)
+}
+
+import.rio_csv <- function(file = file, format, ...){
+  print(file)
+  import.delim(file = file, sep = ",", ...)
+}
+
+import.rio_csv2 <- function(file = file, format, ...){
+  import.delim(file = file, sep = ";", ...)
+}
+
+import.rio_csvy <- function(file = file, format, ...) {
+  # read in whole file
+  f <- readLines(file)
+  
+  # identify yaml delimiters
+  g <- grep("^---", f)
+  if (length(g) > 2) {
+    stop("More than 2 yaml delimiters found in file")
+  } else if (length(g) == 1) {
+    stop("Only one yaml delimiter found")
+  } else if (length(g) == 0) {
+    stop("No yaml delimiters found")
+  }
+  
+  # extract yaml front matter and convert to R list
+  y <- yaml.load(paste(f[(g[1]+1):(g[2]-1)], collapse = "\n"))
+  
+  # load the data
+  out <- import.delim(file = paste0(f[(g[2]+1):length(f)], collapse = "\n"), ...)
+  for (i in seq_along(y$fields)) {
+    attr(out[, i], "title") <- y$fields[[i]][["title"]]
+    attr(out[, i], "description") <- y$fields[[i]][["description"]]
+  }
+  if ("fields" %in% names(y)) {
+    structure(out, names = sapply(y$fields, `[`, "name"))
+  } else {
+    out
+  }
+}
+
+import.rio_psv <- function(file = file, format, ...){
+  import.delim(file = file, sep = "|", ...)
+}
+
+import.rio_rdata <- function(file = file, which = 1, format, ...) {
+  e <- new.env()
+  load(file = file, envir = e, ...)
+  get(ls(e)[which], e)
+}
+
+import.rio_dta <- function(file = file, haven = TRUE, column.labels = FALSE, format, ...) {
+  if (haven) {
+    a <- list(...)
+    if (length(a)) {
+      warning("File imported using haven. Arguments to '...' ignored.")
+    }
+    if (column.labels) {
+      return(read_dta(path = file))
+    }
+    cleanup.haven(read_dta(path = file))
+  } else {
+    read.dta(file = file, ...)
+  }
+}
+
+import.rio_dbf <- function(file = file, format, ...){
+  read.dbf(file = file, ...)
+}
+
+import.rio_dif <- function(file = file, format, ...){
+  read.DIF(file = file, ...)
+}
+
+import.rio_sav <- function(file = file, haven = TRUE, column.labels = FALSE, format, ...) {
+  if (haven) {
+    if(column.labels) {
+      return(read_sav(path = file))
+    }
+    cleanup.haven(read_sav(path = file))
+  } else {
+    read.spss(file = file, to.data.frame = TRUE, ...)
+  }
+}
+
+import.rio_por <- function(file = file, column.labels = FALSE, format, ...) {
+  if(column.labels) {
+    return(read_por(path = file))
+  }
+  cleanup.haven(read_por(path = file))
+}
+
+import.rio_sas7bdat <- function(file = file, column.labels = FALSE, format, ...) {
+  if(column.labels) {
+    return(read_sas(b7dat = file, ...))
+  }
+  cleanup.haven(read_sas(b7dat = file, ...))
+}
+
+import.rio_xpt <- function(file = file, format, ...){
+  read.xport(file = file, ...)
+}
+
+import.rio_mtp <- function(file = file, format, ...){
+  read.mtp(file = file, ...)
+}
+
+import.rio_syd <- function(file = file, format, ...){
+  read.systat(file = file, to.data.frame = TRUE, ...)
+}
+
+import.rio_json <- function(file = file, format, ...){
+  fromJSON(txt = file, ...)
+}
+
+import.rio_rec <- function(file = file, format, ...){
+  read.epiinfo(file = file, ...)
+}
+
+import.rio_arff <- function(file = file, format){
+  read.arff(file = file)
+}
+
+import.rio_xls <- function(file = file, format, ...){
+  read_excel(path = file, ...)
+}
+
+import.rio_xlsx <- function(file = file, readxl = TRUE, format, ...) {
+  if (readxl) {
+    read_excel(path = file, ...)
+  } else {
+    read.xlsx(xlsxFile = file, ...)
+  }
+}
+
+import.rio_fortran <- function(file = file, style, format, ...) {
     if (missing(style)) {
         stop("Import of Fortran format data requires a 'style' argument. See `? read.fortran`.")
     }
     read.fortran(file = file, format = style, ...)
 }
 
-import.dta <- function(file, haven = TRUE, column.labels = FALSE, ...) {
-    if (haven) {
-        a <- list(...)
-        if (length(a)) {
-            warning("File imported using haven. Arguments to '...' ignored.")
-        }
-        if (column.labels) {
-            return(read_dta(path = file))
-        }
-        cleanup.haven(read_dta(path = file))
-    } else {
-        read.dta(file = file, ...)
-    }
-}
-
-import.sav <- function(file, haven = TRUE, column.labels = FALSE, ...) {
-    if (haven) {
-        if(column.labels) {
-            return(read_sav(path = file))
-        }
-        cleanup.haven(read_sav(path = file))
-    } else {
-        read.spss(file = file, to.data.frame = TRUE, ...)
-    }
-}
-
-import.por <- function(file, column.labels = FALSE, ...) {
-    if(column.labels) {
-        return(read_por(path = file))
-    }
-    cleanup.haven(read_por(path = file))
-}
-
-import.sas <- function(file, column.labels = FALSE, ...) {
-    if(column.labels) {
-        return(read_sas(b7dat = file, ...))
-    }
-    cleanup.haven(read_sas(b7dat = file, ...))
-}
-
-import.rdata <- function(file, which = 1, ...) {
-    e <- new.env()
-    load(file = file, envir = e, ...)
-    get(ls(e)[which], e)
-}
-
-import.xlsx <- function(file = file, readxl = TRUE, ...) {
-    if (readxl) {
-        read_excel(path = file, ...)
-    } else {
-        read.xlsx(xlsxFile = file, ...)
-    }
-}
-
-import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
+import.rio_ods <- function(file = file, header = TRUE, sheet = NULL, format, ...) {
     handlingODSheader <- function(x) {
         colnames(x) <- x[1,]
         g <- x[2:nrow(x),]
@@ -162,13 +227,13 @@ import.ods <- function(file, header = TRUE, sheet = NULL, ...) {
     return(res)
 }
 
-import.xml <- function(file, colClasses = NULL, homogeneous = NA, collectNames = TRUE,
-                       stringsAsFactors = FALSE, ...) {
+import.rio_xml <- function(file = file, colClasses = NULL, homogeneous = NA, collectNames = TRUE,
+                       stringsAsFactors = FALSE, format, ...) {
     xmlToDataFrame(doc = xmlParse(file, ...), colClasses = colClasses, homogeneous = homogeneous,
                    collectNames = collectNames, stringsAsFactors = stringsAsFactors)
 }
 
-import.clipboard <- function(header = TRUE, sep = "\t", ...) {
+import.rio_clipboard <- function(header = TRUE, sep = "\t", format, ...) {
     if (Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbpaste")
         read.table(file = clip, sep = sep, ...)
@@ -178,6 +243,10 @@ import.clipboard <- function(header = TRUE, sep = "\t", ...) {
     } else {
         stop("Reading from clipboard is not supported on your OS")
     }
+}
+
+import.default <- function(file, format){
+  stop('Unrecognized file format')
 }
 
 import <- function(file, format, setclass, ...) {
@@ -197,51 +266,16 @@ import <- function(file, format, setclass, ...) {
     } else {
         fmt <- get_type(format)
     }
-    x <- switch(fmt,
-                r = dget(file = file),
-                tsv = import.delim(file = file, sep = "\t", ...),
-                txt = import.delim(file = file, sep = "\t", ...),
-                fwf = import.fwf(file = file, ...),
-                rds = readRDS(file = file, ...),
-                csv = import.delim(file = file, sep = ",", ...),
-                csv2 = import.delim(file = file, sep = ";", ...),
-                csvy = import.csvy(file = file, ...),
-                psv = import.delim(file = file, sep = "|", ...),
-                rdata = import.rdata(file = file, ...),
-                dta = import.dta(file = file, ...),
-                dbf = read.dbf(file = file, ...),
-                dif = read.DIF(file = file, ...),
-                sav = import.sav(file = file, ...),
-                por = import.por(file = file, ...),
-                sas7bdat = import.sas(file = file, ...),
-                xpt = read.xport(file = file),
-                mtp = read.mtp(file = file, ...),
-                syd = read.systat(file = file, to.data.frame = TRUE),
-                json = fromJSON(txt = file, ...),
-                rec = read.epiinfo(file = file, ...),
-                arff = read.arff(file = file),
-                xls = read_excel(path = file, ...),
-                xlsx = import.xlsx(file = file, ...),
-                fortran = import.fortran(file = file, ...),
-                ods = import.ods(file = file, ...),
-                xml = import.xml(file = file, ...),
-                clipboard = import.clipboard(...),
-                # unsupported formats
-                tar = stop(stop_for_import(fmt)),
-                zip = stop(stop_for_import(fmt)),
-                gnumeric = stop(stop_for_import(fmt)),
-                jpg = stop(stop_for_import(fmt)),
-                png = stop(stop_for_import(fmt)),
-                bmp = stop(stop_for_import(fmt)),
-                tiff = stop(stop_for_import(fmt)),
-                sss = stop(stop_for_import(fmt)),
-                sdmx = stop(stop_for_import(fmt)),
-                matlab = stop(stop_for_import(fmt)),
-                gexf = stop(stop_for_import(fmt)),
-                npy = stop(stop_for_import(fmt)),
-                # unrecognized format
-                stop("Unrecognized file format")
-                )
+    unsupported <- c("tar", "zip", "gnumeric", "jpg", "png", "bmp", "tiff", 
+                     "sss", "sdmx", "matlab", "gexf", "npy")
+    if (fmt %in% unsupported){
+      stop(stop_for_import(fmt))
+    }
+    
+    fmt <- paste0("rio_", fmt)
+    
+    x <- .import(format = fmt, file, ...)
+    
     if (missing(setclass)) {
         return(set_class(x))
     }
@@ -251,4 +285,10 @@ import <- function(file, format, setclass, ...) {
         setclass <- "data.table"
     }
     return(set_class(x, class = setclass))
+}
+
+.import <- function(format, ...){
+  z <- NA
+  class(z) <- format
+  UseMethod('import', z)
 }
