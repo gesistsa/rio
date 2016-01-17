@@ -1,3 +1,8 @@
+# CHANGES TO v0.3.0 #
+
+ * Release to CRAN.
+ * Set a default numerical precision (of 2 decimal places) for export to fixed-width format.
+
 # CHANGES TO v0.2.13 #
 
  * Import stats package for `na.omit()`.
