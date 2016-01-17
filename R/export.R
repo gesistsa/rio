@@ -1,14 +1,32 @@
-export.csv <- function(x, file, row.names = FALSE, ...) {
-    write.csv(x, file = file, row.names = row.names, ...)
-}
-
 export.delim <- function(x, file, sep = "\t", row.names = FALSE,
                          col.names = TRUE, ...) {
     write.table(x, file = file, sep = sep, row.names = row.names,
                 col.names = col.names, ...)
 }
 
-export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, ...) {
+
+export.exportfile_txt <- function(x, file, format, ...){
+    export.delim(x = x, file = file, ...)
+}
+
+export.exportfile_tsv <- function(x, file, format, ...){
+    export.delim(x = x, file = file, ...)
+}
+
+
+export.exportfile_csv <- function(x, file, format, ...) {
+    export.delim(x = x, file = file, sep = ",", dec = ".", ...)
+}
+
+export.exportfile_csv2 <- function(x, file, format, ...){
+    export.delim(x = x, file = file, sep =";", dec = ",", ...)
+}
+
+export.exportfile_psv <- function(x, file, format, ...){
+    export.delim(x = x, file = file, sep = "|", ...)
+}
+
+export.exportfile_fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, format, ...) {
     dat <- lapply(x, function(col) {
         if (is.character(col)) {
             col <- as.numeric(as.factor(col))
@@ -34,7 +52,47 @@ export.fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, col.
                 col.names = col.names, ...)
 }
 
-export.xml <- function(x, file, ...) {
+export.exportfile_r <- function(x, file, format, ...){
+    dput(x, file = file, ...)
+}
+
+export.exportfile_dump <- function(x, file, format, ...){
+    dump(as.character(substitute(x)), file = file, ...)
+}
+
+export.exportfile_rds <- function(x, file, format, ...){
+    saveRDS(object = x, file = file, ...)
+}
+
+export.exportfile_rdata <- function(x, file, format, ...){
+    save(x = x, file = file, ...)
+}
+
+export.exportfile_sav <- function(x, file, format, ...){
+    write_sav(data = x, path = file, ...)
+}
+
+export.exportfile_dta <- function(x, file, format, ...){
+    write_dta(data = x, path = file, ...)
+}
+
+export.exportfile_dbf <- function(x, file, format, ...){
+    write.dbf(dataframe = x, file = file, ...)
+}
+
+export.exportfile_json <- function(x, file, format, ...){
+    cat(toJSON(x, ...), file = file)
+}
+
+export.exportfile_arff <- function(x, file, format, ...){
+    write.arff(x = x, file = file, ...)
+}
+
+export.exportfile_xlsx <- function(x, file, format, ...){
+    write.xlsx(x = x, file = file, ...)
+}
+
+export.exportfile_xml <- function(x, file, format, ...) {
     root <- newXMLNode(as.character(substitute(x)))
     for (i in 1:nrow(x)) {
         obs <- newXMLNode("Observation", parent = root)
@@ -48,7 +106,7 @@ export.xml <- function(x, file, ...) {
     invisible(saveXML(doc = root, file = file, ...))
 }
 
-export.clipboard <- function(x, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
+export.exportfile_clipboard <- function(x, row.names = FALSE, col.names = TRUE, sep = "\t", format, ...) {
     if (Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbcopy", "w")
         write.table(x, file = clip, sep = sep, row.names = row.names,
@@ -79,35 +137,24 @@ export <- function(x, file, format, ...) {
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
-    switch(fmt,
-           txt = export.delim(x, file = file, ...),
-           tsv = export.delim(x, file = file, ...),
-           csv = export.delim(x, file = file, sep = ",", dec = ".", ...),
-           csv2 = export.delim(x, file = file, sep = ";", dec = ",", ...),
-           psv = export.delim(x, file = file, sep = "|", ...),
-           fwf = export.fwf(x, file = file, ...),
-           r = dput(x, file = file, ...),
-           dump = dump(as.character(substitute(x)), file = file, ...),
-           rds = saveRDS(x, file = file, ...),
-           rdata = save(x, file = file, ...),
-           sav = write_sav(data = x, path = file),
-           dta = write_dta(data = x, path = file),
-           dbf = write.dbf(dataframe = x, file = file, ...),
-           json = cat(toJSON(x, ...), file = file),
-           arff = write.arff(x = x, file = file, ...),
-           xlsx = write.xlsx(x = x, file = file, ...),
-           xml = export.xml(x, file = file, ...), 
-           clipboard = export.clipboard(x, ...),
-           # unsupported formats
-           jpg = stop(stop_for_export(fmt)),
-           png = stop(stop_for_export(fmt)),
-           tiff = stop(stop_for_export(fmt)),
-           matlab = stop(stop_for_export(fmt)),
-           xpt = stop(stop_for_export(fmt)),
-           gexf = stop(stop_for_export(fmt)),
-           npy = stop(stop_for_export(fmt)),
-           # unrecognized format
-           stop("Unrecognized file format")
-           )
+    unsupported <- c("jpg", "png", "tiff", "matlab", "xpt", "gexf", "npy")
+    if (fmt %in% unsupported){
+      stop(stop_for_export(fmt))
+    }
+  
+    fmt <- paste0("exportfile_", fmt)
+  
+    .export(x = x, file = file, format = fmt, ...)
+  
     invisible(file)
+}
+
+export.default <- function(x, file, format, ...){
+  stop("Unrecognized file format")
+}
+
+.export <- function(x, file, format, ...){
+  z <- NA
+  class(z) <- format
+  UseMethod("export", z)
 }
