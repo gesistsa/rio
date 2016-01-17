@@ -7,6 +7,8 @@ test_that("Basic file conversion", {
     x <- import("iris.dta")
     expect_true(identical(names(iris), names(x)))
     expect_true(identical(dim(iris), dim(x)))
+    unlink("iris.dta")
+    unlink("iris.csv")
 })
 
 test_that("File conversion with arguments", {
@@ -17,4 +19,6 @@ test_that("File conversion with arguments", {
     convert("iris.csv", "iris.tsv",
             in_opts = list(format = "tsv"), out_opts = list(format = "csv"))
     expect_true("iris.tsv" %in% dir())
+    unlink("iris.csv")
+    unlink("iris.tsv")
 })
