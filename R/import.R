@@ -122,7 +122,7 @@ import.rio_dta <- function(file = file, haven = TRUE, column.labels = FALSE, for
     if (column.labels) {
       return(read_dta(path = file))
     }
-    cleanup.haven(read_dta(path = file))
+    cleanup_haven(read_dta(path = file))
   } else {
     read.dta(file = file, ...)
   }
@@ -141,7 +141,7 @@ import.rio_sav <- function(file = file, haven = TRUE, column.labels = FALSE, for
     if(column.labels) {
       return(read_sav(path = file))
     }
-    cleanup.haven(read_sav(path = file))
+    cleanup_haven(read_sav(path = file))
   } else {
     read.spss(file = file, to.data.frame = TRUE, ...)
   }
@@ -151,14 +151,14 @@ import.rio_por <- function(file = file, column.labels = FALSE, format, ...) {
   if(column.labels) {
     return(read_por(path = file))
   }
-  cleanup.haven(read_por(path = file))
+  cleanup_haven(read_por(path = file))
 }
 
 import.rio_sas7bdat <- function(file = file, column.labels = FALSE, format, ...) {
   if(column.labels) {
     return(read_sas(b7dat = file, ...))
   }
-  cleanup.haven(read_sas(b7dat = file, ...))
+  cleanup_haven(read_sas(b7dat = file, ...))
 }
 
 import.rio_xpt <- function(file = file, format, ...){
