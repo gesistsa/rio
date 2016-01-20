@@ -1,4 +1,4 @@
-parse.zip <- function(file, which = 1, ...) {
+parse_zip <- function(file, which = 1, ...) {
     file_list <- unzip(file, list = TRUE)
     if (nrow(file_list) > 1) {
         warning("Zip archive contains multiple files. Attempting first file.")
@@ -8,7 +8,7 @@ parse.zip <- function(file, which = 1, ...) {
     }
 }
 
-parse.tar <- function(file, which = 1, ...) {
+parse_tar <- function(file, which = 1, ...) {
     e <- file_ext(file)
     if (e == "tar") {
         file_list <- untar(file, list = TRUE)
@@ -27,7 +27,7 @@ parse.tar <- function(file, which = 1, ...) {
     }
 }
 
-import.delim <- function(file = file, fread = TRUE, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
+import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
   if (fread) {
     fread(input = file, sep = sep, sep2 = "auto", header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
   } else {
@@ -41,39 +41,39 @@ import.delim <- function(file = file, fread = TRUE, sep = "auto", header = "auto
   }
 }
 
-import.rio_r <- function(file = file, format, ...){
+.import.rio_r <- function(file, ...){
   dget(file = file, ...)
 }
 
-import.rio_tsv <- function(file = file, format, ...){
-  import.delim(file = file, sep = "\t", ...)
+.import.rio_tsv <- function(file, ...){
+  import_delim(file = file, sep = "\t", ...)
 }
 
-import.rio_txt <- function(file = file, format, ...){
-  import.delim(file = file, sep = "\t", ...)
+.import.rio_txt <- function(file, ...){
+  import_delim(file = file, sep = "\t", ...)
 }
 
-import.rio_fwf <- function(file = file, format, header = FALSE, widths, ...) {
+.import.rio_fwf <- function(file, header = FALSE, widths, ...) {
   if (missing(widths)) {
     stop("Import of fixed-width format data requires a 'widths' argument. See `? read.fwf`.")
   }
   read.fwf2(file = file, widths = widths, header = header, ...)
 }
 
-import.rio_rds <- function(file = file, format, ...){
+.import.rio_rds <- function(file, ...){
   readRDS(file = file, ...)
 }
 
-import.rio_csv <- function(file = file, format, ...){
+.import.rio_csv <- function(file, ...){
   print(file)
-  import.delim(file = file, sep = ",", ...)
+  import_delim(file = file, sep = ",", ...)
 }
 
-import.rio_csv2 <- function(file = file, format, ...){
-  import.delim(file = file, sep = ";", ...)
+.import.rio_csv2 <- function(file, ...){
+  import_delim(file = file, sep = ";", ...)
 }
 
-import.rio_csvy <- function(file = file, format, ...) {
+.import.rio_csvy <- function(file, ...) {
   # read in whole file
   f <- readLines(file)
   
@@ -91,7 +91,7 @@ import.rio_csvy <- function(file = file, format, ...) {
   y <- yaml.load(paste(f[(g[1]+1):(g[2]-1)], collapse = "\n"))
   
   # load the data
-  out <- import.delim(file = paste0(f[(g[2]+1):length(f)], collapse = "\n"), ...)
+  out <- import_delim(file = paste0(f[(g[2]+1):length(f)], collapse = "\n"), ...)
   for (i in seq_along(y$fields)) {
     attr(out[, i], "title") <- y$fields[[i]][["title"]]
     attr(out[, i], "description") <- y$fields[[i]][["description"]]
@@ -103,17 +103,17 @@ import.rio_csvy <- function(file = file, format, ...) {
   }
 }
 
-import.rio_psv <- function(file = file, format, ...){
-  import.delim(file = file, sep = "|", ...)
+.import.rio_psv <- function(file, ...){
+  import_delim(file = file, sep = "|", ...)
 }
 
-import.rio_rdata <- function(file = file, which = 1, format, ...) {
+.import.rio_rdata <- function(file, which = 1, ...) {
   e <- new.env()
   load(file = file, envir = e, ...)
   get(ls(e)[which], e)
 }
 
-import.rio_dta <- function(file = file, haven = TRUE, column.labels = FALSE, format, ...) {
+.import.rio_dta <- function(file, haven = TRUE, column.labels = FALSE, ...) {
   if (haven) {
     a <- list(...)
     if (length(a)) {
@@ -128,15 +128,15 @@ import.rio_dta <- function(file = file, haven = TRUE, column.labels = FALSE, for
   }
 }
 
-import.rio_dbf <- function(file = file, format, ...){
+.import.rio_dbf <- function(file, ...){
   read.dbf(file = file, ...)
 }
 
-import.rio_dif <- function(file = file, format, ...){
+.import.rio_dif <- function(file, ...){
   read.DIF(file = file, ...)
 }
 
-import.rio_sav <- function(file = file, haven = TRUE, column.labels = FALSE, format, ...) {
+.import.rio_sav <- function(file, haven = TRUE, column.labels = FALSE, ...) {
   if (haven) {
     if(column.labels) {
       return(read_sav(path = file))
@@ -147,49 +147,49 @@ import.rio_sav <- function(file = file, haven = TRUE, column.labels = FALSE, for
   }
 }
 
-import.rio_por <- function(file = file, column.labels = FALSE, format, ...) {
+.import.rio_por <- function(file, column.labels = FALSE, ...) {
   if(column.labels) {
     return(read_por(path = file))
   }
   cleanup_haven(read_por(path = file))
 }
 
-import.rio_sas7bdat <- function(file = file, column.labels = FALSE, format, ...) {
+.import.rio_sas7bdat <- function(file, column.labels = FALSE, ...) {
   if(column.labels) {
     return(read_sas(b7dat = file, ...))
   }
   cleanup_haven(read_sas(b7dat = file, ...))
 }
 
-import.rio_xpt <- function(file = file, format, ...){
+.import.rio_xpt <- function(file, ...){
   read.xport(file = file, ...)
 }
 
-import.rio_mtp <- function(file = file, format, ...){
+.import.rio_mtp <- function(file, ...){
   read.mtp(file = file, ...)
 }
 
-import.rio_syd <- function(file = file, format, ...){
+.import.rio_syd <- function(file, ...){
   read.systat(file = file, to.data.frame = TRUE, ...)
 }
 
-import.rio_json <- function(file = file, format, ...){
+.import.rio_json <- function(file, ...){
   fromJSON(txt = file, ...)
 }
 
-import.rio_rec <- function(file = file, format, ...){
+.import.rio_rec <- function(file, ...){
   read.epiinfo(file = file, ...)
 }
 
-import.rio_arff <- function(file = file, format){
+.import.rio_arff <- function(file, ...){
   read.arff(file = file)
 }
 
-import.rio_xls <- function(file = file, format, ...){
+.import.rio_xls <- function(file, ...){
   read_excel(path = file, ...)
 }
 
-import.rio_xlsx <- function(file = file, readxl = TRUE, format, ...) {
+.import.rio_xlsx <- function(file, readxl = TRUE, ...) {
   if (readxl) {
     read_excel(path = file, ...)
   } else {
@@ -197,14 +197,14 @@ import.rio_xlsx <- function(file = file, readxl = TRUE, format, ...) {
   }
 }
 
-import.rio_fortran <- function(file = file, style, format, ...) {
+.import.rio_fortran <- function(file, style, ...) {
     if (missing(style)) {
         stop("Import of Fortran format data requires a 'style' argument. See `? read.fortran`.")
     }
     read.fortran(file = file, format = style, ...)
 }
 
-import.rio_ods <- function(file = file, header = TRUE, sheet = NULL, format, ...) {
+.import.rio_ods <- function(file, header = TRUE, sheet = NULL, ...) {
     handlingODSheader <- function(x) {
         colnames(x) <- x[1,]
         g <- x[2:nrow(x),]
@@ -227,13 +227,13 @@ import.rio_ods <- function(file = file, header = TRUE, sheet = NULL, format, ...
     return(res)
 }
 
-import.rio_xml <- function(file = file, colClasses = NULL, homogeneous = NA, collectNames = TRUE,
-                       stringsAsFactors = FALSE, format, ...) {
+.import.rio_xml <- function(file, colClasses = NULL, homogeneous = NA, collectNames = TRUE,
+                       stringsAsFactors = FALSE, ...) {
     xmlToDataFrame(doc = xmlParse(file, ...), colClasses = colClasses, homogeneous = homogeneous,
                    collectNames = collectNames, stringsAsFactors = stringsAsFactors)
 }
 
-import.rio_clipboard <- function(header = TRUE, sep = "\t", format, ...) {
+.import.rio_clipboard <- function(header = TRUE, sep = "\t", ...) {
     if (Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbpaste")
         read.table(file = clip, sep = sep, ...)
@@ -245,8 +245,12 @@ import.rio_clipboard <- function(header = TRUE, sep = "\t", format, ...) {
     }
 }
 
-import.default <- function(file, format){
+.import.default <- function(file){
   stop('Unrecognized file format')
+}
+
+.import <- function(file, ...){
+  UseMethod('.import', file)
 }
 
 import <- function(file, format, setclass, ...) {
@@ -257,20 +261,19 @@ import <- function(file, format, setclass, ...) {
         stop("No such file")
     }
     if (grepl("zip$", file)) {
-        file <- parse.zip(file)
+        file <- parse_zip(file)
     } else if(grepl("tar$", file) | grepl("gz$", file)) {
-        file <- parse.tar(file)
+        file <- parse_tar(file)
     }
     if (missing(format)) {
         fmt <- get_ext(file)
     } else {
         fmt <- get_type(format)
     }
-    stop(stop_for_import(fmt))
+    stop_for_import(fmt)
     
-    fmt <- paste0("rio_", fmt)
-    
-    x <- .import(format = fmt, file, ...)
+    class(file) <- paste0("rio_", fmt)
+    x <- .import(file = file, ...)
     
     if (missing(setclass)) {
         return(set_class(x))
@@ -281,10 +284,4 @@ import <- function(file, format, setclass, ...) {
         setclass <- "data.table"
     }
     return(set_class(x, class = setclass))
-}
-
-.import <- function(format, ...){
-  z <- NA
-  class(z) <- format
-  UseMethod('import', z)
 }

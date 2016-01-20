@@ -1,3 +1,7 @@
+# CHANGES TO v0.3.2 #
+
+ * Use S3 dispatch internally to call new (unexported) `.import()` and `.export()` methods. (#42, h/t Jason Becker)
+
 # CHANGES TO v0.3.0 #
 
  * Release to CRAN.

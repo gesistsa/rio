@@ -1,31 +1,31 @@
-export.delim <- function(x, file, sep = "\t", row.names = FALSE,
+export_delim <- function(file, x, sep = "\t", row.names = FALSE,
                          col.names = TRUE, ...) {
     write.table(x, file = file, sep = sep, row.names = row.names,
                 col.names = col.names, ...)
 }
 
-export.rio_txt <- function(x, file, format, ...){
-    export.delim(x = x, file = file, ...)
+.export.rio_txt <- function(file, x, ...){
+    export_delim(x = x, file = file, ...)
 }
 
-export.rio_tsv <- function(x, file, format, ...){
-    export.delim(x = x, file = file, ...)
+.export.rio_tsv <- function(file, x, ...){
+    export_delim(x = x, file = file, ...)
 }
 
 
-export.rio_csv <- function(x, file, format, ...) {
-    export.delim(x = x, file = file, sep = ",", dec = ".", ...)
+.export.rio_csv <- function(file, x, ...) {
+    export_delim(x = x, file = file, sep = ",", dec = ".", ...)
 }
 
-export.rio_csv2 <- function(x, file, format, ...){
-    export.delim(x = x, file = file, sep =";", dec = ",", ...)
+.export.rio_csv2 <- function(file, x, ...){
+    export_delim(x = x, file = file, sep =";", dec = ",", ...)
 }
 
-export.rio_psv <- function(x, file, format, ...){
-    export.delim(x = x, file = file, sep = "|", ...)
+.export.rio_psv <- function(file, x, ...){
+    export_delim(x = x, file = file, sep = "|", ...)
 }
 
-export.rio_fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, digits = getOption("digits", 7), format, ...){
+.export.rio_fwf <- function(file, x, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, digits = getOption("digits", 7), ...){
     dat <- lapply(x, function(col) {
         if (is.character(col)) {
             col <- as.numeric(as.factor(col))
@@ -54,47 +54,47 @@ export.rio_fwf <- function(x, file, sep = "", row.names = FALSE, quote = FALSE, 
                 col.names = col.names, ...)
 }
 
-export.rio_r <- function(x, file, format, ...){
+.export.rio_r <- function(file, x, ...){
     dput(x, file = file, ...)
 }
 
-export.rio_dump <- function(x, file, format, ...){
+.export.rio_dump <- function(file, x, ...){
     dump(as.character(substitute(x)), file = file, ...)
 }
 
-export.rio_rds <- function(x, file, format, ...){
+.export.rio_rds <- function(file, x, ...){
     saveRDS(object = x, file = file, ...)
 }
 
-export.rio_rdata <- function(x, file, format, ...){
+.export.rio_rdata <- function(file, x, ...){
     save(x = x, file = file, ...)
 }
 
-export.rio_sav <- function(x, file, format, ...){
+.export.rio_sav <- function(file, x, ...){
     write_sav(data = x, path = file, ...)
 }
 
-export.rio_dta <- function(x, file, format, ...){
+.export.rio_dta <- function(file, x, ...){
     write_dta(data = x, path = file, ...)
 }
 
-export.rio_dbf <- function(x, file, format, ...){
+.export.rio_dbf <- function(file, x, ...){
     write.dbf(dataframe = x, file = file, ...)
 }
 
-export.rio_json <- function(x, file, format, ...){
+.export.rio_json <- function(file, x, ...){
     cat(toJSON(x, ...), file = file)
 }
 
-export.rio_arff <- function(x, file, format, ...){
+.export.rio_arff <- function(file, x, ...){
     write.arff(x = x, file = file, ...)
 }
 
-export.rio_xlsx <- function(x, file, format, ...){
+.export.rio_xlsx <- function(file, x, ...){
     write.xlsx(x = x, file = file, ...)
 }
 
-export.rio_xml <- function(x, file, format, ...) {
+.export.rio_xml <- function(file, x, ...) {
     root <- newXMLNode(as.character(substitute(x)))
     for (i in 1:nrow(x)) {
         obs <- newXMLNode("Observation", parent = root)
@@ -108,7 +108,7 @@ export.rio_xml <- function(x, file, format, ...) {
     invisible(saveXML(doc = root, file = file, ...))
 }
 
-export.rio_clipboard <- function(x, row.names = FALSE, col.names = TRUE, sep = "\t", format, ...) {
+.export.rio_clipboard <- function(file, x, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
     if (Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbcopy", "w")
         write.table(x, file = clip, sep = sep, row.names = row.names,
@@ -121,6 +121,14 @@ export.rio_clipboard <- function(x, row.names = FALSE, col.names = TRUE, sep = "
         stop("Writing to clipboard is not supported on your OS")
         return(NULL)
     }
+}
+
+.export.default <- function(file, x, ...){
+  stop("Unrecognized file format")
+}
+
+.export <- function(file, x, ...){
+  UseMethod(".export")
 }
 
 export <- function(x, file, format, ...) {
@@ -139,21 +147,10 @@ export <- function(x, file, format, ...) {
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
-    stop(stop_for_export(fmt))
+    stop_for_export(fmt)
     
-    fmt <- paste0("rio_", fmt)
-  
-    .export(x = x, file = file, format = fmt, ...)
+    class(file) <- paste0("rio_", fmt)
+    .export(file = file, x = x, ...)
   
     invisible(file)
-}
-
-export.default <- function(x, file, format, ...){
-  stop("Unrecognized file format")
-}
-
-.export <- function(x, file, format, ...){
-  z <- NA
-  class(z) <- format
-  UseMethod("export", z)
 }
