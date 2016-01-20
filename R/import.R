@@ -266,11 +266,7 @@ import <- function(file, format, setclass, ...) {
     } else {
         fmt <- get_type(format)
     }
-    unsupported <- c("tar", "zip", "gnumeric", "jpg", "png", "bmp", "tiff", 
-                     "sss", "sdmx", "matlab", "gexf", "npy")
-    if (fmt %in% unsupported){
-      stop(stop_for_import(fmt))
-    }
+    stop(stop_for_import(fmt))
     
     fmt <- paste0("rio_", fmt)
     

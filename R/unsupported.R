@@ -11,7 +11,7 @@ stop_for_import <- function(fmt) {
            matlab = sprintf(x, fmt, "R.matlab::readMat"),
            gexf = sprintf(x, fmt, "rgexf::read.gexf"),
            npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
-           stop("Unrecognized file format"))
+           fmt)
 }
 
 stop_for_export <- function(fmt) {
@@ -24,5 +24,5 @@ stop_for_export <- function(fmt) {
            xpt = sprintf(x, fmt, "SASxport::write.xport"),
            gexf = sprintf(x, fmt, "rgexf::write.gexf"),
            npy = sprintf(x, fmt, "RcppCNPy::npySave"),
-           stop("Unrecognized file format"))
+           fmt)
 }

@@ -139,11 +139,8 @@ export <- function(x, file, format, ...) {
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
-    unsupported <- c("jpg", "png", "tiff", "matlab", "xpt", "gexf", "npy")
-    if (fmt %in% unsupported){
-      stop(stop_for_export(fmt))
-    }
-  
+    stop(stop_for_export(fmt))
+    
     fmt <- paste0("rio_", fmt)
   
     .export(x = x, file = file, format = fmt, ...)
