@@ -42,7 +42,7 @@ get_type <- function(fmt) {
         clipboard = "clipboard",
         ods = "ods",
         xml = "xml",
-        # unsupported formats
+        # known but unsupported formats
         gnumeric = "gnumeric",
         jpeg = "jpg",
         jpg = "jpg",
@@ -57,12 +57,12 @@ get_type <- function(fmt) {
         gexf = "gexf",
         npy = "npy"
     )
-    type <- type_list[[tolower(fmt)]]
-    if (is.null(type)) {
-        stop("Unrecognized file format. Try specifying with the format argument.",
-             call. = FALSE)
+    out <- type_list[[tolower(fmt)]]
+    if (is.null(out)) {
+        message("Unrecognized file format. Try specifying with the format argument.")
+        return(type)
     }
-    return(type)
+    return(out)
 }
 
 get_ext <- function(file) {
