@@ -21,7 +21,16 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
     export_delim(x = x, file = file, sep =";", dec = ",", ...)
 }
 
-#.export.rio_csvy <- function(file, x, ...) {}
+.export.rio_csvy <- function(file, x, ...) {
+    # write yaml
+    a <- attributes(x)
+    a <- a[!names(a) %in% "row.names"]
+    y <- paste0("---\n", as.yaml(a), "---\n")
+    cat(y, file = file)
+    
+    # append CSV
+    .export.rio_csv(file = file, x = x, append = TRUE, ...)
+}
 
 .export.rio_psv <- function(file, x, ...){
     export_delim(x = x, file = file, sep = "|", ...)

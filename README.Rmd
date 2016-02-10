@@ -24,7 +24,7 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | ------ | ------ | ------ |
 | Tab-separated data (.tsv) | Yes | Yes |
 | Comma-separated data (.csv) | Yes | Yes |
-| CSVY (CSV + YAML metadata header) (.csvy) | Yes | No |
+| CSVY (CSV + YAML metadata header) (.csvy) | Yes | Yes |
 | Pipe-separated data (.psv) | Yes | Yes |
 | Fixed-width format data (.fwf) | Yes | Yes |
 | Serialized R objects (.rds) | Yes | Yes |

@@ -1,5 +1,6 @@
 # CHANGES TO v0.3.3 #
 
+ * Export of CSVY files and metadata now supported by `export()`. (#73)
  * Import of CSVY files now stores dataset-level metadata in attributes of the output data.frame. (#73, h/t Tom Aldenberg)
  * When rio receives an unrecognized file format, it now issues a message. The new internal `.import.default()` and `.export.default()` then produce an error. This enables add-on packages to support additional formats through new s3 methods of the form `.import.rio_EXTENSION()` and `.export.rio_EXTENSION()`.
 

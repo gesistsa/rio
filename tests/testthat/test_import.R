@@ -8,6 +8,9 @@ test_that("Import from CSV", {
 test_that("Import from CSVY", {
     d <- import(system.file("examples", "example.csvy", package = "rio"))
     expect_true(inherits(d, "data.frame"))
+    
+    d2 <- import(system.file("examples", "example2.csvy", package = "rio"))
+    expect_true(c("title", "units", "source") %in% names(attributes(d2)))
 })
 #test_that("Import from PSV", {})
 #test_that("Import from FWF", {})

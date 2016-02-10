@@ -8,10 +8,11 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Five of these are important:
 
  1. **rio** uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, **rio** allows almost all common data formats to be read with the same function. [The **reader** package](http://cran.r-project.org/web/packages/reader/index.html) does something similar for reading certain text formats and R binary files and [**io**](http://cran.r-project.org/web/packages/io/index.html) offers a set of methods for reading and writing to file formats defined by that package, but **rio** supports a much broader set of commonly used file types for import and export.
- 2. For text-delimited file formats, the package uses `data.table::fread` to automatically determine the file format regardless of the extension. So, a CSV that is actually tab-separated will still be correctly read in. 
+ 2. For text-delimited file formats, the package uses `data.table::fread()` to automatically determine the file format regardless of the extension. So, a CSV that is actually tab-separated will still be correctly read in. 
  3. When importing tabular data (CSV, TSV, etc.), **rio** does not convert strings to factors.
  4. The data import functions in base R only support import of local files or web-based data from websites serving HTTP, not SSL (HTTPS). For example, data stored on GitHub as publicly visible files cannot be read directly into R without either manually downloading them or reading them in via **RCurl** or **httr**. `import` supports HTTPS automatically.
- 5. `import` reads from single-file .zip and .tar archives automatically, without the need to explicitly decompress them first.
+ 5. `import()` reads from single-file .zip and .tar archives automatically, without the need to explicitly decompress them first.
+ 6. **rio** imports and exports files based on an internal S3 class infrastructure. This means that other packages can contain extensions to **rio** by importing `import()` and/or `export()` and then writing internal S3 methods. These methods should take the form `.import.rio_X()` and `.export.rio_X()`, where `X` is the file extension of a file type.
  
 The package also wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. Namely, the package uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files, [the `fread` function from **data.table**](https://github.com/Rdatatable/data.table) for intuitive import of text-delimited and fixed-width file formats, and [**readxl**](https://github.com/hadley/readxl) for reading from Excel workbooks.
 
@@ -23,7 +24,7 @@ The package also wraps a variety of faster, more stream-lined I/O packages than 
 | ------ | ------ | ------ |
 | Tab-separated data (.tsv) | Yes | Yes |
 | Comma-separated data (.csv) | Yes | Yes |
-| CSVY (CSV + YAML metadata header) (.csvy) | Yes | No |
+| CSVY (CSV + YAML metadata header) (.csvy) | Yes | Yes |
 | Pipe-separated data (.psv) | Yes | Yes |
 | Fixed-width format data (.fwf) | Yes | Yes |
 | Serialized R objects (.rds) | Yes | Yes |
