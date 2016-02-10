@@ -96,11 +96,14 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
     attr(out[, i], "title") <- y$fields[[i]][["title"]]
     attr(out[, i], "description") <- y$fields[[i]][["description"]]
   }
+
+  # store dataset metadata in output data.frame
   if ("fields" %in% names(y)) {
-    structure(out, names = sapply(y$fields, `[`, "name"))
+    meta <- c(list(out, names = sapply(y$fields, `[`, "name")), y[!names(y) %in% "names"])
   } else {
-    out
+    meta <- c(list(out), y)
   }
+  out <- do.call("structure", meta)
 }
 
 .import.rio_psv <- function(file, ...){

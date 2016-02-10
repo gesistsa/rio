@@ -21,6 +21,8 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
     export_delim(x = x, file = file, sep =";", dec = ",", ...)
 }
 
+#.export.rio_csvy <- function(file, x, ...) {}
+
 .export.rio_psv <- function(file, x, ...){
     export_delim(x = x, file = file, sep = "|", ...)
 }
