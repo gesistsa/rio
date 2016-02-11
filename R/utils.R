@@ -60,7 +60,7 @@ get_type <- function(fmt) {
     out <- type_list[[tolower(fmt)]]
     if (is.null(out)) {
         message("Unrecognized file format. Try specifying with the format argument.")
-        return(type)
+        return(fmt)
     }
     return(out)
 }

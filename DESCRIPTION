@@ -4,7 +4,7 @@ Title: A Swiss-Army Knife for Data I/O
 Version: 0.3.3
 Date: 2016-02-10
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
-Authors@R: c(person("Jason", "Becker", role = "aut"),
+Authors@R: c(person("Jason", "Becker", role = "aut", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
              person("Geoffrey CH", "Chan", role = "aut", email = "gefchchan@gmail.com"),
              person("Thomas J.", "Leeper", role = c("aut", "cre"), email = "thosjleeper@gmail.com"),
