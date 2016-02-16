@@ -1,0 +1,17 @@
+context("Excel imports/exports")
+require("datasets")
+
+#test_that("Export to Excel (.xls)", {})
+#test_that("Import from Excel (.xls)", {})
+#unlink("iris.xls")
+
+test_that("Export to Excel (.xlsx)", {
+    expect_true(export(iris, "iris.xlsx") %in% dir())
+    
+})
+
+test_that("Import from Excel (.xlsx)", {
+    expect_true(is.data.frame(import("iris.xlsx")))
+})
+
+unlink("iris.xlsx")
