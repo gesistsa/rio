@@ -1,6 +1,10 @@
 context("Remote Files")
 
-test_that("Import Remote File", {
+test_that("Import Remote Stata File", {
+    expect_true(is.data.frame(import("http://www.stata-press.com/data/r13/auto.dta")))
+})
+
+test_that("Import Remote GitHub File", {
     rfile <- "https://raw.githubusercontent.com/leeper/rio/master/inst/examples/example.csvy"
     expect_true(inherits(import(rfile), "data.frame"), label = "Import remote file")
     
