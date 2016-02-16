@@ -12,8 +12,8 @@ test_that("Import from CSVY", {
     d2 <- import(system.file("examples", "example2.csvy", package = "rio"))
     expect_true(all(c("title", "units", "source") %in% names(attributes(d2))))
     
-    d2 <- import(system.file("examples", "example2.csvy", package = "rio"))
-    expect_true(dim(d2) == c(2, 3))
+    d3 <- import(system.file("examples", "example3.csvy", package = "rio"))
+    expect_true(identical(dim(d3), c(2L, 3L)))
 })
 #test_that("Import from PSV", {})
 #test_that("Import from FWF", {})

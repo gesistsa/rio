@@ -9,6 +9,10 @@ test_that("Export to CSV", {
     expect_true(export(iris, "iris.csv") %in% dir())
     unlink("iris.csv")
 })
+test_that("Export to CSVY", {
+    expect_true(export(iris, "iris.csvy") %in% dir())
+    unlink("iris.csvy")
+})
 test_that("Export to PSV", {
     expect_true(export(iris, "iris.psv") %in% dir())
     unlink("iris.psv")
