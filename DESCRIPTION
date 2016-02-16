@@ -1,8 +1,8 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.3.4
-Date: 2016-02-11
+Version: 0.3.5
+Date: 2016-02-16
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Authors@R: c(person("Jason", "Becker", role = "aut", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),

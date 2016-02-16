@@ -1,3 +1,7 @@
+# CHANGES TO v0.3.5 #
+
+ * Export of CSVY files now includes commenting the yaml header by default. Import of CSVY accommodates this automatically. (#74)
+
 # CHANGES TO v0.3.3 #
 
  * Export of CSVY files and metadata now supported by `export()`. (#73)

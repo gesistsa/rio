@@ -78,7 +78,7 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   f <- readLines(file)
   
   # identify yaml delimiters
-  g <- grep("^---", f)
+  g <- grep("^#?---", f)
   if (length(g) > 2) {
     stop("More than 2 yaml delimiters found in file")
   } else if (length(g) == 1) {
@@ -88,7 +88,7 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   }
   
   # extract yaml front matter and convert to R list
-  y <- yaml.load(paste(f[(g[1]+1):(g[2]-1)], collapse = "\n"))
+  y <- yaml.load(paste(gsub("^#", "", f[(g[1]+1):(g[2]-1)]), collapse = "\n"))
   
   # load the data
   out <- import_delim(file = paste0(f[(g[2]+1):length(f)], collapse = "\n"), ...)
