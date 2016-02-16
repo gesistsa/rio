@@ -12,7 +12,7 @@ parse_tar <- function(file, which = 1, ...) {
     e <- file_ext(file)
     if (e == "tar") {
         file_list <- untar(file, list = TRUE)
-        if (nrow(file_list) > 1) {
+        if (length(file_list) > 1) {
             stop("Tar archive contains multiple files. Attempting first file.")
         }
         untar(file, exdir = tempdir())

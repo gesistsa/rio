@@ -2,12 +2,15 @@
 \alias{export}
 \title{Write data.frame or matrix to a file}
 \usage{
-    export(x, file, format, ...)
+    export(x, file, format, 
+           compress = c("none", "zip", "tar", "gzip", "bzip2", "xz"),
+           ...)
 }
 \arguments{
     \item{x}{A data frame or matrix to be written into a file.}
     \item{file}{A character string naming a file. Must specify \code{file} and/or \code{format}.}
     \item{format}{An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.}
+    \item{compress}{A character string specifying a method of compression. If specified, the resulting data file is compressed using the specified method and a file is saved with an appropriate extension (e.g., \dQuote{file.csv.zip}).}
     \item{...}{Additional arguments for the underlying export functions.}
 }
 \value{The name of the output file as a character string (invisibly).}

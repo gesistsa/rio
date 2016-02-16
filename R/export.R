@@ -160,7 +160,30 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
   UseMethod(".export")
 }
 
-export <- function(x, file, format, ...) {
+compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2", "xz")) {
+    type <- ext <- match.arg(type)
+    if (ext %in% c("gzip", "bzip2", "xz")) {
+        ext <- paste0("tar")
+    }
+    if (missing(cfile)) {
+        cfile <- paste0(filename, ".", ext)
+    }
+    if (type == "zip") {
+        o <- zip(cfile, files = filename)
+    } else if (type == "tar") {
+        o <- tar(cfile, files = filename)
+    } else {
+        o <- tar(cfile, files = filename, compression = type)
+    }
+    if (o != 0) {
+        stop(sprintf("File compresion failed for %s!", cfile))
+    }
+    return(cfile)
+}
+
+export <- function(x, file, format, 
+                   compress = c("none", "zip", "tar", "gzip", "bzip2", "xz"), 
+                   ...) {
     if (missing(file) & missing(format)) {
         stop("Must specify 'file' and/or 'format'")
     } else if (!missing(file) & !missing(format)) {
@@ -180,6 +203,13 @@ export <- function(x, file, format, ...) {
     
     class(file) <- paste0("rio_", fmt)
     .export(file = file, x = x, ...)
-  
+    
+    compress <- match.arg(compress)
+    if (compress != "none") {
+        cfile <- compress_out(filename = file, type = compress)
+        unlink(file)
+        return(invisible(cfile))
+    }
+    
     invisible(file)
 }
