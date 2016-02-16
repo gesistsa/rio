@@ -36,12 +36,15 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
     export_delim(x = x, file = file, sep = "|", ...)
 }
 
-.export.rio_fwf <- function(file, x, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, digits = getOption("digits", 7), ...){
+.export.rio_fwf <- function(file, x, verbose = TRUE, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, digits = getOption("digits", 7), ...){
     dat <- lapply(x, function(col) {
         if (is.character(col)) {
             col <- as.numeric(as.factor(col))
         } else if(is.factor(col)) {
-            col <- as.numeric(col)
+            col <- as.integer(col)
+        }
+        if (is.integer(col)) {
+            return(sprintf("%i",col))
         }
         if (is.numeric(col)) {
             s <- strsplit(as.character(col), ".", fixed = TRUE)
@@ -57,11 +60,26 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
     })
     dat <- do.call(cbind, dat)
     n <- nchar(dat[1,]) + c(rep(nchar(sep), ncol(dat)-1), 0)
-    dict <- paste0(names(n), ":\t", c(1, cumsum(n)+1), "-", cumsum(n), "\n")
-    message("Columns:\n", paste0(dict[-length(dict)], collapse = ""))
-    if(sep == "")
-        message('Read in with `import("', file, '", widths = c(', paste0(n, collapse = ","), '))`\n')
-    write.table(dat, file = file, row.names = row.names, sep = sep, quote = quote,
+    col_classes <- sapply(x, class)
+    col_classes[col_classes == "factor"] <- "integer"
+    dict <- cbind.data.frame(variable = names(n), 
+                             class = col_classes, 
+                             width = unname(n), 
+                             columns = paste0(c(1, cumsum(n)+1)[-length(n)], "-", cumsum(n)),
+                             stringsAsFactors = FALSE)
+    if (verbose) {
+        message("Columns:")
+        print(dict)
+        if (sep == "") {
+            message('\nRead in with:\n',
+                    'import("', file, '",\n',
+                    '       widths = c(', paste0(n, collapse = ","), '),\n',
+                    '       col.names = c("', paste0(names(n), collapse = '","'), '"),\n',
+                    '       colClasses = c("', paste0(col_classes, collapse = '","') ,'"))\n')
+        }
+    }
+    cat(paste0("#", capture.output(write.csv(dict, row.names = FALSE, quote = FALSE))), file = file, sep = "\n")
+    write.table(dat, file = file, append = TRUE, row.names = row.names, sep = sep, quote = quote,
                 col.names = col.names, ...)
 }
 

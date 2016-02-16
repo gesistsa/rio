@@ -1,3 +1,9 @@
+# CHANGES TO v0.3.6 #
+
+ * Expanded verbosity of `export()` for fixed-width format files and added a commented header containing column class and width information.
+ * Exporting factors to fixed-width format now saves those values as integer rather than numeric.
+ * Expanded test suite and separated tests into format-specific files. (#51)
+
 # CHANGES TO v0.3.5 #
 
  * Export of CSVY files now includes commenting the yaml header by default. Import of CSVY accommodates this automatically. (#74)
