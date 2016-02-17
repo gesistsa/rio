@@ -181,19 +181,47 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
     return(cfile)
 }
 
-export <- function(x, file, format, 
-                   compress = c("none", "zip", "tar", "gzip", "bzip2", "xz"), 
-                   ...) {
+find_compress <- function(f) {
+    if (grepl("zip$", f)) {
+        file <- sub("\\.zip$", "", f)
+        compress <- "zip"
+    } else if (grepl("tar\\.gz$", f)) {
+        file <- sub("\\.tar\\.gz$", "", f)
+        compress <- "gzip"
+    } else if (grepl("tar$", f)) {
+        file <- sub("\\.tar$", "", f)
+        compress <- "tar"
+    } else if (grepl("gz$", f)) {
+        file <- sub("\\.gz$", "", f)
+        compress <- "gzip"
+    } else {
+        file <- f
+        compress <- NA_character_
+    }
+    return(list(file = file, compress = compress))
+}
+
+export <- function(x, file, format, ...) {
     if (missing(file) & missing(format)) {
         stop("Must specify 'file' and/or 'format'")
     } else if (!missing(file) & !missing(format)) {
         fmt <- tolower(format)
+        cfile <- file
+        f <- find_compress(file)
+        file <- f$file
+        compress <- f$compress
     } else if (!missing(file) & missing(format)) {
+        cfile <- file
+        f <- find_compress(file)
+        file <- f$file
+        compress <- f$compress
         fmt <- get_ext(file)
     } else if (!missing(format)) {
         fmt <- get_type(format)
         file <- paste0(as.character(substitute(x)), ".", fmt)
+        compress <- NA_character_
     }
+    
     if (!is.data.frame(x) & !is.matrix(x)) {
         stop("`x` is not a data.frame or matrix")
     } else if (is.matrix(x)) {
@@ -204,9 +232,8 @@ export <- function(x, file, format,
     class(file) <- paste0("rio_", fmt)
     .export(file = file, x = x, ...)
     
-    compress <- match.arg(compress)
-    if (compress != "none") {
-        cfile <- compress_out(filename = file, type = compress)
+    if (!is.na(compress)) {
+        cfile <- compress_out(cfile = cfile, filename = file, type = compress)
         unlink(file)
         return(invisible(cfile))
     }

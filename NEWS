@@ -1,6 +1,9 @@
+# CHANGES TO v0.3.7 #
+
+ * `export()` now allows automatic file compression as tar, gzip, or zip using the `file` argument (e.g., `export(iris, "iris.csv.zip")`).
+
 # CHANGES TO v0.3.6 #
 
- * `export()` now carries a `compress` argument to enable automated compression of exported datasets.
  * Expanded verbosity of `export()` for fixed-width format files and added a commented header containing column class and width information.
  * Exporting factors to fixed-width format now saves those values as integer rather than numeric.
  * Expanded test suite and separated tests into format-specific files. (#51)

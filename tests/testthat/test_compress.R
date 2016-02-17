@@ -1,10 +1,12 @@
 context("Compressed files")
 
-e1 <- export(iris, "iris.csv", compress = "zip")
-e2 <- export(iris, "iris.csv", compress = "tar")
+# tar export does not work due to: https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16716
+
+e1 <- export(iris, "iris.csv.zip")
+#e2 <- export(iris, "iris.csv.tar")
 test_that("Export to compressed", {
     expect_true(e1 %in% dir())
-    expect_true(e2 %in% dir())
+    #expect_true(e2 %in% dir())
 })
 
 test_that("Import from compressed", {
@@ -13,4 +15,4 @@ test_that("Import from compressed", {
 })
 
 unlink(e1)
-unlink(e2)
+#unlink(e2)

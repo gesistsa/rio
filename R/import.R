@@ -10,21 +10,14 @@ parse_zip <- function(file, which = 1, ...) {
 
 parse_tar <- function(file, which = 1, ...) {
     e <- file_ext(file)
-    if (e == "tar") {
-        file_list <- untar(file, list = TRUE)
-        if (length(file_list) > 1) {
-            stop("Tar archive contains multiple files. Attempting first file.")
-        }
-        untar(file, exdir = tempdir())
-        paste0(tempdir(),"/", file_list$Name[which])
-    } else if (e == "gz") {
-        file_list <- untar(file, list = TRUE, compressed = TRUE)
-        if (nrow(file_list) > 1) {
-            stop("Tar archive contains multiple files. Attempting first file.")
-        }
-        untar(file, exdir = tempdir(), compressed = TRUE)
-        paste0(tempdir(),"/", file_list$Name[which])
+    d <- tempfile()
+    dir.create(d)
+    on.exit(unlink(d))
+    file_list <- untar(file, exdir = d)
+    if (dir(d) > 1) {
+        stop("Tar archive contains multiple files. Attempting first file.")
     }
+    return(file.path(tempdir(), dir(d)[1]))
 }
 
 import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
