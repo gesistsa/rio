@@ -25,7 +25,11 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
     # write yaml
     a <- attributes(x)
     a <- a[!names(a) %in% "row.names"]
-    y <- paste0("#", paste0("---\n", as.yaml(a), "---\n"))
+    
+    m <- paste0("---\n", as.yaml(a), "---\n")
+    
+    y <- paste0("#", readLines(textConnection(m)),
+                collapse = "\n")
     cat(y, file = file)
     
     # append CSV
