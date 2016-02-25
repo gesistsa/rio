@@ -1,3 +1,7 @@
+# CHANGES TO v0.3.8 #
+
+ * Fixed error in export to CSVY with a commented yaml header. (#81, h/t Andrew MacDonald)
+
 # CHANGES TO v0.3.7 #
 
  * `export()` now allows automatic file compression as tar, gzip, or zip using the `file` argument (e.g., `export(iris, "iris.csv.zip")`).
