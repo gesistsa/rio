@@ -26,10 +26,13 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
     a <- attributes(x)
     a <- a[!names(a) %in% "row.names"]
     
-    m <- paste0("---\n", as.yaml(a), "---\n")
+    y <- paste0("---\n", as.yaml(a), "---\n")
     
-    y <- paste0("#", readLines(textConnection(m)),
-                collapse = "\n")
+    if (isTRUE(comment_header)){
+      m <- readLines(textConnection(y))
+      y <- paste0("#", m[-length(m)],collapse = "\n")
+      y <- c(y, "\n")
+    }
     cat(y, file = file)
     
     # append CSV
