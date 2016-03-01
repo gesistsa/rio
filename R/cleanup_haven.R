@@ -1,18 +1,36 @@
-cleanup_haven <- function(x) {
-    xinfo <- list(var.labels = sapply(x, attr, which = "label", exact = TRUE),
-                  label.table = sapply(x, attr, which = "labels", exact = TRUE))
-    discrete <- sapply(x, function(y) length(unique(attr(y, "labels"))) >= length(stats::na.omit(unique(y))))
-    x[discrete] <- lapply(x[discrete], as_factor)
-    x[sapply(x, is.numeric)] <- lapply(x[sapply(x, is.numeric)], function(y) {
-        attr(y, "labels") <- NULL
-        return(unclass(y))
-    })
-    x[] <- lapply(x, function(y) {
-        attr(y, "label") <- NULL
-        return(y)
-    })
-    for (a in names(xinfo)) {
-        attr(x, a) <- xinfo[[a]]
+convert_attributes <- function(dat) {
+  out <- dat
+  a <- attributes(out)
+  if ("variable.labels" %in% names(a)) {
+    names(a)[names(a) == "variable.labels"] <- "var.labels"
+    a$var.labels <- unname(a$var.labels)
+  }
+  # cleanup import
+  attr(out, "var.labels") <- NULL      # Stata
+  attr(out, "variable.labels") <- NULL # SPSS
+  attr(out, "formats") <- NULL
+  attr(out, "types") <- NULL
+  attr(out, "label.table") <- NULL
+  for (i in 1:length(out)) {
+    if ("value.labels" %in% names(attributes(out[,i]))) {
+      attr(out[,i], "labels") <- attr(out[,i], "value.labels")
+      attr(out[,i], "value.labels") <- NULL
     }
-    return(x)
+    if (inherits(out[,i], "labelled")) {
+      out[,i] <- unclass(out[,i])
+    }
+    if ("var.labels" %in% names(a)) {
+      attr(out[,i], "label") <- a$var.labels[i]
+    }
+    if ("formats" %in% names(a)) {
+      attr(out[,i], "format") <- a$formats[i]
+    }
+    if ("types" %in% names(a)) {
+      attr(out[,i], "type") <- a$types[i]
+    }
+    if ("val.labels" %in% names(a) && (a$val.labels[i] != "")) {
+      attr(out[,i], "labels") <- a$label.table[[a$val.labels[i]]]
+    }
+  }
+  out
 }

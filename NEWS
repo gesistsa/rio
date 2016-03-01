@@ -1,3 +1,7 @@
+# CHANGES TO v0.3.9 #
+
+ * The use of `import()` for SAS, Stata, and SPSS files has been streamlined. Regardless of whether the `haven = TRUE` argument is used, the data.frame returned by `import()` should now be (nearly) identical, with all attributes stored at the variable rather than data.frame level. This is a non-backwards compatible change. (#80)
+
 # CHANGES TO v0.3.8 #
 
  * Fixed error in export to CSVY with a commented yaml header. (#81, h/t Andrew MacDonald)

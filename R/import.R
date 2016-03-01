@@ -109,18 +109,24 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   get(ls(e)[which], e)
 }
 
-.import.rio_dta <- function(file, haven = TRUE, column.labels = FALSE, ...) {
+.import.rio_dta <- function(file, haven = TRUE, 
+                            convert.dates = TRUE, 
+                            convert.factors = FALSE, 
+                            missing.type = FALSE, ...) {
   if (haven) {
     a <- list(...)
     if (length(a)) {
       warning("File imported using haven. Arguments to '...' ignored.")
     }
-    if (column.labels) {
-      return(read_dta(path = file))
-    }
-    cleanup_haven(read_dta(path = file))
+    convert_attributes(read_dta(path = file))
   } else {
-    read.dta(file = file, ...)
+    out <- read.dta(file = file, 
+                    convert.dates = convert.dates, 
+                    convert.factors = convert.factors, 
+                    missing.type = missing.type, ...)
+    attr(out, "expansion.fields") <- NULL
+    attr(out, "time.stamp") <- NULL
+    convert_attributes(out)
   }
 }
 
@@ -132,29 +138,21 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   read.DIF(file = file, ...)
 }
 
-.import.rio_sav <- function(file, haven = TRUE, column.labels = FALSE, ...) {
+.import.rio_sav <- function(file, haven = TRUE, use.value.labels = FALSE, ...) {
   if (haven) {
-    if(column.labels) {
-      return(read_sav(path = file))
-    }
-    cleanup_haven(read_sav(path = file))
+    convert_attributes(read_sav(path = file))
   } else {
-    read.spss(file = file, to.data.frame = TRUE, ...)
+    convert_attributes(read.spss(file = file, to.data.frame = TRUE, 
+                                 use.value.labels = use.value.labels, ...))
   }
 }
 
-.import.rio_por <- function(file, column.labels = FALSE, ...) {
-  if(column.labels) {
-    return(read_por(path = file))
-  }
-  cleanup_haven(read_por(path = file))
+.import.rio_por <- function(file, ...) {
+  convert_attributes(read_por(path = file))
 }
 
 .import.rio_sas7bdat <- function(file, column.labels = FALSE, ...) {
-  if(column.labels) {
-    return(read_sas(b7dat = file, ...))
-  }
-  cleanup_haven(read_sas(b7dat = file, ...))
+  convert_attributes(read_sas(b7dat = file, ...))
 }
 
 .import.rio_xpt <- function(file, ...){
