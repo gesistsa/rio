@@ -1,4 +1,4 @@
-# rio: A Swiss-army knife for data I/O #
+# rio: A Swiss-Army Knife for Data I/O #
 
 The aim of **rio** is to make data file I/O in R as easy as possible by implementing three simple functions in Swiss-army knife style:
 
@@ -94,7 +94,7 @@ unlink("mtcars.rds")
 
 ## Package Philosophy ##
 
-The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Seven of these are important:
+The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Eight of these are important:
 
  1. **rio** uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, **rio** allows almost all common data formats to be read with the same function. Other packages do this as well, but rio aims to be more complete and more consistent than each:
  
@@ -106,13 +106,15 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
  
  3. **rio**, wherever possible, does not import character strings as factors.
  
- 4. **rio** supports web-based imports from SSL (HTTPS) URLs, from shortened URLs, and from URLs that lack proper extensions.
+ 4. **rio** stores metadata from rich file formats (SPSS, Stata, etc.) in variable-level attributes in a consistent form regardless of file type or underlying import function.
  
- 5. **rio** imports from from single-file .zip and .tar archives automatically, without the need to explicitly decompress them.
+ 5. **rio** supports web-based imports from SSL (HTTPS) URLs, from shortened URLs, and from URLs that lack proper extensions.
  
- 6. **rio** imports and exports files based on an internal S3 class infrastructure. This means that other packages can contain extensions to **rio** by importing `import()` and/or `export()` and then writing internal S3 methods. These methods should take the form `.import.rio_X()` and `.export.rio_X()`, where `X` is the file extension of a file type.
+ 6. **rio** imports from from single-file .zip and .tar archives automatically, without the need to explicitly decompress them.
  
- 7. **rio** wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. It uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files, [the `fread` function from **data.table**](https://github.com/Rdatatable/data.table) for delimited formats, smarter and faster fixed-width file import and export routines, and [**readxl**](https://github.com/hadley/readxl) for reading from Excel workbooks.
+ 7. **rio** imports and exports files based on an internal S3 class infrastructure. This means that other packages can contain extensions to **rio** by importing `import()` and/or `export()` and then writing internal S3 methods. These methods should take the form `.import.rio_X()` and `.export.rio_X()`, where `X` is the file extension of a file type.
+ 
+ 8. **rio** wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. It uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files, [the `fread` function from **data.table**](https://github.com/Rdatatable/data.table) for delimited formats, smarter and faster fixed-width file import and export routines, and [**readxl**](https://github.com/hadley/readxl) for reading from Excel workbooks.
 
 ## Package Installation ##
 

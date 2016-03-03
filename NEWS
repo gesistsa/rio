@@ -1,5 +1,6 @@
 # CHANGES TO v0.3.10 #
 
+ * Fixed a bug in `import()` (introduced in #62, 7a7480e5) that prevented import from clipboard. (h/t Kevin Wright)
  * `export()` returns a character string. (#82)
 
 # CHANGES TO v0.3.9 #

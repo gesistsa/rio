@@ -227,13 +227,13 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
                    collectNames = collectNames, stringsAsFactors = stringsAsFactors)
 }
 
-.import.rio_clipboard <- function(header = TRUE, sep = "\t", ...) {
+.import.rio_clipboard <- function(file = "clipboard", header = TRUE, sep = "\t", ...) {
     if (Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbpaste")
         read.table(file = clip, sep = sep, ...)
         close(clip)
     } else if(Sys.info()["sysname"] == "Windows") {
-        read.table(file = "clipboard", sep = sep, header = header, ...)
+        read.table(file = file, sep = sep, header = header, ...)
     } else {
         stop("Reading from clipboard is not supported on your OS")
     }
@@ -251,7 +251,7 @@ import <- function(file, format, setclass, ...) {
     if (grepl("^http.*://", file)) {
         file <- remote_to_local(file, format)
     }
-    if (!file.exists(file)) {
+    if ((file != "clipboard") && !file.exists(file)) {
         stop("No such file")
     }
     if (grepl("zip$", file)) {
