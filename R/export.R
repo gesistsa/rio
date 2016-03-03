@@ -245,5 +245,5 @@ export <- function(x, file, format, ...) {
         return(invisible(cfile))
     }
     
-    invisible(file)
+    invisible(unclass(file))
 }
