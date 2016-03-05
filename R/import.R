@@ -2,8 +2,11 @@ parse_zip <- function(file, which = 1, ...) {
     file_list <- unzip(file, list = TRUE)
     if (nrow(file_list) > 1) {
         warning("Zip archive contains multiple files. Attempting first file.")
+    }
+    unzip(file, exdir = tempdir())
+    if (is.numeric(which)) {
+        paste0(tempdir(),"/", file_list$Name[which])
     } else {
-        unzip(file, exdir = tempdir())
         paste0(tempdir(),"/", file_list$Name[which])
     }
 }
@@ -13,7 +16,7 @@ parse_tar <- function(file, which = 1, ...) {
     d <- tempfile()
     dir.create(d)
     on.exit(unlink(d))
-    file_list <- untar(file, exdir = d)
+    file_list <- untar(file, list = TRUE)
     if (dir(d) > 1) {
         stop("Tar archive contains multiple files. Attempting first file.")
     }
@@ -247,7 +250,7 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   UseMethod('.import', file)
 }
 
-import <- function(file, format, setclass, ...) {
+import <- function(file, format, setclass, which, ...) {
     if (grepl("^http.*://", file)) {
         file <- remote_to_local(file, format)
     }
@@ -255,9 +258,15 @@ import <- function(file, format, setclass, ...) {
         stop("No such file")
     }
     if (grepl("zip$", file)) {
-        file <- parse_zip(file)
+        if (missing(which)) {
+            which <- 1
+        }
+        file <- parse_zip(file, which = which)
     } else if(grepl("tar$", file) | grepl("gz$", file)) {
-        file <- parse_tar(file)
+        if (missing(which)) {
+            which <- 1
+        }
+        file <- parse_tar(file, which = which)
     }
     if (missing(format)) {
         fmt <- get_ext(file)
