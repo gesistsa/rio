@@ -147,17 +147,18 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
 }
 
 .export.rio_xml <- function(file, x, ...) {
-    root <- newXMLNode(as.character(substitute(x)))
-    for (i in 1:nrow(x)) {
-        obs <- newXMLNode("Observation", parent = root)
-        rowname <- newXMLNode("rowname", parent = obs)
-        xmlValue(rowname) <- rownames(x)[i]
-        for (j in 1:ncol(x)) {
-            obs_value <- newXMLNode(names(x)[j], parent = obs)
-            xmlValue(obs_value) <- x[i,j]
-        }
+    wrap <- function(value, tag) {
+        paste0("<", tag, ">", value, "</", tag, ">")
     }
-    invisible(saveXML(doc = root, file = file, ...))
+    root <- ""
+    for (i in 1:nrow(x)) {
+        out <- ""
+        for (j in seq_along(x)) {
+            out <- paste0(out, wrap(x[i,j], names(x)[j]))
+        }
+        root <- paste0(root, wrap(out, "Observation"))
+    }
+    cat(wrap(root, as.character(substitute(x))), file = file, ...)
 }
 
 .export.rio_clipboard <- function(file, x, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {

@@ -245,10 +245,25 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
     return(res)
 }
 
-.import.rio_xml <- function(file, colClasses = NULL, homogeneous = NA, collectNames = TRUE,
-                       stringsAsFactors = FALSE, ...) {
-    xmlToDataFrame(doc = xmlParse(file, ...), colClasses = colClasses, homogeneous = homogeneous,
-                   collectNames = collectNames, stringsAsFactors = stringsAsFactors)
+.import.rio_xml <- function(file, stringsAsFactors = FALSE, ...) {
+    x <- as_list(read_xml(unclass(file)))
+    d <- do.call("rbind", c(lapply(x, unlist)))
+    row.names(d) <- 1:nrow(d)
+    d <- as.data.frame(d, stringsAsFactors = stringsAsFactors)
+    tc2 <- function(x) {
+        out <- type.convert(x)
+        if (is.factor(out)) {
+            x
+        } else {
+            out
+        }
+    }
+    if (!stringsAsFactors) {
+        d[] <- lapply(d, tc2)
+    } else {
+        d[] <- lapply(d, type.convert)
+    }
+    d
 }
 
 .import.rio_clipboard <- function(file = "clipboard", header = TRUE, sep = "\t", ...) {
