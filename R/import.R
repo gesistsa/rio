@@ -1,26 +1,41 @@
-parse_zip <- function(file, which = 1, ...) {
+parse_zip <- function(file, which, ...) {
+    d <- tempfile()
+    dir.create(d)
+    on.exit(unlink(d))
     file_list <- unzip(file, list = TRUE)
-    if (nrow(file_list) > 1) {
-        warning("Zip archive contains multiple files. Attempting first file.")
+    if (missing(which)) {
+        which <- 1
+        if (nrow(file_list) > 1) {
+            warning(sprintf("Zip archive contains multiple files. Attempting first file."))
+        }
     }
-    unzip(file, exdir = tempdir())
     if (is.numeric(which)) {
-        paste0(tempdir(),"/", file_list$Name[which])
+        unzip(file, files = file_list$Name[which], exdir = d)
+        file.path(d, file_list$Name[which])
     } else {
-        paste0(tempdir(),"/", file_list$Name[which])
+        unzip(file, files = file_list$Name[grep(which, file_list$Name)[1]], exdir = d)
+        file.path(d, which)
     }
 }
 
-parse_tar <- function(file, which = 1, ...) {
-    e <- file_ext(file)
+parse_tar <- function(file, which, ...) {
     d <- tempfile()
     dir.create(d)
     on.exit(unlink(d))
     file_list <- untar(file, list = TRUE)
-    if (dir(d) > 1) {
-        stop("Tar archive contains multiple files. Attempting first file.")
+    if (missing(which)) {
+        which <- 1
+        if (length(file_list) > 1) {
+            warning(sprintf("Zip archive contains multiple files. Attempting first file."))
+        }
     }
-    return(file.path(tempdir(), dir(d)[1]))
+    if (is.numeric(which)) {
+        untar(file, files = file_list[which], exdir = d)
+        file.path(d, file_list[which])
+    } else {
+        untar(file, files = file_list[grep(which, file_list)[1]], exdir = d)
+        file.path(d, which)
+    }
 }
 
 import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
@@ -61,7 +76,6 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
 }
 
 .import.rio_csv <- function(file, ...){
-  print(file)
   import_delim(file = file, sep = ",", ...)
 }
 
@@ -106,10 +120,22 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   import_delim(file = file, sep = "|", ...)
 }
 
-.import.rio_rdata <- function(file, which = 1, ...) {
+.import.rio_rdata <- function(file, ...) {
+  a <- list(...)
   e <- new.env()
   load(file = file, envir = e, ...)
-  get(ls(e)[which], e)
+  if ("missing" %in% names(a)) {
+    if (is.numeric(a$which)) {
+      get(ls(e)[a$which], e)
+    } else {
+      get(ls(e)[grep(a$which, ls(e))[1]], e)
+    }
+  } else {
+    if (length(ls(e)) > 1) {
+        warning(sprintf("Rdata file contains multiple objects. Returning first object."))
+    }
+    get(ls(e)[1], e)
+  }
 }
 
 .import.rio_dta <- function(file, haven = TRUE, 
@@ -259,9 +285,10 @@ import <- function(file, format, setclass, which, ...) {
     }
     if (grepl("zip$", file)) {
         if (missing(which)) {
-            which <- 1
+            file <- parse_zip(file)
+        } else {
+            file <- parse_zip(file, which = which)
         }
-        file <- parse_zip(file, which = which)
     } else if(grepl("tar$", file) | grepl("gz$", file)) {
         if (missing(which)) {
             which <- 1

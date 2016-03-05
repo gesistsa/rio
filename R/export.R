@@ -174,13 +174,27 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
     }
     if (missing(cfile)) {
         cfile <- paste0(filename, ".", ext)
+        cfile2 <- paste0(basename(filename), ".", ext)
+    } else {
+        cfile2 <- basename(cfile)
     }
     if (type == "zip") {
-        o <- zip(cfile, files = filename)
-    } else if (type == "tar") {
-        o <- tar(cfile, files = filename)
+        o <- zip(cfile2, files = filename)
     } else {
-        o <- tar(cfile, files = filename, compression = type)
+        if (type == "tar") {
+            type <- "none"
+        }
+        filename <- normalizePath(filename)
+        tmp <- tempfile()
+        dir.create(tmp)
+        on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+        file.rename(filename, file.path(tmp, basename(filename)))
+        wd <- getwd()
+        on.exit(setwd(wd), add = TRUE)
+        setwd(tmp)
+        o <- tar(cfile2, files = ".", compression = type)
+        setwd(wd)
+        file.rename(file.path(tmp, cfile2), cfile)
     }
     if (o != 0) {
         stop(sprintf("File compresion failed for %s!", cfile))

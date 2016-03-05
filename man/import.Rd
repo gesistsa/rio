@@ -2,12 +2,13 @@
 \alias{import}
 \title{Read data.frame or matrix from a file}
 \usage{
-    import(file, format, setclass, ...)
+    import(file, format, setclass, which, ...)
 }
 \arguments{
     \item{file}{A character string naming a file, URL, or single-file .zip or .tar archive.}
     \item{format}{An optional character string code of file format, which can be used to override the format inferred from \code{file}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), and \dQuote{|} (for pipe-separated values).}
     \item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, all the return object is always a \dQuote{data.frame}. Reasonable values for this might be \dQuote{tbl_df} (if using dplyr) or \dQuote{data.table} (if using data.table). Warnings will be produced if a class is used from a package that is not loaded and/or available.}
+    \item{which}{If \code{file} is a compressed directory, \code{which} can be either a character string specifying a filename or an integer specifying which file (in locale sort order) to extract from the compressed directory. Ignored otherwise. A character string value will be used as a regular expression, such that the extracted file is the first match of the regular expression against the file names in the archive.}
     \item{...}{Additional arguments passed to the underlying import functions. For example, this can control column classes for delimited file types, or control the use of haven for Stata and SPSS or readxl for Excel (.xlsx) format. See details below.}
 }
 \value{An R data.frame. If \code{setclass} is used, this data.frame may have additional class attribute values.}
