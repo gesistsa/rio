@@ -1,5 +1,6 @@
 # CHANGES TO v0.3.11 #
 
+ * Enhancements were made to import and export of CSVY to store attribute metadata as variable-level attributes (like imports from binary file formats).
  * `import()` gains a `which` argument that is used to select which file to return from within a compressed tar or zip archive.
  * Export to tar now tries to correct for bugs in `tar()` that are being fixed in base R via [PR#16716](https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16716).
 

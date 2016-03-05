@@ -103,16 +103,11 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   # load the data
   out <- import_delim(file = paste0(f[(g[2]+1):length(f)], collapse = "\n"), ...)
   for (i in seq_along(y$fields)) {
-    attr(out[, i], "title") <- y$fields[[i]][["title"]]
-    attr(out[, i], "description") <- y$fields[[i]][["description"]]
+    attributes(out[, i]) <- y$fields[[i]]
   }
-
-  # store dataset metadata in output data.frame
-  if ("fields" %in% names(y)) {
-    meta <- c(list(out, names = sapply(y$fields, `[`, "name")), y[!names(y) %in% "names"])
-  } else {
-    meta <- c(list(out), y)
-  }
+  y$fields <- NULL
+  
+  meta <- c(list(out), y)
   out <- do.call("structure", meta)
 }
 
