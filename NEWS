@@ -1,3 +1,7 @@
+# CHANGES TO v0.3.12 #
+
+ * `.import()` and `.export()` are now exported S3 generics and documentation has been added to describe how to write rio extensions for new file types. An example of this functionality is shown in the new suggested "rio.db" package.
+
 # CHANGES TO v0.3.11 #
 
  * `import()` now uses xml2 to read XML structures and `export()` uses a custom method for writing to XML, thereby negating dependency on the XML package. (#67)

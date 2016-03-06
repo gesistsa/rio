@@ -2,6 +2,8 @@
 export(convert)
 export(export)
 export(import)
+export(.export)
+export(.import)
 
 # utility functions to import
 importFrom(tools, file_ext)
