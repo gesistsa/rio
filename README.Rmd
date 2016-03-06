@@ -112,7 +112,7 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
  
  6. **rio** imports from from single-file .zip and .tar archives automatically, without the need to explicitly decompress them.
  
- 7. **rio** imports and exports files based on an internal S3 class infrastructure. This means that other packages can contain extensions to **rio** by importing `import()` and/or `export()` and then writing internal S3 methods. These methods should take the form `.import.rio_X()` and `.export.rio_X()`, where `X` is the file extension of a file type.
+ 7. **rio** imports and exports files based on an internal S3 class infrastructure. This means that other packages can contain extensions to **rio** by importing `.import()` and/or `.export()` and then writing internal S3 methods. These methods should take the form `.import.rio_X()` and `.export.rio_X()`, where `X` is the file extension of a file type. An example is provided in the [rio.db package](https://github.com/leeper/rio.db).
  
  8. **rio** wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the **foreign** package. It uses [**haven**](https://github.com/hadley/haven) for reading and writing SAS, Stata, and SPSS files, [the `fread` function from **data.table**](https://github.com/Rdatatable/data.table) for delimited formats, smarter and faster fixed-width file import and export routines, and [**readxl**](https://github.com/hadley/readxl) for reading from Excel workbooks.
 
