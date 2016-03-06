@@ -283,7 +283,7 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
 }
 
 .import <- function(file, ...){
-  UseMethod('.import', file)
+  UseMethod('.import')
 }
 
 import <- function(file, format, setclass, which, ...) {
