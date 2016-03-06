@@ -28,7 +28,7 @@ export <- function(x, file, format, ...) {
     }
     
     if (!is.data.frame(x) & !is.matrix(x)) {
-        stop("`x` is not a data.frame or matrix")
+        stop("'x' is not a data.frame or matrix")
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }

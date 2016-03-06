@@ -1,5 +1,5 @@
 stop_for_import <- function(fmt) {
-    x <- "%s format not supported. Consider using the `%s` function"
+    x <- gettext("%s format not supported. Consider using the '%s()' function")
     out <- switch(fmt,
            gnumeric = sprintf(x, fmt, "gnumeric::read.gnumeric.sheet"),
            jpg = sprintf(x, fmt, "jpeg::readJPEG"),
@@ -20,7 +20,7 @@ stop_for_import <- function(fmt) {
 }
 
 stop_for_export <- function(fmt) {
-    x <- "%s format not supported. Consider using the `%s` function"
+    x <- gettext("%s format not supported. Consider using the '%s()' function")
     out <- switch(fmt,
            jpg = sprintf(x, fmt, "jpeg::writeJPEG"),
            png = sprintf(x, fmt, "png::writePNG"),

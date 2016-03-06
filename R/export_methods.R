@@ -94,11 +94,11 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
         message("Columns:")
         print(dict)
         if (sep == "") {
-            message('\nRead in with:\n',
+            message(paste0('\nRead in with:\n',
                     'import("', file, '",\n',
                     '       widths = c(', paste0(n, collapse = ","), '),\n',
                     '       col.names = c("', paste0(names(n), collapse = '","'), '"),\n',
-                    '       colClasses = c("', paste0(col_classes, collapse = '","') ,'"))\n')
+                    '       colClasses = c("', paste0(col_classes, collapse = '","') ,'"))\n'), domain = NA)
         }
     }
     cat(paste0("#", capture.output(write.csv(dict, row.names = FALSE, quote = FALSE))), file = file, sep = "\n")
@@ -171,7 +171,7 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
         write.table(x, file="clipboard", sep = sep, row.names = row.names,
                     col.names = col.names, ...)
     } else {
-        stop("Writing to clipboard is not supported on your OS")
+        stop("Writing to clipboard is not supported on your OS.")
         return(NULL)
     }
 }

@@ -1,3 +1,7 @@
+# CHANGES TO v0.3.14 #
+
+ * Diagnostic messages were cleaned up to facilitate translation. (#57)
+
 # CHANGES TO v0.3.12 #
 
  * `.import()` and `.export()` are now exported S3 generics and documentation has been added to describe how to write rio extensions for new file types. An example of this functionality is shown in the new suggested "rio.db" package.

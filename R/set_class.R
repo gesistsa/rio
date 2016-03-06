@@ -9,9 +9,9 @@ set_class <- function(x, class = NULL) {
     if (!is.na(pkg)) {
         if(!pkg %in% loadedNamespaces()) {
             if(!pkg %in% row.names(installed.packages())) {
-                warning(paste0("Package '", pkg, "' has not been installed."))
+                warning(sprintf("Package '%s' has not been installed.", pkg))
             } else {
-                warning(paste0("Package '", pkg, "' has not been loaded."))
+                warning(sprintf("Package '%s' has not been loaded.", pkg))
             }
         }
     }

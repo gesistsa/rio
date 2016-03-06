@@ -26,7 +26,7 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
 
 .import.rio_fwf <- function(file, header = FALSE, widths, ...) {
   if (missing(widths)) {
-    stop("Import of fixed-width format data requires a 'widths' argument. See `? read.fwf`.")
+    stop("Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().")
   }
   read.fwf2(file = file, widths = widths, header = header, ...)
 }
@@ -75,21 +75,19 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   import_delim(file = file, sep = "|", ...)
 }
 
-.import.rio_rdata <- function(file, ...) {
-  a <- list(...)
+.import.rio_rdata <- function(file, which, ...) {
   e <- new.env()
   load(file = file, envir = e, ...)
-  if ("missing" %in% names(a)) {
-    if (is.numeric(a$which)) {
-      get(ls(e)[a$which], e)
-    } else {
-      get(ls(e)[grep(a$which, ls(e))[1]], e)
-    }
+  if (missing(which)) {
+      if (length(ls(e)) > 1) {
+          warning("Rdata file contains multiple objects. Returning first object.")
+      }
+      which <- 1
+  }
+  if (is.numeric(which)) {
+      get(ls(e)[which], e)
   } else {
-    if (length(ls(e)) > 1) {
-        warning(sprintf("Rdata file contains multiple objects. Returning first object."))
-    }
-    get(ls(e)[1], e)
+      get(ls(e)[grep(which, ls(e))[1]], e)
   }
 }
 
@@ -177,7 +175,7 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
 
 .import.rio_fortran <- function(file, style, ...) {
     if (missing(style)) {
-        stop("Import of Fortran format data requires a 'style' argument. See `? read.fortran`.")
+        stop("Import of Fortran format data requires a 'style' argument. See ? foreign::read.fortran().")
     }
     read.fortran(file = file, format = style, ...)
 }
@@ -190,7 +188,8 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
         return(g)
     }
     if (getNrOfSheetsInODS(file) > 1 & is.null(sheet)) {
-        warning(paste0("There are ", getNrOfSheetsInODS(file), " sheets in the ODS file. Only the first sheet will be returned. Use sheet option from read.ods to select which sheet to import."))
+        msg <- paste0("There are ", getNrOfSheetsInODS(file), " sheets in the ODS file. Only the first sheet will be returned. Use sheet option from read.ods to select which sheet to import.")
+        warning(msg)
         sheet <- 1
     } else if (getNrOfSheetsInODS(file) == 1) {
         sheet <- 1
