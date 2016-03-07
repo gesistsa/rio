@@ -23,7 +23,7 @@ test_that("Error for mixed support file types", {
 })
 
 test_that("Only export data.frame or matrix", {
-    expect_error(export(1, "test.csv"), "`x` is not a data.frame or matrix")
+    expect_error(export(1, "test.csv"), "'x' is not a data.frame or matrix")
 })
 
 test_that("Column widths printed for fixed-width format", {
