@@ -58,7 +58,11 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   }
   
   # extract yaml front matter and convert to R list
-  y <- yaml.load(paste(gsub("^#", "", f[(g[1]+1):(g[2]-1)]), collapse = "\n"))
+  y <- f[(g[1]+1):(g[2]-1)]
+  if (all(grepl("^#", y))) {
+    y <- gsub("^#", "", y)
+  }
+  y <- yaml.load(paste(y, collapse = "\n"))
   
   # load the data
   out <- import_delim(file = paste0(f[(g[2]+1):length(f)], collapse = "\n"), ...)

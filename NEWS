@@ -1,3 +1,7 @@
+# CHANGES TO v0.3.15 #
+
+ * Fixed a bug when reading from an uncommented CSVY yaml header that contained single-line comments. (#84, h/t Tom Aldenberg)
+
 # CHANGES TO v0.3.14 #
 
  * Diagnostic messages were cleaned up to facilitate translation. (#57)

@@ -8,7 +8,7 @@
 
 import <- function(file, format, setclass, which, ...) {
     if (grepl("^http.*://", file)) {
-        file <- remote_to_local(file, format)
+        file <- remote_to_local(file, format = format)
     }
     if ((file != "clipboard") && !file.exists(file)) {
         stop("No such file")

@@ -19,7 +19,7 @@
 \itemize{
     \item Tab-separated data (.tsv), using \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE} (or, if \code{fread = TRUE}, \code{\link[data.table]{fread}})
     \item Comma-separated data (.csv), using \code{\link[utils]{read.csv}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE} (or, if \code{fread = TRUE}, \code{\link[data.table]{fread}})
-    \item \href{http://csvy.org/}{CSVY} (CSV with a YAML metadata header) using \code{\link[utils]{read.csv}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE} (or, if \code{fread = TRUE}, \code{\link[data.table]{fread}})
+    \item \href{http://csvy.org/}{CSVY} (CSV with a YAML metadata header) using \code{\link[utils]{read.csv}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE} (or, if \code{fread = TRUE}, \code{\link[data.table]{fread}}). Note: the YAML header can be \dQuote{raw} or commented with hash symbols at the beginnning of each line. The latter is the default format when using \code{\link{export}} to write to CSVY.
     \item Pipe-separated data (.psv), using \code{\link[utils]{read.table}} with \code{sep = '|'}, \code{row.names = FALSE}, and \code{stringsAsFactors = FALSE} (or, if \code{fread = TRUE}, \code{\link[data.table]{fread}})
     \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils]{read.fwf}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}
     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
