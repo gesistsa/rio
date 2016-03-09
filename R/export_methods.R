@@ -161,6 +161,10 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
     cat(wrap(root, as.character(substitute(x))), file = file, ...)
 }
 
+.export.rio_yml <- function(file, x, ...) {
+  cat(as.yaml(x, ...), file = file)
+}
+
 .export.rio_clipboard <- function(file, x, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
     if (Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbcopy", "w")

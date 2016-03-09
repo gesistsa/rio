@@ -33,6 +33,7 @@ S3method(.import, rio_xlsx)
 S3method(.import, rio_fortran)
 S3method(.import, rio_ods)
 S3method(.import, rio_xml)
+S3method(.import, rio_yml)
 S3method(.import, rio_clipboard)
 
 # S3 .export Methods
@@ -54,6 +55,7 @@ S3method(.export, rio_json)
 S3method(.export, rio_arff)
 S3method(.export, rio_xlsx)
 S3method(.export, rio_xml)
+S3method(.export, rio_yml)
 S3method(.export, rio_clipboard)
 
 # utility functions to import

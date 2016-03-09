@@ -19,6 +19,7 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 | Serialized R objects (.rds) | Yes | Yes |
 | Saved R objects (.RData) | Yes | Yes |
 | JSON (.json) | Yes | Yes |
+| YAML (.yml) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |
 | SPSS and SPSS portable | Yes (.sav and .por) | Yes (.sav only) |
 | "XBASE" database files (.dbf) | Yes | Yes |
@@ -27,7 +28,8 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 | Weka Attribute-Relation File Format (.arff) | Yes | Yes |
 | R syntax (.R) | Yes | Yes |
 | Shallow XML documents (.xml) | Yes | Yes |
-| SAS and SAS XPORT | Yes (.sas7bdat and .xpt) |  |
+| SAS (.sas7bdat) | Yes |  |
+| SAS XPORT (.xpt) | Yes |  |
 | Minitab (.mtp) | Yes |  |
 | Epiinfo (.rec) | Yes |  |
 | Systat (.syd) | Yes |  |

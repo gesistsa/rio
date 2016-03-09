@@ -42,6 +42,8 @@ get_type <- function(fmt) {
         clipboard = "clipboard",
         ods = "ods",
         xml = "xml",
+        yml = "yml",
+        yaml = "yml",
         # known but unsupported formats
         gnumeric = "gnumeric",
         jpeg = "jpg",

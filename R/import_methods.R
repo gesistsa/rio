@@ -229,6 +229,10 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
     d
 }
 
+.import.rio_yml <- function(file, stringsAsFactors = FALSE, ...) {
+  as.data.frame(yaml.load(file, ...), stringsAsFactors = stringsAsFactors)
+}
+
 .import.rio_clipboard <- function(file = "clipboard", header = TRUE, sep = "\t", ...) {
     if (Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbpaste")

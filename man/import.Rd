@@ -25,6 +25,7 @@
     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
     \item Saved R objects (.RData), using \code{\link[base]{load}} for single-object .Rdata files
     \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
+    \item YAML (.yml), using \code{\link[yaml]{yaml.load}}
     \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
     \item SPSS and SPSS portable (.sav and .por), using \code{\link[haven]{read_sav}} and \code{\link[haven]{read_por}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used for .sav files.
     \item "XBASE" database files (.dbf), using \code{\link[foreign]{read.dbf}}

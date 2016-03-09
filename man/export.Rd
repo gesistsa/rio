@@ -26,6 +26,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
     \item Saved R objects (.RData), using \code{\link[base]{save}}
     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}
+    \item YAML (.yml), using \code{\link[yaml]{as.yaml}}
     \item Stata (.dta), using \code{\link[haven]{write_dta}}
     \item SPSS (.sav), using \code{\link[haven]{write_sav}}
     \item "XBASE" database files (.dbf), using \code{\link[foreign]{write.dbf}}
