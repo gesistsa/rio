@@ -82,7 +82,7 @@ parse_tar <- function(file, which, ...) {
     if (missing(which)) {
         which <- 1
         if (length(file_list) > 1) {
-            warning(sprintf("Zip archive contains multiple files. Attempting first file."))
+            warning(sprintf("Tar archive contains multiple files. Attempting first file."))
         }
     }
     if (is.numeric(which)) {
