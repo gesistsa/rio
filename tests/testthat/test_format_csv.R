@@ -17,9 +17,14 @@ test_that("Export to CSV", {
     expect_true(export(iris, "iris.csv", format = "csv2") %in% dir())
 })
 
-test_that("Import from CSV", {
+test_that("Import from CSV (read.csv)", {
     expect_error(is.data.frame(import("iris.csv")))
     expect_true(is.data.frame(import("iris.csv", format = "csv2")))
+})
+
+test_that("Import from CSV (fread)", {
+    expect_error(is.data.frame(import("iris.csv", fread = TRUE)))
+    expect_true(is.data.frame(import("iris.csv", format = "csv2", fread = TRUE)))
 })
 
 unlink("iris.csv")
