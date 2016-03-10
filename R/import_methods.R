@@ -24,11 +24,57 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   import_delim(file = file, sep = "\t", ...)
 }
 
-.import.rio_fwf <- function(file, header = FALSE, widths, ...) {
+.import.rio_fwf <- function(file, widths, header = FALSE, col.names, readr = FALSE, progress = FALSE, ...) {
   if (missing(widths)) {
     stop("Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().")
   }
-  read.fwf2(file = file, widths = widths, header = header, ...)
+  a <- list(...)
+  if (readr) {
+    if (is.null(widths)) {
+      if (!missing(col.names)) {
+        widths <- fwf_empty(file = file, col_names = col.names)
+      } else {
+        widths <- fwf_empty(file = file)
+      }
+      read_fwf(file = file, col_positions = widths, progress = progress, ...)
+    } else if (is.numeric(widths)) {
+      if (any(widths < 0)) {
+        if (!"col_types" %in% names(a)) {
+          col_types <- rep("?", length(widths))
+          col_types[widths < 0] <- "?"
+          col_types <- paste0(col_types, collapse = "")
+        }
+        if (!missing(col.names)) {
+          widths <- fwf_widths(abs(widths), col_names = col.names)
+        } else {
+          widths <- fwf_widths(abs(widths))
+        }
+        read_fwf(file = file, col_positions = widths, col_types = col_types, progress = progress, ...)
+      } else {
+        if (!missing(col.names)) {
+          widths <- fwf_widths(abs(widths), col_names = col.names)
+        } else {
+          widths <- fwf_widths(abs(widths))
+        }
+        read_fwf(file = file, col_positions = widths, progress = progress, ...)
+      }
+    } else if (is.list(widths)) {
+      if (!c("begin", "end") %in% names(widths)) {
+        if (!missing(col.names)) {
+          widths <- fwf_widths(widths, col_names = col.names)
+        } else {
+          widths <- fwf_widths(widths)
+        }
+      }
+      read_fwf(file = file, col_positions = widths, progress = progress, ...)
+    }
+  } else {
+    if (!missing(col.names)) {
+      read.fwf2(file = file, widths = widths, header = header, col.names = col.names, ...)
+    } else {
+      read.fwf2(file = file, widths = widths, header = header, ...)
+    }
+  }
 }
 
 .import.rio_rds <- function(file, ...){
