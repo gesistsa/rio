@@ -1,3 +1,7 @@
+# CHANGES TO v0.3.17 #
+
+ * Fixed a bug in import from remote URLs with incorrect file extensions.
+
 # CHANGES TO v0.3.16 #
 
  * Added support for import from fixed-width format files via `readr::read_fwf()` with a specified `widths` argument. This may enable faster import of these types of files and provides a base-like interface for working with readr. (#48)
