@@ -57,7 +57,8 @@ get_type <- function(fmt) {
         mat = "matlab",
         matlab = "matlab",
         gexf = "gexf",
-        npy = "npy"
+        npy = "npy",
+        feather = 'feather'
     )
     out <- type_list[[tolower(fmt)]]
     if (is.null(out)) {

@@ -122,6 +122,9 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
     save(x = x, file = file, ...)
 }
 
+.export.rio_feather <- function(file, x, ...){
+    write_feather(x = x, path = file)
+}
 .export.rio_sav <- function(file, x, ...){
     write_sav(data = x, path = file, ...)
 }

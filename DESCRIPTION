@@ -28,7 +28,8 @@ Imports:
     data.table (>= 1.9.5), 
     readxl, 
     readr,
-    yaml
+    yaml,
+    feather
 Suggests:
     datasets, 
     bit64, 

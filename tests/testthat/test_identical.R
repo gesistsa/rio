@@ -14,6 +14,7 @@ test_that("Data identical (R formats)", {
     expect_equivalent(import(export(mtcars, "mtcars.R")), mtcars)
     expect_equivalent(import(export(mtcars, "mtcars.RData")), mtcars)
     expect_equivalent(import(export(mtcars, "mtcars.R", format = "dump")), mtcars)
+    expect_equivalent(import(export(mtcars, "mtcars.feather")), mtcars)
     unlink("mtcars.rds")
     unlink("mtcars.R")
     unlink("mtcars.RData")
