@@ -14,6 +14,7 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 | Tab-separated data (.tsv) | Yes | Yes |
 | Comma-separated data (.csv) | Yes | Yes |
 | CSVY (CSV + YAML metadata header) (.csvy) | Yes | Yes |
+| Feather (.feather) | Yes | Yes |
 | Pipe-separated data (.psv) | Yes | Yes |
 | Fixed-width format data (.fwf) | Yes | Yes |
 | Serialized R objects (.rds) | Yes | Yes |

@@ -21,6 +21,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
     \item Tab-separated data (.tsv), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
     \item Comma-separated data (.csv), using \code{\link[utils]{write.csv}} with \code{row.names = FALSE}
     \item \href{http://csvy.org/}{CSVY} (CSV with a YAML metadata header) using \code{\link[utils]{read.csv}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE} (or, if \code{fread = TRUE}, \code{\link[data.table]{fread}}). The YAML header lines are preceded by R comment symbols (\#) by default; this can be turned off by passing a \code{comment_header = FALSE} argument to \code{export}.
+    \item Feather (.feather), using \code{\link[feather]{write_feather}}
     \item Pipe-separated data (.psv), using \code{\link[utils]{write.table}} with \code{sep = '|'} and \code{row.names = FALSE}
     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
