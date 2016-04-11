@@ -146,19 +146,31 @@ export_delim <- function(file, x, sep = "\t", row.names = FALSE,
     write.xlsx(x = x, file = file, ...)
 }
 
-.export.rio_xml <- function(file, x, ...) {
-    wrap <- function(value, tag) {
-        paste0("<", tag, ">", value, "</", tag, ">")
+.export.rio_html <- function(file, x, ...) {
+    x[] <- lapply(x, as.character)
+    out <- character(nrow(x))
+    for (i in 1:nrow(x)) {
+        out[i] <- twrap(paste0(twrap(unlist(x[i, , drop = TRUE]), "td"), collapse = ""), "tr")
     }
+    nm <- twrap(paste0(twrap(names(x), "th"), collapse = ""), "tr")
+    tab <- twrap(paste0(c(nm, out), collapse = "\n"), "table")
+    bod <- paste0(twrap(paste0(tab, "\n", sep = ""), "body"), "\n", collapse = "")
+    hd <- paste0("<head>\n<title>R Exported Data</title>\n</head>")
+    html <- twrap(paste(hd, bod, sep = "\n"), "html")
+    doct <- "<!doctype html>"
+    cat(paste(doct, html, sep = "\n"), file = file, ...)
+}
+
+.export.rio_xml <- function(file, x, ...) {
     root <- ""
     for (i in 1:nrow(x)) {
         out <- ""
         for (j in seq_along(x)) {
-            out <- paste0(out, wrap(x[i,j], names(x)[j]))
+            out <- paste0(out, twrap(x[i,j], names(x)[j]))
         }
-        root <- paste0(root, wrap(out, "Observation"))
+        root <- paste0(root, twrap(out, "Observation"))
     }
-    cat(wrap(root, as.character(substitute(x))), file = file, ...)
+    cat(twrap(root, as.character(substitute(x))), file = file, ...)
 }
 
 .export.rio_yml <- function(file, x, ...) {

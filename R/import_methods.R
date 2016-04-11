@@ -275,6 +275,11 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
     d
 }
 
+#.import.rio_html <- function(file, stringsAsFactors = FALSE, ...) {
+#    x <- as_list(read_html(unclass(file)))[["body"]][["table"]]
+#    d <- do.call("rbind", c(lapply(x, unlist)))
+#}
+
 .import.rio_yml <- function(file, stringsAsFactors = FALSE, ...) {
   as.data.frame(yaml.load(file, ...), stringsAsFactors = stringsAsFactors)
 }

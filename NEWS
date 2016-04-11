@@ -1,3 +1,7 @@
+# CHANGES TO v0.3.18 #
+
+ * Added support for export to HTML tables. (#86)
+
 # CHANGES TO v0.3.17 #
 
  * Fixed a bug in import from remote URLs with incorrect file extensions.

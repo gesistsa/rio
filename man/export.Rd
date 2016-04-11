@@ -34,6 +34,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
     \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'}
     \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}
     \item XML (.xml), using a custom method to create a simple XML tree
+    \item HTML (.html), using a custom method to create a single-table HTML file
     \item Clipboard export (on Windows and Mac OS), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
 }
 

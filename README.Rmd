@@ -28,6 +28,7 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 | Weka Attribute-Relation File Format (.arff) | Yes | Yes |
 | R syntax (.R) | Yes | Yes |
 | Shallow XML documents (.xml) | Yes | Yes |
+| HTML Tables (.html) |  | Yes |
 | SAS (.sas7bdat) | Yes |  |
 | SAS XPORT (.xpt) | Yes |  |
 | Minitab (.mtp) | Yes |  |
