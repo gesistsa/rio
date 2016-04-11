@@ -41,6 +41,8 @@ get_type <- function(fmt) {
         r = "r",
         clipboard = "clipboard",
         ods = "ods",
+        htm = "html",
+        html = "html",
         xml = "xml",
         yml = "yml",
         yaml = "yml",
@@ -86,4 +88,8 @@ get_ext <- function(file) {
     } else {
         return(tolower(fmt))
     }
+}
+
+twrap <- function(value, tag) {
+    paste0("<", tag, ">", value, "</", tag, ">")
 }

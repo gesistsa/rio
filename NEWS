@@ -1,6 +1,10 @@
+# CHANGES TO v0.3.19 #
+
+ * Added support to import and export to `feather` data serialization format. (#87)
+
 # CHANGES TO v0.3.18 #
 
-* Added support to import and export to `feather` data serialization format. (#87)
+ * Added support for export to HTML tables. (#86)
 
 # CHANGES TO v0.3.17 #
 

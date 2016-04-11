@@ -35,6 +35,7 @@ By making import and export easy, it's an obvious next step to also use R as a s
 | Weka Attribute-Relation File Format (.arff) | Yes | Yes |
 | R syntax (.R) | Yes | Yes |
 | Shallow XML documents (.xml) | Yes | Yes |
+| HTML Tables (.html) |  | Yes |
 | SAS (.sas7bdat) | Yes |  |
 | SAS XPORT (.xpt) | Yes |  |
 | Minitab (.mtp) | Yes |  |
