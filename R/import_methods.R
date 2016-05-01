@@ -275,10 +275,23 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
     d
 }
 
-#.import.rio_html <- function(file, stringsAsFactors = FALSE, ...) {
-#    x <- as_list(read_html(unclass(file)))[["body"]][["table"]]
-#    d <- do.call("rbind", c(lapply(x, unlist)))
-#}
+.import.rio_html <- function(file, stringsAsFactors = FALSE, ...) {
+    x <- as_list(read_html(unclass(file)))[["body"]][["table"]]
+    if ("th" %in% names(x[[1]])) {
+        col_names <- unlist(x[[1]][names(x[[1]]) %in% "th"])
+        out <- do.call("rbind", lapply(x[-1], function(y) {
+            unlist(y[names(y) %in% "td"])
+        }))
+        colnames(out) <- col_names
+    } else {
+        out <- do.call("rbind", lapply(x, function(y) {
+            unlist(y[names(y) %in% "td"])
+        }))
+        colnames(out) <- paste0("V", 1:ncol(out))
+    }
+    row.names(out) <- 1:nrow(out)
+    as.data.frame(out, ..., stringsAsFactors = stringsAsFactors)
+}
 
 .import.rio_yml <- function(file, stringsAsFactors = FALSE, ...) {
   as.data.frame(yaml.load(file, ...), stringsAsFactors = stringsAsFactors)
