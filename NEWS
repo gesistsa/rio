@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.0 #
+
+ * CRAN Release.
+
 # CHANGES TO v0.3.19 #
 
  * Added a `gather_attrs()` function that moves variable-level attributes to the data.frame level. (#80)
