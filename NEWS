@@ -1,3 +1,7 @@
+# CHANGES TO v0.3.19 #
+
+ * Added a `gather_attrs()` function that moves variable-level attributes to the data.frame level. (#80)
+
 # CHANGES TO v0.3.18 #
 
  * Added support for export to HTML tables. (#86)

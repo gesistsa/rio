@@ -2,6 +2,7 @@
 export(convert)
 export(export)
 export(import)
+export(gather_attrs)
 export(.export)
 export(.import)
 

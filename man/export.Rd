@@ -1,6 +1,7 @@
 \name{export}
 \alias{export}
-\title{Write data.frame or matrix to a file}
+\title{Export}
+\description{Write data.frame to a file}
 \usage{
     export(x, file, format, ...)
 }
@@ -11,7 +12,7 @@
     \item{...}{Additional arguments for the underlying export functions.}
 }
 \value{The name of the output file as a character string (invisibly).}
-\description{This function exports a data frame or matrix into a file with file format based on the file extension (or the manually specified format, if \code{format} is specified).
+\details{This function exports a data frame or matrix into a file with file format based on the file extension (or the manually specified format, if \code{format} is specified).
 
 The output file can be to a compressed directory, simply by adding an appropriate additional extensiont to the \code{file} argument, such as: \dQuote{iris.csv.tar}, \dQuote{iris.csv.zip}, or \dQuote{iris.csv.gz}.
 

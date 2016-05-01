@@ -1,6 +1,7 @@
 \name{import}
 \alias{import}
-\title{Read data.frame or matrix from a file}
+\title{Import}
+\description{Read data.frame from a file}
 \usage{
     import(file, format, setclass, which, ...)
 }
@@ -12,7 +13,7 @@
     \item{...}{Additional arguments passed to the underlying import functions. For example, this can control column classes for delimited file types, or control the use of haven for Stata and SPSS or readxl for Excel (.xlsx) format. See details below.}
 }
 \value{An R data.frame. If \code{setclass} is used, this data.frame may have additional class attribute values.}
-\description{This function imports a data frame or matrix from a data file with the file format based on the file extension (or the manually specified format, if \code{format} is specified).
+\details{This function imports a data frame or matrix from a data file with the file format based on the file extension (or the manually specified format, if \code{format} is specified).
 
 \code{import} supports the following file formats:
 
@@ -43,6 +44,9 @@
     \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
     \item Google Sheets, as Comma-separated data (.csv)
 }
+
+\code{import} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). If you would prefer these attributes to be stored at the data.frame-level (i.e., in \code{attributes(mtcars)}), see \code{\link{gather_attrs}}.
+
 }
 \note{For csv and txt files with row names exported from \code{\link{export}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.}
 \examples{
@@ -73,3 +77,4 @@ unlink("iris.tsv")
 unlink("iris1.csv")
 unlink("iris2.csv")
 }
+\seealso{\code{\link{.import}}, \code{\link{gather_attrs}}}
