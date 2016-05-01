@@ -68,7 +68,7 @@ importFrom(yaml, yaml.load, as.yaml)
 importFrom(curl, curl_download, curl_fetch_memory, parse_headers)
 
 # import and export functions from other packages
-importFrom(data.table, fread)
+importFrom(data.table, fread) #, fwrite)
 importFrom(haven, read_dta, read_sav, read_por, read_sas)
 importFrom(haven, write_sav, write_dta)
 importFrom(haven, as_factor)

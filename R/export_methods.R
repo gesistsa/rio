@@ -1,5 +1,9 @@
-export_delim <- function(file, x, sep = "\t", row.names = FALSE,
+export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
                          col.names = TRUE, ...) {
+    if (fwrite) {
+        warning("data.table::fwrite() support is pending. 'fwrite = FALSE' ignored.")
+        # fwrite(x, file.path = file, sep = sep, col.name = col.names, ...)
+    }
     write.table(x, file = file, sep = sep, row.names = row.names,
                 col.names = col.names, ...)
 }
