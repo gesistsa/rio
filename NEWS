@@ -1,6 +1,7 @@
 # CHANGES TO v0.4.1 #
 
  * Fixed behavior of `gather_attrs()` on a data.frame with no attributes to gather. (#94)
+ * Removed unrecognized file format error for import from compressed files. (#93)
 
 # CHANGES TO v0.4.0 #
 

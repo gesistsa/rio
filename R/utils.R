@@ -46,6 +46,10 @@ get_type <- function(fmt) {
         xml = "xml",
         yml = "yml",
         yaml = "yml",
+        # compressed formats
+        zip = "zip",
+        tar = "tar",
+        gz = "gz",
         # known but unsupported formats
         gnumeric = "gnumeric",
         jpeg = "jpg",
