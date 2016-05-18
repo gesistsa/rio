@@ -3,18 +3,18 @@ gather_attrs <- function(x) {
         stop("'x' is not a data.frame")
     }
     dfattrs <- attributes(x)
-    varattrs <- list()
+    varattrs <- rep(list(list()), length(x))
     for (i in seq_along(x)) {
-        varattrs[[i]] <- attributes(x[[i]])
-        attributes(x[[i]]) <- NULL
-        if ("levels" %in% names(varattrs[[i]])) {
-           attr(x[[i]], "levels") <- varattrs[[i]][["levels"]]
-        }
+        a <- attributes(x[[i]])
+        varattrs[[i]] <- a[!names(a) %in% c("levels", "class")]
+        attributes(x[[i]]) <- a[names(a) == c("levels", "class")]
     }
-    attrnames <- sort(unique(unlist(lapply(varattrs, names))))
-    outattrs <- setNames(lapply(attrnames, function(z) {
-        setNames(lapply(varattrs, `[[`, z), names(x))
-    }), attrnames)
-    attributes(x) <- c(dfattrs, outattrs)
+    if (any(sapply(varattrs, length))) {
+        attrnames <- sort(unique(unlist(lapply(varattrs, names))))
+        outattrs <- setNames(lapply(attrnames, function(z) {
+            setNames(lapply(varattrs, `[[`, z), names(x))
+        }), attrnames)
+        attributes(x) <- c(dfattrs, outattrs)
+    }
     x
 }
