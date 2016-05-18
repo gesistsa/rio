@@ -9,7 +9,7 @@
     \item{file}{A character string naming a file, URL, or single-file .zip or .tar archive.}
     \item{format}{An optional character string code of file format, which can be used to override the format inferred from \code{file}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), and \dQuote{|} (for pipe-separated values).}
     \item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, all the return object is always a \dQuote{data.frame}. Reasonable values for this might be \dQuote{tbl_df} (if using dplyr) or \dQuote{data.table} (if using data.table). Warnings will be produced if a class is used from a package that is not loaded and/or available.}
-    \item{which}{If \code{file} is a compressed directory, \code{which} can be either a character string specifying a filename or an integer specifying which file (in locale sort order) to extract from the compressed directory. Ignored otherwise. A character string value will be used as a regular expression, such that the extracted file is the first match of the regular expression against the file names in the archive.}
+    \item{which}{This argument is used to control import from multi-object files. If \code{file} is a compressed directory, \code{which} can be either a character string specifying a filename or an integer specifying which file (in locale sort order) to extract from the compressed directory. For Excel spreadsheets, this can be used to specify a sheet number. For .Rdata files, this can be an object name. Ignored otherwise. A character string value will be used as a regular expression, such that the extracted file is the first match of the regular expression against the file names in the archive.}
     \item{...}{Additional arguments passed to the underlying import functions. For example, this can control column classes for delimited file types, or control the use of haven for Stata and SPSS or readxl for Excel (.xlsx) format. See details below.}
 }
 \value{An R data.frame. If \code{setclass} is used, this data.frame may have additional class attribute values.}
@@ -25,7 +25,7 @@
     \item Pipe-separated data (.psv), using \code{\link[utils]{read.table}} with \code{sep = '|'}, \code{row.names = FALSE}, and \code{stringsAsFactors = FALSE} (or, if \code{fread = TRUE}, \code{\link[data.table]{fread}})
     \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils]{read.fwf}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}. If \code{readr = TRUE}, import will be performed using \code{\link[readr]{read_fwf}}, where \code{widths} should be: \code{NULL}, a vector of column widths, or the output of \code{\link[readr]{fwf_empty}}, \code{\link[readr]{fwf_widths}}, or \code{\link[readr]{fwf_positions}}.
     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
-    \item Saved R objects (.RData), using \code{\link[base]{load}} for single-object .Rdata files
+    \item Saved R objects (.RData), using \code{\link[base]{load}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files.
     \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
     \item YAML (.yml), using \code{\link[yaml]{yaml.load}}
     \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
@@ -33,13 +33,13 @@
     \item "XBASE" database files (.dbf), using \code{\link[foreign]{read.dbf}}
     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{read.arff}}
     \item R syntax object (.R), using \code{\link[base]{dget}}
-    \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. If \code{readxl = FALSE}, \code{\link[openxlsx]{read.xlsx}} can be used.
+    \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. If \code{readxl = FALSE}, \code{\link[openxlsx]{read.xlsx}} can be used. Use \code{which} to specify a sheet number.
     \item SAS (.sas7bdat) and SAS XPORT (.xpt), using \code{\link[haven]{read_sas}} and \code{\link[foreign]{read.xport}}.
     \item Minitab (.mtp), using \code{\link[foreign]{read.mtp}}
     \item Epiinfo (.rec), using \code{\link[foreign]{read.epiinfo}}
     \item Systat (.syd), using \code{\link[foreign]{read.systat}}
     \item Data Interchange Format (.dif), using \code{\link[utils]{read.DIF}}
-    \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read.ods}}
+    \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read.ods}}.  Use \code{which} to specify a sheet number.
     \item Shallow XML documents (.xml). The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2]{as_list}}.
     \item Single-table HTML documents (.html). The data structure will only be read correctly if the HTML file can be read with \code{\link[xml2]{read_html}} and converted to a list via \code{\link[xml2]{as_list}}.
     \item Clipboard import (on Windows and Mac OS), using \code{\link[utils]{read.table}} with \code{row.names = FALSE}

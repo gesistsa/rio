@@ -123,7 +123,7 @@ export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
 }
 
 .export.rio_rdata <- function(file, x, ...){
-    save(x = x, file = file, ...)
+    save(x, file = file, ...)
 }
 
 .export.rio_feather <- function(file, x, ...){

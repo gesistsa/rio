@@ -7,6 +7,8 @@ test_that("Export to Stata", {
 
 test_that("Import from Stata (read_dta)", {
     expect_true(is.data.frame(import("iris.dta", haven = TRUE)))
+    # arguments ignored
+    expect_warning(is.data.frame(import("iris.dta", haven = TRUE, extraneous.argument = TRUE)))
 })
 
 test_that("Import from Stata (read.dta)", {

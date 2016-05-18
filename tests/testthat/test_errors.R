@@ -1,9 +1,10 @@
 context("Errors")
 library("datasets")
 
-test_that("Function suggestions for unsupported import and export", {
-    #expect_error(import("test.jpg"), "jpg format not supported. Consider using the `jpeg::readJPEG` function")
-    #expect_error(export(data.frame(1), "test.jpg"), "jpg format not supported. Consider using the `jpeg::writeJPEG` function")
+test_that("Function suggestions for unsupported export", {
+    expect_error(export(data.frame(1), "test.jpg"), 
+                 "jpg format not supported. Consider using the 'jpeg::writeJPEG()' function", 
+                 fixed = TRUE)
 })
 
 test_that("Error for unsupported file types", {

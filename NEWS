@@ -1,5 +1,10 @@
 # CHANGES TO v0.4.2 #
 
+ * Improved, generalized, tested, and expanded documentation of `which` argument in `import()`.
+ * Expanded test suite and made some small fixes.
+
+# CHANGES TO v0.4.2 #
+
  * Added support to import and export to `feather` data serialization format. (#88, h/t Jason Becker)
 
 # CHANGES TO v0.4.1 #

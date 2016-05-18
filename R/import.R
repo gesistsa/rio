@@ -1,4 +1,4 @@
-.import.default <- function(file){
+.import.default <- function(file, ...){
   stop('Unrecognized file format')
 }
 

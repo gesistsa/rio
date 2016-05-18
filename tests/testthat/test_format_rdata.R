@@ -7,6 +7,7 @@ test_that("Export to Rdata", {
 
 test_that("Import from Rdata", {
     expect_true(is.data.frame(import("iris.Rdata")))
+    expect_true(is.data.frame(import("iris.Rdata", which = 1)))
 })
 
 unlink("iris.Rdata")
