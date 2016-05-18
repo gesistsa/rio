@@ -1,6 +1,9 @@
 language: r
 sudo: required
 r_check_revdep: false
+r_binary_packages:
+- BH
+- stringi
 r_github_packages:
 - jimhester/covr
 after_success:
