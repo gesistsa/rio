@@ -141,6 +141,10 @@ import_delim <- function(file, fread = TRUE, sep = "auto", header = "auto", stri
   }
 }
 
+.import.rio_feather <- function(file, ...){
+    read_feather(path = file)
+}
+
 .import.rio_dta <- function(file, haven = TRUE, 
                             convert.dates = TRUE, 
                             convert.factors = FALSE, 

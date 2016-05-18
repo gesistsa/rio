@@ -20,6 +20,7 @@ By making import and export easy, it's an obvious next step to also use R as a s
 | Tab-separated data (.tsv) | Yes | Yes |
 | Comma-separated data (.csv) | Yes | Yes |
 | CSVY (CSV + YAML metadata header) (.csvy) | Yes | Yes |
+| Feather R/Python interchange format (.feather) | Yes | Yes |
 | Pipe-separated data (.psv) | Yes | Yes |
 | Fixed-width format data (.fwf) | Yes | Yes |
 | Serialized R objects (.rds) | Yes | Yes |
