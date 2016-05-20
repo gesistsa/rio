@@ -1,5 +1,6 @@
-# CHANGES TO v0.4.4 #
+# CHANGES TO v0.4.5 #
 
+ * Fixed other tests to remove (unimportant) warnings.
  * Fixed a failing test of file compression that was found in v0.4.3 on some platforms.
 
 # CHANGES TO v0.4.3 #

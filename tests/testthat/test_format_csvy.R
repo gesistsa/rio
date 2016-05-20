@@ -2,7 +2,7 @@ context("CSVY imports/exports")
 require("datasets")
 
 test_that("Export to CSVY", {
-    expect_true(export(iris, "iris.csvy") %in% dir())
+    suppressWarnings(expect_true(export(iris, "iris.csvy") %in% dir()))
     unlink("iris.csvy")
 })
 

@@ -7,6 +7,5 @@ test_that("Export to feather", {
 
 test_that("Import from feather", {
     expect_true(is.data.frame(import("iris.feather")))
+    unlink("iris.feather")
 })
-
-unlink("iris.feather")

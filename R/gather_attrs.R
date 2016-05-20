@@ -7,7 +7,7 @@ gather_attrs <- function(x) {
     for (i in seq_along(x)) {
         a <- attributes(x[[i]])
         varattrs[[i]] <- a[!names(a) %in% c("levels", "class")]
-        attributes(x[[i]]) <- a[names(a) == c("levels", "class")]
+        attributes(x[[i]]) <- a[names(a) %in% c("levels", "class")]
     }
     if (any(sapply(varattrs, length))) {
         attrnames <- sort(unique(unlist(lapply(varattrs, names))))

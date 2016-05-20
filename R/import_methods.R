@@ -119,6 +119,7 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", header = "
   
   meta <- c(list(out), y)
   out <- do.call("structure", meta)
+  out
 }
 
 .import.rio_psv <- function(file, which = 1, ...){

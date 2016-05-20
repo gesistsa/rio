@@ -28,7 +28,7 @@ test_that("Import from FWF Errors", {
     # error on NULL widths
     expect_error(import("iris.fwf", widths = NULL, readr = FALSE))
     # no error on NULL widths w/ readr::read_fwf()
-    expect_true(is.data.frame(import("iris.fwf", widths = NULL, readr = TRUE)))
+    suppressWarnings(expect_true(is.data.frame(import("iris.fwf", widths = NULL, readr = TRUE))))
 })
 
 unlink("iris.fwf")
