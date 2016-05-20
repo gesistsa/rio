@@ -41,6 +41,7 @@ test_that("Data identical (other formats)", {
     unlink("mtcars.dbf")
     unlink("mtcars.json")
     unlink("mtcars.arff")
+    unlink("mtcars.xml")
 })
 
 test_that("Data identical (optional arguments)", {
