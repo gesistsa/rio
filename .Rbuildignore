@@ -6,3 +6,4 @@ appveyor.yml
 README.Rmd
 CONTRIBUTING.md
 ^revdep$
+*.Rproj
