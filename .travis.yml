@@ -1,12 +1,24 @@
 language: r
-sudo: required
-r_check_revdep: false
+sudo: false
+cache: packages
+
 r_packages:
-- covr
-r_binary_packages:
-- BH
-- stringi
-r_github_packages:
-- wesm/feather/R
+  - covr
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.9
+      - g++-4.9
+
+before_install: |
+  mkdir ~/.R
+  cat <<EOF > ~/.R/Makevars
+  CXX=g++-4.9
+  CXX1X=g++-4.9
+  CXX1XSTD=-std=c++11
+
 after_success:
-- Rscript -e 'library("covr");codecov()'
+  - Rscript -e 'library("covr");codecov()'
