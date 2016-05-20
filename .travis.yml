@@ -1,10 +1,12 @@
 language: r
 sudo: required
 r_check_revdep: false
+r_packages:
+- covr
 r_binary_packages:
 - BH
 - stringi
 r_github_packages:
-- jimhester/covr
+- wesm/feather/R
 after_success:
 - Rscript -e 'library("covr");codecov()'

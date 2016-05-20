@@ -33,8 +33,12 @@ remote_to_local <- function(file, format) {
                         f <- regmatches(h, regexpr("(?<=filename=)(.*)", h, perl = TRUE))
                     }
                     f <- paste0(dirname(temp_file), "/", f)
-                    file.rename(temp_file, f)
+                    file.copy(from = temp_file, to = f)
+                    unlink(temp_file)
+                    temp_file <- f
                 }
+            } else {
+                stop("Unrecognized file format. Try specifying with the format argument.")
             }
             # check `Content-Type` header
             #if (any(grepl("^Content-Type", h1))) {
@@ -43,7 +47,8 @@ remote_to_local <- function(file, format) {
             #}
         } else {
             f <- sub("TMP$", fmt, temp_file)
-            file.rename(temp_file, f)
+            file.copy(from = temp_file, to = f)
+            unlink(temp_file)
             temp_file <- f
         }
     }

@@ -1,4 +1,8 @@
-# CHANGES TO v0.4.2 #
+# CHANGES TO v0.4.4 #
+
+ * Fixed a failing test of file compression that was found in v0.4.3 on some platforms.
+
+# CHANGES TO v0.4.3 #
 
  * Improved, generalized, tested, and expanded documentation of `which` argument in `import()`.
  * Expanded test suite and made some small fixes.
