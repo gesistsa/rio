@@ -18,6 +18,7 @@ test_that("Data identical (R formats)", {
     unlink("mtcars.rds")
     unlink("mtcars.R")
     unlink("mtcars.RData")
+    unlink("mtcars.feather")
 })
 
 test_that("Data identical (haven formats)", {
@@ -36,7 +37,7 @@ test_that("Data identical (other formats)", {
     expect_equivalent(import(export(mtcars, "mtcars.dbf")), mtcars)
     expect_equivalent(import(export(mtcars, "mtcars.json")), mtcars)
     expect_equivalent(import(export(mtcars, "mtcars.arff")), mtcars)
-    #expect_equivalent(import(export(mtcars, "mtcars.xml")), mtcars)
+    expect_equivalent(import(export(mtcars, "mtcars.xml")), mtcars)
     unlink("mtcars.dbf")
     unlink("mtcars.json")
     unlink("mtcars.arff")
