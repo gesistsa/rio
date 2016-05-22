@@ -10,9 +10,9 @@ test_that("Recognize compressed file types", {
 
 test_that("Export to compressed", {
     e1 <- export(iris, "iris.csv.zip")
-    e2 <- export(iris, "iris.csv.tar")
+    #e2 <- export(iris, "iris.csv.tar")
     expect_true(e1 %in% dir())
-    expect_true(e2 %in% dir())
+    #expect_true(e2 %in% dir())
 })
 
 test_that("Import from compressed", {
@@ -24,4 +24,4 @@ test_that("Import from compressed", {
 })
 
 unlink("iris.csv.zip")
-unlink("iris.csv.tar")
+#unlink("iris.csv.tar")

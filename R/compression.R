@@ -46,7 +46,8 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
         setwd(tmp)
         o <- tar(cfile2, files = ".", compression = type)
         setwd(wd)
-        file.rename(file.path(tmp, cfile2), cfile)
+        file.copy(from = file.path(tmp, cfile2), to = cfile, overwrite = TRUE)
+        unlink(file.path(tmp, cfile2))
     }
     if (o != 0) {
         stop(sprintf("File compresion failed for %s!", cfile))
