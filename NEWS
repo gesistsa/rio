@@ -1,5 +1,6 @@
 # CHANGES TO v0.4.7 #
 
+ * Improved use of the `sep` argument for import of delimited files. (#99, h/t Danny Parsons)
  * Removed support for import of SPSS Portable (.por) files, given deprecation from haven. (#100)
 
 # CHANGES TO v0.4.5 #

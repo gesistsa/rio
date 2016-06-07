@@ -12,16 +12,24 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", header = "
   }
 }
 
-.import.rio_r <- function(file, which = 1, ...){
-  dget(file = file, ...)
+.import.rio_tsv <- function(file, sep, which = 1, fread = TRUE, ...){
+  import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
 }
 
-.import.rio_tsv <- function(file, which = 1, ...){
-  import_delim(file = file, sep = "\t", ...)
+.import.rio_txt <- function(file, sep, which = 1, fread = TRUE, ...){
+  import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
 }
 
-.import.rio_txt <- function(file, which = 1, ...){
-  import_delim(file = file, sep = "\t", ...)
+.import.rio_csv <- function(file, sep, which = 1, fread = TRUE, ...){
+  import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+}
+
+.import.rio_csv2 <- function(file, sep, which = 1, fread = TRUE, ...){
+  import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+}
+
+.import.rio_psv <- function(file, sep, which = 1, fread = TRUE, ...){
+  import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
 }
 
 .import.rio_fwf <- function(file, which = 1, widths, header = FALSE, col.names, readr = FALSE, progress = FALSE, ...) {
@@ -77,16 +85,12 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", header = "
   }
 }
 
+.import.rio_r <- function(file, which = 1, ...){
+  dget(file = file, ...)
+}
+
 .import.rio_rds <- function(file, which = 1, ...){
   readRDS(file = file, ...)
-}
-
-.import.rio_csv <- function(file, which = 1, ...){
-  import_delim(file = file, sep = ",", ...)
-}
-
-.import.rio_csv2 <- function(file, which = 1, ...){
-  import_delim(file = file, sep = ";", ...)
 }
 
 .import.rio_csvy <- function(file, which = 1, ...) {
@@ -120,10 +124,6 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", header = "
   meta <- c(list(out), y)
   out <- do.call("structure", meta)
   out
-}
-
-.import.rio_psv <- function(file, which = 1, ...){
-  import_delim(file = file, sep = "|", ...)
 }
 
 .import.rio_rdata <- function(file, which = 1, envir = new.env(), ...) {
