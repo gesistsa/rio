@@ -19,7 +19,6 @@ get_type <- function(fmt) {
         dif = "dif",
         spss = "sav",
         sav = "sav",
-        por = "por",
         sas = "sas7bdat",
         sas7bdat = "sas7bdat",
         xpt = "xpt",

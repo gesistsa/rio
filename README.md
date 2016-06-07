@@ -22,7 +22,7 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 | JSON (.json) | Yes | Yes |
 | YAML (.yml) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |
-| SPSS and SPSS portable | Yes (.sav and .por) | Yes (.sav only) |
+| SPSS (.sav) | Yes | Yes |
 | "XBASE" database files (.dbf) | Yes | Yes |
 | Excel (.xls) | Yes |  |
 | Excel (.xlsx) | Yes | Yes |

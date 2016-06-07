@@ -183,10 +183,6 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", header = "
   }
 }
 
-.import.rio_por <- function(file, which = 1, ...) {
-  convert_attributes(read_por(path = file))
-}
-
 .import.rio_sas7bdat <- function(file, which = 1, column.labels = FALSE, ...) {
   convert_attributes(read_sas(b7dat = file, ...))
 }

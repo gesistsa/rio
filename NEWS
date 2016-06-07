@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.7 #
+
+ * Removed support for import of SPSS Portable (.por) files, given deprecation from haven. (#100)
+
 # CHANGES TO v0.4.5 #
 
  * Fixed other tests to remove (unimportant) warnings.

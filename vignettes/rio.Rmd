@@ -28,7 +28,7 @@ By making import and export easy, it's an obvious next step to also use R as a s
 | JSON (.json) | Yes | Yes |
 | YAML (.yml) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |
-| SPSS and SPSS portable | Yes (.sav and .por) | Yes (.sav) |
+| SPSS (.sav) | Yes | Yes |
 | "XBASE" database files (.dbf) | Yes | Yes |
 | Excel (.xls) | Yes |  |
 | Excel (.xlsx) | Yes | Yes |

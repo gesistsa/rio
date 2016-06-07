@@ -14,6 +14,3 @@ test_that("Import from SPSS (.sav; read_sav)", {
 })
 
 unlink("iris.sav")
-
-#context("SPSS (.por) imports")
-#test_that("Import from SPSS (.por)", {})
