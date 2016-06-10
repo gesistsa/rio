@@ -1,6 +1,6 @@
-import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
+import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
   if (fread) {
-    fread(input = file, sep = sep, sep2 = "auto", header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
+    fread(input = file, sep = sep, sep2 = sep2, header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
   } else {
     if (missing(sep) || is.null(sep) || sep == "auto") {
       sep <- "\t"
@@ -8,7 +8,10 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", header = "
     if (missing(header) || is.null(header) || header == "auto") {
       header <- TRUE
     }
-    read.table(file = file, sep = sep, header = header, stringsAsFactors = stringsAsFactors, ...)
+    if (missing(sep2) || is.null(sep2) || sep2 == "auto") {
+      sep2 <- "."
+    }
+    read.table(file = file, sep = sep, dec = sep2, header = header, stringsAsFactors = stringsAsFactors, ...)
   }
 }
 
