@@ -10,7 +10,9 @@ test_that("Export to SPSS (.sav)", {
 #})
 
 test_that("Import from SPSS (.sav; read_sav)", {
-    expect_true(is.data.frame(import("iris.sav", haven = TRUE)))
+    expect_true(d <- is.data.frame(import("iris.sav", haven = TRUE)))
+    expect_true(!"labelled" %in% unlist(lapply(d, class)))
+    rm(d)
 })
 
 unlink("iris.sav")

@@ -177,11 +177,11 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "au
   read.DIF(file = file, ...)
 }
 
-.import.rio_sav <- function(file, which = 1, haven = TRUE, use.value.labels = FALSE, ...) {
+.import.rio_sav <- function(file, which = 1, haven = TRUE, to.data.frame = TRUE, use.value.labels = FALSE, ...) {
   if (haven) {
     convert_attributes(read_sav(path = file))
   } else {
-    convert_attributes(read.spss(file = file, to.data.frame = TRUE, 
+    convert_attributes(read.spss(file = file, to.data.frame = to.data.frame, 
                                  use.value.labels = use.value.labels, ...))
   }
 }

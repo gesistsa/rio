@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.8 #
+
+ * Fixed a bug in the handling of "labelled" class variables imported from haven. (#102, h/t Pierre LaFortune)
+
 # CHANGES TO v0.4.7 #
 
  * Improved use of the `sep` argument for import of delimited files. (#99, h/t Danny Parsons)
