@@ -36,7 +36,5 @@ Suggests:
     testthat, 
     knitr, 
     magrittr
-Remotes:
-  wesm/feather/R
 License: GPL-2
 VignetteBuilder: knitr
