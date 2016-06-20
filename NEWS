@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.9 #
+
+ * Removed unnecessary error in xlsx imports. (#103, h/t Kevin Wright)
+
 # CHANGES TO v0.4.8 #
 
  * Fixed a bug in the handling of "labelled" class variables imported from haven. (#102, h/t Pierre LaFortune)

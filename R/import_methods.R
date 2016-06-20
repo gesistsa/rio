@@ -224,19 +224,9 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "au
         which <- a$sheet
   }
   if (readxl) {
-    if (is.numeric(which)) {
-        read_excel(path = file, sheet = which, ...)
-    } else {
-        stop("'which' must be a positive integer specifying a sheet number.")
-        read_excel(path = file, sheet = 1, ...)
-    }
+    read_excel(path = file, sheet = which, ...)
   } else {
-    if (is.numeric(which)) {
-        read.xlsx(xlsxFile = file, sheet = which, ...)
-    } else {
-        stop("'which' must be a positive integer specifying a sheet number.")
-        read.xlsx(xlsxFile = file, sheet = 1, ...)
-    }
+    read.xlsx(xlsxFile = file, sheet = which, ...)
   }
 }
 
