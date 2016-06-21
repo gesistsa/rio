@@ -1,4 +1,4 @@
-import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
+import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, dec = ".", ...) {
   if (fread) {
     fread(input = file, sep = sep, sep2 = sep2, header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
   } else {
@@ -8,10 +8,21 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "au
     if (missing(header) || is.null(header) || header == "auto") {
       header <- TRUE
     }
-    if (missing(sep2) || is.null(sep2) || sep2 == "auto") {
-      sep2 <- "."
+    
+    # If dec is not specified but sep2 is, take sep2
+    if (is.null(dec) && !is.null(sep2) && sep2 != "auto") {
+      dec <- sep2
     }
-    read.table(file = file, sep = sep, dec = sep2, header = header, stringsAsFactors = stringsAsFactors, ...)
+    
+    # Override argument
+    call <- match.call()[1]
+    call[[1]] <- as.name("read.table")
+    call$file <- file
+    call$sep <- sep
+    call$dec <- dec # important part
+    call$header <- header
+    call$stringsAsFactors <- stringsAsFactors
+    eval(call)
   }
 }
 
