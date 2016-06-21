@@ -11,6 +11,13 @@ test_that("Import from CSV", {
     expect_that(colnames(noheadercsv)[1], equals("V1"), label = "Header is correctly specified")
 })
 
+test_that("Import from CSV with comma separator", {
+  name <- "iris_comma_sep.csv"
+  write.table(iris, name, dec = ",", sep = ";")
+  expect_true(name %in% dir())
+  expect_true(is.data.frame(import("iris_comma_sep.csv", dec = ",", sep = ";", fread = FALSE, header = TRUE)))
+})
+
 context("CSV (.csv2) imports/exports")
 
 test_that("Export to CSV", {
