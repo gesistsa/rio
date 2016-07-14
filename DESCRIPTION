@@ -1,8 +1,8 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.4.9
-Date: 2016-06-20
+Version: 0.4.10
+Date: 2016-07-14
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
@@ -29,6 +29,7 @@ Imports:
     readxl, 
     readr,
     yaml,
+    csvy,
     feather
 Suggests:
     datasets, 

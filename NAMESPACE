@@ -66,6 +66,7 @@ importFrom(stats, na.omit, setNames)
 importFrom(utils, installed.packages, untar, unzip, tar, zip, type.convert, capture.output)
 importFrom(urltools, url_parse)
 importFrom(yaml, yaml.load, as.yaml)
+importFrom(csvy, read_csvy, write_csvy)
 importFrom(curl, curl_download, curl_fetch_memory, parse_headers)
 
 # import and export functions from other packages

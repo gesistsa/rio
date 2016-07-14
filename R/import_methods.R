@@ -97,36 +97,7 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "au
 }
 
 .import.rio_csvy <- function(file, which = 1, ...) {
-  # read in whole file
-  f <- readLines(file)
-  
-  # identify yaml delimiters
-  g <- grep("^#?---", f)
-  if (length(g) > 2) {
-    stop("More than 2 yaml delimiters found in file")
-  } else if (length(g) == 1) {
-    stop("Only one yaml delimiter found")
-  } else if (length(g) == 0) {
-    stop("No yaml delimiters found")
-  }
-  
-  # extract yaml front matter and convert to R list
-  y <- f[(g[1]+1):(g[2]-1)]
-  if (all(grepl("^#", y))) {
-    y <- gsub("^#", "", y)
-  }
-  y <- yaml.load(paste(y, collapse = "\n"))
-  
-  # load the data
-  out <- import_delim(file = paste0(f[(g[2]+1):length(f)], collapse = "\n"), ...)
-  for (i in seq_along(y$fields)) {
-    attributes(out[, i]) <- y$fields[[i]]
-  }
-  y$fields <- NULL
-  
-  meta <- c(list(out), y)
-  out <- do.call("structure", meta)
-  out
+    read_csvy(file = file, ...)
 }
 
 .import.rio_rdata <- function(file, which = 1, envir = new.env(), ...) {

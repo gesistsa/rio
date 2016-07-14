@@ -4,7 +4,9 @@ cache: packages
 
 r_packages:
   - covr
-
+r_github_packages:
+  - leeper/csvy
+  
 addons:
   apt:
     sources:

@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.10 #
+
+ * Migrated CSVY-related code to separate package (https://github.com/leeper/csvy/). (#111)
+
 # CHANGES TO v0.4.9 #
 
  * Removed unnecessary error in xlsx imports. (#103, h/t Kevin Wright)

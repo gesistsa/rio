@@ -25,38 +25,8 @@ export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
     export_delim(x = x, file = file, sep =";", dec = ",", ...)
 }
 
-.export.rio_csvy <- function(file, x, comment_header = TRUE, ...) {
-    # write yaml
-    a <- attributes(x)
-    a <- a[!names(a) %in% c("names", "row.names")]
-    
-    a$fields <- list()
-    for (i in seq_along(x)) {
-        a$fields[[i]] <- list()
-        a$fields[[i]][1] <- names(x)[i]
-        a$fields[[i]][2] <- class(x[[i]])
-        atmp <- attributes(x[[i]])
-        atmp$class <- NULL
-        a$fields[[i]] <- c(a$fields[[i]], unname(atmp))
-        names(a$fields[[i]]) <- c("name", "class", names(atmp))
-        if ("labels" %in% names(a$fields[[i]])) {
-            a$fields[[i]][["labels"]] <- 
-              setNames(as.list(unname(atmp$labels)), names(atmp$labels))
-        }
-        rm(atmp)
-    }
-    
-    y <- paste0("---\n", as.yaml(a), "---\n")
-    
-    if (isTRUE(comment_header)){
-      m <- readLines(textConnection(y))
-      y <- paste0("#", m[-length(m)],collapse = "\n")
-      y <- c(y, "\n")
-    }
-    cat(y, file = file)
-    
-    # append CSV
-    .export.rio_csv(file = file, x = x, append = TRUE, ...)
+.export.rio_csvy <- function(file, x, ...) {
+    write_csvy(file = file, x = x, ...)
 }
 
 .export.rio_psv <- function(file, x, ...){
