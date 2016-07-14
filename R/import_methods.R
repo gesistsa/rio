@@ -116,7 +116,8 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "au
 }
 
 .import.rio_feather <- function(file, which = 1, ...){
-    read_feather(path = file)
+    requireNamespace("feather")
+    feather::read_feather(path = file)
 }
 
 .import.rio_dta <- function(file, haven = TRUE, 

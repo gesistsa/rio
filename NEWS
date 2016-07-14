@@ -1,5 +1,7 @@
 # CHANGES TO v0.4.10 #
 
+ * Changed feather Imports to Suggests to make rio installable on older R versions. (#104)
+ * Noted new RStudio add-in, GREA, that uses rio. (#109)
  * Migrated CSVY-related code to separate package (https://github.com/leeper/csvy/). (#111)
 
 # CHANGES TO v0.4.9 #

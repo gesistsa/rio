@@ -29,13 +29,13 @@ Imports:
     readxl, 
     readr,
     yaml,
-    csvy,
-    feather
+    csvy
 Suggests:
     datasets, 
     bit64, 
     testthat, 
     knitr, 
-    magrittr
+    magrittr,
+    feather
 License: GPL-2
 VignetteBuilder: knitr
