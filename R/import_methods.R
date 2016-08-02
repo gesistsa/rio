@@ -1,18 +1,25 @@
 import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
-  if (fread) {
-    fread(input = file, sep = sep, sep2 = sep2, header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
-  } else {
-    if (missing(sep) || is.null(sep) || sep == "auto") {
-      sep <- "\t"
+    if (fread) {
+        fread(input = file, sep = sep, sep2 = sep2, header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
+    } else {
+        dots <- list(...)
+        dots[["file"]] <- file
+        if (missing(sep) || is.null(sep) || sep == "auto") {
+            dots[["sep"]] <- "\t"
+        }
+        if (!"dec" %in% names(dots)) {
+            if (missing(sep2) || is.null(sep2) || sep2 == "auto") {
+                dots[["dec"]] <- "."
+            } else {
+                dots[["dec"]] <- sep2
+            }
+        }
+        if (missing(header) || is.null(header) || header == "auto") {
+            dots[["header"]] <- TRUE
+        }
+        dots[["stringsAsFactors"]] <- stringsAsFactors
+        do.call("read.table", dots)
     }
-    if (missing(header) || is.null(header) || header == "auto") {
-      header <- TRUE
-    }
-    if (missing(sep2) || is.null(sep2) || sep2 == "auto") {
-      sep2 <- "."
-    }
-    read.table(file = file, sep = sep, dec = sep2, header = header, stringsAsFactors = stringsAsFactors, ...)
-  }
 }
 
 .import.rio_tsv <- function(file, sep, which = 1, fread = TRUE, ...){

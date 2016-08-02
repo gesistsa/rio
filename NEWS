@@ -1,6 +1,7 @@
 # CHANGES TO v0.4.11 #
 
  * Note unsupported NumPy i/o via RcppCNPy. (#112)
+ * Fix import of European-style CSV files (sep = "," and sep2 = ";"). (#106, #107, h/t Stani Stadlmann)
 
 # CHANGES TO v0.4.10 #
 
