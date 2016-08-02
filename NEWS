@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.11 #
+
+ * Note unsupported NumPy i/o via RcppCNPy. (#112)
+
 # CHANGES TO v0.4.10 #
 
  * Changed feather Imports to Suggests to make rio installable on older R versions. (#104)

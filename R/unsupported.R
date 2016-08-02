@@ -3,6 +3,7 @@ stop_for_import <- function(fmt) {
     out <- switch(fmt,
            gnumeric = sprintf(x, fmt, "gnumeric::read.gnumeric.sheet"),
            jpg = sprintf(x, fmt, "jpeg::readJPEG"),
+           npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
            png = sprintf(x, fmt, "png::readPNG"),
            png = sprintf(x, fmt, "bmp::read.bmp"),
            tiff = sprintf(x, fmt, "tiff::readTIFF"),
@@ -23,6 +24,7 @@ stop_for_export <- function(fmt) {
     x <- gettext("%s format not supported. Consider using the '%s()' function")
     out <- switch(fmt,
            jpg = sprintf(x, fmt, "jpeg::writeJPEG"),
+           npy = sprintf(x, fmt, "RcppCNPy::npySave"),
            png = sprintf(x, fmt, "png::writePNG"),
            tiff = sprintf(x, fmt, "tiff::writeTIFF"),
            matlab = sprintf(x, fmt, "R.matlab::writeMat"),
