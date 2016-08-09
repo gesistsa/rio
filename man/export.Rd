@@ -21,9 +21,9 @@ The output file can be to a compressed directory, simply by adding an appropriat
 \itemize{
     \item Tab-separated data (.tsv), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}. %Setting \code{fwrite = TRUE} will rely on \code{\link[data.table]{fwrite}} for much faster export.
     \item Comma-separated data (.csv), using \code{\link[utils]{write.csv}} with \code{row.names = FALSE}. %Setting \code{fwrite = TRUE} will rely on \code{\link[data.table]{fwrite}} for much faster export.
-    \item \href{http://csvy.org/}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{write_csvy}}. The YAML header lines are preceded by R comment symbols (\#) by default; this can be turned off by passing a \code{comment_header = FALSE} argument to \code{export}. %Setting \code{fwrite = TRUE} will rely on \code{\link[data.table]{fwrite}} for much faster export.
+    \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{write_csvy}}. The YAML header lines are preceded by R comment symbols (\#) by default; this can be turned off by passing a \code{comment_header = FALSE} argument to \code{export}. %Setting \code{fwrite = TRUE} will rely on \code{\link[data.table]{fwrite}} for much faster export.
     \item Pipe-separated data (.psv), using \code{\link[utils]{write.table}} with \code{sep = '|'} and \code{row.names = FALSE}. %Setting \code{fwrite = TRUE} will rely on \code{\link[data.table]{fwrite}} for much faster export.
-    \item Feather R/Python interchange format (.feather), using \code{\link[feather]{write_feather}}
+    \item Feather R/Python interchange format (.feather), using \code{feather::write_feather}
     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
     \item Saved R objects (.RData), using \code{\link[base]{save}}
