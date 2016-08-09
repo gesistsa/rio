@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.12 #
+
+ * rio sets `options(datatable.fread.dec.experiment=FALSE)` during onLoad to address a Unix-specific locale issue.
+
 # CHANGES TO v0.4.11 #
 
  * Note unsupported NumPy i/o via RcppCNPy. (#112)
