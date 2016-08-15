@@ -2,7 +2,7 @@ Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
 Version: 0.4.12
-Date: 2016-08-09
+Date: 2016-08-15
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
@@ -12,6 +12,8 @@ Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co")
              person("Ista", "Zahn", role = "ctb"),
              person("Stanislaus", "Stadlmann", role = "ctb"))
 Description: Streamlined data import and export by making assumptions that the user is probably willing to make: 'import()' and 'export()' determine the data structure from the file extension, reasonable defaults are used for data import and export (e.g., 'stringsAsFactors=FALSE'), web-based import is natively supported (including from SSL/HTTPS), compressed files can be read directly without explicit decompression, and fast import packages are used where appropriate.
+URL: https://github.com/leeper/rio
+BugReports: https://github.com/leeper/rio/issues
 Depends: R (>= 2.15.0)
 Imports:
     tools, 
