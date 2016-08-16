@@ -1,6 +1,10 @@
 # CHANGES TO v0.4.13 #
 
  * Fix failing tests related to stricter variable name handling for Stata files in development version of haven. (#113, h/t Hadley Wickham)
+ * Added support for export of .sas7bdat files via haven (#116)
+ * Restored support for import from SPSS portable via haven (#116)
+ * Updated import methods to reflect changed formal argument names in haven. (#116)
+ * Converted to roxygen2 documentation and made NEWS an explicit markdown file.
 
 # CHANGES TO v0.4.12 #
 
