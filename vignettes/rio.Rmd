@@ -29,6 +29,7 @@ By making import and export easy, it's an obvious next step to also use R as a s
 | YAML (.yml) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |
 | SPSS (.sav) | Yes | Yes |
+| SPSS Portable (.por) | Yes |  |
 | "XBASE" database files (.dbf) | Yes | Yes |
 | Excel (.xls) | Yes |  |
 | Excel (.xlsx) | Yes | Yes |
@@ -36,7 +37,7 @@ By making import and export easy, it's an obvious next step to also use R as a s
 | R syntax (.R) | Yes | Yes |
 | Shallow XML documents (.xml) | Yes | Yes |
 | HTML Tables (.html) | Yes | Yes |
-| SAS (.sas7bdat) | Yes |  |
+| SAS (.sas7bdat) | Yes | Yes |
 | SAS XPORT (.xpt) | Yes |  |
 | Minitab (.mtp) | Yes |  |
 | Epiinfo (.rec) | Yes |  |

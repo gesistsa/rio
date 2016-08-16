@@ -23,6 +23,7 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 | YAML (.yml) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |
 | SPSS (.sav) | Yes | Yes |
+| SPSS Portable (.por) | Yes |  |
 | "XBASE" database files (.dbf) | Yes | Yes |
 | Excel (.xls) | Yes |  |
 | Excel (.xlsx) | Yes | Yes |
@@ -30,7 +31,7 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 | R syntax (.R) | Yes | Yes |
 | Shallow XML documents (.xml) | Yes | Yes |
 | HTML Tables (.html) | Yes | Yes |
-| SAS (.sas7bdat) | Yes |  |
+| SAS (.sas7bdat) | Yes | Yes |
 | SAS XPORT (.xpt) | Yes |  |
 | Minitab (.mtp) | Yes |  |
 | Epiinfo (.rec) | Yes |  |
