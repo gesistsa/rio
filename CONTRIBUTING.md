@@ -8,7 +8,7 @@ Contributions to **rio** are welcome from anyone and are best sent as pull reque
  
  4. All contributions need to be noted in the `Authors@R` field in the [DESCRIPTION](https://github.com/leeper/rio/blob/master/DESCRIPTION). Just follow the format of the existing entries to add your name (and, optionally, email address). Substantial contributions should also be noted in [`inst/CITATION`](https://github.com/leeper/rio/blob/master/inst/CITATION).
  
- 5. This package does not use devtools or roxygen code markup. Changes to documentation need to be made manually in the appropriate Rd file. See ["Writing R Extensions"](https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Writing-R-documentation-files) if the format is unfamiliar to you.
+ 5. This package uses royxgen code and documentation markup, so changes should be made to roxygen comments in the source code `.R` files. If changes are made, roxygen needs to be run. The easiest way to do this is a command line call to: `Rscript -e devtools::document()`. Please resolve any roxygen errors before submitting a pull request.
  
  6. Please run `R CMD BUILD rio` and `R CMD CHECK rio_VERSION.tar.gz` before submitting the pull request to check for any errors.
  
