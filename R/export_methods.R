@@ -1,3 +1,5 @@
+# @importFrom data.table fwrite
+#' @importFrom utils write.table
 export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
                          col.names = TRUE, ...) {
     if (fwrite) {
@@ -8,32 +10,41 @@ export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
                 col.names = col.names, ...)
 }
 
-.export.rio_txt <- function(file, x, ...){
+#' @export
+.export.rio_txt <- function(file, x, ...) {
     export_delim(x = x, file = file, ...)
 }
 
-.export.rio_tsv <- function(file, x, ...){
+#' @export
+.export.rio_tsv <- function(file, x, ...) {
     export_delim(x = x, file = file, ...)
 }
 
 
+#' @export
 .export.rio_csv <- function(file, x, ...) {
     export_delim(x = x, file = file, sep = ",", dec = ".", ...)
 }
 
-.export.rio_csv2 <- function(file, x, ...){
+#' @export
+.export.rio_csv2 <- function(file, x, ...) {
     export_delim(x = x, file = file, sep =";", dec = ",", ...)
 }
 
+#' @importFrom csvy write_csvy
+#' @export
 .export.rio_csvy <- function(file, x, ...) {
     write_csvy(file = file, x = x, ...)
 }
 
-.export.rio_psv <- function(file, x, ...){
+#' @export
+.export.rio_psv <- function(file, x, ...) {
     export_delim(x = x, file = file, sep = "|", ...)
 }
 
-.export.rio_fwf <- function(file, x, verbose = TRUE, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, digits = getOption("digits", 7), ...){
+#' @importFrom utils capture.output write.csv
+#' @export
+.export.rio_fwf <- function(file, x, verbose = TRUE, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, digits = getOption("digits", 7), ...) {
     dat <- lapply(x, function(col) {
         if (is.character(col)) {
             col <- as.numeric(as.factor(col))
@@ -80,50 +91,75 @@ export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
                 col.names = col.names, ...)
 }
 
-.export.rio_r <- function(file, x, ...){
+#' @export
+.export.rio_r <- function(file, x, ...) {
     dput(x, file = file, ...)
 }
 
-.export.rio_dump <- function(file, x, ...){
+#' @export
+.export.rio_dump <- function(file, x, ...) {
     dump(as.character(substitute(x)), file = file, ...)
 }
 
-.export.rio_rds <- function(file, x, ...){
+#' @export
+.export.rio_rds <- function(file, x, ...) {
     saveRDS(object = x, file = file, ...)
 }
 
-.export.rio_rdata <- function(file, x, ...){
+#' @export
+.export.rio_rdata <- function(file, x, ...) {
     save(x, file = file, ...)
 }
 
-.export.rio_feather <- function(file, x, ...){
+#' @export
+.export.rio_feather <- function(file, x, ...) {
     requireNamespace("feather")
     feather::write_feather(x = x, path = file)
 }
-.export.rio_sav <- function(file, x, ...){
+
+#' @importFrom haven write_sav
+#' @export
+.export.rio_sav <- function(file, x, ...) {
     write_sav(data = x, path = file, ...)
 }
 
-.export.rio_dta <- function(file, x, ...){
+#' @importFrom haven write_dta
+#' @export
+.export.rio_dta <- function(file, x, ...) {
     write_dta(data = x, path = file, ...)
 }
 
-.export.rio_dbf <- function(file, x, ...){
+#' @importFrom haven write_sas
+#' @export
+.export.rio_sas7bdat <- function(file, x, ...) {
+    write_sas(b7dat = x, path = file, ...)
+}
+
+#' @importFrom foreign write.dbf
+#' @export
+.export.rio_dbf <- function(file, x, ...) {
     write.dbf(dataframe = x, file = file, ...)
 }
 
-.export.rio_json <- function(file, x, ...){
+#' @importFrom jsonlite toJSON
+#' @export
+.export.rio_json <- function(file, x, ...) {
     cat(toJSON(x, ...), file = file)
 }
 
-.export.rio_arff <- function(file, x, ...){
+#' @importFrom foreign write.arff
+#' @export
+.export.rio_arff <- function(file, x, ...) {
     write.arff(x = x, file = file, ...)
 }
 
-.export.rio_xlsx <- function(file, x, ...){
+#' @importFrom openxlsx write.xlsx
+#' @export
+.export.rio_xlsx <- function(file, x, ...) {
     write.xlsx(x = x, file = file, ...)
 }
 
+#' @export
 .export.rio_html <- function(file, x, ...) {
     x[] <- lapply(x, as.character)
     out <- character(nrow(x))
@@ -139,6 +175,7 @@ export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
     cat(paste(doct, html, sep = "\n"), file = file, ...)
 }
 
+#' @export
 .export.rio_xml <- function(file, x, ...) {
     root <- ""
     for (i in 1:nrow(x)) {
@@ -151,10 +188,14 @@ export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
     cat(twrap(root, as.character(substitute(x))), file = file, ...)
 }
 
+#' @importFrom yaml as.yaml
+#' @export
 .export.rio_yml <- function(file, x, ...) {
   cat(as.yaml(x, ...), file = file)
 }
 
+#' @importFrom utils write.table
+#' @export
 .export.rio_clipboard <- function(file, x, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
     if (Sys.info()["sysname"] == "Darwin") {
         clip <- pipe("pbcopy", "w")
@@ -169,4 +210,3 @@ export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
         return(NULL)
     }
 }
-

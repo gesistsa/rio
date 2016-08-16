@@ -2,8 +2,10 @@ language: r
 sudo: false
 cache: packages
 
+r_github_packages:
+- hadley/haven
 r_packages:
-  - covr
+- covr
   
 addons:
   apt:
@@ -20,5 +22,11 @@ before_install: |
   CXX1X=g++-4.9
   CXX1XSTD=-std=c++11
 
+after_failure:
+  email: 
+    recipients:
+     - thosjleeper@gmail.com
+    on_success: change
+    on_failure: change
 after_success:
   - Rscript -e 'library("covr");codecov()'
