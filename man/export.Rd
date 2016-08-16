@@ -24,7 +24,7 @@ Write data.frame to a file
 \details{
 This function exports a data frame or matrix into a file with file format based on the file extension (or the manually specified format, if \code{format} is specified).
 
-The output file can be to a compressed directory, simply by adding an appropriate additional extensiont to the \code{file} argument, such as: \dQuote{iris.csv.tar}, \dQuote{iris.csv.zip}, or \dQuote{iris.csv.gz}.
+The output file can be to a compressed directory, simply by adding an appropriate additional extensiont to the \code{file} argument, such as: \dQuote{mtcars.csv.tar}, \dQuote{mtcars.csv.zip}, or \dQuote{mtcars.csv.gz}.
 
 \code{export} supports many file formats. See the documentation for the underlying export functions for optional arguments that can be passed via \code{...}
 
@@ -53,36 +53,41 @@ The output file can be to a compressed directory, simply by adding an appropriat
 }
 \examples{
 # specify only `file` argument
-export(iris, "iris.csv")
+export(mtcars, "mtcars.csv")
+
+\dontrun{
+# Stata does not recognize variables names with '.'
+export(mtcars, "mtcars.dta")
+}
 
 # specify only `format` argument
-"iris.dta" \%in\% dir()
-export(iris, format = "stata")
-"iris.dta" \%in\% dir()
+"mtcars.dta" \%in\% dir()
+export(mtcars, format = "stata")
+"mtcars.dta" \%in\% dir()
 
 # specify `file` and `format` to override default format
-export(iris, file = "iris.txt", format = "csv")
+export(mtcars, file = "mtcars.txt", format = "csv")
 
 # export to JSON
-export(iris, "iris.json")
+export(mtcars, "mtcars.json")
 
 # pass arguments to underlying export function
-export(iris, "iris.csv", col.names = FALSE)
+export(mtcars, "mtcars.csv", col.names = FALSE)
 
 # write data to .R syntax file and append additional data
-export(iris, file = "data.R", format = "dump")
+export(mtcars, file = "data.R", format = "dump")
 export(mtcars, file = "data.R", format = "dump", append = TRUE)
 source("data.R", echo = TRUE)
 
 # write data to a zip-compressed CSV
-export(iris, "iris.csv.zip")
+export(mtcars, "mtcars.csv.zip")
 
 # cleanup
-unlink("iris.csv")
-unlink("iris.dta")
-unlink("iris.json")
+unlink("mtcars.csv")
+unlink("mtcars.dta")
+unlink("mtcars.json")
 unlink("data.R")
-unlink("iris.csv.zip")
+unlink("mtcars.csv.zip")
 }
 \seealso{
 \code{\link{.export}}, \code{\link{import}}, \code{\link{convert}}

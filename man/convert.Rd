@@ -23,29 +23,29 @@ This function constructs a data frame from a data file using code{\link{import}}
 }
 \examples{
 # create a file to convert
-export(iris, "iris.dta")
+export(mtcars, "mtcars.dta")
 
 # convert Stata to CSV and open converted file
-convert("iris.dta", "iris.csv")
-head(import("iris.csv"))
+convert("mtcars.dta", "mtcars.csv")
+head(import("mtcars.csv"))
 
 # correct an erroneous file format
-export(iris, "iris.csv", format = "tsv")
-convert("iris.csv", "iris.csv", in_opts = list(format = "tsv"))
+export(mtcars, "mtcars.csv", format = "tsv")
+convert("mtcars.csv", "mtcars.csv", in_opts = list(format = "tsv"))
 
 # convert serialized R data.frame to JSON
-export(iris, "iris.rds")
-convert("iris.rds", "iris.json")
+export(mtcars, "mtcars.rds")
+convert("mtcars.rds", "mtcars.json")
 
 # cleanup
-unlink("iris.csv")
-unlink("iris.dta")
-unlink("iris.rds")
-unlink("iris.json")
+unlink("mtcars.csv")
+unlink("mtcars.dta")
+unlink("mtcars.rds")
+unlink("mtcars.json")
 
 \dontrun{
 # convert from the command line:
-Rscript -e "rio::convert('iris.dta', 'iris.csv')"
+Rscript -e "rio::convert('mtcars.dta', 'mtcars.csv')"
 }
 }
 \seealso{

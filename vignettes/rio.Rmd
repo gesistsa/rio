@@ -56,18 +56,18 @@ Additionally, any format that is not supported by **rio** but that has a known R
 ```{r, echo=FALSE, results='hide'}
 library("rio")
 
-export(iris, "iris.csv")
-export(iris, "iris.rds")
-export(iris, "iris.dta")
-export(iris, "iris_noext", format = "csv")
+export(mtcars, "mtcars.csv")
+export(mtcars, "mtcars.rds")
+export(mtcars, "mtcars.dta")
+export(mtcars, "mtcars_noext", format = "csv")
 ```
 
 ```{r}
 library("rio")
 
-x <- import("iris.csv")
-y <- import("iris.rds")
-z <- import("iris.dta")
+x <- import("mtcars.csv")
+y <- import("mtcars.rds")
+z <- import("mtcars.dta")
 
 # confirm identical
 all.equal(x, y, check.attributes = FALSE)
@@ -77,15 +77,15 @@ all.equal(x, z, check.attributes = FALSE)
 If for some reason a file does not have an extension, or has a file extension that does not match its actual type, you can manually specify a file format to override the format inference step. For example, we can read in a CSV file that does not have a file extension by specifying `csv`:
 
 ```{r}
-head(import("iris_noext", format = "csv"))
+head(import("mtcars_noext", format = "csv"))
 ```
 
 
 ```{r, echo=FALSE, results='hide'}
-unlink("iris.csv")
-unlink("iris.rds")
-unlink("iris.dta")
-unlink("iris_noext")
+unlink("mtcars.csv")
+unlink("mtcars.rds")
+unlink("mtcars.dta")
+unlink("mtcars_noext")
 ```
 
 
@@ -97,9 +97,9 @@ The export capabilities of **rio** are somewhat more limited than the import cap
 ```{r}
 library("rio")
 
-export(iris, "iris.csv")
-export(iris, "iris.rds")
-export(iris, "iris.dta")
+export(mtcars, "mtcars.csv")
+export(mtcars, "mtcars.rds")
+export(mtcars, "mtcars.dta")
 ```
 
 It is also easy to use `export` as part of an R pipeline (from magrittr or dplyr). For example, the following code uses `export` to save the results of a simple data transformation:
@@ -110,9 +110,9 @@ mtcars %>% subset(hp > 100) %>%  aggregate(. ~ cyl + am, data = ., FUN = mean) %
 ```
 
 ```{r, echo=FALSE, results='hide'}
-unlink("iris.csv")
-unlink("iris.rds")
-unlink("iris.dta")
+unlink("mtcars.csv")
+unlink("mtcars.rds")
+unlink("mtcars.dta")
 unlink("mtcars2.dta")
 ```
 
@@ -124,10 +124,10 @@ Because `convert` is just a thin wrapper for `import` and `export`, it is very e
 
 ```{r}
 # create file to convert
-export(iris, "iris.dta")
+export(mtcars, "mtcars.dta")
 
 # convert Stata to SPSS
-convert("iris.dta", "iris.sav")
+convert("mtcars.dta", "mtcars.sav")
 ```
 
 `convert` also accepts lists of arguments for controlling import (`in_opts`) and export (`out_opts`). This can be useful for passing additional arguments to import or export methods. This could be useful, for example, for reading in a fixed-width format file and converting it to a comma-separated values file:
@@ -146,8 +146,8 @@ import("fwf.csv") # check conversion
 ```
 
 ```{r, echo=FALSE, results='hide'}
-unlink("iris.dta")
-unlink("iris.sav")
+unlink("mtcars.dta")
+unlink("mtcars.sav")
 unlink("fwf.csv")
 unlink(fwf)
 ```
@@ -155,5 +155,5 @@ unlink(fwf)
 It is also possible to use **rio** on the command-line by calling `Rscript` with the `-e` (expression) argument. For example, to convert a file from Stata (.dta) to comma-separated values (.csv), simply do the following:
 
 ```
-Rscript -e "rio::convert('iris.dta', 'iris.csv')"
+Rscript -e "rio::convert('mtcars.dta', 'mtcars.csv')"
 ```

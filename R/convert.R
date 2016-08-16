@@ -7,29 +7,29 @@
 #' @return A character string containing the name of the output file (invisibly).
 #' @examples
 #' # create a file to convert
-#' export(iris, "iris.dta")
+#' export(mtcars, "mtcars.dta")
 #' 
 #' # convert Stata to CSV and open converted file
-#' convert("iris.dta", "iris.csv")
-#' head(import("iris.csv"))
+#' convert("mtcars.dta", "mtcars.csv")
+#' head(import("mtcars.csv"))
 #' 
 #' # correct an erroneous file format
-#' export(iris, "iris.csv", format = "tsv")
-#' convert("iris.csv", "iris.csv", in_opts = list(format = "tsv"))
+#' export(mtcars, "mtcars.csv", format = "tsv")
+#' convert("mtcars.csv", "mtcars.csv", in_opts = list(format = "tsv"))
 #' 
 #' # convert serialized R data.frame to JSON
-#' export(iris, "iris.rds")
-#' convert("iris.rds", "iris.json")
+#' export(mtcars, "mtcars.rds")
+#' convert("mtcars.rds", "mtcars.json")
 #' 
 #' # cleanup
-#' unlink("iris.csv")
-#' unlink("iris.dta")
-#' unlink("iris.rds")
-#' unlink("iris.json")
+#' unlink("mtcars.csv")
+#' unlink("mtcars.dta")
+#' unlink("mtcars.rds")
+#' unlink("mtcars.json")
 #' 
 #' \dontrun{
 #' # convert from the command line:
-#' Rscript -e "rio::convert('iris.dta', 'iris.csv')"
+#' Rscript -e "rio::convert('mtcars.dta', 'mtcars.csv')"
 #' }
 #' @seealso \href{https://lbraglia.github.io/}{Luca Braglia} has created a Shiny app called \href{https://github.com/lbraglia/rioweb}{rioweb} that provides access to the file conversion features of rio through a web browser. The app is featured in the \href{https://gallery.shinyapps.io/rioweb}{RStudio Shiny Gallery}.
 #' @export
