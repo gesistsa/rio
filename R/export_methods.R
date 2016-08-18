@@ -196,6 +196,12 @@ export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
     write_xml(xml, file = file, ...)
 }
 
+# @importFrom readODS write_ods
+# @export
+#.export.rio_ods <- function(file, x, which = 1, ...) {
+#    write_ods(x = x, path = file, sheet = which, ...)
+#}
+
 #' @importFrom yaml as.yaml
 #' @export
 .export.rio_yml <- function(file, x, ...) {
