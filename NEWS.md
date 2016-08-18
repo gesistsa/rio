@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.14 #
+
+ * Update import and export methods to use new xml2 for XML and HTML export. (#86)
+
 # CHANGES TO v0.4.13 #
 
  * Fix failing tests related to stricter variable name handling for Stata files in development version of haven. (#113, h/t Hadley Wickham)

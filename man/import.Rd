@@ -52,8 +52,8 @@ This function imports a data frame or matrix from a data file with the file form
     \item Systat (.syd), using \code{\link[foreign]{read.systat}}
     \item Data Interchange Format (.dif), using \code{\link[utils]{read.DIF}}
     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read.ods}}.  Use \code{which} to specify a sheet number.
-    \item Shallow XML documents (.xml). The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2]{as_list}}.
-    \item Single-table HTML documents (.html). The data structure will only be read correctly if the HTML file can be read with \code{\link[xml2]{read_html}} and converted to a list via \code{\link[xml2]{as_list}}.
+    \item Shallow XML documents (.xml), using \code{\link[xml2]{read_xml}}. The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2]{as_list}}.
+    \item Single-table HTML documents (.html), using \code{\link[xml2]{read_html}}. The data structure will only be read correctly if the HTML file can be converted to a list via \code{\link[xml2]{as_list}}.
     \item Clipboard import (on Windows and Mac OS), using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
     \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
     \item Google Sheets, as Comma-separated data (.csv)

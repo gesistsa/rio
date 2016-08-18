@@ -30,8 +30,8 @@
 #'     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{write.arff}}
 #'     \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'}
 #'     \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}
-#'     \item XML (.xml), using a custom method to create a simple XML tree
-#'     \item HTML (.html), using a custom method to create a single-table HTML file
+#'     \item XML (.xml), using a custom method based on \code{\link[xml2]{xml_add_child}} to create a simple XML tree and \code{\link[xml2]{write_xml}} to write to disk.
+#'     \item HTML (.html), using a custom method based on \code{\link[xml2]{xml_add_child}} to create a simple HTML table and \code{\link[xml2]{write_xml}} to write to disk.
 #'     \item Clipboard export (on Windows and Mac OS), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
 #' }
 #' 
