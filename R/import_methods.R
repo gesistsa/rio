@@ -199,7 +199,7 @@ import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "au
 #' @importFrom haven read_sas
 #' @export
 .import.rio_sas7bdat <- function(file, which = 1, column.labels = FALSE, ...) {
-  convert_attributes(read_sas(b7dat = file, ...))
+  convert_attributes(read_sas(data_file = file, ...))
 }
 
 #' @importFrom foreign read.xport
