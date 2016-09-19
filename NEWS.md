@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.15 #
+ 
+ * Update import to be more compatible with custom import methods with a supplied format parameter.
+
 # CHANGES TO v0.4.14 #
 
  * Update import and export methods to use new xml2 for XML and HTML export. (#86)
