@@ -4,13 +4,10 @@ find_compress <- function(f) {
         compress <- "zip"
     } else if (grepl("tar\\.gz$", f)) {
         file <- sub("\\.tar\\.gz$", "", f)
-        compress <- "gzip"
+        compress <- "tar"
     } else if (grepl("tar$", f)) {
         file <- sub("\\.tar$", "", f)
         compress <- "tar"
-    } else if (grepl("gz$", f)) {
-        file <- sub("\\.gz$", "", f)
-        compress <- "gzip"
     } else {
         file <- f
         compress <- NA_character_

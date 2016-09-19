@@ -12,9 +12,9 @@
 
 \method{.import}{default}(file, ...)
 
-\method{.export}{default}(file, x, ...)
-
 .export(file, x, ...)
+
+\method{.export}{default}(file, x, ...)
 }
 \arguments{
 \item{file}{A character string naming a file.}

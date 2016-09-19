@@ -48,7 +48,10 @@ get_type <- function(fmt) {
         # compressed formats
         zip = "zip",
         tar = "tar",
-        gz = "gz",
+        gz = "gzip",
+        gzip = "gzip",
+        csv.gz = "gzip",
+        csv.gzip = "gzip",
         # known but unsupported formats
         gnumeric = "gnumeric",
         jpeg = "jpg",

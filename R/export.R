@@ -94,14 +94,19 @@ export <- function(x, file, format, ...) {
         file <- paste0(as.character(substitute(x)), ".", fmt)
         compress <- NA_character_
     }
-    
+    if (fmt %in% c("gz", "gzip")) {
+        fmt <- file_ext(file_path_sans_ext(file, compress = FALSE))
+        file <- gzfile(file, "w")
+        on.exit(close(file))
+    }
+
     if (!is.data.frame(x) & !is.matrix(x)) {
         stop("'x' is not a data.frame or matrix")
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
     
-    class(file) <- paste0("rio_", fmt)
+    class(file) <- c(paste0("rio_", fmt), class(file))
     .export(file = file, x = x, ...)
     
     if (!is.na(compress)) {

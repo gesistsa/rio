@@ -1,8 +1,14 @@
 #' @importFrom data.table fread
-import_delim <- function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
-    if (fread) {
-        fread(input = file, sep = sep, sep2 = sep2, header = header, stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
+import_delim <- 
+function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto", 
+         header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
+    if (fread & !inherits(file, "connection")) {
+        fread(input = file, sep = sep, sep2 = sep2, header = header, 
+              stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
     } else {
+        if (inherits(file, "connection")) {
+            message("data.table::fread() does not support reading from connections. Using utils::read.table() instead.")
+        }
         dots <- list(...)
         dots[["file"]] <- file
         if (missing(sep) || is.null(sep) || sep == "auto") {

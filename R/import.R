@@ -74,7 +74,7 @@
 #' unlink("iris2.csv")
 #' 
 #' @seealso \code{\link{.import}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
-#' @importFrom tools file_ext
+#' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom stats na.omit setNames
 #' @importFrom utils installed.packages untar unzip tar zip type.convert capture.output
 #' @importFrom urltools url_parse
@@ -87,13 +87,13 @@ import <- function(file, format, setclass, which, ...) {
     if ((file != "clipboard") && !file.exists(file)) {
         stop("No such file")
     }
-    if (grepl("zip$", file)) {
+    if (grepl("\\.zip$", file)) {
         if (missing(which)) {
             file <- parse_zip(file)
         } else {
             file <- parse_zip(file, which = which)
         }
-    } else if(grepl("tar$", file) | grepl("gz$", file)) {
+    } else if(grepl("\\.tar", file)) {
         if (missing(which)) {
             which <- 1
         }
@@ -101,11 +101,16 @@ import <- function(file, format, setclass, which, ...) {
     }
     if (missing(format)) {
         fmt <- get_ext(file)
+        if (fmt %in% c("gz", "gzip")) {
+            fmt <- file_ext(file_path_sans_ext(file, compress = FALSE))
+            file <- gzfile(file, "r")
+            on.exit(close(file))
+        }
     } else {
         fmt <- get_type(format)
     }
     
-    class(file) <- paste0("rio_", fmt)
+    class(file) <- c(paste0("rio_", fmt), class(file))
     if (missing(which)) {
         x <- .import(file = file, ...)
     } else {

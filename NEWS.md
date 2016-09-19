@@ -2,6 +2,7 @@
 
  * Improved behavior of `import()` and `export()` with respect to unrecognized file types. (#124, #125, h/t Jason Becker)
  * Added explicit tests of the S3 extension mechanism for `.import()` and `.export()`.
+ * Attempt to recognize compressed but non-archived file formats (e.g., ".csv.gz"). (#123, h/t trevorld)
 
 # CHANGES TO v0.4.14 #
 
