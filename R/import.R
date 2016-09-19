@@ -102,7 +102,13 @@ import <- function(file, format, setclass, which, ...) {
     if (missing(format)) {
         fmt <- get_ext(file)
     } else {
-        fmt <- get_type(format)
+      check_method_exists <- function(format) {
+        if (!is.null(getS3method('.import', paste0('rio_', format)))) {
+          return(format)
+        }
+      }
+      fmt <- tryCatch(check_method_exists(format), 
+                      error = function(e) get_type(format))
     }
     stop_for_import(fmt)
     
