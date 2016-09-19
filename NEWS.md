@@ -1,3 +1,8 @@
+# CHANGES TO v0.4.15 #
+
+ * Improved behavior of `import()` and `export()` with respect to unrecognized file types. (#124, #125, h/t Jason Becker)
+ * Added explicit tests of the S3 extension mechanism for `.import()` and `.export()`.
+
 # CHANGES TO v0.4.14 #
 
  * Update import and export methods to use new xml2 for XML and HTML export. (#86)

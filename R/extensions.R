@@ -20,17 +20,44 @@
 #' @rdname extensions
 #' @export
 .import.default <- function(file, ...){
-  stop('Unrecognized file format')
-}
-
-#' @rdname extensions
-#' @export
-.export.default <- function(file, x, ...){
-  stop("Unrecognized file format")
+    x <- gettext("%s format not supported. Consider using the '%s()' function")
+    fmt <- file_ext(file)
+    out <- switch(fmt,
+           gnumeric = sprintf(x, fmt, "gnumeric::read.gnumeric.sheet"),
+           jpg = sprintf(x, fmt, "jpeg::readJPEG"),
+           npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
+           png = sprintf(x, fmt, "png::readPNG"),
+           png = sprintf(x, fmt, "bmp::read.bmp"),
+           tiff = sprintf(x, fmt, "tiff::readTIFF"),
+           sss = sprintf(x, fmt, "sss::read.sss"),
+           sdmx = sprintf(x, fmt, "sdmx::readSDMX"),
+           matlab = sprintf(x, fmt, "R.matlab::readMat"),
+           gexf = sprintf(x, fmt, "rgexf::read.gexf"),
+           npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
+           gettext("Format not supported"))
+    stop(out)
 }
 
 #' @rdname extensions
 #' @export
 .export <- function(file, x, ...){
   UseMethod(".export")
+}
+
+#' @rdname extensions
+#' @export
+.export.default <- function(file, x, ...){
+    x <- gettext("%s format not supported. Consider using the '%s()' function")
+    fmt <- file_ext(file)
+    out <- switch(fmt,
+           jpg = sprintf(x, fmt, "jpeg::writeJPEG"),
+           npy = sprintf(x, fmt, "RcppCNPy::npySave"),
+           png = sprintf(x, fmt, "png::writePNG"),
+           tiff = sprintf(x, fmt, "tiff::writeTIFF"),
+           matlab = sprintf(x, fmt, "R.matlab::writeMat"),
+           xpt = sprintf(x, fmt, "SASxport::write.xport"),
+           gexf = sprintf(x, fmt, "rgexf::write.gexf"),
+           npy = sprintf(x, fmt, "RcppCNPy::npySave"),
+           gettext("Format not supported"))
+    stop(out)
 }

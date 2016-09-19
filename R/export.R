@@ -100,7 +100,6 @@ export <- function(x, file, format, ...) {
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
-    stop_for_export(fmt)
     
     class(file) <- paste0("rio_", fmt)
     .export(file = file, x = x, ...)

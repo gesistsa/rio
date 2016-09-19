@@ -104,7 +104,6 @@ import <- function(file, format, setclass, which, ...) {
     } else {
         fmt <- get_type(format)
     }
-    stop_for_import(fmt)
     
     class(file) <- paste0("rio_", fmt)
     if (missing(which)) {
