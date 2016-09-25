@@ -327,10 +327,14 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     d
 }
 
-#' @importFrom xml2 read_html as_list
+#' @importFrom xml2 read_html as_list xml_find_all
 #' @export
 .import.rio_html <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
-    x <- as_list(read_html(unclass(file)))[["body"]][["table"]]
+    tables <- xml_find_all(read_html(unclass(file)), ".//table")
+    if (which > length(tables)) {
+        stop(paste0("Requested table exceeds number of tables found in file (", length(tables),")!"))
+    }
+    x <- as_list(tables[[which]])
     if ("th" %in% names(x[[1]])) {
         col_names <- unlist(x[[1]][names(x[[1]]) %in% "th"])
         out <- do.call("rbind", lapply(x[-1], function(y) {
