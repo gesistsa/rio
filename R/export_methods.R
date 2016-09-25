@@ -132,7 +132,7 @@ export_delim <- function(file, x, fwrite = FALSE, sep = "\t", row.names = FALSE,
 #' @importFrom haven write_sas
 #' @export
 .export.rio_sas7bdat <- function(file, x, ...) {
-    write_sas(b7dat = x, path = file, ...)
+    write_sas(data = x, path = file, ...)
 }
 
 #' @importFrom foreign write.dbf

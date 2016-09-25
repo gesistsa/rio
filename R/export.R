@@ -95,7 +95,7 @@ export <- function(x, file, format, ...) {
         compress <- NA_character_
     }
     if (fmt %in% c("gz", "gzip")) {
-        fmt <- file_ext(file_path_sans_ext(file, compress = FALSE))
+        fmt <- file_ext(file_path_sans_ext(file, compression = FALSE))
         file <- gzfile(file, "w")
         on.exit(close(file))
     }
