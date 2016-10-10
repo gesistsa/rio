@@ -247,7 +247,7 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 #' @importFrom readxl read_excel
 #' @export
 .import.rio_xls <- function(file, which = 1, ...) {
-  read_excel(path = file, ...)
+  read_excel(path = file, sheet = which, ...)
 }
 
 #' @importFrom readxl read_excel

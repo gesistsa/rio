@@ -1,4 +1,8 @@
-# CHANGES TO v0.4.15 #
+# CHANGES TO v0.4.17 #
+
+ * Fixed a bug in `.import.rio_xls()` wherein the `which` argument was ignored. (h/t Mohamed Elgoussi)
+
+# CHANGES TO v0.4.16 #
 
  * Added support for importing from multi-table HTML files using the `which` argument. (#126)
 
