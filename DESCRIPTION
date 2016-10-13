@@ -31,7 +31,7 @@ Imports:
     foreign,
     haven (> 0.2.1),
     openxlsx,
-    readODS,
+    readODS (>= 1.6.2),
     jsonlite,
     xml2 (>= 1.0.0),
     curl (>= 0.6),
