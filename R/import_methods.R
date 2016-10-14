@@ -274,33 +274,10 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     read.fortran(file = file, format = style, ...)
 }
 
-#' @importFrom readODS read.ods getNrOfSheetsInODS
+#' @importFrom readODS read_ods
 #' @export
-.import.rio_ods <- function(file, which = NULL, header = TRUE, ...) {
-    a <- list(...)
-    if ("sheet" %in% names(a)) {
-        which <- a$sheet
-    }
-    handlingODSheader <- function(x) {
-        colnames(x) <- x[1,]
-        g <- x[2:nrow(x),]
-        rownames(g) <- seq(from = 1, to = nrow(g))
-        return(g)
-    }
-    if (getNrOfSheetsInODS(file) > 1 & is.null(which)) {
-        msg <- paste0("There are ", getNrOfSheetsInODS(file), " sheets in the ODS file. Only the first sheet will be returned. Use sheet option from read.ods to select which sheet to import.")
-        warning(msg)
-        which <- 1
-    } else if (getNrOfSheetsInODS(file) == 1) {
-        which <- 1
-    }
-    res <- read.ods(file = file, sheet = which, ...)
-    if (header & !is.data.frame(res)) {
-        res <- lapply(res, handlingODSheader)
-    }
-    if (header & is.data.frame(res)) {
-        res <- handlingODSheader(res)
-    }
+.import.rio_ods <- function(file, which = 1, header = TRUE, ...) {
+    res <- read_ods(path = file, sheet = which, col_names = header, ...)
     return(res)
 }
 
