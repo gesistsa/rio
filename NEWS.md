@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.19
+
+ * Fixed a bug in the import of delimited files when `fread = FALSE`. (#133, h/t Christopher Gandrud)
+
 # CHANGES TO v0.4.18
 
  * With new data.table release, export using `fwrite()` is now the default for text-based file formats.

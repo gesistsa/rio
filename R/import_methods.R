@@ -2,7 +2,7 @@
 import_delim <- 
 function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto", 
          header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
-    if (fread & !inherits(file, "connection")) {
+    if (isTRUE(fread) & !inherits(file, "connection")) {
         fread(input = file, sep = sep, sep2 = sep2, header = header, 
               stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
     } else {
@@ -12,7 +12,15 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
         dots <- list(...)
         dots[["file"]] <- file
         if (missing(sep) || is.null(sep) || sep == "auto") {
-            dots[["sep"]] <- "\t"
+            if (inherits(file, "rio_csv")) {
+                dots[["sep"]] <- ","
+            } else if (inherits(file, "rio_csv2")) {
+                dots[["sep"]] <- ";"
+            } else if (inherits(file, "rio_psv")) {
+                dots[["sep"]] <- "|"
+            } else {
+                dots[["sep"]] <- "\t"
+            }
         }
         if (!"dec" %in% names(dots)) {
             if (missing(sep2) || is.null(sep2) || sep2 == "auto") {

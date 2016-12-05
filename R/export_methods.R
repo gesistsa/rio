@@ -5,9 +5,10 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     if (fwrite) {
         fwrite(x, file = file, sep = sep, col.name = col.names, 
                row.names = row.names, ...)
+    } else {
+        write.table(x, file = file, sep = sep, row.names = row.names,
+                    col.names = col.names, ...)
     }
-    write.table(x, file = file, sep = sep, row.names = row.names,
-                col.names = col.names, ...)
 }
 
 #' @export
@@ -19,7 +20,6 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 .export.rio_tsv <- function(file, x, ...) {
     export_delim(x = x, file = file, ...)
 }
-
 
 #' @export
 .export.rio_csv <- function(file, x, ...) {

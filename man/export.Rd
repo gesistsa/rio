@@ -29,10 +29,10 @@ The output file can be to a compressed directory, simply by adding an appropriat
 \code{export} supports many file formats. See the documentation for the underlying export functions for optional arguments that can be passed via \code{...}
 
 \itemize{
-    \item Tab-separated data (.tsv), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}. Setting \code{fwrite = TRUE} (the default) will rely on \code{\link[data.table]{fwrite}} for much faster export.
-    \item Comma-separated data (.csv), using \code{\link[utils]{write.csv}} with \code{row.names = FALSE}. Setting \code{fwrite = TRUE} (the default) will rely on \code{\link[data.table]{fwrite}} for much faster export.
+    \item Tab-separated data (.tsv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{row.names = FALSE}.
+    \item Comma-separated data (.csv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.csv}} with \code{row.names = FALSE}.
     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{write_csvy}}. The YAML header lines are preceded by R comment symbols (\#) by default; this can be turned off by passing a \code{comment_header = FALSE} argument to \code{export}. Setting \code{fwrite = TRUE} (the default) will rely on \code{\link[data.table]{fwrite}} for much faster export.
-    \item Pipe-separated data (.psv), using \code{\link[utils]{write.table}} with \code{sep = '|'} and \code{row.names = FALSE}. Setting \code{fwrite = TRUE} (the default) will rely on \code{\link[data.table]{fwrite}} for much faster export.
+    \item Pipe-separated data (.psv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{sep = '|'} and \code{row.names = FALSE}.
     \item Feather R/Python interchange format (.feather), using \code{feather::write_feather}
     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
