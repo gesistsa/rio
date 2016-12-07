@@ -1,6 +1,6 @@
 # CHANGES TO v0.4.20
 
- * Fixed a big in the `.import.rio_xls()` and `.import.rio_xlsx()` where the `sheet` argument would not be not be passed to `which` and would return an error. 
+ * Fixed a big in the `.import.rio_xls()` and `.import.rio_xlsx()` where the `sheet` argument would return an error.
 
 # CHANGES TO v0.4.19
 
