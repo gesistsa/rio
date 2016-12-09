@@ -1,9 +1,9 @@
 #' @importFrom data.table fread
-import_delim <- 
-function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto", 
+import_delim <-
+function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
          header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
     if (isTRUE(fread) & !inherits(file, "connection")) {
-        fread(input = file, sep = sep, sep2 = sep2, header = header, 
+        fread(input = file, sep = sep, sep2 = sep2, header = header,
               stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
     } else {
         if (inherits(file, "connection")) {
@@ -159,9 +159,9 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 #' @importFrom foreign read.dta
 #' @importFrom haven read_dta
 #' @export
-.import.rio_dta <- function(file, haven = TRUE, 
-                            convert.dates = TRUE, 
-                            convert.factors = FALSE, 
+.import.rio_dta <- function(file, haven = TRUE,
+                            convert.dates = TRUE,
+                            convert.factors = FALSE,
                             missing.type = FALSE, ...) {
   if (haven) {
     a <- list(...)
@@ -170,9 +170,9 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     }
     convert_attributes(read_dta(file = file))
   } else {
-    out <- read.dta(file = file, 
-                    convert.dates = convert.dates, 
-                    convert.factors = convert.factors, 
+    out <- read.dta(file = file,
+                    convert.dates = convert.dates,
+                    convert.factors = convert.factors,
                     missing.type = missing.type, ...)
     attr(out, "expansion.fields") <- NULL
     attr(out, "time.stamp") <- NULL
@@ -199,7 +199,7 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
   if (haven) {
     convert_attributes(read_sav(file = file))
   } else {
-    convert_attributes(read.spss(file = file, to.data.frame = to.data.frame, 
+    convert_attributes(read.spss(file = file, to.data.frame = to.data.frame,
                                  use.value.labels = use.value.labels, ...))
   }
 }
@@ -255,22 +255,42 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 #' @importFrom readxl read_excel
 #' @export
 .import.rio_xls <- function(file, which = 1, ...) {
-  read_excel(path = file, sheet = which, ...)
+
+  Call <- match.call(expand.dots = TRUE)
+  if ("which" %in% names(Call)) {
+    Call$sheet <- Call$which
+    Call$which <- NULL
+  }
+
+  Call$path <- file
+  Call$file <- NULL
+  Call$readxl <- NULL
+  Call[[1L]] <- as.name("read_excel")
+  eval.parent(Call)
 }
 
 #' @importFrom readxl read_excel
 #' @importFrom openxlsx read.xlsx
 #' @export
 .import.rio_xlsx <- function(file, which = 1, readxl = TRUE, ...) {
-  a <- list(...)
-  if ("sheet" %in% names(a)) {
-        which <- a$sheet
+
+  Call <- match.call(expand.dots = TRUE)
+  if ("which" %in% names(Call)) {
+    Call$sheet <- Call$which
+    Call$which <- NULL
   }
+
   if (readxl) {
-    read_excel(path = file, sheet = which, ...)
+    Call$path <- file
+    Call[[1L]] <- as.name("read_excel")
   } else {
-    read.xlsx(xlsxFile = file, sheet = which, ...)
+    Call$xlsxFile <- file
+    Call[[1L]] <- as.name("read.xlsx")
   }
+
+  Call$file <- NULL
+  Call$readxl <- NULL
+  eval.parent(Call)
 }
 
 #' @importFrom utils read.fortran

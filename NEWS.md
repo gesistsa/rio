@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.20
+
+ * Fixed a big in the `.import.rio_xls()` and `.import.rio_xlsx()` where the `sheet` argument would return an error.
+
 # CHANGES TO v0.4.19
 
  * Fixed a bug in the import of delimited files when `fread = FALSE`. (#133, h/t Christopher Gandrud)
@@ -197,7 +201,7 @@
 
 # CHANGES TO v0.2.2
 
- * Uses the longurl package to expand shortened URLs so that their file type can be easily determined. 
+ * Uses the longurl package to expand shortened URLs so that their file type can be easily determined.
 
 # CHANGES TO v0.2.1
 
