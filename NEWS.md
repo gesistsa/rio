@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.21
+
+ * Handle HTML tables with `<tbody>` elements. (h/t Mohamed Elgoussi)
+
 # CHANGES TO v0.4.20
 
  * Fixed a big in the `.import.rio_xls()` and `.import.rio_xlsx()` where the `sheet` argument would return an error.

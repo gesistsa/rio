@@ -340,6 +340,9 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
         stop(paste0("Requested table exceeds number of tables found in file (", length(tables),")!"))
     }
     x <- as_list(tables[[which]])
+    if ("tbody" %in% names(x)) {
+        x <- x[["tbody"]]
+    }
     if ("th" %in% names(x[[1]])) {
         col_names <- unlist(x[[1]][names(x[[1]]) %in% "th"])
         out <- do.call("rbind", lapply(x[-1], function(y) {
@@ -350,7 +353,7 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
         out <- do.call("rbind", lapply(x, function(y) {
             unlist(y[names(y) %in% "td"])
         }))
-        colnames(out) <- paste0("V", 1:ncol(out))
+        colnames(out) <- paste0("V", seq_len(ncol(out)))
     }
     row.names(out) <- 1:nrow(out)
     as.data.frame(out, ..., stringsAsFactors = stringsAsFactors)
