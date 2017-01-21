@@ -7,11 +7,11 @@
 #' @param \dots Additional arguments for the underlying export functions.
 #' @return The name of the output file as a character string (invisibly).
 #' @details This function exports a data frame or matrix into a file with file format based on the file extension (or the manually specified format, if \code{format} is specified).
-#' 
+#'
 #' The output file can be to a compressed directory, simply by adding an appropriate additional extensiont to the \code{file} argument, such as: \dQuote{mtcars.csv.tar}, \dQuote{mtcars.csv.zip}, or \dQuote{mtcars.csv.gz}.
-#' 
+#'
 #' \code{export} supports many file formats. See the documentation for the underlying export functions for optional arguments that can be passed via \code{...}
-#' 
+#'
 #' \itemize{
 #'     \item Tab-separated data (.tsv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{row.names = FALSE}.
 #'     \item Comma-separated data (.csv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.csv}} with \code{row.names = FALSE}.
@@ -20,7 +20,7 @@
 #'     \item Feather R/Python interchange format (.feather), using \code{feather::write_feather}
 #'     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
 #'     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
-#'     \item Saved R objects (.RData), using \code{\link[base]{save}}
+#'     \item Saved R objects (.RData,.rda), using \code{\link[base]{save}}
 #'     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}
 #'     \item YAML (.yml), using \code{\link[yaml]{as.yaml}}
 #'     \item Stata (.dta), using \code{\link[haven]{write_dta}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
@@ -34,38 +34,38 @@
 #'     \item HTML (.html), using a custom method based on \code{\link[xml2]{xml_add_child}} to create a simple HTML table and \code{\link[xml2]{write_xml}} to write to disk.
 #'     \item Clipboard export (on Windows and Mac OS), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
 #' }
-#' 
+#'
 #' @examples
 #' # specify only `file` argument
 #' export(mtcars, "mtcars.csv")
-#' 
+#'
 #' \dontrun{
 #' # Stata does not recognize variables names with '.'
 #' export(mtcars, "mtcars.dta")
 #' }
-#' 
+#'
 #' # specify only `format` argument
 #' "mtcars.dta" %in% dir()
 #' export(mtcars, format = "stata")
 #' "mtcars.dta" %in% dir()
-#' 
+#'
 #' # specify `file` and `format` to override default format
 #' export(mtcars, file = "mtcars.txt", format = "csv")
-#' 
+#'
 #' # export to JSON
 #' export(mtcars, "mtcars.json")
-#' 
+#'
 #' # pass arguments to underlying export function
 #' export(mtcars, "mtcars.csv", col.names = FALSE)
-#' 
+#'
 #' # write data to .R syntax file and append additional data
 #' export(mtcars, file = "data.R", format = "dump")
 #' export(mtcars, file = "data.R", format = "dump", append = TRUE)
 #' source("data.R", echo = TRUE)
-#' 
+#'
 #' # write data to a zip-compressed CSV
 #' export(mtcars, "mtcars.csv.zip")
-#' 
+#'
 #' # cleanup
 #' unlink("mtcars.csv")
 #' unlink("mtcars.dta")
@@ -105,15 +105,15 @@ export <- function(x, file, format, ...) {
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
-    
+
     class(file) <- c(paste0("rio_", fmt), class(file))
     .export(file = file, x = x, ...)
-    
+
     if (!is.na(compress)) {
         cfile <- compress_out(cfile = cfile, filename = file, type = compress)
         unlink(file)
         return(invisible(cfile))
     }
-    
+
     invisible(unclass(file))
 }
