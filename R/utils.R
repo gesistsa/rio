@@ -11,6 +11,7 @@ get_type <- function(fmt) {
         psv = "psv",
         "|" = "psv",
         fwf = "fwf",
+        rda = "rdata",
         rds = "rds",
         rdata = "rdata",
         dta = "dta",

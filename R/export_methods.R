@@ -3,7 +3,7 @@
 export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
                          col.names = TRUE, ...) {
     if (fwrite) {
-        fwrite(x, file = file, sep = sep, col.name = col.names, 
+        fwrite(x, file = file, sep = sep, col.name = col.names,
                row.names = row.names, ...)
     } else {
         write.table(x, file = file, sep = sep, row.names = row.names,
@@ -70,9 +70,9 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     n <- nchar(dat[1,]) + c(rep(nchar(sep), ncol(dat)-1), 0)
     col_classes <- sapply(x, class)
     col_classes[col_classes == "factor"] <- "integer"
-    dict <- cbind.data.frame(variable = names(n), 
-                             class = col_classes, 
-                             width = unname(n), 
+    dict <- cbind.data.frame(variable = names(n),
+                             class = col_classes,
+                             width = unname(n),
                              columns = paste0(c(1, cumsum(n)+1)[-length(n)], "-", cumsum(n)),
                              stringsAsFactors = FALSE)
     if (verbose) {
@@ -110,6 +110,9 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 .export.rio_rdata <- function(file, x, ...) {
     save(x, file = file, ...)
 }
+
+#' @export
+.export.rio_rda <- .export.rio_rdata
 
 #' @export
 .export.rio_feather <- function(file, x, ...) {
@@ -192,7 +195,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
             xml_add_child(thisrow, read_xml(paste0(twrap(x[i, j, drop = TRUE], names(x)[j]), "\n")))
         }
     }
-    
+
     write_xml(xml, file = file, ...)
 }
 

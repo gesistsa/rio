@@ -18,7 +18,7 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 | Pipe-separated data (.psv) | Yes | Yes |
 | Fixed-width format data (.fwf) | Yes | Yes |
 | Serialized R objects (.rds) | Yes | Yes |
-| Saved R objects (.RData) | Yes | Yes |
+| Saved R objects (.RData,.rda) | Yes | Yes |
 | JSON (.json) | Yes | Yes |
 | YAML (.yml) | Yes | Yes |
 | Stata (.dta) | Yes | Yes |

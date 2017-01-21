@@ -8,9 +8,9 @@
 #' @param \dots Additional arguments passed to the underlying import functions. For example, this can control column classes for delimited file types, or control the use of haven for Stata and SPSS or readxl for Excel (.xlsx) format. See details below.
 #' @return An R data.frame. If \code{setclass} is used, this data.frame may have additional class attribute values.
 #' @details This function imports a data frame or matrix from a data file with the file format based on the file extension (or the manually specified format, if \code{format} is specified).
-#' 
+#'
 #' \code{import} supports the following file formats:
-#' 
+#'
 #' \itemize{
 #'     \item Tab-separated data (.tsv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
 #'     \item Comma-separated data (.csv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
@@ -19,7 +19,7 @@
 #'     \item Pipe-separated data (.psv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{sep = '|'}, \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
 #'     \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils]{read.fwf}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}. If \code{readr = TRUE}, import will be performed using \code{\link[readr]{read_fwf}}, where \code{widths} should be: \code{NULL}, a vector of column widths, or the output of \code{\link[readr]{fwf_empty}}, \code{\link[readr]{fwf_widths}}, or \code{\link[readr]{fwf_positions}}.
 #'     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
-#'     \item Saved R objects (.RData), using \code{\link[base]{load}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files.
+#'     \item Saved R objects (.RData,.rda), using \code{\link[base]{load}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files.
 #'     \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
 #'     \item YAML (.yml), using \code{\link[yaml]{yaml.load}}
 #'     \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
@@ -41,38 +41,38 @@
 #'     \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
 #'     \item Google Sheets, as Comma-separated data (.csv)
 #' }
-#' 
+#'
 #' \code{import} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). If you would prefer these attributes to be stored at the data.frame-level (i.e., in \code{attributes(mtcars)}), see \code{\link{gather_attrs}}.
-#' 
+#'
 #' @note For csv and txt files with row names exported from \code{\link{export}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.
 #' @examples
 #' # create CSV to import
 #' export(iris, "iris1.csv")
-#' 
+#'
 #' # specify `format` to override default format
 #' export(iris, "iris.tsv", format = "csv")
 #' stopifnot(identical(import("iris1.csv"), import("iris.tsv", format = "csv")))
-#' 
+#'
 #' # import CSV as a `data.table`
 #' stopifnot(inherits(import("iris1.csv", setclass = "data.table"), "data.table"))
 #' stopifnot(inherits(import("iris1.csv", setclass = "data.table"), "data.table"))
-#' 
+#'
 #' # pass arguments to underlying import function
 #' iris1 <- import("iris1.csv")
 #' identical(names(iris), names(iris1))
-#' 
+#'
 #' export(iris, "iris2.csv", col.names = FALSE)
 #' iris2 <- import("iris2.csv")
 #' identical(names(iris), names(iris2))
-#' 
+#'
 #' # set class for the response data.frame as "tbl_df" (from dplyr)
 #' stopifnot(inherits(import("iris1.csv", setclass = "tbl_df"), "tbl_df"))
-#' 
+#'
 #' # cleanup
 #' unlink("iris.tsv")
 #' unlink("iris1.csv")
 #' unlink("iris2.csv")
-#' 
+#'
 #' @seealso \code{\link{.import}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
 #' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom stats na.omit setNames
@@ -109,18 +109,18 @@ import <- function(file, format, setclass, which, ...) {
     } else {
         fmt <- get_type(format)
     }
-    
+
     class(file) <- c(paste0("rio_", fmt), class(file))
     if (missing(which)) {
         x <- .import(file = file, ...)
     } else {
         x <- .import(file = file, which = which, ...)
     }
-    
+
     if (missing(setclass)) {
         return(set_class(x))
     }
-    
+
     a <- list(...)
     if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
         setclass <- "data.table"

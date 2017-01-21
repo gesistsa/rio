@@ -151,6 +151,9 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 }
 
 #' @export
+.import.rio_rda <- .import.rio_rdata
+
+#' @export
 .import.rio_feather <- function(file, which = 1, ...) {
     requireNamespace("feather")
     feather::read_feather(path = file)
