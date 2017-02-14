@@ -5,45 +5,6 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
  - `export()` and `import()` provide a painless data I/O experience by automatically choosing the appropriate data read or write function based on file extension
  - `convert()` wraps `import()` and `export()` to allow the user to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](https://www.mtna.us/#/products/sledgehammer)). [Luca Braglia](https://lbraglia.github.io/) has created a Shiny app called [rioweb](https://github.com/lbraglia/rioweb) that provides access to the file conversion features of rio. [GREA](https://github.com/Stan125/GREA/) is an RStudio add-in that provides an interactive interface for reading in data using rio.
 
-## Supported file formats
-
-**rio** supports a variety of different file formats for import and export.
-
-| Format | Import | Export |
-| ------ | ------ | ------ |
-| Tab-separated data (.tsv) | Yes | Yes |
-| Comma-separated data (.csv) | Yes | Yes |
-| CSVY (CSV + YAML metadata header) (.csvy) | Yes | Yes |
-| Feather R/Python interchange format (.feather) | Yes | Yes |
-| Pipe-separated data (.psv) | Yes | Yes |
-| Fixed-width format data (.fwf) | Yes | Yes |
-| Serialized R objects (.rds) | Yes | Yes |
-| Saved R objects (.RData) | Yes | Yes |
-| JSON (.json) | Yes | Yes |
-| YAML (.yml) | Yes | Yes |
-| Stata (.dta) | Yes | Yes |
-| SPSS (.sav) | Yes | Yes |
-| SPSS Portable (.por) | Yes |  |
-| "XBASE" database files (.dbf) | Yes | Yes |
-| Excel (.xls) | Yes |  |
-| Excel (.xlsx) | Yes | Yes |
-| Weka Attribute-Relation File Format (.arff) | Yes | Yes |
-| R syntax (.R) | Yes | Yes |
-| Shallow XML documents (.xml) | Yes | Yes |
-| HTML Tables (.html) | Yes | Yes |
-| SAS (.sas7bdat) | Yes | Yes |
-| SAS XPORT (.xpt) | Yes |  |
-| Minitab (.mtp) | Yes |  |
-| Epiinfo (.rec) | Yes |  |
-| Systat (.syd) | Yes |  |
-| Data Interchange Format (.dif) | Yes |  |
-| OpenDocument Spreadsheet  (.ods) | Yes |  |
-| Fortran data (no recognized extension) | Yes |  |
-| [Google Sheets](https://www.google.com/sheets/about/) | Yes |  |
-| Clipboard (default is tsv) | Yes (Mac and Windows) | Yes (Mac and Windows) |
-
-Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
-
 ## Examples
 
 Because **rio** is meant to streamline data I/O, the package is extremely easy to use. Here are some examples of reading, writing, and converting data files.
@@ -59,6 +20,13 @@ library("rio")
 export(mtcars, "mtcars.csv") # comma-separated values
 export(mtcars, "mtcars.rds") # R serialized
 export(mtcars, "mtcars.sav") # SPSS
+```
+
+A particularly useful feature of rio is the ability to import from and export to compressed (e.g., zip) directories, saving users the extra step of compressing a large exported file, e.g.:
+
+
+```r
+export(mtcars, "mtcars.tsv.zip")
 ```
 
 ### Import
@@ -105,6 +73,45 @@ Rscript -e "rio::convert('iris.dta', 'iris.csv')"
 ```
 
 
+
+## Supported file formats
+
+**rio** supports a variety of different file formats for import and export.
+
+| Format | Import | Export |
+| ------ | ------ | ------ |
+| Tab-separated data (.tsv) | Yes | Yes |
+| Comma-separated data (.csv) | Yes | Yes |
+| CSVY (CSV + YAML metadata header) (.csvy) | Yes | Yes |
+| Feather R/Python interchange format (.feather) | Yes | Yes |
+| Pipe-separated data (.psv) | Yes | Yes |
+| Fixed-width format data (.fwf) | Yes | Yes |
+| Serialized R objects (.rds) | Yes | Yes |
+| Saved R objects (.RData,.rda) | Yes | Yes |
+| JSON (.json) | Yes | Yes |
+| YAML (.yml) | Yes | Yes |
+| Stata (.dta) | Yes | Yes |
+| SPSS (.sav) | Yes | Yes |
+| SPSS Portable (.por) | Yes |  |
+| "XBASE" database files (.dbf) | Yes | Yes |
+| Excel (.xls) | Yes |  |
+| Excel (.xlsx) | Yes | Yes |
+| OpenDocument Spreadsheet  (.ods) | Yes | Yes |
+| Weka Attribute-Relation File Format (.arff) | Yes | Yes |
+| R syntax (.R) | Yes | Yes |
+| Shallow XML documents (.xml) | Yes | Yes |
+| HTML Tables (.html) | Yes | Yes |
+| SAS (.sas7bdat) | Yes | Yes |
+| SAS XPORT (.xpt) | Yes |  |
+| Minitab (.mtp) | Yes |  |
+| Epiinfo (.rec) | Yes |  |
+| Systat (.syd) | Yes |  |
+| Data Interchange Format (.dif) | Yes |  |
+| Fortran data (no recognized extension) | Yes |  |
+| [Google Sheets](https://www.google.com/sheets/about/) | Yes |  |
+| Clipboard (default is tsv) | Yes (Mac and Windows) | Yes (Mac and Windows) |
+
+Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
 
 ## Package Philosophy
 
