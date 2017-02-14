@@ -171,7 +171,7 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     if (length(a)) {
       warning("File imported using haven. Arguments to '...' ignored.")
     }
-    convert_attributes(read_dta(file = file))
+    standardize_attributes(read_dta(file = file))
   } else {
     out <- read.dta(file = file,
                     convert.dates = convert.dates,
@@ -179,7 +179,7 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
                     missing.type = missing.type, ...)
     attr(out, "expansion.fields") <- NULL
     attr(out, "time.stamp") <- NULL
-    convert_attributes(out)
+    standardize_attributes(out)
   }
 }
 
@@ -200,9 +200,9 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 #' @export
 .import.rio_sav <- function(file, which = 1, haven = TRUE, to.data.frame = TRUE, use.value.labels = FALSE, ...) {
   if (haven) {
-    convert_attributes(read_sav(file = file))
+    standardize_attributes(read_sav(file = file))
   } else {
-    convert_attributes(read.spss(file = file, to.data.frame = to.data.frame,
+    standardize_attributes(read.spss(file = file, to.data.frame = to.data.frame,
                                  use.value.labels = use.value.labels, ...))
   }
 }
@@ -210,13 +210,13 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 #' @importFrom haven read_por
 #' @export
 .import.rio_spss <- function(file, which = 1, ...) {
-  convert_attributes(read_por(file = file))
+  standardize_attributes(read_por(file = file))
 }
 
 #' @importFrom haven read_sas
 #' @export
 .import.rio_sas7bdat <- function(file, which = 1, column.labels = FALSE, ...) {
-  convert_attributes(read_sas(data_file = file, ...))
+  standardize_attributes(read_sas(data_file = file, ...))
 }
 
 #' @importFrom foreign read.xport

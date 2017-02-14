@@ -36,7 +36,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
     \item Feather R/Python interchange format (.feather), using \code{feather::write_feather}
     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
-    \item Saved R objects (.RData), using \code{\link[base]{save}}
+    \item Saved R objects (.RData,.rda), using \code{\link[base]{save}}
     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}
     \item YAML (.yml), using \code{\link[yaml]{as.yaml}}
     \item Stata (.dta), using \code{\link[haven]{write_dta}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
