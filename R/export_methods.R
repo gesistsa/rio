@@ -162,6 +162,12 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     write.xlsx(x = x, file = file, ...)
 }
 
+#' @importFrom readODS write_ods
+#' @export
+.export.rio_ods <- function(file, x, ...) {
+    write_ods(x = x, path = file)
+}
+
 #' @importFrom xml2 read_html read_xml xml_children xml_add_child write_xml
 #' @export
 .export.rio_html <- function(file, x, ...) {

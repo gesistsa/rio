@@ -33,6 +33,7 @@ By making import and export easy, it's an obvious next step to also use R as a s
 | "XBASE" database files (.dbf) | Yes | Yes |
 | Excel (.xls) | Yes |  |
 | Excel (.xlsx) | Yes | Yes |
+| OpenDocument Spreadsheet  (.ods) | Yes | Yes |
 | Weka Attribute-Relation File Format (.arff) | Yes | Yes |
 | R syntax (.R) | Yes | Yes |
 | Shallow XML documents (.xml) | Yes | Yes |
@@ -43,7 +44,6 @@ By making import and export easy, it's an obvious next step to also use R as a s
 | Epiinfo (.rec) | Yes |  |
 | Systat (.syd) | Yes |  |
 | Data Interchange Format (.dif) | Yes |  |
-| OpenDocument Spreadsheet  (.ods) | Yes |  |
 | Fortran data (no recognized extension) | Yes |  |
 | Clipboard (default is tsv) | Yes (Mac and Windows) | Yes (Mac and Windows) |
 

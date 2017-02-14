@@ -27,6 +27,7 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 | "XBASE" database files (.dbf) | Yes | Yes |
 | Excel (.xls) | Yes |  |
 | Excel (.xlsx) | Yes | Yes |
+| OpenDocument Spreadsheet  (.ods) | Yes | Yes |
 | Weka Attribute-Relation File Format (.arff) | Yes | Yes |
 | R syntax (.R) | Yes | Yes |
 | Shallow XML documents (.xml) | Yes | Yes |
@@ -37,7 +38,6 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
 | Epiinfo (.rec) | Yes |  |
 | Systat (.syd) | Yes |  |
 | Data Interchange Format (.dif) | Yes |  |
-| OpenDocument Spreadsheet  (.ods) | Yes |  |
 | Fortran data (no recognized extension) | Yes |  |
 | [Google Sheets](https://www.google.com/sheets/about/) | Yes |  |
 | Clipboard (default is tsv) | Yes (Mac and Windows) | Yes (Mac and Windows) |

@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.22
+
+ * Added support for writing to ODS files via `readODS::write_ods()`. (#96)
+
 # CHANGES TO v0.4.21
 
  * Handle HTML tables with `<tbody>` elements. (h/t Mohamed Elgoussi)
