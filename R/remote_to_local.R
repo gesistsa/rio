@@ -1,17 +1,30 @@
 remote_to_local <- function(file, format) {
     if (missing(format)) {
-        # try to extract format from URL
-        fmt <- try(get_ext(file), silent = TRUE)
-        if (inherits(fmt, "try-error")) {
-            fmt <- "TMP"
-        }
         # handle google sheets urls
         if (grepl("docs\\.google\\.com/spreadsheets", file)) {
-            file <- convert_google_url(file)
+            file <- convert_google_url(file, export_as = "csv")
             fmt <- "csv"
+        } else {
+            # try to extract format from URL
+            fmt <- try(get_ext(file), silent = TRUE)
+            if (inherits(fmt, "try-error")) {
+                fmt <- "TMP"
+            }
         }
     } else {
-        fmt <- get_type(format)
+        # handle google sheets urls
+        if (grepl("docs\\.google\\.com/spreadsheets", file)) {
+            fmt <- get_type(format)
+            if (fmt %in% c("csv", "tsv", "xlsx", "ods")) {
+                file <- convert_google_url(file, export_as = fmt)
+                fmt <- fmt
+            } else {
+                file <- convert_google_url(file, export_as = "csv")
+                fmt <- "csv"
+            }
+        } else {
+            fmt <- get_type(format)
+        }
     }
     # save file locally
     temp_file <- tempfile(fileext = paste0(".", fmt))
