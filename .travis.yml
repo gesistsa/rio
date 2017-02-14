@@ -13,7 +13,8 @@ matrix:
       osx_image: beta-xcode6.2
 
 r_github_packages:
-- hadley/haven
+- tidyverse/haven
+- tidyverse/readxl
 r_packages:
 - covr
   

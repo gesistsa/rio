@@ -1,5 +1,9 @@
 # CHANGES TO v0.4.22
 
+ * Rearranged README.
+ * Bumped readxl dependency to `>= 0.1.1` (#130, h/t Yongfa Chen)
+ * Pass explicit `excel_format` arguments when using **readxl** functions. (#130)
+ * Google Spreadsheets can now be imported using any of the allowed formats (CSV, TSV, XLSX, ODS).
  * Added support for writing to ODS files via `readODS::write_ods()`. (#96)
 
 # CHANGES TO v0.4.21

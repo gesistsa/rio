@@ -259,17 +259,18 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 #' @export
 .import.rio_xls <- function(file, which = 1, ...) {
 
-  Call <- match.call(expand.dots = TRUE)
-  if ("which" %in% names(Call)) {
-    Call$sheet <- Call$which
-    Call$which <- NULL
-  }
+    Call <- match.call(expand.dots = TRUE)
+    if ("which" %in% names(Call)) {
+        Call$sheet <- Call$which
+        Call$which <- NULL
+    }
 
-  Call$path <- file
-  Call$file <- NULL
-  Call$readxl <- NULL
-  Call[[1L]] <- as.name("read_excel")
-  eval.parent(Call)
+    Call$path <- file
+    Call$file <- NULL
+    Call$readxl <- NULL
+    Call$excel_format <- "xls"
+    Call[[1L]] <- as.name("read_excel")
+    eval.parent(Call)
 }
 
 #' @importFrom readxl read_excel
@@ -277,23 +278,22 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 #' @export
 .import.rio_xlsx <- function(file, which = 1, readxl = TRUE, ...) {
 
-  Call <- match.call(expand.dots = TRUE)
-  if ("which" %in% names(Call)) {
-    Call$sheet <- Call$which
-    Call$which <- NULL
-  }
-
-  if (readxl) {
-    Call$path <- file
-    Call[[1L]] <- as.name("read_excel")
-  } else {
-    Call$xlsxFile <- file
-    Call[[1L]] <- as.name("read.xlsx")
-  }
-
-  Call$file <- NULL
-  Call$readxl <- NULL
-  eval.parent(Call)
+    Call <- match.call(expand.dots = TRUE)
+    if ("which" %in% names(Call)) {
+        Call$sheet <- Call$which
+        Call$which <- NULL
+    }
+    if (isTRUE(readxl)) {
+        Call$path <- file
+        Call$excel_format <- "xlsx"
+        Call[[1L]] <- as.name("read_excel")
+    } else {
+        Call$xlsxFile <- file
+        Call[[1L]] <- as.name("read.xlsx")
+    }
+    Call$file <- NULL
+    Call$readxl <- NULL
+    eval.parent(Call)
 }
 
 #' @importFrom utils read.fortran
