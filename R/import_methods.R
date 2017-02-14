@@ -255,7 +255,7 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
   read.arff(file = file)
 }
 
-#' @importFrom readxl read_excel
+#' @importFrom readxl read_xls
 #' @export
 .import.rio_xls <- function(file, which = 1, ...) {
 
@@ -268,12 +268,11 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     Call$path <- file
     Call$file <- NULL
     Call$readxl <- NULL
-    Call$excel_format <- "xls"
-    Call[[1L]] <- as.name("read_excel")
+    Call[[1L]] <- as.name("read_xls")
     eval.parent(Call)
 }
 
-#' @importFrom readxl read_excel
+#' @importFrom readxl read_xlsx
 #' @importFrom openxlsx read.xlsx
 #' @export
 .import.rio_xlsx <- function(file, which = 1, readxl = TRUE, ...) {
@@ -285,8 +284,7 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     }
     if (isTRUE(readxl)) {
         Call$path <- file
-        Call$excel_format <- "xlsx"
-        Call[[1L]] <- as.name("read_excel")
+        Call[[1L]] <- as.name("read_xlsx")
     } else {
         Call$xlsxFile <- file
         Call[[1L]] <- as.name("read.xlsx")
