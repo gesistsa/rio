@@ -28,4 +28,3 @@ str(g)
 \seealso{
 \code{\link{import}}
 }
-

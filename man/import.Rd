@@ -96,4 +96,3 @@ unlink("iris2.csv")
 \seealso{
 \code{\link{.import}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
 }
-

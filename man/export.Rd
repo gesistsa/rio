@@ -93,4 +93,3 @@ unlink("mtcars.csv.zip")
 \seealso{
 \code{\link{.export}}, \code{\link{import}}, \code{\link{convert}}
 }
-
