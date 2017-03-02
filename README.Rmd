@@ -139,10 +139,11 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
 
 ## Package Installation
 
-The package is available on [CRAN](https://cran.r-project.org/package=rio) and can be installed directly in R using:
+The package is available on [CRAN](https://cran.r-project.org/package=rio) and can be installed directly in R using `install.packages()`. You may want to run `install_formats()` after the first installation.
 
 ```R
 install.packages("rio")
+install_formats()
 ```
 
 The latest development version on GitHub can be installed using **devtools**:
@@ -153,6 +154,8 @@ if(!require("ghit")){
 }
 ghit::install_github("leeper/rio")
 ```
+
+Because of how **ghit** handles Suggests packages, you do not need to run `install_formats()` when installing directly from GitHub.
 
 [![CRAN Version](http://www.r-pkg.org/badges/version/rio)](https://cran.r-project.org/package=rio)
 ![Downloads](http://cranlogs.r-pkg.org/badges/rio)

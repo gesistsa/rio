@@ -298,12 +298,13 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
         Call[[1L]] <- as.name("read_xlsx")
     } else {
         requireNamespace("openxlsx")
+        read.xlsx <- openxlsx::read.xlsx
         Call$xlsxFile <- file
-        Call[[1L]] <- as.name("openxlsx::read.xlsx")
+        Call[[1L]] <- as.name("read.xlsx")
     }
     Call$file <- NULL
     Call$readxl <- NULL
-    eval.parent(Call)
+    eval.parent(Call, n = 0)
 }
 
 #' @importFrom utils read.fortran
