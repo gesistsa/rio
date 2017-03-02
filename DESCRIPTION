@@ -47,7 +47,8 @@ Suggests:
     knitr,
     magrittr,
     feather,
-    fst
+    fst,
+    rmatio
 License: GPL-2
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

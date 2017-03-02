@@ -97,6 +97,7 @@ Rscript -e "rio::convert('iris.dta', 'iris.csv')"
 | "XBASE" database files (.dbf) | Yes | Yes |
 | Excel (.xls) | Yes |  |
 | Excel (.xlsx) | Yes | Yes |
+| Matlab (.mat) | Yes | Yes |
 | OpenDocument Spreadsheet  (.ods) | Yes | Yes |
 | Weka Attribute-Relation File Format (.arff) | Yes | Yes |
 | R syntax (.R) | Yes | Yes |

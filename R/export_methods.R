@@ -126,6 +126,12 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     fst::write.fst(x = x, path = file, ...)
 }
 
+#' @export
+.export.rio_matlab <- function(file, x, ...) {
+    requireNamespace("rmatio")
+    rmatio::write.mat(object = x, filename = file, ...)
+}
+
 #' @importFrom haven write_sav
 #' @export
 .export.rio_sav <- function(file, x, ...) {

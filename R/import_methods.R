@@ -165,6 +165,12 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     fst::read.fst(path = file, ...)
 }
 
+#' @export
+.import.rio_matlab <- function(file, which = 1, ...) {
+    requireNamespace("rmatio")
+    rmatio::read.mat(filename = file, ...)
+}
+
 #' @importFrom foreign read.dta
 #' @importFrom haven read_dta
 #' @export

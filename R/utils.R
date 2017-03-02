@@ -23,6 +23,8 @@ get_type <- function(fmt) {
         htm = "html",
         html = "html",
         json = "json",
+        mat = "matlab",
+        matlab = "matlab",
         minitab = "mtp",
         mtp = "mtp",
         ods = "ods",

@@ -16,6 +16,7 @@
 #'     \item Comma-separated data (.csv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
 #'     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{read_csvy}}.
 #'     \item Feather R/Python interchange format (.feather), using \code{feather::read_feather}
+#'     \item Fast storage (.fst), using \code{\link[fst]{read.fst}}
 #'     \item Pipe-separated data (.psv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{sep = '|'}, \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
 #'     \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils]{read.fwf}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}. If \code{readr = TRUE}, import will be performed using \code{\link[readr]{read_fwf}}, where \code{widths} should be: \code{NULL}, a vector of column widths, or the output of \code{\link[readr]{fwf_empty}}, \code{\link[readr]{fwf_widths}}, or \code{\link[readr]{fwf_positions}}.
 #'     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
@@ -28,6 +29,7 @@
 #'     \item "XBASE" database files (.dbf), using \code{\link[foreign]{read.dbf}}
 #'     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{read.arff}}
 #'     \item R syntax object (.R), using \code{\link[base]{dget}}
+#'     \item Matlab (.mat), using \code{\link[rmatio]{read.mat}}
 #'     \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. If \code{readxl = FALSE}, \code{\link[openxlsx]{read.xlsx}} can be used. Use \code{which} to specify a sheet number.
 #'     \item SAS (.sas7bdat) and SAS XPORT (.xpt), using \code{\link[haven]{read_sas}} and \code{\link[foreign]{read.xport}}.
 #'     \item Minitab (.mtp), using \code{\link[foreign]{read.mtp}}
