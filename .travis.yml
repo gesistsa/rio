@@ -10,7 +10,7 @@ matrix:
     - os: osx
       osx_image: xcode8
     - os: osx
-      osx_image: beta-xcode6.2
+      osx_image: xcode6.4
 
 r_github_packages:
 - tidyverse/haven
