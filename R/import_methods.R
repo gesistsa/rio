@@ -39,115 +39,115 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 
 #' @export
 .import.rio_tsv <- function(file, sep, which = 1, fread = TRUE, ...) {
-  import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
 }
 
 #' @export
 .import.rio_txt <- function(file, sep, which = 1, fread = TRUE, ...) {
-  import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
 }
 
 #' @export
 .import.rio_csv <- function(file, sep, which = 1, fread = TRUE, ...) {
-  import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
 }
 
 #' @export
 .import.rio_csv2 <- function(file, sep, which = 1, fread = TRUE, ...) {
-  import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
 }
 
 #' @export
 .import.rio_psv <- function(file, sep, which = 1, fread = TRUE, ...) {
-  import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
 }
 
 #' @importFrom utils read.fwf
-#' @importFrom readr read_fwf fwf_empty fwf_widths fwf_positions
 #' @export
 .import.rio_fwf <- function(file, which = 1, widths, header = FALSE, col.names, readr = FALSE, progress = FALSE, ...) {
-  if (missing(widths)) {
-    stop("Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().")
-  }
-  a <- list(...)
-  if (readr) {
-    if (is.null(widths)) {
-      if (!missing(col.names)) {
-        widths <- fwf_empty(file = file, col_names = col.names)
-      } else {
-        widths <- fwf_empty(file = file)
-      }
-      read_fwf(file = file, col_positions = widths, progress = progress, ...)
-    } else if (is.numeric(widths)) {
-      if (any(widths < 0)) {
-        if (!"col_types" %in% names(a)) {
-          col_types <- rep("?", length(widths))
-          col_types[widths < 0] <- "?"
-          col_types <- paste0(col_types, collapse = "")
-        }
-        if (!missing(col.names)) {
-          widths <- fwf_widths(abs(widths), col_names = col.names)
-        } else {
-          widths <- fwf_widths(abs(widths))
-        }
-        read_fwf(file = file, col_positions = widths, col_types = col_types, progress = progress, ...)
-      } else {
-        if (!missing(col.names)) {
-          widths <- fwf_widths(abs(widths), col_names = col.names)
-        } else {
-          widths <- fwf_widths(abs(widths))
-        }
-        read_fwf(file = file, col_positions = widths, progress = progress, ...)
-      }
-    } else if (is.list(widths)) {
-      if (!c("begin", "end") %in% names(widths)) {
-        if (!missing(col.names)) {
-          widths <- fwf_widths(widths, col_names = col.names)
-        } else {
-          widths <- fwf_widths(widths)
-        }
-      }
-      read_fwf(file = file, col_positions = widths, progress = progress, ...)
+    if (missing(widths)) {
+      stop("Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().")
     }
-  } else {
-    if (!missing(col.names)) {
-      read.fwf2(file = file, widths = widths, header = header, col.names = col.names, ...)
+    a <- list(...)
+    if (isTRUE(readr)) {
+        requireNamespace("readr")
+        if (is.null(widths)) {
+            if (!missing(col.names)) {
+                widths <- readr::fwf_empty(file = file, col_names = col.names)
+            } else {
+                widths <- readr::fwf_empty(file = file)
+            }
+            readr::read_fwf(file = file, col_positions = widths, progress = progress, ...)
+        } else if (is.numeric(widths)) {
+            if (any(widths < 0)) {
+                if (!"col_types" %in% names(a)) {
+                    col_types <- rep("?", length(widths))
+                    col_types[widths < 0] <- "?"
+                    col_types <- paste0(col_types, collapse = "")
+                }
+                if (!missing(col.names)) {
+                    widths <- readr::fwf_widths(abs(widths), col_names = col.names)
+                } else {
+                    widths <- readr::fwf_widths(abs(widths))
+                }
+                readr::read_fwf(file = file, col_positions = widths, col_types = col_types, progress = progress, ...)
+            } else {
+                if (!missing(col.names)) {
+                    widths <- readr::fwf_widths(abs(widths), col_names = col.names)
+                } else {
+                    widths <- readr::fwf_widths(abs(widths))
+                }
+                readr::read_fwf(file = file, col_positions = widths, progress = progress, ...)
+            }
+        } else if (is.list(widths)) {
+            if (!c("begin", "end") %in% names(widths)) {
+                if (!missing(col.names)) {
+                    widths <- readr::fwf_widths(widths, col_names = col.names)
+                } else {
+                    widths <- readr::fwf_widths(widths)
+                }
+            }
+            readr::read_fwf(file = file, col_positions = widths, progress = progress, ...)
+        }
     } else {
-      read.fwf2(file = file, widths = widths, header = header, ...)
+        if (!missing(col.names)) {
+            read.fwf2(file = file, widths = widths, header = header, col.names = col.names, ...)
+        } else {
+            read.fwf2(file = file, widths = widths, header = header, ...)
+        }
     }
-  }
 }
 
 #' @export
 .import.rio_r <- function(file, which = 1, ...) {
-  dget(file = file, ...)
+    dget(file = file, ...)
 }
 
 #' @export
 .import.rio_rds <- function(file, which = 1, ...) {
-  readRDS(file = file, ...)
+    readRDS(file = file, ...)
 }
 
-#' @importFrom csvy read_csvy
 #' @export
 .import.rio_csvy <- function(file, which = 1, ...) {
-    read_csvy(file = file, ...)
+    requireNamespace("csvy")
+    csvy::read_csvy(file = file, ...)
 }
 
 #' @export
 .import.rio_rdata <- function(file, which = 1, envir = new.env(), ...) {
-  load(file = file, envir = envir, ...)
-  if (missing(which)) {
-      if (length(ls(envir)) > 1) {
-          warning("Rdata file contains multiple objects. Returning first object.")
-      }
-      which <- 1
-  }
-  if (is.numeric(which)) {
-      get(ls(envir)[which], envir)
-  } else {
-      get(ls(envir)[grep(which, ls(envir))[1]], envir)
-  }
+    load(file = file, envir = envir, ...)
+    if (missing(which)) {
+        if (length(ls(envir)) > 1) {
+            warning("Rdata file contains multiple objects. Returning first object.")
+        }
+        which <- 1
+    }
+    if (is.numeric(which)) {
+        get(ls(envir)[which], envir)
+    } else {
+        get(ls(envir)[grep(which, ls(envir))[1]], envir)
+    }
 }
 
 #' @export
@@ -198,73 +198,73 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 #' @importFrom foreign read.dbf
 #' @export
 .import.rio_dbf <- function(file, which = 1, ...) {
-  read.dbf(file = file, ...)
+    read.dbf(file = file, ...)
 }
 
 #' @importFrom utils read.DIF
 #' @export
 .import.rio_dif <- function(file, which = 1, ...) {
-  read.DIF(file = file, ...)
+    read.DIF(file = file, ...)
 }
 
 #' @importFrom haven read_sav
 #' @importFrom foreign read.spss
 #' @export
 .import.rio_sav <- function(file, which = 1, haven = TRUE, to.data.frame = TRUE, use.value.labels = FALSE, ...) {
-  if (haven) {
-    standardize_attributes(read_sav(file = file))
-  } else {
-    standardize_attributes(read.spss(file = file, to.data.frame = to.data.frame,
-                                 use.value.labels = use.value.labels, ...))
-  }
+    if (isTRUE(haven)) {
+        standardize_attributes(read_sav(file = file))
+    } else {
+        standardize_attributes(read.spss(file = file, to.data.frame = to.data.frame,
+                                         use.value.labels = use.value.labels, ...))
+    }
 }
 
 #' @importFrom haven read_por
 #' @export
 .import.rio_spss <- function(file, which = 1, ...) {
-  standardize_attributes(read_por(file = file))
+    standardize_attributes(read_por(file = file))
 }
 
 #' @importFrom haven read_sas
 #' @export
 .import.rio_sas7bdat <- function(file, which = 1, column.labels = FALSE, ...) {
-  standardize_attributes(read_sas(data_file = file, ...))
+    standardize_attributes(read_sas(data_file = file, ...))
 }
 
 #' @importFrom foreign read.xport
 #' @export
 .import.rio_xpt <- function(file, which = 1, ...) {
-  read.xport(file = file, ...)
+    read.xport(file = file, ...)
 }
 
 #' @importFrom foreign read.mtp
 #' @export
 .import.rio_mtp <- function(file, which = 1, ...) {
-  read.mtp(file = file, ...)
+    read.mtp(file = file, ...)
 }
 
 #' @importFrom foreign read.systat
 #' @export
 .import.rio_syd <- function(file, which = 1, ...) {
-  read.systat(file = file, to.data.frame = TRUE, ...)
+    read.systat(file = file, to.data.frame = TRUE, ...)
 }
 
-#' @importFrom jsonlite fromJSON
 #' @export
 .import.rio_json <- function(file, which = 1, ...) {
-  fromJSON(txt = file, ...)
+    requireNamespace("jsonlite")
+    jsonlite::fromJSON(txt = file, ...)
 }
 
 #' @importFrom foreign read.epiinfo
 #' @export
 .import.rio_rec <- function(file, which = 1, ...) {
-  read.epiinfo(file = file, ...)
+    read.epiinfo(file = file, ...)
 }
 
 #' @importFrom foreign read.arff
 #' @export
 .import.rio_arff <- function(file, which = 1, ...) {
-  read.arff(file = file)
+    read.arff(file = file)
 }
 
 #' @importFrom readxl read_xls
@@ -285,7 +285,6 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 }
 
 #' @importFrom readxl read_xlsx
-#' @importFrom openxlsx read.xlsx
 #' @export
 .import.rio_xlsx <- function(file, which = 1, readxl = TRUE, ...) {
 
@@ -298,8 +297,9 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
         Call$path <- file
         Call[[1L]] <- as.name("read_xlsx")
     } else {
+        requireNamespace("openxlsx")
         Call$xlsxFile <- file
-        Call[[1L]] <- as.name("read.xlsx")
+        Call[[1L]] <- as.name("openxlsx::read.xlsx")
     }
     Call$file <- NULL
     Call$readxl <- NULL
@@ -315,11 +315,10 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     read.fortran(file = file, format = style, ...)
 }
 
-#' @importFrom readODS read_ods
 #' @export
 .import.rio_ods <- function(file, which = 1, header = TRUE, ...) {
-    res <- read_ods(path = file, sheet = which, col_names = header, ...)
-    return(res)
+    requireNamespace("readODS")
+    readODS::read_ods(path = file, sheet = which, col_names = header, ...)
 }
 
 #' @importFrom xml2 read_xml as_list
@@ -372,10 +371,10 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     as.data.frame(out, ..., stringsAsFactors = stringsAsFactors)
 }
 
-#' @importFrom yaml yaml.load
 #' @export
 .import.rio_yml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
-  as.data.frame(yaml.load(file, ...), stringsAsFactors = stringsAsFactors)
+    requireNamespace("yaml")
+    as.data.frame(yaml::yaml.load(file, ...), stringsAsFactors = stringsAsFactors)
 }
 
 #' @importFrom utils read.table

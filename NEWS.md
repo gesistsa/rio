@@ -1,5 +1,6 @@
 # CHANGES TO v0.4.22
 
+ * Moved all non-critical format packages to Suggests, rather than Imports. (#143)
  * Added support for Matlab formats. (#78, #98)
  * Added support for fst format. (#138)
 

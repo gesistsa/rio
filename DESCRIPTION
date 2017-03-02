@@ -30,25 +30,25 @@ Imports:
     urltools,
     foreign,
     haven (> 0.2.1),
-    openxlsx,
-    readODS (>= 1.6.4),
-    jsonlite,
     xml2 (>= 1.0.0),
     curl (>= 0.6),
     data.table (>= 1.9.8),
-    readxl (>= 0.1.1),
-    readr,
-    yaml,
-    csvy
+    readxl (>= 0.1.1)
 Suggests:
     datasets,
     bit64,
     testthat,
     knitr,
     magrittr,
+    csvy,
     feather,
     fst,
-    rmatio
+    jsonlite,
+    openxlsx,
+    readODS (>= 1.6.4),
+    readr,
+    rmatio,
+    yaml
 License: GPL-2
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

@@ -31,10 +31,10 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     export_delim(x = x, file = file, sep =";", dec = ",", ...)
 }
 
-#' @importFrom csvy write_csvy
 #' @export
 .export.rio_csvy <- function(file, x, ...) {
-    write_csvy(file = file, x = x, ...)
+    requireNamespace("csvy")
+    csvy::write_csvy(file = file, x = x, ...)
 }
 
 #' @export
@@ -156,10 +156,10 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     write.dbf(dataframe = x, file = file, ...)
 }
 
-#' @importFrom jsonlite toJSON
 #' @export
 .export.rio_json <- function(file, x, ...) {
-    cat(toJSON(x, ...), file = file)
+    requireNamespace("jsonlite")
+    cat(jsonlite::toJSON(x, ...), file = file)
 }
 
 #' @importFrom foreign write.arff
@@ -168,16 +168,16 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     write.arff(x = x, file = file, ...)
 }
 
-#' @importFrom openxlsx write.xlsx
 #' @export
 .export.rio_xlsx <- function(file, x, ...) {
-    write.xlsx(x = x, file = file, ...)
+    requireNamespace("openxlsx")
+    openxlsx::write.xlsx(x = x, file = file, ...)
 }
 
-#' @importFrom readODS write_ods
 #' @export
 .export.rio_ods <- function(file, x, ...) {
-    write_ods(x = x, path = file)
+    requireNamespace("readODS")
+    readODS::write_ods(x = x, path = file)
 }
 
 #' @importFrom xml2 read_html read_xml xml_children xml_add_child write_xml
@@ -217,16 +217,10 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     write_xml(xml, file = file, ...)
 }
 
-# @importFrom readODS write_ods
-# @export
-#.export.rio_ods <- function(file, x, which = 1, ...) {
-#    write_ods(x = x, path = file, sheet = which, ...)
-#}
-
-#' @importFrom yaml as.yaml
 #' @export
 .export.rio_yml <- function(file, x, ...) {
-  cat(as.yaml(x, ...), file = file)
+    requireNamespace("yaml")
+    cat(yaml::as.yaml(x, ...), file = file)
 }
 
 #' @importFrom utils write.table

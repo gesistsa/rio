@@ -76,7 +76,13 @@ Rscript -e "rio::convert('iris.dta', 'iris.csv')"
 
 ## Supported file formats
 
-**rio** supports a variety of different file formats for import and export.
+**rio** supports a variety of different file formats for import and export. To keep the package slim, all non-essential formats are supported via "Suggests" packages, which are not installed (or loaded) by default. To ensure rio is fully functional, install these packages the first time you use **rio** via:
+
+```R
+install_formats()
+```
+
+The full list of supported formats is below:
 
 | Format | Import | Export |
 | ------ | ------ | ------ |
