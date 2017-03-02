@@ -18,6 +18,7 @@ get_type <- function(fmt) {
         excel = "xlsx",
         feather = "feather",
         fortran = "fortran",
+        fst = "fst",
         fwf = "fwf",
         htm = "html",
         html = "html",
@@ -63,12 +64,12 @@ get_type <- function(fmt) {
         jpg = "jpg",
         mat = "matlab",
         matlab = "matlab",
-        npy = "npy"
+        npy = "npy",
         png = "png",
         sdmx = "sdmx",
         sss = "sss",
         tif = "tiff",
-        tiff = "tiff",
+        tiff = "tiff"
     )
     out <- type_list[[tolower(fmt)]]
     if (is.null(out)) {

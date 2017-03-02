@@ -84,6 +84,7 @@ Rscript -e "rio::convert('iris.dta', 'iris.csv')"
 | Comma-separated data (.csv) | Yes | Yes |
 | CSVY (CSV + YAML metadata header) (.csvy) | Yes | Yes |
 | Feather R/Python interchange format (.feather) | Yes | Yes |
+| Fast Storage (.fst) | Yes | Yes |
 | Pipe-separated data (.psv) | Yes | Yes |
 | Fixed-width format data (.fwf) | Yes | Yes |
 | Serialized R objects (.rds) | Yes | Yes |

@@ -1,5 +1,9 @@
 # CHANGES TO v0.4.22
 
+ * Added support for fst format. (#138)
+
+# CHANGES TO v0.4.22
+
  * Rearranged README.
  * Bumped readxl dependency to `>= 0.1.1` (#130, h/t Yongfa Chen)
  * Pass explicit `excel_format` arguments when using **readxl** functions. (#130)

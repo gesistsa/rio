@@ -159,6 +159,12 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     feather::read_feather(path = file)
 }
 
+#' @export
+.import.rio_fst <- function(file, which = 1, ...) {
+    requireNamespace("fst")
+    fst::read.fst(path = file, ...)
+}
+
 #' @importFrom foreign read.dta
 #' @importFrom haven read_dta
 #' @export

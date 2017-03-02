@@ -120,6 +120,12 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     feather::write_feather(x = x, path = file)
 }
 
+#' @export
+.export.rio_fst <- function(file, x, ...) {
+    requireNamespace("fst")
+    fst::write.fst(x = x, path = file, ...)
+}
+
 #' @importFrom haven write_sav
 #' @export
 .export.rio_sav <- function(file, x, ...) {
