@@ -5,7 +5,10 @@
 #' @importFrom utils installed.packages install.packages
 #' @export
 install_formats <- function(...) {
-    install.packages(suggestions[!suggestions %in% installed.packages()[ , 1, drop = TRUE]], ...)
+    to_install <- suggestions[!suggestions %in% installed.packages()[ , 1, drop = TRUE]]
+    if (length(to_install)) {
+        install.packages(to_install, ...)
+    }
 }
 
 suggestions <- c("csvy", "feather", "fst", "jsonlite", "openxlsx", "readODS", "readr", "rmatio", "yaml")
