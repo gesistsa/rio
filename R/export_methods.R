@@ -180,41 +180,41 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     readODS::write_ods(x = x, path = file)
 }
 
-#' @importFrom xml2 read_html read_xml xml_children xml_add_child write_xml
 #' @export
 .export.rio_html <- function(file, x, ...) {
+    requireNamespace("xml2")
     x[] <- lapply(x, as.character)
     out <- character(nrow(x))
-    html <- read_html("<!doctype html><html><head>\n<title>R Exported Data</title>\n</head><body>\n<table></table>\n</body>\n</html>")
-    tab <- xml_children(xml_children(html)[[2]])[[1]]
+    html <- xml2::read_html("<!doctype html><html><head>\n<title>R Exported Data</title>\n</head><body>\n<table></table>\n</body>\n</html>")
+    tab <- xml2::xml_children(xml2::xml_children(html)[[2]])[[1]]
     # add header row
-    invisible(xml_add_child(tab, read_xml(paste0(twrap(paste0(twrap(names(x), "th"), collapse = ""), "tr"), "\n"))))
+    invisible(xml2::xml_add_child(tab, xml2::read_xml(paste0(twrap(paste0(twrap(names(x), "th"), collapse = ""), "tr"), "\n"))))
     # add data
     for (i in seq_len(nrow(x))) {
-        xml_add_child(tab, read_xml(paste0(twrap(paste0(twrap(unlist(x[i, , drop = TRUE]), "td"), collapse = ""), "tr"), "\n")))
+        xml2::xml_add_child(tab, xml2::read_xml(paste0(twrap(paste0(twrap(unlist(x[i, , drop = TRUE]), "td"), collapse = ""), "tr"), "\n")))
     }
-    write_xml(html, file = file, ...)
+    xml2::write_xml(html, file = file, ...)
 }
 
-#' @importFrom xml2 read_xml xml_children xml_add_child xml_add_sibling xml_attr<- write_xml
 #' @export
 .export.rio_xml <- function(file, x, ...) {
+    requireNamespace("xml2")
     root <- ""
-    xml <- read_xml(paste0("<",as.character(substitute(x)),">\n</",as.character(substitute(x)),">\n"))
+    xml <- xml2::read_xml(paste0("<",as.character(substitute(x)),">\n</",as.character(substitute(x)),">\n"))
     att <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
     for (a in seq_along(att)) {
-        xml_attr(xml, names(att)[a]) <- att[[a]]
+        xml2::xml_attr(xml, names(att)[a]) <- att[[a]]
     }
     # add data
     for (i in seq_len(nrow(x))) {
-        thisrow <- xml_add_child(xml, "Observation")
-        xml_attr(thisrow, "row.name") <- row.names(x)[i]
+        thisrow <- xml2::xml_add_child(xml, "Observation")
+        xml2::xml_attr(thisrow, "row.name") <- row.names(x)[i]
         for (j in seq_along(x)) {
-            xml_add_child(thisrow, read_xml(paste0(twrap(x[i, j, drop = TRUE], names(x)[j]), "\n")))
+            xml2::xml_add_child(thisrow, xml2::read_xml(paste0(twrap(x[i, j, drop = TRUE], names(x)[j]), "\n")))
         }
     }
 
-    write_xml(xml, file = file, ...)
+    xml2::write_xml(xml, file = file, ...)
 }
 
 #' @export

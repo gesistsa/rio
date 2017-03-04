@@ -1,8 +1,8 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.4.23
-Date: 2017-03-02
+Version: 0.4.24
+Date: 2017-03-03
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
@@ -30,10 +30,10 @@ Imports:
     urltools,
     foreign,
     haven (> 0.2.1),
-    xml2 (>= 1.0.0),
     curl (>= 0.6),
     data.table (>= 1.9.8),
-    readxl (>= 0.1.1)
+    readxl (>= 0.1.1),
+    tibble
 Suggests:
     datasets,
     bit64,
@@ -48,6 +48,7 @@ Suggests:
     readODS (>= 1.6.4),
     readr,
     rmatio,
+    xml2 (>= 1.0.0),
     yaml
 License: GPL-2
 VignetteBuilder: knitr

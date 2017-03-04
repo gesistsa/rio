@@ -1,19 +1,16 @@
 set_class <- function(x, class = NULL) {
     if (is.null(class)) {
         return(structure(x, class = "data.frame"))
-    }
-    pkg <- switch(class, 
-                  "tbl_df" = "dplyr", 
-                  "data.table" = "data.table",
-                  NA)
-    if (!is.na(pkg)) {
-        if(!pkg %in% loadedNamespaces()) {
-            if(!pkg %in% row.names(installed.packages())) {
-                warning(sprintf("Package '%s' has not been installed.", pkg))
-            } else {
-                warning(sprintf("Package '%s' has not been loaded.", pkg))
-            }
+    } else if ("data.table" %in% class) {
+        if (inherits(x, "data.table")) {
+            return(x)
         }
+        return(data.table::as.data.table(x))
+    } else if ("tibble" %in% class || "tbl_df" %in% class || "tbl" %in% class) {
+        if (inherits(x, "tbl")) {
+            return(x)
+        }
+        return(tibble::as_tibble(x))
     }
-    return(structure(x, class = c(class[!class %in% c("data.frame", class(x))], "data.frame")))
+    return(structure(x, class = "data.frame"))
 }

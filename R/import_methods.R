@@ -322,10 +322,10 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     readODS::read_ods(path = file, sheet = which, col_names = header, ...)
 }
 
-#' @importFrom xml2 read_xml as_list
 #' @export
 .import.rio_xml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
-    x <- as_list(read_xml(unclass(file)))
+    requireNamespace("xml2")
+    x <- xml2::as_list(xml2::read_xml(unclass(file)))
     d <- do.call("rbind", c(lapply(x, unlist)))
     row.names(d) <- 1:nrow(d)
     d <- as.data.frame(d, stringsAsFactors = stringsAsFactors)
@@ -337,7 +337,7 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
             out
         }
     }
-    if (!stringsAsFactors) {
+    if (!isTRUE(stringsAsFactors)) {
         d[] <- lapply(d, tc2)
     } else {
         d[] <- lapply(d, type.convert)
@@ -345,14 +345,13 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
     d
 }
 
-#' @importFrom xml2 read_html as_list xml_find_all
 #' @export
 .import.rio_html <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
-    tables <- xml_find_all(read_html(unclass(file)), ".//table")
+    tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
     if (which > length(tables)) {
         stop(paste0("Requested table exceeds number of tables found in file (", length(tables),")!"))
     }
-    x <- as_list(tables[[which]])
+    x <- xml2::as_list(tables[[which]])
     if ("tbody" %in% names(x)) {
         x <- x[["tbody"]]
     }

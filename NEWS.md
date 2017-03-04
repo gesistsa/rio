@@ -1,4 +1,8 @@
-# CHANGES TO v0.4.22
+# CHANGES TO v0.4.24
+
+ * Fixed handling of "data.table", "tibble", and "data.frame" classes in `set_class()`. (#144)
+
+# CHANGES TO v0.4.23
 
  * Moved all non-critical format packages to Suggests, rather than Imports. (#143)
  * Added support for Matlab formats. (#78, #98)

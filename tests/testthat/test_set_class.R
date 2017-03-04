@@ -1,10 +1,22 @@
 context("Set object class")
+library("datasets")
+mtcars_tibble <- tibble::as_tibble(mtcars)
+mtcars_datatable <- data.table::as.data.table(mtcars)
 
 test_that("Set object class", {
-    x <- list(a = 1:5)
-    expect_true(inherits(set_class(x), "data.frame"))
-    expect_true(inherits(set_class(x, class = "fakeclass"), "data.frame"))
-    expect_true("tbl_df" %in% suppressWarnings(class(set_class(x, class = "tbl_df"))))
-    expect_true("data.table" %in% class(set_class(x, class = "data.table")))
-    expect_true("fakeclass" %in% suppressWarnings(class(set_class(x, class = "fakeclass"))))
+    expect_true(inherits(set_class(mtcars), "data.frame"))
+    expect_true(inherits(set_class(mtcars_tibble), "data.frame"))
+    expect_true(inherits(set_class(mtcars_datatable), "data.frame"))
+    
+    expect_true(inherits(set_class(mtcars, class = "fakeclass"), "data.frame"))
+    expect_true(!"fakeclass" %in% class(set_class(mtcars, class = "fakeclass")))
+})
+
+test_that("Set object class as tibble", {
+    expect_true(inherits(set_class(mtcars, class = "tbl_df"), "tbl_df"))
+    expect_true(inherits(set_class(mtcars, class = "tibble"), "tbl_df"))
+})
+
+test_that("Set object class as data.table", {
+    expect_true(inherits(set_class(mtcars, class = "data.table"), "data.table"))
 })
