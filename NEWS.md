@@ -1,5 +1,8 @@
 # CHANGES TO v0.4.24
 
+ * Verbosity of `export(format = "fwf")` now depends on `options("verbose")`. 
+ * Fixed various errors, warnings, and messages in fixed-width format tests.
+ * Modified defaults and argument handling in internal function `read_delim()`.
  * Fixed handling of "data.table", "tibble", and "data.frame" classes in `set_class()`. (#144)
 
 # CHANGES TO v0.4.23

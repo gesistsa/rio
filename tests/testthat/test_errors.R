@@ -28,6 +28,7 @@ test_that("Only export data.frame or matrix", {
 })
 
 test_that("Column widths printed for fixed-width format", {
-    expect_message(export(data.frame(1), "test.txt", format = "fwf"))
+    expect_true(is.character(export(data.frame(1), "test.txt", format = "fwf", verbose = FALSE)))
+    expect_message(export(data.frame(1), "test.txt", format = "fwf", verbose = TRUE))
     unlink("test.txt")
 })

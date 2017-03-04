@@ -1,16 +1,28 @@
 #' @importFrom data.table fread
 import_delim <-
-function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
+function(file, which = 1, fread = TRUE, sep = "auto", 
          header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
     if (isTRUE(fread) & !inherits(file, "connection")) {
-        fread(input = file, sep = sep, sep2 = sep2, header = header,
-              stringsAsFactors = stringsAsFactors, data.table = data.table, ...)
+        dots <- list(...)
+        dots[["input"]] <- file
+        dots[["sep"]] <- sep
+        dots[["header"]] <- header
+        dots[["stringsAsFactors"]] <- stringsAsFactors
+        dots[["data.table"]] <- data.table
+        do.call("fread", dots)
     } else {
         if (inherits(file, "connection")) {
             message("data.table::fread() does not support reading from connections. Using utils::read.table() instead.")
         }
         dots <- list(...)
         dots[["file"]] <- file
+        if (!"dec" %in% names(dots)) {
+            if (inherits(file, "rio_csv")) {
+                dots[["dec"]] <- "."
+            } else if (inherits(file, "rio_csv2")) {
+                dots[["dec"]] <- ","
+            }
+        }
         if (missing(sep) || is.null(sep) || sep == "auto") {
             if (inherits(file, "rio_csv")) {
                 dots[["sep"]] <- ","
@@ -21,16 +33,13 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
             } else {
                 dots[["sep"]] <- "\t"
             }
-        }
-        if (!"dec" %in% names(dots)) {
-            if (missing(sep2) || is.null(sep2) || sep2 == "auto") {
-                dots[["dec"]] <- "."
-            } else {
-                dots[["dec"]] <- sep2
-            }
+        } else {
+            dots[["sep"]] <- sep
         }
         if (missing(header) || is.null(header) || header == "auto") {
             dots[["header"]] <- TRUE
+        } else {
+            dots[["header"]] <- header
         }
         dots[["stringsAsFactors"]] <- stringsAsFactors
         do.call("read.table", dots)
@@ -64,7 +73,16 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
 
 #' @importFrom utils read.fwf
 #' @export
-.import.rio_fwf <- function(file, which = 1, widths, header = FALSE, col.names, readr = FALSE, progress = FALSE, ...) {
+.import.rio_fwf <- 
+function(file, 
+         which = 1, 
+         widths, 
+         header = FALSE, 
+         col.names, 
+         comment = "#",
+         readr = FALSE, 
+         progress = getOption("verbose", FALSE), 
+         ...) {
     if (missing(widths)) {
       stop("Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().")
     }
@@ -77,7 +95,7 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
             } else {
                 widths <- readr::fwf_empty(file = file)
             }
-            readr::read_fwf(file = file, col_positions = widths, progress = progress, ...)
+            readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
         } else if (is.numeric(widths)) {
             if (any(widths < 0)) {
                 if (!"col_types" %in% names(a)) {
@@ -90,14 +108,16 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
                 } else {
                     widths <- readr::fwf_widths(abs(widths))
                 }
-                readr::read_fwf(file = file, col_positions = widths, col_types = col_types, progress = progress, ...)
+                readr::read_fwf(file = file, col_positions = widths, 
+                                col_types = col_types, progress = progress, 
+                                comment = comment, ...)
             } else {
                 if (!missing(col.names)) {
                     widths <- readr::fwf_widths(abs(widths), col_names = col.names)
                 } else {
                     widths <- readr::fwf_widths(abs(widths))
                 }
-                readr::read_fwf(file = file, col_positions = widths, progress = progress, ...)
+                readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
             }
         } else if (is.list(widths)) {
             if (!c("begin", "end") %in% names(widths)) {
@@ -107,7 +127,7 @@ function(file, which = 1, fread = TRUE, sep = "auto", sep2 = "auto",
                     widths <- readr::fwf_widths(widths)
                 }
             }
-            readr::read_fwf(file = file, col_positions = widths, progress = progress, ...)
+            readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
         }
     } else {
         if (!missing(col.names)) {

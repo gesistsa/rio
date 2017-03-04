@@ -12,10 +12,10 @@ test_that("Import from CSV", {
 })
 
 test_that("Import from (European-style) CSV with semicolon separator", {
-  write.table(iris, "iris2.csv", dec = ",", sep = ";")
-  expect_true("iris2.csv" %in% dir())
-  expect_true(is.data.frame(import("iris2.csv", dec = ",", sep = ";", fread = TRUE, header = TRUE)))
-  expect_true(is.data.frame(import("iris2.csv", dec = ",", sep = ";", fread = FALSE, header = TRUE)))
+    write.table(iris, "iris2.csv", dec = ",", sep = ";", row.names = FALSE)
+    expect_true("iris2.csv" %in% dir())
+    expect_true(is.data.frame(import("iris2.csv", dec = ",", sep = ";", fread = TRUE, header = TRUE)))
+    expect_true(is.data.frame(import("iris2.csv", dec = ",", sep = ";", fread = FALSE, header = TRUE)))
 })
 
 

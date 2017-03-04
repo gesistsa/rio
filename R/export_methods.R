@@ -44,7 +44,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @importFrom utils capture.output write.csv
 #' @export
-.export.rio_fwf <- function(file, x, verbose = TRUE, sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, digits = getOption("digits", 7), ...) {
+.export.rio_fwf <- function(file, x, verbose = getOption("verbose", FALSE), sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, digits = getOption("digits", 7), ...) {
     dat <- lapply(x, function(col) {
         if (is.character(col)) {
             col <- as.numeric(as.factor(col))
