@@ -1,5 +1,6 @@
 # CHANGES TO v0.4.25
 
+ * Remove unecessary **urltools** dependency.
  * New function `import_list()` returns a list of data frames from a multi-object Excel Workbook, .Rdata file, zip directory, or HTML file. (#126, #129)
  * `export()` can now write a list of data frames to an Excel (.xlsx) workbook. (#142, h/t Jeremy Johnson)
  * `export()` can now write a list of data frames to an HTML (.html) file.

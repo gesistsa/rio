@@ -27,7 +27,6 @@ Imports:
     tools,
     stats,
     utils,
-    urltools,
     foreign,
     haven (> 0.2.1),
     curl (>= 0.6),

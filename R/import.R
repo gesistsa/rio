@@ -79,8 +79,7 @@
 #' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom stats na.omit setNames
 #' @importFrom utils installed.packages untar unzip tar zip type.convert capture.output
-#' @importFrom urltools url_parse
-#' @importFrom curl curl_download curl_fetch_memory parse_headers
+#' @importFrom curl curl_fetch_memory parse_headers
 #' @importFrom data.table as.data.table is.data.table
 #' @importFrom tibble as_tibble is_tibble
 #' @export

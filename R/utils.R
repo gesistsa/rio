@@ -88,7 +88,8 @@ get_ext <- function(file) {
     if (!grepl("^http.*://", file)) {
         fmt <- file_ext(file)
     } else if(grepl("^http.*://", file)) {
-        file <- url_parse(file)$path
+        parsed <- strsplit(strsplit(file, "?", fixed = TRUE)[[1]][1], "/", fixed = TRUE)[[1]]
+        file <- parsed[length(parsed)]
         fmt <- file_ext(file)
         get_type(fmt)
     }
