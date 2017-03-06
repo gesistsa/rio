@@ -1,4 +1,3 @@
-#' @rdname import
 #' @title Import list of data frames
 #' @description Use \code{\link{import}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, zip directory, HTML file)
 #' @param file A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.
