@@ -1,17 +1,29 @@
-<!--
-%\VignetteEngine{knitr}
-%\VignetteIndexEntry{Import, Export, and Convert Data Files}
--->
+---
+title: "Import, Export, and Convert Data Files"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    fig_caption: false
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{Introduction to 'margins'}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
-# Import, Export, and Convert Data Files #
+# Import, Export, and Convert Data Files
 
-The idea behind **rio** is to simplify the process of importing data into R and exporting data from R. This process is, probably unnecessarily, extremely complex for beginning R users. Indeed, R supplies [an entire manual](https://cran.r-project.org/doc/manuals/r-release/R-data.html) describing the process of data import/export. And, despite all of that text, most of the packages described are (to varying degrees) out-of-date. Faster, simpler, packages with fewer dependencies have been created for many of the file types described in that document. **rio** aims to unify data I/O (importing and exporting) into two simple functions: `import` and `export` so that beginners (and experienced R users) never have to think twice (or even once) about the best way to read and write R data.
+The idea behind **rio** is to simplify the process of importing data into R and exporting data from R. This process is, probably unnecessarily, extremely complex for beginning R users. Indeed, R supplies [an entire manual](https://cran.r-project.org/doc/manuals/r-release/R-data.html) describing the process of data import/export. And, despite all of that text, most of the packages described are (to varying degrees) out-of-date. Faster, simpler, packages with fewer dependencies have been created for many of the file types described in that document. **rio** aims to unify data I/O (importing and exporting) into two simple functions: `import()` and `export()` so that beginners (and experienced R users) never have to think twice (or even once) about the best way to read and write R data.
 
 The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Specifically, **rio** uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, **rio** allows almost all common data formats to be read with the same function.
 
 By making import and export easy, it's an obvious next step to also use R as a simple data conversion utility. Transferring data files between various proprietary formats is always a pain and often expensive. The `convert` function therefore combines `import` and `export` to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](https://www.mtna.us/#/products/sledgehammer)).
 
-## Supported file formats ##
+## Supported file formats
 
 **rio** supports a variety of different file formats for import and export. To keep the package slim, all non-essential formats are supported via "Suggests" packages, which are not installed (or loaded) by default. To ensure rio is fully functional, install these packages the first time you use **rio** via:
 
@@ -57,9 +69,9 @@ The full list of supported formats is below:
 
 Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
 
-### Import ###
+## Data Import
 
-**rio** allows you to import files in almost any format using one, typically single-argument, function. `import` infers the file format from the file's extension and calls the appropriate data import function for you, returning a simple data.frame. This works for any for the formats listed above.
+**rio** allows you to import files in almost any format using one, typically single-argument, function. `import()` infers the file format from the file's extension and calls the appropriate data import function for you, returning a simple data.frame. This works for any for the formats listed above.
 
 ```{r, echo=FALSE, results='hide'}
 library("rio")
@@ -96,8 +108,18 @@ unlink("mtcars.dta")
 unlink("mtcars_noext")
 ```
 
+### Importing Data Lists
 
-### Export ###
+Sometimes you may have multiple data files that you want to import. `import()` only ever returns a single data frame, but `import_list()` can be used to import a vector of file names into R. This works even if the files are different formats:
+
+```r
+str(import_list(dir()), 1)
+```
+
+Similarly, some single-file formats (e.g. Excel Workbooks, Zip directories, HTML files, etc.) can contain multiple data sets. Because `import()` is type safe, always returning a data frame, importing from these formats requires specifying a `which` argument to `import()` to dictate which data set (worksheet, file, table, etc.) to import (the default being `which = 1`). But `import_list()` can be used to import all (or only a specified subset, again via `which`) of data objects from these types of files.
+
+
+## Data Export
 
 The export capabilities of **rio** are somewhat more limited than the import capabilities, given the availability of different functions in various R packages and because import functions are often written to make use of data from other applications and it never seems to be a development priority to have functions to export to the formats used by other applications. That said, **rio** currently supports the following formats:
 
@@ -110,25 +132,44 @@ export(mtcars, "mtcars.rds")
 export(mtcars, "mtcars.dta")
 ```
 
-It is also easy to use `export` as part of an R pipeline (from magrittr or dplyr). For example, the following code uses `export` to save the results of a simple data transformation:
+It is also easy to use `export()` as part of an R pipeline (from magrittr or dplyr). For example, the following code uses `export()` to save the results of a simple data transformation:
 
 ```{r}
 library("magrittr")
 mtcars %>% subset(hp > 100) %>%  aggregate(. ~ cyl + am, data = ., FUN = mean) %>% export(file = "mtcars2.dta")
 ```
 
+Some file formats (e.g., Excel workbooks, Rdata files) can support multiple data objects in a single file. `export()` natively supports output of multiple objects to these types of files:
+
+```{r}
+# export to sheets of an Excel workbook
+export(list(mtcars = mtcars, iris = iris), "multi.xlsx")
+```
+
+```{r}
+# export to an .Rdata file
+## as a named list
+export(list(mtcars = mtcars, iris = iris), "multi.rdata")
+
+## as a character vector
+export(c("mtcars", "iris"), "multi.rdata")
+```
+
+
 ```{r, echo=FALSE, results='hide'}
 unlink("mtcars.csv")
 unlink("mtcars.rds")
+unlink("mtcars.rdata")
 unlink("mtcars.dta")
+unlink("multisheet.xlsx")
 unlink("mtcars2.dta")
 ```
 
-## Convert ##
+## File Conversion
 
-The `convert` function links `import` and `export` by constructing a dataframe from the imported file and immediately writing it back to disk. `convert` invisibly returns the file name of the exported file, so that it can be used to programmatically access the new file.
+The `convert()` function links `import()` and `export()` by constructing a dataframe from the imported file and immediately writing it back to disk. `convert()` invisibly returns the file name of the exported file, so that it can be used to programmatically access the new file.
 
-Because `convert` is just a thin wrapper for `import` and `export`, it is very easy to use. For example, we can convert 
+Because `convert()` is just a thin wrapper for `import()` and `export()`, it is very easy to use. For example, we can convert 
 
 ```{r}
 # create file to convert
@@ -138,7 +179,7 @@ export(mtcars, "mtcars.dta")
 convert("mtcars.dta", "mtcars.sav")
 ```
 
-`convert` also accepts lists of arguments for controlling import (`in_opts`) and export (`out_opts`). This can be useful for passing additional arguments to import or export methods. This could be useful, for example, for reading in a fixed-width format file and converting it to a comma-separated values file:
+`convert()` also accepts lists of arguments for controlling import (`in_opts`) and export (`out_opts`). This can be useful for passing additional arguments to import or export methods. This could be useful, for example, for reading in a fixed-width format file and converting it to a comma-separated values file:
 
 ```{r}
 # create an ambiguous file
@@ -165,3 +206,4 @@ It is also possible to use **rio** on the command-line by calling `Rscript` with
 ```
 Rscript -e "rio::convert('mtcars.dta', 'mtcars.csv')"
 ```
+
