@@ -7,7 +7,7 @@
 export(x, file, format, ...)
 }
 \arguments{
-\item{x}{A data frame or matrix to be written into a file. (An exception to this is that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook or HTML file. See examples.)}
+\item{x}{A data frame or matrix to be written into a file. (An exception to this is that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file. See examples.)}
 
 \item{file}{A character string naming a file. Must specify \code{file} and/or \code{format}.}
 
@@ -37,7 +37,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
     \item Fast storage (.fst), using \code{\link[fst]{write.fst}}
     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
-    \item Saved R objects (.RData,.rda), using \code{\link[base]{save}}
+    \item Saved R objects (.RData,.rda), using \code{\link[base]{save}}. In this case, \code{x} can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding \code{envir} argument is specified.
     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}
     \item YAML (.yml), using \code{\link[yaml]{as.yaml}}
     \item Stata (.dta), using \code{\link[haven]{write_dta}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
@@ -55,6 +55,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
 }
 }
 \examples{
+library("datasets")
 # specify only `file` argument
 export(mtcars, "mtcars.csv")
 
@@ -70,6 +71,10 @@ export(mtcars, format = "stata")
 
 # specify `file` and `format` to override default format
 export(mtcars, file = "mtcars.txt", format = "csv")
+
+# export multiple objects to Rdata
+export(list(mtcars = mtcars, iris = iris), "mtcars.rdata")
+export(c("mtcars", "iris"), "mtcars.rdata")
 
 # export to JSON
 export(mtcars, "mtcars.json")
@@ -101,6 +106,7 @@ export(mtcars, "mtcars.csv.zip")
 unlink("mtcars.csv")
 unlink("mtcars.dta")
 unlink("mtcars.json")
+unlink("mtcars.rdata")
 unlink("data.R")
 unlink("mtcars.csv.zip")
 }

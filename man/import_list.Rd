@@ -17,7 +17,7 @@ import_list(file, which, ...)
 A list of a data frames.
 }
 \description{
-Use \code{\link{import}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, zip directory, HTML file)
+Use \code{\link{import}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)
 }
 \examples{
 library('datasets')

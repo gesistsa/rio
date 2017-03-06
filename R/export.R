@@ -1,7 +1,7 @@
 #' @rdname export
 #' @title Export
 #' @description Write data.frame to a file
-#' @param x A data frame or matrix to be written into a file. (An exception to this is that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook or HTML file. See examples.)
+#' @param x A data frame or matrix to be written into a file. (An exception to this is that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file. See examples.)
 #' @param file A character string naming a file. Must specify \code{file} and/or \code{format}.
 #' @param format An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.
 #' @param \dots Additional arguments for the underlying export functions. See examples.
@@ -21,7 +21,7 @@
 #'     \item Fast storage (.fst), using \code{\link[fst]{write.fst}}
 #'     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
 #'     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
-#'     \item Saved R objects (.RData,.rda), using \code{\link[base]{save}}
+#'     \item Saved R objects (.RData,.rda), using \code{\link[base]{save}}. In this case, \code{x} can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding \code{envir} argument is specified.
 #'     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}
 #'     \item YAML (.yml), using \code{\link[yaml]{as.yaml}}
 #'     \item Stata (.dta), using \code{\link[haven]{write_dta}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
@@ -39,6 +39,7 @@
 #' }
 #'
 #' @examples
+#' library("datasets")
 #' # specify only `file` argument
 #' export(mtcars, "mtcars.csv")
 #'
@@ -54,6 +55,10 @@
 #'
 #' # specify `file` and `format` to override default format
 #' export(mtcars, file = "mtcars.txt", format = "csv")
+#'
+#' # export multiple objects to Rdata
+#' export(list(mtcars = mtcars, iris = iris), "mtcars.rdata")
+#' export(c("mtcars", "iris"), "mtcars.rdata")
 #'
 #' # export to JSON
 #' export(mtcars, "mtcars.json")
@@ -85,6 +90,7 @@
 #' unlink("mtcars.csv")
 #' unlink("mtcars.dta")
 #' unlink("mtcars.json")
+#' unlink("mtcars.rdata")
 #' unlink("data.R")
 #' unlink("mtcars.csv.zip")
 #' @seealso \code{\link{.export}}, \code{\link{import}}, \code{\link{convert}}
@@ -117,7 +123,7 @@ export <- function(x, file, format, ...) {
 
     data_name <- as.character(substitute(x))
     if (!is.data.frame(x) & !is.matrix(x)) {
-        if (!fmt %in% c("xlsx", "html")) {
+        if (!fmt %in% c("xlsx", "html", "rdata")) {
             stop("'x' is not a data.frame or matrix")
         }
     } else if (is.matrix(x)) {

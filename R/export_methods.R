@@ -108,7 +108,18 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_rdata <- function(file, x, ...) {
-    save(x, file = file, ...)
+    if (is.data.frame(x)) {
+        return(save(x, file = file, ...))
+    } else if (is.list(x)) {
+        e <- as.environment(x)
+        save(list = names(x), file = file, envir = e, ...)
+    } else if (is.environment(x)) {
+        save(list = ls(x), file = file, envir = x, ...)
+    } else if (is.character(x)) {
+        save(list = x, file = file, ...)
+    } else {
+        stop("'x' must be a data.frame, list, or environment")
+    }
 }
 
 #' @export
