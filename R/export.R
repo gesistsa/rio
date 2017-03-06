@@ -1,7 +1,7 @@
 #' @rdname export
 #' @title Export
 #' @description Write data.frame to a file
-#' @param x A data frame or matrix to be written into a file. (An exception to this is that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook. See examples.)
+#' @param x A data frame or matrix to be written into a file. (An exception to this is that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook or HTML file. See examples.)
 #' @param file A character string naming a file. Must specify \code{file} and/or \code{format}.
 #' @param format An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.
 #' @param \dots Additional arguments for the underlying export functions. See examples.
@@ -117,7 +117,7 @@ export <- function(x, file, format, ...) {
 
     data_name <- as.character(substitute(x))
     if (!is.data.frame(x) & !is.matrix(x)) {
-        if (fmt != "xlsx") {
+        if (!fmt %in% c("xlsx", "html")) {
             stop("'x' is not a data.frame or matrix")
         }
     } else if (is.matrix(x)) {

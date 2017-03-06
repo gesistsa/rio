@@ -3,6 +3,7 @@
 The aim of **rio** is to make data file I/O in R as easy as possible by implementing three simple functions in Swiss-army knife style:
 
  - `export()` and `import()` provide a painless data I/O experience by automatically choosing the appropriate data read or write function based on file extension
+ - `import_list()` imports a list of data frames from a multi-object file (Excel workbook, zip directory, or HTML file)
  - `convert()` wraps `import()` and `export()` to allow the user to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](https://www.mtna.us/#/products/sledgehammer)). [Luca Braglia](https://lbraglia.github.io/) has created a Shiny app called [rioweb](https://github.com/lbraglia/rioweb) that provides access to the file conversion features of rio. [GREA](https://github.com/Stan125/GREA/) is an RStudio add-in that provides an interactive interface for reading in data using rio.
 
 ## Examples
@@ -27,6 +28,17 @@ A particularly useful feature of rio is the ability to import from and export to
 
 ```r
 export(mtcars, "mtcars.tsv.zip")
+```
+
+As of rio v0.5.0, `export()` can also write multiple data farmes to respective sheets of an Excel workbook or an HTML file:
+
+
+```r
+export(list(mtcars = mtcars, iris = iris), file = "mtcars.xlsx")
+```
+
+```
+## Loading required namespace: openxlsx
 ```
 
 ### Import
@@ -56,6 +68,35 @@ all.equal(x, z, check.attributes = FALSE)
 ```
 
 Note: Because of inconsistencies across underlying packages, the data.frame returned by `import` might vary slightly (in variable classes and attributes) depending on file type.
+
+In rio v0.5.0, a new list-based import function was added. This allows users to import a list of data frames from a multi-object file (such as an Excel workbook, zip directory, or HTML file):
+
+
+```r
+str(import_list("mtcars.xlsx"))
+```
+
+```
+## List of 2
+##  $ :'data.frame':	32 obs. of  11 variables:
+##   ..$ mpg : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##   ..$ cyl : num [1:32] 6 6 4 6 8 6 8 4 4 6 ...
+##   ..$ disp: num [1:32] 160 160 108 258 360 ...
+##   ..$ hp  : num [1:32] 110 110 93 110 175 105 245 62 95 123 ...
+##   ..$ drat: num [1:32] 3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##   ..$ wt  : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...
+##   ..$ qsec: num [1:32] 16.5 17 18.6 19.4 17 ...
+##   ..$ vs  : num [1:32] 0 0 1 1 0 1 0 1 1 1 ...
+##   ..$ am  : num [1:32] 1 1 1 0 0 0 0 0 0 0 ...
+##   ..$ gear: num [1:32] 4 4 4 3 3 3 3 4 4 4 ...
+##   ..$ carb: num [1:32] 4 4 1 1 2 1 4 2 2 4 ...
+##  $ :'data.frame':	150 obs. of  5 variables:
+##   ..$ Sepal.Length: num [1:150] 5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##   ..$ Sepal.Width : num [1:150] 3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##   ..$ Petal.Length: num [1:150] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##   ..$ Petal.Width : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##   ..$ Species     : chr [1:150] "setosa" "setosa" "setosa" "setosa" ...
+```
 
 ### Convert
 
@@ -148,10 +189,11 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
 
 ## Package Installation
 
-The package is available on [CRAN](https://cran.r-project.org/package=rio) and can be installed directly in R using:
+The package is available on [CRAN](https://cran.r-project.org/package=rio) and can be installed directly in R using `install.packages()`. You may want to run `install_formats()` after the first installation.
 
 ```R
 install.packages("rio")
+install_formats()
 ```
 
 The latest development version on GitHub can be installed using **devtools**:
@@ -162,6 +204,8 @@ if(!require("ghit")){
 }
 ghit::install_github("leeper/rio")
 ```
+
+Because of how **ghit** handles Suggests packages, you do not need to run `install_formats()` when installing directly from GitHub.
 
 [![CRAN Version](http://www.r-pkg.org/badges/version/rio)](https://cran.r-project.org/package=rio)
 ![Downloads](http://cranlogs.r-pkg.org/badges/rio)

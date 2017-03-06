@@ -180,7 +180,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
         }
     } else {
         wb <- openxlsx::loadWorkbook(file = file)
-        sheets <- getSheetNames(file = file)
+        sheets <- openxlsx::getSheetNames(file = file)
         if (is.data.frame(x)) {
             if (missing(which)) {
                 which <- paste("Sheet", length(sheets)+1)
@@ -210,15 +210,20 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @export
 .export.rio_html <- function(file, x, ...) {
     requireNamespace("xml2")
-    x[] <- lapply(x, as.character)
-    out <- character(nrow(x))
-    html <- xml2::read_html("<!doctype html><html><head>\n<title>R Exported Data</title>\n</head><body>\n<table></table>\n</body>\n</html>")
-    tab <- xml2::xml_children(xml2::xml_children(html)[[2]])[[1]]
-    # add header row
-    invisible(xml2::xml_add_child(tab, xml2::read_xml(paste0(twrap(paste0(twrap(names(x), "th"), collapse = ""), "tr"), "\n"))))
-    # add data
-    for (i in seq_len(nrow(x))) {
-        xml2::xml_add_child(tab, xml2::read_xml(paste0(twrap(paste0(twrap(unlist(x[i, , drop = TRUE]), "td"), collapse = ""), "tr"), "\n")))
+    html <- xml2::read_html("<!doctype html><html><head>\n<title>R Exported Data</title>\n</head><body>\n</body>\n</html>")
+    bod <- xml2::xml_children(html)[[2]]
+    if (is.data.frame(x)) {
+        x <- list(x)
+    }
+    for (i in seq_along(x)) {
+        x[[i]][] <- lapply(x[[i]], as.character)
+        tab <- xml2::xml_add_child(bod, "table")
+        # add header row
+        invisible(xml2::xml_add_child(tab, xml2::read_xml(paste0(twrap(paste0(twrap(names(x[[i]]), "th"), collapse = ""), "tr"), "\n"))))
+        # add data
+        for (j in seq_len(nrow(x[[i]]))) {
+            xml2::xml_add_child(tab, xml2::read_xml(paste0(twrap(paste0(twrap(unlist(x[[i]][j, , drop = TRUE]), "td"), collapse = ""), "tr"), "\n")))
+        }
     }
     xml2::write_xml(html, file = file, ...)
 }
