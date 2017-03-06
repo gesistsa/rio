@@ -47,7 +47,7 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
         unlink(file.path(tmp, cfile2))
     }
     if (o != 0) {
-        stop(sprintf("File compresion failed for %s!", cfile))
+        stop(sprintf("File compression failed for %s!", cfile))
     }
     return(cfile)
 }
