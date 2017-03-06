@@ -169,9 +169,36 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 }
 
 #' @export
-.export.rio_xlsx <- function(file, x, ...) {
+.export.rio_xlsx <- function(file, x, overwrite = TRUE, which, ...) {
     requireNamespace("openxlsx")
-    openxlsx::write.xlsx(x = x, file = file, ...)
+    dots <- list(...)
+    if (isTRUE(overwrite) || !file.exists(file)) {
+        if (!missing(which)) {
+            openxlsx::write.xlsx(x = x, file = file, sheetName = which, ...)
+        } else {
+            openxlsx::write.xlsx(x = x, file = file, ...)
+        }
+    } else {
+        wb <- openxlsx::loadWorkbook(file = file)
+        sheets <- getSheetNames(file = file)
+        if (is.data.frame(x)) {
+            if (missing(which)) {
+                which <- paste("Sheet", length(sheets)+1)
+            }
+            if (!which %in% sheets) {
+                openxlsx::addWorksheet(wb, sheet = which)
+            }
+            openxlsx::writeData(wb, sheet = which, x = x)
+            openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
+        } else {
+            wb <- openxlsx::loadWorkbook(file = file)
+            mapply(function(sheet, dat) {
+                openxlsx::addWorksheet(wb, sheet = sheet)
+                openxlsx::writeData(wb, sheet = sheet, x = dat)
+            }, names(x), x)
+            openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
+        }
+    }
 }
 
 #' @export

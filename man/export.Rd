@@ -7,13 +7,13 @@
 export(x, file, format, ...)
 }
 \arguments{
-\item{x}{A data frame or matrix to be written into a file.}
+\item{x}{A data frame or matrix to be written into a file. (An exception to this is that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook. See examples.)}
 
 \item{file}{A character string naming a file. Must specify \code{file} and/or \code{format}.}
 
 \item{format}{An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.}
 
-\item{\dots}{Additional arguments for the underlying export functions.}
+\item{\dots}{Additional arguments for the underlying export functions. See examples.}
 }
 \value{
 The name of the output file as a character string (invisibly).
@@ -47,7 +47,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{write.arff}}
     \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'}
     \item Matlab (.mat), using \code{\link[rmatio]{write.mat}}
-    \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}
+    \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}. Use \code{which} to specify a sheet name and \code{overwrite} to decide whether to overwrite an existing file or worksheet (the default) or add the data as a new worksheet (with \code{overwrite = FALSE}). \code{x} can also be a list of data frames; the list entry names are used as sheet names.
     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{write_ods}}. (Currently only single-sheet exports are supported.)
     \item XML (.xml), using a custom method based on \code{\link[xml2]{xml_add_child}} to create a simple XML tree and \code{\link[xml2]{write_xml}} to write to disk.
     \item HTML (.html), using a custom method based on \code{\link[xml2]{xml_add_child}} to create a simple HTML table and \code{\link[xml2]{write_xml}} to write to disk.
@@ -81,6 +81,18 @@ export(mtcars, "mtcars.csv", col.names = FALSE)
 export(mtcars, file = "data.R", format = "dump")
 export(mtcars, file = "data.R", format = "dump", append = TRUE)
 source("data.R", echo = TRUE)
+
+# write to an Excel workbook
+\dontrun{
+  ## export a single data frame
+  export(mtcars, "mtcars.xlsx")
+  
+  ## export a list of data frames as worksheets
+  export(list(a = mtcars, b = iris), "multisheet.xlsx")
+
+  ## export, adding sheet to an existing workbook
+  export(iris, "mtcars.xlsx", which = "iris", overwrite = FALSE)
+}
 
 # write data to a zip-compressed CSV
 export(mtcars, "mtcars.csv.zip")

@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.25
+
+ * `export()` can now write a list of data frames to an Excel (.xlsx) workbook. (#142, h/t Jeremy Johnson)
+
 # CHANGES TO v0.4.24
 
  * Verbosity of `export(format = "fwf")` now depends on `options("verbose")`. 
