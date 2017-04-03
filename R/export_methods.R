@@ -2,10 +2,13 @@
 #' @importFrom utils write.table
 export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
                          col.names = TRUE, ...) {
-    if (fwrite) {
+    if (isTRUE(fwrite) & !inherits(file, "connection")) {
         fwrite(x, file = file, sep = sep, col.name = col.names,
                row.names = row.names, ...)
     } else {
+        if (isTRUE(fwrite) & inherits(file, "connection")) {
+            message("data.table::fwrite() does not support writing to connections. Using utils::write.table() instead.")
+        }
         write.table(x, file = file, sep = sep, row.names = row.names,
                     col.names = col.names, ...)
     }

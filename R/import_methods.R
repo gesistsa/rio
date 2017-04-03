@@ -11,7 +11,7 @@ function(file, which = 1, fread = TRUE, sep = "auto",
         dots[["data.table"]] <- data.table
         do.call("fread", dots)
     } else {
-        if (inherits(file, "connection")) {
+        if (isTRUE(fread) & inherits(file, "connection")) {
             message("data.table::fread() does not support reading from connections. Using utils::read.table() instead.")
         }
         dots <- list(...)
