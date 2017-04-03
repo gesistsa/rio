@@ -14,7 +14,8 @@
 #'
 #' \itemize{
 #'     \item Tab-separated data (.tsv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{row.names = FALSE}.
-#'     \item Comma-separated data (.csv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.csv}} with \code{row.names = FALSE}.
+#'     \item Comma-separated data (.csv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{row.names = FALSE}.
+#'     \item gzip comma-separated data (.csv.gz), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
 #'     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{write_csvy}}. The YAML header lines are preceded by R comment symbols (\#) by default; this can be turned off by passing a \code{comment_header = FALSE} argument to \code{export}. Setting \code{fwrite = TRUE} (the default) will rely on \code{\link[data.table]{fwrite}} for much faster export.
 #'     \item Pipe-separated data (.psv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{sep = '|'} and \code{row.names = FALSE}.
 #'     \item Feather R/Python interchange format (.feather), using \code{feather::write_feather}
@@ -115,6 +116,7 @@ export <- function(x, file, format, ...) {
         file <- paste0(as.character(substitute(x)), ".", fmt)
         compress <- NA_character_
     }
+    outfile <- file
     if (fmt %in% c("gz", "gzip")) {
         fmt <- file_ext(file_path_sans_ext(file, compression = FALSE))
         file <- gzfile(file, "w")
@@ -139,5 +141,5 @@ export <- function(x, file, format, ...) {
         return(invisible(cfile))
     }
 
-    invisible(unclass(file))
+    invisible(unclass(outfile))
 }

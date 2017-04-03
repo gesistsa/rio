@@ -37,6 +37,7 @@ The full list of supported formats is below:
 | ------ | ------ | ------ |
 | Tab-separated data (.tsv) | Yes | Yes |
 | Comma-separated data (.csv) | Yes | Yes |
+| gzip comma-separated data (.csv.gz) | Yes | Yes |
 | CSVY (CSV + YAML metadata header) (.csvy) | Yes | Yes |
 | Feather R/Python interchange format (.feather) | Yes | Yes |
 | Fast Storage (.fst) | Yes | Yes |

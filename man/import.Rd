@@ -31,6 +31,7 @@ This function imports a data frame or matrix from a data file with the file form
 \itemize{
     \item Tab-separated data (.tsv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
     \item Comma-separated data (.csv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
+    \item gzip comma-separated data (.csv.gz), using \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{read_csvy}}.
     \item Feather R/Python interchange format (.feather), using \code{feather::read_feather}
     \item Fast storage (.fst), using \code{\link[fst]{read.fst}}
