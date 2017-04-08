@@ -4,8 +4,10 @@
 .travis.yml
 appveyor.yml
 README.Rmd
+README.html
 CONTRIBUTING.md
 ^revdep$
 .Rproj
 ^.*\.Rproj$
 ^\.Rproj\.user$
+Makefile
