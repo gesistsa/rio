@@ -161,7 +161,7 @@ install.packages("rio")
 install_formats()
 ```
 
-The latest development version on GitHub can be installed using **ghit**:
+The latest development version on GitHub can be installed using [**ghit**](https://github.com/cloudyr/ghit), a lightweight alternative to `devtools::install_github()`:
 
 ```R
 if(!require("ghit")){
