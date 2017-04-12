@@ -10,7 +10,7 @@ test_that("Import List", {
   data_list <- import_list(c("mtcars1.csv", "mtcars2.csv", "mtcars3.csv", "mtcars4.csv"))
   data_classes <- lapply(data_list, class)
   
-  expect_output(class(data_list), "list")
+  expect_equal(class(data_list), "list")
   expect_length(data_classes, 4)
   expect_true(all(data_classes == "data.frame"))
 })
@@ -21,7 +21,7 @@ test_that("Import Directory", {
   export(mtcars[17:24,], "mtcars3.csv")
   export(mtcars[25:32,], "mtcars4.csv")
   
-  expect_equivalent(import_directory(path = ".", file.type = ".csv"), mtcars)
+  expect_equivalent(as.data.frame(import_directory(path = ".", file.type = ".csv$")), mtcars)
 })
 
 unlink("mtcars1.csv")
