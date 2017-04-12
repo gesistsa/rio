@@ -25,7 +25,7 @@ import_directory <- function(path, file.type = NULL, ...){
   
   # If file.type is not supplied, use the most common file extension in path
   if(is.null(file.type)){
-    file.extns <- str_match(files, "^[^~].*\\.(\\w+)$")[,1]
+    file.extns <- gsub("(?:.*\\.)(\\w+)$", "\\1", files)
     file.type <- names(sort(-table(file.extns)))[1]
     files <- files[grepl(pattern = file.type, files, fixed = T)]
   }
