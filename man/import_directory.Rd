@@ -9,6 +9,8 @@ import_directory(path, file.type = NULL, ...)
 \arguments{
 \item{path}{A character string path name that contains a directory of files with identical structure to be imported.}
 
+\item{file.type}{An optional character string file extension pattern to be passed to \code{\link{list.files}}. Otherwise the most common extention in the directory is used.}
+
 \item{\dots}{Additional arguments passed to \code{\link{import}}.}
 }
 \value{

@@ -1,6 +1,7 @@
 #' @title Import directory of files to a data frame
 #' @description Use \code{\link{import_list}} to import a directory of files list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)
 #' @param path A character string path name that contains a directory of files with identical structure to be imported.
+#' @param file.type An optional character string file extension pattern to be passed to \code{\link{list.files}}. Otherwise the most common extention in the directory is used.
 #' @param \dots Additional arguments passed to \code{\link{import}}.
 #' @return A data frame (or a list of data frames if \code{rbind} is unsuccessful).
 #' @examples
