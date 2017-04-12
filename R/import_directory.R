@@ -37,7 +37,6 @@ import_directory <- function(path, file.type = NULL, ...){
   message("Merging datasets...")
   tryCatch(
     {
-      stop("Error")
       return(data.table::rbindlist(data))
     },
     error = function(e){
