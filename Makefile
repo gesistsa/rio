@@ -2,7 +2,7 @@ pkg = $(shell basename $(CURDIR))
 
 all: build
 
-man/: R/
+NAMESPACE: R/
 	Rscript -e "devtools::document()"
 
 README.md: README.Rmd
@@ -11,7 +11,7 @@ README.md: README.Rmd
 README.html: README.md
 	pandoc -o README.html README.md
 
-../$(pkg)*.tar.gz: DESCRIPTION README.md man/
+../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE
 	cd ../ && R CMD build $(pkg)
 
 build: ../$(pkg)*.tar.gz
