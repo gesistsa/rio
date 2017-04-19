@@ -1,3 +1,7 @@
+# CHANGES TO v0.4.27
+
+ * Switched `requireNamespace()` calls to `quietly = TRUE`.
+
 # CHANGES TO v0.4.26
 
  * Further fixes to .csv.gz import/export. (#146, h/t Trevor Davis)

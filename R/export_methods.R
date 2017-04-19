@@ -36,7 +36,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_csvy <- function(file, x, ...) {
-    requireNamespace("csvy")
+    requireNamespace("csvy", quietly = TRUE)
     csvy::write_csvy(file = file, x = x, ...)
 }
 
@@ -130,19 +130,19 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_feather <- function(file, x, ...) {
-    requireNamespace("feather")
+    requireNamespace("feather", quietly = TRUE)
     feather::write_feather(x = x, path = file)
 }
 
 #' @export
 .export.rio_fst <- function(file, x, ...) {
-    requireNamespace("fst")
+    requireNamespace("fst", quietly = TRUE)
     fst::write.fst(x = x, path = file, ...)
 }
 
 #' @export
 .export.rio_matlab <- function(file, x, ...) {
-    requireNamespace("rmatio")
+    requireNamespace("rmatio", quietly = TRUE)
     rmatio::write.mat(object = x, filename = file, ...)
 }
 
@@ -172,7 +172,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_json <- function(file, x, ...) {
-    requireNamespace("jsonlite")
+    requireNamespace("jsonlite", quietly = TRUE)
     cat(jsonlite::toJSON(x, ...), file = file)
 }
 
@@ -184,7 +184,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_xlsx <- function(file, x, overwrite = TRUE, which, ...) {
-    requireNamespace("openxlsx")
+    requireNamespace("openxlsx", quietly = TRUE)
     dots <- list(...)
     if (isTRUE(overwrite) || !file.exists(file)) {
         if (!missing(which)) {
@@ -217,13 +217,13 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_ods <- function(file, x, ...) {
-    requireNamespace("readODS")
+    requireNamespace("readODS", quietly = TRUE)
     readODS::write_ods(x = x, path = file)
 }
 
 #' @export
 .export.rio_html <- function(file, x, ...) {
-    requireNamespace("xml2")
+    requireNamespace("xml2", quietly = TRUE)
     html <- xml2::read_html("<!doctype html><html><head>\n<title>R Exported Data</title>\n</head><body>\n</body>\n</html>")
     bod <- xml2::xml_children(html)[[2]]
     if (is.data.frame(x)) {
@@ -244,7 +244,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_xml <- function(file, x, ...) {
-    requireNamespace("xml2")
+    requireNamespace("xml2", quietly = TRUE)
     root <- ""
     xml <- xml2::read_xml(paste0("<",as.character(substitute(x)),">\n</",as.character(substitute(x)),">\n"))
     att <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
@@ -265,7 +265,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_yml <- function(file, x, ...) {
-    requireNamespace("yaml")
+    requireNamespace("yaml", quietly = TRUE)
     cat(yaml::as.yaml(x, ...), file = file)
 }
 
