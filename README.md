@@ -1,10 +1,11 @@
 # rio: A Swiss-Army Knife for Data I/O
 
-The aim of **rio** is to make data file I/O in R as easy as possible by implementing three simple functions in Swiss-army knife style:
+The aim of **rio** is to make data file I/O in R as easy as possible by implementing four simple functions in Swiss-army knife style:
 
- - `export()` and `import()` provide a painless data I/O experience by automatically choosing the appropriate data read or write function based on file extension
+ - `import()` provides a painless data import experience by automatically choosing the appropriate import/read function based on file extension (or a specified `format` argument)
  - `import_list()` imports a list of data frames from a multi-object file (Excel workbook, .Rdata files, zip directory, or HTML file)
- - `convert()` wraps `import()` and `export()` to allow the user to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](https://www.mtna.us/#/products/sledgehammer)). [Luca Braglia](https://lbraglia.github.io/) has created a Shiny app called [rioweb](https://github.com/lbraglia/rioweb) that provides access to the file conversion features of rio. [GREA](https://github.com/Stan125/GREA/) is an RStudio add-in that provides an interactive interface for reading in data using rio.
+ - `export()` provides the same painless file recognition for data export/write functionality
+ - `convert()` wraps `import()` and `export()` to allow the user to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](https://www.mtna.us/#/products/sledgehammer)). Relatedly, [Luca Braglia](https://lbraglia.github.io/) has created a Shiny app called [rioweb](https://github.com/lbraglia/rioweb) that provides access to the file conversion features of rio. [GREA](https://github.com/Stan125/GREA/) is an RStudio add-in that provides an interactive interface for reading in data using rio.
 
 ## Examples
 
@@ -159,7 +160,7 @@ The full list of supported formats is below:
 | Data Interchange Format (.dif) | Yes |  |
 | Fortran data (no recognized extension) | Yes |  |
 | [Google Sheets](https://www.google.com/sheets/about/) | Yes |  |
-| Clipboard (default is tsv) | Yes (Mac and Windows) | Yes (Mac and Windows) |
+| Clipboard (default is tsv) | Yes (uses [clipr](https://cran.r-project.org/package=clipr)) | Yes (uses [clipr](https://cran.r-project.org/package=clipr)) |
 
 Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
 
@@ -190,6 +191,12 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
 
 ## Package Installation
 
+[![CRAN Version](http://www.r-pkg.org/badges/version/rio)](https://cran.r-project.org/package=rio)
+![Downloads](http://cranlogs.r-pkg.org/badges/rio)
+[![Travis-CI Build Status](https://travis-ci.org/leeper/rio.png?branch=master)](https://travis-ci.org/leeper/rio)
+[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/40ua5l06jw0gjyjb?svg=true)](https://ci.appveyor.com/project/leeper/rio)
+[![codecov.io](http://codecov.io/github/leeper/rio/coverage.svg?branch=master)](http://codecov.io/github/leeper/rio?branch=master)
+
 The package is available on [CRAN](https://cran.r-project.org/package=rio) and can be installed directly in R using `install.packages()`. You may want to run `install_formats()` after the first installation.
 
 ```R
@@ -207,10 +214,3 @@ ghit::install_github("leeper/rio")
 ```
 
 Because of how **ghit** handles Suggests packages, you do not need to run `install_formats()` when installing directly from GitHub.
-
-[![CRAN Version](http://www.r-pkg.org/badges/version/rio)](https://cran.r-project.org/package=rio)
-![Downloads](http://cranlogs.r-pkg.org/badges/rio)
-[![Travis-CI Build Status](https://travis-ci.org/leeper/rio.png?branch=master)](https://travis-ci.org/leeper/rio)
-[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/40ua5l06jw0gjyjb?svg=true)](https://ci.appveyor.com/project/leeper/rio)
-[![codecov.io](http://codecov.io/github/leeper/rio/coverage.svg?branch=master)](http://codecov.io/github/leeper/rio?branch=master)
-
