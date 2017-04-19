@@ -4,7 +4,8 @@
 \alias{import_list}
 \title{Import list of data frames}
 \usage{
-import_list(file, setclass, which, rbind = FALSE, ...)
+import_list(file, setclass, which, rbind = FALSE, rbind_label = "_file",
+  rbind_fill = TRUE, ...)
 }
 \arguments{
 \item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.}
@@ -13,7 +14,11 @@ import_list(file, setclass, which, rbind = FALSE, ...)
 
 \item{which}{If \code{file} is a single file path, this specifies which objects should be extracted (passed to \code{\link{import}}'s \code{which} argument). Ignored otherwise.}
 
-\item{rbind}{A logical indicating whether to pass}
+\item{rbind}{A logical indicating whether to pass the import list of data frames through \code{\link[data.table]{rbindlist}}.}
+
+\item{rbind_label}{If \code{rbind = TRUE}, a character string specifying the name of a column to add to the data frame indicating its source file.}
+
+\item{rbind_fill}{If \code{rbind = TRUE}, a logical indicating whether to set the \code{fill = TRUE} (and fill missing columns with \code{NA}).}
 
 \item{\dots}{Additional arguments passed to \code{\link{import}}. Behavior may be unexpected if files are of different formats.}
 }

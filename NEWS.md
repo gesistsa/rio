@@ -1,3 +1,8 @@
+# CHANGES TO v0.4.28
+
+ * `import_list()` now returns a `NULL` entry for any failed imports, with a warning. (#149)
+ * `import_list()` gains additional arguments `rbind_fill` and `rbind_label` to control rbind-ing behavior. (#149)
+
 # CHANGES TO v0.4.27
 
  * Import to and export from the clipboard now relies on `clipr::read_clip()` and `clipr::write_clip()`, respectively, thus (finally) providing Linux support. (#105, h/t Matthew Lincoln)

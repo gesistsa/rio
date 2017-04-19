@@ -3,7 +3,9 @@
 #' @param file A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.
 #' @template setclass
 #' @param which If \code{file} is a single file path, this specifies which objects should be extracted (passed to \code{\link{import}}'s \code{which} argument). Ignored otherwise.
-#' @param rbind A logical indicating whether to pass
+#' @param rbind A logical indicating whether to pass the import list of data frames through \code{\link[data.table]{rbindlist}}.
+#' @param rbind_label If \code{rbind = TRUE}, a character string specifying the name of a column to add to the data frame indicating its source file.
+#' @param rbind_fill If \code{rbind = TRUE}, a logical indicating whether to set the \code{fill = TRUE} (and fill missing columns with \code{NA}).
 #' @param \dots Additional arguments passed to \code{\link{import}}. Behavior may be unexpected if files are of different formats.
 #' @return If \code{rbind=FALSE} (the default), a list of a data frames. Otherwise, that list is passed to \code{\link[data.table]{rbindlist}} with \code{fill = TRUE} and returns a data frame object of class set by the \code{setclass} argument; if this operation fails, the list is returned.
 #' @examples
@@ -34,9 +36,25 @@
 #' 
 #' @seealso \code{\link{import}}
 #' @export
-import_list <- function(file, setclass, which, rbind = FALSE, ...) {
+import_list <- 
+function(file, 
+         setclass, 
+         which, 
+         rbind = FALSE, 
+         rbind_label = "_file", 
+         rbind_fill = TRUE, 
+         ...) {
     if (length(file) > 1) {
-        x <- lapply(file, import, ...)
+        x <- lapply(file, function(thisfile) {
+            out <- try(import(thisfile, ...), silent = TRUE)
+            if (inherits(out, "try-error")) {
+                warning(sprintf("Import failed for %s", thisfile))
+                out <- NULL
+            } else if (isTRUE(rbind)) {
+                out[[rbind_label]] <- thisfile
+            }
+            out
+        })
     } else {
         if (get_ext(file) == "rdata") {
             e <- new.env()
@@ -56,7 +74,16 @@ import_list <- function(file, setclass, which, rbind = FALSE, ...) {
                 which <- 1
             }
         }
-        x <- lapply(which, function(w) import(file, which = w, ...))
+        x <- lapply(which, function(thiswhich) {
+            out <- try(import(file, which = thiswhich, ...), silent = TRUE)
+            if (inherits(out, "try-error")) {
+                warning(sprintf("Import failed for %s from %s", thiswhich, file))
+                out <- NULL
+            } else if (isTRUE(rbind)) {
+                out[[rbind_label]] <- thiswhich
+            }
+            out
+        })
     }
     
     # optionally rbind
@@ -64,7 +91,7 @@ import_list <- function(file, setclass, which, rbind = FALSE, ...) {
         if (length(x) == 1) {
             x <- x[[1L]]
         } else {
-            x2 <- try(data.table::rbindlist(x, fill = TRUE), silent = TRUE)
+            x2 <- try(data.table::rbindlist(x, fill = rbind_fill), silent = TRUE)
             if (inherits(x2, "try-error")) {
                 warnings("Attempt to rbindlist() the data did not succeed. List returned instead.")
                 return(x)

@@ -32,3 +32,7 @@ test_that("Column widths printed for fixed-width format", {
     expect_message(export(data.frame(1), "test.txt", format = "fwf", verbose = TRUE))
     unlink("test.txt")
 })
+
+test_that("Warning for import_list() with missing file", {
+    expect_warning(import_list("fake_file.csv"))
+})
