@@ -1,5 +1,7 @@
 # CHANGES TO v0.4.27
 
+ * Added an `rbind` argument to `import_list()`. (#149)
+ * Added a `setclass` argument to `import_list()`, ala the same in `import()`.
  * Switched `requireNamespace()` calls to `quietly = TRUE`.
 
 # CHANGES TO v0.4.26

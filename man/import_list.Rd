@@ -4,38 +4,48 @@
 \alias{import_list}
 \title{Import list of data frames}
 \usage{
-import_list(file, which, ...)
+import_list(file, setclass, which, rbind = FALSE, ...)
 }
 \arguments{
 \item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.}
 
+\item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, all the return object is always a \dQuote{data.frame}. Allowed values for this might be \dQuote{tbl_df}, \dQuote{tbl}, or \dQuote{tibble} (if using dplyr) or \dQuote{data.table} (if using data.table). Other values are ignored such that a data.frame is returned.}
+
 \item{which}{If \code{file} is a single file path, this specifies which objects should be extracted (passed to \code{\link{import}}'s \code{which} argument). Ignored otherwise.}
+
+\item{rbind}{A logical indicating whether to pass}
 
 \item{\dots}{Additional arguments passed to \code{\link{import}}. Behavior may be unexpected if files are of different formats.}
 }
 \value{
-A list of a data frames.
+If \code{rbind=FALSE} (the default), a list of a data frames. Otherwise, that list is passed to \code{\link[data.table]{rbindlist}} with \code{fill = TRUE} and returns a data frame object of class set by the \code{setclass} argument; if this operation fails, the list is returned.
 }
 \description{
 Use \code{\link{import}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)
 }
 \examples{
 library('datasets')
-export(list(iris = iris, mtcars = mtcars), "data.xlsx")
+export(list(mtcars1 = mtcars[1:10,], 
+            mtcars2 = mtcars[11:20,],
+            mtcars2 = mtcars[21:32,]), "mtcars.xlsx")
 
 # import a single file from multi-object workbook
-str(import("data.xlsx", which = "mtcars"))
+str(import("mtcars.xlsx", which = "mtcars1"))
 
 # import all worksheets
-str(import_list("data.xlsx"))
+str(import_list("mtcars.xlsx"), 1)
+
+# import and rbind all worksheets
+mtcars2 <- import_list("mtcars.xlsx", rbind = TRUE)
+all.equal(mtcars2, mtcars, check.attributes = FALSE)
 
 # import multiple files
 export(mtcars, "mtcars.csv")
 export(mtcars, "iris.csv")
-str(import_list(c("mtcars.csv", "iris.csv")))
+str(import_list(dir(pattern = "csv$")), 1)
 
 # cleanup
-unlink("data.xlsx")
+unlink("mtcars.xlsx")
 unlink("mtcars.csv")
 unlink("iris.csv")
 
