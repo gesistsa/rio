@@ -269,19 +269,8 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     cat(yaml::as.yaml(x, ...), file = file)
 }
 
-#' @importFrom utils write.table
 #' @export
 .export.rio_clipboard <- function(file, x, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
-    if (Sys.info()["sysname"] == "Darwin") {
-        clip <- pipe("pbcopy", "w")
-        write.table(x, file = clip, sep = sep, row.names = row.names,
-                    col.names = col.names, ...)
-        close(clip)
-    } else if (Sys.info()["sysname"] == "Windows") {
-        write.table(x, file="clipboard", sep = sep, row.names = row.names,
-                    col.names = col.names, ...)
-    } else {
-        stop("Writing to clipboard is not supported on your OS.")
-        return(NULL)
-    }
+    requireNamespace("clipr", quietly = TRUE)
+    clipr::write_clip(content = x, row.names = row.names, col.names = col.names, sep = sep, ...)
 }

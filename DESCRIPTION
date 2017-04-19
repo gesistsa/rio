@@ -39,6 +39,7 @@ Suggests:
     testthat,
     knitr,
     magrittr,
+    clipr,
     csvy,
     feather,
     fst,

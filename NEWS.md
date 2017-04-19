@@ -1,5 +1,6 @@
 # CHANGES TO v0.4.27
 
+ * Import to and export from the clipboard now relies on `clipr::read_clip()` and `clipr::write_clip()`, respectively, thus (finally) providing Linux support. (#105, h/t Matthew Lincoln)
  * Added an `rbind` argument to `import_list()`. (#149)
  * Added a `setclass` argument to `import_list()`, ala the same in `import()`.
  * Switched `requireNamespace()` calls to `quietly = TRUE`.

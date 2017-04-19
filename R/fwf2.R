@@ -1,3 +1,4 @@
+#' @importFrom utils read.table
 read.fwf2 <- function (file, widths, header = FALSE, sep = "\t", skip = 0, n = -1, quote = "", stringsAsFactors = FALSE, ...) 
 {
     doone <- function(x) {

@@ -397,16 +397,8 @@ function(file,
     as.data.frame(yaml::yaml.load(file, ...), stringsAsFactors = stringsAsFactors)
 }
 
-#' @importFrom utils read.table
 #' @export
 .import.rio_clipboard <- function(file = "clipboard", which = 1, header = TRUE, sep = "\t", ...) {
-    if (Sys.info()["sysname"] == "Darwin") {
-        clip <- pipe("pbpaste")
-        read.table(file = clip, sep = sep, ...)
-        close(clip)
-    } else if(Sys.info()["sysname"] == "Windows") {
-        read.table(file = file, sep = sep, header = header, ...)
-    } else {
-        stop("Reading from clipboard is not supported on your OS")
-    }
+    requireNamespace("clipr", quietly = TRUE)
+    clipr::read_clip_tbl(x = clipr::read_clip(), header = header, sep = sep, ...)
 }
