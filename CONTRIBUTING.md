@@ -20,7 +20,7 @@ Some specific types of changes that you might make are:
  
   - Import is based on S3 dispatch to functions of the form `.import.rio_FORMAT()`. Export works the same, but with `.export.rio_FORMAT()`. New import/export methods should take this form. There's no need to change the body of the `import()` or `export()` functions; S3 will take care of dispatch. All `.import()` methods must accept a `file` and `which` argument: `file` represents the path to the file and `which` can be used to extract sheets or files from multi-object files (e.g., zip, Excel workbooks, etc.). `.export()` methods take three arguments: `file` and `x`, where `file` is the path to the file and `x` is the data frame being exported. Most of the work of import and export methods involves mapping these arguments to their corresponding argument names in the various underlying packages.
   
-  - The S3 methods should be documented in [NAMESPACE](https://github.com/leeper/rio/blob/master/NAMESPACE) using `S3method()`
+  - The S3 methods should be documented in [NAMESPACE](https://github.com/leeper/rio/blob/master/NAMESPACE) using `S3method()`, which is handled automatically by roxygen markup in the source code.
   
   - Any new format support needs to be documented in each of the following places: [README.Rmd](https://github.com/leeper/rio/blob/master/README.Rmd), [the vignette](https://github.com/leeper/rio/blob/master/vignettes/rio.Rmd), and the appropriate Rd file in [`/man`](https://github.com/leeper/rio/tree/master/man).
   

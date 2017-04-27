@@ -1,5 +1,6 @@
 # CHANGES TO v0.4.28
 
+ * Improved documentation of mapping between file format support and the packages used for each format. (#151, h/t Patrick Kennedy)
  * `import_list()` now returns a `NULL` entry for any failed imports, with a warning. (#149)
  * `import_list()` gains additional arguments `rbind_fill` and `rbind_label` to control rbind-ing behavior. (#149)
 

@@ -33,40 +33,41 @@ install_formats()
 
 The full list of supported formats is below:
 
-| Format | Import | Export |
-| ------ | ------ | ------ |
-| Tab-separated data (.tsv) | Yes | Yes |
-| Comma-separated data (.csv) | Yes | Yes |
-| gzip comma-separated data (.csv.gz) | Yes | Yes |
-| CSVY (CSV + YAML metadata header) (.csvy) | Yes | Yes |
-| Feather R/Python interchange format (.feather) | Yes | Yes |
-| Fast Storage (.fst) | Yes | Yes |
-| Pipe-separated data (.psv) | Yes | Yes |
-| Fixed-width format data (.fwf) | Yes | Yes |
-| Serialized R objects (.rds) | Yes | Yes |
-| Saved R objects (.RData) | Yes | Yes |
-| JSON (.json) | Yes | Yes |
-| YAML (.yml) | Yes | Yes |
-| Stata (.dta) | Yes | Yes |
-| SPSS (.sav) | Yes | Yes |
-| SPSS Portable (.por) | Yes |  |
-| "XBASE" database files (.dbf) | Yes | Yes |
-| Excel (.xls) | Yes |  |
-| Excel (.xlsx) | Yes | Yes |
-| Matlab (.mat) | Yes | Yes |
-| OpenDocument Spreadsheet  (.ods) | Yes | Yes |
-| Weka Attribute-Relation File Format (.arff) | Yes | Yes |
-| R syntax (.R) | Yes | Yes |
-| Shallow XML documents (.xml) | Yes | Yes |
-| HTML Tables (.html) | Yes | Yes |
-| SAS (.sas7bdat) | Yes | Yes |
-| SAS XPORT (.xpt) | Yes |  |
-| Minitab (.mtp) | Yes |  |
-| Epiinfo (.rec) | Yes |  |
-| Systat (.syd) | Yes |  |
-| Data Interchange Format (.dif) | Yes |  |
-| Fortran data (no recognized extension) | Yes |  |
-| Clipboard (default is tsv) | Yes (Mac and Windows) | Yes (Mac and Windows) |
+| Format | Typical Extension | Import Package | Export Package | Installed by Default |
+| ------ | --------- | -------------- | -------------- | -------------------- |
+| Comma-separated data | .csv | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table) | Yes |
+| Pipe-separated data | .psv | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table) | Yes |
+| Tab-separated data | .tsv | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table) | Yes |
+| SAS | .sas7bdat | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
+| SPSS | .sav | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
+| Stata | .dta | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
+| SAS XPORT | .xpt | [**haven**](https://cran.r-project.org/package=haven) |  | Yes |
+| SPSS Portable | .por | [**haven**](https://cran.r-project.org/package=haven) |  | Yes |
+| Excel | .xls | [**readxl**](https://cran.r-project.org/package=readxl) |  | Yes |
+| Excel | .xlsx | [**readxl**](https://cran.r-project.org/package=readxl) | [**openxlsx**](https://cran.r-project.org/package=openxlsx) | Yes / No |
+| R syntax | .R | **base** | **base** | Yes |
+| Saved R objects | .RData, .rda | **base** | **base** | Yes |
+| Serialized R objects | .rds | **base** | **base** | Yes |
+| Epiinfo | .rec | [**foreign**](https://cran.r-project.org/package=foreign) |  | Yes |
+| Minitab | .mtp | [**foreign**](https://cran.r-project.org/package=foreign) |  | Yes |
+| Systat | .syd | [**foreign**](https://cran.r-project.org/package=foreign) |  | Yes |
+| "XBASE" database files | .dbf | [**foreign**](https://cran.r-project.org/package=foreign) | [**foreign**](https://cran.r-project.org/package=foreign) | Yes |
+| Weka Attribute-Relation File Format | .arff | [**foreign**](https://cran.r-project.org/package=foreign) | [**foreign**](https://cran.r-project.org/package=foreign) | Yes |
+| Data Interchange Format | .dif | **utils** |  | Yes |
+| Fortran data | no recognized extension | **utils** |  | Yes |
+| Fixed-width format data | .fwf | **utils** | **utils** | Yes |
+| gzip comma-separated data | .csv.gz | **utils** | **utils** | Yes |
+| CSVY (CSV + YAML metadata header) | .csvy | [**csvy**](https://cran.r-project.org/package=csvy) | [**csvy**](https://cran.r-project.org/package=csvy) | No |
+| Feather R/Python interchange format | .feather | [**feather**](https://cran.r-project.org/package=feather) | [**feather**](https://cran.r-project.org/package=feather) | No |
+| Fast Storage | .fst | [**fst**](https://cran.r-project.org/package=fst) | [**fst**](https://cran.r-project.org/package=fst) | No |
+| JSON | .json | [**jsonlite**](https://cran.r-project.org/package=jsonlite) | [**jsonlite**](https://cran.r-project.org/package=jsonlite) | No |
+| Matlab | .mat | [**rmatio**](https://cran.r-project.org/package=rmatio) | [**rmatio**](https://cran.r-project.org/package=rmatio) | No |
+| OpenDocument Spreadsheet | .ods | [**readODS**](https://cran.r-project.org/package=readODS) | [**readODS**](https://cran.r-project.org/package=readODS) | No |
+| HTML Tables | .html | [**xml2**](https://cran.r-project.org/package=xml2) | [**xml2**](https://cran.r-project.org/package=xml2) | No |
+| Shallow XML documents | .xml | [**xml2**](https://cran.r-project.org/package=xml2) | [**xml2**](https://cran.r-project.org/package=xml2) | No |
+| YAML | .yml | [**yaml**](https://cran.r-project.org/package=yaml) | [**yaml**](https://cran.r-project.org/package=yaml) | No |
+| Clipboard | default is tsv | [**clipr**](https://cran.r-project.org/package=clipr) | [**clipr**](https://cran.r-project.org/package=clipr) | No |
+| [Google Sheets](https://www.google.com/sheets/about/) | as Comma-separated data |  |  |  |
 
 Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
 
