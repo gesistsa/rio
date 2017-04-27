@@ -29,36 +29,37 @@ This function imports a data frame or matrix from a data file with the file form
 \code{import} supports the following file formats:
 
 \itemize{
-    \item Tab-separated data (.tsv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
     \item Comma-separated data (.csv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
+    \item Pipe-separated data (.psv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{sep = '|'}, \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
+    \item Tab-separated data (.tsv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
+    \item SAS (.sas7bdat), using \code{\link[haven]{read_sas}}.
+    \item SPSS (.sav), using \code{\link[haven]{read_sav}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used.
+    \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
+    \item SAS XPORT (.xpt), using \code{\link[foreign]{read.xport}}.
+    \item SPSS Portable Files (.por), using \code{\link[haven]{read_por}}.
+    \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. If \code{readxl = FALSE}, \code{\link[openxlsx]{read.xlsx}} can be used. Use \code{which} to specify a sheet number.
+    \item R syntax object (.R), using \code{\link[base]{dget}}
+    \item Saved R objects (.RData,.rda), using \code{\link[base]{load}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files.
+    \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
+    \item Epiinfo (.rec), using \code{\link[foreign]{read.epiinfo}}
+    \item Minitab (.mtp), using \code{\link[foreign]{read.mtp}}
+    \item Systat (.syd), using \code{\link[foreign]{read.systat}}
+    \item "XBASE" database files (.dbf), using \code{\link[foreign]{read.dbf}}
+    \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{read.arff}}
+    \item Data Interchange Format (.dif), using \code{\link[utils]{read.DIF}}
+    \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
+    \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils]{read.fwf}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}. If \code{readr = TRUE}, import will be performed using \code{\link[readr]{read_fwf}}, where \code{widths} should be: \code{NULL}, a vector of column widths, or the output of \code{\link[readr]{fwf_empty}}, \code{\link[readr]{fwf_widths}}, or \code{\link[readr]{fwf_positions}}.
     \item gzip comma-separated data (.csv.gz), using \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{read_csvy}}.
     \item Feather R/Python interchange format (.feather), using \code{feather::read_feather}
     \item Fast storage (.fst), using \code{\link[fst]{read.fst}}
-    \item Pipe-separated data (.psv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{sep = '|'}, \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
-    \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils]{read.fwf}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}. If \code{readr = TRUE}, import will be performed using \code{\link[readr]{read_fwf}}, where \code{widths} should be: \code{NULL}, a vector of column widths, or the output of \code{\link[readr]{fwf_empty}}, \code{\link[readr]{fwf_widths}}, or \code{\link[readr]{fwf_positions}}.
-    \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
-    \item Saved R objects (.RData,.rda), using \code{\link[base]{load}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files.
     \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
-    \item YAML (.yml), using \code{\link[yaml]{yaml.load}}
-    \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
-    \item SPSS (.sav), using \code{\link[haven]{read_sav}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used.
-    \item SPSS Portable Files (.por), using \code{\link[haven]{read_por}}.
-    \item "XBASE" database files (.dbf), using \code{\link[foreign]{read.dbf}}
-    \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{read.arff}}
-    \item R syntax object (.R), using \code{\link[base]{dget}}
     \item Matlab (.mat), using \code{\link[rmatio]{read.mat}}
-    \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. If \code{readxl = FALSE}, \code{\link[openxlsx]{read.xlsx}} can be used. Use \code{which} to specify a sheet number.
-    \item SAS (.sas7bdat) and SAS XPORT (.xpt), using \code{\link[haven]{read_sas}} and \code{\link[foreign]{read.xport}}.
-    \item Minitab (.mtp), using \code{\link[foreign]{read.mtp}}
-    \item Epiinfo (.rec), using \code{\link[foreign]{read.epiinfo}}
-    \item Systat (.syd), using \code{\link[foreign]{read.systat}}
-    \item Data Interchange Format (.dif), using \code{\link[utils]{read.DIF}}
     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read_ods}}.  Use \code{which} to specify a sheet number.
-    \item Shallow XML documents (.xml), using \code{\link[xml2]{read_xml}}. The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2]{as_list}}.
     \item Single-table HTML documents (.html), using \code{\link[xml2]{read_html}}. The data structure will only be read correctly if the HTML file can be converted to a list via \code{\link[xml2]{as_list}}.
+    \item Shallow XML documents (.xml), using \code{\link[xml2]{read_xml}}. The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2]{as_list}}.
+    \item YAML (.yml), using \code{\link[yaml]{yaml.load}}
     \item Clipboard import (on Windows and Mac OS), using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
-    \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
     \item Google Sheets, as Comma-separated data (.csv)
 }
 
