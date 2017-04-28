@@ -7,7 +7,7 @@ README.Rmd
 README.html
 CONTRIBUTING.md
 ^revdep$
-^man-oxygen$
+/man-oxygen
 .Rproj
 ^.*\.Rproj$
 ^\.Rproj\.user$
