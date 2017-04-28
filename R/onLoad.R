@@ -4,10 +4,10 @@
 
 .onAttach <- function(libname, pkgname) {
     if (interactive()) {
-        w <- suggestions %in% installed.packages()[ , 1, drop = TRUE]
-        if (any(!w)) {
+        w <- uninstalled_formats()
+        if (length(w)) {
             msg <- "The following rio suggested packages are not installed: %s\nUse 'install_formats()' to install them"
-            packageStartupMessage(sprintf(msg, paste0(sQuote(suggestions[!w]), collapse = ", ")))
+            packageStartupMessage(sprintf(msg, paste0(sQuote(w), collapse = ", ")))
         }
     }
 }

@@ -5,10 +5,24 @@
 #' @importFrom utils installed.packages install.packages
 #' @export
 install_formats <- function(...) {
-    to_install <- suggestions[!suggestions %in% installed.packages()[ , 1, drop = TRUE]]
+    
+    to_install <- uninstalled_formats()
+    
     if (length(to_install)) {
         install.packages(to_install, ...)
     }
 }
 
-suggestions <- c("csvy", "feather", "fst", "jsonlite", "openxlsx", "readODS", "readr", "rmatio", "yaml")
+uninstalled_formats <- function() {
+    # suggested packages
+    suggestions <- c("clipr", "csvy", "feather", "fst", "jsonlite", "readODS", "readr", "rmatio", "xml2", "yaml")
+    
+    # which are not installed
+    unlist(lapply(suggestions, function(x) {
+        if (length(find.package(x, quiet = TRUE))) {
+            NULL
+        } else {
+            x
+        }
+    }))
+}

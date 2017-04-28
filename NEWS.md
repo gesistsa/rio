@@ -1,3 +1,8 @@
+# CHANGES TO v0.5.0
+
+ * CRAN Release.
+ * Restored import of **openxlsx** so that writing to xlsx is supported on install. (#150)
+
 # CHANGES TO v0.4.28
 
  * Improved documentation of mapping between file format support and the packages used for each format. (#151, h/t Patrick Kennedy)
