@@ -10,7 +10,7 @@ output:
       smooth_scroll: false
     toc_depth: 3
 vignette: >
-  %\VignetteIndexEntry{Introduction to 'margins'}
+  %\VignetteIndexEntry{Introduction to 'rio'}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
