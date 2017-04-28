@@ -20,15 +20,15 @@
 #'     \item SPSS (.sav), using \code{\link[haven]{write_sav}}
 #'     \item Stata (.dta), using \code{\link[haven]{write_dta}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
 #'     \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}. Use \code{which} to specify a sheet name and \code{overwrite} to decide whether to overwrite an existing file or worksheet (the default) or add the data as a new worksheet (with \code{overwrite = FALSE}). \code{x} can also be a list of data frames; the list entry names are used as sheet names.
-#'     \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'}
+#'     \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'})
 #'     \item Saved R objects (.RData,.rda), using \code{\link[base]{save}}. In this case, \code{x} can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding \code{envir} argument is specified.
 #'     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
 #'     \item "XBASE" database files (.dbf), using \code{\link[foreign]{write.dbf}}
 #'     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{write.arff}}
 #'     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
 #'     \item gzip comma-separated data (.csv.gz), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
-#'     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{write_csvy}}. The YAML header lines are preceded by R comment symbols (\#) by default; this can be turned off by passing a \code{comment_header = FALSE} argument to \code{export}. Setting \code{fwrite = TRUE} (the default) will rely on \code{\link[data.table]{fwrite}} for much faster export.
-#'     \item Feather R/Python interchange format (.feather), using \code{feather::write_feather}
+#'     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{write_csvy}}. The YAML header lines are preceded by R comment symbols (#) by default; this can be turned off by passing a \code{comment_header = FALSE} argument to \code{export}. Setting \code{fwrite = TRUE} (the default) will rely on \code{\link[data.table]{fwrite}} for much faster export.
+#'     \item Feather R/Python interchange format (.feather), using \code{\link[feather]{write_feather}}
 #'     \item Fast storage (.fst), using \code{\link[fst]{write.fst}}
 #'     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}
 #'     \item Matlab (.mat), using \code{\link[rmatio]{write.mat}}

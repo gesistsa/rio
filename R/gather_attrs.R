@@ -1,6 +1,6 @@
 #' @title Gather attributes from data.frame variables
 #' @description This function moves variable-level attributes to the data.frame level
-#' @details \code{\link{import}} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). \code{gather_attrs} moves these to the data.frame-level (i.e., in \code{attributes(mtcars)}).
+#' @details \code{\link{import}} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). \code{gather_attrs} moves these to the data frame level (i.e., in \code{attributes(mtcars)}).
 #' @param x A data.frame.
 #' @return \code{x}, with variable-level attributes stored at the data.frame level.
 #' @examples

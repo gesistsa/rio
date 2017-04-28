@@ -51,7 +51,7 @@ This function imports a data frame or matrix from a data file with the file form
     \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils]{read.fwf}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}. If \code{readr = TRUE}, import will be performed using \code{\link[readr]{read_fwf}}, where \code{widths} should be: \code{NULL}, a vector of column widths, or the output of \code{\link[readr]{fwf_empty}}, \code{\link[readr]{fwf_widths}}, or \code{\link[readr]{fwf_positions}}.
     \item gzip comma-separated data (.csv.gz), using \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{read_csvy}}.
-    \item Feather R/Python interchange format (.feather), using \code{feather::read_feather}
+    \item Feather R/Python interchange format (.feather), using \code{\link[feather]{read_feather}}
     \item Fast storage (.fst), using \code{\link[fst]{read.fst}}
     \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
     \item Matlab (.mat), using \code{\link[rmatio]{read.mat}}

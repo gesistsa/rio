@@ -1,5 +1,5 @@
 #' @title Convert from one file format to another
-#' @description This function constructs a data frame from a data file using code{\link{import}} and uses \code{\link{export}} to write the data to disk in the format indicated by the file extension.
+#' @description This function constructs a data frame from a data file using \code{\link{import}} and uses \code{\link{export}} to write the data to disk in the format indicated by the file extension.
 #' @param in_file A character string naming an input file.
 #' @param out_file A character string naming an output file.
 #' @param in_opts A named list of options to be passed to \code{\link{import}}.
