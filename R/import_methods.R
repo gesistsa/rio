@@ -305,6 +305,7 @@ function(file,
 }
 
 #' @importFrom readxl read_xlsx
+#' @importFrom openxlsx read.xlsx
 #' @export
 .import.rio_xlsx <- function(file, which = 1, readxl = TRUE, ...) {
 

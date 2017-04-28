@@ -1,8 +1,8 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.4.28
-Date: 2017-04-19
+Version: 0.5.0
+Date: 2017-04-27
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
@@ -32,6 +32,7 @@ Imports:
     curl (>= 0.6),
     data.table (>= 1.9.8),
     readxl (>= 0.1.1),
+    openxlsx,
     tibble
 Suggests:
     datasets,
@@ -44,7 +45,6 @@ Suggests:
     feather,
     fst,
     jsonlite,
-    openxlsx,
     readODS (>= 1.6.4),
     readr,
     rmatio,

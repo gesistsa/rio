@@ -182,9 +182,9 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     write.arff(x = x, file = file, ...)
 }
 
+#' @importFrom openxlsx write.xlsx
 #' @export
 .export.rio_xlsx <- function(file, x, overwrite = TRUE, which, ...) {
-    requireNamespace("openxlsx", quietly = TRUE)
     dots <- list(...)
     if (isTRUE(overwrite) || !file.exists(file)) {
         if (!missing(which)) {

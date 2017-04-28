@@ -101,7 +101,7 @@ The full list of supported formats is below:
 | SAS XPORT | .xpt | [**haven**](https://cran.r-project.org/package=haven) |  | Yes |
 | SPSS Portable | .por | [**haven**](https://cran.r-project.org/package=haven) |  | Yes |
 | Excel | .xls | [**readxl**](https://cran.r-project.org/package=readxl) |  | Yes |
-| Excel | .xlsx | [**readxl**](https://cran.r-project.org/package=readxl) | [**openxlsx**](https://cran.r-project.org/package=openxlsx) | Yes / No |
+| Excel | .xlsx | [**readxl**](https://cran.r-project.org/package=readxl) | [**openxlsx**](https://cran.r-project.org/package=openxlsx) | Yes |
 | R syntax | .R | **base** | **base** | Yes |
 | Saved R objects | .RData, .rda | **base** | **base** | Yes |
 | Serialized R objects | .rds | **base** | **base** | Yes |
