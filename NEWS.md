@@ -1,3 +1,7 @@
+# CHANGES TO v0.5.1
+
+ * `export()` now sets variables with a "labels" attribute to **haven**'s "labelled" class.
+
 # CHANGES TO v0.5.0
 
  * CRAN Release.

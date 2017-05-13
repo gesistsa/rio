@@ -95,6 +95,7 @@
 #' unlink("data.R")
 #' unlink("mtcars.csv.zip")
 #' @seealso \code{\link{.export}}, \code{\link{import}}, \code{\link{convert}}
+#' @importFrom haven labelled
 #' @export
 export <- function(x, file, format, ...) {
     if (missing(file) & missing(format)) {
@@ -131,7 +132,10 @@ export <- function(x, file, format, ...) {
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
-
+    
+    # restore labelled variable classes
+    x[] <- lapply(x, function(v) if (!is.null(attr(v, "labels"))) haven::labelled(v, attr(v, "labels")) else v)
+    
     class(file) <- c(paste0("rio_", fmt), class(file))
     .export(file = file, x = x, ...)
 
