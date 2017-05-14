@@ -119,7 +119,7 @@ function(file,
                     x <- set_class(x, class = "data.table")
                 }
             } else {
-                x <- set_class(x, class = setclass)
+                x <- set_class(x, class = "data.frame")
             }
         }
     }

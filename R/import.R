@@ -122,7 +122,7 @@ import <- function(file, format, setclass, which, ...) {
     }
 
     a <- list(...)
-    if (missing(setclass)) {
+    if (missing(setclass) || is.null(setclass)) {
         if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
             return(set_class(x, class = "data.table"))
         } else {

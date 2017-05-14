@@ -38,10 +38,6 @@ As of rio v0.5.0, `export()` can also write multiple data farmes to respective s
 export(list(mtcars = mtcars, iris = iris), file = "mtcars.xlsx")
 ```
 
-```
-## Loading required namespace: openxlsx
-```
-
 ### Import
 
 Importing data is handled with one function, `import()`:
