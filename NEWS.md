@@ -1,3 +1,7 @@
+# CHANGES TO v0.5.2
+
+ * Fixed a bug in `.import.rio_xlsx()` when `readxl = FALSE`. (#152, h/t Danny Parsons)
+
 # CHANGES TO v0.5.1
 
  * `export()` now sets variables with a "labels" attribute to **haven**'s "labelled" class.
