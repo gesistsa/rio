@@ -143,7 +143,13 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
  
  3. **rio**, wherever possible, does not import character strings as factors.
  
- 4. **rio** stores metadata from rich file formats (SPSS, Stata, etc.) in variable-level attributes in a consistent form regardless of file type or underlying import function. The `gather_attrs()` function makes it easy to move variable-level attributes to the data frame level.
+ 4. **rio** stores metadata from rich file formats (SPSS, Stata, etc.) in variable-level attributes in a consistent form regardless of file type or underlying import function. These attributes are identified as:
+     
+     - `label`: a description of variable
+     - `labels`: a vector mapping numeric values to character strings those values represent
+     - `format`: a character string describing the variable storage type in the original file
+     
+  The `gather_attrs()` function makes it easy to move variable-level attributes to the data frame level (and `spread_attrs()` reverses that gathering process).
  
  5. **rio** supports web-based imports natively, including from SSL (HTTPS) URLs, from shortened URLs, from URLs that lack proper extensions, and from (public) Google Documents Spreadsheets.
  

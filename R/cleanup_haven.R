@@ -22,8 +22,8 @@ standardize_attributes <- function(dat) {
         if ("var.labels" %in% names(a)) {
             attr(out[[i]], "label") <- a$var.labels[i]
         }
-        if ("formats" %in% names(a)) {
-            attr(out[[i]], "format") <- a$formats[i]
+        if (any(grepl("$format", names(a)))) {
+            attr(out[[i]], "format") <- a[[grep("$format", names(a))[1L]]][i]
         }
         if ("types" %in% names(a)) {
             attr(out[[i]], "type") <- a$types[i]
