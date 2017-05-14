@@ -1,22 +1,23 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: rio 0.3.13\n"
-"POT-Creation-Date: 2016-03-06 19:53\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: rio 0.5.2\n"
+"Report-Msgid-Bugs-To: https://github.com/leeper/rio/issues\n"
+"POT-Creation-Date: 2017-05-14 18:30\n"
+"PO-Revision-Date: 2017-05-14 18:30\n"
+"Last-Translator:  \n"
+"Language-Team:  \n"
+"Language: LL\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-
-msgid "File compresion failed for %s!"
+msgid "File compression failed for %s!"
 msgstr ""
 
 msgid "Zip archive contains multiple files. Attempting first file."
 msgstr ""
 
-msgid "Unrecognized file format"
+msgid "Tar archive contains multiple files. Attempting first file."
 msgstr ""
 
 msgid "Must specify 'file' and/or 'format'"
@@ -25,25 +26,40 @@ msgstr ""
 msgid "'x' is not a data.frame or matrix"
 msgstr ""
 
+msgid "data.table::fwrite() does not support writing to connections. Using utils::write.table() instead."
+msgstr ""
+
 msgid "Columns:"
 msgstr ""
 
-msgid "Writing to clipboard is not supported on your OS."
+msgid "'x' must be a data.frame, list, or environment"
+msgstr ""
+
+msgid "%s format not supported. Consider using the '%s()' function"
+msgstr ""
+
+msgid "Format not supported"
+msgstr ""
+
+msgid "'x' is not a data.frame"
 msgstr ""
 
 msgid "No such file"
 msgstr ""
 
+msgid "'data.table = TRUE' argument overruled. Using setclass = '%s'"
+msgstr ""
+
+msgid "Import failed for %s"
+msgstr ""
+
+msgid "Import failed for %s from %s"
+msgstr ""
+
+msgid "data.table::fread() does not support reading from connections. Using utils::read.table() instead."
+msgstr ""
+
 msgid "Import of fixed-width format data requires a 'widths' argument. See ? read.fwf()."
-msgstr ""
-
-msgid "More than 2 yaml delimiters found in file"
-msgstr ""
-
-msgid "Only one yaml delimiter found"
-msgstr ""
-
-msgid "No yaml delimiters found"
 msgstr ""
 
 msgid "Rdata file contains multiple objects. Returning first object."
@@ -52,19 +68,19 @@ msgstr ""
 msgid "File imported using haven. Arguments to '...' ignored."
 msgstr ""
 
-msgid "Import of Fortran format data requires a 'style' argument. See ? foreign::read.fortran()."
+msgid "'rows' argument ignored when readxl = TRUE. Use 'range' instead."
 msgstr ""
 
-msgid "Reading from clipboard is not supported on your OS"
+msgid "Import of Fortran format data requires a 'style' argument. See ? utils::read.fortran()."
 msgstr ""
 
-msgid "Package '%s' has not been installed."
+msgid "Requested table exceeds number of tables found in file ("
 msgstr ""
 
-msgid "Package '%s' has not been loaded."
+msgid ")!"
 msgstr ""
 
-msgid "%s format not supported. Consider using the '%s()' function"
+msgid ","
 msgstr ""
 
 msgid "Unrecognized file format. Try specifying with the format argument."
@@ -76,7 +92,9 @@ msgstr ""
 msgid "'file' has no extension"
 msgstr ""
 
-msgid        "last record incomplete, %d line discarded"
+msgctxt ""
+msgid "last record incomplete, %d line discarded"
 msgid_plural "last record incomplete, %d lines discarded"
-msgstr[0]    ""
-msgstr[1]    ""
+msgstr[0] ""
+msgstr[1] ""
+
