@@ -149,18 +149,21 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @importFrom haven write_sav
 #' @export
 .export.rio_sav <- function(file, x, ...) {
+    x <- restore_labelled(x)
     write_sav(data = x, path = file, ...)
 }
 
 #' @importFrom haven write_dta
 #' @export
 .export.rio_dta <- function(file, x, ...) {
+    x <- restore_labelled(x)
     write_dta(data = x, path = file, ...)
 }
 
 #' @importFrom haven write_sas
 #' @export
 .export.rio_sas7bdat <- function(file, x, ...) {
+    x <- restore_labelled(x)
     write_sas(data = x, path = file, ...)
 }
 

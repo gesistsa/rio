@@ -105,3 +105,9 @@ get_ext <- function(file) {
 twrap <- function(value, tag) {
     paste0("<", tag, ">", value, "</", tag, ">")
 }
+
+restore_labelled <- function(x) {
+    # restore labelled variable classes
+    x[] <- lapply(x, function(v) if (!is.null(attr(v, "labels"))) haven::labelled(v, attr(v, "labels")) else v)
+    x
+}

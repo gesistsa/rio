@@ -133,9 +133,6 @@ export <- function(x, file, format, ...) {
         x <- as.data.frame(x)
     }
     
-    # restore labelled variable classes
-    x[] <- lapply(x, function(v) if (!is.null(attr(v, "labels"))) haven::labelled(v, attr(v, "labels")) else v)
-    
     class(file) <- c(paste0("rio_", fmt), class(file))
     .export(file = file, x = x, ...)
 
