@@ -9,8 +9,6 @@ matrix:
       dist: trusty
     - os: osx
       osx_image: xcode8
-    - os: osx
-      osx_image: xcode6.4
 
 r_github_packages:
 - tidyverse/haven
@@ -33,11 +31,5 @@ before_install: |
   CXX1X=g++-4.9
   CXX1XSTD=-std=c++11
 
-after_failure:
-  email: 
-    recipients:
-     - thosjleeper@gmail.com
-    on_success: change
-    on_failure: change
 after_success:
   - Rscript -e 'library("covr");codecov()'
