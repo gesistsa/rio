@@ -2,21 +2,24 @@
 % Please edit documentation in R/gather_attrs.R
 \name{gather_attrs}
 \alias{gather_attrs}
-\title{Gather attributes from data.frame variables}
+\alias{spread_attrs}
+\title{Gather attributes from data frame variables}
 \usage{
 gather_attrs(x)
+
+spread_attrs(x)
 }
 \arguments{
-\item{x}{A data.frame.}
+\item{x}{A data frame.}
 }
 \value{
-\code{x}, with variable-level attributes stored at the data.frame level.
+\code{x}, with variable-level attributes stored at the data frame level.
 }
 \description{
-This function moves variable-level attributes to the data.frame level
+\code{gather_attrs} moves variable-level attributes to the data frame level and \code{spread_attrs} reverses that operation.
 }
 \details{
-\code{\link{import}} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). \code{gather_attrs} moves these to the data frame level (i.e., in \code{attributes(mtcars)}).
+\code{\link{import}} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). \code{gather_attrs} moves these to the data frame level (i.e., in \code{attributes(mtcars)}). \code{spread_attrs} moves attributes back to the variable level.
 }
 \examples{
 e <- import("http://www.stata-press.com/data/r13/auto.dta")
