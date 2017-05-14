@@ -19,4 +19,7 @@ test_that("Set object class as tibble", {
 
 test_that("Set object class as data.table", {
     expect_true(inherits(set_class(mtcars, class = "data.table"), "data.table"))
+    export(mtcars, "mtcars.csv")
+    expect_true(inherits(import("mtcars.csv", data.table = TRUE), "data.table"))
+    unlink("mtcars.csv")
 })

@@ -121,13 +121,24 @@ import <- function(file, format, setclass, which, ...) {
         x <- .import(file = file, which = which, ...)
     }
 
+    a <- list(...)
     if (missing(setclass)) {
-        return(set_class(x))
+        if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
+            return(set_class(x, class = "data.table"))
+        } else {
+            return(set_class(x, class = "data.frame"))
+        }
+    } else {
+        if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
+            if (setclass != "data.table") {
+                warning(sprintf("'data.table = TRUE' argument overruled. Using setclass = '%s'", setclass))
+                return(set_class(x, class = setclass))
+            } else {
+                return(set_class(x, class = "data.table"))
+            }
+        } else {
+            return(set_class(x, class = setclass))
+        }
     }
 
-    a <- list(...)
-    if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
-        setclass <- "data.table"
-    }
-    return(set_class(x, class = setclass))
 }

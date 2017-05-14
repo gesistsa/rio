@@ -23,6 +23,17 @@ test_that("Data identical (R formats)", {
     unlink("mtcars.RData")
 })
 
+test_that("Data identical (import_list)", {
+    export(mtcars, "mtcars.rds")
+    expect_equivalent(import_list(rep("mtcars.rds", 2)), list(mtcars, mtcars))
+    mdat <- rbind(mtcars, mtcars)
+    dat <- import_list(rep("mtcars.rds", 2), rbind = TRUE)
+    expect_true(ncol(dat) == ncol(mdat) + 1)
+    expect_true(nrow(dat) == nrow(mdat))
+    expect_true("_file" %in% names(dat))
+    unlink("mtcars.rds")
+})
+
 test_that("Data identical (haven formats)", {
     expect_equivalent(import(export(mtcars, "mtcars.dta")), mtcars)
     expect_equivalent(import(export(mtcars, "mtcars.sav")), mtcars)

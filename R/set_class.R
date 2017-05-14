@@ -1,6 +1,6 @@
 set_class <- function(x, class = NULL) {
     if (is.null(class)) {
-        return(structure(x, class = "data.frame"))
+        return(x)
     } else if ("data.table" %in% class) {
         if (inherits(x, "data.table")) {
             return(x)

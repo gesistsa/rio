@@ -11,6 +11,7 @@ install_formats <- function(...) {
     if (length(to_install)) {
         install.packages(to_install, ...)
     }
+    return(TRUE)
 }
 
 uninstalled_formats <- function() {

@@ -44,9 +44,12 @@ function(file,
          rbind_label = "_file", 
          rbind_fill = TRUE, 
          ...) {
+    if (missing(setclass)) {
+        setclass <- NULL
+    }
     if (length(file) > 1) {
         x <- lapply(file, function(thisfile) {
-            out <- try(import(thisfile, ...), silent = TRUE)
+            out <- try(import(thisfile, setclass = setclass, ...), silent = TRUE)
             if (inherits(out, "try-error")) {
                 warning(sprintf("Import failed for %s", thisfile))
                 out <- NULL
@@ -75,7 +78,7 @@ function(file,
             }
         }
         x <- lapply(which, function(thiswhich) {
-            out <- try(import(file, which = thiswhich, ...), silent = TRUE)
+            out <- try(import(file, setclass = setclass, which = thiswhich, ...), silent = TRUE)
             if (inherits(out, "try-error")) {
                 warning(sprintf("Import failed for %s from %s", thiswhich, file))
                 out <- NULL
@@ -100,14 +103,25 @@ function(file,
             }
         }
         # set class
-        if (missing(setclass)) {
-            return(set_class(x))
-        }
         a <- list(...)
-        if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
-            setclass <- "data.table"
+        if (is.null(setclass)) {
+            if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
+                x <- set_class(x, class = "data.table")
+            } else {
+                x <- set_class(x, class = "data.frame")
+            }
+        } else {
+            if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
+                if (setclass != "data.table") {
+                    warning(sprintf("'data.table = TRUE' argument overruled. Using setclass = '%s'", setclass))
+                    x <- set_class(x, class = setclass)
+                } else {
+                    x <- set_class(x, class = "data.table")
+                }
+            } else {
+                x <- set_class(x, class = setclass)
+            }
         }
-        x <- set_class(x, class = setclass)
     }
     
     return(x)
