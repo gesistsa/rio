@@ -32,4 +32,8 @@ test_that("gather_attrs() fails on non-data frame", {
     expect_error(gather_attrs(letters))
 })
 
+test_that("spread_attrs() fails on non-data frame", {
+    expect_error(spread_attrs(letters))
+})
+
 rm(e)

@@ -1,13 +1,14 @@
 context("Convert")
+library("datasets")
+
+export(mtcars, "mtcars.dta")
 
 test_that("Basic file conversion", {
-    export(mtcars, "mtcars.dta")
     convert("mtcars.dta", "mtcars.csv")
     convert("mtcars.csv", "mtcars.dta")
     x <- import("mtcars.dta")
     expect_true(identical(names(mtcars), names(x)))
     expect_true(identical(dim(mtcars), dim(x)))
-    unlink("mtcars.dta")
     unlink("mtcars.csv")
 })
 
@@ -22,3 +23,9 @@ test_that("File conversion with arguments", {
     unlink("mtcars.csv")
     unlink("mtcars.tsv")
 })
+
+test_that("File conversion w/o out_file errors", {
+    expect_error(convert("mtcars.dta"))
+})
+
+unlink("mtcars.dta")

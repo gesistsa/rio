@@ -1,4 +1,5 @@
 context("Systat (.syd) imports/exports")
-require("datasets")
 
-#test_that("Import from Systat", {})
+test_that("Import from Systat", {
+    expect_true(inherits(import(system.file("files/Iris.syd", package="foreign")[1]), "data.frame"))
+})

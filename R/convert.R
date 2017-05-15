@@ -34,5 +34,8 @@
 #' @seealso \href{https://lbraglia.github.io/}{Luca Braglia} has created a Shiny app called \href{https://github.com/lbraglia/rioweb}{rioweb} that provides access to the file conversion features of rio through a web browser. The app is featured in the \href{https://gallery.shinyapps.io/rioweb}{RStudio Shiny Gallery}.
 #' @export
 convert <- function(in_file, out_file, in_opts=list(), out_opts=list()) {
+    if (missing(out_file)) {
+        stop("'outfile' is missing with no default")
+    }
     invisible(do.call("export", c(list(file = out_file, x = do.call("import", c(list(file=in_file), in_opts))), out_opts)))
 }

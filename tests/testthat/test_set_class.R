@@ -15,11 +15,14 @@ test_that("Set object class", {
 test_that("Set object class as tibble", {
     expect_true(inherits(set_class(mtcars, class = "tbl_df"), "tbl_df"))
     expect_true(inherits(set_class(mtcars, class = "tibble"), "tbl_df"))
+    expect_true(inherits(set_class(mtcars_tibble, class = "tibble"), "tbl_df"))
 })
 
 test_that("Set object class as data.table", {
     expect_true(inherits(set_class(mtcars, class = "data.table"), "data.table"))
     export(mtcars, "mtcars.csv")
     expect_true(inherits(import("mtcars.csv", data.table = TRUE), "data.table"))
+    expect_true(inherits(import("mtcars.csv", setclass = "data.table"), "data.table"))
+    expect_warning(import("mtcars.csv", setclass = "data.frame", data.table = TRUE))
     unlink("mtcars.csv")
 })
