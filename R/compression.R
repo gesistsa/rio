@@ -26,29 +26,28 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
     } else {
         cfile2 <- basename(cfile)
     }
+    filename <- normalizePath(filename)
+    tmp <- tempfile()
+    dir.create(tmp)
+    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+    file.copy(from = filename, to = file.path(tmp, basename(filename)), overwrite = TRUE)
+    wd <- getwd()
+    on.exit(setwd(wd), add = TRUE)
+    setwd(tmp)
     if (type == "zip") {
-        o <- zip(cfile2, files = filename)
+        o <- zip(cfile2, files = basename(filename))
     } else {
         if (type == "tar") {
             type <- "none"
         }
-        filename <- normalizePath(filename)
-        tmp <- tempfile()
-        dir.create(tmp)
-        on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
-        file.copy(from = filename, to = file.path(tmp, basename(filename)), overwrite = TRUE)
-        unlink(filename)
-        wd <- getwd()
-        on.exit(setwd(wd), add = TRUE)
-        setwd(tmp)
-        o <- tar(cfile2, files = ".", compression = type)
-        setwd(wd)
-        file.copy(from = file.path(tmp, cfile2), to = cfile, overwrite = TRUE)
-        unlink(file.path(tmp, cfile2))
+        o <- tar(cfile2, files = basename(filename), compression = type)
     }
+    setwd(wd)
     if (o != 0) {
         stop(sprintf("File compression failed for %s!", cfile))
     }
+    file.copy(from = file.path(tmp, cfile2), to = cfile, overwrite = TRUE)
+    unlink(file.path(tmp, cfile2))
     return(cfile)
 }
 
@@ -56,7 +55,6 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
 parse_zip <- function(file, which, ...) {
     d <- tempfile()
     dir.create(d)
-    on.exit(unlink(d))
     file_list <- unzip(file, list = TRUE)
     if (missing(which)) {
         which <- 1
@@ -92,4 +90,3 @@ parse_tar <- function(file, which, ...) {
         file.path(d, which)
     }
 }
-

@@ -8,11 +8,14 @@ test_that("Recognize compressed file types", {
     expect_true(is.na(rio:::find_compress("file.notcompressed")$compress))
 })
 
-test_that("Export to compressed", {
+test_that("Export to compressed (zip)", {
     e1 <- export(iris, "iris.csv.zip")
-    #e2 <- export(iris, "iris.csv.tar")
     expect_true(e1 %in% dir())
-    #expect_true(e2 %in% dir())
+})
+
+test_that("Export to compressed (tar)", {
+    e2 <- export(iris, "iris.csv.tar")
+    expect_true(e2 %in% dir())
 })
 
 test_that("Import from compressed", {
@@ -24,4 +27,4 @@ test_that("Import from compressed", {
 })
 
 unlink("iris.csv.zip")
-#unlink("iris.csv.tar")
+unlink("iris.csv.tar")

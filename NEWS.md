@@ -1,4 +1,8 @@
-# CHANGES TO v0.5.2
+# CHANGES TO v0.5.3
+
+ * Fixed a bug in writing to .zip and .tar archives related to absolute file paths.
+
+# CHANGES TO v0.5.3
 
  * Fixed a bug in `.import.rio_xlsx()` when `readxl = FALSE`. (#152, h/t Danny Parsons)
  * Added a new function `spread_attrs()` that reverses the `gather_attrs()` operation.
