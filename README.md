@@ -181,7 +181,18 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
      - `labels`: a vector mapping numeric values to character strings those values represent
      - `format`: a character string describing the variable storage type in the original file
      
-  The `gather_attrs()` function makes it easy to move variable-level attributes to the data frame level (and `spread_attrs()` reverses that gathering process).
+      The `gather_attrs()` function makes it easy to move variable-level attributes to the data frame level (and `spread_attrs()` reverses that gathering process). These can be useful, especially, during file conversion to more easily modify attributes that are handled differently across file foramts. As an example, the following idiom can be used to trim SPSS value labels to the 32-character maximum allowed by Stata:
+      
+      ```R
+      dat <- gather_attrs(rio::import("data.sav"))
+      attr(dat, "labels") <- lapply(attributes(dat)$labels, function(x) {
+          if (!is.null(x)) {
+              names(x) <- substring(names(x), 1, 32)
+          }
+          x
+      })
+      export(spread_attrs(dat, "data.dta"))
+      ```
  
  5. **rio** supports web-based imports natively, including from SSL (HTTPS) URLs, from shortened URLs, from URLs that lack proper extensions, and from (public) Google Documents Spreadsheets.
  
