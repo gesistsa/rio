@@ -62,31 +62,32 @@ function(file,
         if (get_ext(file) == "rdata") {
             e <- new.env()
             load(file, envir = e)
-            return(as.list(e))
-        }
-        if (missing(which)) {
-            if (get_ext(file) == "html") {
-                requireNamespace("xml2", quietly = TRUE)
-                which <- seq_along(xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table"))
-            } else if (get_ext(file) %in% c("xls","xlsx")) {
-                requireNamespace("readxl", quietly = TRUE)
-                which <- seq_along(readxl::excel_sheets(path = file))
-            } else if (get_ext(file) %in% c("zip")) {
-                which <- seq_len(nrow(utils::unzip(file, list = TRUE)))
-            } else {
-                which <- 1
+            x <- as.list(e)
+        } else {
+            if (missing(which)) {
+                if (get_ext(file) == "html") {
+                    requireNamespace("xml2", quietly = TRUE)
+                    which <- seq_along(xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table"))
+                } else if (get_ext(file) %in% c("xls","xlsx")) {
+                    requireNamespace("readxl", quietly = TRUE)
+                    which <- seq_along(readxl::excel_sheets(path = file))
+                } else if (get_ext(file) %in% c("zip")) {
+                    which <- seq_len(nrow(utils::unzip(file, list = TRUE)))
+                } else {
+                    which <- 1
+                }
             }
+            x <- lapply(which, function(thiswhich) {
+                out <- try(import(file, setclass = setclass, which = thiswhich, ...), silent = TRUE)
+                if (inherits(out, "try-error")) {
+                    warning(sprintf("Import failed for %s from %s", thiswhich, file))
+                    out <- NULL
+                } else if (isTRUE(rbind) && length(which) > 1) {
+                    out[[rbind_label]] <- thiswhich
+                }
+                out
+            })
         }
-        x <- lapply(which, function(thiswhich) {
-            out <- try(import(file, setclass = setclass, which = thiswhich, ...), silent = TRUE)
-            if (inherits(out, "try-error")) {
-                warning(sprintf("Import failed for %s from %s", thiswhich, file))
-                out <- NULL
-            } else if (isTRUE(rbind)) {
-                out[[rbind_label]] <- thiswhich
-            }
-            out
-        })
     }
     
     # optionally rbind
@@ -119,7 +120,7 @@ function(file,
                     x <- set_class(x, class = "data.table")
                 }
             } else {
-                x <- set_class(x, class = "data.frame")
+                x <- set_class(x, class = setclass)
             }
         }
     }

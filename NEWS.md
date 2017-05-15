@@ -1,6 +1,7 @@
 # CHANGES TO v0.5.3
 
  * Fixed a bug in writing to .zip and .tar archives related to absolute file paths.
+ * Fixed some small bugs in `import_list()` and added tests for behavior.
 
 # CHANGES TO v0.5.3
 
