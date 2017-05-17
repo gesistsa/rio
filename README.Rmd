@@ -159,7 +159,7 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
           }
           x
       })
-      export(spread_attrs(dat, "data.dta"))
+      export(spread_attrs(dat), "data.dta")
       ```
  
  5. **rio** supports web-based imports natively, including from SSL (HTTPS) URLs, from shortened URLs, from URLs that lack proper extensions, and from (public) Google Documents Spreadsheets.
