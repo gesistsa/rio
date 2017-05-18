@@ -23,6 +23,7 @@
     x <- gettext("%s format not supported. Consider using the '%s()' function")
     fmt <- file_ext(file)
     out <- switch(fmt,
+           bib = sprintf(x, fmt, "bib2df::bib2df"),
            gnumeric = sprintf(x, fmt, "gnumeric::read.gnumeric.sheet"),
            jpg = sprintf(x, fmt, "jpeg::readJPEG"),
            npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),

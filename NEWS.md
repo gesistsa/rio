@@ -2,6 +2,7 @@
 
  * Fixed a bug in writing to .zip and .tar archives related to absolute file paths.
  * Fixed some small bugs in `import_list()` and added tests for behavior.
+ * Add .bib as known-unsupported format via `bib2df::bib2df()`.
  * Expanded test coverage.
 
 # CHANGES TO v0.5.3

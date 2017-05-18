@@ -59,6 +59,8 @@ get_type <- function(fmt) {
         tar = "tar",
         zip = "zip",
         # known but unsupported formats
+        bib = "bib",
+        bibtex = "bib",
         bmp = "bmp",
         gexf = "gexf",
         gnumeric = "gnumeric",
