@@ -20,7 +20,7 @@
 #'     \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
 #'     \item SAS XPORT (.xpt), using \code{\link[foreign]{read.xport}}.
 #'     \item SPSS Portable Files (.por), using \code{\link[haven]{read_por}}.
-#'     \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. If \code{readxl = FALSE}, \code{\link[openxlsx]{read.xlsx}} can be used. Use \code{which} to specify a sheet number.
+#'     \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. Use \code{which} to specify a sheet number. For .xlsx files, it is possible to set \code{readxl = FALSE}, so that \code{\link[openxlsx]{read.xlsx}} can be used instead of readxl (the default).
 #'     \item R syntax object (.R), using \code{\link[base]{dget}}
 #'     \item Saved R objects (.RData,.rda), using \code{\link[base]{load}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files.
 #'     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
