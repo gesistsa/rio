@@ -1,6 +1,6 @@
 # CHANGES TO v0.5.5
 
- * Expanded test suite and increased test coverage.
+ * Expanded test suite and increased test coverage, fixing a few tests that were failing on certain CRAN builds.
 
 # CHANGES TO v0.5.4
 
