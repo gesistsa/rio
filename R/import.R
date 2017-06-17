@@ -47,6 +47,8 @@
 #' }
 #'
 #' \code{import} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). If you would prefer these attributes to be stored at the data.frame-level (i.e., in \code{attributes(mtcars)}), see \code{\link{gather_attrs}}.
+#' 
+#' After importing metadata-rich file formats (e.g., from Stata or SPSS), it may be helpful to recode labelled variables to character or factor using \code{\link{characterize}} or \code{\link{factorize}} respectively.
 #'
 #' @note For csv and txt files with row names exported from \code{\link{export}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.
 #' @examples
@@ -77,7 +79,7 @@
 #' unlink("iris1.csv")
 #' unlink("iris2.csv")
 #'
-#' @seealso \code{\link{import_list}}, \code{\link{.import}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
+#' @seealso \code{\link{import_list}}, \code{\link{.import}}, \code{\link{characterize}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
 #' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom stats na.omit setNames
 #' @importFrom utils installed.packages untar unzip tar zip type.convert capture.output

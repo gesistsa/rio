@@ -10,7 +10,7 @@
 #' g <- gather_attrs(e)
 #' str(attributes(e))
 #' str(g)
-#' @seealso \code{\link{import}}
+#' @seealso \code{\link{import}}, \code{\link{characterize}}
 #' @export
 gather_attrs <- function(x) {
     if (!inherits(x, "data.frame")) {

@@ -29,5 +29,5 @@ str(attributes(e))
 str(g)
 }
 \seealso{
-\code{\link{import}}
+\code{\link{import}}, \code{\link{characterize}}
 }

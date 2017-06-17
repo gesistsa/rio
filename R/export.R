@@ -39,6 +39,8 @@
 #'     \item Clipboard export (on Windows and Mac OS), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
 #' }
 #'
+#' When exporting a data set that contains label attributes (e.g., if imported from an SPSS or Stata file) to a plain text file, \code{\link{characterize}} can be a useful pre-processing step that records value labels into the resulting file (e.g., \code{export(characterize(x), "file.csv")}) rather than the numeric values.
+#' 
 #' @examples
 #' library("datasets")
 #' # specify only `file` argument
@@ -94,7 +96,7 @@
 #' unlink("mtcars.rdata")
 #' unlink("data.R")
 #' unlink("mtcars.csv.zip")
-#' @seealso \code{\link{.export}}, \code{\link{import}}, \code{\link{convert}}
+#' @seealso \code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}
 #' @importFrom haven labelled
 #' @export
 export <- function(x, file, format, ...) {
