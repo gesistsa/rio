@@ -19,6 +19,14 @@ test_that("Import multi-object .Rdata in import_list()", {
     expect_true(identical(dat[[2]], iris))
 })
 
+test_that("Import multiple HTML tables in import_list()", {
+    dat <- import_list(system.file("examples", "twotables.html", package = "rio"))
+    expect_true(identical(dim(dat[[1]]), dim(mtcars)))
+    expect_true(identical(names(dat[[1]]), names(mtcars)))
+    expect_true(identical(dim(dat[[2]]), dim(iris)))
+    expect_true(identical(names(dat[[2]]), names(iris)))
+})
+
 test_that("Import single file via import_list()", {
     expect_true(identical(import_list("mtcars.rds", rbind = TRUE), mtcars))
 })

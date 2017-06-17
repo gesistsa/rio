@@ -4,6 +4,7 @@ require("datasets")
 test_that("Export to Excel (.xlsx)", {
     expect_true(export(iris, "iris.xlsx") %in% dir())
     expect_true(export(iris, "iris.xlsx", overwrite = FALSE) %in% dir())
+    expect_true(export(mtcars, "iris.xlsx", which = 2) %in% dir())
 })
 
 test_that("Import from Excel (.xlsx)", {

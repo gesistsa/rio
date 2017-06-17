@@ -1,3 +1,7 @@
+# CHANGES TO v0.5.5
+
+ * Expanded test suite and increased test coverage.
+
 # CHANGES TO v0.5.4
 
  * New functions `characterize()` and `factorize()` provide methods for converting "labelled" variables (e.g., from Stata or SPSS) into character or factor variables using embedded metadata. This can also be useful for exporting a metadata-rich file format into a plain text file. (#153)

@@ -11,7 +11,7 @@ README.md: README.Rmd
 README.html: README.md
 	pandoc -o README.html README.md
 
-../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE R/ tests/
+../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE R/* tests/*
 	cd ../ && R CMD build $(pkg)
 
 build: ../$(pkg)*.tar.gz

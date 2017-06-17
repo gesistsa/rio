@@ -23,6 +23,7 @@ test_that("Set object class as data.table", {
     export(mtcars, "mtcars.csv")
     expect_true(inherits(import("mtcars.csv", data.table = TRUE), "data.table"))
     expect_true(inherits(import("mtcars.csv", setclass = "data.table"), "data.table"))
-    expect_warning(import("mtcars.csv", setclass = "data.frame", data.table = TRUE))
+    expect_true(inherits(import("mtcars.csv", data.table = TRUE, setclass = "data.table"), "data.table"))
+    expect_warning(import("mtcars.csv", data.table = TRUE, setclass = "data.frame"))
     unlink("mtcars.csv")
 })

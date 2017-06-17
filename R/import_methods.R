@@ -341,6 +341,7 @@ function(file,
     readODS::read_ods(path = file, sheet = which, col_names = header, ...)
 }
 
+#' @importFrom utils type.convert
 #' @export
 .import.rio_xml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
     requireNamespace("xml2", quietly = TRUE)
@@ -349,7 +350,7 @@ function(file,
     row.names(d) <- 1:nrow(d)
     d <- as.data.frame(d, stringsAsFactors = stringsAsFactors)
     tc2 <- function(x) {
-        out <- type.convert(x)
+        out <- utils::type.convert(x)
         if (is.factor(out)) {
             x
         } else {
@@ -359,13 +360,15 @@ function(file,
     if (!isTRUE(stringsAsFactors)) {
         d[] <- lapply(d, tc2)
     } else {
-        d[] <- lapply(d, type.convert)
+        d[] <- lapply(d, utils::type.convert)
     }
     d
 }
 
+#' @importFrom utils type.convert
 #' @export
 .import.rio_html <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
+    # find all tables
     tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
     if (which > length(tables)) {
         stop(paste0("Requested table exceeds number of tables found in file (", length(tables),")!"))
@@ -374,6 +377,8 @@ function(file,
     if ("tbody" %in% names(x)) {
         x <- x[["tbody"]]
     }
+    # loop row-wise over the table and then rbind()
+    ## check for table header to use as column names
     if ("th" %in% names(x[[1]])) {
         col_names <- unlist(x[[1]][names(x[[1]]) %in% "th"])
         out <- do.call("rbind", lapply(x[-1], function(y) {
@@ -386,8 +391,12 @@ function(file,
         }))
         colnames(out) <- paste0("V", seq_len(ncol(out)))
     }
-    row.names(out) <- 1:nrow(out)
-    as.data.frame(out, ..., stringsAsFactors = stringsAsFactors)
+    out <- as.data.frame(out, ..., stringsAsFactors = stringsAsFactors)
+    # set row names
+    rownames(out) <- 1:nrow(out)
+    # type.convert() to numeric, etc.
+    out[] <- lapply(out, utils::type.convert, as.is = TRUE)
+    out
 }
 
 #' @export

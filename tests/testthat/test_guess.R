@@ -6,6 +6,7 @@ test_that("File extension converted correctly", {
     expect_that(get_ext("hello.CSV"), equals("csv"))
     expect_that(get_ext("hello.sav.CSV"), equals("csv"))
     expect_that(get_ext("clipboard"), equals("clipboard"))
+    expect_error(get_ext(1L))
 })
 
 test_that("Format converted correctly", {

@@ -88,11 +88,11 @@ get_ext <- function(file) {
         stop("'file' is not a string")
     }
     if (!grepl("^http.*://", file)) {
-        fmt <- file_ext(file)
+        fmt <- tools::file_ext(file)
     } else if(grepl("^http.*://", file)) {
         parsed <- strsplit(strsplit(file, "?", fixed = TRUE)[[1]][1], "/", fixed = TRUE)[[1]]
         file <- parsed[length(parsed)]
-        fmt <- file_ext(file)
+        fmt <- tools::file_ext(file)
         get_type(fmt)
     }
     if (file == "clipboard") {

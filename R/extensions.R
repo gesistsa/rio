@@ -14,14 +14,15 @@
 #' @seealso \code{\link{import}}, \code{\link{export}}
 #' @export
 .import <- function(file, ...){
-  UseMethod('.import')
+    UseMethod('.import')
 }
 
 #' @rdname extensions
+#' @importFrom tools file_ext
 #' @export
 .import.default <- function(file, ...){
     x <- gettext("%s format not supported. Consider using the '%s()' function")
-    fmt <- file_ext(file)
+    fmt <- tools::file_ext(file)
     out <- switch(fmt,
            bib = sprintf(x, fmt, "bib2df::bib2df"),
            gnumeric = sprintf(x, fmt, "gnumeric::read.gnumeric.sheet"),
@@ -42,14 +43,15 @@
 #' @rdname extensions
 #' @export
 .export <- function(file, x, ...){
-  UseMethod(".export")
+    UseMethod(".export")
 }
 
 #' @rdname extensions
+#' @importFrom tools file_ext
 #' @export
 .export.default <- function(file, x, ...){
     x <- gettext("%s format not supported. Consider using the '%s()' function")
-    fmt <- file_ext(file)
+    fmt <- tools::file_ext(file)
     out <- switch(fmt,
            jpg = sprintf(x, fmt, "jpeg::writeJPEG"),
            npy = sprintf(x, fmt, "RcppCNPy::npySave"),
