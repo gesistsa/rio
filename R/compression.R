@@ -66,7 +66,10 @@ parse_zip <- function(file, which, ...) {
         unzip(file, files = file_list$Name[which], exdir = d)
         file.path(d, file_list$Name[which])
     } else {
-        unzip(file, files = file_list$Name[grep(which, file_list$Name)[1]], exdir = d)
+        if (substring(which, 1,1) != "^") {
+            which2 <- paste0("^", which)
+        }
+        unzip(file, files = file_list$Name[grep(which2, file_list$Name)[1]], exdir = d)
         file.path(d, which)
     }
 }
@@ -86,7 +89,10 @@ parse_tar <- function(file, which, ...) {
         untar(file, files = file_list[which], exdir = d)
         file.path(d, file_list[which])
     } else {
-        untar(file, files = file_list[grep(which, file_list)[1]], exdir = d)
+        if (substring(which, 1,1) != "^") {
+            which2 <- paste0("^", which)
+        }
+        untar(file, files = file_list[grep(which2, file_list)[1]], exdir = d)
         file.path(d, which)
     }
 }

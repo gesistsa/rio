@@ -1,3 +1,7 @@
+# CHANGES TO v0.5.6
+
+ * Fixed a bug in `import()` from compressed files wherein the `which` argument did not necessarily return the correct file if >=2 files in the compressed folder.
+
 # CHANGES TO v0.5.5
 
  * Expanded test suite and increased test coverage, fixing a few tests that were failing on certain CRAN builds.
