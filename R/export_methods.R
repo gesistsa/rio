@@ -191,7 +191,20 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     dots <- list(...)
     if (isTRUE(overwrite) || !file.exists(file)) {
         if (!missing(which)) {
-            openxlsx::write.xlsx(x = x, file = file, sheetName = which, ...)
+            if (file.exists(file)) {
+                wb <- openxlsx::loadWorkbook(file = file)
+                sheets <- openxlsx::getSheetNames(file = file)
+                if (!which %in% sheets) {
+                    openxlsx::addWorksheet(wb, sheet = which)
+                } else {
+                    openxlsx::removeWorksheet(wb, sheet = which)
+                    openxlsx::addWorksheet(wb, sheet = which)
+                }
+                openxlsx::writeData(wb, sheet = which, x = x)
+                openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
+            } else {
+                openxlsx::write.xlsx(x = x, file = file, sheetName = which, ...)
+            }
         } else {
             openxlsx::write.xlsx(x = x, file = file, ...)
         }

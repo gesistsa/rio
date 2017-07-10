@@ -1,6 +1,7 @@
 # CHANGES TO v0.5.6
 
  * Fixed a bug in `import()` from compressed files wherein the `which` argument did not necessarily return the correct file if >=2 files in the compressed folder.
+ * Tweak handling of `export()` to xlsx workbooks when `which` is specified. (#156)
 
 # CHANGES TO v0.5.5
 
