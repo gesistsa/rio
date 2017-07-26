@@ -1,5 +1,6 @@
 # CHANGES TO v0.5.7
 
+ * Import of files with the ambiguous .dat extension, which are typically text-delimited files, are now passed to `data.table::fread()` with a message. Export to the format remains unsupported. (#98, #155)
  * Added support for export to SAS XPORT format (via `haven::write_xpt()`). (#157)
  * Switched default import package for SAS XPORT format to `haven::read_xpt()` with a `haven = FALSE` toggle restoring the previous default behavior using `foreign::read.xpt()`. (#157)
 

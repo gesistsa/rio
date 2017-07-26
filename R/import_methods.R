@@ -47,6 +47,12 @@ function(file, which = 1, fread = TRUE, sep = "auto",
 }
 
 #' @export
+.import.rio_dat <- function(file, which = 1, ...) {
+    message(sprintf("Ambiguous file format ('.dat'), but attempting 'data.table::fread(\"%s\")'", file))
+    import_delim(file = file, ...)
+}
+
+#' @export
 .import.rio_tsv <- function(file, sep, which = 1, fread = TRUE, ...) {
     import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
 }
