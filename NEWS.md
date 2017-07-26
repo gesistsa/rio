@@ -1,3 +1,8 @@
+# CHANGES TO v0.5.7
+
+ * Added support for export to SAS XPORT format (via `haven::write_xpt()`). (#157)
+ * Switched default import package for SAS XPORT format to `haven::read_xpt()` with a `haven = FALSE` toggle restoring the previous default behavior using `foreign::read.xpt()`. (#157)
+
 # CHANGES TO v0.5.6
 
  * Fixed a bug in `import()` from compressed files wherein the `which` argument did not necessarily return the correct file if >=2 files in the compressed folder.

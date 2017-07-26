@@ -252,9 +252,14 @@ function(file,
 }
 
 #' @importFrom foreign read.xport
+#' @importFrom haven read_xpt
 #' @export
-.import.rio_xpt <- function(file, which = 1, ...) {
-    read.xport(file = file, ...)
+.import.rio_xpt <- function(file, which = 1, haven = TRUE, ...) {
+    if (isTRUE(haven)) {
+        standardize_attributes(haven::read_xpt(file = file, ...))
+    } else {
+        foreign::read.xport(file = file)
+    }
 }
 
 #' @importFrom foreign read.mtp

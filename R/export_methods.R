@@ -167,6 +167,13 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     write_sas(data = x, path = file, ...)
 }
 
+#' @importFrom haven write_xpt
+#' @export
+.export.rio_xpt <- function(file, x, ...) {
+    x <- restore_labelled(x)
+    haven::write_xpt(data = x, path = file, ...)
+}
+
 #' @importFrom foreign write.dbf
 #' @export
 .export.rio_dbf <- function(file, x, ...) {

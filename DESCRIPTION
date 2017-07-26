@@ -1,8 +1,8 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.5.6
-Date: 2017-07-10
+Version: 0.5.7
+Date: 2017-07-26
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
@@ -28,7 +28,7 @@ Imports:
     stats,
     utils,
     foreign,
-    haven (> 0.2.1),
+    haven (>= 1.1.0),
     curl (>= 0.6),
     data.table (>= 1.9.8),
     readxl (>= 0.1.1),

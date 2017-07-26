@@ -16,6 +16,7 @@
 #'     \item Pipe-separated data (.psv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{sep = '|'}, \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
 #'     \item Tab-separated data (.tsv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
 #'     \item SAS (.sas7bdat), using \code{\link[haven]{read_sas}}.
+#'     \item SAS XPORT (.xpt), using \code{\link[haven]{read_xpt}} or, if \code{haven = FALSE}, \code{\link[foreign]{read.xport}}.
 #'     \item SPSS (.sav), using \code{\link[haven]{read_sav}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used.
 #'     \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
 #'     \item SAS XPORT (.xpt), using \code{\link[foreign]{read.xport}}.

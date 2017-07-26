@@ -17,6 +17,7 @@
 #'     \item Pipe-separated data (.psv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{sep = '|'} and \code{row.names = FALSE}.
 #'     \item Tab-separated data (.tsv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{row.names = FALSE}.
 #'     \item SAS (.sas7bdat), using \code{\link[haven]{write_sas}}.
+#'     \item SAS XPORT (.xpt), using \code{\link[haven]{write_xpt}}.
 #'     \item SPSS (.sav), using \code{\link[haven]{write_sav}}
 #'     \item Stata (.dta), using \code{\link[haven]{write_dta}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
 #'     \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}. Use \code{which} to specify a sheet name and \code{overwrite} to decide whether to overwrite an existing file or worksheet (the default) or add the data as a new worksheet (with \code{overwrite = FALSE}). \code{x} can also be a list of data frames; the list entry names are used as sheet names.
