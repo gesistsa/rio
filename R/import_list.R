@@ -48,6 +48,7 @@ function(file,
         setclass <- NULL
     }
     if (length(file) > 1) {
+        names(file) <- gsub(paste0("\\.", tools::file_ext(file[1]), "$"), "", file, ignore.case = TRUE)
         x <- lapply(file, function(thisfile) {
             out <- try(import(thisfile, setclass = setclass, ...), silent = TRUE)
             if (inherits(out, "try-error")) {
