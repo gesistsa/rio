@@ -70,9 +70,13 @@ function(file,
                     which <- seq_along(xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table"))
                 } else if (get_ext(file) %in% c("xls","xlsx")) {
                     requireNamespace("readxl", quietly = TRUE)
-                    which <- seq_along(readxl::excel_sheets(path = file))
+                    whichnames <- readxl::excel_sheets(path = file)
+                    which <- seq_along(whichnames)
+                    names(which) <- whichnames
                 } else if (get_ext(file) %in% c("zip")) {
-                    which <- seq_len(nrow(utils::unzip(file, list = TRUE)))
+                    whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
+                    which <- seq_along(whichnames)
+                    names(which) <- whichnames
                 } else {
                     which <- 1
                 }
