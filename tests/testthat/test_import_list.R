@@ -41,5 +41,22 @@ test_that("Using setclass in import_list()", {
     
 })
 
+test_that("Object names are preserved by import_list()", {
+    export(list(mtcars1 = mtcars[1:10,],
+                mtcars2 = mtcars[11:20,],
+                mtcars3 = mtcars[21:32,]), "mtcars.xlsx")
+    export(mtcars[1:10,],  "mtcars1.csv")
+    export(mtcars[11:20,], "mtcars2.csv")
+    export(mtcars[21:32,], "mtcars3.csv")
+    expected_names <- c("mtcars1", "mtcars2", "mtcars3")
+    dat_xls <- import_list("mtcars.xlsx")
+    dat_csv <- import_list(c("mtcars1.csv","mtcars2.csv","mtcars3.csv"))
+    
+    expect_identical(names(dat_xls), expected_names)
+    expect_identical(names(dat_csv), expected_names)
+    
+    unlink(c("mtcars.xlsx", "mtcars1.csv","mtcars2.csv","mtcars3.csv"))
+})
+
 unlink("data.rdata")
 unlink("mtcars.rds")
