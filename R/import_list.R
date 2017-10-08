@@ -68,7 +68,15 @@ function(file,
             if (missing(which)) {
                 if (get_ext(file) == "html") {
                     requireNamespace("xml2", quietly = TRUE)
-                    which <- seq_along(xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table"))
+                    tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
+                    which <- seq_along(tables)
+                    names(which) <- sapply(xml2::xml_attrs(tables), function(x) {
+                      if ("class" %in% names(x)) {
+                        x["class"]
+                      } else {
+                        ""
+                      }
+                      })
                 } else if (get_ext(file) %in% c("xls","xlsx")) {
                     requireNamespace("readxl", quietly = TRUE)
                     whichnames <- readxl::excel_sheets(path = file)
