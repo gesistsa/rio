@@ -51,9 +51,11 @@ test_that("Object names are preserved by import_list()", {
     expected_names <- c("mtcars1", "mtcars2", "mtcars3")
     dat_xls <- import_list("mtcars.xlsx")
     dat_csv <- import_list(c("mtcars1.csv","mtcars2.csv","mtcars3.csv"))
+    dat_html <- import_list(system.file("examples", "twotables.html", package = "rio"))
     
     expect_identical(names(dat_xls), expected_names)
     expect_identical(names(dat_csv), expected_names)
+    expect_identical(names(dat_html), c("mtcars", ""))
     
     unlink(c("mtcars.xlsx", "mtcars1.csv","mtcars2.csv","mtcars3.csv"))
 })
