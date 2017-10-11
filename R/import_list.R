@@ -47,8 +47,12 @@ function(file,
     if (missing(setclass)) {
         setclass <- NULL
     }
+    strip_exts <- function(file) {
+      exts <- paste0("\\.", lapply(file, tools::file_ext), "$")
+      sapply(seq_along(file), function(x) gsub(exts[x], "", file[x]))
+    }
     if (length(file) > 1) {
-        names(file) <- gsub(paste0("\\.", tools::file_ext(file[1]), "$"), "", file, ignore.case = TRUE)
+        names(file) <- strip_exts(file)
         x <- lapply(file, function(thisfile) {
             out <- try(import(thisfile, setclass = setclass, ...), silent = TRUE)
             if (inherits(out, "try-error")) {
@@ -81,7 +85,7 @@ function(file,
                 } else if (get_ext(file) %in% c("zip")) {
                     whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
                     which <- seq_along(whichnames)
-                    names(which) <- whichnames
+                    names(which) <- strip_exts(whichnames)
                 } else {
                     which <- 1
                 }
