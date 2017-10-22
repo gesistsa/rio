@@ -48,8 +48,7 @@ function(file,
         setclass <- NULL
     }
     strip_exts <- function(file) {
-      exts <- paste0("\\.", lapply(file, tools::file_ext), "$")
-      sapply(seq_along(file), function(x) gsub(exts[x], "", file[x]))
+      sapply(file, function(x) tools::file_path_sans_ext(basename(x)))
     }
     if (length(file) > 1) {
         names(file) <- strip_exts(file)
