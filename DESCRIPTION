@@ -51,8 +51,9 @@ Suggests:
     readODS (>= 1.6.4),
     readr,
     rmatio,
-    xml2 (>= 1.0.0),
+    xml2 (>= 1.2.0),
     yaml
 License: GPL-2
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
+Remotes: hadley/xml2

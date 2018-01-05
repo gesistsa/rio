@@ -356,7 +356,7 @@ function(file,
 #' @export
 .import.rio_xml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
     requireNamespace("xml2", quietly = TRUE)
-    x <- xml2::as_list(xml2::read_xml(unclass(file)))
+    x <- xml2::as_list(xml2::read_xml(unclass(file)))[[1L]]
     d <- do.call("rbind", c(lapply(x, unlist)))
     row.names(d) <- 1:nrow(d)
     d <- as.data.frame(d, stringsAsFactors = stringsAsFactors)
