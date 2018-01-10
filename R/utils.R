@@ -1,3 +1,29 @@
+#' @title Get File Type from Extension
+#' @description A utility function to retrieve the file type from a file extension (via its filename/path/URL)
+#' @param file A character string containing a filename, file path, or URL.
+#' @return A characters string containing a file type recognized by rio.
+#' @export
+get_ext <- function(file) {
+    if (!is.character(file)) {
+        stop("'file' is not a string")
+    }
+    if (!grepl("^http.*://", file)) {
+        fmt <- tools::file_ext(file)
+    } else if(grepl("^http.*://", file)) {
+        parsed <- strsplit(strsplit(file, "?", fixed = TRUE)[[1]][1], "/", fixed = TRUE)[[1]]
+        file <- parsed[length(parsed)]
+        fmt <- tools::file_ext(file)
+        get_type(fmt)
+    }
+    if (file == "clipboard") {
+        return("clipboard")
+    } else if (fmt == "") {
+        stop("'file' has no extension")
+    } else {
+        return(tolower(fmt))
+    }
+}
+
 get_type <- function(fmt) {
     type_list <- list(
         clipboard = "clipboard",
@@ -81,27 +107,6 @@ get_type <- function(fmt) {
         return(fmt)
     }
     return(out)
-}
-
-get_ext <- function(file) {
-    if (!is.character(file)) {
-        stop("'file' is not a string")
-    }
-    if (!grepl("^http.*://", file)) {
-        fmt <- tools::file_ext(file)
-    } else if(grepl("^http.*://", file)) {
-        parsed <- strsplit(strsplit(file, "?", fixed = TRUE)[[1]][1], "/", fixed = TRUE)[[1]]
-        file <- parsed[length(parsed)]
-        fmt <- tools::file_ext(file)
-        get_type(fmt)
-    }
-    if (file == "clipboard") {
-        return("clipboard")
-    } else if (fmt == "") {
-        stop("'file' has no extension")
-    } else {
-        return(tolower(fmt))
-    }
 }
 
 twrap <- function(value, tag) {
