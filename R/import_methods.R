@@ -94,7 +94,7 @@ function(file,
     }
     a <- list(...)
     if (isTRUE(readr)) {
-        requireNamespace("readr", quietly = TRUE)
+        requireNamespace("readr")
         if (is.null(widths)) {
             if (!missing(col.names)) {
                 widths <- readr::fwf_empty(file = file, col_names = col.names)
@@ -156,7 +156,7 @@ function(file,
 
 #' @export
 .import.rio_csvy <- function(file, which = 1, ...) {
-    requireNamespace("csvy", quietly = TRUE)
+    requireNamespace("csvy")
     csvy::read_csvy(file = file, ...)
 }
 
@@ -181,20 +181,20 @@ function(file,
 
 #' @export
 .import.rio_feather <- function(file, which = 1, ...) {
-    requireNamespace("feather", quietly = TRUE)
+    requireNamespace("feather")
     feather::read_feather(path = file)
 }
 
 #' @export
 .import.rio_fst <- function(file, which = 1, ...) {
-    requireNamespace("fst", quietly = TRUE)
+    requireNamespace("fst")
     fst::read.fst(path = file, ...)
 }
 
 #' @export
 .import.rio_matlab <- function(file, which = 1, ...) {
-    requireNamespace("rmatio", quietly = TRUE)
-    rmatio::read.mat(filename = file, ...)
+    requireNamespace("rmatio")
+    rmatio::read.mat(filename = file)
 }
 
 #' @importFrom foreign read.dta
@@ -282,7 +282,7 @@ function(file,
 
 #' @export
 .import.rio_json <- function(file, which = 1, ...) {
-    requireNamespace("jsonlite", quietly = TRUE)
+    requireNamespace("jsonlite")
     jsonlite::fromJSON(txt = file, ...)
 }
 
@@ -333,7 +333,7 @@ function(file,
         }
         do.call("read_xlsx", c(list(path = file, sheet = which), a))
     } else {
-        requireNamespace("openxlsx", quietly = TRUE)
+        requireNamespace("openxlsx")
         do.call("read.xlsx", c(list(xlsxFile = file, sheet = which), a))
     }
 }
@@ -349,14 +349,14 @@ function(file,
 
 #' @export
 .import.rio_ods <- function(file, which = 1, header = TRUE, ...) {
-    requireNamespace("readODS", quietly = TRUE)
+    requireNamespace("readODS")
     readODS::read_ods(path = file, sheet = which, col_names = header, ...)
 }
 
 #' @importFrom utils type.convert
 #' @export
 .import.rio_xml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
-    requireNamespace("xml2", quietly = TRUE)
+    requireNamespace("xml2")
     x <- xml2::as_list(xml2::read_xml(unclass(file)))[[1L]]
     d <- do.call("rbind", c(lapply(x, unlist)))
     row.names(d) <- 1:nrow(d)
@@ -413,12 +413,12 @@ function(file,
 
 #' @export
 .import.rio_yml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
-    requireNamespace("yaml", quietly = TRUE)
+    requireNamespace("yaml")
     as.data.frame(yaml::yaml.load(file, ...), stringsAsFactors = stringsAsFactors)
 }
 
 #' @export
 .import.rio_clipboard <- function(file = "clipboard", which = 1, header = TRUE, sep = "\t", ...) {
-    requireNamespace("clipr", quietly = TRUE)
+    requireNamespace("clipr")
     clipr::read_clip_tbl(x = clipr::read_clip(), header = header, sep = sep, ...)
 }

@@ -33,7 +33,6 @@
            tiff = sprintf(x, fmt, "tiff::readTIFF"),
            sss = sprintf(x, fmt, "sss::read.sss"),
            sdmx = sprintf(x, fmt, "sdmx::readSDMX"),
-           matlab = sprintf(x, fmt, "R.matlab::readMat"),
            gexf = sprintf(x, fmt, "rgexf::read.gexf"),
            npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
            gettext("Format not supported"))
@@ -57,7 +56,6 @@
            npy = sprintf(x, fmt, "RcppCNPy::npySave"),
            png = sprintf(x, fmt, "png::writePNG"),
            tiff = sprintf(x, fmt, "tiff::writeTIFF"),
-           matlab = sprintf(x, fmt, "R.matlab::writeMat"),
            xpt = sprintf(x, fmt, "SASxport::write.xport"),
            gexf = sprintf(x, fmt, "rgexf::write.gexf"),
            npy = sprintf(x, fmt, "RcppCNPy::npySave"),
