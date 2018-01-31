@@ -47,7 +47,11 @@ function(file,
     if (missing(setclass)) {
         setclass <- NULL
     }
+    strip_exts <- function(file) {
+      sapply(file, function(x) tools::file_path_sans_ext(basename(x)))
+    }
     if (length(file) > 1) {
+        names(file) <- strip_exts(file)
         x <- lapply(file, function(thisfile) {
             out <- try(import(thisfile, setclass = setclass, ...), silent = TRUE)
             if (inherits(out, "try-error")) {
@@ -67,12 +71,20 @@ function(file,
             if (missing(which)) {
                 if (get_ext(file) == "html") {
                     requireNamespace("xml2", quietly = TRUE)
-                    which <- seq_along(xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table"))
+                    tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
+                    which <- seq_along(tables)
+                    names(which) <- sapply(xml2::xml_attrs(tables),
+                      function(x) if ("class" %in% names(x)) x["class"] else ""
+                      )
                 } else if (get_ext(file) %in% c("xls","xlsx")) {
                     requireNamespace("readxl", quietly = TRUE)
-                    which <- seq_along(readxl::excel_sheets(path = file))
+                    whichnames <- readxl::excel_sheets(path = file)
+                    which <- seq_along(whichnames)
+                    names(which) <- whichnames
                 } else if (get_ext(file) %in% c("zip")) {
-                    which <- seq_len(nrow(utils::unzip(file, list = TRUE)))
+                    whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
+                    which <- seq_along(whichnames)
+                    names(which) <- strip_exts(whichnames)
                 } else {
                     which <- 1
                 }
