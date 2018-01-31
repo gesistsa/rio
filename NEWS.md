@@ -1,6 +1,9 @@
 # CHANGES TO v0.5.8
 
  * Export the `get_ext()` function. (#169)
+ * Fix a bug related to an xml2 bug (#168, h/t Jim Hester)
+ * `import_list()` gains improved file name handling. (#164, h/t Ruaridh Williamson)
+ * Removed the `overwrite` argument from `export()` method for xlsx files. Instead, existing workbooks are always overwritten unless which is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the `which` sheet does not, the data are added as a new sheet to the existing workbook. (#156)
 
 # CHANGES TO v0.5.7
 

@@ -326,6 +326,7 @@ function(file,
         a[["sheet"]] <- NULL
     }
     if (isTRUE(readxl)) {
+        requireNamespace("readxl")
         if ("rows" %in% names(a)) {
             warning("'rows' argument ignored when readxl = TRUE. Use 'range' instead.")
             a[["rows"]] <- NULL
