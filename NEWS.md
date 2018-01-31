@@ -1,3 +1,7 @@
+# CHANGES TO v0.5.8
+
+ * Export the `get_ext()` function. (#169)
+
 # CHANGES TO v0.5.7
 
  * Import of files with the ambiguous .dat extension, which are typically text-delimited files, are now passed to `data.table::fread()` with a message. Export to the format remains unsupported. (#98, #155)

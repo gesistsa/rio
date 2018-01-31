@@ -1,12 +1,15 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.5.7
-Date: 2017-10-10
+Version: 0.5.8
+Date: 2018-01-31
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
-             person("Thomas J.", "Leeper", role = c("aut", "cre"), email = "thosjleeper@gmail.com"),
+             person("Thomas J.", "Leeper",
+                    role = c("aut", "cre"), 
+                    email = "thosjleeper@gmail.com",
+                    comment = c(ORCID = "0000-0003-4097-6326")),
              person("Christopher", "Gandrud", role = "ctb"),
              person("Andrew", "MacDonald", role = "ctb"),
              person("Ista", "Zahn", role = "ctb"),
@@ -49,8 +52,9 @@ Suggests:
     readODS (>= 1.6.4),
     readr,
     rmatio,
-    xml2 (>= 1.0.0),
+    xml2 (>= 1.2.0),
     yaml
 License: GPL-2
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
+Remotes: hadley/xml2
