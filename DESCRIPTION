@@ -57,4 +57,3 @@ Suggests:
 License: GPL-2
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
-Remotes: hadley/xml2
