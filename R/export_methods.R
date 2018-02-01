@@ -58,9 +58,15 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
             return(sprintf("%i",col))
         }
         if (is.numeric(col)) {
-            s <- strsplit(as.character(col), ".", fixed = TRUE)
-            m1 <- max(nchar(sapply(s, `[`, 1)), na.rm = TRUE)
-            m2 <- max(nchar(sapply(s, `[`, 2)), na.rm = TRUE)
+            decimals <- strsplit(as.character(col), ".", fixed = TRUE)
+            m1 <- max(nchar(unlist(lapply(decimals, `[`, 1))), na.rm = TRUE)
+            decimals_2 <- unlist(lapply(decimals, `[`, 2))
+            decimals_2_nchar <- nchar(decimals_2[!is.na(decimals_2)])
+            if (length(decimals_2_nchar)) {
+                m2 <- max(decimals_2_nchar, na.rm = TRUE)
+            } else {
+                m2 <- 0
+            }
             if (!is.finite(m2)) {
                 m2 <- digits
             }

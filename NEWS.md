@@ -1,3 +1,7 @@
+# CHANGES TO v0.5.9
+
+ * Removed longstanding warnings from the tests of `export()` to fixed-width format.
+
 # CHANGES TO v0.5.8
 
  * Export the `get_ext()` function. (#169)

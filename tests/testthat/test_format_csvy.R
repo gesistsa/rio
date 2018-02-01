@@ -7,12 +7,12 @@ test_that("Export to CSVY", {
 })
 
 test_that("Import from CSVY", {
-    d <- import(system.file("examples", "example.csvy", package = "csvy"))
+    suppressWarnings(d <- import(system.file("examples", "example.csvy", package = "csvy")))
     expect_true(inherits(d, "data.frame"))
     
-    d2 <- import(system.file("examples", "example2.csvy", package = "csvy"))
+    suppressWarnings(d2 <- import(system.file("examples", "example2.csvy", package = "csvy")))
     expect_true(all(c("title", "units", "source") %in% names(attributes(d2))))
     
-    d3 <- import(system.file("examples", "example3.csvy", package = "csvy"))
+    suppressWarnings(d3 <- import(system.file("examples", "example3.csvy", package = "csvy")))
     expect_true(identical(dim(d3), c(2L, 3L)))
 })
