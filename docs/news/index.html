@@ -93,6 +93,619 @@
     </div>
 
     <div class="contents">
+    <div id="rio-0-5-9" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-9" class="anchor"></a>rio 0.5.9<small> 2018-02-01 </small>
+</h1>
+<ul>
+<li>Removed longstanding warnings from the tests of <code><a href="../reference/export.html">export()</a></code> to fixed-width format.</li>
+</ul>
+</div>
+    <div id="rio-0-5-8" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-8" class="anchor"></a>rio 0.5.8<small> Unreleased </small>
+</h1>
+<ul>
+<li>Export the <code><a href="../reference/get_ext.html">get_ext()</a></code> function. (<a href='https://github.com/leeper/rio/issues/169'>#169</a>)</li>
+<li>Fix a bug related to an xml2 bug (<a href='https://github.com/leeper/rio/issues/168'>#168</a>, h/t Jim Hester)</li>
+<li>
+<code><a href="../reference/import_list.html">import_list()</a></code> gains improved file name handling. (<a href='https://github.com/leeper/rio/issues/164'>#164</a>, h/t Ruaridh Williamson)</li>
+<li>Removed the <code>overwrite</code> argument from <code><a href="../reference/export.html">export()</a></code> method for xlsx files. Instead, existing workbooks are always overwritten unless which is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the <code>which</code> sheet does not, the data are added as a new sheet to the existing workbook. (<a href='https://github.com/leeper/rio/issues/156'>#156</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-5-7" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-7" class="anchor"></a>rio 0.5.7<small> Unreleased </small>
+</h1>
+<ul>
+<li>Import of files with the ambiguous .dat extension, which are typically text-delimited files, are now passed to <code><a href="http://www.rdocumentation.org/packages/data.table/topics/fread">data.table::fread()</a></code> with a message. Export to the format remains unsupported. (<a href='https://github.com/leeper/rio/issues/98'>#98</a>, <a href='https://github.com/leeper/rio/issues/155'>#155</a>)</li>
+<li>Added support for export to SAS XPORT format (via <code><a href="http://www.rdocumentation.org/packages/haven/topics/read_xpt">haven::write_xpt()</a></code>). (<a href='https://github.com/leeper/rio/issues/157'>#157</a>)</li>
+<li>Switched default import package for SAS XPORT format to <code><a href="http://www.rdocumentation.org/packages/haven/topics/read_xpt">haven::read_xpt()</a></code> with a <code>haven = FALSE</code> toggle restoring the previous default behavior using <code>foreign::read.xpt()</code>. (<a href='https://github.com/leeper/rio/issues/157'>#157</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-5-6" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-6" class="anchor"></a>rio 0.5.6<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed a bug in <code><a href="../reference/import.html">import()</a></code> from compressed files wherein the <code>which</code> argument did not necessarily return the correct file if &gt;=2 files in the compressed folder.</li>
+<li>Tweak handling of <code><a href="../reference/export.html">export()</a></code> to xlsx workbooks when <code>which</code> is specified. (<a href='https://github.com/leeper/rio/issues/156'>#156</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-5-5" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-5" class="anchor"></a>rio 0.5.5<small> 2017-06-18 </small>
+</h1>
+<ul>
+<li>Expanded test suite and increased test coverage, fixing a few tests that were failing on certain CRAN builds.</li>
+</ul>
+</div>
+    <div id="rio-0-5-4" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-4" class="anchor"></a>rio 0.5.4<small> Unreleased </small>
+</h1>
+<ul>
+<li>New functions <code><a href="../reference/characterize.html">characterize()</a></code> and <code><a href="../reference/characterize.html">factorize()</a></code> provide methods for converting “labelled” variables (e.g., from Stata or SPSS) into character or factor variables using embedded metadata. This can also be useful for exporting a metadata-rich file format into a plain text file. (<a href='https://github.com/leeper/rio/issues/153'>#153</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-5-3" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-3" class="anchor"></a>rio 0.5.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed a bug in writing to .zip and .tar archives related to absolute file paths.</li>
+<li>Fixed some small bugs in <code><a href="../reference/import_list.html">import_list()</a></code> and added tests for behavior.</li>
+<li>Add .bib as known-unsupported format via <code><a href="http://www.rdocumentation.org/packages/bib2df/topics/bib2df">bib2df::bib2df()</a></code>.</li>
+<li>Expanded test coverage.</li>
+</ul>
+</div>
+    <div id="rio-0-5-3-1" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-3-1" class="anchor"></a>rio 0.5.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed a bug in <code>.import.rio_xlsx()</code> when <code>readxl = FALSE</code>. (<a href='https://github.com/leeper/rio/issues/152'>#152</a>, h/t Danny Parsons)</li>
+<li>Added a new function <code><a href="../reference/gather_attrs.html">spread_attrs()</a></code> that reverses the <code><a href="../reference/gather_attrs.html">gather_attrs()</a></code> operation.</li>
+<li>Expanded test coverage.</li>
+</ul>
+</div>
+    <div id="rio-0-5-1" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-1" class="anchor"></a>rio 0.5.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="../reference/export.html">export()</a></code> now sets variables with a “labels” attribute to <strong>haven</strong>’s “labelled” class.</li>
+</ul>
+</div>
+    <div id="rio-0-5-0" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-0" class="anchor"></a>rio 0.5.0<small> 2017-04-28 </small>
+</h1>
+<ul>
+<li>CRAN Release.</li>
+<li>Restored import of <strong>openxlsx</strong> so that writing to xlsx is supported on install. (<a href='https://github.com/leeper/rio/issues/150'>#150</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-4-28" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-28" class="anchor"></a>rio 0.4.28<small> Unreleased </small>
+</h1>
+<ul>
+<li>Improved documentation of mapping between file format support and the packages used for each format. (<a href='https://github.com/leeper/rio/issues/151'>#151</a>, h/t Patrick Kennedy)</li>
+<li>
+<code><a href="../reference/import_list.html">import_list()</a></code> now returns a <code>NULL</code> entry for any failed imports, with a warning. (<a href='https://github.com/leeper/rio/issues/149'>#149</a>)</li>
+<li>
+<code><a href="../reference/import_list.html">import_list()</a></code> gains additional arguments <code>rbind_fill</code> and <code>rbind_label</code> to control rbind-ing behavior. (<a href='https://github.com/leeper/rio/issues/149'>#149</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-4-27" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-27" class="anchor"></a>rio 0.4.27<small> Unreleased </small>
+</h1>
+<ul>
+<li>Import to and export from the clipboard now relies on <code><a href="http://www.rdocumentation.org/packages/clipr/topics/read_clip">clipr::read_clip()</a></code> and <code><a href="http://www.rdocumentation.org/packages/clipr/topics/write_clip">clipr::write_clip()</a></code>, respectively, thus (finally) providing Linux support. (<a href='https://github.com/leeper/rio/issues/105'>#105</a>, h/t Matthew Lincoln)</li>
+<li>Added an <code>rbind</code> argument to <code><a href="../reference/import_list.html">import_list()</a></code>. (<a href='https://github.com/leeper/rio/issues/149'>#149</a>)</li>
+<li>Added a <code>setclass</code> argument to <code><a href="../reference/import_list.html">import_list()</a></code>, ala the same in <code><a href="../reference/import.html">import()</a></code>.</li>
+<li>Switched <code>requireNamespace()</code> calls to <code>quietly = TRUE</code>.</li>
+</ul>
+</div>
+    <div id="rio-0-4-26" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-26" class="anchor"></a>rio 0.4.26<small> Unreleased </small>
+</h1>
+<ul>
+<li>Further fixes to .csv.gz import/export. (<a href='https://github.com/leeper/rio/issues/146'>#146</a>, h/t Trevor Davis)</li>
+</ul>
+</div>
+    <div id="rio-0-4-25" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-25" class="anchor"></a>rio 0.4.25<small> Unreleased </small>
+</h1>
+<ul>
+<li>Remove unecessary <strong>urltools</strong> dependency.</li>
+<li>New function <code><a href="../reference/import_list.html">import_list()</a></code> returns a list of data frames from a multi-object Excel Workbook, .Rdata file, zip directory, or HTML file. (<a href='https://github.com/leeper/rio/issues/126'>#126</a>, <a href='https://github.com/leeper/rio/issues/129'>#129</a>)</li>
+<li>
+<code><a href="../reference/export.html">export()</a></code> can now write a list of data frames to an Excel (.xlsx) workbook. (<a href='https://github.com/leeper/rio/issues/142'>#142</a>, h/t Jeremy Johnson)</li>
+<li>
+<code><a href="../reference/export.html">export()</a></code> can now write a list of data frames to an HTML (.html) file.</li>
+</ul>
+</div>
+    <div id="rio-0-4-24" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-24" class="anchor"></a>rio 0.4.24<small> Unreleased </small>
+</h1>
+<ul>
+<li>Verbosity of <code><a href="../reference/export.html">export(format = "fwf")</a></code> now depends on <code>options("verbose")</code>.</li>
+<li>Fixed various errors, warnings, and messages in fixed-width format tests.</li>
+<li>Modified defaults and argument handling in internal function <code>read_delim()</code>.</li>
+<li>Fixed handling of “data.table”, “tibble”, and “data.frame” classes in <code>set_class()</code>. (<a href='https://github.com/leeper/rio/issues/144'>#144</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-4-23" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-23" class="anchor"></a>rio 0.4.23<small> Unreleased </small>
+</h1>
+<ul>
+<li>Moved all non-critical format packages to Suggests, rather than Imports. (<a href='https://github.com/leeper/rio/issues/143'>#143</a>)</li>
+<li>Added support for Matlab formats. (<a href='https://github.com/leeper/rio/issues/78'>#78</a>, <a href='https://github.com/leeper/rio/issues/98'>#98</a>)</li>
+<li>Added support for fst format. (<a href='https://github.com/leeper/rio/issues/138'>#138</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-4-22" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-22" class="anchor"></a>rio 0.4.22<small> Unreleased </small>
+</h1>
+<ul>
+<li>Rearranged README.</li>
+<li>Bumped readxl dependency to <code>&gt;= 0.1.1</code> (<a href='https://github.com/leeper/rio/issues/130'>#130</a>, h/t Yongfa Chen)</li>
+<li>Pass explicit <code>excel_format</code> arguments when using <strong>readxl</strong> functions. (<a href='https://github.com/leeper/rio/issues/130'>#130</a>)</li>
+<li>Google Spreadsheets can now be imported using any of the allowed formats (CSV, TSV, XLSX, ODS).</li>
+<li>Added support for writing to ODS files via <code><a href="http://www.rdocumentation.org/packages/readODS/topics/write_ods">readODS::write_ods()</a></code>. (<a href='https://github.com/leeper/rio/issues/96'>#96</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-4-21" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-21" class="anchor"></a>rio 0.4.21<small> Unreleased </small>
+</h1>
+<ul>
+<li>Handle HTML tables with <code>&lt;tbody&gt;</code> elements. (h/t Mohamed Elgoussi)</li>
+</ul>
+</div>
+    <div id="rio-0-4-20" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-20" class="anchor"></a>rio 0.4.20<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed a big in the <code>.import.rio_xls()</code> and <code>.import.rio_xlsx()</code> where the <code>sheet</code> argument would return an error.</li>
+</ul>
+</div>
+    <div id="rio-0-4-19" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-19" class="anchor"></a>rio 0.4.19<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed a bug in the import of delimited files when <code>fread = FALSE</code>. (<a href='https://github.com/leeper/rio/issues/133'>#133</a>, h/t Christopher Gandrud)</li>
+</ul>
+</div>
+    <div id="rio-0-4-18" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-18" class="anchor"></a>rio 0.4.18<small> Unreleased </small>
+</h1>
+<ul>
+<li>With new data.table release, export using <code>fwrite()</code> is now the default for text-based file formats.</li>
+</ul>
+</div>
+    <div id="rio-0-4-17" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-17" class="anchor"></a>rio 0.4.17<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed a bug in <code>.import.rio_xls()</code> wherein the <code>which</code> argument was ignored. (h/t Mohamed Elgoussi)</li>
+</ul>
+</div>
+    <div id="rio-0-4-16" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-16" class="anchor"></a>rio 0.4.16<small> 2016-09-25 </small>
+</h1>
+<ul>
+<li>Added support for importing from multi-table HTML files using the <code>which</code> argument. (<a href='https://github.com/leeper/rio/issues/126'>#126</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-4-15" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-15" class="anchor"></a>rio 0.4.15<small> Unreleased </small>
+</h1>
+<ul>
+<li>Improved behavior of <code><a href="../reference/import.html">import()</a></code> and <code><a href="../reference/export.html">export()</a></code> with respect to unrecognized file types. (<a href='https://github.com/leeper/rio/issues/124'>#124</a>, <a href='https://github.com/leeper/rio/issues/125'>#125</a>, h/t Jason Becker)</li>
+<li>Added explicit tests of the S3 extension mechanism for <code><a href="../reference/extensions.html">.import()</a></code> and <code>.export()</code>.</li>
+<li>Attempt to recognize compressed but non-archived file formats (e.g., “.csv.gz”). (<a href='https://github.com/leeper/rio/issues/123'>#123</a>, h/t trevorld)</li>
+</ul>
+</div>
+    <div id="rio-0-4-14" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-14" class="anchor"></a>rio 0.4.14<small> Unreleased </small>
+</h1>
+<ul>
+<li>Update import and export methods to use new xml2 for XML and HTML export. (<a href='https://github.com/leeper/rio/issues/86'>#86</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-4-13" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-13" class="anchor"></a>rio 0.4.13<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fix failing tests related to stricter variable name handling for Stata files in development version of haven. (<a href='https://github.com/leeper/rio/issues/113'>#113</a>, h/t Hadley Wickham)</li>
+<li>Added support for export of .sas7bdat files via haven (<a href='https://github.com/leeper/rio/issues/116'>#116</a>)</li>
+<li>Restored support for import from SPSS portable via haven (<a href='https://github.com/leeper/rio/issues/116'>#116</a>)</li>
+<li>Updated import methods to reflect changed formal argument names in haven. (<a href='https://github.com/leeper/rio/issues/116'>#116</a>)</li>
+<li>Converted to roxygen2 documentation and made NEWS an explicit markdown file.</li>
+</ul>
+</div>
+    <div id="rio-0-4-12" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-12" class="anchor"></a>rio 0.4.12<small> 2016-08-10 </small>
+</h1>
+<ul>
+<li>rio sets <code>options(datatable.fread.dec.experiment=FALSE)</code> during onLoad to address a Unix-specific locale issue.</li>
+</ul>
+</div>
+    <div id="rio-0-4-11" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-11" class="anchor"></a>rio 0.4.11<small> 2016-08-09 </small>
+</h1>
+<ul>
+<li>Note unsupported NumPy i/o via RcppCNPy. (<a href='https://github.com/leeper/rio/issues/112'>#112</a>)</li>
+<li>Fix import of European-style CSV files (sep = “,” and sep2 = “;”). (<a href='https://github.com/leeper/rio/issues/106'>#106</a>, <a href='https://github.com/leeper/rio/issues/107'>#107</a>, h/t Stani Stadlmann)</li>
+</ul>
+</div>
+    <div id="rio-0-4-10" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-10" class="anchor"></a>rio 0.4.10<small> Unreleased </small>
+</h1>
+<ul>
+<li>Changed feather Imports to Suggests to make rio installable on older R versions. (<a href='https://github.com/leeper/rio/issues/104'>#104</a>)</li>
+<li>Noted new RStudio add-in, GREA, that uses rio. (<a href='https://github.com/leeper/rio/issues/109'>#109</a>)</li>
+<li>Migrated CSVY-related code to separate package (<a href="https://github.com/leeper/csvy/" class="uri">https://github.com/leeper/csvy/</a>). (<a href='https://github.com/leeper/rio/issues/111'>#111</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-4-9" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-9" class="anchor"></a>rio 0.4.9<small> Unreleased </small>
+</h1>
+<ul>
+<li>Removed unnecessary error in xlsx imports. (<a href='https://github.com/leeper/rio/issues/103'>#103</a>, h/t Kevin Wright)</li>
+</ul>
+</div>
+    <div id="rio-0-4-8" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-8" class="anchor"></a>rio 0.4.8<small> 2016-06-14 </small>
+</h1>
+<ul>
+<li>Fixed a bug in the handling of “labelled” class variables imported from haven. (<a href='https://github.com/leeper/rio/issues/102'>#102</a>, h/t Pierre LaFortune)</li>
+</ul>
+</div>
+    <div id="rio-0-4-7" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-7" class="anchor"></a>rio 0.4.7<small> Unreleased </small>
+</h1>
+<ul>
+<li>Improved use of the <code>sep</code> argument for import of delimited files. (<a href='https://github.com/leeper/rio/issues/99'>#99</a>, h/t Danny Parsons)</li>
+<li>Removed support for import of SPSS Portable (.por) files, given deprecation from haven. (<a href='https://github.com/leeper/rio/issues/100'>#100</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-4-5" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-5" class="anchor"></a>rio 0.4.5<small> 2016-05-20 </small>
+</h1>
+<ul>
+<li>Fixed other tests to remove (unimportant) warnings.</li>
+<li>Fixed a failing test of file compression that was found in v0.4.3 on some platforms.</li>
+</ul>
+</div>
+    <div id="rio-0-4-3" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-3" class="anchor"></a>rio 0.4.3<small> 2016-05-19 </small>
+</h1>
+<ul>
+<li>Improved, generalized, tested, and expanded documentation of <code>which</code> argument in <code><a href="../reference/import.html">import()</a></code>.</li>
+<li>Expanded test suite and made some small fixes.</li>
+</ul>
+</div>
+    <div id="rio-0-4-2" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-2" class="anchor"></a>rio 0.4.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added support to import and export to <code>feather</code> data serialization format. (<a href='https://github.com/leeper/rio/issues/88'>#88</a>, h/t Jason Becker)</li>
+</ul>
+</div>
+    <div id="rio-0-4-1" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-1" class="anchor"></a>rio 0.4.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed behavior of <code><a href="../reference/gather_attrs.html">gather_attrs()</a></code> on a data.frame with no attributes to gather. (<a href='https://github.com/leeper/rio/issues/94'>#94</a>)</li>
+<li>Removed unrecognized file format error for import from compressed files. (<a href='https://github.com/leeper/rio/issues/93'>#93</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-4-0" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-4-0" class="anchor"></a>rio 0.4.0<small> 2016-05-01 </small>
+</h1>
+<ul>
+<li>CRAN Release.</li>
+</ul>
+</div>
+    <div id="rio-0-3-19" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-19" class="anchor"></a>rio 0.3.19<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added a <code><a href="../reference/gather_attrs.html">gather_attrs()</a></code> function that moves variable-level attributes to the data.frame level. (<a href='https://github.com/leeper/rio/issues/80'>#80</a>)</li>
+<li>Added preliminary support for import from HTML tables (<a href='https://github.com/leeper/rio/issues/86'>#86</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-3-18" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-18" class="anchor"></a>rio 0.3.18<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added support for export to HTML tables. (<a href='https://github.com/leeper/rio/issues/86'>#86</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-3-17" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-17" class="anchor"></a>rio 0.3.17<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed a bug in import from remote URLs with incorrect file extensions.</li>
+</ul>
+</div>
+    <div id="rio-0-3-16" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-16" class="anchor"></a>rio 0.3.16<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added support for import from fixed-width format files via <code><a href="http://www.rdocumentation.org/packages/readr/topics/read_fwf">readr::read_fwf()</a></code> with a specified <code>widths</code> argument. This may enable faster import of these types of files and provides a base-like interface for working with readr. (<a href='https://github.com/leeper/rio/issues/48'>#48</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-3-15" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-15" class="anchor"></a>rio 0.3.15<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added support for import from and export to yaml. (<a href='https://github.com/leeper/rio/issues/83'>#83</a>)</li>
+<li>Fixed a bug when reading from an uncommented CSVY yaml header that contained single-line comments. (<a href='https://github.com/leeper/rio/issues/84'>#84</a>, h/t Tom Aldenberg)</li>
+</ul>
+</div>
+    <div id="rio-0-3-14" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-14" class="anchor"></a>rio 0.3.14<small> Unreleased </small>
+</h1>
+<ul>
+<li>Diagnostic messages were cleaned up to facilitate translation. (<a href='https://github.com/leeper/rio/issues/57'>#57</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-3-12" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-12" class="anchor"></a>rio 0.3.12<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="../reference/extensions.html">.import()</a></code> and <code>.export()</code> are now exported S3 generics and documentation has been added to describe how to write rio extensions for new file types. An example of this functionality is shown in the new suggested “rio.db” package.</li>
+</ul>
+</div>
+    <div id="rio-0-3-11" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-11" class="anchor"></a>rio 0.3.11<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="../reference/import.html">import()</a></code> now uses xml2 to read XML structures and <code><a href="../reference/export.html">export()</a></code> uses a custom method for writing to XML, thereby negating dependency on the XML package. (<a href='https://github.com/leeper/rio/issues/67'>#67</a>)</li>
+<li>Enhancements were made to import and export of CSVY to store attribute metadata as variable-level attributes (like imports from binary file formats).</li>
+<li>
+<code><a href="../reference/import.html">import()</a></code> gains a <code>which</code> argument that is used to select which file to return from within a compressed tar or zip archive.</li>
+<li>Export to tar now tries to correct for bugs in <code>tar()</code> that are being fixed in base R via <a href="https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16716">PR<a href='https://github.com/leeper/rio/issues/16716'>#16716</a></a>.</li>
+</ul>
+</div>
+    <div id="rio-0-3-10" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-10" class="anchor"></a>rio 0.3.10<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed a bug in <code><a href="../reference/import.html">import()</a></code> (introduced in <a href='https://github.com/leeper/rio/issues/62'>#62</a>, 7a7480e5) that prevented import from clipboard. (h/t Kevin Wright)</li>
+<li>
+<code><a href="../reference/export.html">export()</a></code> returns a character string. (<a href='https://github.com/leeper/rio/issues/82'>#82</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-3-9" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-9" class="anchor"></a>rio 0.3.9<small> Unreleased </small>
+</h1>
+<ul>
+<li>The use of <code><a href="../reference/import.html">import()</a></code> for SAS, Stata, and SPSS files has been streamlined. Regardless of whether the <code>haven = TRUE</code> argument is used, the data.frame returned by <code><a href="../reference/import.html">import()</a></code> should now be (nearly) identical, with all attributes stored at the variable rather than data.frame level. This is a non-backwards compatible change. (<a href='https://github.com/leeper/rio/issues/80'>#80</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-3-8" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-8" class="anchor"></a>rio 0.3.8<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed error in export to CSVY with a commented yaml header. (<a href='https://github.com/leeper/rio/issues/81'>#81</a>, h/t Andrew MacDonald)</li>
+</ul>
+</div>
+    <div id="rio-0-3-7" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-7" class="anchor"></a>rio 0.3.7<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="../reference/export.html">export()</a></code> now allows automatic file compression as tar, gzip, or zip using the <code>file</code> argument (e.g., <code><a href="../reference/export.html">export(iris, "iris.csv.zip")</a></code>).</li>
+</ul>
+</div>
+    <div id="rio-0-3-6" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-6" class="anchor"></a>rio 0.3.6<small> Unreleased </small>
+</h1>
+<ul>
+<li>Expanded verbosity of <code><a href="../reference/export.html">export()</a></code> for fixed-width format files and added a commented header containing column class and width information.</li>
+<li>Exporting factors to fixed-width format now saves those values as integer rather than numeric.</li>
+<li>Expanded test suite and separated tests into format-specific files. (<a href='https://github.com/leeper/rio/issues/51'>#51</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-3-5" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-5" class="anchor"></a>rio 0.3.5<small> Unreleased </small>
+</h1>
+<ul>
+<li>Export of CSVY files now includes commenting the yaml header by default. Import of CSVY accommodates this automatically. (<a href='https://github.com/leeper/rio/issues/74'>#74</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-3-3" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-3" class="anchor"></a>rio 0.3.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>Export of CSVY files and metadata now supported by <code><a href="../reference/export.html">export()</a></code>. (<a href='https://github.com/leeper/rio/issues/73'>#73</a>)</li>
+<li>Import of CSVY files now stores dataset-level metadata in attributes of the output data.frame. (<a href='https://github.com/leeper/rio/issues/73'>#73</a>, h/t Tom Aldenberg)</li>
+<li>When rio receives an unrecognized file format, it now issues a message. The new internal <code><a href="../reference/extensions.html">.import.default()</a></code> and <code><a href="../reference/extensions.html">.export.default()</a></code> then produce an error. This enables add-on packages to support additional formats through new s3 methods of the form <code>.import.rio_EXTENSION()</code> and <code>.export.rio_EXTENSION()</code>.</li>
+</ul>
+</div>
+    <div id="rio-0-3-2" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-2" class="anchor"></a>rio 0.3.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>Use S3 dispatch internally to call new (unexported) <code><a href="../reference/extensions.html">.import()</a></code> and <code>.export()</code> methods. (<a href='https://github.com/leeper/rio/issues/42'>#42</a>, h/t Jason Becker)</li>
+</ul>
+</div>
+    <div id="rio-0-3-0" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-3-0" class="anchor"></a>rio 0.3.0<small> 2016-01-14 </small>
+</h1>
+<ul>
+<li>Release to CRAN.</li>
+<li>Set a default numerical precision (of 2 decimal places) for export to fixed-width format.</li>
+</ul>
+</div>
+    <div id="rio-0-2-13" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-2-13" class="anchor"></a>rio 0.2.13<small> Unreleased </small>
+</h1>
+<ul>
+<li>Import stats package for <code>na.omit()</code>.</li>
+</ul>
+</div>
+    <div id="rio-0-2-11" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-2-11" class="anchor"></a>rio 0.2.11<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added support for direct import from Google Sheets. (<a href='https://github.com/leeper/rio/issues/60'>#60</a>, <a href='https://github.com/leeper/rio/issues/63'>#63</a>, h/t Chung-hong Chan)</li>
+</ul>
+</div>
+    <div id="rio-0-2-7" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-2-7" class="anchor"></a>rio 0.2.7<small> Unreleased </small>
+</h1>
+<ul>
+<li>Refactored remote file retrieval into separate (non-exported) function used by <code><a href="../reference/import.html">import()</a></code>. (<a href='https://github.com/leeper/rio/issues/62'>#62</a>)</li>
+<li>Added test sutie to test file conversion.</li>
+<li>Expanded test suite to include test of all export formats.</li>
+</ul>
+</div>
+    <div id="rio-0-2-6" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-2-6" class="anchor"></a>rio 0.2.6<small> Unreleased </small>
+</h1>
+<ul>
+<li>Cleaned up NAMESPACE file.</li>
+</ul>
+</div>
+    <div id="rio-0-2-5" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-2-5" class="anchor"></a>rio 0.2.5<small> Unreleased </small>
+</h1>
+<ul>
+<li>If file format for a remote file cannot be identified from the supplied URL or the final URL reported by <code><a href="http://www.rdocumentation.org/packages/curl/topics/curl_fetch">curl::curl_fetch_memory()</a></code>, the HTTP headers are checked for a filename in the Content-Disposition header. (<a href='https://github.com/leeper/rio/issues/36'>#36</a>)</li>
+<li>Removed longurl dependency. This is no longer needed because we can identify formats using curl’s url argument.</li>
+<li>Fixed a bug related to importing European-style (“csv2”) format files. (<a href='https://github.com/leeper/rio/issues/44'>#44</a>)</li>
+<li>Updated CSVY import to embed variable-level metadata. (<a href='https://github.com/leeper/rio/issues/52'>#52</a>)</li>
+<li>Use <code>urltools::url_parse()</code> to extract file extensions from complex URLs (e.g., those with query arguments). (<a href='https://github.com/leeper/rio/issues/56'>#56</a>)</li>
+<li>Fixed NAMESPACE notes for base packages. (<a href='https://github.com/leeper/rio/issues/58'>#58</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-2-4" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-2-4" class="anchor"></a>rio 0.2.4<small> Unreleased </small>
+</h1>
+<ul>
+<li>Modified behavior so that files imported using haven now store variable metadata at the data.frame level by default (unlike the default behavior in haven, which can cause problems). (<a href='https://github.com/leeper/rio/issues/37'>#37</a>, h/t Ista Zahn)</li>
+<li>Added support for importing CSVY (<a href="http://csvy.org/" class="uri">http://csvy.org/</a>) formatted files. (<a href='https://github.com/leeper/rio/issues/52'>#52</a>)</li>
+<li>Added import dependency on data.table 1.9.5. (<a href='https://github.com/leeper/rio/issues/39'>#39</a>)</li>
+</ul>
+</div>
+    <div id="rio-0-2-2" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-2-2" class="anchor"></a>rio 0.2.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>Uses the longurl package to expand shortened URLs so that their file type can be easily determined.</li>
+</ul>
+</div>
+    <div id="rio-0-2-1" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-2-1" class="anchor"></a>rio 0.2.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Improved support for importing from compressed directories, especially web-based compressed directories. (<a href='https://github.com/leeper/rio/issues/38'>#38</a>)</li>
+<li>Add import dependency on curl &gt;= 0.6 to facilitate content type parsing and format inference from URL redirects. (<a href='https://github.com/leeper/rio/issues/36'>#36</a>)</li>
+<li>Add bit64 to <code>Suggests</code> to remove an <code>import</code> warning.</li>
+</ul>
+</div>
+    <div id="rio-0-2" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-2" class="anchor"></a>rio 0.2<small> 2015-05-07 </small>
+</h1>
+<ul>
+<li>
+<code>import</code> always returns a data.frame, unless <code>setclass</code> is specified. (<a href='https://github.com/leeper/rio/issues/22'>#22</a>)</li>
+<li>Added support for import from legacy Excel (.xls) files <code><a href="http://www.rdocumentation.org/packages/readxl/topics/read_excel">readxl::read_excel</a></code>, making its use optional. (<a href='https://github.com/leeper/rio/issues/19'>#19</a>)</li>
+<li>Added support for import from and export to the system clipboard on Windows and Mac OS.</li>
+<li>Added support for export to simple XML documents. (<a href='https://github.com/leeper/rio/issues/12'>#12</a>)</li>
+<li>Added support for import from simple XML documents via <code><a href="http://www.rdocumentation.org/packages/XML/topics/xmlToDataFrame">XML::xmlToDataFrame</a></code>. (<a href='https://github.com/leeper/rio/issues/12'>#12</a>)</li>
+<li>Added support for import from ODS spreadsheet formats. (<a href='https://github.com/leeper/rio/issues/12'>#12</a>, h/t Chung-hong Chan)</li>
+<li>Use <code><a href="http://www.rdocumentation.org/packages/data.table/topics/fread">data.table::fread</a></code> by default for reading delimited files. (<a href='https://github.com/leeper/rio/issues/3'>#3</a>)</li>
+<li>Added support for import and export of <code>dput</code> and <code>dget</code> objects. (<a href='https://github.com/leeper/rio/issues/10'>#10</a>)</li>
+<li>Added support for reading from compressed archives (.zip and .tar). (<a href='https://github.com/leeper/rio/issues/7'>#7</a>)</li>
+<li>Added support for writing to fixed-width format. (<a href='https://github.com/leeper/rio/issues/8'>#8</a>)</li>
+<li>Set <code>stringsAsFactors = FALSE</code> as default for reading tabular data. (<a href='https://github.com/leeper/rio/issues/4'>#4</a>)</li>
+<li>Added support for HTTPS imports. (<a href='https://github.com/leeper/rio/issues/1'>#1</a>, h/t Christopher Gandrud)</li>
+<li>Added support for automatic file naming in <code>export</code> based on object name and file format. (<a href='https://github.com/leeper/rio/issues/5'>#5</a>)</li>
+<li>Exposed <code>convert</code> function.</li>
+<li>Added vignette, knitr-generated README.md, and updated documentation. (<a href='https://github.com/leeper/rio/issues/2'>#2</a>)</li>
+<li>Added some non-exported functions to simplify argument passing and streamline package API. (<a href='https://github.com/leeper/rio/issues/6'>#6</a>)</li>
+<li>Separated <code>import</code>, <code>export</code>, <code>convert</code>, and utilities into separate source code files.</li>
+<li>Expanded the set of supported file types/extensions, switched SPSS, SAS, and Stata formats to <strong>haven</strong>, making its use optional.</li>
+</ul>
+</div>
+    <div id="rio-0-1-2" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-1-2" class="anchor"></a>rio 0.1.2<small> 2013-09-04 </small>
+</h1>
+<ul>
+<li>Updated documentation and fixed a bug in csv import without header.</li>
+</ul>
+</div>
+    <div id="rio-0-1-1" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-1-1" class="anchor"></a>rio 0.1.1<small> 2013-08-28 </small>
+</h1>
+<ul>
+<li>Initial release</li>
+</ul>
+</div>
     </div>
   </div>
 
@@ -100,6 +713,71 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#rio-0-5-9">0.5.9</a></li>
+        <li><a href="#rio-0-5-8">0.5.8</a></li>
+        <li><a href="#rio-0-5-7">0.5.7</a></li>
+        <li><a href="#rio-0-5-6">0.5.6</a></li>
+        <li><a href="#rio-0-5-5">0.5.5</a></li>
+        <li><a href="#rio-0-5-4">0.5.4</a></li>
+        <li><a href="#rio-0-5-3">0.5.3</a></li>
+        <li><a href="#rio-0-5-3-1">0.5.3</a></li>
+        <li><a href="#rio-0-5-1">0.5.1</a></li>
+        <li><a href="#rio-0-5-0">0.5.0</a></li>
+        <li><a href="#rio-0-4-28">0.4.28</a></li>
+        <li><a href="#rio-0-4-27">0.4.27</a></li>
+        <li><a href="#rio-0-4-26">0.4.26</a></li>
+        <li><a href="#rio-0-4-25">0.4.25</a></li>
+        <li><a href="#rio-0-4-24">0.4.24</a></li>
+        <li><a href="#rio-0-4-23">0.4.23</a></li>
+        <li><a href="#rio-0-4-22">0.4.22</a></li>
+        <li><a href="#rio-0-4-21">0.4.21</a></li>
+        <li><a href="#rio-0-4-20">0.4.20</a></li>
+        <li><a href="#rio-0-4-19">0.4.19</a></li>
+        <li><a href="#rio-0-4-18">0.4.18</a></li>
+        <li><a href="#rio-0-4-17">0.4.17</a></li>
+        <li><a href="#rio-0-4-16">0.4.16</a></li>
+        <li><a href="#rio-0-4-15">0.4.15</a></li>
+        <li><a href="#rio-0-4-14">0.4.14</a></li>
+        <li><a href="#rio-0-4-13">0.4.13</a></li>
+        <li><a href="#rio-0-4-12">0.4.12</a></li>
+        <li><a href="#rio-0-4-11">0.4.11</a></li>
+        <li><a href="#rio-0-4-10">0.4.10</a></li>
+        <li><a href="#rio-0-4-9">0.4.9</a></li>
+        <li><a href="#rio-0-4-8">0.4.8</a></li>
+        <li><a href="#rio-0-4-7">0.4.7</a></li>
+        <li><a href="#rio-0-4-5">0.4.5</a></li>
+        <li><a href="#rio-0-4-3">0.4.3</a></li>
+        <li><a href="#rio-0-4-2">0.4.2</a></li>
+        <li><a href="#rio-0-4-1">0.4.1</a></li>
+        <li><a href="#rio-0-4-0">0.4.0</a></li>
+        <li><a href="#rio-0-3-19">0.3.19</a></li>
+        <li><a href="#rio-0-3-18">0.3.18</a></li>
+        <li><a href="#rio-0-3-17">0.3.17</a></li>
+        <li><a href="#rio-0-3-16">0.3.16</a></li>
+        <li><a href="#rio-0-3-15">0.3.15</a></li>
+        <li><a href="#rio-0-3-14">0.3.14</a></li>
+        <li><a href="#rio-0-3-12">0.3.12</a></li>
+        <li><a href="#rio-0-3-11">0.3.11</a></li>
+        <li><a href="#rio-0-3-10">0.3.10</a></li>
+        <li><a href="#rio-0-3-9">0.3.9</a></li>
+        <li><a href="#rio-0-3-8">0.3.8</a></li>
+        <li><a href="#rio-0-3-7">0.3.7</a></li>
+        <li><a href="#rio-0-3-6">0.3.6</a></li>
+        <li><a href="#rio-0-3-5">0.3.5</a></li>
+        <li><a href="#rio-0-3-3">0.3.3</a></li>
+        <li><a href="#rio-0-3-2">0.3.2</a></li>
+        <li><a href="#rio-0-3-0">0.3.0</a></li>
+        <li><a href="#rio-0-2-13">0.2.13</a></li>
+        <li><a href="#rio-0-2-11">0.2.11</a></li>
+        <li><a href="#rio-0-2-7">0.2.7</a></li>
+        <li><a href="#rio-0-2-6">0.2.6</a></li>
+        <li><a href="#rio-0-2-5">0.2.5</a></li>
+        <li><a href="#rio-0-2-4">0.2.4</a></li>
+        <li><a href="#rio-0-2-2">0.2.2</a></li>
+        <li><a href="#rio-0-2-1">0.2.1</a></li>
+        <li><a href="#rio-0-2">0.2</a></li>
+        <li><a href="#rio-0-1-2">0.1.2</a></li>
+        <li><a href="#rio-0-1-1">0.1.1</a></li>
       </ul>
     </div>
   </div>
