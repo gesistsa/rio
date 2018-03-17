@@ -158,15 +158,6 @@ export(c("mtcars", "iris"), "multi.rdata")
 ```
 
 
-```{r, echo=FALSE, results='hide'}
-unlink("mtcars.csv")
-unlink("mtcars.rds")
-unlink("mtcars.rdata")
-unlink("mtcars.dta")
-unlink("multisheet.xlsx")
-unlink("mtcars2.dta")
-```
-
 ## File Conversion
 
 The `convert()` function links `import()` and `export()` by constructing a dataframe from the imported file and immediately writing it back to disk. `convert()` invisibly returns the file name of the exported file, so that it can be used to programmatically access the new file.
@@ -255,3 +246,13 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
  
  8. **rio** imports and exports files based on an internal S3 class infrastructure. This means that other packages can contain extensions to **rio** by registering S3 methods. These methods should take the form `.import.rio_X()` and `.export.rio_X()`, where `X` is the file extension of a file type. An example is provided in the [rio.db package](https://github.com/leeper/rio.db).
  
+
+```{r, echo=FALSE, results='hide'}
+unlink("mtcars.csv")
+unlink("mtcars.rds")
+unlink("mtcars.rdata")
+unlink("mtcars.dta")
+unlink("multi.xlsx")
+unlink("multi.rdata")
+unlink("mtcars2.dta")
+```

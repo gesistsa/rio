@@ -11,15 +11,18 @@ README.md: README.Rmd
 README.html: README.md
 	pandoc -o README.html README.md
 
-../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE R/* tests/*
+../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE README.md
 	cd ../ && R CMD build $(pkg)
 
 build: ../$(pkg)*.tar.gz
 
 check: ../$(pkg)*.tar.gz
-	cd ../ && R CMD check $(pkg)*.tar.gz --no-multiarch
+	cd ../ && R CMD check $(pkg)*.tar.gz
 	rm ../$(pkg)*.tar.gz
 
 install: ../$(pkg)*.tar.gz
 	cd ../ && R CMD INSTALL $(pkg)*.tar.gz
 	rm ../$(pkg)*.tar.gz
+
+website: R/* README.md DESCRIPTION
+	Rscript -e "pkgdown::build_site()"
