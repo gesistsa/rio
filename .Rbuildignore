@@ -11,6 +11,10 @@
 ^inst/standarderrors\.pdf$
 ^figure$
 ^figure/.+$
+^man-roxygen$
+^man-roxygen/.+$
+^revdep$
+^revdep/.+$
 ^cache/.+$
 ^docs$
 ^docs/.+$

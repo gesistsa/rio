@@ -1,3 +1,7 @@
+# rio 0.5.10
+
+ * Removed some csvy-related tests, which were failing on CRAN.
+
 # rio 0.5.9
 
  * Removed longstanding warnings from the tests of `export()` to fixed-width format.
