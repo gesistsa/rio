@@ -220,13 +220,11 @@ install.packages("rio")
 install_formats()
 ```
 
-The latest development version on GitHub can be installed using [**ghit**](https://github.com/cloudyr/ghit), a lightweight alternative to `devtools::install_github()`:
+The latest development version on GitHub can be installed using:
 
 ```R
-if(!require("ghit")){
-    install.packages("ghit")
+if (!require("remotes")){
+    install.packages("remotes")
 }
-ghit::install_github("leeper/rio")
+remotes::install_github("leeper/rio")
 ```
-
-Because of how **ghit** handles Suggests packages, you do not need to run `install_formats()` when installing directly from GitHub.
