@@ -36,7 +36,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
     \item SAS XPORT (.xpt), using \code{\link[haven]{write_xpt}}.
     \item SPSS (.sav), using \code{\link[haven]{write_sav}}
     \item Stata (.dta), using \code{\link[haven]{write_dta}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
-    \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}. Use \code{which} to specify a sheet name and \code{overwrite} to decide whether to overwrite an existing file or worksheet (the default) or add the data as a new worksheet (with \code{overwrite = FALSE}). \code{x} can also be a list of data frames; the list entry names are used as sheet names.
+    \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}. Existing workbooks are overwritten unless \code{which} is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the \code{which} sheet does not, data are added as a new sheet to the existing workbook. \code{x} can also be a list of data frames; the list entry names are used as sheet names.
     \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'})
     \item Saved R objects (.RData,.rda), using \code{\link[base]{save}}. In this case, \code{x} can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding \code{envir} argument is specified.
     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
@@ -99,8 +99,8 @@ source("data.R", echo = TRUE)
   ## export a list of data frames as worksheets
   export(list(a = mtcars, b = iris), "multisheet.xlsx")
 
-  ## export, adding sheet to an existing workbook
-  export(iris, "mtcars.xlsx", which = "iris", overwrite = FALSE)
+  ## export, adding a new sheet to an existing workbook
+  export(iris, "mtcars.xlsx", which = "iris")
 }
 
 # write data to a zip-compressed CSV

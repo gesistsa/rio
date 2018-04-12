@@ -1,3 +1,7 @@
+# rio 0.5.11
+
+ * Updated documentation to reflect recent changes to the xlsx `export()` method. (#156)
+
 # rio 0.5.10
 
  * Removed some csvy-related tests, which were failing on CRAN.
