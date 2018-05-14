@@ -12,5 +12,10 @@ set_class <- function(x, class = NULL) {
         }
         return(tibble::as_tibble(x))
     }
-    return(structure(x, class = "data.frame"))
+    out <- structure(x, class = "data.frame")
+    # add row names in case `x` wasn't already a data frame (e.g., matlab list)
+    if (!length(rownames(out))) {
+        rownames(out) <- as.character(seq_len(length(out[,1L,drop = TRUE])))
+    }
+    return(out)
 }

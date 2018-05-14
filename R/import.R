@@ -112,18 +112,20 @@ import <- function(file, format, setclass, which, ...) {
         if (fmt %in% c("gz", "gzip")) {
             fmt <- file_ext(file_path_sans_ext(file, compression = FALSE))
             file <- gzfile(file)
+        } else {
+            fmt <- get_type(fmt)
         }
     } else {
         fmt <- get_type(format)
     }
-
+    
     class(file) <- c(paste0("rio_", fmt), class(file))
     if (missing(which)) {
         x <- .import(file = file, ...)
     } else {
         x <- .import(file = file, which = which, ...)
     }
-
+    
     a <- list(...)
     if (missing(setclass) || is.null(setclass)) {
         if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {

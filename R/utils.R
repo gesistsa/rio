@@ -92,8 +92,6 @@ get_type <- function(fmt) {
         gnumeric = "gnumeric",
         jpeg = "jpg",
         jpg = "jpg",
-        mat = "matlab",
-        matlab = "matlab",
         npy = "npy",
         png = "png",
         sdmx = "sdmx",

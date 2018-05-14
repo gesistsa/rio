@@ -8,6 +8,7 @@ if (requireNamespace("rmatio")) {
 
     test_that("Import from matlab", {
         expect_true(is.data.frame(import("iris.matlab")))
+        expect_true(identical(dim(import("iris.matlab")), dim(iris)))
     })
     unlink("iris.matlab")
 }
