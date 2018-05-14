@@ -14,8 +14,12 @@ test_that("Import from CSV", {
 test_that("Import from (European-style) CSV with semicolon separator", {
     write.table(iris, "iris2.csv", dec = ",", sep = ";", row.names = FALSE)
     expect_true("iris2.csv" %in% dir())
-    expect_true(is.data.frame(import("iris2.csv", dec = ",", sep = ";", fread = TRUE, header = TRUE)))
-    expect_true(is.data.frame(import("iris2.csv", dec = ",", sep = ";", fread = FALSE, header = TRUE)))
+    # import works (even if column classes are incorrect)
+    expect_true(is.data.frame(import("iris2.csv", fread = TRUE, header = TRUE)))
+    iris_imported <- import("iris2.csv", format = ";", fread = TRUE, header = TRUE)
+    # import works with correct, numeric column classes
+    expect_true(is.data.frame(iris_imported))
+    expect_true(is.numeric(iris_imported[["Sepal.Length"]]))
 })
 
 

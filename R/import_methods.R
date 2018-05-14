@@ -63,13 +63,13 @@ function(file, which = 1, fread = TRUE, sep = "auto",
 }
 
 #' @export
-.import.rio_csv <- function(file, sep, which = 1, fread = TRUE, ...) {
-    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+.import.rio_csv <- function(file, sep, which = 1, fread = TRUE, dec = ".", ...) {
+    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, dec = dec, ...)
 }
 
 #' @export
-.import.rio_csv2 <- function(file, sep, which = 1, fread = TRUE, ...) {
-    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+.import.rio_csv2 <- function(file, sep, which = 1, fread = TRUE, dec = ",", ...) {
+    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, dec = dec, ...)
 }
 
 #' @export
