@@ -120,6 +120,7 @@ export <- function(x, file, format, ...) {
         file <- paste0(as.character(substitute(x)), ".", fmt)
         compress <- NA_character_
     }
+    fmt <- get_type(fmt)
     outfile <- file
     if (fmt %in% c("gz", "gzip")) {
         fmt <- file_ext(file_path_sans_ext(file, compression = FALSE))

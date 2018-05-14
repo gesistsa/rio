@@ -25,13 +25,13 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 }
 
 #' @export
-.export.rio_csv <- function(file, x, ...) {
-    export_delim(x = x, file = file, sep = ",", dec = ".", ...)
+.export.rio_csv <- function(file, x, sep = ",", dec = ".", ...) {
+    export_delim(x = x, file = file, sep = sep, dec = dec, ...)
 }
 
 #' @export
-.export.rio_csv2 <- function(file, x, ...) {
-    export_delim(x = x, file = file, sep =";", dec = ",", ...)
+.export.rio_csv2 <- function(file, x, sep = ";", dec = ",", ...) {
+    export_delim(x = x, file = file, sep = sep, dec = dec, ...)
 }
 
 #' @export

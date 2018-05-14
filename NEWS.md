@@ -1,5 +1,6 @@
 # rio 0.5.11
 
+ * Fixed a bug in `export()` wherein `format` was ignored. (#99, h/t Sebastian Sauer)
  * Fixed a bug in the importing of European-style semicolon-separated CSV files. Added a test to ensure correct behavior. (#159, h/t Kenneth Rose)
  * Updated documentation to reflect recent changes to the xlsx `export()` method. (#156)
 
