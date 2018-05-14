@@ -54,6 +54,7 @@ get_type <- function(fmt) {
         minitab = "mtp",
         mtp = "mtp",
         ods = "ods",
+        por = "spss",
         psv = "psv",
         r = "r",
         rda = "rdata",
