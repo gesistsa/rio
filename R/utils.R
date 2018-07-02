@@ -65,6 +65,7 @@ get_type <- function(fmt) {
         sas7bdat = "sas7bdat",
         sav = "sav",
         spss = "sav",
+        sql = "sql",
         stata = "dta",
         syd = "syd",
         systat = "syd",
@@ -110,4 +111,12 @@ get_type <- function(fmt) {
 
 twrap <- function(value, tag) {
     paste0("<", tag, ">", value, "</", tag, ">")
+}
+
+# Get table names from SQL dump script
+get_sql_tablenames <- function(file) {
+  tables <- readLines(system.file("examples/example.sql", package = packageName(), mustWork = TRUE))
+  tables <- grep("CREATE TABLE", tables, ignore.case = TRUE, value = TRUE)
+  tables <- gsub("CREATE TABLE (.+?) .*", "\\1", tables, ignore.case = TRUE)
+  tables
 }

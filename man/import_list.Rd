@@ -8,7 +8,7 @@ import_list(file, setclass, which, rbind = FALSE, rbind_label = "_file",
   rbind_fill = TRUE, ...)
 }
 \arguments{
-\item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.}
+\item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, HTML file, or SQL dump), or a vector of file paths for multiple files to be imported.}
 
 \item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, the return object is always a \dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or \dQuote{tibble} (if using dplyr) or \dQuote{data.table} (if using data.table). Other values are ignored, such that a data.frame is returned.}
 

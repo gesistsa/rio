@@ -65,6 +65,7 @@ The full list of supported formats is below:
 | OpenDocument Spreadsheet | .ods | [**readODS**](https://cran.r-project.org/package=readODS) | [**readODS**](https://cran.r-project.org/package=readODS) | No |
 | HTML Tables | .html | [**xml2**](https://cran.r-project.org/package=xml2) | [**xml2**](https://cran.r-project.org/package=xml2) | No |
 | Shallow XML documents | .xml | [**xml2**](https://cran.r-project.org/package=xml2) | [**xml2**](https://cran.r-project.org/package=xml2) | No |
+| SQL dumps | .sql | [**RSQLite**](https://cran.r-project.org/package=RSQLite) | | No |
 | YAML | .yml | [**yaml**](https://cran.r-project.org/package=yaml) | [**yaml**](https://cran.r-project.org/package=yaml) | No |
 | Clipboard | default is tsv | [**clipr**](https://cran.r-project.org/package=clipr) | [**clipr**](https://cran.r-project.org/package=clipr) | No |
 | [Google Sheets](https://www.google.com/sheets/about/) | as Comma-separated data |  |  |  |

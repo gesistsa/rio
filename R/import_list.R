@@ -1,6 +1,6 @@
 #' @title Import list of data frames
 #' @description Use \code{\link{import}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)
-#' @param file A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.
+#' @param file A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, HTML file, or SQL dump), or a vector of file paths for multiple files to be imported.
 #' @template setclass
 #' @param which If \code{file} is a single file path, this specifies which objects should be extracted (passed to \code{\link{import}}'s \code{which} argument). Ignored otherwise.
 #' @param rbind A logical indicating whether to pass the import list of data frames through \code{\link[data.table]{rbindlist}}.
@@ -67,6 +67,8 @@ function(file,
             e <- new.env()
             load(file, envir = e)
             x <- as.list(e)
+        } else if (get_ext(file) %in% c("sql")) {
+            x <- import(file)
         } else {
             if (missing(which)) {
                 if (get_ext(file) == "html") {
