@@ -1,4 +1,7 @@
-# rio: A Swiss-Army Knife for Data I/O
+---
+title: 'rio: A Swiss-Army Knife for Data I/O'
+output: github_document
+---
 
 The aim of **rio** is to make data file I/O in R as easy as possible by implementing four simple functions in Swiss-army knife style:
 
@@ -122,6 +125,7 @@ The full list of supported formats is below:
 | OpenDocument Spreadsheet | .ods | [**readODS**](https://cran.r-project.org/package=readODS) | [**readODS**](https://cran.r-project.org/package=readODS) | No |
 | HTML Tables | .html | [**xml2**](https://cran.r-project.org/package=xml2) | [**xml2**](https://cran.r-project.org/package=xml2) | No |
 | Shallow XML documents | .xml | [**xml2**](https://cran.r-project.org/package=xml2) | [**xml2**](https://cran.r-project.org/package=xml2) | No |
+| SQL dumps | .sql | [**RSQLite**](https://cran.r-project.org/package=RSQLite) | | No |
 | YAML | .yml | [**yaml**](https://cran.r-project.org/package=yaml) | [**yaml**](https://cran.r-project.org/package=yaml) | No |
 | Clipboard | default is tsv | [**clipr**](https://cran.r-project.org/package=clipr) | [**clipr**](https://cran.r-project.org/package=clipr) | No |
 | [Google Sheets](https://www.google.com/sheets/about/) | as Comma-separated data |  |  |  |
@@ -171,7 +175,6 @@ The core advantage of **rio** is that it makes assumptions that the user is prob
       In addition, two functions (added in v0.5.5) provide easy ways to create character and factor variables from these "labels" attributes. `characterize()` converts a single variable or all variables in a data frame that have "labels" attributes into character vectors based on the mapping of values to value labels. `factorize()` does the same but returns factor variables. This can be especially helpful for converting these rich file formats into open formats (e.g., `export(characterize(import("file.dta")), "file.csv")`.
  
  8. **rio** imports and exports files based on an internal S3 class infrastructure. This means that other packages can contain extensions to **rio** by registering S3 methods. These methods should take the form `.import.rio_X()` and `.export.rio_X()`, where `X` is the file extension of a file type. An example is provided in the [rio.db package](https://github.com/leeper/rio.db).
- 
 
 ## Package Installation
 

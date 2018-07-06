@@ -130,6 +130,8 @@ import <- function(file, format, setclass, which, ...) {
     if (missing(setclass) || is.null(setclass)) {
         if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
             return(set_class(x, class = "data.table"))
+        } else if (grepl(".sql", file)) {
+            return(x)
         } else {
             return(set_class(x, class = "data.frame"))
         }
@@ -145,5 +147,4 @@ import <- function(file, format, setclass, which, ...) {
             return(set_class(x, class = setclass))
         }
     }
-
 }
