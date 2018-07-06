@@ -425,36 +425,16 @@ function(file,
 
 #' @export
 .import.rio_sql <- function(file, which = 1, ...) {
-  requireNamespace("RSQLite")
-  # Vector adjustment, just in case the dump has multiple lines per statement
-  query <- paste(readLines(file), collapse = " ")
-  query <- unlist(strsplit(query, split = "; "))
-  query <- paste0(query, ";")
-  query <- gsub(";;", ";", query)
-  # For SQLite compatibilty with other RDBMS, only keep SQL standards
-  delete_stmts <- c(
-    "sqlite_sequence"
-    # etc, based on other RDBMS
-  )
-  keep_stmts <- c(
-    "CREATE TABLE",
-    "INSERT INTO"
-    # etc, based on other RDBMS
-  )
-  query <- query[!grepl(paste(delete_stmts, collapse = "|"), query, ignore.case = TRUE)]
-  query <- query[grepl(paste(keep_stmts, collapse = "|"), query, ignore.case = TRUE)]
-  
-  con <- RSQLite::dbConnect(RSQLite::SQLite(), ":memory:")
-  
-  for (statement in query) {
-    RSQLite::dbExecute(con, statement)
-  }
-  
-  db_tables <- list()
-  for (db_table in RSQLite::dbListTables(con)) {
-    db_tables[[db_table]] <- RSQLite::dbReadTable(con, db_table)
-  }
-  
-  RSQLite::dbDisconnect(con)
-  db_tables
+    requireNamespace("RSQLite")
+    query <- build_sql_query(file)
+    con <- RSQLite::dbConnect(RSQLite::SQLite(), ":memory:")
+    for (statement in query) {
+      RSQLite::dbExecute(con, statement)
+    }
+    db_tables <- list()
+    for (db_table in RSQLite::dbListTables(con)) {
+      db_tables[[db_table]] <- RSQLite::dbReadTable(con, db_table)
+    }
+    RSQLite::dbDisconnect(con)
+    db_tables
 }
