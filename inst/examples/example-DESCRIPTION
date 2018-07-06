@@ -51,6 +51,7 @@ Suggests:
     feather,
     fst,
     jsonlite,
+    NANTUCKET,
     readODS (>= 1.6.4),
     readr,
     rmatio,
