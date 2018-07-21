@@ -118,6 +118,7 @@ The full list of supported formats is below:
 | Fixed-width format data | .fwf | **utils** | **utils** | Yes |
 | gzip comma-separated data | .csv.gz | **utils** | **utils** | Yes |
 | CSVY (CSV + YAML metadata header) | .csvy | [**csvy**](https://cran.r-project.org/package=csvy) | [**csvy**](https://cran.r-project.org/package=csvy) | No |
+| EViews | .wf1 | [**hexView**](https://cran.r-project.org/package=hexView) |  | No |
 | Feather R/Python interchange format | .feather | [**feather**](https://cran.r-project.org/package=feather) | [**feather**](https://cran.r-project.org/package=feather) | No |
 | Fast Storage | .fst | [**fst**](https://cran.r-project.org/package=fst) | [**fst**](https://cran.r-project.org/package=fst) | No |
 | JSON | .json | [**jsonlite**](https://cran.r-project.org/package=jsonlite) | [**jsonlite**](https://cran.r-project.org/package=jsonlite) | No |

@@ -39,6 +39,7 @@
 #'     \item Fast storage (.fst), using \code{\link[fst]{read.fst}}
 #'     \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
 #'     \item Matlab (.mat), using \code{\link[rmatio]{read.mat}}
+#'     \item EViews (.wf1), using \code{\link[hexView]{readEViews}}
 #'     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read_ods}}.  Use \code{which} to specify a sheet number.
 #'     \item Single-table HTML documents (.html), using \code{\link[xml2]{read_html}}. The data structure will only be read correctly if the HTML file can be converted to a list via \code{\link[xml2]{as_list}}.
 #'     \item Shallow XML documents (.xml), using \code{\link[xml2]{read_xml}}. The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2]{as_list}}.

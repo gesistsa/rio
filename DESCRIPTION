@@ -50,6 +50,7 @@ Suggests:
     csvy,
     feather,
     fst,
+    hexView,
     jsonlite,
     readODS (>= 1.6.4),
     readr,

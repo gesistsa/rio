@@ -411,6 +411,12 @@ function(file,
 }
 
 #' @export
+.import.rio_eviews <- function(file, which = 1, ...) {
+    requireNamespace("hexView")
+    hexView::readEViews(file, ...)
+}
+
+#' @export
 .import.rio_clipboard <- function(file = "clipboard", which = 1, header = TRUE, sep = "\t", ...) {
     requireNamespace("clipr")
     clipr::read_clip_tbl(x = clipr::read_clip(), header = header, sep = sep, ...)

@@ -1,6 +1,7 @@
 # rio 0.5.13
 
  * Allow `import()` of objects other than data frames from R-serialized (.rds and .rdata) files. Also, export of such objects to .rds files is supported, as previously intended. (#183, h/t Nicholas Jhirad)
+ * Added (suggests) support for import of EViews files using `hexView::readEViews()`. (#163, h/t Boris Demeshev)
 
  # rio 0.5.12
 
