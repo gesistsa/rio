@@ -23,8 +23,8 @@
 #'     \item SPSS Portable Files (.por), using \code{\link[haven]{read_por}}.
 #'     \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. Use \code{which} to specify a sheet number. For .xlsx files, it is possible to set \code{readxl = FALSE}, so that \code{\link[openxlsx]{read.xlsx}} can be used instead of readxl (the default).
 #'     \item R syntax object (.R), using \code{\link[base]{dget}}
-#'     \item Saved R objects (.RData,.rda), using \code{\link[base]{load}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files.
-#'     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}
+#'     \item Saved R objects (.RData,.rda), using \code{\link[base]{load}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame).
+#'     \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}. This can be any R object (not just a data frame).
 #'     \item Epiinfo (.rec), using \code{\link[foreign]{read.epiinfo}}
 #'     \item Minitab (.mtp), using \code{\link[foreign]{read.mtp}}
 #'     \item Systat (.syd), using \code{\link[foreign]{read.systat}}
@@ -119,6 +119,8 @@ import <- function(file, format, setclass, which, ...) {
         fmt <- get_type(format)
     }
     
+    args_list <- list(...)
+    
     class(file) <- c(paste0("rio_", fmt), class(file))
     if (missing(which)) {
         x <- .import(file = file, ...)
@@ -126,15 +128,19 @@ import <- function(file, format, setclass, which, ...) {
         x <- .import(file = file, which = which, ...)
     }
     
-    a <- list(...)
+    # if R serialized object, just return it without setting object class
+    if (class(file) %in% c("rio_rdata", "rio_rds")) {
+        return(x)
+    }
+    # otherwise, make sure it's a data frame (or requested class)
     if (missing(setclass) || is.null(setclass)) {
-        if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
+        if ("data.table" %in% names(args_list) && isTRUE(args_list[["data.table"]])) {
             return(set_class(x, class = "data.table"))
         } else {
             return(set_class(x, class = "data.frame"))
         }
     } else {
-        if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
+        if ("data.table" %in% names(args_list) && isTRUE(args_list[["data.table"]])) {
             if (setclass != "data.table") {
                 warning(sprintf("'data.table = TRUE' argument overruled. Using setclass = '%s'", setclass))
                 return(set_class(x, class = setclass))

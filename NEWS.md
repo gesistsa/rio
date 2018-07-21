@@ -1,4 +1,8 @@
-# rio 0.5.12
+# rio 0.5.13
+
+ * Allow `import()` of objects other than data frames from R-serialized (.rds and .rdata) files. Also, export of such objects to .rds files is supported, as previously intended. (#183, h/t Nicholas Jhirad)
+
+ # rio 0.5.12
 
  * Add better package specification to `install_formats()` so that it reads from the `Suggests` field of the `DESCRIPTION` file.
  * Edit header of `README.Rmd` (and thusly `README.md`) to stop complaining about a lack of title field.

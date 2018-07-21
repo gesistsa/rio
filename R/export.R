@@ -23,7 +23,7 @@
 #'     \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}. Existing workbooks are overwritten unless \code{which} is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the \code{which} sheet does not, data are added as a new sheet to the existing workbook. \code{x} can also be a list of data frames; the list entry names are used as sheet names.
 #'     \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'})
 #'     \item Saved R objects (.RData,.rda), using \code{\link[base]{save}}. In this case, \code{x} can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding \code{envir} argument is specified.
-#'     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}
+#'     \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}. In this case, \code{x} can be any serializable R object.
 #'     \item "XBASE" database files (.dbf), using \code{\link[foreign]{write.dbf}}
 #'     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{write.arff}}
 #'     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
@@ -130,7 +130,7 @@ export <- function(x, file, format, ...) {
 
     data_name <- as.character(substitute(x))
     if (!is.data.frame(x) & !is.matrix(x)) {
-        if (!fmt %in% c("xlsx", "html", "rdata")) {
+        if (!fmt %in% c("xlsx", "html", "rdata", "rds")) {
             stop("'x' is not a data.frame or matrix")
         }
     } else if (is.matrix(x)) {
