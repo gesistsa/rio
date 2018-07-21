@@ -145,5 +145,4 @@ import <- function(file, format, setclass, which, ...) {
             return(set_class(x, class = setclass))
         }
     }
-
 }

@@ -45,7 +45,7 @@ test_that("Import from TSV with CSV extension", {
     expect_true(ncol(import("iris.csv")) == 5L)
     expect_true(ncol(import("iris.csv", format = "tsv")) == 5L)
     expect_true(ncol(import("iris.csv", format = "tsv", sep = "\t")) == 5L)
-    expect_true(ncol(import("iris.csv", sep = ",")) == 1L)
+    expect_true(ncol(import("iris.csv", sep = ",")) == 5L) # use `data.table::fread(sep = "auto")` even if `sep` set explicitly to ","
     expect_true(ncol(import("iris.csv", format = "csv")) == 5L)
     expect_true(ncol(import("iris.csv", sep = "auto")) == 5L)
 })

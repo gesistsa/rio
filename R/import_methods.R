@@ -16,13 +16,6 @@ function(file, which = 1, fread = TRUE, sep = "auto",
         }
         dots <- list(...)
         dots[["file"]] <- file
-        if (!"dec" %in% names(dots)) {
-            if (inherits(file, "rio_csv")) {
-                dots[["dec"]] <- "."
-            } else if (inherits(file, "rio_csv2")) {
-                dots[["dec"]] <- ","
-            }
-        }
         if (missing(sep) || is.null(sep) || sep == "auto") {
             if (inherits(file, "rio_csv")) {
                 dots[["sep"]] <- ","
@@ -53,28 +46,28 @@ function(file, which = 1, fread = TRUE, sep = "auto",
 }
 
 #' @export
-.import.rio_tsv <- function(file, sep, which = 1, fread = TRUE, ...) {
-    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+.import.rio_tsv <- function(file, sep = "auto", which = 1, fread = TRUE, dec = if (sep %in% c("\t", "auto")) "." else ",", ...) {
+    import_delim(file = file, sep = sep, fread = fread, dec = dec, ...)
 }
 
 #' @export
-.import.rio_txt <- function(file, sep, which = 1, fread = TRUE, ...) {
-    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+.import.rio_txt <- function(file, sep = "auto", which = 1, fread = TRUE, dec = if (sep %in% c(",", "auto")) "." else ",", ...) {
+    import_delim(file = file, sep = sep, fread = fread, dec = dec, ...)
 }
 
 #' @export
-.import.rio_csv <- function(file, sep, which = 1, fread = TRUE, dec = ".", ...) {
-    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, dec = dec, ...)
+.import.rio_csv <- function(file, sep = ",", which = 1, fread = TRUE, dec = if (sep %in% c(",", "auto")) "." else ",", ...) {
+    import_delim(file = file, sep = if (sep == ",") "auto" else sep, fread = fread, dec = dec, ...)
 }
 
 #' @export
-.import.rio_csv2 <- function(file, sep, which = 1, fread = TRUE, dec = ",", ...) {
-    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, dec = dec, ...)
+.import.rio_csv2 <- function(file, sep = ";", which = 1, fread = TRUE, dec = if (sep %in% c(";", "auto")) "," else ".", ...) {
+    import_delim(file = file, sep = if (sep == ";") "auto" else sep, fread = fread, dec = dec, ...)
 }
 
 #' @export
-.import.rio_psv <- function(file, sep, which = 1, fread = TRUE, ...) {
-    import_delim(file = file, sep = if (missing(sep)) "auto" else sep, fread = fread, ...)
+.import.rio_psv <- function(file, sep = "|", which = 1, fread = TRUE, dec = if (sep %in% c("|", "auto")) "." else ",", ...) {
+    import_delim(file = file, sep = if (sep == "|") "auto" else sep, fread = fread, dec = dec, ...)
 }
 
 #' @importFrom utils read.fwf
