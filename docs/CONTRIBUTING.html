@@ -21,11 +21,22 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script>
 <script src="pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="NA" />
+
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -48,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">rio</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="index.html">rio</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.13</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -59,7 +74,7 @@
   </a>
 </li>
 <li>
-  <a href="articles/rio.html">Get Started</a>
+  <a href="articles/rio.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -77,6 +92,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -84,7 +100,7 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
       <h1>NA</h1>
@@ -106,7 +122,7 @@
 <li><p>Addition of new file format imports or exports. This is also great! Some advice:</p></li>
 </ol>
 <ul>
-<li><p>Import is based on S3 dispatch to functions of the form <code>.import.rio_FORMAT()</code>. Export works the same, but with <code>.export.rio_FORMAT()</code>. New import/export methods should take this form. There’s no need to change the body of the <code><a href="reference/import.html">import()</a></code> or <code><a href="reference/export.html">export()</a></code> functions; S3 will take care of dispatch. All <code><a href="reference/extensions.html">.import()</a></code> methods must accept a <code>file</code> and <code>which</code> argument: <code>file</code> represents the path to the file and <code>which</code> can be used to extract sheets or files from multi-object files (e.g., zip, Excel workbooks, etc.). <code>.export()</code> methods take three arguments: <code>file</code> and <code>x</code>, where <code>file</code> is the path to the file and <code>x</code> is the data frame being exported. Most of the work of import and export methods involves mapping these arguments to their corresponding argument names in the various underlying packages.</p></li>
+<li><p>Import is based on S3 dispatch to functions of the form <code>.import.rio_FORMAT()</code>. Export works the same, but with <code>.export.rio_FORMAT()</code>. New import/export methods should take this form. There’s no need to change the body of the <code><a href="reference/import.html">import()</a></code> or <code><a href="reference/export.html">export()</a></code> functions; S3 will take care of dispatch. All <code><a href="reference/extensions.html">.import()</a></code> methods must accept a <code>file</code> and <code>which</code> argument: <code>file</code> represents the path to the file and <code>which</code> can be used to extract sheets or files from multi-object files (e.g., zip, Excel workbooks, etc.). <code>.export()</code> methods take two arguments: <code>file</code> and <code>x</code>, where <code>file</code> is the path to the file and <code>x</code> is the data frame being exported. Most of the work of import and export methods involves mapping these arguments to their corresponding argument names in the various underlying packages.</p></li>
 <li><p>The S3 methods should be documented in <a href="https://github.com/leeper/rio/blob/master/NAMESPACE">NAMESPACE</a> using <code>S3method()</code>, which is handled automatically by roxygen markup in the source code.</p></li>
 <li><p>Any new format support needs to be documented in each of the following places: <a href="https://github.com/leeper/rio/blob/master/README.Rmd">README.Rmd</a>, <a href="https://github.com/leeper/rio/blob/master/vignettes/rio.Rmd">the vignette</a>, and the appropriate Rd file in <a href="https://github.com/leeper/rio/tree/master/man"><code>/man</code></a>.</p></li>
 <li><p>New formats or new options for handling formats should have a test added in <a href="https://github.com/leeper/rio/tree/master/tests/testthat"><code>/tests/testthat</code></a> called <code>test_format_FORMAT.R</code> that completely covers the function’s behavior. This may require adding an example file to <a href="https://github.com/leeper/rio/tree/master/inst/examples"><code>inst/examples</code></a> (e.g., for testing <code><a href="reference/import.html">import()</a></code>).</p></li>
@@ -134,6 +150,8 @@
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

@@ -21,14 +21,24 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Export — export" />
 
 <meta property="og:description" content="Write data.frame to a file" />
+
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,8 +61,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">rio</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">rio</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.13</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -62,7 +76,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/rio.html">Get Started</a>
+  <a href="../articles/rio.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -80,6 +94,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -87,20 +102,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Export</h1>
-    <small>Source: <a href='https:/github.com/leeper/rio/blob/master/R/export.R'><code>R/export.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/leeper/rio/blob/master/R/export.R'><code>R/export.R</code></a></small>
+    <div class="hidden name"><code>export.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Write data.frame to a file</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>export</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>format</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -138,10 +156,10 @@
 <li><p>SAS XPORT (.xpt), using <code><a href='http://www.rdocumentation.org/packages/haven/topics/read_xpt'>write_xpt</a></code>.</p></li>
 <li><p>SPSS (.sav), using <code><a href='http://www.rdocumentation.org/packages/haven/topics/read_spss'>write_sav</a></code></p></li>
 <li><p>Stata (.dta), using <code><a href='http://www.rdocumentation.org/packages/haven/topics/read_dta'>write_dta</a></code>. Note that variable/column names containing dots (.) are not allowed and will produce an error.</p></li>
-<li><p>Excel (.xlsx), using <code><a href='http://www.rdocumentation.org/packages/openxlsx/topics/write.xlsx'>write.xlsx</a></code>. Use <code>which</code> to specify a sheet name and <code>overwrite</code> to decide whether to overwrite an existing file or worksheet (the default) or add the data as a new worksheet (with <code>overwrite = FALSE</code>). <code>x</code> can also be a list of data frames; the list entry names are used as sheet names.</p></li>
+<li><p>Excel (.xlsx), using <code><a href='http://www.rdocumentation.org/packages/openxlsx/topics/write.xlsx'>write.xlsx</a></code>. Existing workbooks are overwritten unless <code>which</code> is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the <code>which</code> sheet does not, data are added as a new sheet to the existing workbook. <code>x</code> can also be a list of data frames; the list entry names are used as sheet names.</p></li>
 <li><p>R syntax object (.R), using <code><a href='http://www.rdocumentation.org/packages/base/topics/dput'>dput</a></code> (by default) or <code><a href='http://www.rdocumentation.org/packages/base/topics/dump'>dump</a></code> (if <code>format = 'dump'</code>)</p></li>
 <li><p>Saved R objects (.RData,.rda), using <code><a href='http://www.rdocumentation.org/packages/base/topics/save'>save</a></code>. In this case, <code>x</code> can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding <code>envir</code> argument is specified.</p></li>
-<li><p>Serialized R objects (.rds), using <code><a href='http://www.rdocumentation.org/packages/base/topics/readRDS'>saveRDS</a></code></p></li>
+<li><p>Serialized R objects (.rds), using <code><a href='http://www.rdocumentation.org/packages/base/topics/readRDS'>saveRDS</a></code>. In this case, <code>x</code> can be any serializable R object.</p></li>
 <li><p>"XBASE" database files (.dbf), using <code><a href='http://www.rdocumentation.org/packages/foreign/topics/write.dbf'>write.dbf</a></code></p></li>
 <li><p>Weka Attribute-Relation File Format (.arff), using <code><a href='http://www.rdocumentation.org/packages/foreign/topics/write.arff'>write.arff</a></code></p></li>
 <li><p>Fixed-width format data (.fwf), using <code><a href='http://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></code> with <code>row.names = FALSE</code>, <code>quote = FALSE</code>, and <code>col.names = FALSE</code></p></li>
@@ -161,7 +179,7 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>.export</code>, <code><a href='characterize.html'>characterize</a></code>, <code><a href='import.html'>import</a></code>, <code><a href='convert.html'>convert</a></code></p>
+    <div class='dont-index'><p><code>.export</code>, <code><a href='characterize.html'>characterize</a></code>, <code><a href='import.html'>import</a></code>, <code><a href='convert.html'>convert</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -206,8 +224,8 @@
   <span class='co'>## export a list of data frames as worksheets</span>
   <span class='fu'>export</span>(<span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>iris</span>), <span class='st'>"multisheet.xlsx"</span>)
 
-  <span class='co'>## export, adding sheet to an existing workbook</span>
-  <span class='fu'>export</span>(<span class='no'>iris</span>, <span class='st'>"mtcars.xlsx"</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='st'>"iris"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='co'>## export, adding a new sheet to an existing workbook</span>
+  <span class='fu'>export</span>(<span class='no'>iris</span>, <span class='st'>"mtcars.xlsx"</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='st'>"iris"</span>)
 <span class='co'># }</span><div class='input'>
 <span class='co'># write data to a zip-compressed CSV</span>
 <span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.csv.zip"</span>)
@@ -248,6 +266,8 @@
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>
