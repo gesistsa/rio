@@ -3,6 +3,8 @@ title: 'rio: A Swiss-Army Knife for Data I/O'
 output: github_document
 ---
 
+<img src="man/figures/logo.png" align="right" />
+
 The aim of **rio** is to make data file I/O in R as easy as possible by implementing four simple functions in Swiss-army knife style:
 
  - `import()` provides a painless data import experience by automatically choosing the appropriate import/read function based on file extension (or a specified `format` argument)
