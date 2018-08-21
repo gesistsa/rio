@@ -22,11 +22,16 @@
 #' @export
 .import.default <- function(file, ...){
     x <- gettext("%s format not supported. Consider using the '%s()' function")
+    xA <- gettext("Import support for the %s format is exported by the %s package. Run 'library(%s)' then try again.")
     fmt <- tools::file_ext(file)
     out <- switch(fmt,
+           bean = sprintf(xA, fmt, "ledger", "ledger"),
+           beancount = sprintf(xA, fmt, "ledger", "ledger"),
            bib = sprintf(x, fmt, "bib2df::bib2df"),
            gnumeric = sprintf(x, fmt, "gnumeric::read.gnumeric.sheet"),
+           hledger = sprintf(xA, fmt, "ledger", "ledger"),
            jpg = sprintf(x, fmt, "jpeg::readJPEG"),
+           ledger = sprintf(xA, fmt, "ledger", "ledger"),
            npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
            png = sprintf(x, fmt, "png::readPNG"),
            png = sprintf(x, fmt, "bmp::read.bmp"),
