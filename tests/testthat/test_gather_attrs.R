@@ -15,11 +15,6 @@ if (!inherits(e, "try-error")) {
         expect_true("labels" %in% names(attributes(g)))
     })
 
-    test_that("Spread gathered attributes", {
-        g <- gather_attrs(e)
-        expect_true(all.equal(spread_attrs(g), e, check.attributes = TRUE))
-    })
-
     test_that("Gather empty attributes", {
         require("datasets")
         g <- gather_attrs(iris)

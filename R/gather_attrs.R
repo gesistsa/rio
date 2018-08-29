@@ -25,7 +25,15 @@ gather_attrs <- function(x) {
     for (i in seq_along(x)) {
         a <- attributes(x[[i]])
         varattrs[[i]] <- a[!names(a) %in% c("levels", "class")]
-        attributes(x[[i]]) <- a[names(a) %in% c("levels", "class")]
+        attr(x[[i]], "label") <- NULL
+        if (grepl("labelled", class(x[[i]]))) {
+            x[[i]] <- haven::zap_labels(x[[i]])
+        }
+        f <- grep("^format", names(attributes(x$foreign)), value = TRUE)
+        if (length(f)) {
+            attr(x[[i]], f) <- NULL
+        }
+        rm(f)
     }
     if (any(sapply(varattrs, length))) {
         attrnames <- sort(unique(unlist(lapply(varattrs, names))))
