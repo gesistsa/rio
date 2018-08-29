@@ -1,6 +1,7 @@
 # rio 0.5.14
 
  * Changes to `gather_attrs()` for haven 2.0.0 release.
+ * Fixed a bug that generated a superfluous warning in `import()`.
  * Some style guide changes to code.
 
 # rio 0.5.13

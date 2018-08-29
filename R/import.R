@@ -130,7 +130,7 @@ import <- function(file, format, setclass, which, ...) {
     }
     
     # if R serialized object, just return it without setting object class
-    if (class(file) %in% c("rio_rdata", "rio_rds")) {
+    if (inherits(file, "rio_rdata") || inherits(file, "rio_rds")) {
         return(x)
     }
     # otherwise, make sure it's a data frame (or requested class)
