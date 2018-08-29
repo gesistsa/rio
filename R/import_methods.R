@@ -202,9 +202,9 @@ function(file,
         if (length(a)) {
             warning("File imported using haven. Arguments to '...' ignored.")
         }
-        standardize_attributes(read_dta(file = file))
+        standardize_attributes(haven::read_dta(file = file))
     } else {
-        out <- read.dta(file = file,
+        out <- foreign::read.dta(file = file,
                     convert.dates = convert.dates,
                     convert.factors = convert.factors,
                     missing.type = missing.type, ...)
@@ -217,13 +217,13 @@ function(file,
 #' @importFrom foreign read.dbf
 #' @export
 .import.rio_dbf <- function(file, which = 1, ...) {
-    read.dbf(file = file, ...)
+    foreign::read.dbf(file = file, ...)
 }
 
 #' @importFrom utils read.DIF
 #' @export
 .import.rio_dif <- function(file, which = 1, ...) {
-    read.DIF(file = file, ...)
+    utils::read.DIF(file = file, ...)
 }
 
 #' @importFrom haven read_sav
@@ -231,9 +231,9 @@ function(file,
 #' @export
 .import.rio_sav <- function(file, which = 1, haven = TRUE, to.data.frame = TRUE, use.value.labels = FALSE, ...) {
     if (isTRUE(haven)) {
-        standardize_attributes(read_sav(file = file))
+        standardize_attributes(haven::read_sav(file = file))
     } else {
-        standardize_attributes(read.spss(file = file, to.data.frame = to.data.frame,
+        standardize_attributes(foreign::read.spss(file = file, to.data.frame = to.data.frame,
                                          use.value.labels = use.value.labels, ...))
     }
 }
@@ -241,13 +241,13 @@ function(file,
 #' @importFrom haven read_por
 #' @export
 .import.rio_spss <- function(file, which = 1, ...) {
-    standardize_attributes(read_por(file = file))
+    standardize_attributes(haven::read_por(file = file))
 }
 
 #' @importFrom haven read_sas
 #' @export
 .import.rio_sas7bdat <- function(file, which = 1, column.labels = FALSE, ...) {
-    standardize_attributes(read_sas(data_file = file, ...))
+    standardize_attributes(haven::read_sas(data_file = file, ...))
 }
 
 #' @importFrom foreign read.xport
@@ -264,13 +264,13 @@ function(file,
 #' @importFrom foreign read.mtp
 #' @export
 .import.rio_mtp <- function(file, which = 1, ...) {
-    read.mtp(file = file, ...)
+    foreign::read.mtp(file = file, ...)
 }
 
 #' @importFrom foreign read.systat
 #' @export
 .import.rio_syd <- function(file, which = 1, ...) {
-    read.systat(file = file, to.data.frame = TRUE, ...)
+    foreign::read.systat(file = file, to.data.frame = TRUE, ...)
 }
 
 #' @export
@@ -282,13 +282,13 @@ function(file,
 #' @importFrom foreign read.epiinfo
 #' @export
 .import.rio_rec <- function(file, which = 1, ...) {
-    read.epiinfo(file = file, ...)
+    foreign::read.epiinfo(file = file, ...)
 }
 
 #' @importFrom foreign read.arff
 #' @export
 .import.rio_arff <- function(file, which = 1, ...) {
-    read.arff(file = file)
+    foreign::read.arff(file = file)
 }
 
 #' @importFrom readxl read_xls
@@ -337,7 +337,7 @@ function(file,
     if (missing(style)) {
         stop("Import of Fortran format data requires a 'style' argument. See ? utils::read.fortran().")
     }
-    read.fortran(file = file, format = style, ...)
+    utils::read.fortran(file = file, format = style, ...)
 }
 
 #' @export

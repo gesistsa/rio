@@ -3,8 +3,8 @@
 export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
                          col.names = TRUE, ...) {
     if (isTRUE(fwrite) & !inherits(file, "connection")) {
-        fwrite(x, file = file, sep = sep, col.name = col.names,
-               row.names = row.names, ...)
+        data.table::fwrite(x, file = file, sep = sep, col.name = col.names,
+                           row.names = row.names, ...)
     } else {
         if (isTRUE(fwrite) & inherits(file, "connection")) {
             message("data.table::fwrite() does not support writing to connections. Using utils::write.table() instead.")
@@ -96,8 +96,8 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
         }
     }
     cat(paste0("#", capture.output(write.csv(dict, row.names = FALSE, quote = FALSE))), file = file, sep = "\n")
-    write.table(dat, file = file, append = TRUE, row.names = row.names, sep = sep, quote = quote,
-                col.names = col.names, ...)
+    utils::write.table(dat, file = file, append = TRUE, row.names = row.names, sep = sep, quote = quote,
+                       col.names = col.names, ...)
 }
 
 #' @export
@@ -156,21 +156,21 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @export
 .export.rio_sav <- function(file, x, ...) {
     x <- restore_labelled(x)
-    write_sav(data = x, path = file, ...)
+    haven::write_sav(data = x, path = file, ...)
 }
 
 #' @importFrom haven write_dta
 #' @export
 .export.rio_dta <- function(file, x, ...) {
     x <- restore_labelled(x)
-    write_dta(data = x, path = file, ...)
+    haven::write_dta(data = x, path = file, ...)
 }
 
 #' @importFrom haven write_sas
 #' @export
 .export.rio_sas7bdat <- function(file, x, ...) {
     x <- restore_labelled(x)
-    write_sas(data = x, path = file, ...)
+    haven::write_sas(data = x, path = file, ...)
 }
 
 #' @importFrom haven write_xpt
@@ -183,7 +183,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @importFrom foreign write.dbf
 #' @export
 .export.rio_dbf <- function(file, x, ...) {
-    write.dbf(dataframe = x, file = file, ...)
+    foreign::write.dbf(dataframe = x, file = file, ...)
 }
 
 #' @export
@@ -195,7 +195,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @importFrom foreign write.arff
 #' @export
 .export.rio_arff <- function(file, x, ...) {
-    write.arff(x = x, file = file, ...)
+    foreign::write.arff(x = x, file = file, ...)
 }
 
 #' @importFrom openxlsx write.xlsx

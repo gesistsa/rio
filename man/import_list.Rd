@@ -4,8 +4,8 @@
 \alias{import_list}
 \title{Import list of data frames}
 \usage{
-import_list(file, setclass, which, rbind = FALSE, rbind_label = "_file",
-  rbind_fill = TRUE, ...)
+import_list(file, setclass, which, rbind = FALSE,
+  rbind_label = "_file", rbind_fill = TRUE, ...)
 }
 \arguments{
 \item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.}

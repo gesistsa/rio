@@ -111,7 +111,7 @@ import <- function(file, format, setclass, which, ...) {
     if (missing(format)) {
         fmt <- get_ext(file)
         if (fmt %in% c("gz", "gzip")) {
-            fmt <- file_ext(file_path_sans_ext(file, compression = FALSE))
+            fmt <- tools::file_ext(tools::file_path_sans_ext(file, compression = FALSE))
             file <- gzfile(file)
         } else {
             fmt <- get_type(fmt)

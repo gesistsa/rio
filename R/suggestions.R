@@ -2,14 +2,14 @@
 #' @description This function installs various \sQuote{Suggests} dependencies for rio that expand its support to the full range of support import and export formats. These packages are not installed or loaded by default in order to create a slimmer and faster package build, install, and load.
 #' @param \dots Additional arguments passed to \code{\link[utils]{install.packages}}.
 #' @return \code{NULL}
-#' @importFrom utils installed.packages install.packages
+#' @importFrom utils install.packages
 #' @export
 install_formats <- function(...) {
 
     to_install <- uninstalled_formats()
 
     if (length(to_install)) {
-        install.packages(to_install, ...)
+        utils::install.packages(to_install, ...)
     }
     return(TRUE)
 }
@@ -25,7 +25,7 @@ uninstalled_formats <- function() {
     # 1.2.0)`) suggested in the `DESCRIPTION` file. However, this seems a bit
     # recursive, as `devtools` or `remotes` are often also in the `Suggests`
     # field.
-    suggestions <- read.dcf(system.file("DESCRIPTION", package = packageName(), mustWork = TRUE), fields = "Suggests")
+    suggestions <- read.dcf(system.file("DESCRIPTION", package = utils::packageName(), mustWork = TRUE), fields = "Suggests")
     suggestions <- parse_suggestions(suggestions)
     common_suggestions <- c("bit64", "datasets", "devtools", "knitr", "magrittr", "testthat")
     suggestions <- setdiff(suggestions, common_suggestions)
