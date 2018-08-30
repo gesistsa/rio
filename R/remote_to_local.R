@@ -28,7 +28,7 @@ remote_to_local <- function(file, format) {
     }
     # save file locally
     temp_file <- tempfile(fileext = paste0(".", fmt))
-    u <- curl_fetch_memory(file)
+    u <- curl::curl_fetch_memory(file)
     writeBin(object = u$content, con = temp_file)
     
     if (fmt == "TMP") {

@@ -5,7 +5,6 @@
 \alias{extensions}
 \alias{.export}
 \alias{.import.default}
-\alias{.export}
 \alias{.export.default}
 \title{rio Extensions}
 \usage{

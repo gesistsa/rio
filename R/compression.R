@@ -55,7 +55,7 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
 parse_zip <- function(file, which, ...) {
     d <- tempfile()
     dir.create(d)
-    file_list <- unzip(file, list = TRUE)
+    file_list <- utils::unzip(file, list = TRUE)
     if (missing(which)) {
         which <- 1
         if (nrow(file_list) > 1) {
@@ -63,13 +63,13 @@ parse_zip <- function(file, which, ...) {
         }
     }
     if (is.numeric(which)) {
-        unzip(file, files = file_list$Name[which], exdir = d)
+        utils::unzip(file, files = file_list$Name[which], exdir = d)
         file.path(d, file_list$Name[which])
     } else {
         if (substring(which, 1,1) != "^") {
             which2 <- paste0("^", which)
         }
-        unzip(file, files = file_list$Name[grep(which2, file_list$Name)[1]], exdir = d)
+        utils::unzip(file, files = file_list$Name[grep(which2, file_list$Name)[1]], exdir = d)
         file.path(d, which)
     }
 }
@@ -78,7 +78,7 @@ parse_tar <- function(file, which, ...) {
     d <- tempfile()
     dir.create(d)
     on.exit(unlink(d))
-    file_list <- untar(file, list = TRUE)
+    file_list <- utils::untar(file, list = TRUE)
     if (missing(which)) {
         which <- 1
         if (length(file_list) > 1) {
@@ -86,13 +86,13 @@ parse_tar <- function(file, which, ...) {
         }
     }
     if (is.numeric(which)) {
-        untar(file, files = file_list[which], exdir = d)
+        utils::untar(file, files = file_list[which], exdir = d)
         file.path(d, file_list[which])
     } else {
         if (substring(which, 1,1) != "^") {
             which2 <- paste0("^", which)
         }
-        untar(file, files = file_list[grep(which2, file_list)[1]], exdir = d)
+        utils::untar(file, files = file_list[grep(which2, file_list)[1]], exdir = d)
         file.path(d, which)
     }
 }

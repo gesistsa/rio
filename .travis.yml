@@ -16,5 +16,8 @@ matrix:
       osx_image: xcode8.3
 r_packages:
 - covr
+r_github_packages:
+- r-lib/revdepcheck
 after_success:
 - R -q -e 'library("covr");codecov()'
+- test $TRAVIS_BRANCH == "revdep" && Rscript -e "revdepcheck::revdep_check()"

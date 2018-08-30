@@ -111,7 +111,7 @@ import <- function(file, format, setclass, which, ...) {
     if (missing(format)) {
         fmt <- get_ext(file)
         if (fmt %in% c("gz", "gzip")) {
-            fmt <- file_ext(file_path_sans_ext(file, compression = FALSE))
+            fmt <- tools::file_ext(tools::file_path_sans_ext(file, compression = FALSE))
             file <- gzfile(file)
         } else {
             fmt <- get_type(fmt)
@@ -130,7 +130,7 @@ import <- function(file, format, setclass, which, ...) {
     }
     
     # if R serialized object, just return it without setting object class
-    if (class(file) %in% c("rio_rdata", "rio_rds")) {
+    if (inherits(file, "rio_rdata") || inherits(file, "rio_rds")) {
         return(x)
     }
     # otherwise, make sure it's a data frame (or requested class)
