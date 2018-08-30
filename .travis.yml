@@ -17,7 +17,7 @@ matrix:
 r_packages:
 - covr
 r_github_packages:
-- devtools
+- r-lib/revedepcheck
 after_success:
 - R -q -e 'library("covr");codecov()'
 - test $TRAVIS_BRANCH == "revdep" && Rscript -e "revedepcheck::revdep_check()"
