@@ -28,18 +28,18 @@
            bean = sprintf(xA, fmt, "ledger", "ledger"),
            beancount = sprintf(xA, fmt, "ledger", "ledger"),
            bib = sprintf(x, fmt, "bib2df::bib2df"),
+           bmp = sprintf(x, fmt, "bmp::read.bmp"),
+           gexf = sprintf(x, fmt, "rgexf::read.gexf"),
            gnumeric = sprintf(x, fmt, "gnumeric::read.gnumeric.sheet"),
            hledger = sprintf(xA, fmt, "ledger", "ledger"),
+           jpeg = sprintf(x, fmt, "jpeg::readJPEG"),
            jpg = sprintf(x, fmt, "jpeg::readJPEG"),
            ledger = sprintf(xA, fmt, "ledger", "ledger"),
            npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
            png = sprintf(x, fmt, "png::readPNG"),
-           png = sprintf(x, fmt, "bmp::read.bmp"),
-           tiff = sprintf(x, fmt, "tiff::readTIFF"),
-           sss = sprintf(x, fmt, "sss::read.sss"),
            sdmx = sprintf(x, fmt, "sdmx::readSDMX"),
-           gexf = sprintf(x, fmt, "rgexf::read.gexf"),
-           npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
+           sss = sprintf(x, fmt, "sss::read.sss"),
+           tiff = sprintf(x, fmt, "tiff::readTIFF"),
            gettext("Format not supported"))
     stop(out)
 }
