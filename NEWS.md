@@ -1,3 +1,7 @@
+# rio 0.5.16
+
+ * Fix `the condition has length > 1 and only the first element will be used` warning in `standardize_attributes()`.
+
 # rio 0.5.15
 
  * Modified some further code to produce compatibility with haven 2.0.0 release. (#188)
