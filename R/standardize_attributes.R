@@ -16,7 +16,7 @@ standardize_attributes <- function(dat) {
             attr(out[[i]], "labels") <- attr(out[[i]], "value.labels")
             attr(out[[i]], "value.labels") <- NULL
         }
-        if (inherits(out[[i]], "labelled")) {
+        if (grepl("haven_labelled", class(out[[i]]))) {
             out[[i]] <- unclass(out[[i]])
         }
         if ("var.labels" %in% names(a)) {

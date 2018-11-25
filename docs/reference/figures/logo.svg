@@ -17,8 +17,8 @@
    viewBox="0 0 219.375 253.125"
    sodipodi:docname="logo.svg"
    inkscape:export-filename="C:\Users\THOMAS\Dropbox\Software\rio\man\figures\logo.png"
-   inkscape:export-xdpi="600"
-   inkscape:export-ydpi="600">
+   inkscape:export-xdpi="60.490585"
+   inkscape:export-ydpi="60.490585">
   <metadata
      id="metadata3342">
     <rdf:RDF>
@@ -27,7 +27,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -47,7 +47,7 @@
      id="namedview3338"
      showgrid="false"
      inkscape:zoom="2"
-     inkscape:cx="128.84703"
+     inkscape:cx="54.09703"
      inkscape:cy="112.45092"
      inkscape:window-x="-8"
      inkscape:window-y="-8"

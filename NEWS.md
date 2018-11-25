@@ -1,3 +1,8 @@
+# rio 0.5.15
+
+ * Modified some further code to produce compatibility with haven 2.0.0 release. (#188)
+ * Add some additional function suggestions for the ledger package. (#190, h/t Trevor Davis)
+
 # rio 0.5.14
 
  * Changes to `gather_attrs()` for haven 2.0.0 release. (#188)
