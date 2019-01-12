@@ -1,3 +1,7 @@
+# rio 0.5.17
+
+ * Fix `the condition has length > 1 and only the first element will be used` warning in `gather_attributes()`. (#196, h/t Ruben Arslan)
+
 # rio 0.5.16
 
  * Fix `the condition has length > 1 and only the first element will be used` warning in `standardize_attributes()`.
