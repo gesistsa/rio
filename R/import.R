@@ -1,6 +1,6 @@
 #' @rdname import
 #' @title Import
-#' @description Read in a data.frame from a file
+#' @description Read in a data.frame from a file. Exceptions to this rule, are Rdata, RDS and JSON input file formats, which return the originally saved object without changing it's class.
 #' @param file A character string naming a file, URL, or single-file .zip or .tar archive.
 #' @param format An optional character string code of file format, which can be used to override the format inferred from \code{file}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), and \dQuote{|} (for pipe-separated values).
 #' @template setclass
@@ -75,11 +75,17 @@
 #'
 #' # set class for the response data.frame as "tbl_df" (from dplyr)
 #' stopifnot(inherits(import("iris1.csv", setclass = "tbl_df"), "tbl_df"))
+#' 
+#' # non-data frame formats supported for RDS, Rdata, and JSON
+#' export(list(mtcars, iris), "list.rds")
+#' li <- import("list.rds")
+#' identical(names(mtcars), names(li[[1]]))
 #'
 #' # cleanup
 #' unlink("iris.tsv")
 #' unlink("iris1.csv")
 #' unlink("iris2.csv")
+#' unlist("list.rds")
 #'
 #' @seealso \code{\link{import_list}}, \code{\link{.import}}, \code{\link{characterize}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
 #' @importFrom tools file_ext file_path_sans_ext
@@ -130,7 +136,7 @@ import <- function(file, format, setclass, which, ...) {
     }
     
     # if R serialized object, just return it without setting object class
-    if (inherits(file, "rio_rdata") || inherits(file, "rio_rds")) {
+    if (inherits(file, c("rio_rdata", "rio_rds", "rio_json"))) {
         return(x)
     }
     # otherwise, make sure it's a data frame (or requested class)

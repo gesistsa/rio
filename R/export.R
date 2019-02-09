@@ -1,7 +1,7 @@
 #' @rdname export
 #' @title Export
 #' @description Write data.frame to a file
-#' @param x A data frame or matrix to be written into a file. (An exception to this is that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file. See examples.)
+#' @param x A data frame or matrix to be written into a file. Exceptions to this rule is that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file. Or a variety of R objects if the output file format is RDS or JSON. See examples.)
 #' @param file A character string naming a file. Must specify \code{file} and/or \code{format}.
 #' @param format An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.
 #' @param \dots Additional arguments for the underlying export functions. See examples.
@@ -31,7 +31,7 @@
 #'     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{write_csvy}}. The YAML header lines are preceded by R comment symbols (#) by default; this can be turned off by passing a \code{comment_header = FALSE} argument to \code{export}. Setting \code{fwrite = TRUE} (the default) will rely on \code{\link[data.table]{fwrite}} for much faster export.
 #'     \item Feather R/Python interchange format (.feather), using \code{\link[feather]{write_feather}}
 #'     \item Fast storage (.fst), using \code{\link[fst]{write.fst}}
-#'     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}
+#'     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \href{https://arxiv.org/abs/1403.2805}{https://arxiv.org/abs/1403.2805}. 
 #'     \item Matlab (.mat), using \code{\link[rmatio]{write.mat}}
 #'     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{write_ods}}. (Currently only single-sheet exports are supported.)
 #'     \item HTML (.html), using a custom method based on \code{\link[xml2]{xml_add_child}} to create a simple HTML table and \code{\link[xml2]{write_xml}} to write to disk.
@@ -64,8 +64,9 @@
 #' export(list(mtcars = mtcars, iris = iris), "mtcars.rdata")
 #' export(c("mtcars", "iris"), "mtcars.rdata")
 #'
-#' # export to JSON
-#' export(mtcars, "mtcars.json")
+#' # export to non-data frame R object to RDS or JSON
+#' export(mtcars$cyl, "mtcars_cyl.rds")
+#' export(list(iris, mtcars), "list.json")
 #'
 #' # pass arguments to underlying export function
 #' export(mtcars, "mtcars.csv", col.names = FALSE)
@@ -93,10 +94,11 @@
 #' # cleanup
 #' unlink("mtcars.csv")
 #' unlink("mtcars.dta")
-#' unlink("mtcars.json")
+#' unlink("mtcars_cyl.rds")
 #' unlink("mtcars.rdata")
 #' unlink("data.R")
 #' unlink("mtcars.csv.zip")
+#' unlink("list.json")
 #' @seealso \code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}
 #' @importFrom haven labelled
 #' @export
@@ -130,7 +132,7 @@ export <- function(x, file, format, ...) {
 
     data_name <- as.character(substitute(x))
     if (!is.data.frame(x) & !is.matrix(x)) {
-        if (!fmt %in% c("xlsx", "html", "rdata", "rds")) {
+        if (!fmt %in% c("xlsx", "html", "rdata", "rds", "json")) {
             stop("'x' is not a data.frame or matrix")
         }
     } else if (is.matrix(x)) {

@@ -17,7 +17,9 @@ Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co")
              person("Ruaridh", "Williamson", role = "ctb", email = "ruaridh.williamson@gmail.com"),
              person("Patrick", "Kennedy", role = "ctb"),
              person("Ryan", "Price", email = "ryapric@gmail.com", role = "ctb"),
-             person("Trevor L", "Davis", email = "trevor.l.davis@gmail.com", role = "ctb"))
+             person("Trevor L", "Davis", email = "trevor.l.davis@gmail.com", role = "ctb"),
+             person("Nathan", "Day", email = "nathancday@gmail.com", role = "ctb")
+             )
 Description: Streamlined data import and export by making assumptions that
     the user is probably willing to make: 'import()' and 'export()' determine
     the data structure from the file extension, reasonable defaults are used for
