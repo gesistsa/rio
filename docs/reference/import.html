@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Import — import" />
 
-<meta property="og:description" content="Read in a data.frame from a file" />
+<meta property="og:description" content="Read in a data.frame from a file. Exceptions to this rule are Rdata, RDS, and JSON input file formats, which return the originally saved object without changing its class." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.18</span>
       </span>
     </div>
 
@@ -114,7 +114,7 @@
 
     <div class="ref-description">
     
-    <p>Read in a data.frame from a file</p>
+    <p>Read in a data.frame from a file. Exceptions to this rule are Rdata, RDS, and JSON input file formats, which return the originally saved object without changing its class.</p>
     
     </div>
 
@@ -157,13 +157,13 @@
 <li><p>Comma-separated data (.csv), using <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fread'>fread</a></code> or, if <code>fread = FALSE</code>, <code><a href='https://www.rdocumentation.org/packages/utils/topics/read.table'>read.table</a></code> with <code>row.names = FALSE</code> and <code>stringsAsFactors = FALSE</code></p></li>
 <li><p>Pipe-separated data (.psv), using <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fread'>fread</a></code> or, if <code>fread = FALSE</code>, <code><a href='https://www.rdocumentation.org/packages/utils/topics/read.table'>read.table</a></code> with <code>sep = '|'</code>, <code>row.names = FALSE</code> and <code>stringsAsFactors = FALSE</code></p></li>
 <li><p>Tab-separated data (.tsv), using <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fread'>fread</a></code> or, if <code>fread = FALSE</code>, <code><a href='https://www.rdocumentation.org/packages/utils/topics/read.table'>read.table</a></code> with <code>row.names = FALSE</code> and <code>stringsAsFactors = FALSE</code></p></li>
-<li><p>SAS (.sas7bdat), using <code><a href='https://www.rdocumentation.org/packages/haven/topics/read_sas'>read_sas</a></code>.</p></li>
-<li><p>SAS XPORT (.xpt), using <code><a href='https://www.rdocumentation.org/packages/haven/topics/read_xpt'>read_xpt</a></code> or, if <code>haven = FALSE</code>, <code><a href='https://www.rdocumentation.org/packages/foreign/topics/read.xport'>read.xport</a></code>.</p></li>
-<li><p>SPSS (.sav), using <code><a href='https://www.rdocumentation.org/packages/haven/topics/read_spss'>read_sav</a></code>. If <code>haven = FALSE</code>, <code><a href='https://www.rdocumentation.org/packages/foreign/topics/read.spss'>read.spss</a></code> can be used.</p></li>
-<li><p>Stata (.dta), using <code><a href='https://www.rdocumentation.org/packages/haven/topics/read_dta'>read_dta</a></code>. If <code>haven = FALSE</code>, <code><a href='https://www.rdocumentation.org/packages/foreign/topics/read.dta'>read.dta</a></code> can be used.</p></li>
+<li><p>SAS (.sas7bdat), using <code><a href='https://haven.tidyverse.org/reference/read_sas.html'>read_sas</a></code>.</p></li>
+<li><p>SAS XPORT (.xpt), using <code><a href='https://haven.tidyverse.org/reference/read_xpt.html'>read_xpt</a></code> or, if <code>haven = FALSE</code>, <code><a href='https://www.rdocumentation.org/packages/foreign/topics/read.xport'>read.xport</a></code>.</p></li>
+<li><p>SPSS (.sav), using <code><a href='https://haven.tidyverse.org/reference/read_spss.html'>read_sav</a></code>. If <code>haven = FALSE</code>, <code><a href='https://www.rdocumentation.org/packages/foreign/topics/read.spss'>read.spss</a></code> can be used.</p></li>
+<li><p>Stata (.dta), using <code><a href='https://haven.tidyverse.org/reference/read_dta.html'>read_dta</a></code>. If <code>haven = FALSE</code>, <code><a href='https://www.rdocumentation.org/packages/foreign/topics/read.dta'>read.dta</a></code> can be used.</p></li>
 <li><p>SAS XPORT (.xpt), using <code><a href='https://www.rdocumentation.org/packages/foreign/topics/read.xport'>read.xport</a></code>.</p></li>
-<li><p>SPSS Portable Files (.por), using <code><a href='https://www.rdocumentation.org/packages/haven/topics/read_spss'>read_por</a></code>.</p></li>
-<li><p>Excel (.xls and .xlsx), using <code><a href='https://www.rdocumentation.org/packages/readxl/topics/read_excel'>read_excel</a></code>. Use <code>which</code> to specify a sheet number. For .xlsx files, it is possible to set <code>readxl = FALSE</code>, so that <code><a href='https://www.rdocumentation.org/packages/openxlsx/topics/read.xlsx'>read.xlsx</a></code> can be used instead of readxl (the default).</p></li>
+<li><p>SPSS Portable Files (.por), using <code><a href='https://haven.tidyverse.org/reference/read_spss.html'>read_por</a></code>.</p></li>
+<li><p>Excel (.xls and .xlsx), using <code><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></code>. Use <code>which</code> to specify a sheet number. For .xlsx files, it is possible to set <code>readxl = FALSE</code>, so that <code><a href='https://www.rdocumentation.org/packages/openxlsx/topics/read.xlsx'>read.xlsx</a></code> can be used instead of readxl (the default).</p></li>
 <li><p>R syntax object (.R), using <code><a href='https://www.rdocumentation.org/packages/base/topics/dput'>dget</a></code></p></li>
 <li><p>Saved R objects (.RData,.rda), using <code><a href='https://www.rdocumentation.org/packages/base/topics/load'>load</a></code> for single-object .Rdata files. Use <code>which</code> to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame).</p></li>
 <li><p>Serialized R objects (.rds), using <code><a href='https://www.rdocumentation.org/packages/base/topics/readRDS'>readRDS</a></code>. This can be any R object (not just a data frame).</p></li>
@@ -222,10 +222,16 @@
 <span class='co'># set class for the response data.frame as "tbl_df" (from dplyr)</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/stopifnot'>stopifnot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>inherits</a></span>(<span class='fu'>import</span>(<span class='st'>"iris1.csv"</span>, <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='st'>"tbl_df"</span>), <span class='st'>"tbl_df"</span>))
 
+<span class='co'># non-data frame formats supported for RDS, Rdata, and JSON</span>
+<span class='fu'><a href='export.html'>export</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>mtcars</span>, <span class='no'>iris</span>), <span class='st'>"list.rds"</span>)
+<span class='no'>li</span> <span class='kw'>&lt;-</span> <span class='fu'>import</span>(<span class='st'>"list.rds"</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/identical'>identical</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>mtcars</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>li</span><span class='kw'>[[</span><span class='fl'>1</span>]]))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># cleanup</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"iris.tsv"</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"iris1.csv"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"iris2.csv"</span>)</div></pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"iris2.csv"</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlist'>unlist</a></span>(<span class='st'>"list.rds"</span>)</div><div class='output co'>#&gt; [1] "list.rds"</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -252,7 +258,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>

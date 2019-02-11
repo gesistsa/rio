@@ -1,6 +1,6 @@
 #' @rdname import
 #' @title Import
-#' @description Read in a data.frame from a file. Exceptions to this rule, are Rdata, RDS and JSON input file formats, which return the originally saved object without changing it's class.
+#' @description Read in a data.frame from a file. Exceptions to this rule are Rdata, RDS, and JSON input file formats, which return the originally saved object without changing its class.
 #' @param file A character string naming a file, URL, or single-file .zip or .tar archive.
 #' @param format An optional character string code of file format, which can be used to override the format inferred from \code{file}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), and \dQuote{|} (for pipe-separated values).
 #' @template setclass

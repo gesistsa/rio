@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.18</span>
       </span>
     </div>
 
@@ -109,9 +109,33 @@
       <small>Source: <a href='https://github.com/leeper/rio/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="rio-0-5-18" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-18" class="anchor"></a>rio 0.5.18<small> Unreleased </small>
+</h1>
+<ul>
+<li>Adjust <code><a href="../reference/import.html">import()</a></code>/<code><a href="../reference/export.html">export()</a></code> for JSON file formats to allow non-data frame objects. Behavior modeled after RDS format. (<a href='https://github.com/leeper/rio/issues/199'>#199</a> h/t Nathan Day)</li>
+</ul>
+</div>
+    <div id="rio-0-5-17" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-17" class="anchor"></a>rio 0.5.17<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fix <code>the condition has length &gt; 1 and only the first element will be used</code> warning in <code>gather_attributes()</code>. (<a href='https://github.com/leeper/rio/issues/196'>#196</a>, h/t Ruben Arslan)</li>
+</ul>
+</div>
+    <div id="rio-0-5-16" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0-5-16" class="anchor"></a>rio 0.5.16<small> 2018-11-26 </small>
+</h1>
+<ul>
+<li>Fix <code>the condition has length &gt; 1 and only the first element will be used</code> warning in <code>standardize_attributes()</code>.</li>
+</ul>
+</div>
     <div id="rio-0-5-15" class="section level1">
 <h1 class="page-header">
-<a href="#rio-0-5-15" class="anchor"></a>rio 0.5.15<small> Unreleased </small>
+<a href="#rio-0-5-15" class="anchor"></a>rio 0.5.15<small> 2018-11-25 </small>
 </h1>
 <ul>
 <li>Modified some further code to produce compatibility with haven 2.0.0 release. (<a href='https://github.com/leeper/rio/issues/188'>#188</a>)</li>
@@ -188,8 +212,8 @@
 </h1>
 <ul>
 <li>Import of files with the ambiguous .dat extension, which are typically text-delimited files, are now passed to <code><a href="https://www.rdocumentation.org/packages/data.table/topics/fread">data.table::fread()</a></code> with a message. Export to the format remains unsupported. (<a href='https://github.com/leeper/rio/issues/98'>#98</a>, <a href='https://github.com/leeper/rio/issues/155'>#155</a>)</li>
-<li>Added support for export to SAS XPORT format (via <code><a href="https://www.rdocumentation.org/packages/haven/topics/read_xpt">haven::write_xpt()</a></code>). (<a href='https://github.com/leeper/rio/issues/157'>#157</a>)</li>
-<li>Switched default import package for SAS XPORT format to <code><a href="https://www.rdocumentation.org/packages/haven/topics/read_xpt">haven::read_xpt()</a></code> with a <code>haven = FALSE</code> toggle restoring the previous default behavior using <code>foreign::read.xpt()</code>. (<a href='https://github.com/leeper/rio/issues/157'>#157</a>)</li>
+<li>Added support for export to SAS XPORT format (via <code><a href="https://haven.tidyverse.org/reference/read_xpt.html">haven::write_xpt()</a></code>). (<a href='https://github.com/leeper/rio/issues/157'>#157</a>)</li>
+<li>Switched default import package for SAS XPORT format to <code><a href="https://haven.tidyverse.org/reference/read_xpt.html">haven::read_xpt()</a></code> with a <code>haven = FALSE</code> toggle restoring the previous default behavior using <code>foreign::read.xpt()</code>. (<a href='https://github.com/leeper/rio/issues/157'>#157</a>)</li>
 </ul>
 </div>
     <div id="rio-0-5-6" class="section level1">
@@ -740,7 +764,7 @@
 <ul>
 <li>
 <code>import</code> always returns a data.frame, unless <code>setclass</code> is specified. (<a href='https://github.com/leeper/rio/issues/22'>#22</a>)</li>
-<li>Added support for import from legacy Excel (.xls) files <code><a href="https://www.rdocumentation.org/packages/readxl/topics/read_excel">readxl::read_excel</a></code>, making its use optional. (<a href='https://github.com/leeper/rio/issues/19'>#19</a>)</li>
+<li>Added support for import from legacy Excel (.xls) files <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel</a></code>, making its use optional. (<a href='https://github.com/leeper/rio/issues/19'>#19</a>)</li>
 <li>Added support for import from and export to the system clipboard on Windows and Mac OS.</li>
 <li>Added support for export to simple XML documents. (<a href='https://github.com/leeper/rio/issues/12'>#12</a>)</li>
 <li>Added support for import from simple XML documents via <code><a href="https://www.rdocumentation.org/packages/XML/topics/xmlToDataFrame">XML::xmlToDataFrame</a></code>. (<a href='https://github.com/leeper/rio/issues/12'>#12</a>)</li>
@@ -781,6 +805,9 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#rio-0-5-18">0.5.18</a></li>
+        <li><a href="#rio-0-5-17">0.5.17</a></li>
+        <li><a href="#rio-0-5-16">0.5.16</a></li>
         <li><a href="#rio-0-5-15">0.5.15</a></li>
         <li><a href="#rio-0-5-14">0.5.14</a></li>
         <li><a href="#rio-0-5-13">0.5.13</a></li>
@@ -863,7 +890,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>

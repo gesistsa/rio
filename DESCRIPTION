@@ -1,8 +1,8 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.5.17
-Date: 2019-01-12
+Version: 0.5.18
+Date: 2019-02-11
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
@@ -62,4 +62,5 @@ Suggests:
     yaml
 License: GPL-2
 VignetteBuilder: knitr
+Encoding: UTF-8
 RoxygenNote: 6.1.1

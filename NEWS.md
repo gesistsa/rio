@@ -1,4 +1,4 @@
-# rio 0.5.17.99
+# rio 0.5.18
 
  * Adjust `import()`/`export()` for JSON file formats to allow non-data frame objects. Behavior modeled after RDS format. (#199 h/t Nathan Day)
 

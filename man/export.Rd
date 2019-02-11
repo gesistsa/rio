@@ -7,7 +7,7 @@
 export(x, file, format, ...)
 }
 \arguments{
-\item{x}{A data frame or matrix to be written into a file. Exceptions to this rule is that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file. Or a variety of R objects if the output file format is RDS or JSON. See examples.)}
+\item{x}{A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.)}
 
 \item{file}{A character string naming a file. Must specify \code{file} and/or \code{format}.}
 

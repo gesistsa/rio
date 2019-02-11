@@ -21,7 +21,7 @@ import(file, format, setclass, which, ...)
 A data frame. If \code{setclass} is used, this data frame may have additional class attribute values, such as \dQuote{tibble} or \dQuote{data.table}.
 }
 \description{
-Read in a data.frame from a file. Exceptions to this rule, are Rdata, RDS and JSON input file formats, which return the originally saved object without changing it's class.
+Read in a data.frame from a file. Exceptions to this rule are Rdata, RDS, and JSON input file formats, which return the originally saved object without changing its class.
 }
 \details{
 This function imports a data frame or matrix from a data file with the file format based on the file extension (or the manually specified format, if \code{format} is specified).

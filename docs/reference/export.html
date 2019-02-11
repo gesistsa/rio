@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.18</span>
       </span>
     </div>
 
@@ -125,7 +125,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A data frame or matrix to be written into a file. (An exception to this is that <code>x</code> can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file. See examples.)</p></td>
+      <td><p>A data frame or matrix to be written into a file. Exceptions to this rule are that <code>x</code> can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.)</p></td>
     </tr>
     <tr>
       <th>file</th>
@@ -154,10 +154,10 @@
 <li><p>Comma-separated data (.csv), using <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fwrite'>fwrite</a></code> or, if <code>fwrite = TRUE</code>, <code><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></code> with <code>row.names = FALSE</code>.</p></li>
 <li><p>Pipe-separated data (.psv), using <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fwrite'>fwrite</a></code> or, if <code>fwrite = TRUE</code>, <code><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></code> with <code>sep = '|'</code> and <code>row.names = FALSE</code>.</p></li>
 <li><p>Tab-separated data (.tsv), using <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fwrite'>fwrite</a></code> or, if <code>fwrite = TRUE</code>, <code><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></code> with <code>row.names = FALSE</code>.</p></li>
-<li><p>SAS (.sas7bdat), using <code><a href='https://www.rdocumentation.org/packages/haven/topics/read_sas'>write_sas</a></code>.</p></li>
-<li><p>SAS XPORT (.xpt), using <code><a href='https://www.rdocumentation.org/packages/haven/topics/read_xpt'>write_xpt</a></code>.</p></li>
-<li><p>SPSS (.sav), using <code><a href='https://www.rdocumentation.org/packages/haven/topics/read_spss'>write_sav</a></code></p></li>
-<li><p>Stata (.dta), using <code><a href='https://www.rdocumentation.org/packages/haven/topics/read_dta'>write_dta</a></code>. Note that variable/column names containing dots (.) are not allowed and will produce an error.</p></li>
+<li><p>SAS (.sas7bdat), using <code><a href='https://haven.tidyverse.org/reference/read_sas.html'>write_sas</a></code>.</p></li>
+<li><p>SAS XPORT (.xpt), using <code><a href='https://haven.tidyverse.org/reference/read_xpt.html'>write_xpt</a></code>.</p></li>
+<li><p>SPSS (.sav), using <code><a href='https://haven.tidyverse.org/reference/read_spss.html'>write_sav</a></code></p></li>
+<li><p>Stata (.dta), using <code><a href='https://haven.tidyverse.org/reference/read_dta.html'>write_dta</a></code>. Note that variable/column names containing dots (.) are not allowed and will produce an error.</p></li>
 <li><p>Excel (.xlsx), using <code><a href='https://www.rdocumentation.org/packages/openxlsx/topics/write.xlsx'>write.xlsx</a></code>. Existing workbooks are overwritten unless <code>which</code> is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the <code>which</code> sheet does not, data are added as a new sheet to the existing workbook. <code>x</code> can also be a list of data frames; the list entry names are used as sheet names.</p></li>
 <li><p>R syntax object (.R), using <code><a href='https://www.rdocumentation.org/packages/base/topics/dput'>dput</a></code> (by default) or <code><a href='https://www.rdocumentation.org/packages/base/topics/dump'>dump</a></code> (if <code>format = 'dump'</code>)</p></li>
 <li><p>Saved R objects (.RData,.rda), using <code><a href='https://www.rdocumentation.org/packages/base/topics/save'>save</a></code>. In this case, <code>x</code> can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding <code>envir</code> argument is specified.</p></li>
@@ -169,7 +169,7 @@
 <li><p><a href='https://github.com/csvy'>CSVY</a> (CSV with a YAML metadata header) using <code><a href='https://www.rdocumentation.org/packages/csvy/topics/write_csvy'>write_csvy</a></code>. The YAML header lines are preceded by R comment symbols (#) by default; this can be turned off by passing a <code>comment_header = FALSE</code> argument to <code>export</code>. Setting <code>fwrite = TRUE</code> (the default) will rely on <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fwrite'>fwrite</a></code> for much faster export.</p></li>
 <li><p>Feather R/Python interchange format (.feather), using <code><a href='https://www.rdocumentation.org/packages/feather/topics/read_feather'>write_feather</a></code></p></li>
 <li><p>Fast storage (.fst), using <code><a href='http://www.fstpackage.org/reference/write_fst.html'>write.fst</a></code></p></li>
-<li><p>JSON (.json), using <code><a href='https://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></code></p></li>
+<li><p>JSON (.json), using <code><a href='https://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></code>. In this case, <code>x</code> can be a variety of R objects, based on class mapping conventions in this paper: <a href='https://arxiv.org/abs/1403.2805'>https://arxiv.org/abs/1403.2805</a>.</p></li>
 <li><p>Matlab (.mat), using <code><a href='https://www.rdocumentation.org/packages/rmatio/topics/write.mat-methods'>write.mat</a></code></p></li>
 <li><p>OpenDocument Spreadsheet (.ods), using <code><a href='https://www.rdocumentation.org/packages/readODS/topics/write_ods'>write_ods</a></code>. (Currently only single-sheet exports are supported.)</p></li>
 <li><p>HTML (.html), using a custom method based on <code><a href='https://www.rdocumentation.org/packages/xml2/topics/xml_replace'>xml_add_child</a></code> to create a simple HTML table and <code><a href='https://www.rdocumentation.org/packages/xml2/topics/write_xml'>write_xml</a></code> to write to disk.</p></li>
@@ -201,8 +201,9 @@
 <span class='fu'>export</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>mtcars</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>iris</span> <span class='kw'>=</span> <span class='no'>iris</span>), <span class='st'>"mtcars.rdata"</span>)
 <span class='fu'>export</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"mtcars"</span>, <span class='st'>"iris"</span>), <span class='st'>"mtcars.rdata"</span>)
 
-<span class='co'># export to JSON</span>
-<span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.json"</span>)
+<span class='co'># export to non-data frame R object to RDS or JSON</span>
+<span class='fu'>export</span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>, <span class='st'>"mtcars_cyl.rds"</span>)
+<span class='fu'>export</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>iris</span>, <span class='no'>mtcars</span>), <span class='st'>"list.json"</span>)
 
 <span class='co'># pass arguments to underlying export function</span>
 <span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.csv"</span>, <span class='kw'>col.names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
@@ -235,10 +236,11 @@
 <span class='co'># cleanup</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars.csv"</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars.dta"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars.json"</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars_cyl.rds"</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars.rdata"</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"data.R"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars.csv.zip"</span>)</div></pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars.csv.zip"</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"list.json"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -263,7 +265,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>
