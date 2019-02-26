@@ -41,7 +41,7 @@
            sss = sprintf(x, fmt, "sss::read.sss"),
            tiff = sprintf(x, fmt, "tiff::readTIFF"),
            gettext("Format not supported"))
-    stop(out)
+    stop(out, call. = FALSE)
 }
 
 #' @rdname extensions
@@ -65,5 +65,5 @@
            gexf = sprintf(x, fmt, "rgexf::write.gexf"),
            npy = sprintf(x, fmt, "RcppCNPy::npySave"),
            gettext("Format not supported"))
-    stop(out)
+    stop(out, call. = FALSE)
 }

@@ -18,7 +18,7 @@ get_ext <- function(file) {
     if (file == "clipboard") {
         return("clipboard")
     } else if (fmt == "") {
-        stop("'file' has no extension")
+        stop("'file' has no extension", call. = FALSE)
     } else {
         return(tolower(fmt))
     }
@@ -104,7 +104,6 @@ get_type <- function(fmt) {
     )
     out <- type_list[[tolower(fmt)]]
     if (is.null(out)) {
-        message("Unrecognized file format. Try specifying with the format argument.")
         return(fmt)
     }
     return(out)

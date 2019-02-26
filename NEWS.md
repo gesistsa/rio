@@ -1,3 +1,7 @@
+# rio 0.5.19
+
+ * Modify message and errors when working with unrecognized file formats. (#195, h/t Trevor Davis)
+
 # rio 0.5.18
 
  * Adjust `import()`/`export()` for JSON file formats to allow non-data frame objects. Behavior modeled after RDS format. (#199 h/t Nathan Day)
