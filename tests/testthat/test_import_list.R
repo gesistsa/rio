@@ -27,6 +27,20 @@ test_that("Import multiple HTML tables in import_list()", {
     expect_true(identical(names(dat[[2]]), names(iris)))
 })
 
+test_that("import_list() preserves 'which' names when specified", {
+    export(list(a = mtcars, b = iris), "foo.xlsx")
+    expect_true(identical(names(import_list("foo.xlsx")), c("a", "b")))
+    expect_true(identical(names(import_list("foo.xlsx", which = 1)), "a"))
+    expect_true(identical(names(import_list("foo.xlsx", which = "a")), "a"))
+    expect_true(identical(names(import_list("foo.xlsx", which = 2)), "b"))
+    expect_true(identical(names(import_list("foo.xlsx", which = "b")), "b"))
+    expect_true(identical(names(import_list("foo.xlsx", which = 1:2)), c("a", "b")))
+    expect_true(identical(names(import_list("foo.xlsx", which = 2:1)), c("b", "a")))
+    expect_true(identical(names(import_list("foo.xlsx", which = c("a", "b"))), c("a", "b")))
+    expect_true(identical(names(import_list("foo.xlsx", which = c("b", "a"))), c("b", "a")))
+    unlink("foo.xlsx")
+})
+
 test_that("Import single file via import_list()", {
     expect_true(identical(import_list("mtcars.rds", rbind = TRUE), mtcars))
 })
