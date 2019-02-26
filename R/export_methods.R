@@ -1,16 +1,26 @@
 #' @importFrom data.table fwrite
 #' @importFrom utils write.table
 export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
-                         col.names = TRUE, ...) {
+                         col.names = TRUE, append = FALSE, ...) {
     if (isTRUE(fwrite) & !inherits(file, "connection")) {
-        data.table::fwrite(x, file = file, sep = sep, col.name = col.names,
-                           row.names = row.names, ...)
+        if (isTRUE(append)) {
+            data.table::fwrite(x, file = file, sep = sep, row.names = row.names, 
+                               col.names = FALSE, append = TRUE, ...)
+        } else {
+            data.table::fwrite(x, file = file, sep = sep, row.names = row.names,
+                               col.names = col.names, append = FALSE, ...)
+        }
     } else {
         if (isTRUE(fwrite) & inherits(file, "connection")) {
             message("data.table::fwrite() does not support writing to connections. Using utils::write.table() instead.")
         }
-        write.table(x, file = file, sep = sep, row.names = row.names,
-                    col.names = col.names, ...)
+        if (isTRUE(append)) {
+            write.table(x, file = file, sep = sep, row.names = row.names,
+                        col.names = FALSE, append = TRUE, ...)
+        } else {
+            write.table(x, file = file, sep = sep, row.names = row.names,
+                        col.names = col.names, append = FALSE, ...)
+        }
     }
 }
 

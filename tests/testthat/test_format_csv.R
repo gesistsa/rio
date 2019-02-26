@@ -6,6 +6,16 @@ test_that("Export to CSV", {
     unlink("iris.csv")
 })
 
+test_that("Export (Append) to CSV", {
+    export(iris, "iris.csv")
+    nlines <- length(readLines("iris.csv"))
+    export(iris, "iris.csv", append = FALSE)
+    expect_true(identical(length(readLines("iris.csv")), nlines))
+    export(iris, "iris.csv", append = TRUE)
+    expect_true(identical(length(readLines("iris.csv")), (2L*nlines)-1L))
+    unlink("iris.csv")
+})
+
 test_that("Import from CSV", {
     noheadercsv <- import(system.file("examples", "noheader.csv", package = "rio"), header = FALSE)
     expect_that(colnames(noheadercsv)[1], equals("V1"), label = "Header is correctly specified")
