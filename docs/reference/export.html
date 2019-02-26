@@ -137,7 +137,7 @@
     </tr>
     <tr>
       <th>&#8230;</th>
-      <td><p>Additional arguments for the underlying export functions. See examples.</p></td>
+      <td><p>Additional arguments for the underlying export functions. This can be used to specify non-standard arguments. See examples.</p></td>
     </tr>
     </table>
     
@@ -223,6 +223,10 @@
 </div><span class='co'># NOT RUN {</span>
   <span class='co'>## export a single data frame</span>
   <span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.xlsx"</span>)
+
+  <span class='co'>## export NAs to Excel as missing via args passed to `...`</span>
+  <span class='no'>mtcars</span>$<span class='no'>drat</span> <span class='kw'>&lt;-</span> <span class='fl'>NA_real_</span>
+  <span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>export</span>(<span class='st'>"tst2.xlsx"</span>, <span class='kw'>keepNA</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
   <span class='co'>## export a list of data frames as worksheets</span>
   <span class='fu'>export</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>iris</span>), <span class='st'>"multisheet.xlsx"</span>)
