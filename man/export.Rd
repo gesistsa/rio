@@ -13,7 +13,7 @@ export(x, file, format, ...)
 
 \item{format}{An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.}
 
-\item{\dots}{Additional arguments for the underlying export functions. See examples.}
+\item{\dots}{Additional arguments for the underlying export functions. This can be used to specify non-standard arguments. See examples.}
 }
 \value{
 The name of the output file as a character string (invisibly).
@@ -96,6 +96,10 @@ source("data.R", echo = TRUE)
 \dontrun{
   ## export a single data frame
   export(mtcars, "mtcars.xlsx")
+  
+  ## export NAs to Excel as missing via args passed to `...`
+  mtcars$drat <- NA_real_
+  mtcars \%>\% export("tst2.xlsx", keepNA = TRUE)
   
   ## export a list of data frames as worksheets
   export(list(a = mtcars, b = iris), "multisheet.xlsx")

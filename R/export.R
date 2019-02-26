@@ -4,7 +4,7 @@
 #' @param x A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.)
 #' @param file A character string naming a file. Must specify \code{file} and/or \code{format}.
 #' @param format An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.
-#' @param \dots Additional arguments for the underlying export functions. See examples.
+#' @param \dots Additional arguments for the underlying export functions. This can be used to specify non-standard arguments. See examples.
 #' @return The name of the output file as a character string (invisibly).
 #' @details This function exports a data frame or matrix into a file with file format based on the file extension (or the manually specified format, if \code{format} is specified).
 #' 
@@ -80,6 +80,10 @@
 #' \dontrun{
 #'   ## export a single data frame
 #'   export(mtcars, "mtcars.xlsx")
+#'   
+#'   ## export NAs to Excel as missing via args passed to `...`
+#'   mtcars$drat <- NA_real_
+#'   mtcars %>% export("tst2.xlsx", keepNA = TRUE)
 #'   
 #'   ## export a list of data frames as worksheets
 #'   export(list(a = mtcars, b = iris), "multisheet.xlsx")
