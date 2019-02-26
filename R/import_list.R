@@ -62,7 +62,7 @@ function(file,
             }
             out
         })
-        names(x) <- basename(file)
+        names(x) <- names(file)
     } else {
         if (get_ext(file) == "rdata") {
             e <- new.env()
