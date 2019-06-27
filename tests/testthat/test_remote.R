@@ -21,6 +21,7 @@ test_that("Import Remote GitHub File", {
 })
 
 test_that("Import Remote File from Shortened URL", {
+    skip_if_not_installed(pkg="csvy")
     shorturl <- "https://goo.gl/KPFiaK"
     expect_true(inherits(import(shorturl), "data.frame"), label = "Import remote file")
 })

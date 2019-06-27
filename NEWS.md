@@ -3,6 +3,7 @@
  * Fix behavior of `export()` to plain text files when `append = TRUE` (#201, h/t Julián Urbano)
  * `import_list()` now preserve names of Excel sheets, etc. when the 'which' argument is specified. (#162, h/t Danny Parsons)
  * Modify message and errors when working with unrecognized file formats. (#195, h/t Trevor Davis)
+ * Ensure that tests only run if the corresponding package is installed.  (h/t Bill Denney)
 
 # rio 0.5.18
 
