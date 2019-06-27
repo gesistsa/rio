@@ -63,6 +63,7 @@ This function imports a data frame or matrix from a data file with the file form
     \item YAML (.yml), using \code{\link[yaml]{yaml.load}}
     \item Clipboard import (on Windows and Mac OS), using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
     \item Google Sheets, as Comma-separated data (.csv)
+    \item GraphPad Prism (.pzfx) using \code{\link[pzfx]{read_pzfx}}
 }
 
 \code{import} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). If you would prefer these attributes to be stored at the data.frame-level (i.e., in \code{attributes(mtcars)}), see \code{\link{gather_attrs}}.
