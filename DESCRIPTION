@@ -1,8 +1,8 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.5.19
-Date: 2019-02-26
+Version: 0.5.20
+Date: 2019-09-09
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
@@ -18,7 +18,11 @@ Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co")
              person("Patrick", "Kennedy", role = "ctb"),
              person("Ryan", "Price", email = "ryapric@gmail.com", role = "ctb"),
              person("Trevor L", "Davis", email = "trevor.l.davis@gmail.com", role = "ctb"),
-             person("Nathan", "Day", email = "nathancday@gmail.com", role = "ctb")
+             person("Nathan", "Day", email = "nathancday@gmail.com", role = "ctb"),
+             person("Bill", "Denney",
+                    email="wdenney@humanpredictions.com",
+                    role="ctb",
+                    comment=c(ORCID="0000-0002-5759-428X"))
              )
 Description: Streamlined data import and export by making assumptions that
     the user is probably willing to make: 'import()' and 'export()' determine
