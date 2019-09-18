@@ -22,7 +22,9 @@ Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co")
              person("Bill", "Denney",
                     email="wdenney@humanpredictions.com",
                     role="ctb",
-                    comment=c(ORCID="0000-0002-5759-428X"))
+                    comment=c(ORCID="0000-0002-5759-428X")),
+             person("Alex", "Bokov", email = "alex.bokov@gmail.com", role = "ctb",
+                    comment=c(ORCID="0000-0002-0511-9815"))
              )
 Description: Streamlined data import and export by making assumptions that
     the user is probably willing to make: 'import()' and 'export()' determine
