@@ -321,22 +321,24 @@ function(file,
     if (isTRUE(readxl)) {
         requireNamespace("readxl")
         frml <- formals(read_xlsx)
-        unused <- setdiff(names(a),names(frml))
-        if(length(unused)>0) {
+        unused <- setdiff(names(a), names(frml))
+        if (length(unused)>0) {
           warning("The following arguments were ignored when readxl = TRUE:",
-                  "\n",paste(unused,collapse=', '))}
-        a <- a[intersect(names(a),names(frml))]
-        a <- a[setdiff(names(a),'path')]
+                  "\n", paste(unused, collapse=', '))
+        }
+        a <- a[intersect(names(a), names(frml))]
+        a <- a[setdiff(names(a), 'path')]
         do.call("read_xlsx", c(list(path = file, sheet = which), a))
     } else {
         requireNamespace("openxlsx")
         frml <- formals(read.xlsx)
-        unused <- setdiff(names(a),names(frml))
-        if(length(unused)>0) {
+        unused <- setdiff(names(a), names(frml))
+        if (length(unused)>0) {
           warning("The following arguments were ignored when readxl = FALSE:",
-                  "\n",paste(unused,collapse=', '))}
-        a <- a[intersect(names(a),names(frml))]
-        a <- a[setdiff(names(a),'xlsxFile')]
+                  "\n", paste(unused, collapse=', '))
+        }
+        a <- a[intersect(names(a), names(frml))]
+        a <- a[setdiff(names(a), 'xlsxFile')]
         do.call("read.xlsx", c(list(xlsxFile = file, sheet = which), a))
     }
 }
