@@ -81,7 +81,6 @@ stopifnot(identical(import("iris1.csv"), import("iris.tsv", format = "csv")))
 
 # import CSV as a `data.table`
 stopifnot(inherits(import("iris1.csv", setclass = "data.table"), "data.table"))
-stopifnot(inherits(import("iris1.csv", setclass = "data.table"), "data.table"))
 
 # pass arguments to underlying import function
 iris1 <- import("iris1.csv")
