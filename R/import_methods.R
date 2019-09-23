@@ -144,7 +144,10 @@ function(file,
 
 #' @export
 .import.rio_rds <- function(file, which = 1, ...) {
-    readRDS(file = file, ...)
+  if (length(list(...))>0) {
+    warning("File imported using readRDS. Arguments to '...' ignored.")
+  }
+  readRDS(file = file)
 }
 
 #' @export
@@ -155,7 +158,10 @@ function(file,
 
 #' @export
 .import.rio_rdata <- function(file, which = 1, envir = new.env(), ...) {
-    load(file = file, envir = envir, ...)
+    load(file = file, envir = envir)
+    if (length(list(...))>0) {
+      warning("File imported using load. Arguments to '...' ignored.")
+    }
     if (missing(which)) {
         if (length(ls(envir)) > 1) {
             warning("Rdata file contains multiple objects. Returning first object.")
