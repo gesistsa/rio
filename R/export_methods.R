@@ -300,7 +300,6 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     clipr::write_clip(content = x, row.names = row.names, col.names = col.names, sep = sep, ...)
 }
 
-#' @importFrom pzfx write_pzfx
 #' @export
 .export.rio_pzfx <- function(file, x, ..., row_names=FALSE) {
     requireNamespace("pzfx")
