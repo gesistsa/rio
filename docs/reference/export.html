@@ -8,21 +8,32 @@
 
 <title>Export — export • rio</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +41,12 @@
 
 
 
+
 <meta property="og:title" content="Export — export" />
-
 <meta property="og:description" content="Write data.frame to a file" />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,6 +58,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -65,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.20</span>
       </span>
     </div>
 
@@ -73,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -87,11 +99,10 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/leeper/rio">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -102,6 +113,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -113,13 +125,11 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Write data.frame to a file</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>export</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>format</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -133,85 +143,85 @@
     </tr>
     <tr>
       <th>format</th>
-      <td><p>An optional character string containing the file format, which can be used to override the format inferred from <code>file</code> or, in lieu of specifying <code>file</code>, a file with the symbol name of <code>x</code> and the specified file extension will be created. Must specify <code>file</code> and/or <code>format</code>. Shortcuts include: &#8220;,&#8221; (for comma-separated values), &#8220;;&#8221; (for semicolon-separated values), &#8220;|&#8221; (for pipe-separated values), and &#8220;dump&#8221; for <code><a href='https://www.rdocumentation.org/packages/base/topics/dump'>dump</a></code>.</p></td>
+      <td><p>An optional character string containing the file format, which can be used to override the format inferred from <code>file</code> or, in lieu of specifying <code>file</code>, a file with the symbol name of <code>x</code> and the specified file extension will be created. Must specify <code>file</code> and/or <code>format</code>. Shortcuts include: &#8220;,&#8221; (for comma-separated values), &#8220;;&#8221; (for semicolon-separated values), &#8220;|&#8221; (for pipe-separated values), and &#8220;dump&#8221; for <code><a href='https://rdrr.io/r/base/dump.html'>dump</a></code>.</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>Additional arguments for the underlying export functions. This can be used to specify non-standard arguments. See examples.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The name of the output file as a character string (invisibly).</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function exports a data frame or matrix into a file with file format based on the file extension (or the manually specified format, if <code>format</code> is specified).</p>
 <p>The output file can be to a compressed directory, simply by adding an appropriate additional extensiont to the <code>file</code> argument, such as: &#8220;mtcars.csv.tar&#8221;, &#8220;mtcars.csv.zip&#8221;, or &#8220;mtcars.csv.gz&#8221;.</p>
 <p><code>export</code> supports many file formats. See the documentation for the underlying export functions for optional arguments that can be passed via <code>...</code></p>
 <ul>
-<li><p>Comma-separated data (.csv), using <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fwrite'>fwrite</a></code> or, if <code>fwrite = TRUE</code>, <code><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></code> with <code>row.names = FALSE</code>.</p></li>
-<li><p>Pipe-separated data (.psv), using <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fwrite'>fwrite</a></code> or, if <code>fwrite = TRUE</code>, <code><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></code> with <code>sep = '|'</code> and <code>row.names = FALSE</code>.</p></li>
-<li><p>Tab-separated data (.tsv), using <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fwrite'>fwrite</a></code> or, if <code>fwrite = TRUE</code>, <code><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></code> with <code>row.names = FALSE</code>.</p></li>
+<li><p>Comma-separated data (.csv), using <code><a href='https://rdrr.io/pkg/data.table/man/fwrite.html'>fwrite</a></code> or, if <code>fwrite = TRUE</code>, <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> with <code>row.names = FALSE</code>.</p></li>
+<li><p>Pipe-separated data (.psv), using <code><a href='https://rdrr.io/pkg/data.table/man/fwrite.html'>fwrite</a></code> or, if <code>fwrite = TRUE</code>, <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> with <code>sep = '|'</code> and <code>row.names = FALSE</code>.</p></li>
+<li><p>Tab-separated data (.tsv), using <code><a href='https://rdrr.io/pkg/data.table/man/fwrite.html'>fwrite</a></code> or, if <code>fwrite = TRUE</code>, <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> with <code>row.names = FALSE</code>.</p></li>
 <li><p>SAS (.sas7bdat), using <code><a href='https://haven.tidyverse.org/reference/read_sas.html'>write_sas</a></code>.</p></li>
 <li><p>SAS XPORT (.xpt), using <code><a href='https://haven.tidyverse.org/reference/read_xpt.html'>write_xpt</a></code>.</p></li>
 <li><p>SPSS (.sav), using <code><a href='https://haven.tidyverse.org/reference/read_spss.html'>write_sav</a></code></p></li>
 <li><p>Stata (.dta), using <code><a href='https://haven.tidyverse.org/reference/read_dta.html'>write_dta</a></code>. Note that variable/column names containing dots (.) are not allowed and will produce an error.</p></li>
-<li><p>Excel (.xlsx), using <code><a href='https://www.rdocumentation.org/packages/openxlsx/topics/write.xlsx'>write.xlsx</a></code>. Existing workbooks are overwritten unless <code>which</code> is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the <code>which</code> sheet does not, data are added as a new sheet to the existing workbook. <code>x</code> can also be a list of data frames; the list entry names are used as sheet names.</p></li>
-<li><p>R syntax object (.R), using <code><a href='https://www.rdocumentation.org/packages/base/topics/dput'>dput</a></code> (by default) or <code><a href='https://www.rdocumentation.org/packages/base/topics/dump'>dump</a></code> (if <code>format = 'dump'</code>)</p></li>
-<li><p>Saved R objects (.RData,.rda), using <code><a href='https://www.rdocumentation.org/packages/base/topics/save'>save</a></code>. In this case, <code>x</code> can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding <code>envir</code> argument is specified.</p></li>
-<li><p>Serialized R objects (.rds), using <code><a href='https://www.rdocumentation.org/packages/base/topics/readRDS'>saveRDS</a></code>. In this case, <code>x</code> can be any serializable R object.</p></li>
-<li><p>"XBASE" database files (.dbf), using <code><a href='https://www.rdocumentation.org/packages/foreign/topics/write.dbf'>write.dbf</a></code></p></li>
-<li><p>Weka Attribute-Relation File Format (.arff), using <code><a href='https://www.rdocumentation.org/packages/foreign/topics/write.arff'>write.arff</a></code></p></li>
-<li><p>Fixed-width format data (.fwf), using <code><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></code> with <code>row.names = FALSE</code>, <code>quote = FALSE</code>, and <code>col.names = FALSE</code></p></li>
-<li><p>gzip comma-separated data (.csv.gz), using <code><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></code> with <code>row.names = FALSE</code></p></li>
-<li><p><a href='https://github.com/csvy'>CSVY</a> (CSV with a YAML metadata header) using <code><a href='https://www.rdocumentation.org/packages/csvy/topics/write_csvy'>write_csvy</a></code>. The YAML header lines are preceded by R comment symbols (#) by default; this can be turned off by passing a <code>comment_header = FALSE</code> argument to <code>export</code>. Setting <code>fwrite = TRUE</code> (the default) will rely on <code><a href='https://www.rdocumentation.org/packages/data.table/topics/fwrite'>fwrite</a></code> for much faster export.</p></li>
-<li><p>Feather R/Python interchange format (.feather), using <code><a href='https://www.rdocumentation.org/packages/feather/topics/read_feather'>write_feather</a></code></p></li>
+<li><p>Excel (.xlsx), using <code><a href='https://rdrr.io/pkg/openxlsx/man/write.xlsx.html'>write.xlsx</a></code>. Existing workbooks are overwritten unless <code>which</code> is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the <code>which</code> sheet does not, data are added as a new sheet to the existing workbook. <code>x</code> can also be a list of data frames; the list entry names are used as sheet names.</p></li>
+<li><p>R syntax object (.R), using <code><a href='https://rdrr.io/r/base/dput.html'>dput</a></code> (by default) or <code><a href='https://rdrr.io/r/base/dump.html'>dump</a></code> (if <code>format = 'dump'</code>)</p></li>
+<li><p>Saved R objects (.RData,.rda), using <code><a href='https://rdrr.io/r/base/save.html'>save</a></code>. In this case, <code>x</code> can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding <code>envir</code> argument is specified.</p></li>
+<li><p>Serialized R objects (.rds), using <code><a href='https://rdrr.io/r/base/readRDS.html'>saveRDS</a></code>. In this case, <code>x</code> can be any serializable R object.</p></li>
+<li><p>"XBASE" database files (.dbf), using <code><a href='https://rdrr.io/pkg/foreign/man/write.dbf.html'>write.dbf</a></code></p></li>
+<li><p>Weka Attribute-Relation File Format (.arff), using <code><a href='https://rdrr.io/pkg/foreign/man/write.arff.html'>write.arff</a></code></p></li>
+<li><p>Fixed-width format data (.fwf), using <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> with <code>row.names = FALSE</code>, <code>quote = FALSE</code>, and <code>col.names = FALSE</code></p></li>
+<li><p>gzip comma-separated data (.csv.gz), using <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> with <code>row.names = FALSE</code></p></li>
+<li><p><a href='https://github.com/csvy'>CSVY</a> (CSV with a YAML metadata header) using <code><a href='https://rdrr.io/pkg/csvy/man/write_csvy.html'>write_csvy</a></code>. The YAML header lines are preceded by R comment symbols (#) by default; this can be turned off by passing a <code>comment_header = FALSE</code> argument to <code>export</code>. Setting <code>fwrite = TRUE</code> (the default) will rely on <code><a href='https://rdrr.io/pkg/data.table/man/fwrite.html'>fwrite</a></code> for much faster export.</p></li>
+<li><p>Feather R/Python interchange format (.feather), using <code><a href='https://rdrr.io/pkg/feather/man/read_feather.html'>write_feather</a></code></p></li>
 <li><p>Fast storage (.fst), using <code><a href='http://www.fstpackage.org/reference/write_fst.html'>write.fst</a></code></p></li>
-<li><p>JSON (.json), using <code><a href='https://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></code>. In this case, <code>x</code> can be a variety of R objects, based on class mapping conventions in this paper: <a href='https://arxiv.org/abs/1403.2805'>https://arxiv.org/abs/1403.2805</a>.</p></li>
-<li><p>Matlab (.mat), using <code><a href='https://www.rdocumentation.org/packages/rmatio/topics/write.mat-methods'>write.mat</a></code></p></li>
-<li><p>OpenDocument Spreadsheet (.ods), using <code><a href='https://www.rdocumentation.org/packages/readODS/topics/write_ods'>write_ods</a></code>. (Currently only single-sheet exports are supported.)</p></li>
-<li><p>HTML (.html), using a custom method based on <code><a href='https://www.rdocumentation.org/packages/xml2/topics/xml_replace'>xml_add_child</a></code> to create a simple HTML table and <code><a href='https://www.rdocumentation.org/packages/xml2/topics/write_xml'>write_xml</a></code> to write to disk.</p></li>
-<li><p>XML (.xml), using a custom method based on <code><a href='https://www.rdocumentation.org/packages/xml2/topics/xml_replace'>xml_add_child</a></code> to create a simple XML tree and <code><a href='https://www.rdocumentation.org/packages/xml2/topics/write_xml'>write_xml</a></code> to write to disk.</p></li>
-<li><p>YAML (.yml), using <code><a href='https://www.rdocumentation.org/packages/yaml/topics/as.yaml'>as.yaml</a></code></p></li>
-<li><p>Clipboard export (on Windows and Mac OS), using <code><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></code> with <code>row.names = FALSE</code></p></li>
+<li><p>JSON (.json), using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>toJSON</a></code>. In this case, <code>x</code> can be a variety of R objects, based on class mapping conventions in this paper: <a href='https://arxiv.org/abs/1403.2805'>https://arxiv.org/abs/1403.2805</a>.</p></li>
+<li><p>Matlab (.mat), using <code><a href='https://rdrr.io/pkg/rmatio/man/write.mat-methods.html'>write.mat</a></code></p></li>
+<li><p>OpenDocument Spreadsheet (.ods), using <code><a href='https://rdrr.io/pkg/readODS/man/write_ods.html'>write_ods</a></code>. (Currently only single-sheet exports are supported.)</p></li>
+<li><p>HTML (.html), using a custom method based on <code><a href='http://xml2.r-lib.org/reference/xml_replace.html'>xml_add_child</a></code> to create a simple HTML table and <code><a href='http://xml2.r-lib.org/reference/write_xml.html'>write_xml</a></code> to write to disk.</p></li>
+<li><p>XML (.xml), using a custom method based on <code><a href='http://xml2.r-lib.org/reference/xml_replace.html'>xml_add_child</a></code> to create a simple XML tree and <code><a href='http://xml2.r-lib.org/reference/write_xml.html'>write_xml</a></code> to write to disk.</p></li>
+<li><p>YAML (.yml), using <code><a href='https://rdrr.io/pkg/yaml/man/as.yaml.html'>as.yaml</a></code></p></li>
+<li><p>Clipboard export (on Windows and Mac OS), using <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> with <code>row.names = FALSE</code></p></li>
 </ul>
-    <p>When exporting a data set that contains label attributes (e.g., if imported from an SPSS or Stata file) to a plain text file, <code><a href='characterize.html'>characterize</a></code> can be a useful pre-processing step that records value labels into the resulting file (e.g., <code>export(characterize(x), "file.csv")</code>) rather than the numeric values.</p>
-    
+
+<p>When exporting a data set that contains label attributes (e.g., if imported from an SPSS or Stata file) to a plain text file, <code><a href='characterize.html'>characterize</a></code> can be a useful pre-processing step that records value labels into the resulting file (e.g., <code>export(characterize(x), "file.csv")</code>) rather than the numeric values.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='extensions.html'>.export</a></code>, <code><a href='characterize.html'>characterize</a></code>, <code><a href='import.html'>import</a></code>, <code><a href='convert.html'>convert</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"datasets"</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"datasets"</span>)
 <span class='co'># specify only `file` argument</span>
-<span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.csv"</span>)</div><span class='co'># NOT RUN {</span>
+<span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.csv"</span>)
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Stata does not recognize variables names with '.'</span>
 <span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.dta"</span>)
-<span class='co'># }</span><div class='input'>
+}
+
 <span class='co'># specify only `format` argument</span>
-<span class='st'>"mtcars.dta"</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list.files'>dir</a></span>()</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"stata"</span>)
-<span class='st'>"mtcars.dta"</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list.files'>dir</a></span>()</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='st'>"mtcars.dta"</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>dir</a></span>()</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"stata"</span>)
+<span class='st'>"mtcars.dta"</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>dir</a></span>()</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># specify `file` and `format` to override default format</span>
 <span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"mtcars.txt"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"csv"</span>)
 
 <span class='co'># export multiple objects to Rdata</span>
-<span class='fu'>export</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>mtcars</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>iris</span> <span class='kw'>=</span> <span class='no'>iris</span>), <span class='st'>"mtcars.rdata"</span>)
-<span class='fu'>export</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"mtcars"</span>, <span class='st'>"iris"</span>), <span class='st'>"mtcars.rdata"</span>)
+<span class='fu'>export</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>mtcars</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>iris</span> <span class='kw'>=</span> <span class='no'>iris</span>), <span class='st'>"mtcars.rdata"</span>)
+<span class='fu'>export</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mtcars"</span>, <span class='st'>"iris"</span>), <span class='st'>"mtcars.rdata"</span>)
 
 <span class='co'># export to non-data frame R object to RDS or JSON</span>
 <span class='fu'>export</span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>, <span class='st'>"mtcars_cyl.rds"</span>)
-<span class='fu'>export</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>iris</span>, <span class='no'>mtcars</span>), <span class='st'>"list.json"</span>)
-
+<span class='fu'>export</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>iris</span>, <span class='no'>mtcars</span>), <span class='st'>"list.json"</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: jsonlite</span></div><div class='input'>
 <span class='co'># pass arguments to underlying export function</span>
 <span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.csv"</span>, <span class='kw'>col.names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># write data to .R syntax file and append additional data</span>
 <span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"data.R"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"dump"</span>)
 <span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"data.R"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"dump"</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/source'>source</a></span>(<span class='st'>"data.R"</span>, <span class='kw'>echo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/base/source.html'>source</a></span>(<span class='st'>"data.R"</span>, <span class='kw'>echo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 
 #&gt; &gt; x &lt;- structure(list(mpg = c(21, 21, 22.8, 21.4, 18.7, 
 #&gt; +     18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 
 #&gt; +     10.4, 14.7, 32.4, 30 .... [TRUNCATED] 
@@ -219,8 +229,8 @@
 #&gt; &gt; x &lt;- structure(list(mpg = c(21, 21, 22.8, 21.4, 18.7, 
 #&gt; +     18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 
 #&gt; +     10.4, 14.7, 32.4, 30 .... [TRUNCATED] </div><div class='input'>
-# write to an Excel workbook
-</div><span class='co'># NOT RUN {</span>
+<span class='co'># write to an Excel workbook</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
   <span class='co'>## export a single data frame</span>
   <span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.xlsx"</span>)
 
@@ -229,39 +239,37 @@
   <span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>export</span>(<span class='st'>"tst2.xlsx"</span>, <span class='kw'>keepNA</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
   <span class='co'>## export a list of data frames as worksheets</span>
-  <span class='fu'>export</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>iris</span>), <span class='st'>"multisheet.xlsx"</span>)
+  <span class='fu'>export</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>iris</span>), <span class='st'>"multisheet.xlsx"</span>)
 
   <span class='co'>## export, adding a new sheet to an existing workbook</span>
   <span class='fu'>export</span>(<span class='no'>iris</span>, <span class='st'>"mtcars.xlsx"</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='st'>"iris"</span>)
-<span class='co'># }</span><div class='input'>
+}
+
 <span class='co'># write data to a zip-compressed CSV</span>
 <span class='fu'>export</span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.csv.zip"</span>)
 
 <span class='co'># cleanup</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars.csv"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars.dta"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars_cyl.rds"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars.rdata"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"data.R"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"mtcars.csv.zip"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='st'>"list.json"</span>)</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars.csv"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars.dta"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars_cyl.rds"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars.rdata"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"data.R"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars.csv.zip"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"list.json"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -269,13 +277,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

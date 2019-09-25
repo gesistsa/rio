@@ -19,7 +19,6 @@
 #'     \item SAS XPORT (.xpt), using \code{\link[haven]{read_xpt}} or, if \code{haven = FALSE}, \code{\link[foreign]{read.xport}}.
 #'     \item SPSS (.sav), using \code{\link[haven]{read_sav}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used.
 #'     \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
-#'     \item SAS XPORT (.xpt), using \code{\link[foreign]{read.xport}}.
 #'     \item SPSS Portable Files (.por), using \code{\link[haven]{read_por}}.
 #'     \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. Use \code{which} to specify a sheet number. For .xlsx files, it is possible to set \code{readxl = FALSE}, so that \code{\link[openxlsx]{read.xlsx}} can be used instead of readxl (the default).
 #'     \item R syntax object (.R), using \code{\link[base]{dget}}
@@ -63,7 +62,6 @@
 #' stopifnot(identical(import("iris1.csv"), import("iris.tsv", format = "csv")))
 #'
 #' # import CSV as a `data.table`
-#' stopifnot(inherits(import("iris1.csv", setclass = "data.table"), "data.table"))
 #' stopifnot(inherits(import("iris1.csv", setclass = "data.table"), "data.table"))
 #'
 #' # pass arguments to underlying import function

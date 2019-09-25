@@ -1,3 +1,8 @@
+# rio 0.5.20
+
+ * Additional pointers were added to indicate how to load .doc, .docx, and .pdf files (#210, h/t Bill Denney)
+ * Ensure that tests only run if the corresponding package is installed.  (h/t Bill Denney)
+
 # rio 0.5.19
 
  * Fix behavior of `export()` to plain text files when `append = TRUE` (#201, h/t Julián Urbano)
