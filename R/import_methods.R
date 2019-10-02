@@ -372,12 +372,12 @@ function(file,
         a[["path"]] <- NULL
     }
     if (length(unused)>0) {
-        warning("The following arguments were ignored for read_ods:",
-                "\n", paste(unused, collapse = ', '))
+        warning("The following arguments were ignored for read_ods:\n",
+                paste(unused, collapse = ', '))
     }
     a <- a[intersect(names(a), names(frml))]
-    do.call("read_ods"
-            ,c(list(path = file, sheet = which, col_names = header),a))
+    do.call("read_ods",
+            c(list(path = file, sheet = which, col_names = header),a))
 }
 
 #' @importFrom utils type.convert
