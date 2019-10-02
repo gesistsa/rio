@@ -300,7 +300,6 @@ function(file,
         which <- a[["sheet"]]
         a[["sheet"]] <- NULL
     }
-    requireNamespace("readxl")
     frml <- formals(read_xls)
     unused <- setdiff(names(a), names(frml))
     if ("path" %in% names(a)) {
@@ -308,8 +307,8 @@ function(file,
         a[["path"]] <- NULL
     }
     if (length(unused)>0) {
-        warning("The following arguments were ignored by read_xls:",
-                "\n", paste(unused, collapse=', '))
+        warning("The following arguments were ignored by read_xls:\n",
+                paste(unused, collapse=', '))
     }
     a <- a[intersect(names(a), names(frml))]
     do.call("read_xls", c(list(path = file, sheet = which), a))
