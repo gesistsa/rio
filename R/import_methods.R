@@ -419,7 +419,7 @@ function(file,
 #' @export
 .import.rio_yml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
     requireNamespace("yaml")
-    as.data.frame(yaml::yaml.load(file, ...), stringsAsFactors = stringsAsFactors)
+    as.data.frame(yaml::read_yaml(file, ...), stringsAsFactors = stringsAsFactors)
 }
 
 #' @export
