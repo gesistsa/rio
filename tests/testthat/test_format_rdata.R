@@ -17,6 +17,11 @@ test_that("Export to Rdata", {
 test_that("Import from Rdata", {
     expect_true(is.data.frame(import("iris.Rdata")))
     expect_true(is.data.frame(import("iris.Rdata", which = 1)))
+    expect_warning(is.data.frame(import("iris.Rdata",which=1,
+                                        verbose='ignored value',
+                                        invalid_argument=42)),
+                   "File imported using load. Arguments to '...' ignored.",
+                   label="RData imports and ignores unused arguments with a warning")
 })
 
 test_that("Export to rda", {
@@ -26,6 +31,11 @@ test_that("Export to rda", {
 test_that("Import from rda", {
     expect_true(is.data.frame(import("iris.rda")))
     expect_true(is.data.frame(import("iris.rda", which = 1)))
+    expect_warning(is.data.frame(import("iris.rda", which=1,
+                                        verbose="ignored value",
+                                        invalid_argument=42)),
+                   "File imported using load. Arguments to '...' ignored.",
+                   label="rda imports and ignores unused arguments with a warning")
 })
 
 unlink("iris.Rdata")
