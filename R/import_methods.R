@@ -439,3 +439,9 @@ function(file,
     requireNamespace("clipr")
     clipr::read_clip_tbl(x = clipr::read_clip(), header = header, sep = sep, ...)
 }
+
+#' @export
+.import.rio_pzfx <- function(file, which=1, ...) {
+    requireNamespace("pzfx")
+    pzfx::read_pzfx(path=file, table=which, ...)
+}

@@ -61,6 +61,7 @@ Suggests:
     fst,
     hexView,
     jsonlite,
+    pzfx,
     readODS (>= 1.6.4),
     readr,
     rmatio,
