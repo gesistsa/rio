@@ -301,17 +301,23 @@ function(file,
 #' @export
 .import.rio_xls <- function(file, which = 1, ...) {
 
-    Call <- match.call(expand.dots = TRUE)
-    if ("which" %in% names(Call)) {
-        Call$sheet <- Call$which
-        Call$which <- NULL
+    a <- list(...)
+    if ("sheet" %in% names(a)) {
+        which <- a[["sheet"]]
+        a[["sheet"]] <- NULL
     }
-
-    Call$path <- file
-    Call$file <- NULL
-    Call$readxl <- NULL
-    Call[[1L]] <- as.name("read_xls")
-    eval.parent(Call)
+    frml <- formals(read_xls)
+    unused <- setdiff(names(a), names(frml))
+    if ("path" %in% names(a)) {
+        unused <- c(unused, 'path')
+        a[["path"]] <- NULL
+    }
+    if (length(unused)>0) {
+        warning("The following arguments were ignored by read_xls:\n",
+                paste(unused, collapse=', '))
+    }
+    a <- a[intersect(names(a), names(frml))]
+    do.call("read_xls", c(list(path = file, sheet = which), a))
 }
 
 #' @importFrom readxl read_xlsx
