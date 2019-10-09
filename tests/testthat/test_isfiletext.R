@@ -1,7 +1,7 @@
 context("correctly identifying files as text vs binary")
 require("datasets")
 
-txtformats <- c("arff","csv","csv2","dump","fwf","psv","r","tsv","txt","fwf")
+txtformats <- c("arff","csv","csv2","dump","fwf","psv","r","tsv","txt")
 binformats <- c("dbf","dta","rda","rdata","rds","sas7bdat","sav","xlsx","xpt")
 names(iris) <- gsub("\\.","_",names(iris))
 
