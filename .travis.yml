@@ -13,12 +13,6 @@ matrix:
       dist: trusty
       env: R_CODECOV=true
     - os: osx
-      osx_image: xcode8.3
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install llvm &&
-    export PATH="/usr/local/opt/llvm/bin:$PATH" &&
-    export LDFLAGS="-L/usr/local/opt/llvm/lib" &&
-    export CFLAGS="-I/usr/local/opt/llvm/include"; fi
 r_packages:
 - covr
 after_success:
