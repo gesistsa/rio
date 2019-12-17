@@ -256,6 +256,8 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     }
     for (i in seq_along(x)) {
         x[[i]][] <- lapply(x[[i]], as.character)
+        x[[i]][] <- lapply(x[[i]], function(v) gsub('&','&amp;',v))
+        names(x[[i]]) <- gsub('&','&amp;',names(x[[i]]))
         tab <- xml2::xml_add_child(bod, "table")
         # add header row
         invisible(xml2::xml_add_child(tab, xml2::read_xml(paste0(twrap(paste0(twrap(names(x[[i]]), "th"), collapse = ""), "tr"), "\n"))))
@@ -276,6 +278,10 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     for (a in seq_along(att)) {
         xml2::xml_attr(xml, names(att)[a]) <- att[[a]]
     }
+    # remove illegal characters
+    row.names(x) <- gsub('&', '&amp;', row.names(x))
+    colnames(x) <- gsub('[ &]', '.', colnames(x))
+    x[] <- lapply(x, function(v) gsub('&', '&amp;', v))
     # add data
     for (i in seq_len(nrow(x))) {
         thisrow <- xml2::xml_add_child(xml, "Observation")
