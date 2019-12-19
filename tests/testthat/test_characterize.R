@@ -1,8 +1,8 @@
 context("characterize()/factorize()")
 x <- structure(1:4, labels = c("A" = 1, "B" = 2, "C" = 3))
-xdf <- data.frame(v1 = structure(1:4, labels = c("A" = 1, "B" = 2, "C" = 3)),
+xdf <- data.frame(v1 = structure(1:4, labels = c("A" = 1, "B" = 2, "C" = 3), label = "variable 1"),
                   v2 = structure(c(1,0,0,1), labels = c("foo" = 0, "bar" = 1)),
-                  v3 = 4:1)
+                  v3 = 4:1, label = "variable 2")
 
 
 test_that("test characterize.default()", {

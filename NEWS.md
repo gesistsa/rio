@@ -1,3 +1,7 @@
+# rio 0.5.21
+
+ * Fix dropping of variable label in `characterize()` and `factorize()`. (#204, h/t David Armstrong)
+
 # rio 0.5.20
 
  * Additional pointers were added to indicate how to load .doc, .docx, and .pdf files (#210, h/t Bill Denney)
