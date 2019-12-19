@@ -6,7 +6,9 @@ test_that("Export to XBASE (.dbf)", {
 })
 
 test_that("Import from XBASE (.dbf)", {
-    expect_true(is.data.frame(import("iris.dbf")))
+    d <- import("iris.dbf")
+    expect_true(is.data.frame(d))
+    expect_true(!"factor" %in% sapply(d, class))
 })
 
 unlink("iris.dbf")

@@ -222,8 +222,8 @@ function(file,
 
 #' @importFrom foreign read.dbf
 #' @export
-.import.rio_dbf <- function(file, which = 1, ...) {
-    foreign::read.dbf(file = file, ...)
+.import.rio_dbf <- function(file, which = 1, as.is = TRUE, ...) {
+    foreign::read.dbf(file = file, as.is = as.is)
 }
 
 #' @importFrom utils read.DIF

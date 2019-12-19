@@ -1,6 +1,7 @@
 # rio 0.5.21
 
  * Fix dropping of variable label in `characterize()` and `factorize()`. (#204, h/t David Armstrong)
+ * Import of DBF files now does not convert strings to factors. (#202, h/t @jllipatz)
 
 # rio 0.5.20
 
