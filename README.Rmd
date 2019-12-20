@@ -59,8 +59,16 @@ Note: Because of inconsistencies across underlying packages, the data.frame retu
 In rio v0.5.0, a new list-based import function was added. This allows users to import a list of data frames from a multi-object file (such as an Excel workbook, .Rdata file, zip directory, or HTML file):
 
 ```{r}
-str(import_list("mtcars.xlsx"))
+str(m <- import_list("mtcars.xlsx"))
 ```
+
+And for rio v0.6.0, a new list-based export function was added. This makes it easy to export a list of (possibly named) data frames to multiple files:
+
+```{r}
+export_list(m, "%s.tsv")
+c("mtcars.tsv", "iris.tsv") %in% dir()
+```
+
 
 ### Convert
 

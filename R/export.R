@@ -1,7 +1,7 @@
 #' @rdname export
 #' @title Export
 #' @description Write data.frame to a file
-#' @param x A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.)
+#' @param x A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use \code{\link{export_list}} instead.
 #' @param file A character string naming a file. Must specify \code{file} and/or \code{format}.
 #' @param format An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.
 #' @param \dots Additional arguments for the underlying export functions. This can be used to specify non-standard arguments. See examples.
@@ -42,6 +42,8 @@
 #' }
 #'
 #' When exporting a data set that contains label attributes (e.g., if imported from an SPSS or Stata file) to a plain text file, \code{\link{characterize}} can be a useful pre-processing step that records value labels into the resulting file (e.g., \code{export(characterize(x), "file.csv")}) rather than the numeric values.
+#' 
+#' Use \code{\link{export_list}} to export a list of dataframes to separate files.
 #' 
 #' @examples
 #' library("datasets")
@@ -104,7 +106,7 @@
 #' unlink("data.R")
 #' unlink("mtcars.csv.zip")
 #' unlink("list.json")
-#' @seealso \code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}
+#' @seealso \code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}, \code{\link{export_list}}
 #' @importFrom haven labelled
 #' @export
 export <- function(x, file, format, ...) {

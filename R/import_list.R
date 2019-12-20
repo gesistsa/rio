@@ -34,7 +34,7 @@
 #' unlink("mtcars.csv")
 #' unlink("iris.csv")
 #' 
-#' @seealso \code{\link{import}}
+#' @seealso \code{\link{import}}, \code{\link{export_list}}, \code{\link{export}}
 #' @export
 import_list <- 
 function(file, 

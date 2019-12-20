@@ -7,7 +7,7 @@
 export(x, file, format, ...)
 }
 \arguments{
-\item{x}{A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.)}
+\item{x}{A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use \code{\link{export_list}} instead.}
 
 \item{file}{A character string naming a file. Must specify \code{file} and/or \code{format}.}
 
@@ -58,6 +58,8 @@ The output file can be to a compressed directory, simply by adding an appropriat
 }
 
 When exporting a data set that contains label attributes (e.g., if imported from an SPSS or Stata file) to a plain text file, \code{\link{characterize}} can be a useful pre-processing step that records value labels into the resulting file (e.g., \code{export(characterize(x), "file.csv")}) rather than the numeric values.
+
+Use \code{\link{export_list}} to export a list of dataframes to separate files.
 }
 \examples{
 library("datasets")
@@ -122,5 +124,5 @@ unlink("mtcars.csv.zip")
 unlink("list.json")
 }
 \seealso{
-\code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}
+\code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}, \code{\link{export_list}}
 }

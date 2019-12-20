@@ -32,5 +32,5 @@ unlink(c("mtcars.csv", "mtcars.rds", "mtcars.sav", "mtcars.dta"))
 \href{https://github.com/Stan125/GREA}{GREA} provides an RStudio add-in to import data using rio.
 }
 \seealso{
-\code{\link{import}}, \code{\link{import_list}}, \code{\link{export}}, \code{\link{convert}}, \code{\link{install_formats}}
+\code{\link{import}}, \code{\link{import_list}}, \code{\link{export}}, \code{\link{export_list}}, \code{\link{convert}}, \code{\link{install_formats}}
 }

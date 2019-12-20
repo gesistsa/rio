@@ -159,6 +159,12 @@ export(list(mtcars = mtcars, iris = iris), "multi.rdata")
 export(c("mtcars", "iris"), "multi.rdata")
 ```
 
+It is also possible to use the new (as of v0.6.0) function `export_list()` to write a list of data frames to multiple files using either a vector of file names or a file pattern:
+
+```{r}
+export_list(list(mtcars = mtcars, iris = iris), "%s.tsv")
+```
+
 
 ## File Conversion
 
@@ -257,4 +263,6 @@ unlink("mtcars.dta")
 unlink("multi.xlsx")
 unlink("multi.rdata")
 unlink("mtcars2.dta")
+unlink("mtcars.tsv")
+unlink("iris.tsv")
 ```

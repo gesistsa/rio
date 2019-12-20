@@ -75,7 +75,7 @@ In rio v0.5.0, a new list-based import function was added. This allows users to 
 
 
 ```r
-str(import_list("mtcars.xlsx"))
+str(m <- import_list("mtcars.xlsx"))
 ```
 
 ```
@@ -99,6 +99,26 @@ str(import_list("mtcars.xlsx"))
 ##   ..$ Petal.Width : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
 ##   ..$ Species     : chr [1:150] "setosa" "setosa" "setosa" "setosa" ...
 ```
+
+And for rio v0.6.0, a new list-based export function was added. This makes it easy to export a list of (possibly named) data frames to multiple files:
+
+
+```r
+export_list(m, "%s.tsv")
+```
+
+```
+## Error in export_list(m, "%s.tsv"): could not find function "export_list"
+```
+
+```r
+c("mtcars.tsv", "iris.tsv") %in% dir()
+```
+
+```
+## [1] FALSE FALSE
+```
+
 
 ### Convert
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Install rio's &#8216;Suggests&#8217; Dependencies — install_formats • rio</title>
+<title>Export list of data frames to files — export_list • rio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="Install rio's &#8216;Suggests&#8217; Dependencies — install_formats" />
-<meta property="og:description" content="This function installs various &amp;#8216;Suggests&amp;#8217; dependencies for rio that expand its support to the full range of support import and export formats. These packages are not installed or loaded by default in order to create a slimmer and faster package build, install, and load." />
+<meta property="og:title" content="Export list of data frames to files — export_list" />
+<meta property="og:description" content="Use export to export a list of data frames to a vector of file names or a filename pattern." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -119,36 +119,73 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Install rio's &#8216;Suggests&#8217; Dependencies</h1>
-    <small class="dont-index">Source: <a href='https://github.com/leeper/rio/blob/master/R/suggestions.R'><code>R/suggestions.R</code></a></small>
-    <div class="hidden name"><code>install_formats.Rd</code></div>
+    <h1>Export list of data frames to files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/leeper/rio/blob/master/R/export_list.R'><code>R/export_list.R</code></a></small>
+    <div class="hidden name"><code>export_list.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function installs various &#8216;Suggests&#8217; dependencies for rio that expand its support to the full range of support import and export formats. These packages are not installed or loaded by default in order to create a slimmer and faster package build, install, and load.</p>
+    <p>Use <code><a href='export.html'>export</a></code> to export a list of data frames to a vector of file names or a filename pattern.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>install_formats</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>export_list</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>x</th>
+      <td><p>A list of data frames to be written to files.</p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p>A character vector string containing a single file name with a <code>%s</code> wildcard placeholder, or a vector of file paths for multiple files to be imported. If <code>x</code> elements are named, these will be used in place of <code>%s</code>, otherwise numbers will be used; all elements must be named for names to be used.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></code>.</p></td>
+      <td><p>Additional arguments passed to <code><a href='export.html'>export</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>NULL</code></p>
+    <p>The name(s) of the output file(s) as a character vector (invisibly).</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p><code><a href='export.html'>export</a></code> can export a list of data frames to a single multi-dataset file (e.g., an Rdata or Excel .xlsx file). Use <code>export_list</code> to export such a list to <em>multiple</em> files.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='import.html'>import</a></code>, <code><a href='import_list.html'>import_list</a></code>, <code><a href='export.html'>export</a></code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>'datasets'</span>)
+<span class='fu'><a href='export.html'>export</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>mtcars1</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>10</span>,],
+            <span class='kw'>mtcars2</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='fl'>11</span>:<span class='fl'>20</span>,],
+            <span class='kw'>mtcars3</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='fl'>21</span>:<span class='fl'>32</span>,]), <span class='st'>"mtcars.xlsx"</span>)
+
+<span class='co'># import all worksheets</span>
+<span class='no'>mylist</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='import_list.html'>import_list</a></span>(<span class='st'>"mtcars.xlsx"</span>)
+
+<span class='co'># re-export as separate named files</span>
+<span class='fu'>export_list</span>(<span class='no'>mylist</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"mtcars"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='st'>".csv"</span>))
+
+<span class='co'># re-export as separate files using a name pattern</span>
+<span class='fu'>export_list</span>(<span class='no'>mylist</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"%s.csv"</span>)
+
+<span class='co'># cleanup</span>
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars.xlsx"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars1.csv"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars2.csv"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars3.csv"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

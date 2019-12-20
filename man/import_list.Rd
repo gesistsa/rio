@@ -63,5 +63,5 @@ unlink("iris.csv")
 
 }
 \seealso{
-\code{\link{import}}
+\code{\link{import}}, \code{\link{export_list}}, \code{\link{export}}
 }
