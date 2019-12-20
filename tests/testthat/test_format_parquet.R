@@ -1,5 +1,6 @@
 context("Parquet imports/exports")
 require("datasets")
+arrow::install_arrow()
 
 test_that("Export to parquet", {
     skip_if_not_installed("arrow")

@@ -8,6 +8,7 @@ test_that("Export to FWF", {
 
 test_that("Import from FWF (read.fwf)", {
     expect_true(is.data.frame(import("iris.fwf", widths = c(3,3,3,3,1))))
+    expect_true(is.data.frame(import("iris.fwf", widths = list(3,3,3,3,1))))
     expect_true(is.data.frame(import("iris.fwf", widths = c(3,3,3,3,1), col.names = names(iris))))
     expect_true(is.data.frame(import("iris.fwf", widths = c(3,3,3,3,1), col.names = names(iris), readr = TRUE)))
     expect_true(is.data.frame(import("iris.txt", widths = c(3,3,3,3,1), format = "fwf")))

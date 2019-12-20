@@ -7,6 +7,10 @@ export(list(mtcars3 = mtcars[1:10,],
 mylist <- import_list("mtcars.xlsx")
 
 test_that("export_list() works", {
+
+    expect_error(export_list(mtcars), label = "export_list() fails on exporting single data frame")
+    expect_error(export_list(mylist, file = NULL), label = "export_list() fails when file is NULL")
+
     expect_true(identical(export_list(mylist, file = paste0("mtcars_", 3:1, ".csv")), paste0("mtcars_", 3:1, ".csv")))
     expect_true(identical(export_list(mylist, file = "%s.csv"), paste0("mtcars", 3:1, ".csv")))
 
@@ -19,10 +23,12 @@ test_that("export_list() works", {
 
     names(mylist) <- c("a", "", "c")
     expect_error(export_list(mylist), label = "export_list() fails without 'file' argument")
+    expect_error(export_list(mylist, file = "%.csv"), label = "export_list() fails without missing names")
     expect_error(export_list(mylist, file = c("a.csv", "b.csv")), label = "export_list() fails with mismatched argument lengths")
 
     names(mylist) <- c("a", "a", "c")
     expect_error(export_list(mylist, file = "mtcars_%s.csv"), label = "export_list() fails with duplicated data frame names")
+    expect_error(export_list(mylist, file = c("mtcars1.csv", "mtcars1.csv", "mtcars3.csv")), label = "export_list() fails with duplicated data frame names")
     
 })
 

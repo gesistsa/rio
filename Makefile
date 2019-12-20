@@ -11,7 +11,7 @@ README.md: README.Rmd
 README.html: README.md
 	pandoc -o README.html README.md
 
-../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE README.md R/* po/R-rio.pot
+../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE README.md R/* man/* tests/testthat/* po/R-rio.pot
 	cd ../ && R CMD build $(pkg)
 
 build: ../$(pkg)*.tar.gz

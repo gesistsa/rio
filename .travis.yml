@@ -14,7 +14,5 @@ jobs:
     - os: osx
 r_packages:
 - covr
-before_install:
-- R -q -e 'arrow::install_arrow()'
 after_success:
 - R -q -e 'library("covr");codecov()'

@@ -45,6 +45,13 @@ test_that("Import single file via import_list()", {
     expect_true(identical(import_list("mtcars.rds", rbind = TRUE), mtcars))
 })
 
+test_that("Import single file from zip via import_list()", {
+    export(mtcars, "mtcars.csv.zip", format = "csv")
+    expect_true(inherits(import_list("mtcars.csv.zip")[[1L]], "data.frame"))
+    expect_true(inherits(import_list("mtcars.csv.zip", which = 1)[[1L]], "data.frame"))
+    expect_true(inherits(import_list("mtcars.csv.zip", which = "mtcars.csv")[[1L]], "data.frame"))
+})
+
 test_that("Using setclass in import_list()", {
     dat1 <- import_list(rep("mtcars.rds", 2), setclass = "data.table", rbind = TRUE)
     expect_true(inherits(dat1, "data.table"))
@@ -84,3 +91,4 @@ test_that("File names are added as attributes by import_list()", {
 
 unlink("data.rdata")
 unlink("mtcars.rds")
+unlink("mtcars.csv.zip")
