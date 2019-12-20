@@ -143,6 +143,25 @@ function(file,
 }
 
 #' @export
+.import.rio_dump <- function(file, which = 1, envir = new.env(), ...) {
+    source(file = file, local = envir)
+    if (length(list(...)) > 0) {
+      warning("File imported using load. Arguments to '...' ignored.")
+    }
+    if (missing(which)) {
+        if (length(ls(envir)) > 1) {
+            warning("Dump file contains multiple objects. Returning first object.")
+        }
+        which <- 1
+    }
+    if (is.numeric(which)) {
+        get(ls(envir)[which], envir)
+    } else {
+        get(ls(envir)[grep(which, ls(envir))[1]], envir)
+    }
+}
+
+#' @export
 .import.rio_rds <- function(file, which = 1, ...) {
   if (length(list(...))>0) {
     warning("File imported using readRDS. Arguments to '...' ignored.")
@@ -159,7 +178,7 @@ function(file,
 #' @export
 .import.rio_rdata <- function(file, which = 1, envir = new.env(), ...) {
     load(file = file, envir = envir)
-    if (length(list(...))>0) {
+    if (length(list(...)) > 0) {
       warning("File imported using load. Arguments to '...' ignored.")
     }
     if (missing(which)) {
@@ -222,8 +241,8 @@ function(file,
 
 #' @importFrom foreign read.dbf
 #' @export
-.import.rio_dbf <- function(file, which = 1, ...) {
-    foreign::read.dbf(file = file, ...)
+.import.rio_dbf <- function(file, which = 1, as.is = TRUE, ...) {
+    foreign::read.dbf(file = file, as.is = as.is)
 }
 
 #' @importFrom utils read.DIF
@@ -472,4 +491,10 @@ function(file,
 .import.rio_pzfx <- function(file, which=1, ...) {
     requireNamespace("pzfx")
     pzfx::read_pzfx(path=file, table=which, ...)
+}
+
+#' @export
+.import.rio_parquet <- function(file, which = 1, as_data_frame = TRUE, ...) {
+    requireNamespace("arrow")
+    arrow::read_parquet(file = file, as_data_frame = TRUE, ...)
 }

@@ -59,8 +59,16 @@ Note: Because of inconsistencies across underlying packages, the data.frame retu
 In rio v0.5.0, a new list-based import function was added. This allows users to import a list of data frames from a multi-object file (such as an Excel workbook, .Rdata file, zip directory, or HTML file):
 
 ```{r}
-str(import_list("mtcars.xlsx"))
+str(m <- import_list("mtcars.xlsx"))
 ```
+
+And for rio v0.6.0, a new list-based export function was added. This makes it easy to export a list of (possibly named) data frames to multiple files:
+
+```{r}
+export_list(m, "%s.tsv")
+c("mtcars.tsv", "iris.tsv") %in% dir()
+```
+
 
 ### Convert
 
@@ -120,6 +128,7 @@ The full list of supported formats is below:
 | Fixed-width format data | .fwf | **utils** | **utils** | Yes |
 | gzip comma-separated data | .csv.gz | **utils** | **utils** | Yes |
 | CSVY (CSV + YAML metadata header) | .csvy | [**csvy**](https://cran.r-project.org/package=csvy) | [**csvy**](https://cran.r-project.org/package=csvy) | No |
+| Apache Arrow (Parquet) | .parquet | [**arrow**](https://cran.r-project.org/package=arrow) | [**arrow**](https://cran.r-project.org/package=arrow) | No |
 | EViews | .wf1 | [**hexView**](https://cran.r-project.org/package=hexView) |  | No |
 | Feather R/Python interchange format | .feather | [**feather**](https://cran.r-project.org/package=feather) | [**feather**](https://cran.r-project.org/package=feather) | No |
 | Fast Storage | .fst | [**fst**](https://cran.r-project.org/package=fst) | [**fst**](https://cran.r-project.org/package=fst) | No |

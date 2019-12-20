@@ -3,8 +3,8 @@ e <- try(import("http://www.stata-press.com/data/r13/auto.dta"))
 
 if (!inherits(e, "try-error")) {
 
+    g <- gather_attrs(e)
     test_that("Gather attrs from Stata", {
-        g <- gather_attrs(e)
         expect_true(length(attributes(e[[1]])) >= 1)
         expect_true(length(attributes(g[[1]])) == 0)
         expect_true(length(attributes(e)) == 5)
@@ -13,6 +13,20 @@ if (!inherits(e, "try-error")) {
         expect_true(!"label" %in% names(attributes(g[[1]])))
         expect_true("label" %in% names(attributes(g)))
         expect_true("labels" %in% names(attributes(g)))
+        expect_true("format.stata" %in% names(attributes(g)))
+        expect_true(!"format.stata" %in% names(attributes(g[[1]])))
+    })
+
+    test_that("Spread attrs from Stata", {
+        s <- spread_attrs(g)
+        # df-level attributes
+        expect_true("label" %in% names(attributes(s)))
+        expect_true("notes" %in% names(attributes(s)))
+        # spread attributes
+        expect_true("format.stata" %in% names(attributes(s[[1]])))
+        expect_true(!"format.stata" %in% names(attributes(s)))
+        expect_true("label" %in% names(attributes(s[[1]])))
+        expect_true(!"labels" %in% names(attributes(s)))
     })
 
     test_that("Gather empty attributes", {

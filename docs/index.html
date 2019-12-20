@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.22</span>
       </span>
     </div>
 
@@ -134,7 +134,7 @@
 <pre><code>## [1] TRUE</code></pre>
 <p>Note: Because of inconsistencies across underlying packages, the data.frame returned by <code>import</code> might vary slightly (in variable classes and attributes) depending on file type.</p>
 <p>In rio v0.5.0, a new list-based import function was added. This allows users to import a list of data frames from a multi-object file (such as an Excel workbook, .Rdata file, zip directory, or HTML file):</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw"><a href="reference/import_list.html">import_list</a></span>(<span class="st">"mtcars.xlsx"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(m &lt;-<span class="st"> </span><span class="kw"><a href="reference/import_list.html">import_list</a></span>(<span class="st">"mtcars.xlsx"</span>))</a></code></pre></div>
 <pre><code>## List of 2
 ##  $ mtcars:'data.frame':  32 obs. of  11 variables:
 ##   ..$ mpg : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
@@ -154,12 +154,17 @@
 ##   ..$ Petal.Length: num [1:150] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
 ##   ..$ Petal.Width : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
 ##   ..$ Species     : chr [1:150] "setosa" "setosa" "setosa" "setosa" ...</code></pre>
+<p>And for rio v0.6.0, a new list-based export function was added. This makes it easy to export a list of (possibly named) data frames to multiple files:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="reference/export_list.html">export_list</a></span>(m, <span class="st">"%s.tsv"</span>)</a></code></pre></div>
+<pre><code>## Error in export_list(m, "%s.tsv"): could not find function "export_list"</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mtcars.tsv"</span>, <span class="st">"iris.tsv"</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">dir</a></span>()</a></code></pre></div>
+<pre><code>## [1] FALSE FALSE</code></pre>
 </div>
 <div id="convert" class="section level3">
 <h3 class="hasAnchor">
 <a href="#convert" class="anchor"></a>Convert</h3>
 <p>The <code><a href="reference/convert.html">convert()</a></code> function links <code><a href="reference/import.html">import()</a></code> and <code><a href="reference/export.html">export()</a></code> by constructing a dataframe from the imported file and immediately writing it back to disk. <code><a href="reference/convert.html">convert()</a></code> invisibly returns the file name of the exported file, so that it can be used to programmatically access the new file.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="reference/convert.html">convert</a></span>(<span class="st">"mtcars.sav"</span>, <span class="st">"mtcars.dta"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="reference/convert.html">convert</a></span>(<span class="st">"mtcars.sav"</span>, <span class="st">"mtcars.dta"</span>)</a></code></pre></div>
 <p>It is also possible to use <strong>rio</strong> on the command-line by calling <code>Rscript</code> with the <code>-e</code> (expression) argument. For example, to convert a file from Stata (.dta) to comma-separated values (.csv), simply do the following:</p>
 <pre><code>Rscript -e "rio::convert('iris.dta', 'iris.csv')"</code></pre>
 </div>
@@ -168,7 +173,7 @@
 <h2 class="hasAnchor">
 <a href="#supported-file-formats" class="anchor"></a>Supported file formats</h2>
 <p><strong>rio</strong> supports a wide range of file formats. To keep the package slim, all non-essential formats are supported via “Suggests” packages, which are not installed (or loaded) by default. To ensure rio is fully functional, install these packages the first time you use <strong>rio</strong> via:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="reference/install_formats.html">install_formats</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="reference/install_formats.html">install_formats</a></span>()</a></code></pre></div>
 <p>The full list of supported formats is below:</p>
 <table class="table">
 <thead><tr class="header">
@@ -341,81 +346,95 @@
 <td>No</td>
 </tr>
 <tr class="even">
+<td>Apache Arrow (Parquet)</td>
+<td>.parquet</td>
+<td><a href="https://cran.r-project.org/package=arrow"><strong>arrow</strong></a></td>
+<td><a href="https://cran.r-project.org/package=arrow"><strong>arrow</strong></a></td>
+<td>No</td>
+</tr>
+<tr class="odd">
 <td>EViews</td>
 <td>.wf1</td>
 <td><a href="https://cran.r-project.org/package=hexView"><strong>hexView</strong></a></td>
 <td></td>
 <td>No</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Feather R/Python interchange format</td>
 <td>.feather</td>
 <td><a href="https://cran.r-project.org/package=feather"><strong>feather</strong></a></td>
 <td><a href="https://cran.r-project.org/package=feather"><strong>feather</strong></a></td>
 <td>No</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Fast Storage</td>
 <td>.fst</td>
 <td><a href="https://cran.r-project.org/package=fst"><strong>fst</strong></a></td>
 <td><a href="https://cran.r-project.org/package=fst"><strong>fst</strong></a></td>
 <td>No</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>JSON</td>
 <td>.json</td>
 <td><a href="https://cran.r-project.org/package=jsonlite"><strong>jsonlite</strong></a></td>
 <td><a href="https://cran.r-project.org/package=jsonlite"><strong>jsonlite</strong></a></td>
 <td>No</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Matlab</td>
 <td>.mat</td>
 <td><a href="https://cran.r-project.org/package=rmatio"><strong>rmatio</strong></a></td>
 <td><a href="https://cran.r-project.org/package=rmatio"><strong>rmatio</strong></a></td>
 <td>No</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>OpenDocument Spreadsheet</td>
 <td>.ods</td>
 <td><a href="https://cran.r-project.org/package=readODS"><strong>readODS</strong></a></td>
 <td><a href="https://cran.r-project.org/package=readODS"><strong>readODS</strong></a></td>
 <td>No</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>HTML Tables</td>
 <td>.html</td>
 <td><a href="https://cran.r-project.org/package=xml2"><strong>xml2</strong></a></td>
 <td><a href="https://cran.r-project.org/package=xml2"><strong>xml2</strong></a></td>
 <td>No</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Shallow XML documents</td>
 <td>.xml</td>
 <td><a href="https://cran.r-project.org/package=xml2"><strong>xml2</strong></a></td>
 <td><a href="https://cran.r-project.org/package=xml2"><strong>xml2</strong></a></td>
 <td>No</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>YAML</td>
 <td>.yml</td>
 <td><a href="https://cran.r-project.org/package=yaml"><strong>yaml</strong></a></td>
 <td><a href="https://cran.r-project.org/package=yaml"><strong>yaml</strong></a></td>
 <td>No</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Clipboard</td>
 <td>default is tsv</td>
 <td><a href="https://cran.r-project.org/package=clipr"><strong>clipr</strong></a></td>
 <td><a href="https://cran.r-project.org/package=clipr"><strong>clipr</strong></a></td>
 <td>No</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://www.google.com/sheets/about/">Google Sheets</a></td>
 <td>as Comma-separated data</td>
 <td></td>
 <td></td>
 <td></td>
+</tr>
+<tr class="even">
+<td>Graphpad Prism</td>
+<td>.pzfx</td>
+<td><a href="https://cran.r-project.org/package=pzfx"><strong>pzfx</strong></a></td>
+<td><a href="https://cran.r-project.org/package=pzfx"><strong>pzfx</strong></a></td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -456,14 +475,14 @@
 <code>format</code>: a character string describing the variable storage type in the original file</li>
 </ul>
 <p>The <code><a href="reference/gather_attrs.html">gather_attrs()</a></code> function makes it easy to move variable-level attributes to the data frame level (and <code><a href="reference/gather_attrs.html">spread_attrs()</a></code> reverses that gathering process). These can be useful, especially, during file conversion to more easily modify attributes that are handled differently across file formats. As an example, the following idiom can be used to trim SPSS value labels to the 32-character maximum allowed by Stata:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">dat &lt;-<span class="st"> </span><span class="kw"><a href="reference/gather_attrs.html">gather_attrs</a></span>(rio<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span>(<span class="st">"data.sav"</span>))</a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/attr.html">attr</a></span>(dat, <span class="st">"labels"</span>) &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span>(dat)<span class="op">$</span>labels, <span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb13-3" title="3">    <span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(x)) {</a>
-<a class="sourceLine" id="cb13-4" title="4">        <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(x) &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/substr.html">substring</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(x), <span class="dv">1</span>, <span class="dv">32</span>)</a>
-<a class="sourceLine" id="cb13-5" title="5">    }</a>
-<a class="sourceLine" id="cb13-6" title="6">    x</a>
-<a class="sourceLine" id="cb13-7" title="7">})</a>
-<a class="sourceLine" id="cb13-8" title="8"><span class="kw"><a href="reference/export.html">export</a></span>(<span class="kw"><a href="reference/gather_attrs.html">spread_attrs</a></span>(dat), <span class="st">"data.dta"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">dat &lt;-<span class="st"> </span><span class="kw"><a href="reference/gather_attrs.html">gather_attrs</a></span>(rio<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span>(<span class="st">"data.sav"</span>))</a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/attr.html">attr</a></span>(dat, <span class="st">"labels"</span>) &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span>(dat)<span class="op">$</span>labels, <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb17-3" title="3">    <span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(x)) {</a>
+<a class="sourceLine" id="cb17-4" title="4">        <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(x) &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/substr.html">substring</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(x), <span class="dv">1</span>, <span class="dv">32</span>)</a>
+<a class="sourceLine" id="cb17-5" title="5">    }</a>
+<a class="sourceLine" id="cb17-6" title="6">    x</a>
+<a class="sourceLine" id="cb17-7" title="7">})</a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="kw"><a href="reference/export.html">export</a></span>(<span class="kw"><a href="reference/gather_attrs.html">spread_attrs</a></span>(dat), <span class="st">"data.dta"</span>)</a></code></pre></div>
 <p>In addition, two functions (added in v0.5.5) provide easy ways to create character and factor variables from these “labels” attributes. <code><a href="reference/characterize.html">characterize()</a></code> converts a single variable or all variables in a data frame that have “labels” attributes into character vectors based on the mapping of values to value labels. <code><a href="reference/characterize.html">factorize()</a></code> does the same but returns factor variables. This can be especially helpful for converting these rich file formats into open formats (e.g., <code><a href="reference/export.html">export(characterize(import("file.dta")), "file.csv")</a></code>.</p>
 </li>
 <li><p><strong>rio</strong> imports and exports files based on an internal S3 class infrastructure. This means that other packages can contain extensions to <strong>rio</strong> by registering S3 methods. These methods should take the form <code>.import.rio_X()</code> and <code>.export.rio_X()</code>, where <code>X</code> is the file extension of a file type. An example is provided in the <a href="https://github.com/leeper/rio.db">rio.db package</a>.</p></li>
@@ -474,13 +493,13 @@
 <a href="#package-installation" class="anchor"></a>Package Installation</h2>
 <p><a href="https://cran.r-project.org/package=rio"><img src="https://www.r-pkg.org/badges/version/rio" alt="CRAN Version"></a> <img src="https://cranlogs.r-pkg.org/badges/rio" alt="Downloads"><a href="https://travis-ci.org/leeper/rio"><img src="https://travis-ci.org/leeper/rio.png?branch=master" alt="Travis-CI Build Status"></a> <a href="https://ci.appveyor.com/project/leeper/rio"><img src="https://ci.appveyor.com/api/projects/status/40ua5l06jw0gjyjb?svg=true" alt="Appveyor Build status"></a> <a href="https://codecov.io/github/leeper/rio?branch=master"><img src="https://codecov.io/github/leeper/rio/coverage.svg?branch=master" alt="codecov.io"></a></p>
 <p>The package is available on <a href="https://cran.r-project.org/package=rio">CRAN</a> and can be installed directly in R using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>. You may want to run <code><a href="reference/install_formats.html">install_formats()</a></code> after the first installation.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"rio"</span>)</a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="kw"><a href="reference/install_formats.html">install_formats</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"rio"</span>)</a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="kw"><a href="reference/install_formats.html">install_formats</a></span>()</a></code></pre></div>
 <p>The latest development version on GitHub can be installed using:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"remotes"</span>)){</a>
-<a class="sourceLine" id="cb15-2" title="2">    <span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)</a>
-<a class="sourceLine" id="cb15-3" title="3">}</a>
-<a class="sourceLine" id="cb15-4" title="4">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"leeper/rio"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"remotes"</span>)){</a>
+<a class="sourceLine" id="cb19-2" title="2">    <span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)</a>
+<a class="sourceLine" id="cb19-3" title="3">}</a>
+<a class="sourceLine" id="cb19-4" title="4">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"leeper/rio"</span>)</a></code></pre></div>
 </div>
 
   </div>
@@ -533,7 +552,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

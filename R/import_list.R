@@ -34,7 +34,7 @@
 #' unlink("mtcars.csv")
 #' unlink("iris.csv")
 #' 
-#' @seealso \code{\link{import}}
+#' @seealso \code{\link{import}}, \code{\link{export_list}}, \code{\link{export}}
 #' @export
 import_list <- 
 function(file, 
@@ -60,7 +60,7 @@ function(file,
             } else if (isTRUE(rbind)) {
                 out[[rbind_label]] <- thisfile
             }
-            out
+            structure(out, filename = thisfile)
         })
         names(x) <- names(file)
     } else {
@@ -127,7 +127,7 @@ function(file,
         } else {
             x2 <- try(data.table::rbindlist(x, fill = rbind_fill), silent = TRUE)
             if (inherits(x2, "try-error")) {
-                warnings("Attempt to rbindlist() the data did not succeed. List returned instead.")
+                warning("Attempt to rbindlist() the data did not succeed. List returned instead.")
                 return(x)
             } else {
                 x <- x2

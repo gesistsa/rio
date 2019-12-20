@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.22</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A data frame or matrix to be written into a file. Exceptions to this rule are that <code>x</code> can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.)</p></td>
+      <td><p>A data frame or matrix to be written into a file. Exceptions to this rule are that <code>x</code> can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use <code><a href='export_list.html'>export_list</a></code> instead.</p></td>
     </tr>
     <tr>
       <th>file</th>
@@ -176,6 +176,7 @@
 <li><p>Fixed-width format data (.fwf), using <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> with <code>row.names = FALSE</code>, <code>quote = FALSE</code>, and <code>col.names = FALSE</code></p></li>
 <li><p>gzip comma-separated data (.csv.gz), using <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> with <code>row.names = FALSE</code></p></li>
 <li><p><a href='https://github.com/csvy'>CSVY</a> (CSV with a YAML metadata header) using <code><a href='https://rdrr.io/pkg/csvy/man/write_csvy.html'>write_csvy</a></code>. The YAML header lines are preceded by R comment symbols (#) by default; this can be turned off by passing a <code>comment_header = FALSE</code> argument to <code>export</code>. Setting <code>fwrite = TRUE</code> (the default) will rely on <code><a href='https://rdrr.io/pkg/data.table/man/fwrite.html'>fwrite</a></code> for much faster export.</p></li>
+<li><p>Apache Arrow Parquet (.parquet), using <code><a href='https://rdrr.io/pkg/arrow/man/write_parquet.html'>write_parquet</a></code></p></li>
 <li><p>Feather R/Python interchange format (.feather), using <code><a href='https://rdrr.io/pkg/feather/man/read_feather.html'>write_feather</a></code></p></li>
 <li><p>Fast storage (.fst), using <code><a href='http://www.fstpackage.org/reference/write_fst.html'>write.fst</a></code></p></li>
 <li><p>JSON (.json), using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>toJSON</a></code>. In this case, <code>x</code> can be a variety of R objects, based on class mapping conventions in this paper: <a href='https://arxiv.org/abs/1403.2805'>https://arxiv.org/abs/1403.2805</a>.</p></li>
@@ -188,9 +189,10 @@
 </ul>
 
 <p>When exporting a data set that contains label attributes (e.g., if imported from an SPSS or Stata file) to a plain text file, <code><a href='characterize.html'>characterize</a></code> can be a useful pre-processing step that records value labels into the resulting file (e.g., <code>export(characterize(x), "file.csv")</code>) rather than the numeric values.</p>
+<p>Use <code><a href='export_list.html'>export_list</a></code> to export a list of dataframes to separate files.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='extensions.html'>.export</a></code>, <code><a href='characterize.html'>characterize</a></code>, <code><a href='import.html'>import</a></code>, <code><a href='convert.html'>convert</a></code></p></div>
+    <div class='dont-index'><p><code><a href='extensions.html'>.export</a></code>, <code><a href='characterize.html'>characterize</a></code>, <code><a href='import.html'>import</a></code>, <code><a href='convert.html'>convert</a></code>, <code><a href='export_list.html'>export_list</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"datasets"</span>)
@@ -277,7 +279,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

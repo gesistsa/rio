@@ -1,7 +1,7 @@
 #' @rdname export
 #' @title Export
 #' @description Write data.frame to a file
-#' @param x A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.)
+#' @param x A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use \code{\link{export_list}} instead.
 #' @param file A character string naming a file. Must specify \code{file} and/or \code{format}.
 #' @param format An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.
 #' @param \dots Additional arguments for the underlying export functions. This can be used to specify non-standard arguments. See examples.
@@ -29,6 +29,7 @@
 #'     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
 #'     \item gzip comma-separated data (.csv.gz), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
 #'     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{write_csvy}}. The YAML header lines are preceded by R comment symbols (#) by default; this can be turned off by passing a \code{comment_header = FALSE} argument to \code{export}. Setting \code{fwrite = TRUE} (the default) will rely on \code{\link[data.table]{fwrite}} for much faster export.
+#'     \item Apache Arrow Parquet (.parquet), using \code{\link[arrow]{write_parquet}}
 #'     \item Feather R/Python interchange format (.feather), using \code{\link[feather]{write_feather}}
 #'     \item Fast storage (.fst), using \code{\link[fst]{write.fst}}
 #'     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \href{https://arxiv.org/abs/1403.2805}{https://arxiv.org/abs/1403.2805}. 
@@ -41,6 +42,8 @@
 #' }
 #'
 #' When exporting a data set that contains label attributes (e.g., if imported from an SPSS or Stata file) to a plain text file, \code{\link{characterize}} can be a useful pre-processing step that records value labels into the resulting file (e.g., \code{export(characterize(x), "file.csv")}) rather than the numeric values.
+#' 
+#' Use \code{\link{export_list}} to export a list of dataframes to separate files.
 #' 
 #' @examples
 #' library("datasets")
@@ -103,7 +106,7 @@
 #' unlink("data.R")
 #' unlink("mtcars.csv.zip")
 #' unlink("list.json")
-#' @seealso \code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}
+#' @seealso \code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}, \code{\link{export_list}}
 #' @importFrom haven labelled
 #' @export
 export <- function(x, file, format, ...) {

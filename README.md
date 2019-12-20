@@ -75,7 +75,7 @@ In rio v0.5.0, a new list-based import function was added. This allows users to 
 
 
 ```r
-str(import_list("mtcars.xlsx"))
+str(m <- import_list("mtcars.xlsx"))
 ```
 
 ```
@@ -99,6 +99,26 @@ str(import_list("mtcars.xlsx"))
 ##   ..$ Petal.Width : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
 ##   ..$ Species     : chr [1:150] "setosa" "setosa" "setosa" "setosa" ...
 ```
+
+And for rio v0.6.0, a new list-based export function was added. This makes it easy to export a list of (possibly named) data frames to multiple files:
+
+
+```r
+export_list(m, "%s.tsv")
+```
+
+```
+## Error in export_list(m, "%s.tsv"): could not find function "export_list"
+```
+
+```r
+c("mtcars.tsv", "iris.tsv") %in% dir()
+```
+
+```
+## [1] FALSE FALSE
+```
+
 
 ### Convert
 
@@ -152,6 +172,7 @@ The full list of supported formats is below:
 | Fixed-width format data | .fwf | **utils** | **utils** | Yes |
 | gzip comma-separated data | .csv.gz | **utils** | **utils** | Yes |
 | CSVY (CSV + YAML metadata header) | .csvy | [**csvy**](https://cran.r-project.org/package=csvy) | [**csvy**](https://cran.r-project.org/package=csvy) | No |
+| Apache Arrow (Parquet) | .parquet | [**arrow**](https://cran.r-project.org/package=arrow) | [**arrow**](https://cran.r-project.org/package=arrow) | No |
 | EViews | .wf1 | [**hexView**](https://cran.r-project.org/package=hexView) |  | No |
 | Feather R/Python interchange format | .feather | [**feather**](https://cran.r-project.org/package=feather) | [**feather**](https://cran.r-project.org/package=feather) | No |
 | Fast Storage | .fst | [**fst**](https://cran.r-project.org/package=fst) | [**fst**](https://cran.r-project.org/package=fst) | No |
@@ -163,6 +184,7 @@ The full list of supported formats is below:
 | YAML | .yml | [**yaml**](https://cran.r-project.org/package=yaml) | [**yaml**](https://cran.r-project.org/package=yaml) | No |
 | Clipboard | default is tsv | [**clipr**](https://cran.r-project.org/package=clipr) | [**clipr**](https://cran.r-project.org/package=clipr) | No |
 | [Google Sheets](https://www.google.com/sheets/about/) | as Comma-separated data |  |  |  |
+| Graphpad Prism | .pzfx | [**pzfx**](https://cran.r-project.org/package=pzfx) | [**pzfx**](https://cran.r-project.org/package=pzfx) | No |
 
 Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
 
