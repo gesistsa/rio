@@ -69,5 +69,18 @@ test_that("Object names are preserved by import_list()", {
     unlink(c("mtcars.xlsx", "mtcars1.csv","mtcars2.tsv","mtcars3.csv"))
 })
 
+test_that("File names are added as attributes by import_list()", {
+    export(mtcars[1:10,],  "mtcars.csv")
+    export(mtcars[11:20,], "mtcars.tsv")
+    expected_names <- c("mtcars", "mtcars")
+    expected_attrs <- c(mtcars = "mtcars.csv", mtcars = "mtcars.tsv")
+    dat <- import_list(c("mtcars.csv","mtcars.tsv"))
+    
+    expect_identical(names(dat), expected_names)
+    expect_identical(unlist(lapply(dat, attr, "filename")), expected_attrs)
+    
+    unlink(c("mtcars.csv", "mtcars.tsv"))
+})
+
 unlink("data.rdata")
 unlink("mtcars.rds")

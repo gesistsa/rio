@@ -2,6 +2,7 @@
 
 * Added support for Apache Arrow (Parquet) files. (#214)
 * Fix dropping of variable label in `characterize()` and `factorize()`. (#204, h/t David Armstrong)
+* `import_list()` now returns a `filename` attribute for each data frame in the list (when importing from multiple files), in order to distinguish files with the same base name but different extensions (e.g., `import_list(c("foo.csv", "foo.tsv"))`). (#208, h/t Vimal Rawat)
 * Import of DBF files now does not convert strings to factors. (#202, h/t @jllipatz)
 
 # rio 0.5.20

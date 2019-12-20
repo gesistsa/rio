@@ -60,7 +60,7 @@ function(file,
             } else if (isTRUE(rbind)) {
                 out[[rbind_label]] <- thisfile
             }
-            out
+            structure(out, filename = thisfile)
         })
         names(x) <- names(file)
     } else {
