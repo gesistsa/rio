@@ -11,7 +11,7 @@ README.md: README.Rmd
 README.html: README.md
 	pandoc -o README.html README.md
 
-../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE README.md
+../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE README.md R/* po/R-rio.pot
 	cd ../ && R CMD build $(pkg)
 
 build: ../$(pkg)*.tar.gz
@@ -26,3 +26,8 @@ install: ../$(pkg)*.tar.gz
 
 website: R/* README.md DESCRIPTION
 	Rscript -e "pkgdown::build_site()"
+
+po/R-rio.pot: R/* DESCRIPTION
+	Rscript -e "tools::update_pkg_po('.')"
+
+translations: po/R-rio.pot
