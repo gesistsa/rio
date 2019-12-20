@@ -127,7 +127,7 @@ function(file,
         } else {
             x2 <- try(data.table::rbindlist(x, fill = rbind_fill), silent = TRUE)
             if (inherits(x2, "try-error")) {
-                warnings("Attempt to rbindlist() the data did not succeed. List returned instead.")
+                warning("Attempt to rbindlist() the data did not succeed. List returned instead.")
                 return(x)
             } else {
                 x <- x2
