@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.21</span>
       </span>
     </div>
 
@@ -122,6 +122,19 @@
       <small>Source: <a href='https://github.com/leeper/rio/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="rio-0521" class="section level1">
+<h1 class="page-header">
+<a href="#rio-0521" class="anchor"></a>rio 0.5.21<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added support for Apache Arrow (Parquet) files. (<a href='https://github.com/leeper/rio/issues/214'>#214</a>)</li>
+<li>Fix dropping of variable label in <code><a href="../reference/characterize.html">characterize()</a></code> and <code><a href="../reference/characterize.html">factorize()</a></code>. (<a href='https://github.com/leeper/rio/issues/204'>#204</a>, h/t David Armstrong)</li>
+<li>
+<code><a href="../reference/import_list.html">import_list()</a></code> now returns a <code>filename</code> attribute for each data frame in the list (when importing from multiple files), in order to distinguish files with the same base name but different extensions (e.g., <code><a href="../reference/import_list.html">import_list(c("foo.csv", "foo.tsv"))</a></code>). (<a href='https://github.com/leeper/rio/issues/208'>#208</a>, h/t Vimal Rawat)</li>
+<li>Import of DBF files now does not convert strings to factors. (<a href='https://github.com/leeper/rio/issues/202'>#202</a>, h/t <a href='https://github.com/jllipatz'>@jllipatz</a>)</li>
+<li>Implemented <code><a href="../reference/import.html">import()</a></code> method for .dump R files. (<a href='https://github.com/leeper/rio/issues/240'>#240</a>)</li>
+</ul>
+</div>
     <div id="rio-0520" class="section level1">
 <h1 class="page-header">
 <a href="#rio-0520" class="anchor"></a>rio 0.5.20<small> Unreleased </small>
@@ -129,6 +142,7 @@
 <ul>
 <li>Additional pointers were added to indicate how to load .doc, .docx, and .pdf files (<a href='https://github.com/leeper/rio/issues/210'>#210</a>, h/t Bill Denney)</li>
 <li>Ensure that tests only run if the corresponding package is installed. (h/t Bill Denney)</li>
+<li>Escape ampersands for html and xml export (<a href='https://github.com/leeper/rio/issues/234'>#234</a> Alex Bokov)</li>
 </ul>
 </div>
     <div id="rio-0519" class="section level1">
@@ -140,6 +154,7 @@
 <li>
 <code><a href="../reference/import_list.html">import_list()</a></code> now preserve names of Excel sheets, etc. when the ‘which’ argument is specified. (<a href='https://github.com/leeper/rio/issues/162'>#162</a>, h/t Danny Parsons)</li>
 <li>Modify message and errors when working with unrecognized file formats. (<a href='https://github.com/leeper/rio/issues/195'>#195</a>, h/t Trevor Davis)</li>
+<li>Add support for GraphPad Prism .pzfx files (<a href='https://github.com/leeper/rio/issues/205'>#205</a>, h/t Bill Denney)</li>
 </ul>
 </div>
     <div id="rio-0518" class="section level1">
@@ -754,7 +769,7 @@
 <a href="#rio-025" class="anchor"></a>rio 0.2.5<small> Unreleased </small>
 </h1>
 <ul>
-<li>If file format for a remote file cannot be identified from the supplied URL or the final URL reported by <code><a href="https://rdrr.io/pkg/curl/man/curl_fetch.html">curl::curl_fetch_memory()</a></code>, the HTTP headers are checked for a filename in the Content-Disposition header. (<a href='https://github.com/leeper/rio/issues/36'>#36</a>)</li>
+<li>If file format for a remote file cannot be identified from the supplied URL or the final URL reported by <code><a href="https://jeroen.cran.dev/curl/reference/curl_fetch.html">curl::curl_fetch_memory()</a></code>, the HTTP headers are checked for a filename in the Content-Disposition header. (<a href='https://github.com/leeper/rio/issues/36'>#36</a>)</li>
 <li>Removed longurl dependency. This is no longer needed because we can identify formats using curl’s url argument.</li>
 <li>Fixed a bug related to importing European-style (“csv2”) format files. (<a href='https://github.com/leeper/rio/issues/44'>#44</a>)</li>
 <li>Updated CSVY import to embed variable-level metadata. (<a href='https://github.com/leeper/rio/issues/52'>#52</a>)</li>
@@ -838,6 +853,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#rio-0521">0.5.21</a></li>
         <li><a href="#rio-0520">0.5.20</a></li>
         <li><a href="#rio-0519">0.5.19</a></li>
         <li><a href="#rio-0518">0.5.18</a></li>
@@ -926,7 +942,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

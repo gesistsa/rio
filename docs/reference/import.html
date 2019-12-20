@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.21</span>
       </span>
     </div>
 
@@ -185,6 +185,7 @@
 <li><p>Fixed-width format data (.fwf), using a faster version of <code><a href='https://rdrr.io/r/utils/read.fwf.html'>read.fwf</a></code> that requires a <code>widths</code> argument and by default in rio has <code>stringsAsFactors = FALSE</code>. If <code>readr = TRUE</code>, import will be performed using <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>read_fwf</a></code>, where <code>widths</code> should be: <code>NULL</code>, a vector of column widths, or the output of <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>fwf_empty</a></code>, <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>fwf_widths</a></code>, or <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>fwf_positions</a></code>.</p></li>
 <li><p>gzip comma-separated data (.csv.gz), using <code><a href='https://rdrr.io/r/utils/read.table.html'>read.table</a></code> with <code>row.names = FALSE</code> and <code>stringsAsFactors = FALSE</code></p></li>
 <li><p><a href='https://github.com/csvy'>CSVY</a> (CSV with a YAML metadata header) using <code><a href='https://rdrr.io/pkg/csvy/man/read_csvy.html'>read_csvy</a></code>.</p></li>
+<li><p>Apache Arrow Parquet (.parquet), using <code><a href='https://arrow.apache.org/docs/r//reference/read_parquet.html'>read_parquet</a></code></p></li>
 <li><p>Feather R/Python interchange format (.feather), using <code><a href='https://rdrr.io/pkg/feather/man/read_feather.html'>read_feather</a></code></p></li>
 <li><p>Fast storage (.fst), using <code><a href='http://www.fstpackage.org/reference/write_fst.html'>read.fst</a></code></p></li>
 <li><p>JSON (.json), using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></code></p></li>
@@ -196,6 +197,7 @@
 <li><p>YAML (.yml), using <code><a href='https://rdrr.io/pkg/yaml/man/yaml.load.html'>yaml.load</a></code></p></li>
 <li><p>Clipboard import (on Windows and Mac OS), using <code><a href='https://rdrr.io/r/utils/read.table.html'>read.table</a></code> with <code>row.names = FALSE</code></p></li>
 <li><p>Google Sheets, as Comma-separated data (.csv)</p></li>
+<li><p>GraphPad Prism (.pzfx) using <code><a href='https://rdrr.io/pkg/pzfx/man/read_pzfx.html'>read_pzfx</a></code></p></li>
 </ul>
 
 <p><code>import</code> attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for <code>mtcars$mpg</code> is stored in <code><a href='https://rdrr.io/r/base/attributes.html'>attributes(mtcars$mpg)</a></code> rather than <code><a href='https://rdrr.io/r/base/attributes.html'>attributes(mtcars)</a></code>). If you would prefer these attributes to be stored at the data.frame-level (i.e., in <code><a href='https://rdrr.io/r/base/attributes.html'>attributes(mtcars)</a></code>), see <code><a href='gather_attrs.html'>gather_attrs</a></code>.</p>
@@ -216,7 +218,6 @@
 <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>import</span>(<span class='st'>"iris1.csv"</span>), <span class='fu'>import</span>(<span class='st'>"iris.tsv"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"csv"</span>)))
 
 <span class='co'># import CSV as a `data.table`</span>
-<span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span>(<span class='fu'>import</span>(<span class='st'>"iris1.csv"</span>, <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='st'>"data.table"</span>), <span class='st'>"data.table"</span>))
 <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span>(<span class='fu'>import</span>(<span class='st'>"iris1.csv"</span>, <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='st'>"data.table"</span>), <span class='st'>"data.table"</span>))
 
 <span class='co'># pass arguments to underlying import function</span>
@@ -260,7 +261,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

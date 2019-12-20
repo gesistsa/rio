@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.21</span>
       </span>
     </div>
 
@@ -128,8 +128,15 @@
     <p>Use <code><a href='import.html'>import</a></code> to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>import_list</span>(<span class='no'>file</span>, <span class='no'>setclass</span>, <span class='no'>which</span>, <span class='kw'>rbind</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>rbind_label</span> <span class='kw'>=</span> <span class='st'>"_file"</span>, <span class='kw'>rbind_fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>import_list</span>(
+  <span class='no'>file</span>,
+  <span class='no'>setclass</span>,
+  <span class='no'>which</span>,
+  <span class='kw'>rbind</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>rbind_label</span> <span class='kw'>=</span> <span class='st'>"_file"</span>,
+  <span class='kw'>rbind_fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,7 +182,8 @@
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>'datasets'</span>)
 <span class='fu'><a href='export.html'>export</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>mtcars1</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>10</span>,],
             <span class='kw'>mtcars2</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='fl'>11</span>:<span class='fl'>20</span>,],
-            <span class='kw'>mtcars2</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='fl'>21</span>:<span class='fl'>32</span>,]), <span class='st'>"mtcars.xlsx"</span>)</div><div class='output co'>#&gt; <span class='message'>Note: zip::zip() is deprecated, please use zip::zipr() instead</span></div><div class='input'>
+            <span class='kw'>mtcars2</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='fl'>21</span>:<span class='fl'>32</span>,]), <span class='st'>"mtcars.xlsx"</span>)
+
 <span class='co'># import a single file from multi-object workbook</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'><a href='import.html'>import</a></span>(<span class='st'>"mtcars.xlsx"</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='st'>"mtcars1"</span>))</div><div class='output co'>#&gt; 'data.frame':	10 obs. of  11 variables:
 #&gt;  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2
@@ -200,10 +208,11 @@
 <span class='co'># import multiple files</span>
 <span class='fu'><a href='export.html'>export</a></span>(<span class='no'>mtcars</span>, <span class='st'>"mtcars.csv"</span>)
 <span class='fu'><a href='export.html'>export</a></span>(<span class='no'>mtcars</span>, <span class='st'>"iris.csv"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>import_list</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>dir</a></span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"csv$"</span>)), <span class='fl'>1</span>)</div><div class='output co'>#&gt; List of 3
-#&gt;  $ example:'data.frame':	4 obs. of  2 variables:
-#&gt;  $ iris   :'data.frame':	32 obs. of  11 variables:
-#&gt;  $ mtcars :'data.frame':	32 obs. of  11 variables:</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>import_list</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>dir</a></span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"csv$"</span>)), <span class='fl'>1</span>)</div><div class='output co'>#&gt; List of 2
+#&gt;  $ iris  :'data.frame':	32 obs. of  11 variables:
+#&gt;   ..- attr(*, "filename")= chr "iris.csv"
+#&gt;  $ mtcars:'data.frame':	32 obs. of  11 variables:
+#&gt;   ..- attr(*, "filename")= chr "mtcars.csv"</div><div class='input'>
 <span class='co'># cleanup</span>
 <span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars.xlsx"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mtcars.csv"</span>)
@@ -228,7 +237,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

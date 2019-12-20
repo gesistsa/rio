@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.21</span>
       </span>
     </div>
 
@@ -176,6 +176,7 @@
 <li><p>Fixed-width format data (.fwf), using <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> with <code>row.names = FALSE</code>, <code>quote = FALSE</code>, and <code>col.names = FALSE</code></p></li>
 <li><p>gzip comma-separated data (.csv.gz), using <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> with <code>row.names = FALSE</code></p></li>
 <li><p><a href='https://github.com/csvy'>CSVY</a> (CSV with a YAML metadata header) using <code><a href='https://rdrr.io/pkg/csvy/man/write_csvy.html'>write_csvy</a></code>. The YAML header lines are preceded by R comment symbols (#) by default; this can be turned off by passing a <code>comment_header = FALSE</code> argument to <code>export</code>. Setting <code>fwrite = TRUE</code> (the default) will rely on <code><a href='https://rdrr.io/pkg/data.table/man/fwrite.html'>fwrite</a></code> for much faster export.</p></li>
+<li><p>Apache Arrow Parquet (.parquet), using <code><a href='https://arrow.apache.org/docs/r//reference/write_parquet.html'>write_parquet</a></code></p></li>
 <li><p>Feather R/Python interchange format (.feather), using <code><a href='https://rdrr.io/pkg/feather/man/read_feather.html'>write_feather</a></code></p></li>
 <li><p>Fast storage (.fst), using <code><a href='http://www.fstpackage.org/reference/write_fst.html'>write.fst</a></code></p></li>
 <li><p>JSON (.json), using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>toJSON</a></code>. In this case, <code>x</code> can be a variety of R objects, based on class mapping conventions in this paper: <a href='https://arxiv.org/abs/1403.2805'>https://arxiv.org/abs/1403.2805</a>.</p></li>
@@ -277,7 +278,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

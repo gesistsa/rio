@@ -1,5 +1,5 @@
-pandoc: '2.6'
-pkgdown: 1.4.0
+pandoc: 2.7.2
+pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   rio: rio.html
