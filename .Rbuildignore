@@ -1,3 +1,4 @@
+^pkgdown/.+$
 .github/*
 ^\.travis\.yml$
 ^appveyor\.yml$
