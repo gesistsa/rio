@@ -1,6 +1,7 @@
 # rio 0.5.22
 
 * Added an `export_list()` function to write a list of data frames to multiple files using a vector of file names or a file pattern. (#207, h/t Bill Denney)
+* Added an `arg_reconcile()` function to streamline the task of removing/renaming arguments for compatibility with various functions (#245, Alex Bokov)
 
 # rio 0.5.21
 

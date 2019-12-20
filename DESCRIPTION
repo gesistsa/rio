@@ -48,7 +48,8 @@ Imports:
     data.table (>= 1.9.8),
     readxl (>= 0.1.1),
     openxlsx,
-    tibble
+    tibble,
+    methods
 Suggests:
     datasets,
     bit64,
@@ -71,4 +72,4 @@ Suggests:
 License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.0.2
+RoxygenNote: 7.0.2.9000
