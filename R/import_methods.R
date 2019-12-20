@@ -143,6 +143,25 @@ function(file,
 }
 
 #' @export
+.import.rio_dump <- function(file, which = 1, envir = new.env(), ...) {
+    source(file = file, local = envir)
+    if (length(list(...)) > 0) {
+      warning("File imported using load. Arguments to '...' ignored.")
+    }
+    if (missing(which)) {
+        if (length(ls(envir)) > 1) {
+            warning("Dump file contains multiple objects. Returning first object.")
+        }
+        which <- 1
+    }
+    if (is.numeric(which)) {
+        get(ls(envir)[which], envir)
+    } else {
+        get(ls(envir)[grep(which, ls(envir))[1]], envir)
+    }
+}
+
+#' @export
 .import.rio_rds <- function(file, which = 1, ...) {
   if (length(list(...))>0) {
     warning("File imported using readRDS. Arguments to '...' ignored.")
@@ -159,7 +178,7 @@ function(file,
 #' @export
 .import.rio_rdata <- function(file, which = 1, envir = new.env(), ...) {
     load(file = file, envir = envir)
-    if (length(list(...))>0) {
+    if (length(list(...)) > 0) {
       warning("File imported using load. Arguments to '...' ignored.")
     }
     if (missing(which)) {
