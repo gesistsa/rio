@@ -152,6 +152,7 @@ The full list of supported formats is below:
 | Fixed-width format data | .fwf | **utils** | **utils** | Yes |
 | gzip comma-separated data | .csv.gz | **utils** | **utils** | Yes |
 | CSVY (CSV + YAML metadata header) | .csvy | [**csvy**](https://cran.r-project.org/package=csvy) | [**csvy**](https://cran.r-project.org/package=csvy) | No |
+| Apache Arrow (Parquet) | .parquet | [**arrow**](https://cran.r-project.org/package=arrow) | [**arrow**](https://cran.r-project.org/package=arrow) | No |
 | EViews | .wf1 | [**hexView**](https://cran.r-project.org/package=hexView) |  | No |
 | Feather R/Python interchange format | .feather | [**feather**](https://cran.r-project.org/package=feather) | [**feather**](https://cran.r-project.org/package=feather) | No |
 | Fast Storage | .fst | [**fst**](https://cran.r-project.org/package=fst) | [**fst**](https://cran.r-project.org/package=fst) | No |
@@ -163,6 +164,7 @@ The full list of supported formats is below:
 | YAML | .yml | [**yaml**](https://cran.r-project.org/package=yaml) | [**yaml**](https://cran.r-project.org/package=yaml) | No |
 | Clipboard | default is tsv | [**clipr**](https://cran.r-project.org/package=clipr) | [**clipr**](https://cran.r-project.org/package=clipr) | No |
 | [Google Sheets](https://www.google.com/sheets/about/) | as Comma-separated data |  |  |  |
+| Graphpad Prism | .pzfx | [**pzfx**](https://cran.r-project.org/package=pzfx) | [**pzfx**](https://cran.r-project.org/package=pzfx) | No |
 
 Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
 

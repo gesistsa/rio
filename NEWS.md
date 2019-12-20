@@ -1,5 +1,6 @@
 # rio 0.5.21
 
+* Added support for Apache Arrow (Parquet) files. (#214)
 * Fix dropping of variable label in `characterize()` and `factorize()`. (#204, h/t David Armstrong)
 * Import of DBF files now does not convert strings to factors. (#202, h/t @jllipatz)
 

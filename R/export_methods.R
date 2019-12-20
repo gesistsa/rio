@@ -311,3 +311,9 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     requireNamespace("pzfx")
     pzfx::write_pzfx(x=x, path=file, ..., row_names=row_names)
 }
+
+#' @export
+.export.rio_parquet <- function(file, x, ...) {
+    requireNamespace("arrow")
+    arrow::write_parquet(x=x, sink=file, ...)
+}

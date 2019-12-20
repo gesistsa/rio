@@ -55,6 +55,7 @@ Suggests:
     testthat,
     knitr,
     magrittr,
+    arrow,
     clipr,
     csvy,
     feather,

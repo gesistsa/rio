@@ -473,3 +473,9 @@ function(file,
     requireNamespace("pzfx")
     pzfx::read_pzfx(path=file, table=which, ...)
 }
+
+#' @export
+.import.rio_parquet <- function(file, which = 1, as_data_frame = TRUE, ...) {
+    requireNamespace("arrow")
+    arrow::read_parquet(file = file, as_data_frame = TRUE, ...)
+}
