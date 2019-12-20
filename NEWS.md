@@ -1,6 +1,7 @@
 # rio 0.5.22
 
 * Added an `export_list()` function to write a list of data frames to multiple files using a vector of file names or a file pattern. (#207, h/t Bill Denney)
+* Added an `is_file_text()` function to determine whether a file is in a plain-text format. Optionally narrower subsets of characters can be specified, e.g. ASCII. (#236 Alex Bokov)
 
 # rio 0.5.21
 
