@@ -17,13 +17,10 @@ following value can be used:
 \code{as.raw(c(7:16, 18, 19, 32:127))}}
 }
 \value{
-boolean
+A logical
 }
 \description{
-For debugging (i.e. why is a file being deemed non-text) set the option
-\code{"rio.is_file_text.debug"} to \code{TRUE}. Then the result returned will 
-also have an attribute named \code{"non_text_bytes"} which will be a vector 
-of the raw bytes which prevented the file from being identified as text
+Determine whether a file is "plain-text" or some sort of binary format
 }
 \examples{
 library(datasets)

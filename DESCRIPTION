@@ -1,8 +1,8 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.5.22
-Date: 2019-12-20
+Version: 0.5.23
+Date: 2019-12-24
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
@@ -57,7 +57,6 @@ Suggests:
     magrittr,
     arrow,
     clipr,
-    csvy,
     feather,
     fst,
     hexView,

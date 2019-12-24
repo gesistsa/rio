@@ -66,6 +66,11 @@ function(file, which = 1, fread = TRUE, sep = "auto",
 }
 
 #' @export
+.import.rio_csvy <- function(file, sep = ",", which = 1, fread = TRUE, dec = if (sep %in% c(",", "auto")) "." else ",", yaml = TRUE, ...) {
+    import_delim(file = file, sep = if (sep == ",") "auto" else sep, fread = fread, dec = dec, yaml = yaml, ...)
+}
+
+#' @export
 .import.rio_psv <- function(file, sep = "|", which = 1, fread = TRUE, dec = if (sep %in% c("|", "auto")) "." else ",", ...) {
     import_delim(file = file, sep = if (sep == "|") "auto" else sep, fread = fread, dec = dec, ...)
 }
@@ -167,12 +172,6 @@ function(file,
     warning("File imported using readRDS. Arguments to '...' ignored.")
   }
   readRDS(file = file)
-}
-
-#' @export
-.import.rio_csvy <- function(file, which = 1, ...) {
-    requireNamespace("csvy")
-    csvy::read_csvy(file = file, ...)
 }
 
 #' @export

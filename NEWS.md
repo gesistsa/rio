@@ -1,3 +1,7 @@
+# rio 0.5.23
+
+* CSVY support is now provided by `data.table::fread()` and `data.table::fwrite()`, providing significant performance gains.
+
 # rio 0.5.22
 
 * Added an `export_list()` function to write a list of data frames to multiple files using a vector of file names or a file pattern. (#207, h/t Bill Denney)
