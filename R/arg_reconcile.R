@@ -51,23 +51,25 @@ arg_reconcile <- function(fn, ..., .args = alist(), .docall = FALSE,
                           .warn = TRUE, .error = "default", .finish = identity) {
   # capture the formal arguments of the target function
   frmls <- formals(fn)
-  # capture the arguments, both freeform and an explicit list
-  args <- as.list(match.call())[-1]
+  # both freeform and an explicit list
+  args <- match.call(expand.dots = FALSE)$`...`
+  if (.docall) {
+    for (ii in names(args)) try(args[[ii]] <- eval(args[[ii]], parent.frame()))
+  }
   # get rid of duplicate arguments, with freeform arguments 
   dupes <- table(names(args))
   dupes <- names(dupes[dupes>1])
   for (ii in dupes) {
     args[which(names(args) == ii)[-1]] <- NULL
   }
-  # Remove any arguments that are intended for arg_reconcile() itself and merge
-  # ... with .args
-  args <- c(args[setdiff(names(args), names(formals(sys.function())))], .args)
+  # Merge ... with .args
+  args <- c(args, .args)
   # Apply whitelist and blacklist. This step also removes duplicates _between_
   # the freeform (...) and pre-specified (.args) arguments, with ... versions
   # taking precedence over the .args versions. This is a consequence of the 
   # intersect() and setdiff() operations and works even if there is no blacklist
   # nor whitelist
-  if(!missing(.wtlist)) args <- args[intersect(names(args), .wtlist)]
+  if (!missing(.wtlist)) args <- args[intersect(names(args), .wtlist)]
   args <- args[setdiff(names(args), .bklist)]
   # if any remappings of one argument to another are specified, perform them
   for ( ii in names(.remap) ) {
