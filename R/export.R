@@ -28,7 +28,7 @@
 #'     \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{write.arff}}
 #'     \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
 #'     \item gzip comma-separated data (.csv.gz), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
-#'     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[csvy]{write_csvy}}. The YAML header lines are preceded by R comment symbols (#) by default; this can be turned off by passing a \code{comment_header = FALSE} argument to \code{export}. Setting \code{fwrite = TRUE} (the default) will rely on \code{\link[data.table]{fwrite}} for much faster export.
+#'     \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table]{fwrite}}.
 #'     \item Apache Arrow Parquet (.parquet), using \code{\link[arrow]{write_parquet}}
 #'     \item Feather R/Python interchange format (.feather), using \code{\link[feather]{write_feather}}
 #'     \item Fast storage (.fst), using \code{\link[fst]{write.fst}}

@@ -1,13 +1,12 @@
 # rio 0.5.23
 
 * CSVY support is now provided by `data.table::fread()` and `data.table::fwrite()`, providing significant performance gains.
+* Added an `arg_reconcile()` function to streamline the task of removing/renaming arguments for compatibility with various functions (#245, Alex Bokov)
 
 # rio 0.5.22
 
 * Added an `export_list()` function to write a list of data frames to multiple files using a vector of file names or a file pattern. (#207, h/t Bill Denney)
 * Added an `is_file_text()` function to determine whether a file is in a plain-text format. Optionally narrower subsets of characters can be specified, e.g. ASCII. (#236 Alex Bokov)
-* Added an `arg_reconcile()` function to streamline the task of removing/renaming arguments for compatibility with various functions (#245, Alex Bokov)
-
 
 # rio 0.5.21
 

@@ -45,9 +45,8 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 }
 
 #' @export
-.export.rio_csvy <- function(file, x, ...) {
-    requireNamespace("csvy")
-    csvy::write_csvy(file = file, x = x, ...)
+.export.rio_csvy <- function(file, x, sep = ",", dec = ".", yaml = TRUE, ...) {
+    export_delim(x = x, file = file, sep = sep, dec = dec, yaml = TRUE, ...)
 }
 
 #' @export

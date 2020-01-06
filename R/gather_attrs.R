@@ -29,7 +29,7 @@ gather_attrs <- function(x) {
         if (any(grepl("labelled", class(x[[i]])))) {
             x[[i]] <- haven::zap_labels(x[[i]])
         }
-        f <- grep("^format", names(attributes(x$foreign)), value = TRUE)
+        f <- grep("^format", names(attributes(x[[i]])), value = TRUE)
         if (length(f)) {
             attr(x[[i]], f) <- NULL
         }
