@@ -46,14 +46,6 @@
 #' @return Either a named list or the result of calling \code{fn} with the 
 #'         supplied arguments
 #'
-#' @examples
-#' 
-#' arg_reconcile(p.adjust, bla = "aaa", baz = "xzzz", n = 40, 
-#'                     q = c(.1, .2, .02, .3, 1, 0, 1), .remap = c(q = "p"))
-#' arg_reconcile(import, file = "hello.csv", file = "goodbye.csv", bla = "aaa", 
-#'               baz = "xzzz", format = "csv")
-#' 
-#' @export
 arg_reconcile <- function(fn, ..., .args = alist(), .docall = FALSE, 
                           .wtlist = c(), .bklist= c(), .remap = list(), 
                           .warn = TRUE, .error = "default", .finish = identity) {
