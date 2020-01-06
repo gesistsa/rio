@@ -1,43 +1,34 @@
 #' @importFrom data.table fread
-import_delim <-
-function(file, which = 1, fread = TRUE, sep = "auto", 
-         header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
+import_delim <-  
+  function(file, which = 1, fread = TRUE, sep = "auto", 
+           header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
     if (isTRUE(fread) & !inherits(file, "connection")) {
-        dots <- list(...)
-        dots[["input"]] <- file
-        dots[["sep"]] <- sep
-        dots[["header"]] <- header
-        dots[["stringsAsFactors"]] <- stringsAsFactors
-        dots[["data.table"]] <- data.table
-        do.call("fread", dots)
+      arg_reconcile(data.table::fread, input = file, sep = sep, header = header,
+                    stringsAsFactors = stringsAsFactors, 
+                    data.table = data.table, ..., .docall = TRUE)
     } else {
-        if (isTRUE(fread) & inherits(file, "connection")) {
-            message("data.table::fread() does not support reading from connections. Using utils::read.table() instead.")
-        }
-        dots <- list(...)
-        dots[["file"]] <- file
-        if (missing(sep) || is.null(sep) || sep == "auto") {
-            if (inherits(file, "rio_csv")) {
-                dots[["sep"]] <- ","
-            } else if (inherits(file, "rio_csv2")) {
-                dots[["sep"]] <- ";"
-            } else if (inherits(file, "rio_psv")) {
-                dots[["sep"]] <- "|"
-            } else {
-                dots[["sep"]] <- "\t"
-            }
+      if (isTRUE(fread) & inherits(file, "connection")) {
+        message("data.table::fread() does not support reading from connections. Using utils::read.table() instead.")
+      }
+      if (missing(sep) || is.null(sep) || sep == "auto") {
+        if (inherits(file, "rio_csv")) {
+          sep <- ","
+        } else if (inherits(file, "rio_csv2")) {
+          sep <- ";"
+        } else if (inherits(file, "rio_psv")) {
+          sep <- "|"
         } else {
-            dots[["sep"]] <- sep
+          sep <- "\t"
         }
-        if (missing(header) || is.null(header) || header == "auto") {
-            dots[["header"]] <- TRUE
-        } else {
-            dots[["header"]] <- header
-        }
-        dots[["stringsAsFactors"]] <- stringsAsFactors
-        do.call("read.table", dots)
+      }
+      if (missing(header) || is.null(header) || header == "auto") {
+        header <- TRUE
+      }
+      arg_reconcile(utils::read.table, file=file, sep=sep, header=header, 
+                    stringsAsFactors = stringsAsFactors, ..., .docall = TRUE)
     }
-}
+  }
+
 
 #' @export
 .import.rio_dat <- function(file, which = 1, ...) {
