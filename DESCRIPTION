@@ -71,4 +71,4 @@ Suggests:
 License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.0.2.9000
+RoxygenNote: 7.0.2
