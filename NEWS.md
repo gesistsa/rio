@@ -1,3 +1,7 @@
+# rio development
+
+* HTML import can now handle multiple tbody elements within a single table. (#260 Bill Denney)
+
 # rio 0.5.23
 
 * CSVY support is now provided by `data.table::fread()` and `data.table::fwrite()`, providing significant performance gains.
@@ -19,7 +23,7 @@
 
 * Additional pointers were added to indicate how to load .doc, .docx, and .pdf files (#210, h/t Bill Denney)
 * Ensure that tests only run if the corresponding package is installed.  (h/t Bill Denney)
-* Escape ampersands for html and xml export (#234 Alex Bokov) 
+* Escape ampersands for html and xml export (#234 Alex Bokov)
 
 # rio 0.5.19
 
@@ -151,7 +155,7 @@
 
 # rio 0.4.24
 
-* Verbosity of `export(format = "fwf")` now depends on `options("verbose")`. 
+* Verbosity of `export(format = "fwf")` now depends on `options("verbose")`.
 * Fixed various errors, warnings, and messages in fixed-width format tests.
 * Modified defaults and argument handling in internal function `read_delim()`.
 * Fixed handling of "data.table", "tibble", and "data.frame" classes in `set_class()`. (#144)

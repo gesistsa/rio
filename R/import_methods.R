@@ -444,7 +444,8 @@ function(file,
     }
     x <- xml2::as_list(tables[[which]])
     if ("tbody" %in% names(x)) {
-        x <- x[["tbody"]]
+        # Note that "tbody" may be specified multiple times in a valid html table
+        x <- unlist(x[names(x) %in% "tbody"], recursive=FALSE)
     }
     # loop row-wise over the table and then rbind()
     ## check for table header to use as column names
