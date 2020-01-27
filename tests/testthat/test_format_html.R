@@ -26,6 +26,9 @@ test_that("Import from HTML", {
 test_that("Import from HTML with multiple tbody elements", {
     skip_if_not_installed("xml2")
     expect_true(is.data.frame(import("files/two-tbody.html")), label="import with two tbody elements in a single html table works")
+    expect_true(is.data.frame(import("files/br-in-header.html")), label="import with an empty header cell in an html table works")
+    expect_true(is.data.frame(import("files/br-in-td.html")), label="import with an empty data cell in a single html table works")
+    expect_true(is.data.frame(import("files/th-as-row-element.html")), label="import with th instead of td in a non-header row in a single html table works")
 })
 
 unlink(c("iris.xml","iris2.xml"))

@@ -1,6 +1,6 @@
 # rio development
 
-* HTML import can now handle multiple tbody elements within a single table. (#260 Bill Denney)
+* HTML import can now handle multiple tbody elements within a single table, a th element in a non-header row, and empty elements in either the header or data. (#260, #263, #264 Bill Denney)
 
 # rio 0.5.23
 
