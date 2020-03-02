@@ -34,7 +34,7 @@ A particularly useful feature of rio is the ability to import from and export to
 export(mtcars, "mtcars.tsv.zip")
 ```
 
-As of rio v0.5.0, `export()` can also write multiple data farmes to respective sheets of an Excel workbook or an HTML file:
+As of rio v0.5.0, `export()` can also write multiple data frames to respective sheets of an Excel workbook or an HTML file:
 
 ```{r}
 export(list(mtcars = mtcars, iris = iris), file = "mtcars.xlsx")
