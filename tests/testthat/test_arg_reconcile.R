@@ -23,11 +23,12 @@ test_that("hardcoded reference arguments are valid", {
   expect_silent(do.call(haven::write_dta, dta_args0))
 })
 
-test_that("remove duplicated arguments",{
-  expect_identical(alist(file='iris.tsv',x=iris, sep='\t',fileEncoding='UTF-8'),
+test_that("remove duplicated arguments", {
+  expect_identical(alist(file='iris.tsv', x = iris, sep = '\t', 
+                         fileEncoding = 'UTF-8'), 
                    arg_reconcile(utils::write.table, file = "iris.tsv", 
                                  x = iris, sep = "\t", fileEncoding = "UTF-8",
-                                 sep='\t'))
+                                 sep = '\t'))
 })
 
 test_that("warn on mismatched args and filter them out", {
@@ -45,22 +46,23 @@ test_that("warn on mismatched args and filter them out", {
                  "showProgress")
 })
 
-test_that("The whitelist and blacklist work",{
-  expect_equal(nrow(iris) - sharedargs$skip,
+test_that("The whitelist and blacklist work", {
+  expect_equal(nrow(iris) - sharedargs$skip, 
                nrow(arg_reconcile(data.table::fread, .warn = FALSE, 
-                                  .args = sharedargs, .docall = TRUE,
+                                  .args = sharedargs, .docall = TRUE, 
                                   header = TRUE
                                   )))
   expect_equal(nrow(iris),
                nrow(arg_reconcile(data.table::fread, .warn = FALSE, 
-                                  .args = sharedargs, .bklist = 'skip',
+                                  .args = sharedargs, .exclude = 'skip', 
                                   .docall = TRUE, header = TRUE)))
   expect_equal(nrow(iris),
                nrow(arg_reconcile(data.table::fread, .warn = FALSE, 
                                   .args = sharedargs, 
-                                  .wtlist = c('file', 'sep', 'stringsAsFactors',
+                                  .include = c('file', 'sep', 
+                                              'stringsAsFactors', 
                                               'showProgress'),
-                                  .docall = TRUE,header = TRUE)))
+                                  .docall = TRUE, header = TRUE)))
 })
 
 test_that("valid outputs with suppressed warnings", {
@@ -80,7 +82,8 @@ test_that("valid outputs with suppressed warnings", {
                                                   skip = 2, n_max = 4, 
                                                   .warn = FALSE))
   expect_identical(writetable_args0, writetable_args1)
-  expect_silent(fwrite_args1 <- arg_reconcile(data.table::fwrite, .args = sharedargs, 
+  expect_silent(fwrite_args1 <- arg_reconcile(data.table::fwrite, 
+                                              .args = sharedargs, 
                                               .warn = FALSE))
   expect_identical(fwrite_args0, fwrite_args1)
   expect_silent(writetable_args1 <- arg_reconcile(utils::write.table, 
@@ -126,18 +129,18 @@ test_that(".docall works", {
   expect_equivalent(iris[1:4,], arg_reconcile(data.table::fread, 
                                               file = "iris_ref.tsv", 
                                               .warn = FALSE, .args = sharedargs, 
-                                              .docall = TRUE, .bklist = 'skip', 
+                                              .docall = TRUE, .exclude = 'skip', 
                                               .remap = list(n_max = "nrows")))
   expect_equivalent(iris[1:4,], arg_reconcile(utils::read.table, 
                                               file = "iris_ref.tsv", 
                                               .warn = FALSE, .args = sharedargs, 
-                                              .docall = TRUE, .bklist = 'skip', 
+                                              .docall = TRUE, .exclude = 'skip', 
                                               header = TRUE, 
                                               .remap = list(n_max = "nrows")))
   expect_equivalent(iris[1:4,], arg_reconcile(utils::read.table, 
                                               file = "iris_ref.tsv", 
                                               .warn = FALSE, .args = sharedargs, 
-                                              .docall = TRUE, .bklist = 'skip', 
+                                              .docall = TRUE, .exclude = 'skip', 
                                               header = TRUE, 
                                               .remap = list(n_max = "nrows")))
   expect_equivalent(iris[3:6,1:4], arg_reconcile(haven::read_dta, 
@@ -153,22 +156,22 @@ test_that(".docall works", {
 })
 
 test_that("Error handling and silent return of customized error objects to 
-          avoid interrupting long-running processes for individual errors.",{
-  expect_error(arg_reconcile(data.table::fread,file='iris_ref.xyz',.warn=FALSE,
-                             .args=sharedargs,.docall=TRUE,
-                             .remap=list(n_max='nrows')),
+          avoid interrupting long-running processes for individual errors.", {
+  expect_error(arg_reconcile(data.table::fread, file = 'iris_ref.xyz', 
+                             .warn = FALSE, .args = sharedargs, .docall = TRUE, 
+                             .remap = list(n_max = 'nrows')), 
                'does not exist or is non-readable')
-  errobj <- arg_reconcile(data.table::fread,file='iris_ref.xyz',.warn=FALSE,
-                       .args=sharedargs,.docall=TRUE,
-                       .remap=list(n_max='nrows'),
+  errobj <- arg_reconcile(data.table::fread, file = 'iris_ref.xyz', 
+                          .warn = FALSE, .args = sharedargs, .docall = TRUE, 
+                          .remap = list(n_max = 'nrows'), 
                        .error = data.table::data.table(NULL))
-  expect_s3_class(errobj,c('data.table','data.frame'))
-  expect_identical(nrow(errobj),0L)
-  expect_s3_class(attr(errobj,'error'),'try-error')
+  expect_s3_class(errobj, c('data.table', 'data.frame'))
+  expect_identical(nrow(errobj), 0L)
+  expect_s3_class(attr(errobj, 'error'), 'try-error')
 })
 
 # TODO: .docall produces results identical to corresponding direct invokation
 # TODO: do.call on *_args0 produces results identical to corresponding direct invokation
 
 # cleanup
-unlink(c("iris_ref.*","iris.tsv","iris.dat","iris.sav"))
+unlink(c("iris_ref.*", "iris.tsv", "iris.dat", "iris.sav"))

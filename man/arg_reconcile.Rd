@@ -5,12 +5,12 @@
 \title{Reconcile an argument list to any function signature.}
 \usage{
 arg_reconcile(
-  fn,
+  fun,
   ...,
   .args = alist(),
   .docall = FALSE,
-  .wtlist = c(),
-  .bklist = c(),
+  .include = c(),
+  .exclude = c(),
   .remap = list(),
   .warn = TRUE,
   .error = "default",
@@ -18,7 +18,7 @@ arg_reconcile(
 )
 }
 \arguments{
-\item{fn}{A function to which an argument list needs to be adapted. Use
+\item{fun}{A function to which an argument list needs to be adapted. Use
 the unquoted name of the function. If it's in a different 
 package then the fully qualified unquoted name (e.g. 
 \code{utils::read.table})}
@@ -31,22 +31,22 @@ arguments of the same name (if any) in \code{...}}
 with \code{...}. Arguments in \code{.args} are overridden by
 arguments of the same name (if any) in \code{...}}
 
-\item{.docall}{If set to \code{TRUE} will not only clean up the arguments but 
-also execute \code{fn} with those arguments (\code{FALSE} by
-default) and return the results}
+\item{.docall}{If set to \code{TRUE} will not only clean up the arguments 
+but also execute \code{fun} with those arguments 
+(\code{FALSE} by default) and return the results}
 
-\item{.wtlist}{Whitelist. If not empty, only arguments named here will be 
+\item{.include}{Whitelist. If not empty, only arguments named here will be 
 permitted, and only if they satisfy the conditions implied by
 the other arguments. Evaluated before \code{.remap}.}
 
-\item{.bklist}{Blacklist. If not empty, arguments named here will be removed 
+\item{.exclude}{Blacklist. If not empty, arguments named here will be removed 
 even if they satisfy the conditions implied by the other 
 arguments. Evaluated before \code{.remap}.}
 
 \item{.remap}{An optional named character vector or named list of character 
-values for standardizing arguments that play the same role but
-have different names in different functions. Evaluated after
-\code{.bklist} and \code{.wtlist}.}
+values for standardizing arguments that play the same role 
+but have different names in different functions. Evaluated 
+after \code{.exclude} and \code{.include}.}
 
 \item{.warn}{Whether to issue a warning message (default) when invalid 
 arguments need to be discarded.}
@@ -58,16 +58,16 @@ thrown with an added hint on the documentation to read for
 troubleshooting. Ignored if \code{.docall} is \code{FALSE}.
 The point of doing this is fault-tolerance-- if this function
 is part of a lengthy process where you want to document an 
-error but keep going, you can set \code{.error} to some object
-of a compatible type. That object will be returned in the 
-event of error and will have as its \code{"error"} attribute 
-the error object.}
+error but keep going, you can set \code{.error} to some 
+object of a compatible type. That object will be returned in 
+the event of error and will have as its \code{"error"} 
+attribute the error object.}
 
 \item{.finish}{A function to run on the result before returning it. Ignored 
 if \code{.docall} is \code{FALSE}.}
 }
 \value{
-Either a named list or the result of calling \code{fn} with the 
+Either a named list or the result of calling \code{fun} with the 
         supplied arguments
 }
 \description{
