@@ -29,6 +29,8 @@ environment:
 
   - R_VERSION: devel
     GCC_PATH: mingw_32
+    # comment out the below when CRAN not out of sync
+    PKGTYPE: source
 
 matrix:
   fast_finish: true
