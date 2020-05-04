@@ -24,6 +24,8 @@ environment:
   - R_VERSION: devel
     R_ARCH: x64
     GCC_PATH: mingw_64
+    # comment out the below when CRAN not out of sync
+    PKGTYPE: source
 
   - R_VERSION: devel
     GCC_PATH: mingw_32
