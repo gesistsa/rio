@@ -1,3 +1,7 @@
+# rio 0.5.24
+
+* Fix handling of "label" and "labels" attributes when exporting using haven methods (SPSS, Stata, SAS). (#268, h/t Ruben Arslan)
+
 # rio 0.5.23
 
 * CSVY support is now provided by `data.table::fread()` and `data.table::fwrite()`, providing significant performance gains.

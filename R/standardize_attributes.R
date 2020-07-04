@@ -13,7 +13,7 @@ standardize_attributes <- function(dat) {
     attr(out, "label.table") <- NULL
     for (i in seq_along(out)) {
         if ("value.labels" %in% names(attributes(out[[i]]))) {
-            attr(out[[i]], "labels") <- attr(out[[i]], "value.labels")
+            attr(out[[i]], "labels") <- attr(out[[i]], "value.labels", exact = TRUE)
             attr(out[[i]], "value.labels") <- NULL
         }
         if (any(grepl("haven_labelled", class(out[[i]])))) {
@@ -37,6 +37,22 @@ standardize_attributes <- function(dat) {
 
 restore_labelled <- function(x) {
     # restore labelled variable classes
-    x[] <- lapply(x, function(v) if (!is.null(attr(v, "labels"))) haven::labelled(v, attr(v, "labels")) else v)
+    x[] <- lapply(x, function(v) {
+        if (is.factor(v)) {
+            haven::labelled(
+                x = v,
+                labels = stats::setNames(seq_along(levels(v)), levels(v)),
+                label = attr(v, "label", exact = TRUE)
+            )
+        } else if (!is.null(attr(v, "labels", exact = TRUE)) || !is.null(attr(v, "label", exact = TRUE))) {
+            haven::labelled(
+                x = v,
+                labels = attr(v, "labels", exact = TRUE),
+                label = attr(v, "label", exact = TRUE)
+            )
+        } else {
+            v
+        }
+    })
     x
 }
