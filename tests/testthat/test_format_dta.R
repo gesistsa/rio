@@ -3,7 +3,9 @@ require("datasets")
 
 test_that("Export to Stata", {
     expect_true(export(mtcars, "mtcars.dta") %in% dir())
-    expect_error(export(iris, "iris.dta"), label = "Export fails on invalid Stata names")
+    mtcars3 <- mtcars
+    names(mtcars3)[1] <- "foo.bar"
+    expect_error(export(mtcars3, "mtcars3.dta"), label = "Export fails on invalid Stata names")
 })
 
 test_that("Import from Stata (read_dta)", {
@@ -18,4 +20,3 @@ test_that("Import from Stata (read.dta)", {
 })
 
 unlink("mtcars.dta")
-unlink("iris.dta")
