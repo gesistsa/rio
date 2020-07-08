@@ -1,6 +1,7 @@
 # rio 0.5.24
 
 * Fix handling of "label" and "labels" attributes when exporting using haven methods (SPSS, Stata, SAS). (#268, h/t Ruben Arslan)
+* Fix (a different bug?) handling factors by haven::labelled() (#271, Alex Bokov)
 
 # rio 0.5.23
 
