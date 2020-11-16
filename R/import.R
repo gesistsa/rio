@@ -126,7 +126,6 @@ import <- function(file, format, setclass, which, ...) {
         fmt <- get_type(format)
     }
     
-    args_list <- list(...)
     
     class(file) <- c(paste0("rio_", fmt), class(file))
     if (missing(which)) {
@@ -141,13 +140,13 @@ import <- function(file, format, setclass, which, ...) {
     }
     # otherwise, make sure it's a data frame (or requested class)
     if (missing(setclass) || is.null(setclass)) {
-        if ("data.table" %in% names(args_list) && isTRUE(args_list[["data.table"]])) {
+        if (hasArg(data.table) && isTRUE(eval(match.call()$data.table))) {
             return(set_class(x, class = "data.table"))
         } else {
             return(set_class(x, class = "data.frame"))
         }
     } else {
-        if ("data.table" %in% names(args_list) && isTRUE(args_list[["data.table"]])) {
+        if (hasArg(data.table) && isTRUE(eval(match.call()$data.table))) {
             if (setclass != "data.table") {
                 warning(sprintf("'data.table = TRUE' argument overruled. Using setclass = '%s'", setclass))
                 return(set_class(x, class = setclass))
