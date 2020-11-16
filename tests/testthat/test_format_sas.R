@@ -15,6 +15,9 @@ test_that("Export SAS (.sas7bdat)", {
 })
 
 test_that("can use select helpers to pick columns (#248)", {
+    if (packageVersion("haven") < "2.2.0") {
+        skip("col_select was added in haven 2.2.0")
+    }
     expect_named(import("mtcars.sas7bdat", col_select = any_of("mpg")), "mpg")
 })
 
