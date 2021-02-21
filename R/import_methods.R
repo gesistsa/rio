@@ -386,9 +386,27 @@ function(file,
     d
 }
 
+# This is a helper function for .import.rio_html
+extract_html_row <- function(x, empty_value) {
+  # Both <th> and <td> are valid for table data, and <th> may be used when
+  # there is an accented element (e.g. the first row of the table)
+  to_extract <- x[names(x) %in% c("th", "td")]
+  # Insert a value into cells that eventually will become empty cells (or they
+  # will be dropped and the table will not be generated).  Note that this more
+  # complex code for finding the length is required because of html like
+  # <td><br/></td>
+  unlist_length <-
+    sapply(
+      lapply(to_extract, unlist),
+      length
+    )
+  to_extract[unlist_length == 0] <- list(empty_value)
+  unlist(to_extract)
+}
+
 #' @importFrom utils type.convert
 #' @export
-.import.rio_html <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
+.import.rio_html <- function(file, which = 1, stringsAsFactors = FALSE, ..., empty_value = "") {
     # find all tables
     tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
     if (which > length(tables)) {
@@ -396,22 +414,24 @@ function(file,
     }
     x <- xml2::as_list(tables[[which]])
     if ("tbody" %in% names(x)) {
-        x <- x[["tbody"]]
+        # Note that "tbody" may be specified multiple times in a valid html table
+        x <- unlist(x[names(x) %in% "tbody"], recursive=FALSE)
     }
     # loop row-wise over the table and then rbind()
     ## check for table header to use as column names
+    col_names <- NULL
     if ("th" %in% names(x[[1]])) {
-        col_names <- unlist(x[[1]][names(x[[1]]) %in% "th"])
-        out <- do.call("rbind", lapply(x[-1], function(y) {
-            unlist(y[names(y) %in% "td"])
-        }))
-        colnames(out) <- col_names
-    } else {
-        out <- do.call("rbind", lapply(x, function(y) {
-            unlist(y[names(y) %in% "td"])
-        }))
-        colnames(out) <- paste0("V", seq_len(ncol(out)))
+      col_names <- extract_html_row(x[[1]], empty_value=empty_value)
+      # Drop the first row since column names have already been extracted from it.
+      x <- x[-1]
     }
+    out <- do.call("rbind", lapply(x, extract_html_row, empty_value=empty_value))
+    colnames(out) <-
+      if (is.null(col_names)) {
+        paste0("V", seq_len(ncol(out)))
+      } else {
+        col_names
+      }
     out <- as.data.frame(out, ..., stringsAsFactors = stringsAsFactors)
     # set row names
     rownames(out) <- 1:nrow(out)

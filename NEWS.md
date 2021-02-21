@@ -2,6 +2,7 @@
 
 * Fix handling of "label" and "labels" attributes when exporting using haven methods (SPSS, Stata, SAS). (#268, h/t Ruben Arslan)
 * Fix (a different bug?) handling factors by haven::labelled() (#271, Alex Bokov)
+* HTML import can now handle multiple tbody elements within a single table, a th element in a non-header row, and empty elements in either the header or data. (#260, #263, #264 Bill Denney)
 
 # rio 0.5.23
 
@@ -25,7 +26,7 @@
 
 * Additional pointers were added to indicate how to load .doc, .docx, and .pdf files (#210, h/t Bill Denney)
 * Ensure that tests only run if the corresponding package is installed.  (h/t Bill Denney)
-* Escape ampersands for html and xml export (#234 Alex Bokov) 
+* Escape ampersands for html and xml export (#234 Alex Bokov)
 
 # rio 0.5.19
 
@@ -157,7 +158,7 @@
 
 # rio 0.4.24
 
-* Verbosity of `export(format = "fwf")` now depends on `options("verbose")`. 
+* Verbosity of `export(format = "fwf")` now depends on `options("verbose")`.
 * Fixed various errors, warnings, and messages in fixed-width format tests.
 * Modified defaults and argument handling in internal function `read_delim()`.
 * Fixed handling of "data.table", "tibble", and "data.frame" classes in `set_class()`. (#144)
