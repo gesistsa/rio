@@ -31,4 +31,4 @@ test_that("Import from HTML with multiple tbody elements", {
     expect_true(is.data.frame(import("files/th-as-row-element.html")), label="import with th instead of td in a non-header row in a single html table works")
 })
 
-unlink(c("iris.xml","iris2.xml"))
+unlink(c("iris.xml", "iris2.xml", "iris2.html"))

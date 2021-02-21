@@ -101,6 +101,7 @@
 #' # cleanup
 #' unlink("mtcars.csv")
 #' unlink("mtcars.dta")
+#' unlink("mtcars.txt")
 #' unlink("mtcars_cyl.rds")
 #' unlink("mtcars.rdata")
 #' unlink("data.R")

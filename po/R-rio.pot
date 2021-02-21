@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: rio 0.5.24\n"
-"POT-Creation-Date: 2020-07-04 21:42\n"
+"Project-Id-Version: rio 0.5.25\n"
+"POT-Creation-Date: 2021-02-21 12:39\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,6 +9,18 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+msgid "The following arguments were ignored for"
+msgstr ""
+
+msgid ":"
+msgstr ""
+
+msgid ","
+msgstr ""
+
+msgid "condition"
+msgstr ""
 
 msgid "File compression failed for %s!"
 msgstr ""
@@ -107,21 +119,6 @@ msgid "File imported using readRDS. Arguments to '...' ignored."
 msgstr ""
 
 msgid "Rdata file contains multiple objects. Returning first object."
-msgstr ""
-
-msgid "File imported using haven. Arguments to '...' ignored."
-msgstr ""
-
-msgid "The following arguments were ignored by read_xls:"
-msgstr ""
-
-msgid ","
-msgstr ""
-
-msgid "The following arguments were ignored when readxl = TRUE:"
-msgstr ""
-
-msgid "The following arguments were ignored when readxl = FALSE:"
 msgstr ""
 
 msgid "Import of Fortran format data requires a 'style' argument. See ? utils::read.fortran()."

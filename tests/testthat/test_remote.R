@@ -29,7 +29,7 @@ test_that("Import Remote File from Shortened URL", {
     skip_if_not_installed(pkg="csvy")
     shorturl <- try(import("https://goo.gl/KPFiaK"))
     if (!inherits(shorturl, "try-error")) {
-        expect_true(inherits(shorturl), "data.frame"), label = "Import remote file")
+        expect_true(inherits(shorturl, "data.frame"), label = "Import remote file")
     }
 })
 

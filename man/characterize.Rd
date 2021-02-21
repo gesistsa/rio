@@ -17,7 +17,7 @@ factorize(x, ...)
 
 \method{characterize}{data.frame}(x, ...)
 
-\method{factorize}{default}(x, ...)
+\method{factorize}{default}(x, coerce_character = FALSE, ...)
 
 \method{factorize}{data.frame}(x, ...)
 }
@@ -25,6 +25,8 @@ factorize(x, ...)
 \item{x}{A vector or data frame.}
 
 \item{\dots}{additional arguments passed to methods}
+
+\item{coerce_character}{A logical indicating whether to additionally coerce character columns to factor (in \code{factorize}). Default \code{FALSE}.}
 }
 \description{
 Convert labelled variables to character or factor
