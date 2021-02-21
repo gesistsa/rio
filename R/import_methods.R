@@ -209,24 +209,17 @@ function(file,
 #' @importFrom haven read_dta
 #' @export
 .import.rio_dta <- function(file, haven = TRUE,
-                            convert.dates = TRUE,
-                            convert.factors = FALSE,
-                            missing.type = FALSE, ...) {
-    if (isTRUE(haven)) {
-        a <- list(...)
-        if (length(a)) {
-            warning("File imported using haven. Arguments to '...' ignored.")
-        }
-        standardize_attributes(haven::read_dta(file = file))
-    } else {
-        out <- foreign::read.dta(file = file,
-                    convert.dates = convert.dates,
-                    convert.factors = convert.factors,
-                    missing.type = missing.type, ...)
-        attr(out, "expansion.fields") <- NULL
-        attr(out, "time.stamp") <- NULL
-        standardize_attributes(out)
-    }
+                               convert.factors = FALSE,...) {
+  if (isTRUE(haven)) {
+    arg_reconcile(haven::read_dta, file = file, ..., .docall = TRUE,
+                  .finish = standardize_attributes)
+  } else {
+    out <- arg_reconcile(foreign::read.dta, file = file,
+                         convert.factors = convert.factors, ..., .docall = TRUE)
+    attr(out, "expansion.fields") <- NULL
+    attr(out, "time.stamp") <- NULL
+    standardize_attributes(out)
+  }
 }
 
 #' @importFrom foreign read.dbf
