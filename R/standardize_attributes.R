@@ -40,7 +40,7 @@ restore_labelled <- function(x) {
     x[] <- lapply(x, function(v) {
         if (is.factor(v)) {
             haven::labelled(
-                x = v,
+                x = as.numeric(v),
                 labels = stats::setNames(seq_along(levels(v)), levels(v)),
                 label = attr(v, "label", exact = TRUE)
             )
