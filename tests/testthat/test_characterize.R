@@ -20,3 +20,13 @@ test_that("test factorize.data.frame()", {
 test_that("test factorize.data.frame()", {
     expect_true(identical(factorize(xdf), {xdf[] <- lapply(xdf, factorize); xdf}))
 })
+
+test_that("test factorize coerce_character", {
+    expect_true(identical(letters[1:3], factorize(letters[1:3])))
+    expect_true(
+        identical(
+            factorize(letters[3:1], coerce_character = TRUE),
+            factor(letters[3:1], levels = letters[1:3])
+        )
+    )
+})

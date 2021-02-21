@@ -1,3 +1,7 @@
+# rio 0.5.25
+
+* Modified tests per email request from CRAN.
+* Added `coerce_character` argument (default FALSE) to `factorize()` to enable coercing character columns to factor. (#278)
 # rio 0.5.24
 
 * Fix handling of "label" and "labels" attributes when exporting using haven methods (SPSS, Stata, SAS). (#268, h/t Ruben Arslan)
@@ -7,7 +11,7 @@
 # rio 0.5.23
 
 * CSVY support is now provided by `data.table::fread()` and `data.table::fwrite()`, providing significant performance gains.
-* Added an `arg_reconcile()` function to streamline the task of removing/renaming arguments for compatibility with various functions (#245, Alex Bokov)
+* Added an internal `arg_reconcile()` function to streamline the task of removing/renaming arguments for compatibility with various functions (#245, Alex Bokov)
 
 # rio 0.5.22
 
