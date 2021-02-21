@@ -309,58 +309,26 @@ function(file,
 #' @importFrom readxl read_xls
 #' @export
 .import.rio_xls <- function(file, which = 1, ...) {
-
-    a <- list(...)
-    if ("sheet" %in% names(a)) {
-        which <- a[["sheet"]]
-        a[["sheet"]] <- NULL
-    }
-    frml <- formals(read_xls)
-    unused <- setdiff(names(a), names(frml))
-    if ("path" %in% names(a)) {
-        unused <- c(unused, 'path')
-        a[["path"]] <- NULL
-    }
-    if (length(unused)>0) {
-        warning("The following arguments were ignored by read_xls:\n",
-                paste(unused, collapse=', '))
-    }
-    a <- a[intersect(names(a), names(frml))]
-    do.call("read_xls", c(list(path = file, sheet = which), a))
+  requireNamespace("readxl")
+  arg_reconcile(read_xls, path = file, ..., sheet = which,
+                .docall = TRUE,
+                .remap = c(colNames = 'col_names', na.strings = 'na'))
 }
 
 #' @importFrom readxl read_xlsx
 #' @importFrom openxlsx read.xlsx
 #' @export
 .import.rio_xlsx <- function(file, which = 1, readxl = TRUE, ...) {
-
-    a <- list(...)
-    if ("sheet" %in% names(a)) {
-        which <- a[["sheet"]]
-        a[["sheet"]] <- NULL
-    }
     if (isTRUE(readxl)) {
         requireNamespace("readxl")
-        frml <- formals(read_xlsx)
-        unused <- setdiff(names(a), names(frml))
-        if (length(unused)>0) {
-          warning("The following arguments were ignored when readxl = TRUE:",
-                  "\n", paste(unused, collapse=', '))
-        }
-        a <- a[intersect(names(a), names(frml))]
-        a <- a[setdiff(names(a), 'path')]
-        do.call("read_xlsx", c(list(path = file, sheet = which), a))
+        arg_reconcile(read_xlsx, path = file, ..., sheet = which,
+                      .docall = TRUE,
+                      .remap = c(colNames = 'col_names', na.strings = 'na'))
     } else {
         requireNamespace("openxlsx")
-        frml <- formals(read.xlsx)
-        unused <- setdiff(names(a), names(frml))
-        if (length(unused)>0) {
-          warning("The following arguments were ignored when readxl = FALSE:",
-                  "\n", paste(unused, collapse=', '))
-        }
-        a <- a[intersect(names(a), names(frml))]
-        a <- a[setdiff(names(a), 'xlsxFile')]
-        do.call("read.xlsx", c(list(xlsxFile = file, sheet = which), a))
+        arg_reconcile(read.xlsx, xlsxFile = file, ..., sheet = which,
+        .docall = TRUE,
+        .remap = c(col_names = 'colNames', na = 'na.strings'))
     }
 }
 
