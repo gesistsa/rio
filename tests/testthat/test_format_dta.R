@@ -26,8 +26,14 @@ test_that("Import from Stata with extended Haven features (read_dta)", {
 })
 
 test_that("Import from Stata (read.dta)", {
-    expect_true(is.data.frame(import("http://www.stata-press.com/data/r12/auto.dta", haven = FALSE)))
-    expect_error(is.data.frame(import("mtcars.dta", haven = FALSE)), label = "foreign::read.dta cannot read newer Stata files")
+    test1 <- try(import("http://www.stata-press.com/data/r12/auto.dta", haven = FALSE))
+    if (!inherits(test1, "try-error")) {
+        expect_true(inherits(test1, "data.frame"))
+    }
+    expect_error(
+        is.data.frame(import("mtcars.dta", haven = FALSE)), 
+        label = "foreign::read.dta cannot read newer Stata files"
+    )
 })
 
 unlink("mtcars.dta")
