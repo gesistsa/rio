@@ -41,6 +41,7 @@ The full list of supported formats is below:
 | CSVY (CSV + YAML metadata header) | .csvy | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table) | Yes |
 | SAS | .sas7bdat | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
 | SPSS | .sav | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
+| SPSS (compressed) | .zsav | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
 | Stata | .dta | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
 | SAS XPORT | .xpt | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
 | SPSS Portable | .por | [**haven**](https://cran.r-project.org/package=haven) |  | Yes |

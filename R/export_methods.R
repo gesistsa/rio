@@ -168,6 +168,13 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     haven::write_sav(data = x, path = file, ...)
 }
 
+#' @importFrom haven write_sav
+#' @export
+.export.rio_zsav <- function(file, x, compress = TRUE, ...) {
+    x <- restore_labelled(x)
+    haven::write_sav(data = x, path = file, compress = compress, ...)
+}
+
 #' @importFrom haven write_dta
 #' @export
 .export.rio_dta <- function(file, x, ...) {

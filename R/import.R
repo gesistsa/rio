@@ -18,6 +18,7 @@
 #'     \item SAS (.sas7bdat), using \code{\link[haven]{read_sas}}.
 #'     \item SAS XPORT (.xpt), using \code{\link[haven]{read_xpt}} or, if \code{haven = FALSE}, \code{\link[foreign]{read.xport}}.
 #'     \item SPSS (.sav), using \code{\link[haven]{read_sav}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used.
+#'     \item SPSS compressed (.zsav), using \code{\link[haven]{read_sav}}.
 #'     \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
 #'     \item SPSS Portable Files (.por), using \code{\link[haven]{read_por}}.
 #'     \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. Use \code{which} to specify a sheet number. For .xlsx files, it is possible to set \code{readxl = FALSE}, so that \code{\link[openxlsx]{read.xlsx}} can be used instead of readxl (the default).
@@ -85,7 +86,7 @@
 #' unlink("iris.tsv")
 #' unlink("iris1.csv")
 #' unlink("iris2.csv")
-#' unlist("list.rds")
+#' unlink("list.rds")
 #'
 #' @seealso \code{\link{import_list}}, \code{\link{.import}}, \code{\link{characterize}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
 #' @importFrom tools file_ext file_path_sans_ext

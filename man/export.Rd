@@ -35,6 +35,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
     \item SAS (.sas7bdat), using \code{\link[haven]{write_sas}}.
     \item SAS XPORT (.xpt), using \code{\link[haven]{write_xpt}}.
     \item SPSS (.sav), using \code{\link[haven]{write_sav}}
+    \item SPSS compressed (.zsav), using \code{\link[haven]{write_sav}}
     \item Stata (.dta), using \code{\link[haven]{write_dta}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
     \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}. Existing workbooks are overwritten unless \code{which} is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the \code{which} sheet does not, data are added as a new sheet to the existing workbook. \code{x} can also be a list of data frames; the list entry names are used as sheet names.
     \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'})

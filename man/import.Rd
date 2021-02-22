@@ -35,6 +35,7 @@ This function imports a data frame or matrix from a data file with the file form
     \item SAS (.sas7bdat), using \code{\link[haven]{read_sas}}.
     \item SAS XPORT (.xpt), using \code{\link[haven]{read_xpt}} or, if \code{haven = FALSE}, \code{\link[foreign]{read.xport}}.
     \item SPSS (.sav), using \code{\link[haven]{read_sav}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used.
+    \item SPSS compressed (.zsav), using \code{\link[haven]{read_sav}}.
     \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
     \item SPSS Portable Files (.por), using \code{\link[haven]{read_por}}.
     \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. Use \code{which} to specify a sheet number. For .xlsx files, it is possible to set \code{readxl = FALSE}, so that \code{\link[openxlsx]{read.xlsx}} can be used instead of readxl (the default).

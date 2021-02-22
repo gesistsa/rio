@@ -1,7 +1,11 @@
+# rio 0.5.26
+
+* Added support for "zsav" format. (#273)
 # rio 0.5.25
 
 * Modified tests per email request from CRAN.
 * Added `coerce_character` argument (default FALSE) to `factorize()` to enable coercing character columns to factor. (#278)
+
 # rio 0.5.24
 
 * Fix handling of "label" and "labels" attributes when exporting using haven methods (SPSS, Stata, SAS). (#268, h/t Ruben Arslan)

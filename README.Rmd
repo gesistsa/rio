@@ -20,7 +20,7 @@ Because **rio** is meant to streamline data I/O, the package is extremely easy t
 
 Exporting data is handled with one function, `export()`:
 
-```{r}
+```{r exports}
 library("rio")
 
 export(mtcars, "mtcars.csv") # comma-separated values
@@ -30,13 +30,13 @@ export(mtcars, "mtcars.sav") # SPSS
 
 A particularly useful feature of rio is the ability to import from and export to compressed (e.g., zip) directories, saving users the extra step of compressing a large exported file, e.g.:
 
-```{r}
+```{r export_zip}
 export(mtcars, "mtcars.tsv.zip")
 ```
 
 As of rio v0.5.0, `export()` can also write multiple data frames to respective sheets of an Excel workbook or an HTML file:
 
-```{r}
+```{r export_a_list}
 export(list(mtcars = mtcars, iris = iris), file = "mtcars.xlsx")
 ```
 
@@ -44,7 +44,7 @@ export(list(mtcars = mtcars, iris = iris), file = "mtcars.xlsx")
 
 Importing data is handled with one function, `import()`:
 
-```{r}
+```{r import}
 x <- import("mtcars.csv")
 y <- import("mtcars.rds")
 z <- import("mtcars.sav")
@@ -58,13 +58,13 @@ Note: Because of inconsistencies across underlying packages, the data.frame retu
 
 In rio v0.5.0, a new list-based import function was added. This allows users to import a list of data frames from a multi-object file (such as an Excel workbook, .Rdata file, zip directory, or HTML file):
 
-```{r}
+```{r import_list}
 str(m <- import_list("mtcars.xlsx"))
 ```
 
 And for rio v0.6.0, a new list-based export function was added. This makes it easy to export a list of (possibly named) data frames to multiple files:
 
-```{r}
+```{r export_list}
 export_list(m, "%s.tsv")
 c("mtcars.tsv", "iris.tsv") %in% dir()
 ```
@@ -74,7 +74,7 @@ c("mtcars.tsv", "iris.tsv") %in% dir()
 
 The `convert()` function links `import()` and `export()` by constructing a dataframe from the imported file and immediately writing it back to disk. `convert()` invisibly returns the file name of the exported file, so that it can be used to programmatically access the new file.
 
-```{r}
+```{r convert}
 convert("mtcars.sav", "mtcars.dta")
 ```
 
@@ -84,7 +84,7 @@ It is also possible to use **rio** on the command-line by calling `Rscript` with
 Rscript -e "rio::convert('iris.dta', 'iris.csv')"
 ```
 
-```{r, echo=FALSE, results="hide"}
+```{r cleanup, echo=FALSE, results="hide"}
 unlink("mtcars.csv")
 unlink("mtcars.dta")
 unlink("mtcars.sav")
@@ -111,6 +111,7 @@ The full list of supported formats is below:
 | CSVY (CSV + YAML metadata header) | .csvy | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table) | Yes |
 | SAS | .sas7bdat | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
 | SPSS | .sav | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
+| SPSS (compressed) | .zsav | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
 | Stata | .dta | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
 | SAS XPORT | .xpt | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
 | SPSS Portable | .por | [**haven**](https://cran.r-project.org/package=haven) |  | Yes |
