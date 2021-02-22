@@ -80,6 +80,7 @@ get_type <- function(fmt) {
         yml = "yml",
         eviews = "eviews",
         wf1 = "eviews",
+        zsav = "zsav",
         # compressed formats
         csv.gz = "gzip",
         csv.gzip = "gzip",

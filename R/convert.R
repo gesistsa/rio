@@ -29,7 +29,7 @@
 #' 
 #' \dontrun{\donttest{
 #' # convert from the command line:
-#' \code{# Rscript -e "rio::convert('mtcars.dta', 'mtcars.csv')"}
+#' ## Rscript -e "rio::convert('mtcars.dta', 'mtcars.csv')"
 #' }}
 #' 
 #' @seealso \href{https://lbraglia.github.io/}{Luca Braglia} has created a Shiny app called \href{https://github.com/lbraglia/rioweb}{rioweb} that provides access to the file conversion features of rio through a web browser. The app is featured in the \href{https://gallery.shinyapps.io/rioweb}{RStudio Shiny Gallery}.

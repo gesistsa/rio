@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get File Type from Extension — get_ext • rio</title>
+<title>Reconcile an argument list to any function signature. — arg_reconcile • rio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,10 @@
 
 
 
-<meta property="og:title" content="Get File Type from Extension — get_ext" />
-<meta property="og:description" content="A utility function to retrieve the file type from a file extension (via its filename/path/URL)" />
+<meta property="og:title" content="Reconcile an argument list to any function signature. — arg_reconcile" />
+<meta property="og:description" content="Adapt an argument list to a function excluding arguments that 
+             will not be recognized by it, redundant arguments, and un-named
+             arguments." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -122,29 +124,107 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get File Type from Extension</h1>
-    <small class="dont-index">Source: <a href='https://github.com/leeper/rio/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>get_ext.Rd</code></div>
+    <h1>Reconcile an argument list to any function signature.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/leeper/rio/blob/master/R/arg_reconcile.R'><code>R/arg_reconcile.R</code></a></small>
+    <div class="hidden name"><code>arg_reconcile.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A utility function to retrieve the file type from a file extension (via its filename/path/URL)</p>
+    <p>Adapt an argument list to a function excluding arguments that 
+             will not be recognized by it, redundant arguments, and un-named
+             arguments.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_ext</span>(<span class='no'>file</span>)</pre>
+    <pre class="usage"><span class='fu'>arg_reconcile</span>(
+  <span class='no'>fun</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>.args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>alist</a></span>(),
+  <span class='kw'>.docall</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>.include</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(),
+  <span class='kw'>.exclude</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(),
+  <span class='kw'>.remap</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  <span class='kw'>.warn</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>.error</span> <span class='kw'>=</span> <span class='st'>"default"</span>,
+  <span class='kw'>.finish</span> <span class='kw'>=</span> <span class='no'>identity</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>A character string containing a filename, file path, or URL.</p></td>
+      <th>fun</th>
+      <td><p>A function to which an argument list needs to be adapted. Use
+the unquoted name of the function. If it's in a different 
+package then the fully qualified unquoted name (e.g. 
+<code><a href='https://rdrr.io/r/utils/read.table.html'>utils::read.table</a></code>)</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>An arbitrary list of named arguments (unnamed ones will be 
+ignored). Arguments in <code>.args</code> are overridden by
+arguments of the same name (if any) in <code>...</code></p></td>
+    </tr>
+    <tr>
+      <th>.args</th>
+      <td><p>A list or <code>alist</code> of named arguments, to be merged 
+with <code>...</code>. Arguments in <code>.args</code> are overridden by
+arguments of the same name (if any) in <code>...</code></p></td>
+    </tr>
+    <tr>
+      <th>.docall</th>
+      <td><p>If set to <code>TRUE</code> will not only clean up the arguments 
+but also execute <code>fun</code> with those arguments 
+(<code>FALSE</code> by default) and return the results</p></td>
+    </tr>
+    <tr>
+      <th>.include</th>
+      <td><p>Whitelist. If not empty, only arguments named here will be 
+permitted, and only if they satisfy the conditions implied by
+the other arguments. Evaluated before <code>.remap</code>.</p></td>
+    </tr>
+    <tr>
+      <th>.exclude</th>
+      <td><p>Blacklist. If not empty, arguments named here will be removed 
+even if they satisfy the conditions implied by the other 
+arguments. Evaluated before <code>.remap</code>.</p></td>
+    </tr>
+    <tr>
+      <th>.remap</th>
+      <td><p>An optional named character vector or named list of character 
+values for standardizing arguments that play the same role 
+but have different names in different functions. Evaluated 
+after <code>.exclude</code> and <code>.include</code>.</p></td>
+    </tr>
+    <tr>
+      <th>.warn</th>
+      <td><p>Whether to issue a warning message (default) when invalid 
+arguments need to be discarded.</p></td>
+    </tr>
+    <tr>
+      <th>.error</th>
+      <td><p>If specified, should be the object to return in the event of
+error. This object will have the error as its 
+<code>error</code> attribute. If not specified an ordinary error is
+thrown with an added hint on the documentation to read for 
+troubleshooting. Ignored if <code>.docall</code> is <code>FALSE</code>.
+The point of doing this is fault-tolerance-- if this function
+is part of a lengthy process where you want to document an 
+error but keep going, you can set <code>.error</code> to some 
+object of a compatible type. That object will be returned in 
+the event of error and will have as its <code>"error"</code> 
+attribute the error object.</p></td>
+    </tr>
+    <tr>
+      <th>.finish</th>
+      <td><p>A function to run on the result before returning it. Ignored 
+if <code>.docall</code> is <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A characters string containing a file type recognized by rio.</p>
+    <p>Either a named list or the result of calling <code>fun</code> with the 
+        supplied arguments</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

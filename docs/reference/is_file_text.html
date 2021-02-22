@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get File Type from Extension — get_ext • rio</title>
+<title>Determine whether a file is &#8220;plain-text&#8221; or some sort of binary format — is_file_text • rio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get File Type from Extension — get_ext" />
-<meta property="og:description" content="A utility function to retrieve the file type from a file extension (via its filename/path/URL)" />
+<meta property="og:title" content="Determine whether a file is &#8220;plain-text&#8221; or some sort of binary format — is_file_text" />
+<meta property="og:description" content="Determine whether a file is &amp;#8220;plain-text&amp;#8221; or some sort of binary format" />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -122,30 +122,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get File Type from Extension</h1>
-    <small class="dont-index">Source: <a href='https://github.com/leeper/rio/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>get_ext.Rd</code></div>
+    <h1>Determine whether a file is &#8220;plain-text&#8221; or some sort of binary format</h1>
+    <small class="dont-index">Source: <a href='https://github.com/leeper/rio/blob/master/R/is_file_text.R'><code>R/is_file_text.R</code></a></small>
+    <div class="hidden name"><code>is_file_text.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A utility function to retrieve the file type from a file extension (via its filename/path/URL)</p>
+    <p>Determine whether a file is &#8220;plain-text&#8221; or some sort of binary format</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_ext</span>(<span class='no'>file</span>)</pre>
+    <pre class="usage"><span class='fu'>is_file_text</span>(<span class='no'>file</span>, <span class='kw'>maxsize</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>text_bytes</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/raw.html'>as.raw</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>7</span>:<span class='fl'>16</span>, <span class='fl'>18</span>, <span class='fl'>19</span>, <span class='fl'>32</span>:<span class='fl'>255</span>)))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file</th>
-      <td><p>A character string containing a filename, file path, or URL.</p></td>
+      <td><p>Path to the file</p></td>
+    </tr>
+    <tr>
+      <th>maxsize</th>
+      <td><p>Maximum number of bytes to read</p></td>
+    </tr>
+    <tr>
+      <th>text_bytes</th>
+      <td><p>Which characters are used by normal text (though not 
+necessarily just ASCII). To detect just ASCII, the 
+following value can be used: 
+<code><a href='https://rdrr.io/r/base/raw.html'>as.raw(c(7:16, 18, 19, 32:127))</a></code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A characters string containing a file type recognized by rio.</p>
+    <p>A logical</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>datasets</span>)
+<span class='fu'><a href='export.html'>export</a></span>(<span class='no'>iris</span>, <span class='st'>"iris.yml"</span>)
+<span class='fu'>is_file_text</span>(<span class='st'>"iris.yml"</span>) <span class='co'># TRUE</span></div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'><a href='export.html'>export</a></span>(<span class='no'>iris</span>, <span class='st'>"iris.sav"</span>)
+<span class='fu'>is_file_text</span>(<span class='st'>"iris.sav"</span>) <span class='co'># FALSE</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='co'># cleanup</span>
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"iris.yml"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"iris.sav"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,8 +48,7 @@
 
 <meta property="og:title" content="Import — import" />
 <meta property="og:description" content="Read in a data.frame from a file. Exceptions to this rule are Rdata, RDS, and JSON input file formats, which return the originally saved object without changing its class." />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="/logo.svg" />
 
 
 
@@ -63,7 +66,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -77,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.22</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.26</span>
       </span>
     </div>
 
@@ -101,7 +104,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/leeper/rio">
+  <a href="https://github.com/leeper/rio/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -169,6 +172,7 @@
 <li><p>SAS (.sas7bdat), using <code><a href='https://haven.tidyverse.org/reference/read_sas.html'>read_sas</a></code>.</p></li>
 <li><p>SAS XPORT (.xpt), using <code><a href='https://haven.tidyverse.org/reference/read_xpt.html'>read_xpt</a></code> or, if <code>haven = FALSE</code>, <code><a href='https://rdrr.io/pkg/foreign/man/read.xport.html'>read.xport</a></code>.</p></li>
 <li><p>SPSS (.sav), using <code><a href='https://haven.tidyverse.org/reference/read_spss.html'>read_sav</a></code>. If <code>haven = FALSE</code>, <code><a href='https://rdrr.io/pkg/foreign/man/read.spss.html'>read.spss</a></code> can be used.</p></li>
+<li><p>SPSS compressed (.zsav), using <code><a href='https://haven.tidyverse.org/reference/read_spss.html'>read_sav</a></code>.</p></li>
 <li><p>Stata (.dta), using <code><a href='https://haven.tidyverse.org/reference/read_dta.html'>read_dta</a></code>. If <code>haven = FALSE</code>, <code><a href='https://rdrr.io/pkg/foreign/man/read.dta.html'>read.dta</a></code> can be used.</p></li>
 <li><p>SPSS Portable Files (.por), using <code><a href='https://haven.tidyverse.org/reference/read_spss.html'>read_por</a></code>.</p></li>
 <li><p>Excel (.xls and .xlsx), using <code><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></code>. Use <code>which</code> to specify a sheet number. For .xlsx files, it is possible to set <code>readxl = FALSE</code>, so that <code><a href='https://rdrr.io/pkg/openxlsx/man/read.xlsx.html'>read.xlsx</a></code> can be used instead of readxl (the default).</p></li>
@@ -184,16 +188,16 @@
 <li><p>Fortran data (no recognized extension), using <code><a href='https://rdrr.io/r/utils/read.fortran.html'>read.fortran</a></code></p></li>
 <li><p>Fixed-width format data (.fwf), using a faster version of <code><a href='https://rdrr.io/r/utils/read.fwf.html'>read.fwf</a></code> that requires a <code>widths</code> argument and by default in rio has <code>stringsAsFactors = FALSE</code>. If <code>readr = TRUE</code>, import will be performed using <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>read_fwf</a></code>, where <code>widths</code> should be: <code>NULL</code>, a vector of column widths, or the output of <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>fwf_empty</a></code>, <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>fwf_widths</a></code>, or <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>fwf_positions</a></code>.</p></li>
 <li><p>gzip comma-separated data (.csv.gz), using <code><a href='https://rdrr.io/r/utils/read.table.html'>read.table</a></code> with <code>row.names = FALSE</code> and <code>stringsAsFactors = FALSE</code></p></li>
-<li><p><a href='https://github.com/csvy'>CSVY</a> (CSV with a YAML metadata header) using <code><a href='https://rdrr.io/pkg/csvy/man/read_csvy.html'>read_csvy</a></code>.</p></li>
+<li><p><a href='https://github.com/csvy'>CSVY</a> (CSV with a YAML metadata header) using <code><a href='https://rdrr.io/pkg/data.table/man/fread.html'>fread</a></code>.</p></li>
 <li><p>Apache Arrow Parquet (.parquet), using <code><a href='https://arrow.apache.org/docs/r//reference/read_parquet.html'>read_parquet</a></code></p></li>
 <li><p>Feather R/Python interchange format (.feather), using <code><a href='https://rdrr.io/pkg/feather/man/read_feather.html'>read_feather</a></code></p></li>
 <li><p>Fast storage (.fst), using <code><a href='http://www.fstpackage.org/reference/write_fst.html'>read.fst</a></code></p></li>
-<li><p>JSON (.json), using <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></code></p></li>
+<li><p>JSON (.json), using <code><a href='https://jeroen.cran.dev/jsonlite/reference/fromJSON.html'>fromJSON</a></code></p></li>
 <li><p>Matlab (.mat), using <code><a href='https://rdrr.io/pkg/rmatio/man/read.mat.html'>read.mat</a></code></p></li>
 <li><p>EViews (.wf1), using <code><a href='https://rdrr.io/pkg/hexView/man/readEViews.html'>readEViews</a></code></p></li>
 <li><p>OpenDocument Spreadsheet (.ods), using <code><a href='https://rdrr.io/pkg/readODS/man/read_ods.html'>read_ods</a></code>.  Use <code>which</code> to specify a sheet number.</p></li>
-<li><p>Single-table HTML documents (.html), using <code><a href='https://rdrr.io/pkg/xml2/man/read_xml.html'>read_html</a></code>. The data structure will only be read correctly if the HTML file can be converted to a list via <code><a href='https://rdrr.io/pkg/xml2/man/as_list.html'>as_list</a></code>.</p></li>
-<li><p>Shallow XML documents (.xml), using <code><a href='http://xml2.r-lib.org/reference/read_xml.html'>read_xml</a></code>. The data structure will only be read correctly if the XML file can be converted to a list via <code><a href='http://xml2.r-lib.org/reference/as_list.html'>as_list</a></code>.</p></li>
+<li><p>Single-table HTML documents (.html), using <code><a href='http://xml2.r-lib.org/reference/read_xml.html'>read_html</a></code>. The data structure will only be read correctly if the HTML file can be converted to a list via <code><a href='http://xml2.r-lib.org/reference/as_list.html'>as_list</a></code>.</p></li>
+<li><p>Shallow XML documents (.xml), using <code><a href='https://rdrr.io/pkg/xml2/man/read_xml.html'>read_xml</a></code>. The data structure will only be read correctly if the XML file can be converted to a list via <code><a href='http://xml2.r-lib.org/reference/as_list.html'>as_list</a></code>.</p></li>
 <li><p>YAML (.yml), using <code><a href='https://rdrr.io/pkg/yaml/man/yaml.load.html'>yaml.load</a></code></p></li>
 <li><p>Clipboard import (on Windows and Mac OS), using <code><a href='https://rdrr.io/r/utils/read.table.html'>read.table</a></code> with <code>row.names = FALSE</code></p></li>
 <li><p>Google Sheets, as Comma-separated data (.csv)</p></li>
@@ -240,17 +244,10 @@
 <span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span>(<span class='st'>"list.rds"</span>)</div><div class='output co'>#&gt; [1] "list.rds"</div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -261,7 +258,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

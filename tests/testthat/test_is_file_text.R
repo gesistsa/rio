@@ -21,7 +21,7 @@ test_that("Required non-text formats recognized as non-text", {
 })
 
 test_that("csvy recognized as text", {
-  skip_if_not_installed(pkg = "csvy")
+  skip_if_not_installed(pkg = "data.table")
   expect_true(is_file_text(export(iris, "iris.csvy")))
 })
 

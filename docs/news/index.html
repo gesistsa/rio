@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -43,8 +47,7 @@
 
 
 <meta property="og:title" content="Changelog" />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="/logo.svg" />
 
 
 
@@ -62,7 +65,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.22</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.26</span>
       </span>
     </div>
 
@@ -100,7 +103,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/leeper/rio">
+  <a href="https://github.com/leeper/rio/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -118,20 +121,54 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/leeper/rio/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="rio-0526" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.26">
+<a href="#rio-0526" class="anchor"></a>rio 0.5.26<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<p>Added support for “zsav” format. (<a href='https://github.com/leeper/rio/issues/273'>#273</a>)</p>
+<h1 id="rio-0525" class="page-header" data-toc-text="0.5.26">rio 0.5.25<small> Unreleased </small>
+</h1>
+</li>
+<li><p>Modified tests per email request from CRAN.</p></li>
+<li><p>Added <code>coerce_character</code> argument (default FALSE) to <code><a href="../reference/characterize.html">factorize()</a></code> to enable coercing character columns to factor. (<a href='https://github.com/leeper/rio/issues/278'>#278</a>)</p></li>
+</ul>
+</div>
+    <div id="rio-0524" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.24">
+<a href="#rio-0524" class="anchor"></a>rio 0.5.24<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fix handling of “label” and “labels” attributes when exporting using haven methods (SPSS, Stata, SAS). (<a href='https://github.com/leeper/rio/issues/268'>#268</a>, h/t Ruben Arslan)</li>
+<li>Fix (a different bug?) handling factors by haven::labelled() (<a href='https://github.com/leeper/rio/issues/271'>#271</a>, Alex Bokov)</li>
+<li>HTML import can now handle multiple tbody elements within a single table, a th element in a non-header row, and empty elements in either the header or data. (<a href='https://github.com/leeper/rio/issues/260'>#260</a>, <a href='https://github.com/leeper/rio/issues/263'>#263</a>, <a href='https://github.com/leeper/rio/issues/264'>#264</a> Bill Denney)</li>
+</ul>
+</div>
+    <div id="rio-0523" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.23">
+<a href="#rio-0523" class="anchor"></a>rio 0.5.23<small> Unreleased </small>
+</h1>
+<ul>
+<li>CSVY support is now provided by <code><a href="https://rdrr.io/pkg/data.table/man/fread.html">data.table::fread()</a></code> and <code><a href="https://rdrr.io/pkg/data.table/man/fwrite.html">data.table::fwrite()</a></code>, providing significant performance gains.</li>
+<li>Added an internal <code><a href="../reference/arg_reconcile.html">arg_reconcile()</a></code> function to streamline the task of removing/renaming arguments for compatibility with various functions (<a href='https://github.com/leeper/rio/issues/245'>#245</a>, Alex Bokov)</li>
+</ul>
+</div>
     <div id="rio-0522" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.22">
 <a href="#rio-0522" class="anchor"></a>rio 0.5.22<small> Unreleased </small>
 </h1>
 <ul>
 <li>Added an <code><a href="../reference/export_list.html">export_list()</a></code> function to write a list of data frames to multiple files using a vector of file names or a file pattern. (<a href='https://github.com/leeper/rio/issues/207'>#207</a>, h/t Bill Denney)</li>
+<li>Added an <code><a href="../reference/is_file_text.html">is_file_text()</a></code> function to determine whether a file is in a plain-text format. Optionally narrower subsets of characters can be specified, e.g. ASCII. (<a href='https://github.com/leeper/rio/issues/236'>#236</a> Alex Bokov)</li>
 </ul>
 </div>
     <div id="rio-0521" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.21">
 <a href="#rio-0521" class="anchor"></a>rio 0.5.21<small> Unreleased </small>
 </h1>
 <ul>
@@ -144,7 +181,7 @@
 </ul>
 </div>
     <div id="rio-0520" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.20">
 <a href="#rio-0520" class="anchor"></a>rio 0.5.20<small> Unreleased </small>
 </h1>
 <ul>
@@ -154,7 +191,7 @@
 </ul>
 </div>
     <div id="rio-0519" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.19">
 <a href="#rio-0519" class="anchor"></a>rio 0.5.19<small> Unreleased </small>
 </h1>
 <ul>
@@ -166,7 +203,7 @@
 </ul>
 </div>
     <div id="rio-0518" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.18">
 <a href="#rio-0518" class="anchor"></a>rio 0.5.18<small> Unreleased </small>
 </h1>
 <ul>
@@ -174,7 +211,7 @@
 </ul>
 </div>
     <div id="rio-0517" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.17">
 <a href="#rio-0517" class="anchor"></a>rio 0.5.17<small> Unreleased </small>
 </h1>
 <ul>
@@ -182,7 +219,7 @@
 </ul>
 </div>
     <div id="rio-0516" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.16">
 <a href="#rio-0516" class="anchor"></a>rio 0.5.16<small> 2018-11-26 </small>
 </h1>
 <ul>
@@ -190,7 +227,7 @@
 </ul>
 </div>
     <div id="rio-0515" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.15">
 <a href="#rio-0515" class="anchor"></a>rio 0.5.15<small> 2018-11-25 </small>
 </h1>
 <ul>
@@ -199,7 +236,7 @@
 </ul>
 </div>
     <div id="rio-0514" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.14">
 <a href="#rio-0514" class="anchor"></a>rio 0.5.14<small> Unreleased </small>
 </h1>
 <ul>
@@ -209,7 +246,7 @@
 </ul>
 </div>
     <div id="rio-0513" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.13">
 <a href="#rio-0513" class="anchor"></a>rio 0.5.13<small> Unreleased </small>
 </h1>
 <ul>
@@ -224,7 +261,7 @@
 </ul>
 </div>
     <div id="rio-0511" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.11">
 <a href="#rio-0511" class="anchor"></a>rio 0.5.11<small> Unreleased </small>
 </h1>
 <ul>
@@ -235,7 +272,7 @@
 </ul>
 </div>
     <div id="rio-0510" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.10">
 <a href="#rio-0510" class="anchor"></a>rio 0.5.10<small> 2018-03-29 </small>
 </h1>
 <ul>
@@ -243,7 +280,7 @@
 </ul>
 </div>
     <div id="rio-059" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.9">
 <a href="#rio-059" class="anchor"></a>rio 0.5.9<small> 2018-02-01 </small>
 </h1>
 <ul>
@@ -251,7 +288,7 @@
 </ul>
 </div>
     <div id="rio-058" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.8">
 <a href="#rio-058" class="anchor"></a>rio 0.5.8<small> Unreleased </small>
 </h1>
 <ul>
@@ -263,17 +300,17 @@
 </ul>
 </div>
     <div id="rio-057" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.7">
 <a href="#rio-057" class="anchor"></a>rio 0.5.7<small> Unreleased </small>
 </h1>
 <ul>
 <li>Import of files with the ambiguous .dat extension, which are typically text-delimited files, are now passed to <code><a href="https://rdrr.io/pkg/data.table/man/fread.html">data.table::fread()</a></code> with a message. Export to the format remains unsupported. (<a href='https://github.com/leeper/rio/issues/98'>#98</a>, <a href='https://github.com/leeper/rio/issues/155'>#155</a>)</li>
-<li>Added support for export to SAS XPORT format (via <code><a href="https://haven.tidyverse.org/reference/read_xpt.html">haven::write_xpt()</a></code>). (<a href='https://github.com/leeper/rio/issues/157'>#157</a>)</li>
-<li>Switched default import package for SAS XPORT format to <code><a href="https://haven.tidyverse.org/reference/read_xpt.html">haven::read_xpt()</a></code> with a <code>haven = FALSE</code> toggle restoring the previous default behavior using <code>foreign::read.xpt()</code>. (<a href='https://github.com/leeper/rio/issues/157'>#157</a>)</li>
+<li>Added support for export to SAS XPORT format (via <code><a href="https://rdrr.io/pkg/haven/man/read_xpt.html">haven::write_xpt()</a></code>). (<a href='https://github.com/leeper/rio/issues/157'>#157</a>)</li>
+<li>Switched default import package for SAS XPORT format to <code><a href="https://rdrr.io/pkg/haven/man/read_xpt.html">haven::read_xpt()</a></code> with a <code>haven = FALSE</code> toggle restoring the previous default behavior using <code>foreign::read.xpt()</code>. (<a href='https://github.com/leeper/rio/issues/157'>#157</a>)</li>
 </ul>
 </div>
     <div id="rio-056" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.6">
 <a href="#rio-056" class="anchor"></a>rio 0.5.6<small> Unreleased </small>
 </h1>
 <ul>
@@ -282,7 +319,7 @@
 </ul>
 </div>
     <div id="rio-055" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.5">
 <a href="#rio-055" class="anchor"></a>rio 0.5.5<small> 2017-06-18 </small>
 </h1>
 <ul>
@@ -290,7 +327,7 @@
 </ul>
 </div>
     <div id="rio-054" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.4">
 <a href="#rio-054" class="anchor"></a>rio 0.5.4<small> Unreleased </small>
 </h1>
 <ul>
@@ -298,7 +335,7 @@
 </ul>
 </div>
     <div id="rio-053" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.3">
 <a href="#rio-053" class="anchor"></a>rio 0.5.3<small> Unreleased </small>
 </h1>
 <ul>
@@ -309,7 +346,7 @@
 </ul>
 </div>
     <div id="rio-053-1" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.3">
 <a href="#rio-053-1" class="anchor"></a>rio 0.5.3<small> Unreleased </small>
 </h1>
 <ul>
@@ -319,7 +356,7 @@
 </ul>
 </div>
     <div id="rio-051" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.1">
 <a href="#rio-051" class="anchor"></a>rio 0.5.1<small> Unreleased </small>
 </h1>
 <ul>
@@ -328,7 +365,7 @@
 </ul>
 </div>
     <div id="rio-050" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.0">
 <a href="#rio-050" class="anchor"></a>rio 0.5.0<small> 2017-04-28 </small>
 </h1>
 <ul>
@@ -337,7 +374,7 @@
 </ul>
 </div>
     <div id="rio-0428" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.28">
 <a href="#rio-0428" class="anchor"></a>rio 0.4.28<small> Unreleased </small>
 </h1>
 <ul>
@@ -349,18 +386,18 @@
 </ul>
 </div>
     <div id="rio-0427" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.27">
 <a href="#rio-0427" class="anchor"></a>rio 0.4.27<small> Unreleased </small>
 </h1>
 <ul>
 <li>Import to and export from the clipboard now relies on <code><a href="https://rdrr.io/pkg/clipr/man/read_clip.html">clipr::read_clip()</a></code> and <code><a href="https://rdrr.io/pkg/clipr/man/write_clip.html">clipr::write_clip()</a></code>, respectively, thus (finally) providing Linux support. (<a href='https://github.com/leeper/rio/issues/105'>#105</a>, h/t Matthew Lincoln)</li>
 <li>Added an <code>rbind</code> argument to <code><a href="../reference/import_list.html">import_list()</a></code>. (<a href='https://github.com/leeper/rio/issues/149'>#149</a>)</li>
 <li>Added a <code>setclass</code> argument to <code><a href="../reference/import_list.html">import_list()</a></code>, ala the same in <code><a href="../reference/import.html">import()</a></code>.</li>
-<li>Switched <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code> calls to <code>quietly = TRUE</code>.</li>
+<li>Switched <code>requireNamespace()</code> calls to <code>quietly = TRUE</code>.</li>
 </ul>
 </div>
     <div id="rio-0426" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.26">
 <a href="#rio-0426" class="anchor"></a>rio 0.4.26<small> Unreleased </small>
 </h1>
 <ul>
@@ -368,7 +405,7 @@
 </ul>
 </div>
     <div id="rio-0425" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.25">
 <a href="#rio-0425" class="anchor"></a>rio 0.4.25<small> Unreleased </small>
 </h1>
 <ul>
@@ -381,7 +418,7 @@
 </ul>
 </div>
     <div id="rio-0424" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.24">
 <a href="#rio-0424" class="anchor"></a>rio 0.4.24<small> Unreleased </small>
 </h1>
 <ul>
@@ -392,7 +429,7 @@
 </ul>
 </div>
     <div id="rio-0423" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.23">
 <a href="#rio-0423" class="anchor"></a>rio 0.4.23<small> Unreleased </small>
 </h1>
 <ul>
@@ -402,7 +439,7 @@
 </ul>
 </div>
     <div id="rio-0422" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.22">
 <a href="#rio-0422" class="anchor"></a>rio 0.4.22<small> Unreleased </small>
 </h1>
 <ul>
@@ -414,7 +451,7 @@
 </ul>
 </div>
     <div id="rio-0421" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.21">
 <a href="#rio-0421" class="anchor"></a>rio 0.4.21<small> Unreleased </small>
 </h1>
 <ul>
@@ -422,7 +459,7 @@
 </ul>
 </div>
     <div id="rio-0420" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.20">
 <a href="#rio-0420" class="anchor"></a>rio 0.4.20<small> Unreleased </small>
 </h1>
 <ul>
@@ -430,7 +467,7 @@
 </ul>
 </div>
     <div id="rio-0419" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.19">
 <a href="#rio-0419" class="anchor"></a>rio 0.4.19<small> Unreleased </small>
 </h1>
 <ul>
@@ -438,7 +475,7 @@
 </ul>
 </div>
     <div id="rio-0418" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.18">
 <a href="#rio-0418" class="anchor"></a>rio 0.4.18<small> Unreleased </small>
 </h1>
 <ul>
@@ -446,7 +483,7 @@
 </ul>
 </div>
     <div id="rio-0417" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.17">
 <a href="#rio-0417" class="anchor"></a>rio 0.4.17<small> Unreleased </small>
 </h1>
 <ul>
@@ -454,7 +491,7 @@
 </ul>
 </div>
     <div id="rio-0416" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.16">
 <a href="#rio-0416" class="anchor"></a>rio 0.4.16<small> 2016-09-25 </small>
 </h1>
 <ul>
@@ -462,7 +499,7 @@
 </ul>
 </div>
     <div id="rio-0415" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.15">
 <a href="#rio-0415" class="anchor"></a>rio 0.4.15<small> Unreleased </small>
 </h1>
 <ul>
@@ -472,7 +509,7 @@
 </ul>
 </div>
     <div id="rio-0414" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.14">
 <a href="#rio-0414" class="anchor"></a>rio 0.4.14<small> Unreleased </small>
 </h1>
 <ul>
@@ -480,7 +517,7 @@
 </ul>
 </div>
     <div id="rio-0413" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.13">
 <a href="#rio-0413" class="anchor"></a>rio 0.4.13<small> Unreleased </small>
 </h1>
 <ul>
@@ -492,7 +529,7 @@
 </ul>
 </div>
     <div id="rio-0412" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.12">
 <a href="#rio-0412" class="anchor"></a>rio 0.4.12<small> 2016-08-10 </small>
 </h1>
 <ul>
@@ -500,7 +537,7 @@
 </ul>
 </div>
     <div id="rio-0411" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.11">
 <a href="#rio-0411" class="anchor"></a>rio 0.4.11<small> 2016-08-09 </small>
 </h1>
 <ul>
@@ -509,7 +546,7 @@
 </ul>
 </div>
     <div id="rio-0410" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.10">
 <a href="#rio-0410" class="anchor"></a>rio 0.4.10<small> Unreleased </small>
 </h1>
 <ul>
@@ -519,7 +556,7 @@
 </ul>
 </div>
     <div id="rio-049" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.9">
 <a href="#rio-049" class="anchor"></a>rio 0.4.9<small> Unreleased </small>
 </h1>
 <ul>
@@ -527,7 +564,7 @@
 </ul>
 </div>
     <div id="rio-048" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.8">
 <a href="#rio-048" class="anchor"></a>rio 0.4.8<small> 2016-06-14 </small>
 </h1>
 <ul>
@@ -535,7 +572,7 @@
 </ul>
 </div>
     <div id="rio-047" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.7">
 <a href="#rio-047" class="anchor"></a>rio 0.4.7<small> Unreleased </small>
 </h1>
 <ul>
@@ -544,7 +581,7 @@
 </ul>
 </div>
     <div id="rio-045" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.5">
 <a href="#rio-045" class="anchor"></a>rio 0.4.5<small> 2016-05-20 </small>
 </h1>
 <ul>
@@ -553,7 +590,7 @@
 </ul>
 </div>
     <div id="rio-043" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.3">
 <a href="#rio-043" class="anchor"></a>rio 0.4.3<small> 2016-05-19 </small>
 </h1>
 <ul>
@@ -562,7 +599,7 @@
 </ul>
 </div>
     <div id="rio-042" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.2">
 <a href="#rio-042" class="anchor"></a>rio 0.4.2<small> Unreleased </small>
 </h1>
 <ul>
@@ -570,7 +607,7 @@
 </ul>
 </div>
     <div id="rio-041" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.1">
 <a href="#rio-041" class="anchor"></a>rio 0.4.1<small> Unreleased </small>
 </h1>
 <ul>
@@ -579,7 +616,7 @@
 </ul>
 </div>
     <div id="rio-040" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.0">
 <a href="#rio-040" class="anchor"></a>rio 0.4.0<small> 2016-05-01 </small>
 </h1>
 <ul>
@@ -587,7 +624,7 @@
 </ul>
 </div>
     <div id="rio-0319" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.19">
 <a href="#rio-0319" class="anchor"></a>rio 0.3.19<small> Unreleased </small>
 </h1>
 <ul>
@@ -596,7 +633,7 @@
 </ul>
 </div>
     <div id="rio-0318" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.18">
 <a href="#rio-0318" class="anchor"></a>rio 0.3.18<small> Unreleased </small>
 </h1>
 <ul>
@@ -604,7 +641,7 @@
 </ul>
 </div>
     <div id="rio-0317" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.17">
 <a href="#rio-0317" class="anchor"></a>rio 0.3.17<small> Unreleased </small>
 </h1>
 <ul>
@@ -612,7 +649,7 @@
 </ul>
 </div>
     <div id="rio-0316" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.16">
 <a href="#rio-0316" class="anchor"></a>rio 0.3.16<small> Unreleased </small>
 </h1>
 <ul>
@@ -620,7 +657,7 @@
 </ul>
 </div>
     <div id="rio-0315" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.15">
 <a href="#rio-0315" class="anchor"></a>rio 0.3.15<small> Unreleased </small>
 </h1>
 <ul>
@@ -629,7 +666,7 @@
 </ul>
 </div>
     <div id="rio-0314" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.14">
 <a href="#rio-0314" class="anchor"></a>rio 0.3.14<small> Unreleased </small>
 </h1>
 <ul>
@@ -637,7 +674,7 @@
 </ul>
 </div>
     <div id="rio-0312" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.12">
 <a href="#rio-0312" class="anchor"></a>rio 0.3.12<small> Unreleased </small>
 </h1>
 <ul>
@@ -646,7 +683,7 @@
 </ul>
 </div>
     <div id="rio-0311" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.11">
 <a href="#rio-0311" class="anchor"></a>rio 0.3.11<small> Unreleased </small>
 </h1>
 <ul>
@@ -659,7 +696,7 @@
 </ul>
 </div>
     <div id="rio-0310" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.10">
 <a href="#rio-0310" class="anchor"></a>rio 0.3.10<small> Unreleased </small>
 </h1>
 <ul>
@@ -669,7 +706,7 @@
 </ul>
 </div>
     <div id="rio-039" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.9">
 <a href="#rio-039" class="anchor"></a>rio 0.3.9<small> Unreleased </small>
 </h1>
 <ul>
@@ -677,7 +714,7 @@
 </ul>
 </div>
     <div id="rio-038" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.8">
 <a href="#rio-038" class="anchor"></a>rio 0.3.8<small> Unreleased </small>
 </h1>
 <ul>
@@ -685,7 +722,7 @@
 </ul>
 </div>
     <div id="rio-037" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.7">
 <a href="#rio-037" class="anchor"></a>rio 0.3.7<small> Unreleased </small>
 </h1>
 <ul>
@@ -694,7 +731,7 @@
 </ul>
 </div>
     <div id="rio-036" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.6">
 <a href="#rio-036" class="anchor"></a>rio 0.3.6<small> Unreleased </small>
 </h1>
 <ul>
@@ -704,7 +741,7 @@
 </ul>
 </div>
     <div id="rio-035" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.5">
 <a href="#rio-035" class="anchor"></a>rio 0.3.5<small> Unreleased </small>
 </h1>
 <ul>
@@ -712,7 +749,7 @@
 </ul>
 </div>
     <div id="rio-033" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.3">
 <a href="#rio-033" class="anchor"></a>rio 0.3.3<small> Unreleased </small>
 </h1>
 <ul>
@@ -722,7 +759,7 @@
 </ul>
 </div>
     <div id="rio-032" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.2">
 <a href="#rio-032" class="anchor"></a>rio 0.3.2<small> Unreleased </small>
 </h1>
 <ul>
@@ -730,7 +767,7 @@
 </ul>
 </div>
     <div id="rio-030" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.0">
 <a href="#rio-030" class="anchor"></a>rio 0.3.0<small> 2016-01-14 </small>
 </h1>
 <ul>
@@ -739,7 +776,7 @@
 </ul>
 </div>
     <div id="rio-0213" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.13">
 <a href="#rio-0213" class="anchor"></a>rio 0.2.13<small> Unreleased </small>
 </h1>
 <ul>
@@ -747,7 +784,7 @@
 </ul>
 </div>
     <div id="rio-0211" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.11">
 <a href="#rio-0211" class="anchor"></a>rio 0.2.11<small> Unreleased </small>
 </h1>
 <ul>
@@ -755,7 +792,7 @@
 </ul>
 </div>
     <div id="rio-027" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.7">
 <a href="#rio-027" class="anchor"></a>rio 0.2.7<small> Unreleased </small>
 </h1>
 <ul>
@@ -765,7 +802,7 @@
 </ul>
 </div>
     <div id="rio-026" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.6">
 <a href="#rio-026" class="anchor"></a>rio 0.2.6<small> Unreleased </small>
 </h1>
 <ul>
@@ -773,11 +810,11 @@
 </ul>
 </div>
     <div id="rio-025" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.5">
 <a href="#rio-025" class="anchor"></a>rio 0.2.5<small> Unreleased </small>
 </h1>
 <ul>
-<li>If file format for a remote file cannot be identified from the supplied URL or the final URL reported by <code><a href="https://jeroen.cran.dev/curl/reference/curl_fetch.html">curl::curl_fetch_memory()</a></code>, the HTTP headers are checked for a filename in the Content-Disposition header. (<a href='https://github.com/leeper/rio/issues/36'>#36</a>)</li>
+<li>If file format for a remote file cannot be identified from the supplied URL or the final URL reported by <code><a href="https://rdrr.io/pkg/curl/man/curl_fetch.html">curl::curl_fetch_memory()</a></code>, the HTTP headers are checked for a filename in the Content-Disposition header. (<a href='https://github.com/leeper/rio/issues/36'>#36</a>)</li>
 <li>Removed longurl dependency. This is no longer needed because we can identify formats using curl’s url argument.</li>
 <li>Fixed a bug related to importing European-style (“csv2”) format files. (<a href='https://github.com/leeper/rio/issues/44'>#44</a>)</li>
 <li>Updated CSVY import to embed variable-level metadata. (<a href='https://github.com/leeper/rio/issues/52'>#52</a>)</li>
@@ -786,7 +823,7 @@
 </ul>
 </div>
     <div id="rio-024" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.4">
 <a href="#rio-024" class="anchor"></a>rio 0.2.4<small> Unreleased </small>
 </h1>
 <ul>
@@ -796,7 +833,7 @@
 </ul>
 </div>
     <div id="rio-022" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.2">
 <a href="#rio-022" class="anchor"></a>rio 0.2.2<small> Unreleased </small>
 </h1>
 <ul>
@@ -804,7 +841,7 @@
 </ul>
 </div>
     <div id="rio-021" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.1">
 <a href="#rio-021" class="anchor"></a>rio 0.2.1<small> Unreleased </small>
 </h1>
 <ul>
@@ -814,7 +851,7 @@
 </ul>
 </div>
     <div id="rio-02" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2">
 <a href="#rio-02" class="anchor"></a>rio 0.2<small> 2015-05-07 </small>
 </h1>
 <ul>
@@ -840,7 +877,7 @@
 </ul>
 </div>
     <div id="rio-012" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.2">
 <a href="#rio-012" class="anchor"></a>rio 0.1.2<small> 2013-09-04 </small>
 </h1>
 <ul>
@@ -848,7 +885,7 @@
 </ul>
 </div>
     <div id="rio-011" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.1">
 <a href="#rio-011" class="anchor"></a>rio 0.1.1<small> 2013-08-28 </small>
 </h1>
 <ul>
@@ -857,89 +894,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#rio-0522">0.5.22</a></li>
-        <li><a href="#rio-0521">0.5.21</a></li>
-        <li><a href="#rio-0520">0.5.20</a></li>
-        <li><a href="#rio-0519">0.5.19</a></li>
-        <li><a href="#rio-0518">0.5.18</a></li>
-        <li><a href="#rio-0517">0.5.17</a></li>
-        <li><a href="#rio-0516">0.5.16</a></li>
-        <li><a href="#rio-0515">0.5.15</a></li>
-        <li><a href="#rio-0514">0.5.14</a></li>
-        <li><a href="#rio-0513">0.5.13</a></li>
-        <li><a href="#rio-0511">0.5.11</a></li>
-        <li><a href="#rio-0510">0.5.10</a></li>
-        <li><a href="#rio-059">0.5.9</a></li>
-        <li><a href="#rio-058">0.5.8</a></li>
-        <li><a href="#rio-057">0.5.7</a></li>
-        <li><a href="#rio-056">0.5.6</a></li>
-        <li><a href="#rio-055">0.5.5</a></li>
-        <li><a href="#rio-054">0.5.4</a></li>
-        <li><a href="#rio-053">0.5.3</a></li>
-        <li><a href="#rio-053-1">0.5.3</a></li>
-        <li><a href="#rio-051">0.5.1</a></li>
-        <li><a href="#rio-050">0.5.0</a></li>
-        <li><a href="#rio-0428">0.4.28</a></li>
-        <li><a href="#rio-0427">0.4.27</a></li>
-        <li><a href="#rio-0426">0.4.26</a></li>
-        <li><a href="#rio-0425">0.4.25</a></li>
-        <li><a href="#rio-0424">0.4.24</a></li>
-        <li><a href="#rio-0423">0.4.23</a></li>
-        <li><a href="#rio-0422">0.4.22</a></li>
-        <li><a href="#rio-0421">0.4.21</a></li>
-        <li><a href="#rio-0420">0.4.20</a></li>
-        <li><a href="#rio-0419">0.4.19</a></li>
-        <li><a href="#rio-0418">0.4.18</a></li>
-        <li><a href="#rio-0417">0.4.17</a></li>
-        <li><a href="#rio-0416">0.4.16</a></li>
-        <li><a href="#rio-0415">0.4.15</a></li>
-        <li><a href="#rio-0414">0.4.14</a></li>
-        <li><a href="#rio-0413">0.4.13</a></li>
-        <li><a href="#rio-0412">0.4.12</a></li>
-        <li><a href="#rio-0411">0.4.11</a></li>
-        <li><a href="#rio-0410">0.4.10</a></li>
-        <li><a href="#rio-049">0.4.9</a></li>
-        <li><a href="#rio-048">0.4.8</a></li>
-        <li><a href="#rio-047">0.4.7</a></li>
-        <li><a href="#rio-045">0.4.5</a></li>
-        <li><a href="#rio-043">0.4.3</a></li>
-        <li><a href="#rio-042">0.4.2</a></li>
-        <li><a href="#rio-041">0.4.1</a></li>
-        <li><a href="#rio-040">0.4.0</a></li>
-        <li><a href="#rio-0319">0.3.19</a></li>
-        <li><a href="#rio-0318">0.3.18</a></li>
-        <li><a href="#rio-0317">0.3.17</a></li>
-        <li><a href="#rio-0316">0.3.16</a></li>
-        <li><a href="#rio-0315">0.3.15</a></li>
-        <li><a href="#rio-0314">0.3.14</a></li>
-        <li><a href="#rio-0312">0.3.12</a></li>
-        <li><a href="#rio-0311">0.3.11</a></li>
-        <li><a href="#rio-0310">0.3.10</a></li>
-        <li><a href="#rio-039">0.3.9</a></li>
-        <li><a href="#rio-038">0.3.8</a></li>
-        <li><a href="#rio-037">0.3.7</a></li>
-        <li><a href="#rio-036">0.3.6</a></li>
-        <li><a href="#rio-035">0.3.5</a></li>
-        <li><a href="#rio-033">0.3.3</a></li>
-        <li><a href="#rio-032">0.3.2</a></li>
-        <li><a href="#rio-030">0.3.0</a></li>
-        <li><a href="#rio-0213">0.2.13</a></li>
-        <li><a href="#rio-0211">0.2.11</a></li>
-        <li><a href="#rio-027">0.2.7</a></li>
-        <li><a href="#rio-026">0.2.6</a></li>
-        <li><a href="#rio-025">0.2.5</a></li>
-        <li><a href="#rio-024">0.2.4</a></li>
-        <li><a href="#rio-022">0.2.2</a></li>
-        <li><a href="#rio-021">0.2.1</a></li>
-        <li><a href="#rio-02">0.2</a></li>
-        <li><a href="#rio-012">0.1.2</a></li>
-        <li><a href="#rio-011">0.1.1</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -951,7 +909,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
