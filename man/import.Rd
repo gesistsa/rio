@@ -105,7 +105,7 @@ identical(names(mtcars), names(li[[1]]))
 unlink("iris.tsv")
 unlink("iris1.csv")
 unlink("iris2.csv")
-unlist("list.rds")
+unlink("list.rds")
 
 }
 \seealso{

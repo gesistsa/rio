@@ -43,7 +43,7 @@ Imports:
     stats,
     utils,
     foreign,
-    haven (>= 1.1.0),
+    haven (>= 1.1.2),
     curl (>= 0.6),
     data.table (>= 1.9.8),
     readxl (>= 0.1.1),

@@ -53,7 +53,7 @@ arg_reconcile <- function(fun, ..., .args = alist(), .docall = FALSE,
   frmls <- formals(fun)
   # both freeform and an explicit list
   args <- match.call(expand.dots = FALSE)[["..."]]
-  if (.docall) {
+  if (isTRUE(.docall)) {
     for (ii in names(args)) {
       try(args[[ii]] <- eval(args[[ii]], parent.frame()))
     }
@@ -96,12 +96,12 @@ arg_reconcile <- function(fun, ..., .args = alist(), .docall = FALSE,
   }
   # the final, cleaned-up arguments either get returned as a list or used on the 
   # function, depending on how .docall is set
-  if (!.docall) {
+  if (!isTRUE(.docall)) {
     return(args)
   } else {
     # run the function and return the result case
     oo <- try(do.call(fun, args), silent = TRUE)
-    if (!methods::is(oo, "try-error")) {
+    if (!inherits(oo, "try-error")) {
       return(.finish(oo))
     } else {
       # construct an informative error... eventually there will be more 
@@ -113,7 +113,7 @@ arg_reconcile <- function(fun, ..., .args = alist(), .docall = FALSE,
                               paste(deparse(args, control=c('delayPromises')), 
                                     collapse='\n')))
       if (missing(.error)) {
-        stop(attr(oo, 'condition')$message, errorhint)
+        stop(attr(oo, "condition")$message, errorhint)
       } else {
         attr(.error, "error") <- oo
         return(.error)

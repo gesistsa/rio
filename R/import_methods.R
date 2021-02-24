@@ -249,7 +249,7 @@ function(file,
 #' @importFrom haven read_sav
 #' @export
 .import.rio_zsav <- function(file, which = 1, ...) {
-    standardize_attributes(haven::read_sav(file = file, compress = TRUE))
+    standardize_attributes(haven::read_sav(file = file))
 }
 
 #' @importFrom haven read_por

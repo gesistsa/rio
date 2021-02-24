@@ -45,7 +45,7 @@ unlink("mtcars.json")
 
 \dontrun{\donttest{
 # convert from the command line:
-\code{# Rscript -e "rio::convert('mtcars.dta', 'mtcars.csv')"}
+## Rscript -e "rio::convert('mtcars.dta', 'mtcars.csv')"
 }}
 
 }
