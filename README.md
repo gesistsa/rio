@@ -10,7 +10,7 @@ The aim of **rio** is to make data file I/O in R as easy as possible by implemen
  - `import()` provides a painless data import experience by automatically choosing the appropriate import/read function based on file extension (or a specified `format` argument)
  - `import_list()` imports a list of data frames from a multi-object file (Excel workbook, .Rdata files, zip directory, or HTML file)
  - `export()` provides the same painless file recognition for data export/write functionality
- - `convert()` wraps `import()` and `export()` to allow the user to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://www.stattransfer.com/) or [Sledgehammer](https://www.mtna.us/#/products/sledgehammer)). Relatedly, [Luca Braglia](https://lbraglia.github.io/) has created a Shiny app called [rioweb](https://github.com/lbraglia/rioweb) that provides access to the file conversion features of rio. [GREA](https://github.com/Stan125/GREA/) is an RStudio add-in that provides an interactive interface for reading in data using rio.
+ - `convert()` wraps `import()` and `export()` to allow the user to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://stattransfer.com/) or [Sledgehammer](https://www.mtna.us/#/products/sledgehammer)). Relatedly, [Luca Braglia](https://lbraglia.github.io/) has created a Shiny app called [rioweb](https://github.com/lbraglia/rioweb) that provides access to the file conversion features of rio. [GREA](https://github.com/Stan125/GREA/) is an RStudio add-in that provides an interactive interface for reading in data using rio.
 
 ## Examples
 

@@ -50,5 +50,5 @@ unlink("mtcars.json")
 
 }
 \seealso{
-\href{https://lbraglia.github.io/}{Luca Braglia} has created a Shiny app called \href{https://github.com/lbraglia/rioweb}{rioweb} that provides access to the file conversion features of rio through a web browser. The app is featured in the \href{https://gallery.shinyapps.io/rioweb}{RStudio Shiny Gallery}.
+\href{https://lbraglia.github.io/}{Luca Braglia} has created a Shiny app called \href{https://github.com/lbraglia/rioweb}{rioweb} that provides access to the file conversion features of rio through a web browser.
 }

@@ -64,6 +64,7 @@ Suggests:
     pzfx,
     readODS (>= 1.6.4),
     readr,
+    rmarkdown,
     rmatio,
     xml2 (>= 1.2.0),
     yaml
