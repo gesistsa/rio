@@ -118,6 +118,8 @@ unlink("mtcars.sav")
 unlink("mtcars.rds")
 unlink("mtcars.xlsx")
 unlink("mtcars.tsv.zip")
+unlink("mtcars.tsv")
+unlink("iris.tsv")
 ```
 
 ## Supported file formats
