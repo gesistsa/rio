@@ -4,7 +4,8 @@ Title: A Swiss-Army Knife for Data I/O
 Version: 0.5.26
 Date: 2021-02-22
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
-             person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com"),
+             person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com",
+	     	     comment = c(ORCID = "0000-0002-6232-7530")),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
              person("Thomas J.", "Leeper",
                     role = c("aut", "cre"), 
