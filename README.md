@@ -1,7 +1,18 @@
-rio: A Swiss-Army Knife for Data I/O
-================
 
-<img src="man/figures/logo.png" align="right" />
+# rio: A Swiss-Army Knife for Data I/O <img src="man/figures/logo.png" align="right" height="139"/>
+
+<!-- badges: start -->
+
+[![CRAN
+Version](https://www.r-pkg.org/badges/version/rio)](https://cran.r-project.org/package=rio)
+![Downloads](https://cranlogs.r-pkg.org/badges/rio) [![Travis-CI Build
+Status](https://travis-ci.org/leeper/rio.png?branch=master)](https://travis-ci.org/leeper/rio)
+[![Appveyor Build
+status](https://ci.appveyor.com/api/projects/status/40ua5l06jw0gjyjb?svg=true)](https://ci.appveyor.com/project/leeper/rio)
+[![codecov.io](https://codecov.io/github/leeper/rio/coverage.svg?branch=master)](https://codecov.io/github/leeper/rio?branch=master)
+<!-- badges: end -->
+
+## Overview
 
 The aim of **rio** is to make data file I/O in R as easy as possible by
 implementing four simple functions in Swiss-army knife style:
@@ -24,7 +35,28 @@ implementing four simple functions in Swiss-army knife style:
     [GREA](https://github.com/Stan125/GREA/) is an RStudio add-in that
     provides an interactive interface for reading in data using rio.
 
-## Examples
+## Installation
+
+The package is available on
+[CRAN](https://cran.r-project.org/package=rio) and can be installed
+directly in R using `install.packages()`. You may want to run
+`install_formats()` after the first installation.
+
+``` r
+install.packages("rio")
+install_formats()
+```
+
+The latest development version on GitHub can be installed using:
+
+``` r
+if (!require("remotes")){
+    install.packages("remotes")
+}
+remotes::install_github("leeper/rio")
+```
+
+## Usage
 
 Because **rio** is meant to streamline data I/O, the package is
 extremely easy to use. Here are some examples of reading, writing, and
@@ -301,32 +333,3 @@ is probably willing to make. Eight of these are important:
     should take the form `.import.rio_X()` and `.export.rio_X()`, where
     `X` is the file extension of a file type. An example is provided in
     the [rio.db package](https://github.com/leeper/rio.db).
-
-## Package Installation
-
-[![CRAN
-Version](https://www.r-pkg.org/badges/version/rio)](https://cran.r-project.org/package=rio)
-![Downloads](https://cranlogs.r-pkg.org/badges/rio) [![Travis-CI Build
-Status](https://travis-ci.org/leeper/rio.png?branch=master)](https://travis-ci.org/leeper/rio)
-[![Appveyor Build
-status](https://ci.appveyor.com/api/projects/status/40ua5l06jw0gjyjb?svg=true)](https://ci.appveyor.com/project/leeper/rio)
-[![codecov.io](https://codecov.io/github/leeper/rio/coverage.svg?branch=master)](https://codecov.io/github/leeper/rio?branch=master)
-
-The package is available on
-[CRAN](https://cran.r-project.org/package=rio) and can be installed
-directly in R using `install.packages()`. You may want to run
-`install_formats()` after the first installation.
-
-``` r
-install.packages("rio")
-install_formats()
-```
-
-The latest development version on GitHub can be installed using:
-
-``` r
-if (!require("remotes")){
-    install.packages("remotes")
-}
-remotes::install_github("leeper/rio")
-```
