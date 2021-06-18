@@ -12,7 +12,7 @@
 #' library('datasets')
 #' export(list(mtcars1 = mtcars[1:10,], 
 #'             mtcars2 = mtcars[11:20,],
-#'             mtcars2 = mtcars[21:32,]), "mtcars.xlsx")
+#'             mtcars3 = mtcars[21:32,]), "mtcars.xlsx")
 #' 
 #' # import a single file from multi-object workbook
 #' str(import("mtcars.xlsx", which = "mtcars1"))

@@ -5,11 +5,13 @@
 #' @param x A data frame.
 #' @return \code{x}, with variable-level attributes stored at the data frame level.
 #' @examples
-#' e <- import("http://www.stata-press.com/data/r13/auto.dta")
-#' str(e)
-#' g <- gather_attrs(e)
-#' str(attributes(e))
-#' str(g)
+#' e <- try(import("http://www.stata-press.com/data/r13/auto.dta"))
+#' if (!inherits(e, "try-error")) {
+#'   str(e)
+#'   g <- gather_attrs(e)
+#'   str(attributes(e))
+#'   str(g)
+#' }
 #' @seealso \code{\link{import}}, \code{\link{characterize}}
 #' @importFrom stats setNames
 #' @export

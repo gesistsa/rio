@@ -1,6 +1,11 @@
+# rio 0.5.27
+
+* Documentation fixes for CRAN.
+
 # rio 0.5.26
 
 * Added support for "zsav" format. (#273)
+
 # rio 0.5.25
 
 * Modified tests per email request from CRAN.

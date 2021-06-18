@@ -22,11 +22,13 @@ spread_attrs(x)
 \code{\link{import}} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). \code{gather_attrs} moves these to the data frame level (i.e., in \code{attributes(mtcars)}). \code{spread_attrs} moves attributes back to the variable level.
 }
 \examples{
-e <- import("http://www.stata-press.com/data/r13/auto.dta")
-str(e)
-g <- gather_attrs(e)
-str(attributes(e))
-str(g)
+e <- try(import("http://www.stata-press.com/data/r13/auto.dta"))
+if (!inherits(e, "try-error")) {
+  str(e)
+  g <- gather_attrs(e)
+  str(attributes(e))
+  str(g)
+}
 }
 \seealso{
 \code{\link{import}}, \code{\link{characterize}}
