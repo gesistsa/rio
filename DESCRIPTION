@@ -1,8 +1,8 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.5.26
-Date: 2021-02-22
+Version: 0.5.27
+Date: 2021-06-18
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com",
 	     	     comment = c(ORCID = "0000-0002-6232-7530")),
