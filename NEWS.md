@@ -1,3 +1,8 @@
+# rio 0.5.28
+
+* Various fixes to tests, examples, and documentation for CRAN.
+* Temporarily disabled some tests that failed on Mac M1s.
+
 # rio 0.5.27
 
 * Documentation fixes for CRAN.
@@ -318,7 +323,7 @@
 * `import()` now uses xml2 to read XML structures and `export()` uses a custom method for writing to XML, thereby negating dependency on the XML package. (#67)
 * Enhancements were made to import and export of CSVY to store attribute metadata as variable-level attributes (like imports from binary file formats).
 * `import()` gains a `which` argument that is used to select which file to return from within a compressed tar or zip archive.
-* Export to tar now tries to correct for bugs in `tar()` that are being fixed in base R via [PR#16716](https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16716).
+* Export to tar now tries to correct for bugs in `tar()` that are being fixed in base R via [PR#16716](https://bugs.r-project.org/show_bug.cgi?id=16716).
 
 # rio 0.3.10
 

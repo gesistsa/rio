@@ -12,20 +12,20 @@ Note that some of rio's functionality is provided by \sQuote{Suggests} dependend
 \examples{
 # export
 library("datasets")
-export(mtcars, "mtcars.csv") # comma-separated values
-export(mtcars, "mtcars.rds") # R serialized
-export(mtcars, "mtcars.sav") # SPSS
+export(mtcars, csv_file <- tempfile(fileext = ".csv")) # comma-separated values
+export(mtcars, rds_file <- tempfile(fileext = ".rds")) # R serialized
+export(mtcars, sav_file <- tempfile(fileext = ".sav")) # SPSS
 
 # import
-x <- import("mtcars.csv")
-y <- import("mtcars.rds")
-z <- import("mtcars.sav")
+x <- import(csv_file)
+y <- import(rds_file)
+z <- import(sav_file)
 
-# convert
-convert("mtcars.sav", "mtcars.dta")
+# convert sav (SPSS) to dta (Stata)
+convert(sav_file, dta_file <- tempfile(fileext = ".dta"))
 
 # cleanup
-unlink(c("mtcars.csv", "mtcars.rds", "mtcars.sav", "mtcars.dta"))
+unlink(c(csv_file, rds_file, sav_file, dta_file))
 
 }
 \references{

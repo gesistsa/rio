@@ -65,65 +65,73 @@ Use \code{\link{export_list}} to export a list of dataframes to separate files.
 \examples{
 library("datasets")
 # specify only `file` argument
-export(mtcars, "mtcars.csv")
+export(mtcars, f1 <- tempfile(fileext = ".csv"))
 
 \dontrun{
+wd <- getwd()
+setwd(tempdir())
 # Stata does not recognize variables names with '.'
-export(mtcars, "mtcars.dta")
-}
+export(mtcars, f2 <- tempfile(fileext = ".dta"))
 
 # specify only `format` argument
-"mtcars.dta" \%in\% dir()
+f2 \%in\% tempdir()
 export(mtcars, format = "stata")
 "mtcars.dta" \%in\% dir()
 
+setwd(wd)
+}
 # specify `file` and `format` to override default format
-export(mtcars, file = "mtcars.txt", format = "csv")
+export(mtcars, file = f3 <- tempfile(fileext = ".txt"), format = "csv")
 
 # export multiple objects to Rdata
-export(list(mtcars = mtcars, iris = iris), "mtcars.rdata")
-export(c("mtcars", "iris"), "mtcars.rdata")
+export(list(mtcars = mtcars, iris = iris), f4 <- tempfile(fileext = ".rdata"))
+export(c("mtcars", "iris"), f4)
 
 # export to non-data frame R object to RDS or JSON
-export(mtcars$cyl, "mtcars_cyl.rds")
-export(list(iris, mtcars), "list.json")
+export(mtcars$cyl, f5 <- tempfile(fileext = ".rds"))
+export(list(iris, mtcars), f6 <- tempfile(fileext = ".json"))
 
 # pass arguments to underlying export function
-export(mtcars, "mtcars.csv", col.names = FALSE)
+export(mtcars, f7 <- tempfile(fileext = ".csv"), col.names = FALSE)
 
 # write data to .R syntax file and append additional data
-export(mtcars, file = "data.R", format = "dump")
-export(mtcars, file = "data.R", format = "dump", append = TRUE)
-source("data.R", echo = TRUE)
+export(mtcars, file = f8 <- tempfile(fileext = ".R"), format = "dump")
+export(mtcars, file = f8, format = "dump", append = TRUE)
+source(f8, echo = TRUE)
 
 # write to an Excel workbook
 \dontrun{
   ## export a single data frame
-  export(mtcars, "mtcars.xlsx")
+  export(mtcars, f9 <- tempfile(fileext = ".xlsx"))
   
   ## export NAs to Excel as missing via args passed to `...`
   mtcars$drat <- NA_real_
-  mtcars \%>\% export("tst2.xlsx", keepNA = TRUE)
+  mtcars \%>\% export(f10 <- tempfile(fileext = ".xlsx"), keepNA = TRUE)
   
   ## export a list of data frames as worksheets
-  export(list(a = mtcars, b = iris), "multisheet.xlsx")
+  export(list(a = mtcars, b = iris), f11 <- tempfile(fileext = ".xlsx"))
 
   ## export, adding a new sheet to an existing workbook
-  export(iris, "mtcars.xlsx", which = "iris")
+  export(iris, f12 <- tempfile(fileext = ".xlsx"), which = "iris")
 }
 
 # write data to a zip-compressed CSV
-export(mtcars, "mtcars.csv.zip")
+export(mtcars, f13 <- tempfile(fileext = ".csv.zip"))
 
 # cleanup
-unlink("mtcars.csv")
-unlink("mtcars.dta")
-unlink("mtcars.txt")
-unlink("mtcars_cyl.rds")
-unlink("mtcars.rdata")
-unlink("data.R")
-unlink("mtcars.csv.zip")
-unlink("list.json")
+unlink(f1)
+# unlink(f2)
+unlink(f3)
+unlink(f4)
+unlink(f5)
+unlink(f6)
+unlink(f7)
+unlink(f8)
+# unlink(f9)
+# unlink(f10)
+# unlink(f11)
+# unlink(f12)
+# unlink(f13)
 }
 \seealso{
 \code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}, \code{\link{export_list}}

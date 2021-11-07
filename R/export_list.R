@@ -9,22 +9,24 @@
 #' library('datasets')
 #' export(list(mtcars1 = mtcars[1:10,], 
 #'             mtcars2 = mtcars[11:20,],
-#'             mtcars3 = mtcars[21:32,]), "mtcars.xlsx")
+#'             mtcars3 = mtcars[21:32,]),
+#'     xlsx_file <- tempfile(fileext = ".xlsx")
+#' )
 #' 
 #' # import all worksheets
-#' mylist <- import_list("mtcars.xlsx")
+#' mylist <- import_list(xlsx_file)
 #' 
 #' # re-export as separate named files
-#' export_list(mylist, file = paste0("mtcars", 1:3, ".csv"))
+#' csv_files1 <- sapply(1:3, function(x) tempfile(fileext = paste0("-", x, ".csv")))
+#' export_list(mylist, file = csv_files1)
 #' 
 #' # re-export as separate files using a name pattern
-#' export_list(mylist, file = "%s.csv")
+#' export_list(mylist, file = csv_files2 <- tempfile(fileext = "%s.csv"))
 #' 
 #' # cleanup
-#' unlink("mtcars.xlsx")
-#' unlink("mtcars1.csv")
-#' unlink("mtcars2.csv")
-#' unlink("mtcars3.csv")
+#' unlink(xlsx_file)
+#' unlink(csv_files1)
+#' unlink(csv_files2)
 #' 
 #' @seealso \code{\link{import}}, \code{\link{import_list}}, \code{\link{export}}
 #' @export

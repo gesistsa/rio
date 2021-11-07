@@ -12,27 +12,31 @@
 #' library('datasets')
 #' export(list(mtcars1 = mtcars[1:10,], 
 #'             mtcars2 = mtcars[11:20,],
-#'             mtcars3 = mtcars[21:32,]), "mtcars.xlsx")
+#'             mtcars3 = mtcars[21:32,]),
+#'     xlsx_file <- tempfile(fileext = ".xlsx")
+#' )
 #' 
 #' # import a single file from multi-object workbook
-#' str(import("mtcars.xlsx", which = "mtcars1"))
+#' str(import(xlsx_file, which = "mtcars1"))
 #' 
 #' # import all worksheets
-#' str(import_list("mtcars.xlsx"), 1)
+#' str(import_list(xlsx_file), 1)
 #' 
 #' # import and rbind all worksheets
-#' mtcars2 <- import_list("mtcars.xlsx", rbind = TRUE)
-#' all.equal(mtcars2, mtcars, check.attributes = FALSE)
+#' mtcars2 <- import_list(xlsx_file, rbind = TRUE)
+#' all.equal(mtcars2[,-12], mtcars, check.attributes = FALSE)
 #' 
 #' # import multiple files
-#' export(mtcars, "mtcars.csv")
-#' export(mtcars, "iris.csv")
+#' wd <- getwd()
+#' setwd(tempdir())
+#' export(mtcars, "mtcars1.csv")
+#' export(mtcars, "mtcars2.csv")
 #' str(import_list(dir(pattern = "csv$")), 1)
+#' unlink(c("mtcars1.csv", "mtcars2.csv"))
+#' setwd(wd)
 #' 
 #' # cleanup
-#' unlink("mtcars.xlsx")
-#' unlink("mtcars.csv")
-#' unlink("iris.csv")
+#' unlink(xlsx_file)
 #' 
 #' @seealso \code{\link{import}}, \code{\link{export_list}}, \code{\link{export}}
 #' @export

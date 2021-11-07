@@ -93,9 +93,9 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
                              width = unname(n),
                              columns = paste0(c(1, cumsum(n)+1)[-length(n)], "-", cumsum(n)),
                              stringsAsFactors = FALSE)
-    if (verbose) {
+    if (isTRUE(verbose)) {
         message("Columns:")
-        print(dict)
+        message(paste0(capture.output(dict), collapse = "\n"))
         if (sep == "") {
             message(paste0('\nRead in with:\n',
                     'import("', file, '",\n',

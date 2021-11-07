@@ -57,36 +57,36 @@
 #' @note For csv and txt files with row names exported from \code{\link{export}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.
 #' @examples
 #' # create CSV to import
-#' export(iris, "iris1.csv")
+#' export(iris, csv_file <- tempfile(fileext = ".csv"))
 #'
 #' # specify `format` to override default format
-#' export(iris, "iris.tsv", format = "csv")
-#' stopifnot(identical(import("iris1.csv"), import("iris.tsv", format = "csv")))
+#' export(iris, tsv_file <- tempfile(fileext = ".tsv"), format = "csv")
+#' stopifnot(identical(import(csv_file), import(tsv_file, format = "csv")))
 #'
 #' # import CSV as a `data.table`
-#' stopifnot(inherits(import("iris1.csv", setclass = "data.table"), "data.table"))
+#' stopifnot(inherits(import(csv_file, setclass = "data.table"), "data.table"))
 #'
 #' # pass arguments to underlying import function
-#' iris1 <- import("iris1.csv")
+#' iris1 <- import(csv_file)
 #' identical(names(iris), names(iris1))
 #'
-#' export(iris, "iris2.csv", col.names = FALSE)
-#' iris2 <- import("iris2.csv")
+#' export(iris, csv_file2 <- tempfile(fileext = ".csv"), col.names = FALSE)
+#' iris2 <- import(csv_file2)
 #' identical(names(iris), names(iris2))
 #'
 #' # set class for the response data.frame as "tbl_df" (from dplyr)
-#' stopifnot(inherits(import("iris1.csv", setclass = "tbl_df"), "tbl_df"))
+#' stopifnot(inherits(import(csv_file, setclass = "tbl_df"), "tbl_df"))
 #' 
 #' # non-data frame formats supported for RDS, Rdata, and JSON
-#' export(list(mtcars, iris), "list.rds")
-#' li <- import("list.rds")
+#' export(list(mtcars, iris), rds_file <- tempfile(fileext = ".rds"))
+#' li <- import(rds_file)
 #' identical(names(mtcars), names(li[[1]]))
 #'
 #' # cleanup
-#' unlink("iris.tsv")
-#' unlink("iris1.csv")
-#' unlink("iris2.csv")
-#' unlink("list.rds")
+#' unlink(csv_file)
+#' unlink(csv_file2)
+#' unlink(tsv_file)
+#' unlink(rds_file)
 #'
 #' @seealso \code{\link{import_list}}, \code{\link{.import}}, \code{\link{characterize}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
 #' @importFrom tools file_ext file_path_sans_ext

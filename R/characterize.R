@@ -18,11 +18,11 @@
 #' str(characterize(x))
 #' 
 #' # comparison of exported file contents
-#' import(export(x, "example.csv"))
-#' import(export(factorize(x), "example.csv"))
+#' import(export(x, csv_file <- tempfile(fileext = ".csv")))
+#' import(export(factorize(x), csv_file))
 #' 
 #' # cleanup
-#' unlink("example.csv")
+#' unlink(csv_file)
 #' 
 #' @seealso \code{\link{gather_attrs}}
 #' @export

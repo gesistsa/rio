@@ -7,25 +7,26 @@
 #' @return A character string containing the name of the output file (invisibly).
 #' @examples
 #' # create a file to convert
-#' export(mtcars, "mtcars.dta")
+#' export(mtcars, dta_file <- tempfile(fileext = ".dta"))
 #' 
 #' # convert Stata to CSV and open converted file
-#' convert("mtcars.dta", "mtcars.csv")
-#' head(import("mtcars.csv"))
+#' convert(dta_file, csv_file <- tempfile(fileext = ".csv"))
+#' head(import(csv_file))
 #' 
 #' # correct an erroneous file format
-#' export(mtcars, "mtcars.csv", format = "tsv")
-#' convert("mtcars.csv", "mtcars.csv", in_opts = list(format = "tsv"))
+#' export(mtcars, csv_file2 <- tempfile(fileext = ".csv"), format = "tsv")
+#' convert(csv_file2, csv_file, in_opts = list(format = "tsv"))
 #' 
 #' # convert serialized R data.frame to JSON
-#' export(mtcars, "mtcars.rds")
-#' convert("mtcars.rds", "mtcars.json")
+#' export(mtcars, rds_file <- tempfile(fileext = ".rds"))
+#' convert(rds_file, json_file <- tempfile(fileext = ".json"))
 #' 
 #' # cleanup
-#' unlink("mtcars.csv")
-#' unlink("mtcars.dta")
-#' unlink("mtcars.rds")
-#' unlink("mtcars.json")
+#' unlink(csv_file)
+#' unlink(csv_file2)
+#' unlink(rds_file)
+#' unlink(dta_file)
+#' unlink(json_file)
 #' 
 #' \dontrun{\donttest{
 #' # convert from the command line:

@@ -24,14 +24,14 @@ Determine whether a file is \dQuote{plain-text} or some sort of binary format
 }
 \examples{
 library(datasets)
-export(iris, "iris.yml")
-is_file_text("iris.yml") # TRUE
+export(iris, yml_file <- tempfile(fileext = ".yml"))
+is_file_text(yml_file) # TRUE
 
-export(iris, "iris.sav")
-is_file_text("iris.sav") # FALSE
+export(iris, sav_file <- tempfile(fileext = ".sav"))
+is_file_text(sav_file) # FALSE
 
 # cleanup
-unlink("iris.yml")
-unlink("iris.sav")
+unlink(yml_file)
+unlink(sav_file)
 
 }

@@ -377,7 +377,7 @@ function(file,
     row.names(d) <- 1:nrow(d)
     d <- as.data.frame(d, stringsAsFactors = stringsAsFactors)
     tc2 <- function(x) {
-        out <- utils::type.convert(x)
+        out <- utils::type.convert(x, as.is = FALSE)
         if (is.factor(out)) {
             x
         } else {
