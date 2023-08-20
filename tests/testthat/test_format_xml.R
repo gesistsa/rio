@@ -1,18 +1,26 @@
 context("XML imports/exports")
 require("datasets")
 
+test_xml <- function(breaker = "&") {
+    mtcars2 <- mtcars
+    colnames(mtcars2)[1] <- paste0("mp", breaker, breaker, "g")
+    mtcars2[1,1] <- paste0("mp", breaker, breaker, "g")
+    expect_error(x <- rio::export(mtcars2, tempfile(fileext = ".xml")), NA)
+    temp_df <- rio::import(x)
+    expect_equal(colnames(temp_df)[1], paste0("mp..g"))
+    expect_equal(temp_df[1,1], paste0("mp", breaker, breaker, "g"))
+}
+
 test_that("Export to XML", {
     skip_if_not_installed("xml2")
-    skip("temporarily skipping (https://github.com/r-lib/xml2/issues/339)")
+    #skip("temporarily skipping (https://github.com/r-lib/xml2/issues/339)")
     expect_true(export(iris, "iris.xml") %in% dir())})
 
-test_that("Export to XML with ampersands",{
+test_that("Export to XML with &, >, ', \", >, <",{
     skip_if_not_installed("xml2")
-    skip("temporarily skipping (https://github.com/r-lib/xml2/issues/339)")
-    iris$`R & D` <- paste(sample(letters,nrow(iris),rep=T),
-                          '&',
-                          sample(LETTERS,nrow(iris),rep=TRUE))
-    expect_true(export(iris, "iris2.xml") %in% dir())
+    ## test all
+    useless <- lapply(c("&", "\"", "'", "<", ">"), test_xml)
+
 })
 
 test_that("Import from XML", {
