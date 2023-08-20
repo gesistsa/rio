@@ -113,3 +113,8 @@ get_type <- function(fmt) {
 twrap <- function(value, tag) {
     paste0("<", tag, ">", value, "</", tag, ">")
 }
+
+escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&apos;")) {
+    stringi::stri_replace_all_fixed(str = stringi::stri_enc_toutf8(x), pattern = c("&", "\"", "<", ">", "'"),
+                                    replacement = replacement, vectorize_all = FALSE)
+}
