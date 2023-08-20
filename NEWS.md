@@ -1,3 +1,5 @@
+* Correct XML/HTML escaping (#303)
+
 # rio 0.5.28
 
 * Various fixes to tests, examples, and documentation for CRAN.
