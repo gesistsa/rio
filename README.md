@@ -6,7 +6,7 @@
 [![CRAN
 Version](https://www.r-pkg.org/badges/version/rio)](https://cran.r-project.org/package=rio)
 ![Downloads](https://cranlogs.r-pkg.org/badges/rio)
-[![codecov.io](https://codecov.io/github/leeper/rio/coverage.svg?branch=master)](https://codecov.io/github/leeper/rio?branch=master)
+<https://codecov.io/github/chainsawriot/rio/coverage.svg?branch=main>
 <!-- badges: end -->
 
 ## Overview
