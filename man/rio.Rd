@@ -3,6 +3,7 @@
 \docType{package}
 \name{rio}
 \alias{rio}
+\alias{rio-package}
 \title{A Swiss-Army Knife for Data I/O}
 \description{
 The aim of rio is to make data file input and output as easy as possible. \code{\link{export}} and \code{\link{import}} serve as a Swiss-army knife for painless data I/O for data from almost any file format by inferring the data structure from the file extension, natively reading web-based data sources, setting reasonable defaults for import and export, and relying on efficient data import and export packages. An additional convenience function, \code{\link{convert}}, provides a simple method for converting between file types.
@@ -33,4 +34,30 @@ unlink(c(csv_file, rds_file, sav_file, dta_file))
 }
 \seealso{
 \code{\link{import}}, \code{\link{import_list}}, \code{\link{export}}, \code{\link{export_list}}, \code{\link{convert}}, \code{\link{install_formats}}
+}
+\author{
+\strong{Maintainer}: Thomas J. Leeper \email{thosjleeper@gmail.com} (\href{https://orcid.org/0000-0003-4097-6326}{ORCID})
+
+Authors:
+\itemize{
+  \item Chung-hong Chan \email{chainsawtiney@gmail.com} (\href{https://orcid.org/0000-0002-6232-7530}{ORCID})
+}
+
+Other contributors:
+\itemize{
+  \item Jason Becker \email{jason@jbecker.co} [contributor]
+  \item Geoffrey CH Chan \email{gefchchan@gmail.com} [contributor]
+  \item Christopher Gandrud [contributor]
+  \item Andrew MacDonald [contributor]
+  \item Ista Zahn [contributor]
+  \item Stanislaus Stadlmann [contributor]
+  \item Ruaridh Williamson \email{ruaridh.williamson@gmail.com} [contributor]
+  \item Patrick Kennedy [contributor]
+  \item Ryan Price \email{ryapric@gmail.com} [contributor]
+  \item Trevor L Davis \email{trevor.l.davis@gmail.com} [contributor]
+  \item Nathan Day \email{nathancday@gmail.com} [contributor]
+  \item Bill Denney \email{wdenney@humanpredictions.com} (\href{https://orcid.org/0000-0002-5759-428X}{ORCID}) [contributor]
+  \item Alex Bokov \email{alex.bokov@gmail.com} (\href{https://orcid.org/0000-0002-0511-9815}{ORCID}) [contributor]
+}
+
 }
