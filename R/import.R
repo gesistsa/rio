@@ -45,13 +45,13 @@
 #'     \item Single-table HTML documents (.html), using \code{\link[xml2]{read_html}}. The data structure will only be read correctly if the HTML file can be converted to a list via \code{\link[xml2]{as_list}}.
 #'     \item Shallow XML documents (.xml), using \code{\link[xml2]{read_xml}}. The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2]{as_list}}.
 #'     \item YAML (.yml), using \code{\link[yaml]{yaml.load}}
-#'     \item Clipboard import (on Windows and Mac OS), using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
+#'     \item Clipboard import, using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
 #'     \item Google Sheets, as Comma-separated data (.csv)
 #'     \item GraphPad Prism (.pzfx) using \code{\link[pzfx]{read_pzfx}}
 #' }
 #'
 #' \code{import} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). If you would prefer these attributes to be stored at the data.frame-level (i.e., in \code{attributes(mtcars)}), see \code{\link{gather_attrs}}.
-#' 
+#'
 #' After importing metadata-rich file formats (e.g., from Stata or SPSS), it may be helpful to recode labelled variables to character or factor using \code{\link{characterize}} or \code{\link{factorize}} respectively.
 #'
 #' @note For csv and txt files with row names exported from \code{\link{export}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.
@@ -76,7 +76,7 @@
 #'
 #' # set class for the response data.frame as "tbl_df" (from dplyr)
 #' stopifnot(inherits(import(csv_file, setclass = "tbl_df"), "tbl_df"))
-#' 
+#'
 #' # non-data frame formats supported for RDS, Rdata, and JSON
 #' export(list(mtcars, iris), rds_file <- tempfile(fileext = ".rds"))
 #' li <- import(rds_file)
@@ -126,16 +126,16 @@ import <- function(file, format, setclass, which, ...) {
     } else {
         fmt <- get_type(format)
     }
-    
+
     args_list <- list(...)
-    
+
     class(file) <- c(paste0("rio_", fmt), class(file))
     if (missing(which)) {
         x <- .import(file = file, ...)
     } else {
         x <- .import(file = file, which = which, ...)
     }
-    
+
     # if R serialized object, just return it without setting object class
     if (inherits(file, c("rio_rdata", "rio_rds", "rio_json"))) {
         return(x)

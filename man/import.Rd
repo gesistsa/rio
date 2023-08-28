@@ -62,7 +62,7 @@ This function imports a data frame or matrix from a data file with the file form
     \item Single-table HTML documents (.html), using \code{\link[xml2]{read_html}}. The data structure will only be read correctly if the HTML file can be converted to a list via \code{\link[xml2]{as_list}}.
     \item Shallow XML documents (.xml), using \code{\link[xml2]{read_xml}}. The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2]{as_list}}.
     \item YAML (.yml), using \code{\link[yaml]{yaml.load}}
-    \item Clipboard import (on Windows and Mac OS), using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
+    \item Clipboard import, using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
     \item Google Sheets, as Comma-separated data (.csv)
     \item GraphPad Prism (.pzfx) using \code{\link[pzfx]{read_pzfx}}
 }
