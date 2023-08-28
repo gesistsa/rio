@@ -36,11 +36,11 @@ unlink(c(csv_file, rds_file, sav_file, dta_file))
 \code{\link{import}}, \code{\link{import_list}}, \code{\link{export}}, \code{\link{export_list}}, \code{\link{convert}}, \code{\link{install_formats}}
 }
 \author{
-\strong{Maintainer}: Thomas J. Leeper \email{thosjleeper@gmail.com} (\href{https://orcid.org/0000-0003-4097-6326}{ORCID})
+\strong{Maintainer}: Chung-hong Chan \email{chainsawtiney@gmail.com} (\href{https://orcid.org/0000-0002-6232-7530}{ORCID})
 
 Authors:
 \itemize{
-  \item Chung-hong Chan \email{chainsawtiney@gmail.com} (\href{https://orcid.org/0000-0002-6232-7530}{ORCID})
+  \item Thomas J. Leeper \email{thosjleeper@gmail.com} (\href{https://orcid.org/0000-0003-4097-6326}{ORCID})
 }
 
 Other contributors:

@@ -4,11 +4,11 @@ Title: A Swiss-Army Knife for Data I/O
 Version: 0.5.28
 Date: 2021-10-26
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
-             person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com",
+             person("Chung-hong", "Chan", role = c("aut", "cre"), email = "chainsawtiney@gmail.com",
 	     	     comment = c(ORCID = "0000-0002-6232-7530")),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
              person("Thomas J.", "Leeper",
-                    role = c("aut", "cre"), 
+                    role = "aut", 
                     email = "thosjleeper@gmail.com",
                     comment = c(ORCID = "0000-0003-4097-6326")),
              person("Christopher", "Gandrud", role = "ctb"),
@@ -38,7 +38,7 @@ Description: Streamlined data import and export by making assumptions that
 URL: https://github.com/leeper/rio
 BugReports: https://github.com/leeper/rio/issues
 Depends:
-    R (>= 2.15.0)
+    R (>= 3.6)
 Imports:
     tools,
     stats,

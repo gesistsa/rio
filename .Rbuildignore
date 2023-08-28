@@ -37,3 +37,4 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
+^\.editorconfig$
