@@ -1,3 +1,9 @@
+# rio 0.5.29
+
+* Maintenance release: new maintainer
+* Mark `.sas7bdat` as deprecated
+* Change the minimum R version to 3.6
+
 # rio 0.5.28
 
 * Various fixes to tests, examples, and documentation for CRAN.
