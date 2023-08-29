@@ -41,3 +41,4 @@
 ^starwars.xlsx$
 ^starwars.csv$
 ^codecov\.yml$
+^cran-comments\.md$
