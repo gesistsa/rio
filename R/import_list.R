@@ -1,31 +1,31 @@
 #' @title Import list of data frames
 #' @description Use \code{\link{import}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)
 #' @param file A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.
-#' @template setclass
 #' @param which If \code{file} is a single file path, this specifies which objects should be extracted (passed to \code{\link{import}}'s \code{which} argument). Ignored otherwise.
 #' @param rbind A logical indicating whether to pass the import list of data frames through \code{\link[data.table]{rbindlist}}.
 #' @param rbind_label If \code{rbind = TRUE}, a character string specifying the name of a column to add to the data frame indicating its source file.
 #' @param rbind_fill If \code{rbind = TRUE}, a logical indicating whether to set the \code{fill = TRUE} (and fill missing columns with \code{NA}).
 #' @param \dots Additional arguments passed to \code{\link{import}}. Behavior may be unexpected if files are of different formats.
+#' @inheritParams import
 #' @return If \code{rbind=FALSE} (the default), a list of a data frames. Otherwise, that list is passed to \code{\link[data.table]{rbindlist}} with \code{fill = TRUE} and returns a data frame object of class set by the \code{setclass} argument; if this operation fails, the list is returned.
 #' @examples
 #' library('datasets')
-#' export(list(mtcars1 = mtcars[1:10,], 
+#' export(list(mtcars1 = mtcars[1:10,],
 #'             mtcars2 = mtcars[11:20,],
 #'             mtcars3 = mtcars[21:32,]),
 #'     xlsx_file <- tempfile(fileext = ".xlsx")
 #' )
-#' 
+#'
 #' # import a single file from multi-object workbook
 #' str(import(xlsx_file, which = "mtcars1"))
-#' 
+#'
 #' # import all worksheets
 #' str(import_list(xlsx_file), 1)
-#' 
+#'
 #' # import and rbind all worksheets
 #' mtcars2 <- import_list(xlsx_file, rbind = TRUE)
 #' all.equal(mtcars2[,-12], mtcars, check.attributes = FALSE)
-#' 
+#'
 #' # import multiple files
 #' wd <- getwd()
 #' setwd(tempdir())
@@ -34,19 +34,19 @@
 #' str(import_list(dir(pattern = "csv$")), 1)
 #' unlink(c("mtcars1.csv", "mtcars2.csv"))
 #' setwd(wd)
-#' 
+#'
 #' # cleanup
 #' unlink(xlsx_file)
-#' 
+#'
 #' @seealso \code{\link{import}}, \code{\link{export_list}}, \code{\link{export}}
 #' @export
-import_list <- 
-function(file, 
-         setclass, 
-         which, 
-         rbind = FALSE, 
-         rbind_label = "_file", 
-         rbind_fill = TRUE, 
+import_list <-
+function(file,
+         setclass,
+         which,
+         rbind = FALSE,
+         rbind_label = "_file",
+         rbind_fill = TRUE,
          ...) {
     if (missing(setclass)) {
         setclass <- NULL
@@ -123,7 +123,7 @@ function(file,
             names(x) <- whichnames
         }
     }
-    
+
     # optionally rbind
     if (isTRUE(rbind)) {
         if (length(x) == 1) {
@@ -158,6 +158,6 @@ function(file,
             }
         }
     }
-    
+
     return(x)
 }
