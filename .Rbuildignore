@@ -42,3 +42,4 @@
 ^starwars.csv$
 ^codecov\.yml$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
