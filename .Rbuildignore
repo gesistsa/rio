@@ -40,3 +40,4 @@
 ^\.editorconfig$
 ^starwars.xlsx$
 ^starwars.csv$
+^codecov\.yml$
