@@ -17,14 +17,10 @@ test_that("Import from Excel (.xlsx)", {
 })
 
 test_that("Import from Excel (.xls)", {
-    expect_true(is.data.frame(import(system.file('examples', 'iris.xls',
-                                                 package='rio'))))
-    expect_true(is.data.frame(import(system.file('examples', 'iris.xls',
-                                                 package='rio'), sheet = 1)))
-    expect_true(is.data.frame(import(system.file('examples', 'iris.xls',
-                                                 package='rio'), which = 1)))
-    expect_warning(is.data.frame(import(system.file('examples', 'iris.xls',
-                                                 package='rio'), which = 1,
+    expect_true(is.data.frame(import("../testdata/iris.xls")))
+    expect_true(is.data.frame(import("../testdata/iris.xls", sheet = 1)))
+    expect_true(is.data.frame(import("../testdata/iris.xls", which = 1)))
+    expect_warning(is.data.frame(import("../testdata/iris.xls", which = 1,
                                         nrows = 42)), "nrows",
                    label="xls reads the file and ignores unused arguments with warning")
 })
