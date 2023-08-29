@@ -38,3 +38,5 @@
 ^\.Rproj\.user$
 ^\.github$
 ^\.editorconfig$
+^starwars.xlsx$
+^starwars.csv$

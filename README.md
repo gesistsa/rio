@@ -15,26 +15,17 @@ implementing four simple functions in Swiss-army knife style:
   - `import()` provides a painless data import experience by
     automatically choosing the appropriate import/read function based on
     file extension (or a specified `format` argument)
-  - `import_list()` imports a list of data frames from a multi-object
-    file (Excel workbook, .Rdata files, zip directory, or HTML file)
   - `export()` provides the same painless file recognition for data
     export/write functionality
-  - `convert()` wraps `import()` and `export()` to allow the user to
-    easily convert between file formats (thus providing a FOSS
-    replacement for programs like
-    [Stat/Transfer](https://stattransfer.com/) or
-    [Sledgehammer](https://www.mtna.us/#/products/sledgehammer)).
 
 ## Installation
 
 The package is available on
 [CRAN](https://cran.r-project.org/package=rio) and can be installed
-directly in R using `install.packages()`. You may want to run
-`install_formats()` after the first installation.
+directly in R using `install.packages()`.
 
 ``` r
 install.packages("rio")
-install_formats()
 ```
 
 The latest development version on GitHub can be installed using:
@@ -43,7 +34,15 @@ The latest development version on GitHub can be installed using:
 if (!require("remotes")){
     install.packages("remotes")
 }
-remotes::install_github("leeper/rio")
+remotes::install_github("chainsawriot/rio")
+```
+
+Optional: Installation of additional formats (see below: **Supported
+file formats**)
+
+``` r
+library(rio)
+install_formats()
 ```
 
 ## Usage
@@ -121,9 +120,9 @@ export(list(mtcars = mtcars, iris = iris), file = "mtcars.xlsx")
 ## Supported file formats
 
 **rio** supports a wide range of file formats. To keep the package slim,
-all non-essential formats are supported via “Suggests” packages, which
-are not installed (or loaded) by default. To ensure rio is fully
-functional, install these packages the first time you use **rio** via:
+several formats are supported via “Suggests” packages, which are not
+installed (or loaded) by default. To ensure rio is fully functional,
+install these packages the first time you use **rio** via:
 
 ``` r
 install_formats()
