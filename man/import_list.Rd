@@ -37,7 +37,7 @@ Use \code{\link{import}} to import a list of data frames from a vector of file n
 }
 \examples{
 library('datasets')
-export(list(mtcars1 = mtcars[1:10,], 
+export(list(mtcars1 = mtcars[1:10,],
             mtcars2 = mtcars[11:20,],
             mtcars3 = mtcars[21:32,]),
     xlsx_file <- tempfile(fileext = ".xlsx")
