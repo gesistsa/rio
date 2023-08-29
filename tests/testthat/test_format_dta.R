@@ -31,9 +31,10 @@ test_that("Import from Stata (read.dta)", {
         expect_true(inherits(test1, "data.frame"))
     }
     expect_error(
-        is.data.frame(import("mtcars.dta", haven = FALSE)), 
+        is.data.frame(import("mtcars.dta", haven = FALSE)),
         label = "foreign::read.dta cannot read newer Stata files"
     )
 })
 
 unlink("mtcars.dta")
+unlink("mtcars3.dta")
