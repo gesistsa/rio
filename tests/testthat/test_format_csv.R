@@ -17,7 +17,7 @@ test_that("Export (Append) to CSV", {
 })
 
 test_that("Import from CSV", {
-    noheadercsv <- import(system.file("examples", "noheader.csv", package = "rio"), header = FALSE)
+    noheadercsv <- import("../testdata/noheader.csv", header = FALSE)
     expect_that(colnames(noheadercsv)[1], equals("V1"), label = "Header is correctly specified")
 })
 

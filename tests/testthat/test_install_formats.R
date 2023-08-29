@@ -11,8 +11,7 @@ test_that("uninstalled_formats()", {
 })
 
 test_that("install_formats()", {
-    suggestions <- read.dcf(system.file("examples/example-DESCRIPTION",
-                                        package = "rio", mustWork = TRUE),
+    suggestions <- read.dcf("../testdata/example-DESCRIPTION",
                             fields = "Suggests")
     suggestions <- parse_suggestions(suggestions)
     expect_true("NANTUCKET" %in% suggestions)

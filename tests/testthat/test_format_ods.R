@@ -3,9 +3,8 @@ require("datasets")
 
 test_that("Import from ODS", {
     skip_if_not_installed(pkg="readODS")
-    ods0 <- import(system.file("examples", "mtcars.ods", package = "rio"))
-    expect_warning(ods <- import(system.file("examples", "mtcars.ods"
-                                             , package = "rio"),
+    ods0 <- import("../testdata/mtcars.ods")
+    expect_warning(ods <- import("../testdata/mtcars.ods",
                                  sheet = 1, col_names = TRUE,
                                  path = 'ignored value',
                                  invalid_argument = 42),

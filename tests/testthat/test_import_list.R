@@ -20,7 +20,7 @@ test_that("Import multi-object .Rdata in import_list()", {
 })
 
 test_that("Import multiple HTML tables in import_list()", {
-    dat <- import_list(system.file("examples", "twotables.html", package = "rio"))
+    dat <- import_list("../testdata/twotables.html")
     expect_true(identical(dim(dat[[1]]), dim(mtcars)))
     expect_true(identical(names(dat[[1]]), names(mtcars)))
     expect_true(identical(dim(dat[[2]]), dim(iris)))
@@ -69,10 +69,10 @@ test_that("Object names are preserved by import_list()", {
     expected_names <- c("mtcars1", "mtcars2", "mtcars3")
     dat_xls <- import_list("mtcars.xlsx")
     dat_csv <- import_list(c("mtcars1.csv","mtcars2.tsv","mtcars3.csv"))
-    
+
     expect_identical(names(dat_xls), expected_names)
     expect_identical(names(dat_csv), expected_names)
-    
+
     unlink(c("mtcars.xlsx", "mtcars1.csv","mtcars2.tsv","mtcars3.csv"))
 })
 
@@ -82,10 +82,10 @@ test_that("File names are added as attributes by import_list()", {
     expected_names <- c("mtcars", "mtcars")
     expected_attrs <- c(mtcars = "mtcars.csv", mtcars = "mtcars.tsv")
     dat <- import_list(c("mtcars.csv","mtcars.tsv"))
-    
+
     expect_identical(names(dat), expected_names)
     expect_identical(unlist(lapply(dat, attr, "filename")), expected_attrs)
-    
+
     unlink(c("mtcars.csv", "mtcars.tsv"))
 })
 
