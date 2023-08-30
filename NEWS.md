@@ -1,3 +1,7 @@
+* Unexport objects: `.import`, `.export`; remove documentation for `arg_reconcile` #321
+* Declutter
+   - remove the obsolete data.table option #323
+
 # rio 0.5.30
 
 * Maintenance release: new maintainer

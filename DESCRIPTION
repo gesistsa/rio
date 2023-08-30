@@ -45,7 +45,7 @@ Imports:
     foreign,
     haven (>= 1.1.2),
     curl (>= 0.6),
-    data.table (>= 1.9.8),
+    data.table (>= 1.11.2),
     readxl (>= 0.1.1),
     openxlsx,
     tibble
