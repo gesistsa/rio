@@ -28,6 +28,9 @@ factorize(x, ...)
 
 \item{coerce_character}{A logical indicating whether to additionally coerce character columns to factor (in \code{factorize}). Default \code{FALSE}.}
 }
+\value{
+a character vector (for \code{characterize}) or factor vector (for \code{factorize})
+}
 \description{
 Convert labelled variables to character or factor
 }
