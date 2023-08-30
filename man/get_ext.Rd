@@ -15,3 +15,9 @@ A characters string containing a file type recognized by rio.
 \description{
 A utility function to retrieve the file type from a file extension (via its filename/path/URL)
 }
+\examples{
+get_ext("starwars.xlsx")
+get_ext("starwars.ods")
+get_ext("clipboard") ## "clipboard"
+get_ext("https://github.com/ropensci/readODS/raw/v2.1/starwars.ods")
+}
