@@ -49,7 +49,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
     \item Apache Arrow Parquet (.parquet), using \code{\link[arrow]{write_parquet}}
     \item Feather R/Python interchange format (.feather), using \code{\link[feather]{write_feather}}
     \item Fast storage (.fst), using \code{\link[fst]{write.fst}}
-    \item JSON (.json), using \code{\link[jsonlite]{toJSON}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \href{https://arxiv.org/abs/1403.2805}{https://arxiv.org/abs/1403.2805}. 
+    \item JSON (.json), using \code{\link[jsonlite]{toJSON}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \href{https://arxiv.org/abs/1403.2805}{https://arxiv.org/abs/1403.2805}.
     \item Matlab (.mat), using \code{\link[rmatio]{write.mat}}
     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{write_ods}}. (Currently only single-sheet exports are supported.)
     \item HTML (.html), using a custom method based on \code{\link[xml2]{xml_add_child}} to create a simple HTML table and \code{\link[xml2]{write_xml}} to write to disk.
@@ -103,11 +103,11 @@ source(f8, echo = TRUE)
 \dontrun{
   ## export a single data frame
   export(mtcars, f9 <- tempfile(fileext = ".xlsx"))
-  
+
   ## export NAs to Excel as missing via args passed to `...`
   mtcars$drat <- NA_real_
   mtcars \%>\% export(f10 <- tempfile(fileext = ".xlsx"), keepNA = TRUE)
-  
+
   ## export a list of data frames as worksheets
   export(list(a = mtcars, b = iris), f11 <- tempfile(fileext = ".xlsx"))
 
@@ -134,5 +134,5 @@ unlink(f8)
 # unlink(f13)
 }
 \seealso{
-\code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}, \code{\link{export_list}}
+\code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}, \code{\link{export_list}}
 }

@@ -109,5 +109,5 @@ unlink(rds_file)
 
 }
 \seealso{
-\code{\link{import_list}}, \code{\link{.import}}, \code{\link{characterize}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
+\code{\link{import_list}}, \code{\link{characterize}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
 }

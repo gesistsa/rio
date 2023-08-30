@@ -2,6 +2,11 @@
 #' @description A utility function to retrieve the file type from a file extension (via its filename/path/URL)
 #' @param file A character string containing a filename, file path, or URL.
 #' @return A characters string containing a file type recognized by rio.
+#' @examples
+#' get_ext("starwars.xlsx")
+#' get_ext("starwars.ods")
+#' get_ext("clipboard") ## "clipboard"
+#' get_ext("https://github.com/ropensci/readODS/raw/v2.1/starwars.ods")
 #' @export
 get_ext <- function(file) {
     if (!is.character(file)) {

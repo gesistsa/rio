@@ -3,6 +3,12 @@
 #' @param \dots Additional arguments passed to \code{\link[utils]{install.packages}}.
 #' @return \code{NULL}
 #' @importFrom utils install.packages
+#' @examples
+#' \donttest{
+#' if (interactive()) {
+#' install_formats()
+#' }
+#' }
 #' @export
 install_formats <- function(...) {
 

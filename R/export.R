@@ -7,7 +7,7 @@
 #' @param \dots Additional arguments for the underlying export functions. This can be used to specify non-standard arguments. See examples.
 #' @return The name of the output file as a character string (invisibly).
 #' @details This function exports a data frame or matrix into a file with file format based on the file extension (or the manually specified format, if \code{format} is specified).
-#' 
+#'
 #' The output file can be to a compressed directory, simply by adding an appropriate additional extensiont to the \code{file} argument, such as: \dQuote{mtcars.csv.tar}, \dQuote{mtcars.csv.zip}, or \dQuote{mtcars.csv.gz}.
 #'
 #' \code{export} supports many file formats. See the documentation for the underlying export functions for optional arguments that can be passed via \code{...}
@@ -33,7 +33,7 @@
 #'     \item Apache Arrow Parquet (.parquet), using \code{\link[arrow]{write_parquet}}
 #'     \item Feather R/Python interchange format (.feather), using \code{\link[feather]{write_feather}}
 #'     \item Fast storage (.fst), using \code{\link[fst]{write.fst}}
-#'     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \href{https://arxiv.org/abs/1403.2805}{https://arxiv.org/abs/1403.2805}. 
+#'     \item JSON (.json), using \code{\link[jsonlite]{toJSON}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \href{https://arxiv.org/abs/1403.2805}{https://arxiv.org/abs/1403.2805}.
 #'     \item Matlab (.mat), using \code{\link[rmatio]{write.mat}}
 #'     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{write_ods}}. (Currently only single-sheet exports are supported.)
 #'     \item HTML (.html), using a custom method based on \code{\link[xml2]{xml_add_child}} to create a simple HTML table and \code{\link[xml2]{write_xml}} to write to disk.
@@ -43,9 +43,9 @@
 #' }
 #'
 #' When exporting a data set that contains label attributes (e.g., if imported from an SPSS or Stata file) to a plain text file, \code{\link{characterize}} can be a useful pre-processing step that records value labels into the resulting file (e.g., \code{export(characterize(x), "file.csv")}) rather than the numeric values.
-#' 
+#'
 #' Use \code{\link{export_list}} to export a list of dataframes to separate files.
-#' 
+#'
 #' @examples
 #' library("datasets")
 #' # specify only `file` argument
@@ -61,7 +61,7 @@
 #' f2 %in% tempdir()
 #' export(mtcars, format = "stata")
 #' "mtcars.dta" %in% dir()
-#' 
+#'
 #' setwd(wd)
 #' }
 #' # specify `file` and `format` to override default format
@@ -87,14 +87,14 @@
 #' \dontrun{
 #'   ## export a single data frame
 #'   export(mtcars, f9 <- tempfile(fileext = ".xlsx"))
-#'   
+#'
 #'   ## export NAs to Excel as missing via args passed to `...`
 #'   mtcars$drat <- NA_real_
 #'   mtcars %>% export(f10 <- tempfile(fileext = ".xlsx"), keepNA = TRUE)
-#'   
+#'
 #'   ## export a list of data frames as worksheets
 #'   export(list(a = mtcars, b = iris), f11 <- tempfile(fileext = ".xlsx"))
-#' 
+#'
 #'   ## export, adding a new sheet to an existing workbook
 #'   export(iris, f12 <- tempfile(fileext = ".xlsx"), which = "iris")
 #' }
@@ -116,7 +116,7 @@
 #' # unlink(f11)
 #' # unlink(f12)
 #' # unlink(f13)
-#' @seealso \code{\link{.export}}, \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}, \code{\link{export_list}}
+#' @seealso \code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}, \code{\link{export_list}}
 #' @importFrom haven labelled
 #' @export
 export <- function(x, file, format, ...) {
@@ -155,7 +155,7 @@ export <- function(x, file, format, ...) {
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
-    
+
     class(file) <- c(paste0("rio_", fmt), class(file))
     .export(file = file, x = x, ...)
 
