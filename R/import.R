@@ -97,11 +97,14 @@
 #' @importFrom tibble as_tibble is_tibble
 #' @export
 import <- function(file, format, setclass, which, ...) {
+    if (isFALSE(inherits(file, "character")) || isFALSE(length(file) == 1)) {
+        stop("Invalid `file` argument.", call. = FALSE)
+    }
     if (grepl("^http.*://", file)) {
         file <- remote_to_local(file, format = format)
     }
     if ((file != "clipboard") && !file.exists(file)) {
-        stop("No such file")
+        stop("No such file: ", file, call. = FALSE)
     }
     if (grepl("\\.zip$", file)) {
         if (missing(which)) {
