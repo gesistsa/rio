@@ -4,7 +4,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
                          col.names = TRUE, append = FALSE, ...) {
     if (isTRUE(fwrite) & !inherits(file, "connection")) {
         if (isTRUE(append)) {
-            data.table::fwrite(x, file = file, sep = sep, row.names = row.names, 
+            data.table::fwrite(x, file = file, sep = sep, row.names = row.names,
                                col.names = FALSE, append = TRUE, ...)
         } else {
             data.table::fwrite(x, file = file, sep = sep, row.names = row.names,
@@ -145,19 +145,19 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_feather <- function(file, x, ...) {
-    requireNamespace("feather")
+    .check_pkg_availability("feather")
     feather::write_feather(x = x, path = file)
 }
 
 #' @export
 .export.rio_fst <- function(file, x, ...) {
-    requireNamespace("fst")
+    .check_pkg_availability("fst")
     fst::write.fst(x = x, path = file, ...)
 }
 
 #' @export
 .export.rio_matlab <- function(file, x, ...) {
-    requireNamespace("rmatio")
+    .check_pkg_availability("rmatio")
     rmatio::write.mat(object = x, filename = file, ...)
 }
 
@@ -204,7 +204,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_json <- function(file, x, ...) {
-    requireNamespace("jsonlite")
+    .check_pkg_availability("jsonlite")
     cat(jsonlite::toJSON(x, ...), file = file)
 }
 
@@ -248,13 +248,13 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_ods <- function(file, x, ...) {
-    requireNamespace("readODS")
+    .check_pkg_availability("readODS")
     readODS::write_ods(x = x, path = file)
 }
 
 #' @export
 .export.rio_html <- function(file, x, ...) {
-    requireNamespace("xml2")
+    .check_pkg_availability("xml2")
     html <- xml2::read_html("<!doctype html><html><head>\n<title>R Exported Data</title>\n</head><body>\n</body>\n</html>")
     bod <- xml2::xml_children(html)[[2]]
     if (is.data.frame(x)) {
@@ -277,7 +277,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_xml <- function(file, x, ...) {
-    requireNamespace("xml2")
+    .check_pkg_availability("xml2")
     root <- ""
     xml <- xml2::read_xml(paste0("<",as.character(substitute(x)),">\n</",as.character(substitute(x)),">\n"))
     att <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
@@ -302,24 +302,24 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_yml <- function(file, x, ...) {
-    requireNamespace("yaml")
+    .check_pkg_availability("yaml")
     cat(yaml::as.yaml(x, ...), file = file)
 }
 
 #' @export
 .export.rio_clipboard <- function(file, x, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
-    requireNamespace("clipr")
+    .check_pkg_availability("clipr")
     clipr::write_clip(content = x, row.names = row.names, col.names = col.names, sep = sep, ...)
 }
 
 #' @export
-.export.rio_pzfx <- function(file, x, ..., row_names=FALSE) {
-    requireNamespace("pzfx")
+.export.rio_pzfx <- function(file, x, ..., row_names = FALSE) {
+    .check_pkg_availability("pzfx")
     pzfx::write_pzfx(x=x, path=file, ..., row_names=row_names)
 }
 
 #' @export
 .export.rio_parquet <- function(file, x, ...) {
-    requireNamespace("arrow")
-    arrow::write_parquet(x=x, sink=file, ...)
+    .check_pkg_availability("arrow")
+    arrow::write_parquet(x=x, sink = file, ...)
 }

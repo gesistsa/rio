@@ -24,3 +24,8 @@ test_that("Export without file specified", {
     expect_true(export(iris, format = "csv") %in% dir())
     unlink("iris.csv")
 })
+
+test_that(".check_pkg_availability", {
+    expect_error(.check_pkg_availability("nonexistingpkg1233222"), "Suggested package `nonexisting")
+    expect_error(.check_pkg_availability("rio"), NA)
+})

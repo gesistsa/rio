@@ -1,10 +1,10 @@
 #' @importFrom data.table fread
-import_delim <-  
-  function(file, which = 1, fread = TRUE, sep = "auto", 
+import_delim <-
+  function(file, which = 1, fread = TRUE, sep = "auto",
            header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
     if (isTRUE(fread) & !inherits(file, "connection")) {
       arg_reconcile(data.table::fread, input = file, sep = sep, header = header,
-                    stringsAsFactors = stringsAsFactors, 
+                    stringsAsFactors = stringsAsFactors,
                     data.table = data.table, ..., .docall = TRUE)
     } else {
       if (isTRUE(fread) & inherits(file, "connection")) {
@@ -24,7 +24,7 @@ import_delim <-
       if (missing(header) || is.null(header) || header == "auto") {
         header <- TRUE
       }
-      arg_reconcile(utils::read.table, file=file, sep=sep, header=header, 
+      arg_reconcile(utils::read.table, file=file, sep=sep, header=header,
                     stringsAsFactors = stringsAsFactors, ..., .docall = TRUE)
     }
   }
@@ -68,22 +68,22 @@ import_delim <-
 
 #' @importFrom utils read.fwf
 #' @export
-.import.rio_fwf <- 
-function(file, 
-         which = 1, 
-         widths, 
-         header = FALSE, 
-         col.names, 
+.import.rio_fwf <-
+function(file,
+         which = 1,
+         widths,
+         header = FALSE,
+         col.names,
          comment = "#",
-         readr = FALSE, 
-         progress = getOption("verbose", FALSE), 
+         readr = FALSE,
+         progress = getOption("verbose", FALSE),
          ...) {
     if (missing(widths)) {
       stop("Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().")
     }
     a <- list(...)
     if (isTRUE(readr)) {
-        requireNamespace("readr")
+        .check_pkg_availability("readr")
         if (is.null(widths)) {
             if (!missing(col.names)) {
                 widths <- readr::fwf_empty(file = file, col_names = col.names)
@@ -103,8 +103,8 @@ function(file,
                 } else {
                     widths <- readr::fwf_widths(abs(widths))
                 }
-                readr::read_fwf(file = file, col_positions = widths, 
-                                col_types = col_types, progress = progress, 
+                readr::read_fwf(file = file, col_positions = widths,
+                                col_types = col_types, progress = progress,
                                 comment = comment, ...)
             } else {
                 if (!missing(col.names)) {
@@ -189,19 +189,19 @@ function(file,
 
 #' @export
 .import.rio_feather <- function(file, which = 1, ...) {
-    requireNamespace("feather")
+    .check_pkg_availability("feather")
     feather::read_feather(path = file)
 }
 
 #' @export
 .import.rio_fst <- function(file, which = 1, ...) {
-    requireNamespace("fst")
+    .check_pkg_availability("fst")
     fst::read.fst(path = file, ...)
 }
 
 #' @export
 .import.rio_matlab <- function(file, which = 1, ...) {
-    requireNamespace("rmatio")
+    .check_pkg_availability("rmatio")
     rmatio::read.mat(filename = file)
 }
 
@@ -289,7 +289,7 @@ function(file,
 
 #' @export
 .import.rio_json <- function(file, which = 1, ...) {
-    requireNamespace("jsonlite")
+    .check_pkg_availability("jsonlite")
     jsonlite::fromJSON(txt = file, ...)
 }
 
@@ -308,7 +308,7 @@ function(file,
 #' @importFrom readxl read_xls
 #' @export
 .import.rio_xls <- function(file, which = 1, ...) {
-  requireNamespace("readxl")
+  .check_pkg_availability("readxl")
   arg_reconcile(read_xls, path = file, ..., sheet = which,
                 .docall = TRUE,
                 .remap = c(colNames = 'col_names', na.strings = 'na'))
@@ -319,12 +319,12 @@ function(file,
 #' @export
 .import.rio_xlsx <- function(file, which = 1, readxl = TRUE, ...) {
     if (isTRUE(readxl)) {
-        requireNamespace("readxl")
+        .check_pkg_availability("readxl")
         arg_reconcile(read_xlsx, path = file, ..., sheet = which,
                       .docall = TRUE,
                       .remap = c(colNames = 'col_names', na.strings = 'na'))
     } else {
-        requireNamespace("openxlsx")
+        .check_pkg_availability("openxlsx")
         arg_reconcile(read.xlsx, xlsxFile = file, ..., sheet = which,
         .docall = TRUE,
         .remap = c(col_names = 'colNames', na = 'na.strings'))
@@ -342,7 +342,7 @@ function(file,
 
 #' @export
 .import.rio_ods <- function(file, which = 1, header = TRUE, ...) {
-    requireNamespace("readODS")
+    .check_pkg_availability("readODS")
     "read_ods" <- readODS::read_ods
     a <- list(...)
     if ("sheet" %in% names(a)) {
@@ -371,7 +371,7 @@ function(file,
 #' @importFrom utils type.convert
 #' @export
 .import.rio_xml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
-    requireNamespace("xml2")
+    .check_pkg_availability("xml2")
     x <- xml2::as_list(xml2::read_xml(unclass(file)))[[1L]]
     d <- do.call("rbind", c(lapply(x, unlist)))
     row.names(d) <- 1:nrow(d)
@@ -448,30 +448,30 @@ extract_html_row <- function(x, empty_value) {
 
 #' @export
 .import.rio_yml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
-    requireNamespace("yaml")
+    .check_pkg_availability("yaml")
     as.data.frame(yaml::read_yaml(file, ...), stringsAsFactors = stringsAsFactors)
 }
 
 #' @export
 .import.rio_eviews <- function(file, which = 1, ...) {
-    requireNamespace("hexView")
+    .check_pkg_availability("hexView")
     hexView::readEViews(file, ...)
 }
 
 #' @export
 .import.rio_clipboard <- function(file = "clipboard", which = 1, header = TRUE, sep = "\t", ...) {
-    requireNamespace("clipr")
+    .check_pkg_availability("clipr")
     clipr::read_clip_tbl(x = clipr::read_clip(), header = header, sep = sep, ...)
 }
 
 #' @export
 .import.rio_pzfx <- function(file, which=1, ...) {
-    requireNamespace("pzfx")
+    .check_pkg_availability("pzfx")
     pzfx::read_pzfx(path=file, table=which, ...)
 }
 
 #' @export
 .import.rio_parquet <- function(file, which = 1, as_data_frame = TRUE, ...) {
-    requireNamespace("arrow")
+    .check_pkg_availability("arrow")
     arrow::read_parquet(file = file, as_data_frame = TRUE, ...)
 }

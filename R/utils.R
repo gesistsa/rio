@@ -118,3 +118,10 @@ get_type <- function(fmt) {
 twrap <- function(value, tag) {
     paste0("<", tag, ">", value, "</", tag, ">")
 }
+
+.check_pkg_availability <- function(pkg, lib.loc = NULL) {
+    if (identical(find.package(pkg, quiet = TRUE, lib.loc = lib.loc), character(0))) {
+        stop("Suggested package `", pkg, "` is not available. Please install it individually or use `install_formats()`", call. = FALSE)
+    }
+    return(invisible(NULL))
+}
