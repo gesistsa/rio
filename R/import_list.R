@@ -74,7 +74,7 @@ function(file,
             x <- as.list(e)
         } else {
             if (get_ext(file) == "html") {
-                requireNamespace("xml2", quietly = TRUE)
+                .check_pkg_availability("xml2")
                 tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
                 if (missing(which)) {
                     which <- seq_along(tables)
@@ -84,7 +84,7 @@ function(file,
                 )
                 names(which) <- whichnames
             } else if (get_ext(file) %in% c("xls","xlsx")) {
-                requireNamespace("readxl", quietly = TRUE)
+                .check_pkg_availability("readxl")
                 whichnames <- readxl::excel_sheets(path = file)
                 if (missing(which)) {
                     which <- seq_along(whichnames)
