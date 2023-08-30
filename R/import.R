@@ -88,7 +88,7 @@
 #' unlink(tsv_file)
 #' unlink(rds_file)
 #'
-#' @seealso \code{\link{import_list}}, \code{\link{.import}}, \code{\link{characterize}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
+#' @seealso \code{\link{import_list}}, \code{\link{characterize}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
 #' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom stats na.omit setNames
 #' @importFrom utils installed.packages untar unzip tar zip type.convert capture.output
