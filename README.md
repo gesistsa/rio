@@ -10,7 +10,7 @@ Version](https://www.r-pkg.org/badges/version/rio)](https://cran.r-project.org/p
 ## Overview
 
 The aim of **rio** is to make data file I/O in R as easy as possible by
-implementing four simple functions in Swiss-army knife style:
+implementing two main functions in Swiss-army knife style:
 
   - `import()` provides a painless data import experience by
     automatically choosing the appropriate import/read function based on
