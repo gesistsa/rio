@@ -1,10 +1,10 @@
 #' @title Export list of data frames to files
-#' @description Use \code{\link{export}} to export a list of data frames to a vector of file names or a filename pattern.
+#' @description Use [export()] to export a list of data frames to a vector of file names or a filename pattern.
 #' @param x A list of data frames to be written to files.
-#' @param file A character vector string containing a single file name with a \code{\%s} wildcard placeholder, or a vector of file paths for multiple files to be imported. If \code{x} elements are named, these will be used in place of \code{\%s}, otherwise numbers will be used; all elements must be named for names to be used.
-#' @param \dots Additional arguments passed to \code{\link{export}}.
+#' @param file A character vector string containing a single file name with a `\%s` wildcard placeholder, or a vector of file paths for multiple files to be imported. If `x` elements are named, these will be used in place of `\%s`, otherwise numbers will be used; all elements must be named for names to be used.
+#' @param \dots Additional arguments passed to [export()].
 #' @return The name(s) of the output file(s) as a character vector (invisibly).
-#' @details \code{\link{export}} can export a list of data frames to a single multi-dataset file (e.g., an Rdata or Excel .xlsx file). Use \code{export_list} to export such a list to \emph{multiple} files.
+#' @details [export()] can export a list of data frames to a single multi-dataset file (e.g., an Rdata or Excel .xlsx file). Use `export_list` to export such a list to *multiple* files.
 #' @examples
 #' library('datasets')
 #' export(list(mtcars1 = mtcars[1:10,], 
@@ -28,7 +28,7 @@
 #' unlink(csv_files1)
 #' unlink(csv_files2)
 #' 
-#' @seealso \code{\link{import}}, \code{\link{import_list}}, \code{\link{export}}
+#' @seealso [import()], [import_list()], [export()]
 #' @export
 export_list <- 
 function(

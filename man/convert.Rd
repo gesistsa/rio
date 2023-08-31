@@ -11,15 +11,15 @@ convert(in_file, out_file, in_opts = list(), out_opts = list())
 
 \item{out_file}{A character string naming an output file.}
 
-\item{in_opts}{A named list of options to be passed to \code{\link{import}}.}
+\item{in_opts}{A named list of options to be passed to \code{\link[=import]{import()}}.}
 
-\item{out_opts}{A named list of options to be passed to \code{\link{export}}.}
+\item{out_opts}{A named list of options to be passed to \code{\link[=export]{export()}}.}
 }
 \value{
 A character string containing the name of the output file (invisibly).
 }
 \description{
-This function constructs a data frame from a data file using \code{\link{import}} and uses \code{\link{export}} to write the data to disk in the format indicated by the file extension.
+This function constructs a data frame from a data file using \code{\link[=import]{import()}} and uses \code{\link[=export]{export()}} to write the data to disk in the format indicated by the file extension.
 }
 \examples{
 # create a file to convert

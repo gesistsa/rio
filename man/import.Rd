@@ -13,7 +13,7 @@ import(file, format, setclass, which, ...)
 
 \item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, the return object is always a \dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or \dQuote{tibble} (if using dplyr) or \dQuote{data.table} (if using data.table). Other values are ignored, such that a data.frame is returned.}
 
-\item{which}{This argument is used to control import from multi-object files; as a rule \code{import} only ever returns a single data frame (use \code{\link{import_list}} to import multiple data frames from a multi-object file). If \code{file} is a compressed directory, \code{which} can be either a character string specifying a filename or an integer specifying which file (in locale sort order) to extract from the compressed directory. For Excel spreadsheets, this can be used to specify a sheet name or number. For .Rdata files, this can be an object name. For HTML files, it identifies which table to extract (from document order). Ignored otherwise. A character string value will be used as a regular expression, such that the extracted file is the first match of the regular expression against the file names in the archive.}
+\item{which}{This argument is used to control import from multi-object files; as a rule \code{import} only ever returns a single data frame (use \code{\link[=import_list]{import_list()}} to import multiple data frames from a multi-object file). If \code{file} is a compressed directory, \code{which} can be either a character string specifying a filename or an integer specifying which file (in locale sort order) to extract from the compressed directory. For Excel spreadsheets, this can be used to specify a sheet name or number. For .Rdata files, this can be an object name. For HTML files, it identifies which table to extract (from document order). Ignored otherwise. A character string value will be used as a regular expression, such that the extracted file is the first match of the regular expression against the file names in the archive.}
 
 \item{\dots}{Additional arguments passed to the underlying import functions. For example, this can control column classes for delimited file types, or control the use of haven for Stata and SPSS or readxl for Excel (.xlsx) format. See details below.}
 }
@@ -29,50 +29,50 @@ This function imports a data frame or matrix from a data file with the file form
 \code{import} supports the following file formats:
 
 \itemize{
-    \item Comma-separated data (.csv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
-    \item Pipe-separated data (.psv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{sep = '|'}, \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
-    \item Tab-separated data (.tsv), using \code{\link[data.table]{fread}} or, if \code{fread = FALSE}, \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
-    \item SAS (.sas7bdat), using \code{\link[haven]{read_sas}}.
-    \item SAS XPORT (.xpt), using \code{\link[haven]{read_xpt}} or, if \code{haven = FALSE}, \code{\link[foreign]{read.xport}}.
-    \item SPSS (.sav), using \code{\link[haven]{read_sav}}. If \code{haven = FALSE}, \code{\link[foreign]{read.spss}} can be used.
-    \item SPSS compressed (.zsav), using \code{\link[haven]{read_sav}}.
-    \item Stata (.dta), using \code{\link[haven]{read_dta}}. If \code{haven = FALSE}, \code{\link[foreign]{read.dta}} can be used.
-    \item SPSS Portable Files (.por), using \code{\link[haven]{read_por}}.
-    \item Excel (.xls and .xlsx), using \code{\link[readxl]{read_excel}}. Use \code{which} to specify a sheet number. For .xlsx files, it is possible to set \code{readxl = FALSE}, so that \code{\link[openxlsx]{read.xlsx}} can be used instead of readxl (the default).
-    \item R syntax object (.R), using \code{\link[base]{dget}}
-    \item Saved R objects (.RData,.rda), using \code{\link[base]{load}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame).
-    \item Serialized R objects (.rds), using \code{\link[base]{readRDS}}. This can be any R object (not just a data frame).
-    \item Epiinfo (.rec), using \code{\link[foreign]{read.epiinfo}}
-    \item Minitab (.mtp), using \code{\link[foreign]{read.mtp}}
-    \item Systat (.syd), using \code{\link[foreign]{read.systat}}
-    \item "XBASE" database files (.dbf), using \code{\link[foreign]{read.dbf}}
-    \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{read.arff}}
-    \item Data Interchange Format (.dif), using \code{\link[utils]{read.DIF}}
-    \item Fortran data (no recognized extension), using \code{\link[utils]{read.fortran}}
-    \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils]{read.fwf}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}. If \code{readr = TRUE}, import will be performed using \code{\link[readr]{read_fwf}}, where \code{widths} should be: \code{NULL}, a vector of column widths, or the output of \code{\link[readr]{fwf_empty}}, \code{\link[readr]{fwf_widths}}, or \code{\link[readr]{fwf_positions}}.
-    \item gzip comma-separated data (.csv.gz), using \code{\link[utils]{read.table}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
-    \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table]{fread}}.
-    \item Apache Arrow Parquet (.parquet), using \code{\link[arrow]{read_parquet}}
-    \item Feather R/Python interchange format (.feather), using \code{\link[feather]{read_feather}}
-    \item Fast storage (.fst), using \code{\link[fst]{read.fst}}
-    \item JSON (.json), using \code{\link[jsonlite]{fromJSON}}
-    \item Matlab (.mat), using \code{\link[rmatio]{read.mat}}
-    \item EViews (.wf1), using \code{\link[hexView]{readEViews}}
-    \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read_ods}}.  Use \code{which} to specify a sheet number.
-    \item Single-table HTML documents (.html), using \code{\link[xml2]{read_html}}. There is no standard HTML table and we have only tested this with HTML tables exported with this package. HTML tables will only be read correctly if the HTML file can be converted to a list via \code{\link[xml2]{as_list}}. This import feature is not robust, especially for HTML tables in the wild. Please use a proper web scraping framework, e.g. \code{rvest}.
-    \item Shallow XML documents (.xml), using \code{\link[xml2]{read_xml}}. The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2]{as_list}}.
-    \item YAML (.yml), using \code{\link[yaml]{yaml.load}}
-    \item Clipboard import, using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
-    \item Google Sheets, as Comma-separated data (.csv)
-    \item GraphPad Prism (.pzfx) using \code{\link[pzfx]{read_pzfx}}
+\item Comma-separated data (.csv), using \code{\link[data.table:fread]{data.table::fread()}} or, if \code{fread = FALSE}, \code{\link[utils:read.table]{utils::read.table()}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
+\item Pipe-separated data (.psv), using \code{\link[data.table:fread]{data.table::fread()}} or, if \code{fread = FALSE}, \code{\link[utils:read.table]{utils::read.table()}} with \code{sep = '|'}, \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
+\item Tab-separated data (.tsv), using \code{\link[data.table:fread]{data.table::fread()}} or, if \code{fread = FALSE}, \code{\link[utils:read.table]{utils::read.table()}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
+\item SAS (.sas7bdat), using \code{\link[haven:read_sas]{haven::read_sas()}}.
+\item SAS XPORT (.xpt), using \code{\link[haven:read_xpt]{haven::read_xpt()}} or, if \code{haven = FALSE}, \code{\link[foreign:read.xport]{foreign::read.xport()}}.
+\item SPSS (.sav), using \code{\link[haven:read_spss]{haven::read_sav()}}. If \code{haven = FALSE}, \code{\link[foreign:read.spss]{foreign::read.spss()}} can be used.
+\item SPSS compressed (.zsav), using \code{\link[haven:read_spss]{haven::read_sav()}}.
+\item Stata (.dta), using \code{\link[haven:read_dta]{haven::read_dta()}}. If \code{haven = FALSE}, \code{\link[foreign:read.dta]{foreign::read.dta()}} can be used.
+\item SPSS Portable Files (.por), using \code{\link[haven:read_spss]{haven::read_por()}}.
+\item Excel (.xls and .xlsx), using \code{\link[readxl:read_excel]{readxl::read_excel()}}. Use \code{which} to specify a sheet number. For .xlsx files, it is possible to set \code{readxl = FALSE}, so that \code{\link[openxlsx:read.xlsx]{openxlsx::read.xlsx()}} can be used instead of readxl (the default).
+\item R syntax object (.R), using \code{\link[base:dput]{base::dget()}}
+\item Saved R objects (.RData,.rda), using \code{\link[base:load]{base::load()}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame).
+\item Serialized R objects (.rds), using \code{\link[base:readRDS]{base::readRDS()}}. This can be any R object (not just a data frame).
+\item Epiinfo (.rec), using \code{\link[foreign:read.epiinfo]{foreign::read.epiinfo()}}
+\item Minitab (.mtp), using \code{\link[foreign:read.mtp]{foreign::read.mtp()}}
+\item Systat (.syd), using \code{\link[foreign:read.systat]{foreign::read.systat()}}
+\item "XBASE" database files (.dbf), using \code{\link[foreign:read.dbf]{foreign::read.dbf()}}
+\item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign:read.arff]{foreign::read.arff()}}
+\item Data Interchange Format (.dif), using \code{\link[utils:read.DIF]{utils::read.DIF()}}
+\item Fortran data (no recognized extension), using \code{\link[utils:read.fortran]{utils::read.fortran()}}
+\item Fixed-width format data (.fwf), using a faster version of \code{\link[utils:read.fwf]{utils::read.fwf()}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}. If \code{readr = TRUE}, import will be performed using \code{\link[readr:read_fwf]{readr::read_fwf()}}, where \code{widths} should be: \code{NULL}, a vector of column widths, or the output of \code{\link[readr:read_fwf]{readr::fwf_empty()}}, \code{\link[readr:read_fwf]{readr::fwf_widths()}}, or \code{\link[readr:read_fwf]{readr::fwf_positions()}}.
+\item gzip comma-separated data (.csv.gz), using \code{\link[utils:read.table]{utils::read.table()}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
+\item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table:fread]{data.table::fread()}}.
+\item Apache Arrow Parquet (.parquet), using \code{\link[arrow:read_parquet]{arrow::read_parquet()}}
+\item Feather R/Python interchange format (.feather), using \code{\link[feather:read_feather]{feather::read_feather()}}
+\item Fast storage (.fst), using \code{\link[fst:write_fst]{fst::read.fst()}}
+\item JSON (.json), using \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}
+\item Matlab (.mat), using \code{\link[rmatio:read.mat]{rmatio::read.mat()}}
+\item EViews (.wf1), using \code{\link[hexView:readEViews]{hexView::readEViews()}}
+\item OpenDocument Spreadsheet (.ods), using \code{\link[readODS:read_ods]{readODS::read_ods()}}.  Use \code{which} to specify a sheet number.
+\item Single-table HTML documents (.html), using \code{\link[xml2:read_xml]{xml2::read_html()}}. There is no standard HTML table and we have only tested this with HTML tables exported with this package. HTML tables will only be read correctly if the HTML file can be converted to a list via \code{\link[xml2:as_list]{xml2::as_list()}}. This import feature is not robust, especially for HTML tables in the wild. Please use a proper web scraping framework, e.g. \code{rvest}.
+\item Shallow XML documents (.xml), using \code{\link[xml2:read_xml]{xml2::read_xml()}}. The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2:as_list]{xml2::as_list()}}.
+\item YAML (.yml), using \code{\link[yaml:yaml.load]{yaml::yaml.load()}}
+\item Clipboard import, using \code{\link[utils:read.table]{utils::read.table()}} with \code{row.names = FALSE}
+\item Google Sheets, as Comma-separated data (.csv)
+\item GraphPad Prism (.pzfx) using \code{\link[pzfx:read_pzfx]{pzfx::read_pzfx()}}
 }
 
-\code{import} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). If you would prefer these attributes to be stored at the data.frame-level (i.e., in \code{attributes(mtcars)}), see \code{\link{gather_attrs}}.
+\code{import} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). If you would prefer these attributes to be stored at the data.frame-level (i.e., in \code{attributes(mtcars)}), see \code{\link[=gather_attrs]{gather_attrs()}}.
 
-After importing metadata-rich file formats (e.g., from Stata or SPSS), it may be helpful to recode labelled variables to character or factor using \code{\link{characterize}} or \code{\link{factorize}} respectively.
+After importing metadata-rich file formats (e.g., from Stata or SPSS), it may be helpful to recode labelled variables to character or factor using \code{\link[=characterize]{characterize()}} or \code{\link[=factorize]{factorize()}} respectively.
 }
 \note{
-For csv and txt files with row names exported from \code{\link{export}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.
+For csv and txt files with row names exported from \code{\link[=export]{export()}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.
 }
 \examples{
 # create CSV to import
@@ -109,5 +109,5 @@ unlink(rds_file)
 
 }
 \seealso{
-\code{\link{import_list}}, \code{\link{characterize}}, \code{\link{gather_attrs}}, \code{\link{export}}, \code{\link{convert}}
+\code{\link[=import_list]{import_list()}}, \code{\link[=characterize]{characterize()}}, \code{\link[=gather_attrs]{gather_attrs()}}, \code{\link[=export]{export()}}, \code{\link[=convert]{convert()}}
 }

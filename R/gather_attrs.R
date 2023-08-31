@@ -1,9 +1,9 @@
 #' @rdname gather_attrs
 #' @title Gather attributes from data frame variables
-#' @description \code{gather_attrs} moves variable-level attributes to the data frame level and \code{spread_attrs} reverses that operation.
-#' @details \code{\link{import}} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). \code{gather_attrs} moves these to the data frame level (i.e., in \code{attributes(mtcars)}). \code{spread_attrs} moves attributes back to the variable level.
+#' @description `gather_attrs` moves variable-level attributes to the data frame level and `spread_attrs` reverses that operation.
+#' @details [import()] attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for `mtcars$mpg` is stored in `attributes(mtcars$mpg)` rather than `attributes(mtcars)`). `gather_attrs` moves these to the data frame level (i.e., in `attributes(mtcars)`). `spread_attrs` moves attributes back to the variable level.
 #' @param x A data frame.
-#' @return \code{x}, with variable-level attributes stored at the data frame level.
+#' @return `x`, with variable-level attributes stored at the data frame level.
 #' @examples
 #' e <- try(import("http://www.stata-press.com/data/r13/auto.dta"))
 #' if (!inherits(e, "try-error")) {
@@ -12,7 +12,7 @@
 #'   str(attributes(e))
 #'   str(g)
 #' }
-#' @seealso \code{\link{import}}, \code{\link{characterize}}
+#' @seealso [import()], [characterize()]
 #' @importFrom stats setNames
 #' @export
 gather_attrs <- function(x) {

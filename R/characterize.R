@@ -2,10 +2,10 @@
 #' @title Character conversion of labelled data
 #' @description Convert labelled variables to character or factor
 #' @param x A vector or data frame.
-#' @param coerce_character A logical indicating whether to additionally coerce character columns to factor (in \code{factorize}). Default \code{FALSE}.
+#' @param coerce_character A logical indicating whether to additionally coerce character columns to factor (in `factorize`). Default `FALSE`.
 #' @param \dots additional arguments passed to methods
-#' @details \code{characterize} converts a vector with a \code{labels} attribute of named levels into a character vector. \code{factorize} does the same but to factors. This can be useful at two stages of a data workflow: (1) importing labelled data from metadata-rich file formats (e.g., Stata or SPSS), and (2) exporting such data to plain text files (e.g., CSV) in a way that preserves information.
-#' @return a character vector (for \code{characterize}) or factor vector (for \code{factorize})
+#' @details `characterize` converts a vector with a `labels` attribute of named levels into a character vector. `factorize` does the same but to factors. This can be useful at two stages of a data workflow: (1) importing labelled data from metadata-rich file formats (e.g., Stata or SPSS), and (2) exporting such data to plain text files (e.g., CSV) in a way that preserves information.
+#' @return a character vector (for `characterize`) or factor vector (for `factorize`)
 #' @examples
 #' # vector method
 #' x <- structure(1:4, labels = c("A" = 1, "B" = 2, "C" = 3))
@@ -25,7 +25,7 @@
 #' # cleanup
 #' unlink(csv_file)
 #'
-#' @seealso \code{\link{gather_attrs}}
+#' @seealso [gather_attrs()]
 #' @export
 characterize <- function(x, ...) {
     UseMethod("characterize")

@@ -7,7 +7,7 @@
 install_formats(...)
 }
 \arguments{
-\item{\dots}{Additional arguments passed to \code{\link[utils]{install.packages}}.}
+\item{\dots}{Additional arguments passed to \code{\link[utils:install.packages]{utils::install.packages()}}.}
 }
 \value{
 \code{NULL}
