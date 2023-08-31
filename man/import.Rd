@@ -75,38 +75,34 @@ After importing metadata-rich file formats (e.g., from Stata or SPSS), it may be
 For csv and txt files with row names exported from \code{\link[=export]{export()}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.
 }
 \examples{
-# create CSV to import
-export(iris, csv_file <- tempfile(fileext = ".csv"))
+## For demo, a temp. file path is created with the file extension .csv
+csv_file <- tempfile(fileext = ".csv")
+## .xlsx
+xlsx_file <- tempfile(fileext = ".xlsx")
+## create CSV to import
+export(iris, csv_file)
+## specify `format` to override default format: see export()
+export(iris, xlsx_file, format = "csv")
 
-# specify `format` to override default format
-export(iris, tsv_file <- tempfile(fileext = ".tsv"), format = "csv")
-stopifnot(identical(import(csv_file), import(tsv_file, format = "csv")))
+## basic
+import(csv_file)
 
-# import CSV as a `data.table`
-stopifnot(inherits(import(csv_file, setclass = "data.table"), "data.table"))
+## You can certainly import your data with the file name, which is not a variable:
+## import("starwars.csv"); import("mtcars.xlsx")
 
-# pass arguments to underlying import function
-iris1 <- import(csv_file)
-identical(names(iris), names(iris1))
+## Override the default format
+## import(xlsx_file) # Error, it is actually not an Excel file
+import(xlsx_file, format = "csv")
 
-export(iris, csv_file2 <- tempfile(fileext = ".csv"), col.names = FALSE)
-iris2 <- import(csv_file2)
-identical(names(iris), names(iris2))
+## import CSV as a `data.table`
+import(csv_file, setclass = "data.table")
 
-# set class for the response data.frame as "tbl_df" (from dplyr)
-stopifnot(inherits(import(csv_file, setclass = "tbl_df"), "tbl_df"))
+## import CSV as a tibble (or "tbl_df")
+import(csv_file, setclass = "tbl_df")
 
-# non-data frame formats supported for RDS, Rdata, and JSON
-export(list(mtcars, iris), rds_file <- tempfile(fileext = ".rds"))
-li <- import(rds_file)
-identical(names(mtcars), names(li[[1]]))
-
-# cleanup
-unlink(csv_file)
-unlink(csv_file2)
-unlink(tsv_file)
-unlink(rds_file)
-
+## pass arguments to underlying import function
+## data.table::fread is the underlying import function and `nrows` is its argument
+import(csv_file, nrows = 20)
 }
 \seealso{
 \code{\link[=import_list]{import_list()}}, \code{\link[=characterize]{characterize()}}, \code{\link[=gather_attrs]{gather_attrs()}}, \code{\link[=export]{export()}}, \code{\link[=convert]{convert()}}
