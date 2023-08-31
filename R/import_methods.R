@@ -374,7 +374,7 @@ function(file,
     .check_pkg_availability("xml2")
     x <- xml2::as_list(xml2::read_xml(unclass(file)))[[1L]]
     d <- do.call("rbind", c(lapply(x, unlist)))
-    row.names(d) <- 1:nrow(d)
+    row.names(d) <- seq_len(nrow(d))
     d <- as.data.frame(d, stringsAsFactors = stringsAsFactors)
     tc2 <- function(x) {
         out <- utils::type.convert(x, as.is = FALSE)
@@ -440,7 +440,7 @@ extract_html_row <- function(x, empty_value) {
       }
     out <- as.data.frame(out, ..., stringsAsFactors = stringsAsFactors)
     # set row names
-    rownames(out) <- 1:nrow(out)
+    rownames(out) <- seq_len(nrow(out))
     # type.convert() to numeric, etc.
     out[] <- lapply(out, utils::type.convert, as.is = TRUE)
     out
