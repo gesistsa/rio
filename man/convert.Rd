@@ -22,7 +22,6 @@ A character string containing the name of the output file (invisibly).
 This function constructs a data frame from a data file using \code{\link[=import]{import()}} and uses \code{\link[=export]{export()}} to write the data to disk in the format indicated by the file extension.
 }
 \examples{
-# create a file to convert
 ## For demo, a temp. file path is created with the file extension .dta (Stata)
 dta_file <- tempfile(fileext = ".dta")
 ## .csv

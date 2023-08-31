@@ -6,7 +6,6 @@
 #' @param out_opts A named list of options to be passed to [export()].
 #' @return A character string containing the name of the output file (invisibly).
 #' @examples
-#' # create a file to convert
 #' ## For demo, a temp. file path is created with the file extension .dta (Stata)
 #' dta_file <- tempfile(fileext = ".dta")
 #' ## .csv

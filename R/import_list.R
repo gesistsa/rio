@@ -9,35 +9,21 @@
 #' @inheritParams import
 #' @return If `rbind=FALSE` (the default), a list of a data frames. Otherwise, that list is passed to [data.table::rbindlist()] with `fill = TRUE` and returns a data frame object of class set by the `setclass` argument; if this operation fails, the list is returned.
 #' @examples
-#' library('datasets')
+#' ## For demo, a temp. file path is created with the file extension .xlsx
+#' xlsx_file <- tempfile(fileext = ".xlsx")
 #' export(list(mtcars1 = mtcars[1:10,],
 #'             mtcars2 = mtcars[11:20,],
 #'             mtcars3 = mtcars[21:32,]),
-#'     xlsx_file <- tempfile(fileext = ".xlsx")
+#'     xlsx_file
 #' )
 #'
 #' # import a single file from multi-object workbook
-#' str(import(xlsx_file, which = "mtcars1"))
+#' import(xlsx_file, sheet = "mtcars1")
+#' # import all worksheets, the return value is a list
+#' import_list(xlsx_file)
 #'
-#' # import all worksheets
-#' str(import_list(xlsx_file), 1)
-#'
-#' # import and rbind all worksheets
-#' mtcars2 <- import_list(xlsx_file, rbind = TRUE)
-#' all.equal(mtcars2[,-12], mtcars, check.attributes = FALSE)
-#'
-#' # import multiple files
-#' wd <- getwd()
-#' setwd(tempdir())
-#' export(mtcars, "mtcars1.csv")
-#' export(mtcars, "mtcars2.csv")
-#' str(import_list(dir(pattern = "csv$")), 1)
-#' unlink(c("mtcars1.csv", "mtcars2.csv"))
-#' setwd(wd)
-#'
-#' # cleanup
-#' unlink(xlsx_file)
-#'
+#' # import and rbind all worksheets, the return valye is a data frame
+#' import_list(xlsx_file, rbind = TRUE)
 #' @seealso [import()], [export_list()], [export()]
 #' @export
 import_list <-
