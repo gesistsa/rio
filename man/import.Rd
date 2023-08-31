@@ -59,7 +59,7 @@ This function imports a data frame or matrix from a data file with the file form
     \item Matlab (.mat), using \code{\link[rmatio]{read.mat}}
     \item EViews (.wf1), using \code{\link[hexView]{readEViews}}
     \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{read_ods}}.  Use \code{which} to specify a sheet number.
-    \item Single-table HTML documents (.html), using \code{\link[xml2]{read_html}}. The data structure will only be read correctly if the HTML file can be converted to a list via \code{\link[xml2]{as_list}}.
+    \item Single-table HTML documents (.html), using \code{\link[xml2]{read_html}}. There is no standard HTML table and we have only tested this with HTML tables exported with this package. HTML tables will only be read correctly if the HTML file can be converted to a list via \code{\link[xml2]{as_list}}. This import feature is not robust, especially for HTML tables in the wild. Please use a proper web scraping framework, e.g. \code{rvest}.
     \item Shallow XML documents (.xml), using \code{\link[xml2]{read_xml}}. The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2]{as_list}}.
     \item YAML (.yml), using \code{\link[yaml]{yaml.load}}
     \item Clipboard import, using \code{\link[utils]{read.table}} with \code{row.names = FALSE}
