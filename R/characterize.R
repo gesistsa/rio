@@ -7,24 +7,22 @@
 #' @details `characterize` converts a vector with a `labels` attribute of named levels into a character vector. `factorize` does the same but to factors. This can be useful at two stages of a data workflow: (1) importing labelled data from metadata-rich file formats (e.g., Stata or SPSS), and (2) exporting such data to plain text files (e.g., CSV) in a way that preserves information.
 #' @return a character vector (for `characterize`) or factor vector (for `factorize`)
 #' @examples
-#' # vector method
+#' ## vector method
 #' x <- structure(1:4, labels = c("A" = 1, "B" = 2, "C" = 3))
 #' characterize(x)
 #' factorize(x)
 #'
-#' # data frame method
+#' ## data frame method
 #' x <- data.frame(v1 = structure(1:4, labels = c("A" = 1, "B" = 2, "C" = 3)),
 #'                 v2 = structure(c(1,0,0,1), labels = c("foo" = 0, "bar" = 1)))
 #' str(factorize(x))
 #' str(characterize(x))
 #'
-#' # comparison of exported file contents
-#' import(export(x, csv_file <- tempfile(fileext = ".csv")))
+#' ## Application
+#' csv_file <- tempfile(fileext = ".csv")
+#' ## comparison of exported file contents
+#' import(export(x, csv_file))
 #' import(export(factorize(x), csv_file))
-#'
-#' # cleanup
-#' unlink(csv_file)
-#'
 #' @seealso [gather_attrs()]
 #' @export
 characterize <- function(x, ...) {
