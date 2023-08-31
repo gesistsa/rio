@@ -19,21 +19,21 @@ import_list(
 
 \item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, the return object is always a \dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or \dQuote{tibble} (if using dplyr) or \dQuote{data.table} (if using data.table). Other values are ignored, such that a data.frame is returned.}
 
-\item{which}{If \code{file} is a single file path, this specifies which objects should be extracted (passed to \code{\link{import}}'s \code{which} argument). Ignored otherwise.}
+\item{which}{If \code{file} is a single file path, this specifies which objects should be extracted (passed to \code{\link[=import]{import()}}'s \code{which} argument). Ignored otherwise.}
 
-\item{rbind}{A logical indicating whether to pass the import list of data frames through \code{\link[data.table]{rbindlist}}.}
+\item{rbind}{A logical indicating whether to pass the import list of data frames through \code{\link[data.table:rbindlist]{data.table::rbindlist()}}.}
 
 \item{rbind_label}{If \code{rbind = TRUE}, a character string specifying the name of a column to add to the data frame indicating its source file.}
 
 \item{rbind_fill}{If \code{rbind = TRUE}, a logical indicating whether to set the \code{fill = TRUE} (and fill missing columns with \code{NA}).}
 
-\item{\dots}{Additional arguments passed to \code{\link{import}}. Behavior may be unexpected if files are of different formats.}
+\item{\dots}{Additional arguments passed to \code{\link[=import]{import()}}. Behavior may be unexpected if files are of different formats.}
 }
 \value{
-If \code{rbind=FALSE} (the default), a list of a data frames. Otherwise, that list is passed to \code{\link[data.table]{rbindlist}} with \code{fill = TRUE} and returns a data frame object of class set by the \code{setclass} argument; if this operation fails, the list is returned.
+If \code{rbind=FALSE} (the default), a list of a data frames. Otherwise, that list is passed to \code{\link[data.table:rbindlist]{data.table::rbindlist()}} with \code{fill = TRUE} and returns a data frame object of class set by the \code{setclass} argument; if this operation fails, the list is returned.
 }
 \description{
-Use \code{\link{import}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)
+Use \code{\link[=import]{import()}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)
 }
 \examples{
 library('datasets')
@@ -67,5 +67,5 @@ unlink(xlsx_file)
 
 }
 \seealso{
-\code{\link{import}}, \code{\link{export_list}}, \code{\link{export}}
+\code{\link[=import]{import()}}, \code{\link[=export_list]{export_list()}}, \code{\link[=export]{export()}}
 }

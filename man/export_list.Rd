@@ -9,18 +9,18 @@ export_list(x, file, ...)
 \arguments{
 \item{x}{A list of data frames to be written to files.}
 
-\item{file}{A character vector string containing a single file name with a \code{\%s} wildcard placeholder, or a vector of file paths for multiple files to be imported. If \code{x} elements are named, these will be used in place of \code{\%s}, otherwise numbers will be used; all elements must be named for names to be used.}
+\item{file}{A character vector string containing a single file name with a \verb{\\\%s} wildcard placeholder, or a vector of file paths for multiple files to be imported. If \code{x} elements are named, these will be used in place of \verb{\\\%s}, otherwise numbers will be used; all elements must be named for names to be used.}
 
-\item{\dots}{Additional arguments passed to \code{\link{export}}.}
+\item{\dots}{Additional arguments passed to \code{\link[=export]{export()}}.}
 }
 \value{
 The name(s) of the output file(s) as a character vector (invisibly).
 }
 \description{
-Use \code{\link{export}} to export a list of data frames to a vector of file names or a filename pattern.
+Use \code{\link[=export]{export()}} to export a list of data frames to a vector of file names or a filename pattern.
 }
 \details{
-\code{\link{export}} can export a list of data frames to a single multi-dataset file (e.g., an Rdata or Excel .xlsx file). Use \code{export_list} to export such a list to \emph{multiple} files.
+\code{\link[=export]{export()}} can export a list of data frames to a single multi-dataset file (e.g., an Rdata or Excel .xlsx file). Use \code{export_list} to export such a list to \emph{multiple} files.
 }
 \examples{
 library('datasets')
@@ -47,5 +47,5 @@ unlink(csv_files2)
 
 }
 \seealso{
-\code{\link{import}}, \code{\link{import_list}}, \code{\link{export}}
+\code{\link[=import]{import()}}, \code{\link[=import_list]{import_list()}}, \code{\link[=export]{export()}}
 }

@@ -58,5 +58,5 @@ unlink(csv_file)
 
 }
 \seealso{
-\code{\link{gather_attrs}}
+\code{\link[=gather_attrs]{gather_attrs()}}
 }

@@ -2,6 +2,7 @@
 * Unexport objects: `.import`, `.export`, `is_file_text`; remove documentation for `arg_reconcile` #321
 * Declutter
    - remove the obsolete data.table option #323
+   - write all documentation blocks in markdown #311
 
 # rio 0.5.30
 

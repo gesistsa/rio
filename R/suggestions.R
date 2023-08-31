@@ -1,7 +1,7 @@
 #' @title Install rio's \sQuote{Suggests} Dependencies
 #' @description This function installs various \sQuote{Suggests} dependencies for rio that expand its support to the full range of support import and export formats. These packages are not installed or loaded by default in order to create a slimmer and faster package build, install, and load.
-#' @param \dots Additional arguments passed to \code{\link[utils]{install.packages}}.
-#' @return \code{NULL}
+#' @param \dots Additional arguments passed to [utils::install.packages()].
+#' @return `NULL`
 #' @importFrom utils install.packages
 #' @examples
 #' \donttest{

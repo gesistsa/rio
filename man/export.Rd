@@ -7,11 +7,11 @@
 export(x, file, format, ...)
 }
 \arguments{
-\item{x}{A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use \code{\link{export_list}} instead.}
+\item{x}{A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use \code{\link[=export_list]{export_list()}} instead.}
 
 \item{file}{A character string naming a file. Must specify \code{file} and/or \code{format}.}
 
-\item{format}{An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base]{dump}}.}
+\item{format}{An optional character string containing the file format, which can be used to override the format inferred from \code{file} or, in lieu of specifying \code{file}, a file with the symbol name of \code{x} and the specified file extension will be created. Must specify \code{file} and/or \code{format}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for \code{\link[base:dump]{base::dump()}}.}
 
 \item{\dots}{Additional arguments for the underlying export functions. This can be used to specify non-standard arguments. See examples.}
 }
@@ -29,38 +29,38 @@ The output file can be to a compressed directory, simply by adding an appropriat
 \code{export} supports many file formats. See the documentation for the underlying export functions for optional arguments that can be passed via \code{...}
 
 \itemize{
-    \item Comma-separated data (.csv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{row.names = FALSE}.
-    \item Pipe-separated data (.psv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{sep = '|'} and \code{row.names = FALSE}.
-    \item Tab-separated data (.tsv), using \code{\link[data.table]{fwrite}} or, if \code{fwrite = TRUE}, \code{\link[utils]{write.table}} with \code{row.names = FALSE}.
-    \item SAS (.sas7bdat), using \code{\link[haven]{write_sas}}.
-    \item SAS XPORT (.xpt), using \code{\link[haven]{write_xpt}}.
-    \item SPSS (.sav), using \code{\link[haven]{write_sav}}
-    \item SPSS compressed (.zsav), using \code{\link[haven]{write_sav}}
-    \item Stata (.dta), using \code{\link[haven]{write_dta}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
-    \item Excel (.xlsx), using \code{\link[openxlsx]{write.xlsx}}. Existing workbooks are overwritten unless \code{which} is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the \code{which} sheet does not, data are added as a new sheet to the existing workbook. \code{x} can also be a list of data frames; the list entry names are used as sheet names.
-    \item R syntax object (.R), using \code{\link[base]{dput}} (by default) or \code{\link[base]{dump}} (if \code{format = 'dump'})
-    \item Saved R objects (.RData,.rda), using \code{\link[base]{save}}. In this case, \code{x} can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding \code{envir} argument is specified.
-    \item Serialized R objects (.rds), using \code{\link[base]{saveRDS}}. In this case, \code{x} can be any serializable R object.
-    \item "XBASE" database files (.dbf), using \code{\link[foreign]{write.dbf}}
-    \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign]{write.arff}}
-    \item Fixed-width format data (.fwf), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
-    \item gzip comma-separated data (.csv.gz), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
-    \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table]{fwrite}}.
-    \item Apache Arrow Parquet (.parquet), using \code{\link[arrow]{write_parquet}}
-    \item Feather R/Python interchange format (.feather), using \code{\link[feather]{write_feather}}
-    \item Fast storage (.fst), using \code{\link[fst]{write.fst}}
-    \item JSON (.json), using \code{\link[jsonlite]{toJSON}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \href{https://arxiv.org/abs/1403.2805}{https://arxiv.org/abs/1403.2805}.
-    \item Matlab (.mat), using \code{\link[rmatio]{write.mat}}
-    \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS]{write_ods}}. (Currently only single-sheet exports are supported.)
-    \item HTML (.html), using a custom method based on \code{\link[xml2]{xml_add_child}} to create a simple HTML table and \code{\link[xml2]{write_xml}} to write to disk.
-    \item XML (.xml), using a custom method based on \code{\link[xml2]{xml_add_child}} to create a simple XML tree and \code{\link[xml2]{write_xml}} to write to disk.
-    \item YAML (.yml), using \code{\link[yaml]{as.yaml}}
-    \item Clipboard export (on Windows and Mac OS), using \code{\link[utils]{write.table}} with \code{row.names = FALSE}
+\item Comma-separated data (.csv), using \code{\link[data.table:fwrite]{data.table::fwrite()}} or, if \code{fwrite = TRUE}, \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}.
+\item Pipe-separated data (.psv), using \code{\link[data.table:fwrite]{data.table::fwrite()}} or, if \code{fwrite = TRUE}, \code{\link[utils:write.table]{utils::write.table()}} with \code{sep = '|'} and \code{row.names = FALSE}.
+\item Tab-separated data (.tsv), using \code{\link[data.table:fwrite]{data.table::fwrite()}} or, if \code{fwrite = TRUE}, \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}.
+\item SAS (.sas7bdat), using \code{\link[haven:write_sas]{haven::write_sas()}}.
+\item SAS XPORT (.xpt), using \code{\link[haven:read_xpt]{haven::write_xpt()}}.
+\item SPSS (.sav), using \code{\link[haven:read_spss]{haven::write_sav()}}
+\item SPSS compressed (.zsav), using \code{\link[haven:read_spss]{haven::write_sav()}}
+\item Stata (.dta), using \code{\link[haven:read_dta]{haven::write_dta()}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
+\item Excel (.xlsx), using \code{\link[openxlsx:write.xlsx]{openxlsx::write.xlsx()}}. Existing workbooks are overwritten unless \code{which} is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the \code{which} sheet does not, data are added as a new sheet to the existing workbook. \code{x} can also be a list of data frames; the list entry names are used as sheet names.
+\item R syntax object (.R), using \code{\link[base:dput]{base::dput()}} (by default) or \code{\link[base:dump]{base::dump()}} (if \code{format = 'dump'})
+\item Saved R objects (.RData,.rda), using \code{\link[base:save]{base::save()}}. In this case, \code{x} can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding \code{envir} argument is specified.
+\item Serialized R objects (.rds), using \code{\link[base:readRDS]{base::saveRDS()}}. In this case, \code{x} can be any serializable R object.
+\item "XBASE" database files (.dbf), using \code{\link[foreign:write.dbf]{foreign::write.dbf()}}
+\item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign:write.arff]{foreign::write.arff()}}
+\item Fixed-width format data (.fwf), using \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
+\item gzip comma-separated data (.csv.gz), using \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}
+\item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table:fwrite]{data.table::fwrite()}}.
+\item Apache Arrow Parquet (.parquet), using \code{\link[arrow:write_parquet]{arrow::write_parquet()}}
+\item Feather R/Python interchange format (.feather), using \code{\link[feather:read_feather]{feather::write_feather()}}
+\item Fast storage (.fst), using \code{\link[fst:write_fst]{fst::write.fst()}}
+\item JSON (.json), using \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \url{https://arxiv.org/abs/1403.2805}.
+\item Matlab (.mat), using \code{\link[rmatio:write.mat-methods]{rmatio::write.mat()}}
+\item OpenDocument Spreadsheet (.ods), using \code{\link[readODS:write_ods]{readODS::write_ods()}}. (Currently only single-sheet exports are supported.)
+\item HTML (.html), using a custom method based on \code{\link[xml2:xml_replace]{xml2::xml_add_child()}} to create a simple HTML table and \code{\link[xml2:write_xml]{xml2::write_xml()}} to write to disk.
+\item XML (.xml), using a custom method based on \code{\link[xml2:xml_replace]{xml2::xml_add_child()}} to create a simple XML tree and \code{\link[xml2:write_xml]{xml2::write_xml()}} to write to disk.
+\item YAML (.yml), using \code{\link[yaml:as.yaml]{yaml::as.yaml()}}
+\item Clipboard export (on Windows and Mac OS), using \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}
 }
 
-When exporting a data set that contains label attributes (e.g., if imported from an SPSS or Stata file) to a plain text file, \code{\link{characterize}} can be a useful pre-processing step that records value labels into the resulting file (e.g., \code{export(characterize(x), "file.csv")}) rather than the numeric values.
+When exporting a data set that contains label attributes (e.g., if imported from an SPSS or Stata file) to a plain text file, \code{\link[=characterize]{characterize()}} can be a useful pre-processing step that records value labels into the resulting file (e.g., \code{export(characterize(x), "file.csv")}) rather than the numeric values.
 
-Use \code{\link{export_list}} to export a list of dataframes to separate files.
+Use \code{\link[=export_list]{export_list()}} to export a list of dataframes to separate files.
 }
 \examples{
 library("datasets")
@@ -134,5 +134,5 @@ unlink(f8)
 # unlink(f13)
 }
 \seealso{
-\code{\link{characterize}}, \code{\link{import}}, \code{\link{convert}}, \code{\link{export_list}}
+\code{\link[=characterize]{characterize()}}, \code{\link[=import]{import()}}, \code{\link[=convert]{convert()}}, \code{\link[=export_list]{export_list()}}
 }
