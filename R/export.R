@@ -47,75 +47,32 @@
 #' Use [export_list()] to export a list of dataframes to separate files.
 #'
 #' @examples
-#' library("datasets")
-#' # specify only `file` argument
-#' export(mtcars, f1 <- tempfile(fileext = ".csv"))
+#' ## For demo, a temp. file path is created with the file extension .csv
+#' csv_file <- tempfile(fileext = ".csv")
+#' ## .xlsx
+#' xlsx_file <- tempfile(fileext = ".xlsx")
 #'
-#' \dontrun{
-#' wd <- getwd()
-#' setwd(tempdir())
-#' # Stata does not recognize variables names with '.'
-#' export(mtcars, f2 <- tempfile(fileext = ".dta"))
+#' ## create CSV to import
+#' export(iris, csv_file)
 #'
-#' # specify only `format` argument
-#' f2 %in% tempdir()
-#' export(mtcars, format = "stata")
-#' "mtcars.dta" %in% dir()
+#' ## You can certainly export your data with the file name, which is not a variable:
+#' ## import(mtcars, "car_data.csv")
 #'
-#' setwd(wd)
-#' }
-#' # specify `file` and `format` to override default format
-#' export(mtcars, file = f3 <- tempfile(fileext = ".txt"), format = "csv")
+#' ## pass arguments to the underlying function
+#' ## data.table::fwrite is the underlying function and `col.names` is an argument
+#' export(iris, csv_file, col.names = FALSE)
 #'
-#' # export multiple objects to Rdata
-#' export(list(mtcars = mtcars, iris = iris), f4 <- tempfile(fileext = ".rdata"))
-#' export(c("mtcars", "iris"), f4)
+#' ## export a list of data frames as worksheets
+#' export(list(a = mtcars, b = iris), xlsx_file)
 #'
-#' # export to non-data frame R object to RDS or JSON
-#' export(mtcars$cyl, f5 <- tempfile(fileext = ".rds"))
-#' export(list(iris, mtcars), f6 <- tempfile(fileext = ".json"))
+#' # NOT RECOMMENDED
 #'
-#' # pass arguments to underlying export function
-#' export(mtcars, f7 <- tempfile(fileext = ".csv"), col.names = FALSE)
+#' ## specify `format` to override default format
+#' export(iris, xlsx_file, format = "csv") ## That's confusing
+#' ## You can also specify only the format; in the following case
+#' ## "mtcars.dta" is written [also confusing]
 #'
-#' # write data to .R syntax file and append additional data
-#' export(mtcars, file = f8 <- tempfile(fileext = ".R"), format = "dump")
-#' export(mtcars, file = f8, format = "dump", append = TRUE)
-#' source(f8, echo = TRUE)
-#'
-#' # write to an Excel workbook
-#' \dontrun{
-#'   ## export a single data frame
-#'   export(mtcars, f9 <- tempfile(fileext = ".xlsx"))
-#'
-#'   ## export NAs to Excel as missing via args passed to `...`
-#'   mtcars$drat <- NA_real_
-#'   mtcars %>% export(f10 <- tempfile(fileext = ".xlsx"), keepNA = TRUE)
-#'
-#'   ## export a list of data frames as worksheets
-#'   export(list(a = mtcars, b = iris), f11 <- tempfile(fileext = ".xlsx"))
-#'
-#'   ## export, adding a new sheet to an existing workbook
-#'   export(iris, f12 <- tempfile(fileext = ".xlsx"), which = "iris")
-#' }
-#'
-#' # write data to a zip-compressed CSV
-#' export(mtcars, f13 <- tempfile(fileext = ".csv.zip"))
-#'
-#' # cleanup
-#' unlink(f1)
-#' # unlink(f2)
-#' unlink(f3)
-#' unlink(f4)
-#' unlink(f5)
-#' unlink(f6)
-#' unlink(f7)
-#' unlink(f8)
-#' # unlink(f9)
-#' # unlink(f10)
-#' # unlink(f11)
-#' # unlink(f12)
-#' # unlink(f13)
+#' ## export(mtcars, format = "stata")
 #' @seealso [characterize()], [import()], [convert()], [export_list()]
 #' @importFrom haven labelled
 #' @export

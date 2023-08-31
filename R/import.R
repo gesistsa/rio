@@ -68,7 +68,7 @@
 #' ## basic
 #' import(csv_file)
 #'
-#' ## You can certainly import your data with the file name:
+#' ## You can certainly import your data with the file name, which is not a variable:
 #' ## import("starwars.csv"); import("mtcars.xlsx")
 #'
 #' ## Override the default format
