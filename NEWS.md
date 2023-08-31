@@ -1,5 +1,5 @@
 * Stop loading the entire namespace of a suggested package when it is available #296
-* Unexport objects: `.import`, `.export`; remove documentation for `arg_reconcile` #321
+* Unexport objects: `.import`, `.export`, `is_file_text`; remove documentation for `arg_reconcile` #321
 * Declutter
    - remove the obsolete data.table option #323
 
