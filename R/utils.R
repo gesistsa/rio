@@ -125,3 +125,7 @@ twrap <- function(value, tag) {
     }
     return(invisible(NULL))
 }
+
+.write_as_utf8 <- function(text, file, sep = "") {
+    writeLines(enc2utf8(text), con = file, sep = sep, useBytes = TRUE)
+}

@@ -104,7 +104,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
                     '       colClasses = c("', paste0(col_classes, collapse = '","') ,'"))\n'), domain = NA)
         }
     }
-    cat(paste0("#", capture.output(write.csv(dict, row.names = FALSE, quote = FALSE))), file = file, sep = "\n")
+    .write_as_utf8(paste0("#", capture.output(write.csv(dict, row.names = FALSE, quote = FALSE))), file = file, sep = "\n")
     utils::write.table(dat, file = file, append = TRUE, row.names = row.names, sep = sep, quote = quote,
                        col.names = col.names, ...)
 }
@@ -205,7 +205,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @export
 .export.rio_json <- function(file, x, ...) {
     .check_pkg_availability("jsonlite")
-    cat(jsonlite::toJSON(x, ...), file = file)
+    .write_as_utf8(jsonlite::toJSON(x, ...), file = file)
 }
 
 #' @importFrom foreign write.arff
@@ -303,7 +303,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @export
 .export.rio_yml <- function(file, x, ...) {
     .check_pkg_availability("yaml")
-    cat(yaml::as.yaml(x, ...), file = file)
+    .write_as_utf8(yaml::as.yaml(x, ...), file = file)
 }
 
 #' @export
