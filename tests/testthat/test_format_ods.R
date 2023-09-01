@@ -22,4 +22,11 @@ test_that("Export to ODS", {
     expect_true(export(iris, "iris.ods") %in% dir())
 })
 
+test_that("... correctly passed #318", {
+    skip_if_not_installed(pkg = "readODS")
+    x <- tempfile(fileext = ".ods")
+    rio::export(mtcars, file = x, sheet = "mtcars")
+    expect_equal(readODS::list_ods_sheets(x), "mtcars")
+})
+
 unlink("iris.ods")

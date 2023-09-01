@@ -146,7 +146,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @export
 .export.rio_feather <- function(file, x, ...) {
     .check_pkg_availability("feather")
-    feather::write_feather(x = x, path = file)
+    feather::write_feather(x = x, path = file, ...)
 }
 
 #' @export
@@ -249,7 +249,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @export
 .export.rio_ods <- function(file, x, ...) {
     .check_pkg_availability("readODS")
-    readODS::write_ods(x = x, path = file)
+    readODS::write_ods(x = x, path = file, ...)
 }
 
 #' @export
