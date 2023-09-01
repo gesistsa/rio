@@ -13,4 +13,14 @@ test_that("Import from YAML", {
     expect_identical(import("iris.yml")$Species, as.character(iris$Species))
 })
 
+test_that("utf-8", {
+    skip_if(getRversion() <= "4.2")
+    content <- c("\"", "\u010d", "\u0161", "\u00c4", "\u5b57", "\u30a2", "\u30a2\u30e0\u30ed")
+    x <- data.frame(col = content)
+    tempyaml <- tempfile(fileext = ".yaml")
+    y <- import(export(x, tempyaml))
+    testthat::expect_equal(content, y$col)
+})
+
+
 unlink("iris.yml")

@@ -38,7 +38,7 @@
 #'     \item OpenDocument Spreadsheet (.ods), using [readODS::write_ods()]. (Currently only single-sheet exports are supported.)
 #'     \item HTML (.html), using a custom method based on [xml2::xml_add_child()] to create a simple HTML table and [xml2::write_xml()] to write to disk.
 #'     \item XML (.xml), using a custom method based on [xml2::xml_add_child()] to create a simple XML tree and [xml2::write_xml()] to write to disk.
-#'     \item YAML (.yml), using [yaml::as.yaml()]
+#'     \item YAML (.yml), using [yaml::write_yaml()], default to write the content with UTF-8. Might not work on some older systems, e.g. default Windows locale for R <= 4.2.
 #'     \item Clipboard export (on Windows and Mac OS), using [utils::write.table()] with `row.names = FALSE`
 #' }
 #'
