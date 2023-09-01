@@ -303,7 +303,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @export
 .export.rio_yml <- function(file, x, ...) {
     .check_pkg_availability("yaml")
-    .write_as_utf8(yaml::as.yaml(x, ...), file = file, sep = "\n")
+    yaml::write_yaml(x, file = file, ...)
 }
 
 #' @export
