@@ -18,5 +18,13 @@ test_that("Export to JSON (non-data frame)", {
     expect_true(length(import("list.json")) == 2L)
 })
 
+test_that("utf-8", {
+    content <- c("\"", "\u010d", "\u0161", "\u00c4", "\u5b57", "\u30a2", "\u30a2\u30e0\u30ed")
+    x <- data.frame(col = content)
+    tempjson <- tempfile(fileext = ".json")
+    y <- import(export(x, tempjson))
+    testthat::expect_equal(content, y$col)
+})
+
 unlink("iris.json")
 unlink("list.json")
