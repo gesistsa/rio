@@ -30,7 +30,7 @@ The latest development version on GitHub can be installed using:
 if (!require("remotes")){
     install.packages("remotes")
 }
-remotes::install_github("chainsawriot/rio")
+remotes::install_github("gesistsa/rio")
 ```
 
 Optional: Installation of additional formats (see below: **Supported file formats**)

@@ -27,7 +27,7 @@ test_that("Import Remote GitHub File", {
 
 ## test_that("Import Remote File from Shortened URL", {
 ##     skip_if_not_installed(pkg = "data.table")
-##     shorturl <- try(import("https://raw.githubusercontent.com/chainsawriot/rio/main/tests/testdata/example.csvy"))
+##     shorturl <- try(import("https://raw.githubusercontent.com/gesistsa/rio/main/tests/testdata/example.csvy"))
 ##     if (!inherits(shorturl, "try-error")) {
 ##         expect_true(inherits(shorturl, "data.frame"), label = "Import remote file")
 ##     }

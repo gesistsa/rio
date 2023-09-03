@@ -34,8 +34,8 @@ Description: Streamlined data import and export by making assumptions that
     directly without explicit decompression, and fast import packages are used where
     appropriate. An additional convenience function, 'convert()', provides a simple
     method for converting between file types.
-URL: https://github.com/chainsawriot/rio
-BugReports: https://github.com/chainsawriot/rio/issues
+URL: https://github.com/gesistsa/rio
+BugReports: https://github.com/gesistsa/rio/issues
 Depends:
     R (>= 3.6)
 Imports:
