@@ -10,7 +10,7 @@ test_that("Import from XBASE (.dbf)", {
     skip_if_not_installed("foreign")
     d <- import("iris.dbf")
     expect_true(is.data.frame(d))
-    expect_true(!"factor" %in% sapply(d, class))
+    expect_true(!"factor" %in% vapply(d, class, character(1)))
 })
 
 unlink("iris.dbf")
