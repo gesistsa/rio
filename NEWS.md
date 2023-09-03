@@ -7,6 +7,7 @@
      Windows R < 4.2. This won't affect any modern R installation where UTF-8 is the default. #318
    - POTENTIALLY BREAKING: YAML are exported using yaml::write_yaml(). But it can't pass the UTF-8 check on older systems.
      Disclaimer added. #318
+   - More check for the `file` argument #301
 * Declutter
    - remove the obsolete data.table option #323
    - write all documentation blocks in markdown #311

@@ -77,15 +77,16 @@
 #' @importFrom haven labelled
 #' @export
 export <- function(x, file, format, ...) {
-    if (missing(file) & missing(format)) {
+    .check_file(file, single_only = TRUE)
+    if (missing(file) && missing(format)) {
         stop("Must specify 'file' and/or 'format'")
-    } else if (!missing(file) & !missing(format)) {
+    } else if (!missing(file) && !missing(format)) {
         fmt <- tolower(format)
         cfile <- file
         f <- find_compress(file)
         file <- f$file
         compress <- f$compress
-    } else if (!missing(file) & missing(format)) {
+    } else if (!missing(file) && missing(format)) {
         cfile <- file
         f <- find_compress(file)
         file <- f$file
