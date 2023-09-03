@@ -38,79 +38,13 @@ function(file,
     if (missing(setclass)) {
         setclass <- NULL
     }
-    strip_exts <- function(file) {
-      vapply(file, function(x) tools::file_path_sans_ext(basename(x)), character(1))
-    }
-    if (length(file) > 1) {
-        names(file) <- strip_exts(file)
-        x <- lapply(file, function(thisfile) {
-            out <- try(import(thisfile, setclass = setclass, ...), silent = TRUE)
-            if (inherits(out, "try-error")) {
-                warning(sprintf("Import failed for %s", thisfile))
-                out <- NULL
-            } else if (isTRUE(rbind)) {
-                out[[rbind_label]] <- thisfile
-            }
-            structure(out, filename = thisfile)
-        })
-        names(x) <- names(file)
+    ## special cases
+    if (length(file) == 1) {
+        x <- .read_file_as_list(file = file, which = which, setclass = setclass, rbind = rbind, rbind_label = rbind_label, ...)
     } else {
-        if (get_ext(file) == "rdata") {
-            e <- new.env()
-            load(file, envir = e)
-            x <- as.list(e)
-        } else {
-            if (get_ext(file) == "html") {
-                .check_pkg_availability("xml2")
-                tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
-                if (missing(which)) {
-                    which <- seq_along(tables)
-                }
-                whichnames <- vapply(xml2::xml_attrs(tables[which]),
-                                     function(x) if ("class" %in% names(x)) x["class"] else "",
-                                     FUN.VALUE = character(1))
-                names(which) <- whichnames
-            } else if (get_ext(file) %in% c("xls","xlsx")) {
-                .check_pkg_availability("readxl")
-                whichnames <- readxl::excel_sheets(path = file)
-                if (missing(which)) {
-                    which <- seq_along(whichnames)
-                    names(which) <- whichnames
-                } else if (is.character(which)) {
-                    whichnames <- which
-                } else {
-                    whichnames <- whichnames[which]
-                }
-            } else if (get_ext(file) %in% c("zip")) {
-                if (missing(which)) {
-                    whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
-                    which <- seq_along(whichnames)
-                    names(which) <- strip_exts(whichnames)
-                } else if (is.character(which)) {
-                    whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
-                    whichnames <- whichnames[whichnames %in% which]
-                } else {
-                    whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
-                    names(which) <- strip_exts(whichnames)
-                }
-            } else {
-                which <- 1
-                whichnames <- NULL
-            }
-            x <- lapply(which, function(thiswhich) {
-                out <- try(import(file, setclass = setclass, which = thiswhich, ...), silent = TRUE)
-                if (inherits(out, "try-error")) {
-                    warning(sprintf("Import failed for %s from %s", thiswhich, file))
-                    out <- NULL
-                } else if (isTRUE(rbind) && length(which) > 1) {
-                    out[[rbind_label]] <- thiswhich
-                }
-                out
-            })
-            names(x) <- whichnames
-        }
+        ## note the plural
+        x <- .read_multiple_files_as_list(files = file, setclass = setclass, rbind = rbind, rbind_label = rbind_label, ...)
     }
-
     # optionally rbind
     if (isTRUE(rbind)) {
         if (length(x) == 1) {
@@ -124,7 +58,7 @@ function(file,
                 x <- x2
             }
         }
-        # set class
+        ## set class
         a <- list(...)
         if (is.null(setclass)) {
             if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
@@ -146,5 +80,90 @@ function(file,
         }
     }
 
+    return(x)
+}
+
+.strip_exts <- function(file) {
+    vapply(file, function(x) tools::file_path_sans_ext(basename(x)), character(1))
+}
+
+.read_multiple_files_as_list <- function(files, setclass, rbind, rbind_label,...) {
+    names(files) <- .strip_exts(files)
+    x <- lapply(files, function(thisfile) {
+        out <- try(import(thisfile, setclass = setclass, ...), silent = TRUE)
+        if (inherits(out, "try-error")) {
+            warning(sprintf("Import failed for %s", thisfile))
+            out <- NULL
+        } else if (isTRUE(rbind)) {
+            out[[rbind_label]] <- thisfile
+        }
+        structure(out, filename = thisfile)
+    })
+    names(x) <- names(files)
+    return(x)
+}
+
+.read_file_as_list <- function(file, which, setclass, rbind, rbind_label,...) {
+    if (grepl("^http.*://", file)) {
+        file <- remote_to_local(file)
+    }
+    if (get_ext(file) == "rdata") {
+        e <- new.env()
+        load(file, envir = e)
+        return(as.list(e))
+    }
+    if (!get_ext(file) %in% c("html", "xlsx", "xls", "zip")) {
+        which <- 1
+        whichnames <- NULL
+    }
+    ## getting list of `whichnames`
+    if (get_ext(file) == "html") {
+        .check_pkg_availability("xml2")
+        tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
+        if (missing(which)) {
+            which <- seq_along(tables)
+        }
+        whichnames <- vapply(xml2::xml_attrs(tables[which]),
+                             function(x) if ("class" %in% names(x)) x["class"] else "",
+                             FUN.VALUE = character(1))
+        names(which) <- whichnames
+    }
+    if (get_ext(file) %in% c("xls","xlsx")) {
+        ##.check_pkg_availability("readxl")
+        whichnames <- readxl::excel_sheets(path = file)
+        if (missing(which)) {
+            which <- seq_along(whichnames)
+            names(which) <- whichnames
+        } else if (is.character(which)) {
+            whichnames <- which
+        } else {
+            whichnames <- whichnames[which]
+        }
+    }
+    if (get_ext(file) %in% c("zip")) {
+        if (missing(which)) {
+            whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
+            which <- seq_along(whichnames)
+            names(which) <- .strip_exts(whichnames)
+        } else if (is.character(which)) {
+            whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
+            whichnames <- whichnames[whichnames %in% which]
+        } else {
+            whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
+            names(which) <- .strip_exts(whichnames)
+        }
+    }
+    ## reading all `whichnames`
+    x <- lapply(which, function(thiswhich) {
+        out <- try(import(file, setclass = setclass, which = thiswhich, ...), silent = TRUE)
+        if (inherits(out, "try-error")) {
+            warning(sprintf("Import failed for %s from %s", thiswhich, file))
+            out <- NULL
+        } else if (isTRUE(rbind) && length(which) > 1) {
+            out[[rbind_label]] <- thiswhich
+        }
+        out
+    })
+    names(x) <- whichnames
     return(x)
 }
