@@ -38,7 +38,7 @@ function(file,
         setclass <- NULL
     }
     strip_exts <- function(file) {
-      sapply(file, function(x) tools::file_path_sans_ext(basename(x)))
+      vapply(file, function(x) tools::file_path_sans_ext(basename(x)), character(1))
     }
     if (length(file) > 1) {
         names(file) <- strip_exts(file)
@@ -65,9 +65,9 @@ function(file,
                 if (missing(which)) {
                     which <- seq_along(tables)
                 }
-                whichnames <- sapply(xml2::xml_attrs(tables[which]),
-                  function(x) if ("class" %in% names(x)) x["class"] else ""
-                )
+                whichnames <- vapply(xml2::xml_attrs(tables[which]),
+                                     function(x) if ("class" %in% names(x)) x["class"] else "",
+                                     FUN.VALUE = character(1))
                 names(which) <- whichnames
             } else if (get_ext(file) %in% c("xls","xlsx")) {
                 .check_pkg_availability("readxl")

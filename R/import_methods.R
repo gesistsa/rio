@@ -394,20 +394,16 @@ function(file,
 
 # This is a helper function for .import.rio_html
 extract_html_row <- function(x, empty_value) {
-  # Both <th> and <td> are valid for table data, and <th> may be used when
-  # there is an accented element (e.g. the first row of the table)
-  to_extract <- x[names(x) %in% c("th", "td")]
-  # Insert a value into cells that eventually will become empty cells (or they
-  # will be dropped and the table will not be generated).  Note that this more
-  # complex code for finding the length is required because of html like
-  # <td><br/></td>
-  unlist_length <-
-    sapply(
-      lapply(to_extract, unlist),
-      length
-    )
-  to_extract[unlist_length == 0] <- list(empty_value)
-  unlist(to_extract)
+    ## Both <th> and <td> are valid for table data, and <th> may be used when
+    ## there is an accented element (e.g. the first row of the table)
+    to_extract <- x[names(x) %in% c("th", "td")]
+    ## Insert a value into cells that eventually will become empty cells (or they
+    ## will be dropped and the table will not be generated).  Note that this more
+    ## complex code for finding the length is required because of html like
+    ## <td><br/></td>
+    unlist_length <- vapply(lapply(to_extract, unlist), length, integer(1))
+    to_extract[unlist_length == 0] <- list(empty_value)
+    unlist(to_extract)
 }
 
 #' @importFrom utils type.convert

@@ -86,7 +86,7 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     })
     dat <- do.call(cbind, dat)
     n <- nchar(dat[1,]) + c(rep(nchar(sep), ncol(dat)-1), 0)
-    col_classes <- sapply(x, class)
+    col_classes <- vapply(x, class, character(1))
     col_classes[col_classes == "factor"] <- "integer"
     dict <- cbind.data.frame(variable = names(n),
                              class = col_classes,
