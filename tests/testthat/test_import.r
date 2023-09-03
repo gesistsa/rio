@@ -60,9 +60,8 @@ test_that("Invalid file argument - export_list(), #301", {
         x = sample(1:10, 10000, replace = TRUE),
         y = sample(1:10, 10000, replace = TRUE)
     )
-    expect_error(export(iris, data), "Invalid")
-    expect_error(export(iris, iris), "Invalid")
-    expect_error(export(iris, 1), "Invalid")
-    expect_error(export(iris, TRUE), "Invalid")
-    expect_error(export(iris, c("abc.csv", "123.csv")), "Invalid")
+    expect_error(export_list(iris, data), "Invalid")
+    expect_error(export_list(iris, iris), "Invalid")
+    expect_error(export_list(iris, 1), "Invalid")
+    expect_error(export_list(iris, TRUE), "Invalid")
 })
