@@ -44,7 +44,8 @@ function(
     x,
     file,
     ...
-) {
+    ) {
+    .check_file(file, single_only = FALSE)
     if (inherits(x, "data.frame")) {
         stop("'x' must be a list. Perhaps you want export()?")
     }

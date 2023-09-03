@@ -34,6 +34,7 @@ function(file,
          rbind_label = "_file",
          rbind_fill = TRUE,
          ...) {
+    .check_file(file, single_only = FALSE)
     if (missing(setclass)) {
         setclass <- NULL
     }

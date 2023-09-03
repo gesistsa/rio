@@ -129,3 +129,17 @@ twrap <- function(value, tag) {
 .write_as_utf8 <- function(text, file, sep = "") {
     writeLines(enc2utf8(text), con = file, sep = sep, useBytes = TRUE)
 }
+
+.check_file <- function(file, single_only = TRUE) {
+    ## check the `file` argument
+    if (isTRUE(missing(file))) { ## for the case of export(iris, format = "csv")
+        return(invisible(NULL))
+    }
+    if (isFALSE(inherits(file, "character"))) {
+        stop("Invalid `file` argument: must be character", call. = FALSE)
+    }
+    if (isFALSE(length(file) == 1) && single_only) {
+        stop("Invalid `file` argument: `file` must be single", call. = FALSE)
+    }
+    invisible(NULL)
+}
