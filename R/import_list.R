@@ -1,6 +1,6 @@
 #' @title Import list of data frames
-#' @description Use [import()] to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)
-#' @param file A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.
+#' @description Use [import()] to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zipped directory in a zip file, or HTML file)
+#' @param file A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip file, or HTML file), or a vector of file paths for multiple files to be imported.
 #' @param which If `file` is a single file path, this specifies which objects should be extracted (passed to [import()]'s `which` argument). Ignored otherwise.
 #' @param rbind A logical indicating whether to pass the import list of data frames through [data.table::rbindlist()].
 #' @param rbind_label If `rbind = TRUE`, a character string specifying the name of a column to add to the data frame indicating its source file.

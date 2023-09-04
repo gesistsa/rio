@@ -15,7 +15,7 @@ import_list(
 )
 }
 \arguments{
-\item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.}
+\item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip file, or HTML file), or a vector of file paths for multiple files to be imported.}
 
 \item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, the return object is always a \dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or \dQuote{tibble} (if using dplyr) or \dQuote{data.table} (if using data.table). Other values are ignored, such that a data.frame is returned.}
 
@@ -33,7 +33,7 @@ import_list(
 If \code{rbind=FALSE} (the default), a list of a data frames. Otherwise, that list is passed to \code{\link[data.table:rbindlist]{data.table::rbindlist()}} with \code{fill = TRUE} and returns a data frame object of class set by the \code{setclass} argument; if this operation fails, the list is returned.
 }
 \description{
-Use \code{\link[=import]{import()}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)
+Use \code{\link[=import]{import()}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zipped directory in a zip file, or HTML file)
 }
 \examples{
 ## For demo, a temp. file path is created with the file extension .xlsx
