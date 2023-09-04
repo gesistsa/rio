@@ -85,12 +85,6 @@
 #' ## data.table::fread is the underlying import function and `nrows` is its argument
 #' import(csv_file, nrows = 20)
 #' @seealso [import_list()], [characterize()], [gather_attrs()], [export()], [convert()]
-#' @importFrom tools file_ext file_path_sans_ext
-#' @importFrom stats na.omit setNames
-#' @importFrom utils installed.packages untar unzip tar zip type.convert capture.output
-#' @importFrom curl curl_fetch_memory parse_headers
-#' @importFrom data.table as.data.table is.data.table
-#' @importFrom tibble as_tibble is_tibble
 #' @export
 import <- function(file, format, setclass, which, ...) {
     .check_file(file, single_only = TRUE)
@@ -106,7 +100,7 @@ import <- function(file, format, setclass, which, ...) {
         } else {
             file <- parse_zip(file, which = which)
         }
-    } else if(grepl("\\.tar", file)) {
+    } else if (grepl("\\.tar", file)) {
         if (missing(which)) {
             which <- 1
         }

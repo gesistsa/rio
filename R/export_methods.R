@@ -1,25 +1,31 @@
-#' @importFrom data.table fwrite
-#' @importFrom utils write.table
 export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
                          col.names = TRUE, append = FALSE, ...) {
     if (isTRUE(fwrite) & !inherits(file, "connection")) {
         if (isTRUE(append)) {
-            data.table::fwrite(x, file = file, sep = sep, row.names = row.names,
-                               col.names = FALSE, append = TRUE, ...)
+            data.table::fwrite(x,
+                file = file, sep = sep, row.names = row.names,
+                col.names = FALSE, append = TRUE, ...
+            )
         } else {
-            data.table::fwrite(x, file = file, sep = sep, row.names = row.names,
-                               col.names = col.names, append = FALSE, ...)
+            data.table::fwrite(x,
+                file = file, sep = sep, row.names = row.names,
+                col.names = col.names, append = FALSE, ...
+            )
         }
     } else {
         if (isTRUE(fwrite) & inherits(file, "connection")) {
             message("data.table::fwrite() does not support writing to connections. Using utils::write.table() instead.")
         }
         if (isTRUE(append)) {
-            write.table(x, file = file, sep = sep, row.names = row.names,
-                        col.names = FALSE, append = TRUE, ...)
+            utils::write.table(x,
+                file = file, sep = sep, row.names = row.names,
+                col.names = FALSE, append = TRUE, ...
+            )
         } else {
-            write.table(x, file = file, sep = sep, row.names = row.names,
-                        col.names = col.names, append = FALSE, ...)
+            utils::write.table(x,
+                file = file, sep = sep, row.names = row.names,
+                col.names = col.names, append = FALSE, ...
+            )
         }
     }
 }
@@ -54,17 +60,16 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     export_delim(x = x, file = file, sep = "|", ...)
 }
 
-#' @importFrom utils capture.output write.csv
 #' @export
 .export.rio_fwf <- function(file, x, verbose = getOption("verbose", FALSE), sep = "", row.names = FALSE, quote = FALSE, col.names = FALSE, digits = getOption("digits", 7), ...) {
     dat <- lapply(x, function(col) {
         if (is.character(col)) {
             col <- as.numeric(as.factor(col))
-        } else if(is.factor(col)) {
+        } else if (is.factor(col)) {
             col <- as.integer(col)
         }
         if (is.integer(col)) {
-            return(sprintf("%i",col))
+            return(sprintf("%i", col))
         }
         if (is.numeric(col)) {
             decimals <- strsplit(as.character(col), ".", fixed = TRUE)
@@ -79,34 +84,40 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
             if (!is.finite(m2)) {
                 m2 <- digits
             }
-            return(formatC(sprintf(fmt = paste0("%0.",m2,"f"), col), width = (m1+m2+1)))
-        } else if(is.logical(col)) {
-            return(sprintf("%i",col))
+            return(formatC(sprintf(fmt = paste0("%0.", m2, "f"), col), width = (m1 + m2 + 1)))
+        } else if (is.logical(col)) {
+            return(sprintf("%i", col))
         }
     })
     dat <- do.call(cbind, dat)
-    n <- nchar(dat[1,]) + c(rep(nchar(sep), ncol(dat)-1), 0)
+    n <- nchar(dat[1, ]) + c(rep(nchar(sep), ncol(dat) - 1), 0)
     col_classes <- vapply(x, class, character(1))
     col_classes[col_classes == "factor"] <- "integer"
-    dict <- cbind.data.frame(variable = names(n),
-                             class = col_classes,
-                             width = unname(n),
-                             columns = paste0(c(1, cumsum(n)+1)[-length(n)], "-", cumsum(n)),
-                             stringsAsFactors = FALSE)
+    dict <- cbind.data.frame(
+        variable = names(n),
+        class = col_classes,
+        width = unname(n),
+        columns = paste0(c(1, cumsum(n) + 1)[-length(n)], "-", cumsum(n)),
+        stringsAsFactors = FALSE
+    )
     if (isTRUE(verbose)) {
         message("Columns:")
-        message(paste0(capture.output(dict), collapse = "\n"))
+        message(paste0(utils::capture.output(dict), collapse = "\n"))
         if (sep == "") {
-            message(paste0('\nRead in with:\n',
-                    'import("', file, '",\n',
-                    '       widths = c(', paste0(n, collapse = ","), '),\n',
-                    '       col.names = c("', paste0(names(n), collapse = '","'), '"),\n',
-                    '       colClasses = c("', paste0(col_classes, collapse = '","') ,'"))\n'), domain = NA)
+            message(paste0(
+                "\nRead in with:\n",
+                'import("', file, '",\n',
+                "       widths = c(", paste0(n, collapse = ","), "),\n",
+                '       col.names = c("', paste0(names(n), collapse = '","'), '"),\n',
+                '       colClasses = c("', paste0(col_classes, collapse = '","'), '"))\n'
+            ), domain = NA)
         }
     }
-    .write_as_utf8(paste0("#", capture.output(write.csv(dict, row.names = FALSE, quote = FALSE))), file = file, sep = "\n")
-    utils::write.table(dat, file = file, append = TRUE, row.names = row.names, sep = sep, quote = quote,
-                       col.names = col.names, ...)
+    .write_as_utf8(paste0("#", utils::capture.output(utils::write.csv(dict, row.names = FALSE, quote = FALSE))), file = file, sep = "\n")
+    utils::write.table(dat,
+        file = file, append = TRUE, row.names = row.names, sep = sep, quote = quote,
+        col.names = col.names, ...
+    )
 }
 
 #' @export
@@ -161,42 +172,36 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     rmatio::write.mat(object = x, filename = file, ...)
 }
 
-#' @importFrom haven write_sav
 #' @export
 .export.rio_sav <- function(file, x, ...) {
     x <- restore_labelled(x)
     haven::write_sav(data = x, path = file, ...)
 }
 
-#' @importFrom haven write_sav
 #' @export
 .export.rio_zsav <- function(file, x, compress = TRUE, ...) {
     x <- restore_labelled(x)
     haven::write_sav(data = x, path = file, compress = compress, ...)
 }
 
-#' @importFrom haven write_dta
 #' @export
 .export.rio_dta <- function(file, x, ...) {
     x <- restore_labelled(x)
     haven::write_dta(data = x, path = file, ...)
 }
 
-#' @importFrom haven write_sas
 #' @export
 .export.rio_sas7bdat <- function(file, x, ...) {
     x <- restore_labelled(x)
     haven::write_sas(data = x, path = file, ...)
 }
 
-#' @importFrom haven write_xpt
 #' @export
 .export.rio_xpt <- function(file, x, ...) {
     x <- restore_labelled(x)
     haven::write_xpt(data = x, path = file, ...)
 }
 
-#' @importFrom foreign write.dbf
 #' @export
 .export.rio_dbf <- function(file, x, ...) {
     foreign::write.dbf(dataframe = x, file = file, ...)
@@ -208,13 +213,11 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     .write_as_utf8(jsonlite::toJSON(x, ...), file = file)
 }
 
-#' @importFrom foreign write.arff
 #' @export
 .export.rio_arff <- function(file, x, ...) {
     foreign::write.arff(x = x, file = file, ...)
 }
 
-#' @importFrom openxlsx write.xlsx
 #' @export
 .export.rio_xlsx <- function(file, x, which, ...) {
     dots <- list(...)
@@ -262,8 +265,8 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     }
     for (i in seq_along(x)) {
         x[[i]][] <- lapply(x[[i]], as.character)
-        x[[i]][] <- lapply(x[[i]], function(v) gsub('&','&amp;',v))
-        names(x[[i]]) <- gsub('&','&amp;',names(x[[i]]))
+        x[[i]][] <- lapply(x[[i]], function(v) gsub("&", "&amp;", v))
+        names(x[[i]]) <- gsub("&", "&amp;", names(x[[i]]))
         tab <- xml2::xml_add_child(bod, "table")
         # add header row
         invisible(xml2::xml_add_child(tab, xml2::read_xml(paste0(twrap(paste0(twrap(names(x[[i]]), "th"), collapse = ""), "tr"), "\n"))))
@@ -279,15 +282,15 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 .export.rio_xml <- function(file, x, ...) {
     .check_pkg_availability("xml2")
     root <- ""
-    xml <- xml2::read_xml(paste0("<",as.character(substitute(x)),">\n</",as.character(substitute(x)),">\n"))
+    xml <- xml2::read_xml(paste0("<", as.character(substitute(x)), ">\n</", as.character(substitute(x)), ">\n"))
     att <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
     for (a in seq_along(att)) {
         xml2::xml_attr(xml, names(att)[a]) <- att[[a]]
     }
     # remove illegal characters
-    row.names(x) <- gsub('&', '&amp;', row.names(x))
-    colnames(x) <- gsub('[ &]', '.', colnames(x))
-    x[] <- lapply(x, function(v) gsub('&', '&amp;', v))
+    row.names(x) <- gsub("&", "&amp;", row.names(x))
+    colnames(x) <- gsub("[ &]", ".", colnames(x))
+    x[] <- lapply(x, function(v) gsub("&", "&amp;", v))
     # add data
     for (i in seq_len(nrow(x))) {
         thisrow <- xml2::xml_add_child(xml, "Observation")
@@ -315,11 +318,11 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 #' @export
 .export.rio_pzfx <- function(file, x, ..., row_names = FALSE) {
     .check_pkg_availability("pzfx")
-    pzfx::write_pzfx(x=x, path=file, ..., row_names=row_names)
+    pzfx::write_pzfx(x = x, path = file, ..., row_names = row_names)
 }
 
 #' @export
 .export.rio_parquet <- function(file, x, ...) {
     .check_pkg_availability("arrow")
-    arrow::write_parquet(x=x, sink = file, ...)
+    arrow::write_parquet(x = x, sink = file, ...)
 }

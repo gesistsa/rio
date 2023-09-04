@@ -74,7 +74,6 @@
 #'
 #' ## export(mtcars, format = "stata")
 #' @seealso [characterize()], [import()], [convert()], [export_list()]
-#' @importFrom haven labelled
 #' @export
 export <- function(x, file, format, ...) {
     .check_file(file, single_only = TRUE)

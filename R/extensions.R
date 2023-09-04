@@ -12,58 +12,58 @@
 ##
 ## As general guidance, if an import method creates many attributes, these attributes should be stored --- to the extent possible --- in variable-level attributes fields. These can be \dQuote{gathered} to the data.frame level by the user via \code{\link{gather_attrs}}.
 ## @seealso \code{\link{import}}, \code{\link{export}}
-.import <- function(file, ...){
-    UseMethod('.import')
+.import <- function(file, ...) {
+    UseMethod(".import")
 }
 
 ## @rdname extensions
-## @importFrom tools file_ext
-.import.default <- function(file, ...){
+.import.default <- function(file, ...) {
     x <- gettext("%s format not supported. Consider using the '%s()' function")
     xA <- gettext("Import support for the %s format is exported by the %s package. Run 'library(%s)' then try again.")
     fmt <- tools::file_ext(file)
     out <- switch(fmt,
-           bean = sprintf(xA, fmt, "ledger", "ledger"),
-           beancount = sprintf(xA, fmt, "ledger", "ledger"),
-           bib = sprintf(x, fmt, "bib2df::bib2df"),
-           bmp = sprintf(x, fmt, "bmp::read.bmp"),
-           doc = sprintf(x, fmt, "docxtractr::docx_extract_all_tbls"),
-           docx = sprintf(x, fmt, "docxtractr::docx_extract_all_tbls"),
-           gexf = sprintf(x, fmt, "rgexf::read.gexf"),
-           gnumeric = sprintf(x, fmt, "gnumeric::read.gnumeric.sheet"),
-           hledger = sprintf(xA, fmt, "ledger", "ledger"),
-           jpeg = sprintf(x, fmt, "jpeg::readJPEG"),
-           jpg = sprintf(x, fmt, "jpeg::readJPEG"),
-           ledger = sprintf(xA, fmt, "ledger", "ledger"),
-           npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
-           qs = sprintf(x, fmt, "qs::qread"),
-           pdf = sprintf(x, fmt, "tabulizer::extract_tables"),
-           png = sprintf(x, fmt, "png::readPNG"),
-           sdmx = sprintf(x, fmt, "sdmx::readSDMX"),
-           sss = sprintf(x, fmt, "sss::read.sss"),
-           tiff = sprintf(x, fmt, "tiff::readTIFF"),
-           gettext("Format not supported"))
+        bean = sprintf(xA, fmt, "ledger", "ledger"),
+        beancount = sprintf(xA, fmt, "ledger", "ledger"),
+        bib = sprintf(x, fmt, "bib2df::bib2df"),
+        bmp = sprintf(x, fmt, "bmp::read.bmp"),
+        doc = sprintf(x, fmt, "docxtractr::docx_extract_all_tbls"),
+        docx = sprintf(x, fmt, "docxtractr::docx_extract_all_tbls"),
+        gexf = sprintf(x, fmt, "rgexf::read.gexf"),
+        gnumeric = sprintf(x, fmt, "gnumeric::read.gnumeric.sheet"),
+        hledger = sprintf(xA, fmt, "ledger", "ledger"),
+        jpeg = sprintf(x, fmt, "jpeg::readJPEG"),
+        jpg = sprintf(x, fmt, "jpeg::readJPEG"),
+        ledger = sprintf(xA, fmt, "ledger", "ledger"),
+        npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
+        qs = sprintf(x, fmt, "qs::qread"),
+        pdf = sprintf(x, fmt, "tabulizer::extract_tables"),
+        png = sprintf(x, fmt, "png::readPNG"),
+        sdmx = sprintf(x, fmt, "sdmx::readSDMX"),
+        sss = sprintf(x, fmt, "sss::read.sss"),
+        tiff = sprintf(x, fmt, "tiff::readTIFF"),
+        gettext("Format not supported")
+    )
     stop(out, call. = FALSE)
 }
 
 ## @rdname extensions
-.export <- function(file, x, ...){
+.export <- function(file, x, ...) {
     UseMethod(".export")
 }
 
 ## @rdname extensions
-## @importFrom tools file_ext
-.export.default <- function(file, x, ...){
+.export.default <- function(file, x, ...) {
     x <- gettext("%s format not supported. Consider using the '%s()' function")
     fmt <- tools::file_ext(file)
     out <- switch(fmt,
-           gexf = sprintf(x, fmt, "rgexf::write.gexf"),
-           jpg = sprintf(x, fmt, "jpeg::writeJPEG"),
-           npy = sprintf(x, fmt, "RcppCNPy::npySave"),
-           png = sprintf(x, fmt, "png::writePNG"),
-           qs = sprintf(x, fmt, "qs::qsave"),
-           tiff = sprintf(x, fmt, "tiff::writeTIFF"),
-           xpt = sprintf(x, fmt, "SASxport::write.xport"),
-           gettext("Format not supported"))
+        gexf = sprintf(x, fmt, "rgexf::write.gexf"),
+        jpg = sprintf(x, fmt, "jpeg::writeJPEG"),
+        npy = sprintf(x, fmt, "RcppCNPy::npySave"),
+        png = sprintf(x, fmt, "png::writePNG"),
+        qs = sprintf(x, fmt, "qs::qsave"),
+        tiff = sprintf(x, fmt, "tiff::writeTIFF"),
+        xpt = sprintf(x, fmt, "SASxport::write.xport"),
+        gettext("Format not supported")
+    )
     stop(out, call. = FALSE)
 }
