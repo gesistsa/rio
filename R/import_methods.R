@@ -1,33 +1,36 @@
-#' @importFrom data.table fread
 import_delim <-
-  function(file, which = 1, fread = TRUE, sep = "auto",
-           header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
-    if (isTRUE(fread) & !inherits(file, "connection")) {
-      arg_reconcile(data.table::fread, input = file, sep = sep, header = header,
-                    stringsAsFactors = stringsAsFactors,
-                    data.table = data.table, ..., .docall = TRUE)
-    } else {
-      if (isTRUE(fread) & inherits(file, "connection")) {
-        message("data.table::fread() does not support reading from connections. Using utils::read.table() instead.")
-      }
-      if (missing(sep) || is.null(sep) || sep == "auto") {
-        if (inherits(file, "rio_csv")) {
-          sep <- ","
-        } else if (inherits(file, "rio_csv2")) {
-          sep <- ";"
-        } else if (inherits(file, "rio_psv")) {
-          sep <- "|"
+    function(file, which = 1, fread = TRUE, sep = "auto",
+             header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
+        if (isTRUE(fread) & !inherits(file, "connection")) {
+            arg_reconcile(data.table::fread,
+                input = file, sep = sep, header = header,
+                stringsAsFactors = stringsAsFactors,
+                data.table = data.table, ..., .docall = TRUE
+            )
         } else {
-          sep <- "\t"
+            if (isTRUE(fread) & inherits(file, "connection")) {
+                message("data.table::fread() does not support reading from connections. Using utils::read.table() instead.")
+            }
+            if (missing(sep) || is.null(sep) || sep == "auto") {
+                if (inherits(file, "rio_csv")) {
+                    sep <- ","
+                } else if (inherits(file, "rio_csv2")) {
+                    sep <- ";"
+                } else if (inherits(file, "rio_psv")) {
+                    sep <- "|"
+                } else {
+                    sep <- "\t"
+                }
+            }
+            if (missing(header) || is.null(header) || header == "auto") {
+                header <- TRUE
+            }
+            arg_reconcile(utils::read.table,
+                file = file, sep = sep, header = header,
+                stringsAsFactors = stringsAsFactors, ..., .docall = TRUE
+            )
         }
-      }
-      if (missing(header) || is.null(header) || header == "auto") {
-        header <- TRUE
-      }
-      arg_reconcile(utils::read.table, file=file, sep=sep, header=header,
-                    stringsAsFactors = stringsAsFactors, ..., .docall = TRUE)
     }
-  }
 
 
 #' @export
@@ -66,72 +69,73 @@ import_delim <-
     import_delim(file = file, sep = if (sep == "|") "auto" else sep, fread = fread, dec = dec, ...)
 }
 
-#' @importFrom utils read.fwf
 #' @export
 .import.rio_fwf <-
-function(file,
-         which = 1,
-         widths,
-         header = FALSE,
-         col.names,
-         comment = "#",
-         readr = FALSE,
-         progress = getOption("verbose", FALSE),
-         ...) {
-    if (missing(widths)) {
-      stop("Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().")
-    }
-    a <- list(...)
-    if (isTRUE(readr)) {
-        .check_pkg_availability("readr")
-        if (is.null(widths)) {
-            if (!missing(col.names)) {
-                widths <- readr::fwf_empty(file = file, col_names = col.names)
-            } else {
-                widths <- readr::fwf_empty(file = file)
-            }
-            readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
-        } else if (is.numeric(widths)) {
-            if (any(widths < 0)) {
-                if (!"col_types" %in% names(a)) {
-                    col_types <- rep("?", length(widths))
-                    col_types[widths < 0] <- "?"
-                    col_types <- paste0(col_types, collapse = "")
-                }
+    function(file,
+             which = 1,
+             widths,
+             header = FALSE,
+             col.names,
+             comment = "#",
+             readr = FALSE,
+             progress = getOption("verbose", FALSE),
+             ...) {
+        if (missing(widths)) {
+            stop("Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().")
+        }
+        a <- list(...)
+        if (isTRUE(readr)) {
+            .check_pkg_availability("readr")
+            if (is.null(widths)) {
                 if (!missing(col.names)) {
-                    widths <- readr::fwf_widths(abs(widths), col_names = col.names)
+                    widths <- readr::fwf_empty(file = file, col_names = col.names)
                 } else {
-                    widths <- readr::fwf_widths(abs(widths))
+                    widths <- readr::fwf_empty(file = file)
                 }
-                readr::read_fwf(file = file, col_positions = widths,
-                                col_types = col_types, progress = progress,
-                                comment = comment, ...)
-            } else {
-                if (!missing(col.names)) {
-                    widths <- readr::fwf_widths(abs(widths), col_names = col.names)
+                readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
+            } else if (is.numeric(widths)) {
+                if (any(widths < 0)) {
+                    if (!"col_types" %in% names(a)) {
+                        col_types <- rep("?", length(widths))
+                        col_types[widths < 0] <- "?"
+                        col_types <- paste0(col_types, collapse = "")
+                    }
+                    if (!missing(col.names)) {
+                        widths <- readr::fwf_widths(abs(widths), col_names = col.names)
+                    } else {
+                        widths <- readr::fwf_widths(abs(widths))
+                    }
+                    readr::read_fwf(
+                        file = file, col_positions = widths,
+                        col_types = col_types, progress = progress,
+                        comment = comment, ...
+                    )
                 } else {
-                    widths <- readr::fwf_widths(abs(widths))
+                    if (!missing(col.names)) {
+                        widths <- readr::fwf_widths(abs(widths), col_names = col.names)
+                    } else {
+                        widths <- readr::fwf_widths(abs(widths))
+                    }
+                    readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
+                }
+            } else if (is.list(widths)) {
+                if (!c("begin", "end") %in% names(widths)) {
+                    if (!missing(col.names)) {
+                        widths <- readr::fwf_widths(widths, col_names = col.names)
+                    } else {
+                        widths <- readr::fwf_widths(widths)
+                    }
                 }
                 readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
             }
-        } else if (is.list(widths)) {
-            if (!c("begin", "end") %in% names(widths)) {
-                if (!missing(col.names)) {
-                    widths <- readr::fwf_widths(widths, col_names = col.names)
-                } else {
-                    widths <- readr::fwf_widths(widths)
-                }
-            }
-            readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
-        }
-    } else {
-        if (!missing(col.names)) {
-            read.fwf2(file = file, widths = widths, header = header, col.names = col.names, ...)
         } else {
-            read.fwf2(file = file, widths = widths, header = header, ...)
+            if (!missing(col.names)) {
+                read.fwf2(file = file, widths = widths, header = header, col.names = col.names, ...)
+            } else {
+                read.fwf2(file = file, widths = widths, header = header, ...)
+            }
         }
     }
-}
 
 #' @export
 .import.rio_r <- function(file, which = 1, ...) {
@@ -142,7 +146,7 @@ function(file,
 .import.rio_dump <- function(file, which = 1, envir = new.env(), ...) {
     source(file = file, local = envir)
     if (length(list(...)) > 0) {
-      warning("File imported using load. Arguments to '...' ignored.")
+        warning("File imported using load. Arguments to '...' ignored.")
     }
     if (missing(which)) {
         if (length(ls(envir)) > 1) {
@@ -159,17 +163,17 @@ function(file,
 
 #' @export
 .import.rio_rds <- function(file, which = 1, ...) {
-  if (length(list(...))>0) {
-    warning("File imported using readRDS. Arguments to '...' ignored.")
-  }
-  readRDS(file = file)
+    if (length(list(...)) > 0) {
+        warning("File imported using readRDS. Arguments to '...' ignored.")
+    }
+    readRDS(file = file)
 }
 
 #' @export
 .import.rio_rdata <- function(file, which = 1, envir = new.env(), ...) {
     load(file = file, envir = envir)
     if (length(list(...)) > 0) {
-      warning("File imported using load. Arguments to '...' ignored.")
+        warning("File imported using load. Arguments to '...' ignored.")
     }
     if (missing(which)) {
         if (length(ls(envir)) > 1) {
@@ -205,67 +209,62 @@ function(file,
     rmatio::read.mat(filename = file)
 }
 
-#' @importFrom foreign read.dta
-#' @importFrom haven read_dta
 #' @export
 .import.rio_dta <- function(file, haven = TRUE,
-                               convert.factors = FALSE,...) {
-  if (isTRUE(haven)) {
-    arg_reconcile(haven::read_dta, file = file, ..., .docall = TRUE,
-                  .finish = standardize_attributes)
-  } else {
-    out <- arg_reconcile(foreign::read.dta, file = file,
-                         convert.factors = convert.factors, ..., .docall = TRUE)
-    attr(out, "expansion.fields") <- NULL
-    attr(out, "time.stamp") <- NULL
-    standardize_attributes(out)
-  }
+                            convert.factors = FALSE, ...) {
+    if (isTRUE(haven)) {
+        arg_reconcile(haven::read_dta,
+            file = file, ..., .docall = TRUE,
+            .finish = standardize_attributes
+        )
+    } else {
+        out <- arg_reconcile(foreign::read.dta,
+            file = file,
+            convert.factors = convert.factors, ..., .docall = TRUE
+        )
+        attr(out, "expansion.fields") <- NULL
+        attr(out, "time.stamp") <- NULL
+        standardize_attributes(out)
+    }
 }
 
-#' @importFrom foreign read.dbf
 #' @export
 .import.rio_dbf <- function(file, which = 1, as.is = TRUE, ...) {
     foreign::read.dbf(file = file, as.is = as.is)
 }
 
-#' @importFrom utils read.DIF
 #' @export
 .import.rio_dif <- function(file, which = 1, ...) {
     utils::read.DIF(file = file, ...)
 }
 
-#' @importFrom haven read_sav
-#' @importFrom foreign read.spss
 #' @export
 .import.rio_sav <- function(file, which = 1, haven = TRUE, to.data.frame = TRUE, use.value.labels = FALSE, ...) {
     if (isTRUE(haven)) {
         standardize_attributes(haven::read_sav(file = file))
     } else {
-        standardize_attributes(foreign::read.spss(file = file, to.data.frame = to.data.frame,
-                                         use.value.labels = use.value.labels, ...))
+        standardize_attributes(foreign::read.spss(
+            file = file, to.data.frame = to.data.frame,
+            use.value.labels = use.value.labels, ...
+        ))
     }
 }
 
-#' @importFrom haven read_sav
 #' @export
 .import.rio_zsav <- function(file, which = 1, ...) {
     standardize_attributes(haven::read_sav(file = file))
 }
 
-#' @importFrom haven read_por
 #' @export
 .import.rio_spss <- function(file, which = 1, ...) {
     standardize_attributes(haven::read_por(file = file))
 }
 
-#' @importFrom haven read_sas
 #' @export
 .import.rio_sas7bdat <- function(file, which = 1, column.labels = FALSE, ...) {
     standardize_attributes(haven::read_sas(data_file = file, ...))
 }
 
-#' @importFrom foreign read.xport
-#' @importFrom haven read_xpt
 #' @export
 .import.rio_xpt <- function(file, which = 1, haven = TRUE, ...) {
     if (isTRUE(haven)) {
@@ -275,13 +274,11 @@ function(file,
     }
 }
 
-#' @importFrom foreign read.mtp
 #' @export
 .import.rio_mtp <- function(file, which = 1, ...) {
     foreign::read.mtp(file = file, ...)
 }
 
-#' @importFrom foreign read.systat
 #' @export
 .import.rio_syd <- function(file, which = 1, ...) {
     foreign::read.systat(file = file, to.data.frame = TRUE, ...)
@@ -293,45 +290,45 @@ function(file,
     jsonlite::fromJSON(txt = file, ...)
 }
 
-#' @importFrom foreign read.epiinfo
 #' @export
 .import.rio_rec <- function(file, which = 1, ...) {
     foreign::read.epiinfo(file = file, ...)
 }
 
-#' @importFrom foreign read.arff
 #' @export
 .import.rio_arff <- function(file, which = 1, ...) {
     foreign::read.arff(file = file)
 }
 
-#' @importFrom readxl read_xls
 #' @export
 .import.rio_xls <- function(file, which = 1, ...) {
-  .check_pkg_availability("readxl")
-  arg_reconcile(read_xls, path = file, ..., sheet = which,
-                .docall = TRUE,
-                .remap = c(colNames = 'col_names', na.strings = 'na'))
+    .check_pkg_availability("readxl")
+    arg_reconcile(readxl::read_xls,
+        path = file, ..., sheet = which,
+        .docall = TRUE,
+        .remap = c(colNames = "col_names", na.strings = "na")
+    )
 }
 
-#' @importFrom readxl read_xlsx
-#' @importFrom openxlsx read.xlsx
 #' @export
 .import.rio_xlsx <- function(file, which = 1, readxl = TRUE, ...) {
     if (isTRUE(readxl)) {
         .check_pkg_availability("readxl")
-        arg_reconcile(read_xlsx, path = file, ..., sheet = which,
-                      .docall = TRUE,
-                      .remap = c(colNames = 'col_names', na.strings = 'na'))
+        arg_reconcile(readxl::read_xlsx,
+            path = file, ..., sheet = which,
+            .docall = TRUE,
+            .remap = c(colNames = "col_names", na.strings = "na")
+        )
     } else {
         .check_pkg_availability("openxlsx")
-        arg_reconcile(read.xlsx, xlsxFile = file, ..., sheet = which,
-        .docall = TRUE,
-        .remap = c(col_names = 'colNames', na = 'na.strings'))
+        arg_reconcile(openxlsx::read.xlsx,
+            xlsxFile = file, ..., sheet = which,
+            .docall = TRUE,
+            .remap = c(col_names = "colNames", na = "na.strings")
+        )
     }
 }
 
-#' @importFrom utils read.fortran
 #' @export
 .import.rio_fortran <- function(file, which = 1, style, ...) {
     if (missing(style)) {
@@ -356,19 +353,22 @@ function(file,
     frml <- formals(readODS::read_ods)
     unused <- setdiff(names(a), names(frml))
     if ("path" %in% names(a)) {
-        unused <- c(unused, 'path')
+        unused <- c(unused, "path")
         a[["path"]] <- NULL
     }
-    if (length(unused)>0) {
-        warning("The following arguments were ignored for read_ods:\n",
-                paste(unused, collapse = ', '))
+    if (length(unused) > 0) {
+        warning(
+            "The following arguments were ignored for read_ods:\n",
+            paste(unused, collapse = ", ")
+        )
     }
     a <- a[intersect(names(a), names(frml))]
-    do.call("read_ods",
-            c(list(path = file, sheet = which, col_names = header),a))
+    do.call(
+        "read_ods",
+        c(list(path = file, sheet = which, col_names = header), a)
+    )
 }
 
-#' @importFrom utils type.convert
 #' @export
 .import.rio_xml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
     .check_pkg_availability("xml2")
@@ -406,34 +406,33 @@ extract_html_row <- function(x, empty_value) {
     unlist(to_extract)
 }
 
-#' @importFrom utils type.convert
 #' @export
 .import.rio_html <- function(file, which = 1, stringsAsFactors = FALSE, ..., empty_value = "") {
     # find all tables
     tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
     if (which > length(tables)) {
-        stop(paste0("Requested table exceeds number of tables found in file (", length(tables),")!"))
+        stop(paste0("Requested table exceeds number of tables found in file (", length(tables), ")!"))
     }
     x <- xml2::as_list(tables[[which]])
     if ("tbody" %in% names(x)) {
         # Note that "tbody" may be specified multiple times in a valid html table
-        x <- unlist(x[names(x) %in% "tbody"], recursive=FALSE)
+        x <- unlist(x[names(x) %in% "tbody"], recursive = FALSE)
     }
     # loop row-wise over the table and then rbind()
     ## check for table header to use as column names
     col_names <- NULL
     if ("th" %in% names(x[[1]])) {
-      col_names <- extract_html_row(x[[1]], empty_value=empty_value)
-      # Drop the first row since column names have already been extracted from it.
-      x <- x[-1]
+        col_names <- extract_html_row(x[[1]], empty_value = empty_value)
+        # Drop the first row since column names have already been extracted from it.
+        x <- x[-1]
     }
-    out <- do.call("rbind", lapply(x, extract_html_row, empty_value=empty_value))
+    out <- do.call("rbind", lapply(x, extract_html_row, empty_value = empty_value))
     colnames(out) <-
-      if (is.null(col_names)) {
-        paste0("V", seq_len(ncol(out)))
-      } else {
-        col_names
-      }
+        if (is.null(col_names)) {
+            paste0("V", seq_len(ncol(out)))
+        } else {
+            col_names
+        }
     out <- as.data.frame(out, ..., stringsAsFactors = stringsAsFactors)
     # set row names
     rownames(out) <- seq_len(nrow(out))
@@ -461,9 +460,9 @@ extract_html_row <- function(x, empty_value) {
 }
 
 #' @export
-.import.rio_pzfx <- function(file, which=1, ...) {
+.import.rio_pzfx <- function(file, which = 1, ...) {
     .check_pkg_availability("pzfx")
-    pzfx::read_pzfx(path=file, table=which, ...)
+    pzfx::read_pzfx(path = file, table = which, ...)
 }
 
 #' @export

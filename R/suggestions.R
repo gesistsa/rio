@@ -2,16 +2,14 @@
 #' @description This function installs various \sQuote{Suggests} dependencies for rio that expand its support to the full range of support import and export formats. These packages are not installed or loaded by default in order to create a slimmer and faster package build, install, and load.
 #' @param \dots Additional arguments passed to [utils::install.packages()].
 #' @return `NULL`
-#' @importFrom utils install.packages
 #' @examples
 #' \donttest{
 #' if (interactive()) {
-#' install_formats()
+#'     install_formats()
 #' }
 #' }
 #' @export
 install_formats <- function(...) {
-
     to_install <- uninstalled_formats()
 
     if (length(to_install)) {
@@ -20,7 +18,6 @@ install_formats <- function(...) {
     return(TRUE)
 }
 
-#' @importFrom utils packageName
 uninstalled_formats <- function() {
     # Suggested packages (robust to changes in DESCRIPTION file)
     # Instead of flagging *new* suggestions by hand, this method only requires

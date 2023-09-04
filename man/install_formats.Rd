@@ -18,7 +18,7 @@ This function installs various \sQuote{Suggests} dependencies for rio that expan
 \examples{
 \donttest{
 if (interactive()) {
-install_formats()
+    install_formats()
 }
 }
 }

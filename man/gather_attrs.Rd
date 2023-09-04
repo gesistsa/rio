@@ -24,10 +24,10 @@ spread_attrs(x)
 \examples{
 e <- try(import("http://www.stata-press.com/data/r13/auto.dta"))
 if (!inherits(e, "try-error")) {
-  str(e)
-  g <- gather_attrs(e)
-  str(attributes(e))
-  str(g)
+    str(e)
+    g <- gather_attrs(e)
+    str(attributes(e))
+    str(g)
 }
 }
 \seealso{

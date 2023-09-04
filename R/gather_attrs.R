@@ -7,13 +7,12 @@
 #' @examples
 #' e <- try(import("http://www.stata-press.com/data/r13/auto.dta"))
 #' if (!inherits(e, "try-error")) {
-#'   str(e)
-#'   g <- gather_attrs(e)
-#'   str(attributes(e))
-#'   str(g)
+#'     str(e)
+#'     g <- gather_attrs(e)
+#'     str(attributes(e))
+#'     str(g)
 #' }
 #' @seealso [import()], [characterize()]
-#' @importFrom stats setNames
 #' @export
 gather_attrs <- function(x) {
     if (!inherits(x, "data.frame")) {

@@ -30,13 +30,13 @@ remote_to_local <- function(file, format) {
     temp_file <- tempfile(fileext = paste0(".", fmt))
     u <- curl::curl_fetch_memory(file)
     writeBin(object = u$content, con = temp_file)
-    
+
     if (fmt == "TMP") {
         # try to extract format from curl's final URL
         fmt <- try(get_ext(u$url), silent = TRUE)
         if (inherits(fmt, "try-error")) {
             # try to extract format from headers
-            h1 <- parse_headers(u$headers)
+            h1 <- curl::parse_headers(u$headers)
             # check `Content-Disposition` header
             if (any(grepl("^Content-Disposition", h1))) {
                 h <- h1[grep("filename", h1)]
@@ -54,10 +54,10 @@ remote_to_local <- function(file, format) {
                 stop("Unrecognized file format. Try specifying with the format argument.")
             }
             # check `Content-Type` header
-            #if (any(grepl("^Content-Type", h1))) {
+            # if (any(grepl("^Content-Type", h1))) {
             #    h <- h1[grep("^Content-Type", h1)]
             #    ## PARSE MIME TYPE
-            #}
+            # }
         } else {
             f <- sub("TMP$", fmt, temp_file)
             file.copy(from = temp_file, to = f)
