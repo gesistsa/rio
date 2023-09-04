@@ -12,6 +12,9 @@
 * Declutter
    - remove the obsolete data.table option #323
    - write all documentation blocks in markdown #311
+   - remove all @importFrom #325 h/t David Schoch
+* New Contributors
+   - David Schoch @schochastics 
 
 # rio 0.5.30
 
