@@ -89,6 +89,23 @@ test_that("File names are added as attributes by import_list()", {
     unlink(c("mtcars.csv", "mtcars.tsv"))
 })
 
+test_that("URL #294", {
+    skip_on_cran()
+    ## url <- "https://evs.nci.nih.gov/ftp1/CDISC/SDTM/SDTM%20Terminology.xls" That's 10MB!
+    url <- "https://github.com/tidyverse/readxl/raw/main/tests/testthat/sheets/sheet-xml-lookup.xlsx"
+    expect_error(x <- import_list(url), NA)
+    expect_true(inherits(x, "list"))
+    expect_true("Asia" %in% names(x))
+    expect_true("Africa" %in% x[[1]]$continent)
+    expect_false("Africa" %in% x[[2]]$continent)
+    ## double URLs; it reads twice the first sheet by default
+    urls <- c(url, url)
+    expect_error(x2 <- import_list(urls), NA)
+    expect_true("sheet-xml-lookup" %in% names(x2))
+    expect_true("Africa" %in% x2[[1]]$continent)
+    expect_true("Africa" %in% x2[[2]]$continent)
+})
+
 unlink("data.rdata")
 unlink("mtcars.rds")
 unlink("mtcars.csv.zip")
