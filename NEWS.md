@@ -8,6 +8,7 @@
    - POTENTIALLY BREAKING: YAML are exported using yaml::write_yaml(). But it can't pass the UTF-8 check on older systems.
      Disclaimer added. #318
    - More check for the `file` argument #301
+   - `import_list` works with single Excel/HTML/Zip online #294
 * Declutter
    - remove the obsolete data.table option #323
    - write all documentation blocks in markdown #311
