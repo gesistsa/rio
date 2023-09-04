@@ -5,6 +5,8 @@ Version: 0.5.30
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = c("aut", "cre"), email = "chainsawtiney@gmail.com",
 	     	     comment = c(ORCID = "0000-0002-6232-7530")),
+             person("David", "Schoch", email = "david@schochastics.net", role = c("ctb"),
+                     comment = c(ORCID = "0000-0003-2952-4812")),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
              person("Thomas J.", "Leeper",
                     role = "aut", 

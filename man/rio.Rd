@@ -46,6 +46,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Jason Becker \email{jason@jbecker.co} [contributor]
+  \item David Schoch \email{david@schochastics.net} (\href{https://orcid.org/0000-0003-2952-4812}{ORCID}) [contributor]
   \item Geoffrey CH Chan \email{gefchchan@gmail.com} [contributor]
   \item Christopher Gandrud [contributor]
   \item Andrew MacDonald [contributor]
