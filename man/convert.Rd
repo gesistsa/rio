@@ -11,44 +11,41 @@ convert(in_file, out_file, in_opts = list(), out_opts = list())
 
 \item{out_file}{A character string naming an output file.}
 
-\item{in_opts}{A named list of options to be passed to \code{\link{import}}.}
+\item{in_opts}{A named list of options to be passed to \code{\link[=import]{import()}}.}
 
-\item{out_opts}{A named list of options to be passed to \code{\link{export}}.}
+\item{out_opts}{A named list of options to be passed to \code{\link[=export]{export()}}.}
 }
 \value{
 A character string containing the name of the output file (invisibly).
 }
 \description{
-This function constructs a data frame from a data file using \code{\link{import}} and uses \code{\link{export}} to write the data to disk in the format indicated by the file extension.
+This function constructs a data frame from a data file using \code{\link[=import]{import()}} and uses \code{\link[=export]{export()}} to write the data to disk in the format indicated by the file extension.
 }
 \examples{
-# create a file to convert
-export(mtcars, dta_file <- tempfile(fileext = ".dta"))
+## For demo, a temp. file path is created with the file extension .dta (Stata)
+dta_file <- tempfile(fileext = ".dta")
+## .csv
+csv_file <- tempfile(fileext = ".csv")
+## .xlsx
+xlsx_file <- tempfile(fileext = ".xlsx")
 
-# convert Stata to CSV and open converted file
-convert(dta_file, csv_file <- tempfile(fileext = ".csv"))
-head(import(csv_file))
 
-# correct an erroneous file format
-export(mtcars, csv_file2 <- tempfile(fileext = ".csv"), format = "tsv")
-convert(csv_file2, csv_file, in_opts = list(format = "tsv"))
+## Create a Stata data file
+export(mtcars, dta_file)
 
-# convert serialized R data.frame to JSON
-export(mtcars, rds_file <- tempfile(fileext = ".rds"))
-convert(rds_file, json_file <- tempfile(fileext = ".json"))
+## convert Stata to CSV and open converted file
+convert(dta_file, csv_file)
+import(csv_file)
 
-# cleanup
-unlink(csv_file)
-unlink(csv_file2)
-unlink(rds_file)
-unlink(dta_file)
-unlink(json_file)
+## correct an erroneous file format
+export(mtcars, xlsx_file, format = "tsv") ## DON'T DO THIS
+## import(xlsx_file) ## ERROR
+## convert the file by specifying `in_opts`
+convert(xlsx_file, xlsx_file, in_opts = list(format = "tsv"))
+import(xlsx_file)
 
-\dontrun{\donttest{
-# convert from the command line:
+## convert from the command line:
 ## Rscript -e "rio::convert('mtcars.dta', 'mtcars.csv')"
-}}
-
 }
 \seealso{
 \href{https://lbraglia.github.io/}{Luca Braglia} has created a Shiny app called \href{https://github.com/lbraglia/rioweb}{rioweb} that provides access to the file conversion features of rio through a web browser.

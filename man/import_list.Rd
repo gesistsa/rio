@@ -15,57 +15,43 @@ import_list(
 )
 }
 \arguments{
-\item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip directory, or HTML file), or a vector of file paths for multiple files to be imported.}
+\item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip file, or HTML file), or a vector of file paths for multiple files to be imported.}
 
 \item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, the return object is always a \dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or \dQuote{tibble} (if using dplyr) or \dQuote{data.table} (if using data.table). Other values are ignored, such that a data.frame is returned.}
 
-\item{which}{If \code{file} is a single file path, this specifies which objects should be extracted (passed to \code{\link{import}}'s \code{which} argument). Ignored otherwise.}
+\item{which}{If \code{file} is a single file path, this specifies which objects should be extracted (passed to \code{\link[=import]{import()}}'s \code{which} argument). Ignored otherwise.}
 
-\item{rbind}{A logical indicating whether to pass the import list of data frames through \code{\link[data.table]{rbindlist}}.}
+\item{rbind}{A logical indicating whether to pass the import list of data frames through \code{\link[data.table:rbindlist]{data.table::rbindlist()}}.}
 
 \item{rbind_label}{If \code{rbind = TRUE}, a character string specifying the name of a column to add to the data frame indicating its source file.}
 
 \item{rbind_fill}{If \code{rbind = TRUE}, a logical indicating whether to set the \code{fill = TRUE} (and fill missing columns with \code{NA}).}
 
-\item{\dots}{Additional arguments passed to \code{\link{import}}. Behavior may be unexpected if files are of different formats.}
+\item{\dots}{Additional arguments passed to \code{\link[=import]{import()}}. Behavior may be unexpected if files are of different formats.}
 }
 \value{
-If \code{rbind=FALSE} (the default), a list of a data frames. Otherwise, that list is passed to \code{\link[data.table]{rbindlist}} with \code{fill = TRUE} and returns a data frame object of class set by the \code{setclass} argument; if this operation fails, the list is returned.
+If \code{rbind=FALSE} (the default), a list of a data frames. Otherwise, that list is passed to \code{\link[data.table:rbindlist]{data.table::rbindlist()}} with \code{fill = TRUE} and returns a data frame object of class set by the \code{setclass} argument; if this operation fails, the list is returned.
 }
 \description{
-Use \code{\link{import}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zip directory, or HTML file)
+Use \code{\link[=import]{import()}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zipped directory in a zip file, or HTML file)
 }
 \examples{
-library('datasets')
-export(list(mtcars1 = mtcars[1:10,], 
+## For demo, a temp. file path is created with the file extension .xlsx
+xlsx_file <- tempfile(fileext = ".xlsx")
+export(list(mtcars1 = mtcars[1:10,],
             mtcars2 = mtcars[11:20,],
             mtcars3 = mtcars[21:32,]),
-    xlsx_file <- tempfile(fileext = ".xlsx")
+    xlsx_file
 )
 
 # import a single file from multi-object workbook
-str(import(xlsx_file, which = "mtcars1"))
+import(xlsx_file, sheet = "mtcars1")
+# import all worksheets, the return value is a list
+import_list(xlsx_file)
 
-# import all worksheets
-str(import_list(xlsx_file), 1)
-
-# import and rbind all worksheets
-mtcars2 <- import_list(xlsx_file, rbind = TRUE)
-all.equal(mtcars2[,-12], mtcars, check.attributes = FALSE)
-
-# import multiple files
-wd <- getwd()
-setwd(tempdir())
-export(mtcars, "mtcars1.csv")
-export(mtcars, "mtcars2.csv")
-str(import_list(dir(pattern = "csv$")), 1)
-unlink(c("mtcars1.csv", "mtcars2.csv"))
-setwd(wd)
-
-# cleanup
-unlink(xlsx_file)
-
+# import and rbind all worksheets, the return valye is a data frame
+import_list(xlsx_file, rbind = TRUE)
 }
 \seealso{
-\code{\link{import}}, \code{\link{export_list}}, \code{\link{export}}
+\code{\link[=import]{import()}}, \code{\link[=export_list]{export_list()}}, \code{\link[=export]{export()}}
 }

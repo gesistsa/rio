@@ -1,4 +1,32 @@
-* Correct XML/HTML escaping (#303)
+* Stop loading the entire namespace of a suggested package when it is available #296
+* Unexport objects: `.import`, `.export`, `is_file_text`; remove documentation for `arg_reconcile` #321
+* Update Examples to make them more realistic #327
+* Bug fixes
+   - ... is correctly passed for exporting ODS and feather #318
+   - POTENTIALLY BREAKING: JSON are exported in UTF-8 by default; solved encoding issues on
+     Windows R < 4.2. This won't affect any modern R installation where UTF-8 is the default. #318
+   - POTENTIALLY BREAKING: YAML are exported using yaml::write_yaml(). But it can't pass the UTF-8 check on older systems.
+     Disclaimer added. #318
+   - More check for the `file` argument #301
+   - `import_list` works with single Excel/HTML/Zip online #294
+   - Correct XML/HTML escaping #303
+* Declutter
+   - remove the obsolete data.table option #323
+   - write all documentation blocks in markdown #311
+   - remove all @importFrom #325 h/t David Schoch
+* New Contributors
+   - David Schoch @schochastics 
+
+# rio 0.5.30
+
+* Maintenance release: new maintainer
+* Mark `.sas7bdat` as deprecated
+* Change the minimum R version to 3.6
+
+# rio 0.5.29
+
+* fixes for CRAN
+
 
 # rio 0.5.28
 

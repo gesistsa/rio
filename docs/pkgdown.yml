@@ -1,7 +1,0 @@
-pandoc: 2.7.3
-pkgdown: 1.5.1
-pkgdown_sha: ~
-articles:
-  rio: rio.html
-last_built: 2021-02-22T21:50Z
-

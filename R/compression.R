@@ -35,12 +35,12 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
     on.exit(setwd(wd), add = TRUE)
     setwd(tmp)
     if (type == "zip") {
-        o <- zip(cfile2, files = basename(filename))
+        o <- utils::zip(cfile2, files = basename(filename))
     } else {
         if (type == "tar") {
             type <- "none"
         }
-        o <- tar(cfile2, files = basename(filename), compression = type)
+        o <- utils::tar(cfile2, files = basename(filename), compression = type)
     }
     setwd(wd)
     if (o != 0) {
@@ -66,7 +66,7 @@ parse_zip <- function(file, which, ...) {
         utils::unzip(file, files = file_list$Name[which], exdir = d)
         file.path(d, file_list$Name[which])
     } else {
-        if (substring(which, 1,1) != "^") {
+        if (substring(which, 1, 1) != "^") {
             which2 <- paste0("^", which)
         }
         utils::unzip(file, files = file_list$Name[grep(which2, file_list$Name)[1]], exdir = d)
@@ -89,7 +89,7 @@ parse_tar <- function(file, which, ...) {
         utils::untar(file, files = file_list[which], exdir = d)
         file.path(d, file_list[which])
     } else {
-        if (substring(which, 1,1) != "^") {
+        if (substring(which, 1, 1) != "^") {
             which2 <- paste0("^", which)
         }
         utils::untar(file, files = file_list[grep(which2, file_list)[1]], exdir = d)

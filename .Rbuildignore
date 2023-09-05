@@ -37,3 +37,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
+^\.editorconfig$
+^starwars.xlsx$
+^starwars.csv$
+^codecov\.yml$
+^cran-comments\.md$
+^CRAN-SUBMISSION$
+^codemeta\.json$

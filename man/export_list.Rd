@@ -9,43 +9,51 @@ export_list(x, file, ...)
 \arguments{
 \item{x}{A list of data frames to be written to files.}
 
-\item{file}{A character vector string containing a single file name with a \code{\%s} wildcard placeholder, or a vector of file paths for multiple files to be imported. If \code{x} elements are named, these will be used in place of \code{\%s}, otherwise numbers will be used; all elements must be named for names to be used.}
+\item{file}{A character vector string containing a single file name with a \verb{\\\%s} wildcard placeholder, or a vector of file paths for multiple files to be imported. If \code{x} elements are named, these will be used in place of \verb{\\\%s}, otherwise numbers will be used; all elements must be named for names to be used.}
 
-\item{\dots}{Additional arguments passed to \code{\link{export}}.}
+\item{\dots}{Additional arguments passed to \code{\link[=export]{export()}}.}
 }
 \value{
 The name(s) of the output file(s) as a character vector (invisibly).
 }
 \description{
-Use \code{\link{export}} to export a list of data frames to a vector of file names or a filename pattern.
+Use \code{\link[=export]{export()}} to export a list of data frames to a vector of file names or a filename pattern.
 }
 \details{
-\code{\link{export}} can export a list of data frames to a single multi-dataset file (e.g., an Rdata or Excel .xlsx file). Use \code{export_list} to export such a list to \emph{multiple} files.
+\code{\link[=export]{export()}} can export a list of data frames to a single multi-dataset file (e.g., an Rdata or Excel .xlsx file). Use \code{export_list} to export such a list to \emph{multiple} files.
 }
 \examples{
+## For demo, a temp. file path is created with the file extension .xlsx
+xlsx_file <- tempfile(fileext = ".xlsx")
+export(list(mtcars1 = mtcars[1:10,],
+            mtcars2 = mtcars[11:20,],
+            mtcars3 = mtcars[21:32,]),
+    xlsx_file
+)
+
+# import a single file from multi-object workbook
+import(xlsx_file, sheet = "mtcars1")
+# import all worksheets, the return value is a list
+import_list(xlsx_file)
 library('datasets')
-export(list(mtcars1 = mtcars[1:10,], 
+export(list(mtcars1 = mtcars[1:10,],
             mtcars2 = mtcars[11:20,],
             mtcars3 = mtcars[21:32,]),
     xlsx_file <- tempfile(fileext = ".xlsx")
 )
 
 # import all worksheets
-mylist <- import_list(xlsx_file)
+list_of_dfs <- import_list(xlsx_file)
 
 # re-export as separate named files
-csv_files1 <- sapply(1:3, function(x) tempfile(fileext = paste0("-", x, ".csv")))
-export_list(mylist, file = csv_files1)
 
-# re-export as separate files using a name pattern
-export_list(mylist, file = csv_files2 <- tempfile(fileext = "\%s.csv"))
+## export_list(list_of_dfs, file = c("file1.csv", "file2.csv", "file3.csv"))
 
-# cleanup
-unlink(xlsx_file)
-unlink(csv_files1)
-unlink(csv_files2)
+# re-export as separate files using a name pattern; using the names in the list
+## This will be written as "mtcars1.csv", "mtcars2.csv", "mtcars3.csv"
 
+## export_list(list_of_dfs, file = "\%s.csv")
 }
 \seealso{
-\code{\link{import}}, \code{\link{import_list}}, \code{\link{export}}
+\code{\link[=import]{import()}}, \code{\link[=import_list]{import_list()}}, \code{\link[=export]{export()}}
 }

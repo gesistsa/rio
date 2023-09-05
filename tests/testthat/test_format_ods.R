@@ -3,9 +3,8 @@ require("datasets")
 
 test_that("Import from ODS", {
     skip_if_not_installed(pkg="readODS")
-    ods0 <- import(system.file("examples", "mtcars.ods", package = "rio"))
-    expect_warning(ods <- import(system.file("examples", "mtcars.ods"
-                                             , package = "rio"),
+    ods0 <- import("../testdata/mtcars.ods")
+    expect_warning(ods <- import("../testdata/mtcars.ods",
                                  sheet = 1, col_names = TRUE,
                                  path = 'ignored value',
                                  invalid_argument = 42),
@@ -21,6 +20,13 @@ test_that("Import from ODS", {
 test_that("Export to ODS", {
     skip_if_not_installed(pkg="readODS")
     expect_true(export(iris, "iris.ods") %in% dir())
+})
+
+test_that("... correctly passed #318", {
+    skip_if_not_installed(pkg = "readODS")
+    x <- tempfile(fileext = ".ods")
+    rio::export(mtcars, file = x, sheet = "mtcars")
+    expect_equal(readODS::list_ods_sheets(x), "mtcars")
 })
 
 unlink("iris.ods")

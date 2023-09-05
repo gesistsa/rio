@@ -17,7 +17,7 @@ test_that("Import Remote GitHub File", {
     if (!inherits(rfile_imported2, "try-error")) {
         expect_true(inherits(rfile_imported2, "data.frame"), label = "Import remote file (explicit format)")
     }
-    
+
     lfile <- remote_to_local(rfile)
     if (!inherits(lfile, "try-error")) {
         expect_true(file.exists(lfile), label = "Remote file copied successfully")
@@ -25,18 +25,18 @@ test_that("Import Remote GitHub File", {
     }
 })
 
-test_that("Import Remote File from Shortened URL", {
-    skip_if_not_installed(pkg="data.table")
-    shorturl <- try(import("https://goo.gl/KPFiaK"))
-    if (!inherits(shorturl, "try-error")) {
-        expect_true(inherits(shorturl, "data.frame"), label = "Import remote file")
-    }
-})
+## test_that("Import Remote File from Shortened URL", {
+##     skip_if_not_installed(pkg = "data.table")
+##     shorturl <- try(import("https://raw.githubusercontent.com/gesistsa/rio/main/tests/testdata/example.csvy"))
+##     if (!inherits(shorturl, "try-error")) {
+##         expect_true(inherits(shorturl, "data.frame"), label = "Import remote file")
+##     }
+## })
 
 test_that("Import from Google Sheets", {
     googleurl1 <- "https://docs.google.com/spreadsheets/d/1I9mJsS5QnXF2TNNntTy-HrcdHmIF9wJ8ONYvEJTXSNo/edit#gid=0"
     expect_true(inherits(import(googleurl1), "data.frame"), label = "Import google sheets (specified sheet)")
-    
+
     googleurl2 <- "https://docs.google.com/spreadsheets/d/1I9mJsS5QnXF2TNNntTy-HrcdHmIF9wJ8ONYvEJTXSNo/edit"
     expect_true(inherits(import(googleurl2), "data.frame"), label = "Import google sheets (unspecified sheet)")
 

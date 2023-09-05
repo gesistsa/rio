@@ -21,14 +21,17 @@ Some specific types of changes that you might make are:
   - Import is based on S3 dispatch to functions of the form `.import.rio_FORMAT()`. Export works the same, but with `.export.rio_FORMAT()`. New import/export methods should take this form. There's no need to change the body of the `import()` or `export()` functions; S3 will take care of dispatch. All `.import()` methods must accept a `file` and `which` argument: `file` represents the path to the file and `which` can be used to extract sheets or files from multi-object files (e.g., zip, Excel workbooks, etc.). `.export()` methods take two arguments: `file` and `x`, where `file` is the path to the file and `x` is the data frame being exported. Most of the work of import and export methods involves mapping these arguments to their corresponding argument names in the various underlying packages.
   
   - The S3 methods should be documented in [NAMESPACE](https://github.com/leeper/rio/blob/master/NAMESPACE) using `S3method()`, which is handled automatically by roxygen markup in the source code.
-  
+  - Use the following `base` convention for these three arguments:
+    - `file`: A character string naming a file, URL, or single-file .zip or .tar archive. (not `path`)
+    - `which`: This argument is used to control import from multi-object files. (not `sheet`)
+    - `header`: This argument is used to control whether the first row in the data file contains the header information. (not `col_names`)
   - Any new format support needs to be documented in each of the following places: [README.Rmd](https://github.com/leeper/rio/blob/master/README.Rmd), [the vignette](https://github.com/leeper/rio/blob/master/vignettes/rio.Rmd), and the appropriate Rd file in [`/man`](https://github.com/leeper/rio/tree/master/man).
   
   - New formats or new options for handling formats should have a test added in [`/tests/testthat`](https://github.com/leeper/rio/tree/master/tests/testthat) called `test_format_FORMAT.R` that completely covers the function's behavior. This may require adding an example file to [`inst/examples`](https://github.com/leeper/rio/tree/master/inst/examples) (e.g., for testing `import()`).
- 
+
  3. Changes requiring a new package dependency should be discussed on the GitHub issues page before submitting a pull request.
  
  4. Message translations. These are very appreciated! The format is a pain, but if you're doing this I'm assuming you're already familiar with it.
 
-Any questions you have can be opened as GitHub issues or directed to thosjleeper (at) gmail.com.
+Any questions you have can be opened as GitHub issues.
 

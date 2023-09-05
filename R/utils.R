@@ -2,6 +2,11 @@
 #' @description A utility function to retrieve the file type from a file extension (via its filename/path/URL)
 #' @param file A character string containing a filename, file path, or URL.
 #' @return A characters string containing a file type recognized by rio.
+#' @examples
+#' get_ext("starwars.xlsx")
+#' get_ext("starwars.ods")
+#' get_ext("clipboard") ## "clipboard"
+#' get_ext("https://github.com/ropensci/readODS/raw/v2.1/starwars.ods")
 #' @export
 get_ext <- function(file) {
     if (!is.character(file)) {
@@ -114,7 +119,32 @@ twrap <- function(value, tag) {
     paste0("<", tag, ">", value, "</", tag, ">")
 }
 
+
 escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&apos;")) {
     stringi::stri_replace_all_fixed(str = stringi::stri_enc_toutf8(x), pattern = c("&", "\"", "<", ">", "'"),
                                     replacement = replacement, vectorize_all = FALSE)
+
+.check_pkg_availability <- function(pkg, lib.loc = NULL) {
+    if (identical(find.package(pkg, quiet = TRUE, lib.loc = lib.loc), character(0))) {
+        stop("Suggested package `", pkg, "` is not available. Please install it individually or use `install_formats()`", call. = FALSE)
+    }
+    return(invisible(NULL))
+}
+
+.write_as_utf8 <- function(text, file, sep = "") {
+    writeLines(enc2utf8(text), con = file, sep = sep, useBytes = TRUE)
+}
+
+.check_file <- function(file, single_only = TRUE) {
+    ## check the `file` argument
+    if (isTRUE(missing(file))) { ## for the case of export(iris, format = "csv")
+        return(invisible(NULL))
+    }
+    if (isFALSE(inherits(file, "character"))) {
+        stop("Invalid `file` argument: must be character", call. = FALSE)
+    }
+    if (isFALSE(length(file) == 1) && single_only) {
+        stop("Invalid `file` argument: `file` must be single", call. = FALSE)
+    }
+    invisible(NULL)
 }

@@ -1,14 +1,15 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.5.28
-Date: 2021-10-26
+Version: 0.5.30
 Authors@R: c(person("Jason", "Becker", role = "ctb", email = "jason@jbecker.co"),
-             person("Chung-hong", "Chan", role = "aut", email = "chainsawtiney@gmail.com",
+             person("Chung-hong", "Chan", role = c("aut", "cre"), email = "chainsawtiney@gmail.com",
 	     	     comment = c(ORCID = "0000-0002-6232-7530")),
+             person("David", "Schoch", email = "david@schochastics.net", role = c("ctb"),
+                     comment = c(ORCID = "0000-0003-2952-4812")),
              person("Geoffrey CH", "Chan", role = "ctb", email = "gefchchan@gmail.com"),
              person("Thomas J.", "Leeper",
-                    role = c("aut", "cre"), 
+                    role = "aut", 
                     email = "thosjleeper@gmail.com",
                     comment = c(ORCID = "0000-0003-4097-6326")),
              person("Christopher", "Gandrud", role = "ctb"),
@@ -35,10 +36,10 @@ Description: Streamlined data import and export by making assumptions that
     directly without explicit decompression, and fast import packages are used where
     appropriate. An additional convenience function, 'convert()', provides a simple
     method for converting between file types.
-URL: https://github.com/leeper/rio
-BugReports: https://github.com/leeper/rio/issues
+URL: https://github.com/gesistsa/rio
+BugReports: https://github.com/gesistsa/rio/issues
 Depends:
-    R (>= 2.15.0)
+    R (>= 3.6)
 Imports:
     tools,
     stats,
@@ -46,7 +47,7 @@ Imports:
     foreign,
     haven (>= 1.1.2),
     curl (>= 0.6),
-    data.table (>= 1.9.8),
+    data.table (>= 1.11.2),
     readxl (>= 0.1.1),
     openxlsx,
     tibble,
@@ -73,4 +74,5 @@ Suggests:
 License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)

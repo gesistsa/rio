@@ -7,11 +7,18 @@
 install_formats(...)
 }
 \arguments{
-\item{\dots}{Additional arguments passed to \code{\link[utils]{install.packages}}.}
+\item{\dots}{Additional arguments passed to \code{\link[utils:install.packages]{utils::install.packages()}}.}
 }
 \value{
 \code{NULL}
 }
 \description{
 This function installs various \sQuote{Suggests} dependencies for rio that expand its support to the full range of support import and export formats. These packages are not installed or loaded by default in order to create a slimmer and faster package build, install, and load.
+}
+\examples{
+\donttest{
+if (interactive()) {
+    install_formats()
+}
+}
 }
