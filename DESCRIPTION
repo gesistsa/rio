@@ -70,7 +70,8 @@ Suggests:
     rmarkdown,
     rmatio,
     xml2 (>= 1.2.0),
-    yaml
+    yaml,
+    qs
 License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8

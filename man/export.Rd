@@ -41,6 +41,9 @@ The output file can be to a compressed directory, simply by adding an appropriat
 \item R syntax object (.R), using \code{\link[base:dput]{base::dput()}} (by default) or \code{\link[base:dump]{base::dump()}} (if \code{format = 'dump'})
 \item Saved R objects (.RData,.rda), using \code{\link[base:save]{base::save()}}. In this case, \code{x} can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding \code{envir} argument is specified.
 \item Serialized R objects (.rds), using \code{\link[base:readRDS]{base::saveRDS()}}. In this case, \code{x} can be any serializable R object.
+\item Serialized R objects (.qs), using \code{\link[qs:qsave]{qs::qsave()}}, which is
+significantly faster than .rds. This can be any R
+object (not just a data frame).
 \item "XBASE" database files (.dbf), using \code{\link[foreign:write.dbf]{foreign::write.dbf()}}
 \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign:write.arff]{foreign::write.arff()}}
 \item Fixed-width format data (.fwf), using \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
