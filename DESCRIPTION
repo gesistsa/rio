@@ -50,7 +50,8 @@ Imports:
     data.table (>= 1.11.2),
     readxl (>= 0.1.1),
     openxlsx,
-    tibble
+    tibble,
+    stringi
 Suggests:
     datasets,
     bit64,

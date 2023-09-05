@@ -9,6 +9,7 @@
      Disclaimer added. #318
    - More check for the `file` argument #301
    - `import_list` works with single Excel/HTML/Zip online #294
+   - Correct XML/HTML escaping #303
 * Declutter
    - remove the obsolete data.table option #323
    - write all documentation blocks in markdown #311
@@ -25,6 +26,7 @@
 # rio 0.5.29
 
 * fixes for CRAN
+
 
 # rio 0.5.28
 
