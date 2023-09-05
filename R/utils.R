@@ -123,6 +123,7 @@ twrap <- function(value, tag) {
 escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&apos;")) {
     stringi::stri_replace_all_fixed(str = stringi::stri_enc_toutf8(x), pattern = c("&", "\"", "<", ">", "'"),
                                     replacement = replacement, vectorize_all = FALSE)
+}
 
 .check_pkg_availability <- function(pkg, lib.loc = NULL) {
     if (identical(find.package(pkg, quiet = TRUE, lib.loc = lib.loc), character(0))) {
