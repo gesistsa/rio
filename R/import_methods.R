@@ -470,3 +470,9 @@ extract_html_row <- function(x, empty_value) {
     .check_pkg_availability("arrow")
     arrow::read_parquet(file = file, as_data_frame = TRUE, ...)
 }
+
+#' @export
+.import.rio_qs <- function(file, ...) {
+    .check_pkg_availability("qs")
+    qs::qread(file = file, ...)
+}
