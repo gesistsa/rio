@@ -15,6 +15,7 @@
    - remove the obsolete data.table option #323
    - write all documentation blocks in markdown #311
    - remove all @importFrom #325 h/t David Schoch
+   - rearrange "Package Philosophy" as a Vignette #320
 * New authors
    - David Schoch @schochastics 
 
