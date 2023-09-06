@@ -2,7 +2,7 @@
 #' @description Use [export()] to export a list of data frames to a vector of file names or a filename pattern.
 #' @param x A list of data frames to be written to files.
 #' @param file A character vector string containing a single file name with a `\%s` wildcard placeholder, or a vector of file paths for multiple files to be imported. If `x` elements are named, these will be used in place of `\%s`, otherwise numbers will be used; all elements must be named for names to be used.
-#' @param archive character. Either NULL (default) to save files in current
+#' @param archive character. Either empty string (default) to save files in current
 #' directory, a path to a (new) directory, or a .zip/.tar file to compress all
 #' files into an archive.
 #' @param \dots Additional arguments passed to [export()].
@@ -45,8 +45,12 @@
 #' ## export_list(list_of_dfs, file = "%s.csv")
 #' @seealso [import()], [import_list()], [export()]
 #' @export
-export_list <- function(x, file, archive = NULL, ...) {
+export_list <- function(x, file, archive = "", ...) {
     .check_file(file, single_only = FALSE)
+    archive_format <- find_compress(archive)
+    if (archive_format$file == "") {
+        archive_format$file <- "."
+    }
     if (inherits(x, "data.frame")) {
         stop("'x' must be a list. Perhaps you want export()?")
     }
@@ -55,7 +59,7 @@ export_list <- function(x, file, archive = NULL, ...) {
         stop("'file' must be a character vector")
     } else if (length(file) == 1L) {
         if (!grepl("%s", file, fixed = TRUE)) {
-            stop("'file' must have a %s placehold")
+            stop("'file' must have a %s placeholder")
         }
         if (is.null(names(x))) {
             outfiles <- sprintf(file, seq_along(x))
@@ -77,7 +81,9 @@ export_list <- function(x, file, archive = NULL, ...) {
         }
         outfiles <- file
     }
-
+    if (is.na(archive_format$compress)) {
+        outfiles <- file.path(archive_format$file, outfiles)
+    }
     out <- list()
     for (f in seq_along(x)) {
         out[[f]] <- try(export(x[[f]], file = outfiles[f], ...), silent = TRUE)
@@ -85,6 +91,10 @@ export_list <- function(x, file, archive = NULL, ...) {
             warning(sprintf("Export failed for element %d, filename: %s", f, outfiles[f]))
         }
     }
-
-    invisible(outfiles)
+    if (!is.na(archive_format$compress)) {
+        compress_out(archive, outfiles)
+        unlink(outfiles)
+        return(invisible(archive_format$file))
+    }
+    return(invisible(outfiles))
 }
