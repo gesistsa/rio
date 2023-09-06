@@ -327,3 +327,9 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
     .check_pkg_availability("arrow")
     arrow::write_parquet(x = x, sink = file, ...)
 }
+
+#' @export
+.export.rio_qs <- function(file, x, ...) {
+    .check_pkg_availability("qs")
+    qs::qsave(x = x, file = file, ...)
+}

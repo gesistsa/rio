@@ -35,7 +35,6 @@
         jpg = sprintf(x, fmt, "jpeg::readJPEG"),
         ledger = sprintf(xA, fmt, "ledger", "ledger"),
         npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
-        qs = sprintf(x, fmt, "qs::qread"),
         pdf = sprintf(x, fmt, "tabulizer::extract_tables"),
         png = sprintf(x, fmt, "png::readPNG"),
         sdmx = sprintf(x, fmt, "sdmx::readSDMX"),
@@ -60,7 +59,6 @@
         jpg = sprintf(x, fmt, "jpeg::writeJPEG"),
         npy = sprintf(x, fmt, "RcppCNPy::npySave"),
         png = sprintf(x, fmt, "png::writePNG"),
-        qs = sprintf(x, fmt, "qs::qsave"),
         tiff = sprintf(x, fmt, "tiff::writeTIFF"),
         xpt = sprintf(x, fmt, "SASxport::write.xport"),
         gettext("Format not supported")

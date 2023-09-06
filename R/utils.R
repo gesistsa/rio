@@ -14,7 +14,7 @@ get_ext <- function(file) {
     }
     if (!grepl("^http.*://", file)) {
         fmt <- tools::file_ext(file)
-    } else if(grepl("^http.*://", file)) {
+    } else if (grepl("^http.*://", file)) {
         parsed <- strsplit(strsplit(file, "?", fixed = TRUE)[[1]][1], "/", fixed = TRUE)[[1]]
         file <- parsed[length(parsed)]
         fmt <- tools::file_ext(file)
@@ -61,6 +61,7 @@ get_type <- function(fmt) {
         ods = "ods",
         por = "spss",
         psv = "psv",
+        qs = "qs",
         r = "r",
         rda = "rdata",
         rdata = "rdata",
@@ -121,8 +122,10 @@ twrap <- function(value, tag) {
 
 
 escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&apos;")) {
-    stringi::stri_replace_all_fixed(str = stringi::stri_enc_toutf8(x), pattern = c("&", "\"", "<", ">", "'"),
-                                    replacement = replacement, vectorize_all = FALSE)
+    stringi::stri_replace_all_fixed(
+        str = stringi::stri_enc_toutf8(x), pattern = c("&", "\"", "<", ">", "'"),
+        replacement = replacement, vectorize_all = FALSE
+    )
 }
 
 .check_pkg_availability <- function(pkg, lib.loc = NULL) {
