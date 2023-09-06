@@ -54,7 +54,7 @@ This function imports a data frame or matrix from a data file with the file form
 \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table:fread]{data.table::fread()}}.
 \item Apache Arrow Parquet (.parquet), using \code{\link[arrow:read_parquet]{arrow::read_parquet()}}
 \item Feather R/Python interchange format (.feather), using \code{\link[feather:read_feather]{feather::read_feather()}}
-\item Fast storage (.fst), using \code{\link[fst:write_fst]{fst::read.fst()}}
+\item Fast storage (.fst), using \code{\link[fst:read.fst]{fst::read.fst()}}
 \item JSON (.json), using \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}
 \item Matlab (.mat), using \code{\link[rmatio:read.mat]{rmatio::read.mat()}}
 \item EViews (.wf1), using \code{\link[hexView:readEViews]{hexView::readEViews()}}
