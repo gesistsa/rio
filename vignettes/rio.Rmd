@@ -71,6 +71,7 @@ The full list of supported formats is below:
 | YAML | .yml | [**yaml**](https://cran.r-project.org/package=yaml) | [**yaml**](https://cran.r-project.org/package=yaml) | No |
 | Clipboard | default is tsv | [**clipr**](https://cran.r-project.org/package=clipr) | [**clipr**](https://cran.r-project.org/package=clipr) | No |
 | [Google Sheets](https://www.google.com/sheets/about/) | as Comma-separated data |  |  |  |
+| Serialized R objects | .qs | [**qs**](https://cran.r-project.org/package=qs) | [**qs**](https://cran.r-project.org/package=qs) | No |
 
 Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
 
@@ -141,7 +142,10 @@ It is also easy to use `export()` as part of an R pipeline (from magrittr or dpl
 
 ```{r}
 library("magrittr")
-mtcars %>% subset(hp > 100) %>%  aggregate(. ~ cyl + am, data = ., FUN = mean) %>% export(file = "mtcars2.dta")
+mtcars %>%
+  subset(hp > 100) %>%
+  aggregate(. ~ cyl + am, data = ., FUN = mean) %>%
+  export(file = "mtcars2.dta")
 ```
 
 Some file formats (e.g., Excel workbooks, Rdata files) can support multiple data objects in a single file. `export()` natively supports output of multiple objects to these types of files:
@@ -189,10 +193,10 @@ fwf <- tempfile(fileext = ".fwf")
 cat(file = fwf, "123456", "987654", sep = "\n")
 
 # see two ways to read in the file
-identical(import(fwf, widths = c(1,2,3)), import(fwf, widths = c(1,-2,3)))
+identical(import(fwf, widths = c(1, 2, 3)), import(fwf, widths = c(1, -2, 3)))
 
 # convert to CSV
-convert(fwf, "fwf.csv", in_opts = list(widths = c(1,2,3)))
+convert(fwf, "fwf.csv", in_opts = list(widths = c(1, 2, 3)))
 import("fwf.csv") # check conversion
 ```
 
