@@ -12,10 +12,10 @@ Version](https://www.r-pkg.org/badges/version/rio)](https://cran.r-project.org/p
 The aim of **rio** is to make data file I/O in R as easy as possible by
 implementing two main functions in Swiss-army knife style:
 
-  - `import()` provides a painless data import experience by
+-   `import()` provides a painless data import experience by
     automatically choosing the appropriate import/read function based on
     file extension (or a specified `format` argument)
-  - `export()` provides the same painless file recognition for data
+-   `export()` provides the same painless file recognition for data
     export/write functionality
 
 ## Installation
@@ -131,7 +131,7 @@ install_formats()
 The full list of supported formats is below:
 
 | Format                                                | Typical Extension       | Import Package                                                  | Export Package                                                                                                          | Installed by Default |
-| ----------------------------------------------------- | ----------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------- |
+|-------------------------------------------------------|-------------------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|----------------------|
 | Comma-separated data                                  | .csv                    | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table)                                                         | Yes                  |
 | Pipe-separated data                                   | .psv                    | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table)                                                         | Yes                  |
 | Tab-separated data                                    | .tsv                    | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table)                                                         | Yes                  |
@@ -169,6 +169,7 @@ The full list of supported formats is below:
 | Clipboard                                             | default is tsv          | [**clipr**](https://cran.r-project.org/package=clipr)           | [**clipr**](https://cran.r-project.org/package=clipr)                                                                   | No                   |
 | [Google Sheets](https://www.google.com/sheets/about/) | as Comma-separated data |                                                                 |                                                                                                                         |                      |
 | Graphpad Prism                                        | .pzfx                   | [**pzfx**](https://cran.r-project.org/package=pzfx)             | [**pzfx**](https://cran.r-project.org/package=pzfx)                                                                     | No                   |
+| Serialized R objects                                  | .qs                     | [**qs**](https://cran.r-project.org/package=qs)                 | [**qs**](https://cran.r-project.org/package=qs)                                                                         | No                   |
 
 Additionally, any format that is not supported by **rio** but that has a
 known R implementation will produce an informative error message
@@ -281,13 +282,13 @@ is probably willing to make. Eight of these are important:
     in variable-level attributes in a consistent form regardless of file
     type or underlying import function. These attributes are identified
     as:
-    
-      - `label`: a description of variable
-      - `labels`: a vector mapping numeric values to character strings
+
+    -   `label`: a description of variable
+    -   `labels`: a vector mapping numeric values to character strings
         those values represent
-      - `format`: a character string describing the variable storage
+    -   `format`: a character string describing the variable storage
         type in the original file
-    
+
     The `gather_attrs()` function makes it easy to move variable-level
     attributes to the data frame level (and `spread_attrs()` reverses
     that gathering process). These can be useful, especially, during
@@ -295,7 +296,7 @@ is probably willing to make. Eight of these are important:
     differently across file formats. As an example, the following idiom
     can be used to trim SPSS value labels to the 32-character maximum
     allowed by Stata:
-    
+
     ``` r
     dat <- gather_attrs(rio::import("data.sav"))
     attr(dat, "labels") <- lapply(attributes(dat)$labels, function(x) {
@@ -306,7 +307,7 @@ is probably willing to make. Eight of these are important:
     })
     export(spread_attrs(dat), "data.dta")
     ```
-    
+
     In addition, two functions (added in v0.5.5) provide easy ways to
     create character and factor variables from these “labels”
     attributes. `characterize()` converts a single variable or all
@@ -314,8 +315,8 @@ is probably willing to make. Eight of these are important:
     character vectors based on the mapping of values to value labels.
     `factorize()` does the same but returns factor variables. This can
     be especially helpful for converting these rich file formats into
-    open formats (e.g., `export(characterize(import("file.dta")),
-    "file.csv")`.
+    open formats (e.g.,
+    `export(characterize(import("file.dta")), "file.csv")`.
 
 8.  **rio** imports and exports files based on an internal S3 class
     infrastructure. This means that other packages can contain
@@ -328,21 +329,21 @@ is probably willing to make. Eight of these are important:
 
 ### GUIs
 
-  - [**rioweb**](https://github.com/lbraglia/rioweb) that provides
+-   [**rioweb**](https://github.com/lbraglia/rioweb) that provides
     access to the file conversion features of rio.
-  - [**GREA**](https://github.com/Stan125/GREA/) is an RStudio add-in
+-   [**GREA**](https://github.com/Stan125/GREA/) is an RStudio add-in
     that provides an interactive interface for reading in data using
     rio.
 
 ### Similar packages
 
-  - [**reader**](https://cran.r-project.org/package=reader) handles
+-   [**reader**](https://cran.r-project.org/package=reader) handles
     certain text formats and R binary files
-  - [**io**](https://cran.r-project.org/package=io) offers a set of
+-   [**io**](https://cran.r-project.org/package=io) offers a set of
     custom formats
-  - [**ImportExport**](https://cran.r-project.org/package=ImportExport)
+-   [**ImportExport**](https://cran.r-project.org/package=ImportExport)
     focuses on select binary formats (Excel, SPSS, and Access files) and
     provides a Shiny interface.
-  - [**SchemaOnRead**](https://cran.r-project.org/package=SchemaOnRead)
+-   [**SchemaOnRead**](https://cran.r-project.org/package=SchemaOnRead)
     iterates through a large number of possible import methods until one
     works successfully

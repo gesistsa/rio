@@ -130,6 +130,7 @@ The full list of supported formats is below:
 | Clipboard | default is tsv | [**clipr**](https://cran.r-project.org/package=clipr) | [**clipr**](https://cran.r-project.org/package=clipr) | No |
 | [Google Sheets](https://www.google.com/sheets/about/) | as Comma-separated data |  |  |  |
 | Graphpad Prism | .pzfx | [**pzfx**](https://cran.r-project.org/package=pzfx) | [**pzfx**](https://cran.r-project.org/package=pzfx) | No |
+| Serialized R objects | .qs | [**qs**](https://cran.r-project.org/package=qs) | [**qs**](https://cran.r-project.org/package=qs) | No |
 
 Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
 
