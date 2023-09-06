@@ -39,7 +39,7 @@
 #'     \item gzip comma-separated data (.csv.gz), using [utils::read.table()] with `row.names = FALSE` and `stringsAsFactors = FALSE`
 #'     \item [CSVY](https://github.com/csvy) (CSV with a YAML metadata header) using [data.table::fread()].
 #'     \item Apache Arrow Parquet (.parquet), using [arrow::read_parquet()]
-#'     \item Feather R/Python interchange format (.feather), using [feather::read_feather()]
+#'     \item Feather R/Python interchange format (.feather), using [arrow::read_feather()]
 #'     \item Fast storage (.fst), using [fst::read.fst()]
 #'     \item JSON (.json), using [jsonlite::fromJSON()]
 #'     \item Matlab (.mat), using [rmatio::read.mat()]
