@@ -40,13 +40,13 @@ unlink(c(csv_file, rds_file, sav_file, dta_file))
 
 Authors:
 \itemize{
+  \item Jason Becker \email{jason@jbecker.co}
+  \item David Schoch \email{david@schochastics.net} (\href{https://orcid.org/0000-0003-2952-4812}{ORCID})
   \item Thomas J. Leeper \email{thosjleeper@gmail.com} (\href{https://orcid.org/0000-0003-4097-6326}{ORCID})
 }
 
 Other contributors:
 \itemize{
-  \item Jason Becker \email{jason@jbecker.co} [contributor]
-  \item David Schoch \email{david@schochastics.net} (\href{https://orcid.org/0000-0003-2952-4812}{ORCID}) [contributor]
   \item Geoffrey CH Chan \email{gefchchan@gmail.com} [contributor]
   \item Christopher Gandrud [contributor]
   \item Andrew MacDonald [contributor]
