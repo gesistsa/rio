@@ -156,8 +156,8 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_feather <- function(file, x, ...) {
-    .check_pkg_availability("feather")
-    feather::write_feather(x = x, path = file, ...)
+    .check_pkg_availability("arrow")
+    arrow::write_feather(x = x, sink = file, ...)
 }
 
 #' @export

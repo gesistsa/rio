@@ -2,6 +2,7 @@
 * Unexport objects: `.import`, `.export`, `is_file_text`; remove documentation for `arg_reconcile` #321
 * Update Examples to make them more realistic #327
 * Add support for `qs` #275 h/t David Schoch
+* Use `arrow` to import / export `feather` #340
 * Bug fixes
    - ... is correctly passed for exporting ODS and feather #318
    - POTENTIALLY BREAKING: JSON are exported in UTF-8 by default; solved encoding issues on

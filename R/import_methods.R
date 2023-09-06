@@ -194,7 +194,7 @@ import_delim <-
 #' @export
 .import.rio_feather <- function(file, which = 1, ...) {
     .check_pkg_availability("feather")
-    feather::read_feather(path = file)
+    arrow::read_feather(file = file, ...)
 }
 
 #' @export

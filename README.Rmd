@@ -119,7 +119,7 @@ The full list of supported formats is below:
 | gzip comma-separated data | .csv.gz | **utils** | **utils** | Yes |
 | Apache Arrow (Parquet) | .parquet | [**arrow**](https://cran.r-project.org/package=arrow) | [**arrow**](https://cran.r-project.org/package=arrow) | No |
 | EViews | .wf1 | [**hexView**](https://cran.r-project.org/package=hexView) |  | No |
-| Feather R/Python interchange format | .feather | [**feather**](https://cran.r-project.org/package=feather) | [**feather**](https://cran.r-project.org/package=feather) | No |
+| Feather R/Python interchange format | .feather | [**arrow**](https://cran.r-project.org/package=arrow) | [**arrow**](https://cran.r-project.org/package=arrow) | No |
 | Fast Storage | .fst | [**fst**](https://cran.r-project.org/package=fst) | [**fst**](https://cran.r-project.org/package=fst) | No |
 | JSON | .json | [**jsonlite**](https://cran.r-project.org/package=jsonlite) | [**jsonlite**](https://cran.r-project.org/package=jsonlite) | No |
 | Matlab | .mat | [**rmatio**](https://cran.r-project.org/package=rmatio) | [**rmatio**](https://cran.r-project.org/package=rmatio) | No |
