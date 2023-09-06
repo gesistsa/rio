@@ -25,13 +25,16 @@
 #'     \item R syntax object (.R), using [base::dput()] (by default) or [base::dump()] (if `format = 'dump'`)
 #'     \item Saved R objects (.RData,.rda), using [base::save()]. In this case, `x` can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding `envir` argument is specified.
 #'     \item Serialized R objects (.rds), using [base::saveRDS()]. In this case, `x` can be any serializable R object.
+#'     \item Serialized R objects (.qs), using [qs::qsave()], which is
+#'     significantly faster than .rds. This can be any R
+#'     object (not just a data frame).
 #'     \item "XBASE" database files (.dbf), using [foreign::write.dbf()]
 #'     \item Weka Attribute-Relation File Format (.arff), using [foreign::write.arff()]
 #'     \item Fixed-width format data (.fwf), using [utils::write.table()] with `row.names = FALSE`, `quote = FALSE`, and `col.names = FALSE`
 #'     \item gzip comma-separated data (.csv.gz), using [utils::write.table()] with `row.names = FALSE`
 #'     \item [CSVY](https://github.com/csvy) (CSV with a YAML metadata header) using [data.table::fwrite()].
 #'     \item Apache Arrow Parquet (.parquet), using [arrow::write_parquet()]
-#'     \item Feather R/Python interchange format (.feather), using [feather::write_feather()]
+#'     \item Feather R/Python interchange format (.feather), using [arrow::write_feather()]
 #'     \item Fast storage (.fst), using [fst::write.fst()]
 #'     \item JSON (.json), using [jsonlite::toJSON()]. In this case, `x` can be a variety of R objects, based on class mapping conventions in this paper: [https://arxiv.org/abs/1403.2805](https://arxiv.org/abs/1403.2805).
 #'     \item Matlab (.mat), using [rmatio::write.mat()]

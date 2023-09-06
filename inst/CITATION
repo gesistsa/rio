@@ -2,6 +2,6 @@ citHeader("To cite package 'rio' in publications use:")
      
 bibentry(bibtype = "Manual",
          title = "rio: A Swiss-army knife for data file I/O",
-         author = c(person("Chung-hong", "Chan"), person("Thomas J.", "Leeper"), person("Jason", "Becker")),
+         author = c(person("Chung-hong", "Chan"), person("Thomas J.", "Leeper"), person("Jason", "Becker"), person("David", "Schoch")),
          url = "https://cran.r-project.org/package=rio",
          year = 2023)

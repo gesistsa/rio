@@ -42,6 +42,9 @@ This function imports a data frame or matrix from a data file with the file form
 \item R syntax object (.R), using \code{\link[base:dput]{base::dget()}}
 \item Saved R objects (.RData,.rda), using \code{\link[base:load]{base::load()}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame).
 \item Serialized R objects (.rds), using \code{\link[base:readRDS]{base::readRDS()}}. This can be any R object (not just a data frame).
+\item Serialized R objects (.qs), using \code{\link[qs:qread]{qs::qread()}}, which is
+significantly faster than .rds. This can be any R
+object (not just a data frame).
 \item Epiinfo (.rec), using \code{\link[foreign:read.epiinfo]{foreign::read.epiinfo()}}
 \item Minitab (.mtp), using \code{\link[foreign:read.mtp]{foreign::read.mtp()}}
 \item Systat (.syd), using \code{\link[foreign:read.systat]{foreign::read.systat()}}
@@ -53,8 +56,8 @@ This function imports a data frame or matrix from a data file with the file form
 \item gzip comma-separated data (.csv.gz), using \code{\link[utils:read.table]{utils::read.table()}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
 \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table:fread]{data.table::fread()}}.
 \item Apache Arrow Parquet (.parquet), using \code{\link[arrow:read_parquet]{arrow::read_parquet()}}
-\item Feather R/Python interchange format (.feather), using \code{\link[feather:read_feather]{feather::read_feather()}}
-\item Fast storage (.fst), using \code{\link[fst:read.fst]{fst::read.fst()}}
+\item Feather R/Python interchange format (.feather), using \code{\link[arrow:read_feather]{arrow::read_feather()}}
+\item Fast storage (.fst), using \code{\link[fst:write_fst]{fst::read.fst()}}
 \item JSON (.json), using \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}
 \item Matlab (.mat), using \code{\link[rmatio:read.mat]{rmatio::read.mat()}}
 \item EViews (.wf1), using \code{\link[hexView:readEViews]{hexView::readEViews()}}

@@ -194,7 +194,7 @@ import_delim <-
 #' @export
 .import.rio_feather <- function(file, which = 1, ...) {
     .check_pkg_availability("feather")
-    feather::read_feather(path = file)
+    arrow::read_feather(file = file, ...)
 }
 
 #' @export
@@ -469,4 +469,10 @@ extract_html_row <- function(x, empty_value) {
 .import.rio_parquet <- function(file, which = 1, as_data_frame = TRUE, ...) {
     .check_pkg_availability("arrow")
     arrow::read_parquet(file = file, as_data_frame = TRUE, ...)
+}
+
+#' @export
+.import.rio_qs <- function(file, ...) {
+    .check_pkg_availability("qs")
+    qs::qread(file = file, ...)
 }

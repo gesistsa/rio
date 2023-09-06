@@ -25,6 +25,9 @@
 #'     \item R syntax object (.R), using [base::dget()]
 #'     \item Saved R objects (.RData,.rda), using [base::load()] for single-object .Rdata files. Use `which` to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame).
 #'     \item Serialized R objects (.rds), using [base::readRDS()]. This can be any R object (not just a data frame).
+#'     \item Serialized R objects (.qs), using [qs::qread()], which is
+#'     significantly faster than .rds. This can be any R
+#'     object (not just a data frame).
 #'     \item Epiinfo (.rec), using [foreign::read.epiinfo()]
 #'     \item Minitab (.mtp), using [foreign::read.mtp()]
 #'     \item Systat (.syd), using [foreign::read.systat()]
@@ -36,7 +39,7 @@
 #'     \item gzip comma-separated data (.csv.gz), using [utils::read.table()] with `row.names = FALSE` and `stringsAsFactors = FALSE`
 #'     \item [CSVY](https://github.com/csvy) (CSV with a YAML metadata header) using [data.table::fread()].
 #'     \item Apache Arrow Parquet (.parquet), using [arrow::read_parquet()]
-#'     \item Feather R/Python interchange format (.feather), using [feather::read_feather()]
+#'     \item Feather R/Python interchange format (.feather), using [arrow::read_feather()]
 #'     \item Fast storage (.fst), using [fst::read.fst()]
 #'     \item JSON (.json), using [jsonlite::fromJSON()]
 #'     \item Matlab (.mat), using [rmatio::read.mat()]
