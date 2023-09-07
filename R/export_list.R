@@ -48,9 +48,6 @@
 export_list <- function(x, file, archive = "", ...) {
     .check_file(file, single_only = FALSE)
     archive_format <- find_compress(archive)
-    if (archive_format$file == "") {
-        archive_format$file <- "."
-    }
     if (inherits(x, "data.frame")) {
         stop("'x' must be a list. Perhaps you want export()?")
     }
@@ -81,7 +78,7 @@ export_list <- function(x, file, archive = "", ...) {
         }
         outfiles <- file
     }
-    if (is.na(archive_format$compress)) {
+    if (is.na(archive_format$compress) & archive_format$file != "") {
         outfiles <- file.path(archive_format$file, outfiles)
     }
     out <- list()
@@ -94,7 +91,7 @@ export_list <- function(x, file, archive = "", ...) {
     if (!is.na(archive_format$compress)) {
         compress_out(archive, outfiles)
         unlink(outfiles)
-        return(invisible(archive_format$file))
+        return(invisible(archive))
     }
     return(invisible(outfiles))
 }
