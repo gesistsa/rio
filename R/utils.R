@@ -152,3 +152,11 @@ escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&a
     }
     invisible(NULL)
 }
+
+.create_directory_if_not_exists <- function(file) {
+    file_dir <- dirname(normalizePath(file, mustWork = FALSE))
+    if (!dir.exists(file_dir)) {
+        dir.create(file_dir, recursive = TRUE)
+    }
+    invisible(NULL)
+}

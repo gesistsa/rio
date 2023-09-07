@@ -12,6 +12,7 @@
    - More check for the `file` argument #301
    - `import_list` works with single Excel/HTML/Zip online #294
    - Correct XML/HTML escaping #303
+   - Create directory if it doesn't exist #347
 * Declutter
    - remove the obsolete data.table option #323
    - write all documentation blocks in markdown #311
