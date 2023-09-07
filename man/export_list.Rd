@@ -4,12 +4,16 @@
 \alias{export_list}
 \title{Export list of data frames to files}
 \usage{
-export_list(x, file, ...)
+export_list(x, file, archive = "", ...)
 }
 \arguments{
 \item{x}{A list of data frames to be written to files.}
 
 \item{file}{A character vector string containing a single file name with a \verb{\\\%s} wildcard placeholder, or a vector of file paths for multiple files to be imported. If \code{x} elements are named, these will be used in place of \verb{\\\%s}, otherwise numbers will be used; all elements must be named for names to be used.}
+
+\item{archive}{character. Either empty string (default) to save files in current
+directory, a path to a (new) directory, or a .zip/.tar file to compress all
+files into an archive.}
 
 \item{\dots}{Additional arguments passed to \code{\link[=export]{export()}}.}
 }
@@ -25,9 +29,12 @@ Use \code{\link[=export]{export()}} to export a list of data frames to a vector 
 \examples{
 ## For demo, a temp. file path is created with the file extension .xlsx
 xlsx_file <- tempfile(fileext = ".xlsx")
-export(list(mtcars1 = mtcars[1:10,],
-            mtcars2 = mtcars[11:20,],
-            mtcars3 = mtcars[21:32,]),
+export(
+    list(
+        mtcars1 = mtcars[1:10, ],
+        mtcars2 = mtcars[11:20, ],
+        mtcars3 = mtcars[21:32, ]
+    ),
     xlsx_file
 )
 
