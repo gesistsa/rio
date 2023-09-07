@@ -91,11 +91,7 @@ export_list <- function(x, file, archive = "", ...) {
         }
     }
     if (!is.na(archive_format$compress)) {
-        archive <- normalizePath(archive, mustWork = FALSE)
-        archive_dir <- dirname(archive)
-        if (!dir.exists(archive_dir)) {
-            dir.create(archive_dir, recursive = TRUE)
-        }
+        .create_directory_if_not_exists(archive)
         compress_out(archive, outfiles)
         unlink(outfiles)
         return(invisible(archive))
