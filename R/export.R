@@ -101,11 +101,6 @@ export <- function(x, file, format, ...) {
     }
     fmt <- get_type(fmt)
     outfile <- file
-    if (fmt %in% c("gz", "gzip")) {
-        fmt <- tools::file_ext(tools::file_path_sans_ext(file, compression = FALSE))
-        file <- gzfile(file, "w")
-        on.exit(close(file))
-    }
 
     data_name <- as.character(substitute(x))
     if (!is.data.frame(x) & !is.matrix(x)) {
@@ -115,15 +110,18 @@ export <- function(x, file, format, ...) {
     } else if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
-
+    .create_directory_if_not_exists(file = file) ## fix 347
+    if (fmt %in% c("gz", "gzip")) {
+        fmt <- tools::file_ext(tools::file_path_sans_ext(file, compression = FALSE))
+        file <- gzfile(file, "w")
+        on.exit(close(file))
+    }
     class(file) <- c(paste0("rio_", fmt), class(file))
     .export(file = file, x = x, ...)
-
     if (!is.na(compress)) {
         cfile <- compress_out(cfile = cfile, filename = file, type = compress)
         unlink(file)
         return(invisible(cfile))
     }
-
     invisible(unclass(outfile))
 }
