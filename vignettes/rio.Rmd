@@ -33,45 +33,32 @@ install_formats()
 
 The full list of supported formats is below:
 
-| Format | Typical Extension | Import Package | Export Package | Installed by Default |
-| ------ | --------- | -------------- | -------------- | -------------------- |
-| Comma-separated data | .csv | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table) | Yes |
-| Pipe-separated data | .psv | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table) | Yes |
-| Tab-separated data | .tsv | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table) | Yes |
-| CSVY (CSV + YAML metadata header) | .csvy | [**data.table**](https://cran.r-project.org/package=data.table) | [**data.table**](https://cran.r-project.org/package=data.table) | Yes |
-| SAS | .sas7bdat | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
-| SPSS | .sav | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
-| SPSS (compressed) | .zsav | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
-| Stata | .dta | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
-| SAS XPORT | .xpt | [**haven**](https://cran.r-project.org/package=haven) | [**haven**](https://cran.r-project.org/package=haven) | Yes |
-| SPSS Portable | .por | [**haven**](https://cran.r-project.org/package=haven) |  | Yes |
-| Excel | .xls | [**readxl**](https://cran.r-project.org/package=readxl) |  | Yes |
-| Excel | .xlsx | [**readxl**](https://cran.r-project.org/package=readxl) | [**openxlsx**](https://cran.r-project.org/package=openxlsx) | Yes |
-| R syntax | .R | **base** | **base** | Yes |
-| Saved R objects | .RData, .rda | **base** | **base** | Yes |
-| Serialized R objects | .rds | **base** | **base** | Yes |
-| Epiinfo | .rec | [**foreign**](https://cran.r-project.org/package=foreign) |  | Yes |
-| Minitab | .mtp | [**foreign**](https://cran.r-project.org/package=foreign) |  | Yes |
-| Systat | .syd | [**foreign**](https://cran.r-project.org/package=foreign) |  | Yes |
-| "XBASE" database files | .dbf | [**foreign**](https://cran.r-project.org/package=foreign) | [**foreign**](https://cran.r-project.org/package=foreign) | Yes |
-| Weka Attribute-Relation File Format | .arff | [**foreign**](https://cran.r-project.org/package=foreign) | [**foreign**](https://cran.r-project.org/package=foreign) | Yes |
-| Data Interchange Format | .dif | **utils** |  | Yes |
-| Fortran data | no recognized extension | **utils** |  | Yes |
-| Fixed-width format data | .fwf | **utils** | **utils** | Yes |
-| gzip comma-separated data | .csv.gz | **utils** | **utils** | Yes |
-| Apache Arrow (Parquet) | .parquet | [**arrow**](https://cran.r-project.org/package=arrow) | [**arrow**](https://cran.r-project.org/package=arrow) | No |
-| EViews | .wf1 | [**hexView**](https://cran.r-project.org/package=hexView) |  | No |
-| Feather R/Python interchange format | .feather | [**arrow**](https://cran.r-project.org/package=arrow) | [**arrow**](https://cran.r-project.org/package=arrow) | No |
-| Fast Storage | .fst | [**fst**](https://cran.r-project.org/package=fst) | [**fst**](https://cran.r-project.org/package=fst) | No |
-| JSON | .json | [**jsonlite**](https://cran.r-project.org/package=jsonlite) | [**jsonlite**](https://cran.r-project.org/package=jsonlite) | No |
-| Matlab | .mat | [**rmatio**](https://cran.r-project.org/package=rmatio) | [**rmatio**](https://cran.r-project.org/package=rmatio) | No |
-| OpenDocument Spreadsheet | .ods | [**readODS**](https://cran.r-project.org/package=readODS) | [**readODS**](https://cran.r-project.org/package=readODS) | No |
-| HTML Tables | .html | [**xml2**](https://cran.r-project.org/package=xml2) | [**xml2**](https://cran.r-project.org/package=xml2) | No |
-| Shallow XML documents | .xml | [**xml2**](https://cran.r-project.org/package=xml2) | [**xml2**](https://cran.r-project.org/package=xml2) | No |
-| YAML | .yml | [**yaml**](https://cran.r-project.org/package=yaml) | [**yaml**](https://cran.r-project.org/package=yaml) | No |
-| Clipboard | default is tsv | [**clipr**](https://cran.r-project.org/package=clipr) | [**clipr**](https://cran.r-project.org/package=clipr) | No |
-| [Google Sheets](https://www.google.com/sheets/about/) | as Comma-separated data |  |  |  |
-| Serialized R objects | .qs | [**qs**](https://cran.r-project.org/package=qs) | [**qs**](https://cran.r-project.org/package=qs) | No |
+```{r, include = FALSE}
+suppressPackageStartupMessages(library(data.table))
+```
+
+```{r featuretable, echo = FALSE}
+rf <- data.table(rio:::rio_formats)[!input %in% c(",", ";", "|", "\\t") & type %in% c("import", "suggest", "archive"), !"ext"]
+short_rf <- rf[, paste(input, collapse = " / "), by = format_name]
+type_rf <- unique(rf[,c("format_name", "type", "import_function", "export_function", "note")])
+
+feature_table <- short_rf[type_rf, on = .(format_name)]
+
+colnames(feature_table)[2] <- "signature"
+
+setorder(feature_table, "type", "format_name")
+feature_table$import_function <- stringi::stri_extract_first(feature_table$import_function, regex = "[a-zA-Z0-9\\.]+")
+feature_table$import_function[is.na(feature_table$import_function)] <- ""
+feature_table$export_function <- stringi::stri_extract_first(feature_table$export_function, regex = "[a-zA-Z0-9\\.]+")
+feature_table$export_function[is.na(feature_table$export_function)] <- ""
+
+feature_table$type <- ifelse(feature_table$type %in% c("suggest"), "Suggest", "Default")
+feature_table <- feature_table[,c("format_name", "signature", "import_function", "export_function", "type", "note")]
+
+colnames(feature_table) <- c("Format", "Extensions / \"fmt\"", "Import Package", "Export Package", "Type", "Note")
+
+knitr::kable(feature_table)
+```
 
 Additionally, any format that is not supported by **rio** but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple "Unrecognized file format" error.
 

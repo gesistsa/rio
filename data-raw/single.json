@@ -1,0 +1,823 @@
+[
+    {
+        "input": "parquet",
+        "fmt": "parquet",
+        "ext": "parquet",
+        "type": "suggest",
+        "format_name": "Apache Arrow (Parquet)",
+        "import_function": "arrow::read_parquet",
+        "export_function": "arrow::write_parquet",
+        "note": ""
+    },
+    {
+        "input": "bzip2",
+        "fmt": "tar",
+        "ext": "bzip2",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
+        "input": "xz",
+        "fmt": "tar",
+        "ext": "xz",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
+        "input": "gz",
+        "fmt": "tar",
+        "ext": "gz",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
+        "input": "gzip",
+        "fmt": "tar",
+        "ext": "gzip",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
+        "input": "tar",
+        "fmt": "tar",
+        "ext": "tar",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
+        "input": "bmp",
+        "fmt": "bmp",
+        "ext": "bmp",
+        "type": "known",
+        "format_name": "BMP images",
+        "import_function": "bmp::read.bmp",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "bib",
+        "fmt": "bib",
+        "ext": "bib",
+        "type": "known",
+        "format_name": "BibTeX files",
+        "import_function": "bib2df::bib2df",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "bibtex",
+        "fmt": "bib",
+        "ext": "bib",
+        "type": "known",
+        "format_name": "BibTeX files",
+        "import_function": "bib2df::bib2df",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "csvy",
+        "fmt": "csvy",
+        "ext": "csvy",
+        "type": "import",
+        "format_name": "CSVY (CSV + YAML metadata header)",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": ""
+    },
+    {
+        "input": "clipboard",
+        "fmt": "clipboard",
+        "ext": "",
+        "type": "suggest",
+        "format_name": "Clipboard",
+        "import_function": "clipr::read_clip_tbl",
+        "export_function": "clipr::write_clip",
+        "note": "default is tsv"
+    },
+    {
+        "input": "csv",
+        "fmt": "csv",
+        "ext": "csv",
+        "type": "import",
+        "format_name": "Comma-separated data",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": ""
+    },
+    {
+        "input": ";",
+        "fmt": "csv2",
+        "ext": "csv2",
+        "type": "import",
+        "format_name": "Comma-separated data (European)",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": ""
+    },
+    {
+        "input": "csv2",
+        "fmt": "csv2",
+        "ext": "csv2",
+        "type": "import",
+        "format_name": "Comma-separated data (European)",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": ""
+    },
+    {
+        "input": "dif",
+        "fmt": "dif",
+        "ext": "dif",
+        "type": "import",
+        "format_name": "Data Interchange Format",
+        "import_function": "utils::read.DIF",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "eviews",
+        "fmt": "eviews",
+        "ext": "eviews",
+        "type": "suggest",
+        "format_name": "EViews",
+        "import_function": "hexView::readEViews",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "wf1",
+        "fmt": "eviews",
+        "ext": "eviews",
+        "type": "suggest",
+        "format_name": "EViews",
+        "import_function": "hexView::readEViews",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "epiinfo",
+        "fmt": "rec",
+        "ext": "rec",
+        "type": "import",
+        "format_name": "Epiinfo",
+        "import_function": "foreign::read.epiinfo",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "rec",
+        "fmt": "rec",
+        "ext": "rec",
+        "type": "import",
+        "format_name": "Epiinfo",
+        "import_function": "foreign::read.epiinfo",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "excel",
+        "fmt": "xlsx",
+        "ext": "xlsx",
+        "type": "import",
+        "format_name": "Excel",
+        "import_function": "readxl::read_xlsx",
+        "export_function": "openxlsx::write.xlsx",
+        "note": ""
+    },
+    {
+        "input": "xls",
+        "fmt": "xls",
+        "ext": "xls",
+        "type": "import",
+        "format_name": "Excel (Legacy)",
+        "import_function": "readxl::read_xls",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "xlsx",
+        "fmt": "xlsx",
+        "ext": "xlsx",
+        "type": "import",
+        "format_name": "Excel",
+        "import_function": "readxl::read_xlsx",
+        "export_function": "openxlsx::write.xlsx",
+        "note": ""
+    },
+    {
+        "input": "fst",
+        "fmt": "fst",
+        "ext": "fst",
+        "type": "suggest",
+        "format_name": "Fast Storage",
+        "import_function": "fst::read.fst",
+        "export_function": "fst::write.fst",
+        "note": ""
+    },
+    {
+        "input": "feather",
+        "fmt": "feather",
+        "ext": "feather",
+        "type": "suggest",
+        "format_name": "Feather R/Python interchange format",
+        "import_function": "arrow::read_feather",
+        "export_function": "arrow::write_feather",
+        "note": ""
+    },
+    {
+        "input": "fwf",
+        "fmt": "fwf",
+        "ext": "fwf",
+        "type": "import",
+        "format_name": "Fixed-width format data",
+        "import_function": "utils::read.table",
+        "export_function": "utils::write.table",
+        "note": ""
+    },
+    {
+        "input": "fortran",
+        "fmt": "fortran",
+        "ext": "",
+        "type": "import",
+        "format_name": "Fortran data",
+        "import_function": "utils::read.fortran",
+        "export_function": "",
+        "note": "No recognized extension"
+    },
+    {
+        "input": "gnumeric",
+        "fmt": "gnumeric",
+        "ext": "gnumeric",
+        "type": "known",
+        "format_name": "Gnumeric",
+        "import_function": "gnumeric::read.gnumeric.sheet",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "csv",
+        "fmt": "csv",
+        "ext": "",
+        "type": "import",
+        "format_name": "Google Sheets",
+        "import_function": "data.table::fread",
+        "export_function": "",
+        "note": "As comma-separated data"
+    },
+    {
+        "input": "gexf",
+        "fmt": "gexf",
+        "ext": "gexf",
+        "type": "known",
+        "format_name": "Graph Exchange XML Format",
+        "import_function": "rgexf::read.gexf",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "pzfx",
+        "fmt": "pzfx",
+        "ext": "pzfx",
+        "type": "suggest",
+        "format_name": "Graphpad Prism",
+        "import_function": "pzfx::read_pzfx",
+        "export_function": "pzfx::write_pzfx",
+        "note": ""
+    },
+    {
+        "input": "htm",
+        "fmt": "html",
+        "ext": "html",
+        "type": "suggest",
+        "format_name": "HTML Tables",
+        "import_function": "xml2::read_html",
+        "export_function": "xml2::write_xml",
+        "note": ""
+    },
+    {
+        "input": "html",
+        "fmt": "html",
+        "ext": "html",
+        "type": "suggest",
+        "format_name": "HTML Tables",
+        "import_function": "xml2::read_html",
+        "export_function": "xml2::write_xml",
+        "note": ""
+    },
+    {
+        "input": "jpeg",
+        "fmt": "jpg",
+        "ext": "jpg",
+        "type": "known",
+        "format_name": "JPEG images",
+        "import_function": "jpeg::readJPEG",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "jpg",
+        "fmt": "jpg",
+        "ext": "jpg",
+        "type": "known",
+        "format_name": "JPEG images",
+        "import_function": "jpeg::readJPEG",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "json",
+        "fmt": "json",
+        "ext": "json",
+        "type": "suggest",
+        "format_name": "JSON",
+        "import_function": "jsonlite::fromJSON",
+        "export_function": "jsonlite::toJSON",
+        "note": ""
+    },
+    {
+        "input": "mat",
+        "fmt": "matlab",
+        "ext": "matlab",
+        "type": "suggest",
+        "format_name": "Matlab",
+        "import_function": "rmatio::read.mat",
+        "export_function": "rmatio::write.mat",
+        "note": ""
+    },
+    {
+        "input": "matlab",
+        "fmt": "matlab",
+        "ext": "matlab",
+        "type": "suggest",
+        "format_name": "Matlab",
+        "import_function": "rmatio::read.mat",
+        "export_function": "rmatio::write.mat",
+        "note": ""
+    },
+    {
+        "input": "minitab",
+        "fmt": "mtp",
+        "ext": "mtp",
+        "type": "import",
+        "format_name": "Minitab",
+        "import_function": "foreign::read.mtp",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "mtp",
+        "fmt": "mtp",
+        "ext": "mtp",
+        "type": "import",
+        "format_name": "Minitab",
+        "import_function": "foreign::read.mtp",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "ods",
+        "fmt": "ods",
+        "ext": "ods",
+        "type": "suggest",
+        "format_name": "OpenDocument Spreadsheet",
+        "import_function": "readODS::read_ods",
+        "export_function": "readODS::write_ods",
+        "note": ""
+    },
+    {
+        "input": "pdf",
+        "fmt": "pdf",
+        "ext": "pdf",
+        "type": "known",
+        "format_name": "PDF files",
+        "import_function": "tabulizer::extract_tables",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "png",
+        "fmt": "png",
+        "ext": "png",
+        "type": "known",
+        "format_name": "PNG images",
+        "import_function": "png::readPNG",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "npy",
+        "fmt": "npy",
+        "ext": "npy",
+        "type": "known",
+        "format_name": "Pickled Numpy arrays",
+        "import_function": "RcppCNPy::npyLoad",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "|",
+        "fmt": "psv",
+        "ext": "psv",
+        "type": "import",
+        "format_name": "Pipe-separated data",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": ""
+    },
+    {
+        "input": "psv",
+        "fmt": "psv",
+        "ext": "psv",
+        "type": "import",
+        "format_name": "Pipe-separated data",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": ""
+    },
+    {
+        "input": "beancount",
+        "fmt": "ledger",
+        "ext": "ledger",
+        "type": "enhance",
+        "format_name": "Plain text accounting format",
+        "import_function": "ledger::register",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "hledger",
+        "fmt": "ledger",
+        "ext": "ledger",
+        "type": "enhance",
+        "format_name": "Plain text accounting format",
+        "import_function": "ledger::register",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "ledger",
+        "fmt": "ledger",
+        "ext": "ledger",
+        "type": "enhance",
+        "format_name": "Plain text accounting format",
+        "import_function": "ledger::register",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "bean",
+        "fmt": "ledger",
+        "ext": "ledger",
+        "type": "enhance",
+        "format_name": "Plain text accounting format",
+        "import_function": "ledger::register",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "r",
+        "fmt": "r",
+        "ext": "r",
+        "type": "import",
+        "format_name": "R syntax",
+        "import_function": "base::dget",
+        "export_function": "base::dput",
+        "note": ""
+    },
+    {
+        "input": "sas",
+        "fmt": "sas7bdat",
+        "ext": "sas7bdat",
+        "type": "import",
+        "format_name": "SAS",
+        "import_function": "haven::read_sas",
+        "export_function": "haven::write_sas",
+        "note": "Export is deprecated"
+    },
+    {
+        "input": "sas7bdat",
+        "fmt": "sas7bdat",
+        "ext": "sas7bdat",
+        "type": "import",
+        "format_name": "SAS",
+        "import_function": "haven::read_sas",
+        "export_function": "haven::write_sas",
+        "note": "Export is deprecated"
+    },
+    {
+        "input": "xport",
+        "fmt": "xpt",
+        "ext": "xpt",
+        "type": "import",
+        "format_name": "SAS XPORT",
+        "import_function": "haven::read_xpt",
+        "export_function": "haven::write_xpt",
+        "note": ""
+    },
+    {
+        "input": "xpt",
+        "fmt": "xpt",
+        "ext": "xpt",
+        "type": "import",
+        "format_name": "SAS XPORT",
+        "import_function": "haven::read_xpt",
+        "export_function": "haven::write_xpt",
+        "note": ""
+    },
+    {
+        "input": "sav",
+        "fmt": "sav",
+        "ext": "sav",
+        "type": "import",
+        "format_name": "SPSS",
+        "import_function": "haven::read_sav",
+        "export_function": "haven::write_sav",
+        "note": ""
+    },
+    {
+        "input": "spss",
+        "fmt": "sav",
+        "ext": "sav",
+        "type": "import",
+        "format_name": "SPSS",
+        "import_function": "haven::read_sav",
+        "export_function": "haven::write_sav",
+        "note": ""
+    },
+    {
+        "input": "zsav",
+        "fmt": "zsav",
+        "ext": "zsav",
+        "type": "import",
+        "format_name": "SPSS (compressed)",
+        "import_function": "haven::read_sav",
+        "export_function": "haven::write_sav",
+        "note": ""
+    },
+    {
+        "input": "por",
+        "fmt": "spss",
+        "ext": "spss",
+        "type": "import",
+        "format_name": "SPSS Portable",
+        "import_function": "haven::read_por",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "rda",
+        "fmt": "rdata",
+        "ext": "rdata",
+        "type": "import",
+        "format_name": "Saved R objects",
+        "import_function": "base::load",
+        "export_function": "base::save",
+        "note": ""
+    },
+    {
+        "input": "rdata",
+        "fmt": "rdata",
+        "ext": "rdata",
+        "type": "import",
+        "format_name": "Saved R objects",
+        "import_function": "base::load",
+        "export_function": "base::save",
+        "note": ""
+    },
+    {
+        "input": "rds",
+        "fmt": "rds",
+        "ext": "rds",
+        "type": "import",
+        "format_name": "Serialized R objects",
+        "import_function": "base::readRDS",
+        "export_function": "base::saveRDS",
+        "note": ""
+    },
+    {
+        "input": "qs",
+        "fmt": "qs",
+        "ext": "qs",
+        "type": "suggest",
+        "format_name": "Serialized R objects (Quick)",
+        "import_function": "qs::qread",
+        "export_function": "qs::qsave",
+        "note": ""
+    },
+    {
+        "input": "xml",
+        "fmt": "xml",
+        "ext": "xml",
+        "type": "suggest",
+        "format_name": "Shallow XML documents",
+        "import_function": "xml2::read_xml",
+        "export_function": "xml2::write_xml",
+        "note": ""
+    },
+    {
+        "input": "sss",
+        "fmt": "sss",
+        "ext": "sss",
+        "type": "known",
+        "format_name": "Standard Survey Structure (Triple-S)",
+        "import_function": "sss::read.sss",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "dta",
+        "fmt": "dta",
+        "ext": "dta",
+        "type": "import",
+        "format_name": "Stata",
+        "import_function": "haven::read_dta",
+        "export_function": "haven::write_dta",
+        "note": ""
+    },
+    {
+        "input": "stata",
+        "fmt": "dta",
+        "ext": "dta",
+        "type": "import",
+        "format_name": "Stata",
+        "import_function": "haven::read_dta",
+        "export_function": "haven::write_dta",
+        "note": ""
+    },
+    {
+        "input": "sdmx",
+        "fmt": "sdmx",
+        "ext": "sdmx",
+        "type": "known",
+        "format_name": "Statistical Data and Metadata eXchange",
+        "import_function": "sdmx::readSDMX",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "syd",
+        "fmt": "syd",
+        "ext": "syd",
+        "type": "import",
+        "format_name": "Systat",
+        "import_function": "foreign::read.systat",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "systat",
+        "fmt": "syd",
+        "ext": "syd",
+        "type": "import",
+        "format_name": "Systat",
+        "import_function": "foreign::read.systat",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "tif",
+        "fmt": "tiff",
+        "ext": "tiff",
+        "type": "known",
+        "format_name": "TIFF images",
+        "import_function": "tiff::readTIFF",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "tiff",
+        "fmt": "tiff",
+        "ext": "tiff",
+        "type": "known",
+        "format_name": "TIFF images",
+        "import_function": "tiff::readTIFF",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "\\t",
+        "fmt": "tsv",
+        "ext": "tsv",
+        "type": "import",
+        "format_name": "Tab-separated data",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": ""
+    },
+    {
+        "input": "tsv",
+        "fmt": "tsv",
+        "ext": "tsv",
+        "type": "import",
+        "format_name": "Tab-separated data",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": ""
+    },
+    {
+        "input": "txt",
+        "fmt": "tsv",
+        "ext": "tsv",
+        "type": "import",
+        "format_name": "Tab-separated data",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": ""
+    },
+    {
+        "input": "dump",
+        "fmt": "dump",
+        "ext": "dump",
+        "type": "import",
+        "format_name": "Text Representations of R Objects",
+        "import_function": "base::dump",
+        "export_function": "base::source",
+        "note": ""
+    },
+    {
+        "input": "arff",
+        "fmt": "arff",
+        "ext": "arff",
+        "type": "import",
+        "format_name": "Weka Attribute-Relation File Format",
+        "import_function": "foreign::read.arff",
+        "export_function": "foreign::write.arff",
+        "note": ""
+    },
+    {
+        "input": "weka",
+        "fmt": "arff",
+        "ext": "arff",
+        "type": "import",
+        "format_name": "Weka Attribute-Relation File Format",
+        "import_function": "foreign::read.arff",
+        "export_function": "foreign::write.arff",
+        "note": ""
+    },
+    {
+        "input": "dbf",
+        "fmt": "dbf",
+        "ext": "dbf",
+        "type": "import",
+        "format_name": "XBASE database files",
+        "import_function": "foreign::read.dbf",
+        "export_function": "foreign::write.dbf",
+        "note": ""
+    },
+    {
+        "input": "yaml",
+        "fmt": "yml",
+        "ext": "yml",
+        "type": "suggest",
+        "format_name": "YAML",
+        "import_function": "yaml::read_yaml",
+        "export_function": "yaml::write_yaml",
+        "note": ""
+    },
+    {
+        "input": "yml",
+        "fmt": "yml",
+        "ext": "yml",
+        "type": "suggest",
+        "format_name": "YAML",
+        "import_function": "yaml::read_yaml",
+        "export_function": "yaml::write_yaml",
+        "note": ""
+    },
+    {
+        "input": "zip",
+        "fmt": "zip",
+        "ext": "zip",
+        "type": "archive",
+        "format_name": "Zip files",
+        "import_function": "utils::unzip",
+        "export_function": "utils::zip",
+        "note": ""
+    },
+    {
+        "input": ",",
+        "fmt": "csv",
+        "ext": "csv",
+        "type": "import",
+        "format_name": "Comma-separated data",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": ""
+    }
+]
+
