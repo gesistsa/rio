@@ -22,7 +22,7 @@ test_that("export_list() works", {
     expect_true(all.equal(mylist[["mtcars3"]], import("mtcars3.csv")))
 
     names(mylist) <- NULL
-    expect_true(identical(export_list(mylist, file = "mtcars_%s.csv"), paste0("mtcars_", 1:3, ".csv")))
+    expect_true(identical(export_list(mylist, file = "mtcars_%s.csv"), normalizePath(paste0("mtcars_", 1:3, ".csv"))))
 
     names(mylist) <- c("a", "", "c")
     expect_error(export_list(mylist), label = "export_list() fails without 'file' argument")

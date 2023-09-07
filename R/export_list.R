@@ -81,7 +81,7 @@ export_list <- function(x, file, archive = "", ...) {
     if (is.na(archive_format$compress) && archive_format$file != "") {
         outfiles <- file.path(archive_format$file, outfiles)
     }
-    outfiles <- normalizePath(outfiles)
+    outfiles <- normalizePath(outfiles, mustWork = FALSE)
 
     out <- list()
     for (f in seq_along(x)) {
@@ -91,7 +91,7 @@ export_list <- function(x, file, archive = "", ...) {
         }
     }
     if (!is.na(archive_format$compress)) {
-        archive <- normalizePath(archive)
+        archive <- normalizePath(archive, mustWork = FALSE)
         compress_out(archive, outfiles)
         unlink(outfiles)
         return(invisible(archive))
