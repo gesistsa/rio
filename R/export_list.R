@@ -81,19 +81,19 @@ export_list <- function(x, file, archive = "", ...) {
     if (is.na(archive_format$compress) && archive_format$file != "") {
         outfiles <- file.path(archive_format$file, outfiles)
     }
-    outfiles <- normalizePath(outfiles, mustWork = FALSE)
+    outfiles_normalized <- normalizePath(outfiles, mustWork = FALSE)
 
     out <- list()
     for (f in seq_along(x)) {
-        out[[f]] <- try(export(x[[f]], file = outfiles[f], ...), silent = TRUE)
+        out[[f]] <- try(export(x[[f]], file = outfiles_normalized[f], ...), silent = TRUE)
         if (inherits(out[[f]], "try-error")) {
             warning(sprintf("Export failed for element %d, filename: %s", f, outfiles[f]))
         }
     }
     if (!is.na(archive_format$compress)) {
         .create_directory_if_not_exists(archive)
-        compress_out(archive, outfiles)
-        unlink(outfiles)
+        compress_out(archive, outfiles_normalized)
+        unlink(outfiles_normalized)
         return(invisible(archive))
     }
     return(invisible(outfiles))
