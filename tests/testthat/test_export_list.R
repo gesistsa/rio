@@ -16,6 +16,7 @@ test_that("export_list() works", {
     expect_true(identical(export_list(mylist, file = "%s.csv"), paste0("mtcars", 3:1, ".csv")))
 
     expect_true(identical(export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "archive.zip"), "archive.zip"))
+    expect_true(identical(export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "arch/archive.zip"), "arch/archive.zip"))
 
     expect_true(all.equal(mylist[["mtcars1"]], import("mtcars1.csv")))
     expect_true(all.equal(mylist[["mtcars2"]], import("mtcars2.csv")))
@@ -46,3 +47,5 @@ unlink("a.csv")
 unlink("b.csv")
 
 unlink("archive.zip")
+unlink("arch/archive.zip")
+unlink("arch/", recursive = TRUE)
