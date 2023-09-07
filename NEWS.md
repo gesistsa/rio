@@ -3,6 +3,7 @@
 * Update Examples to make them more realistic #327
 * Add support for `qs` #275 h/t David Schoch
 * Use `arrow` to import / export `feather` #340
+* `export_list` can write multiple data frames to a single archive file (e.g. zip, tar) or a directory #346 h/t David Schoch
 * Bug fixes
    - ... is correctly passed for exporting ODS and feather #318
    - POTENTIALLY BREAKING: JSON are exported in UTF-8 by default; solved encoding issues on
