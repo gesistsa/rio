@@ -130,7 +130,7 @@ install_formats()
 
 The full list of supported formats is below:
 
-| Format                              | Extensions / “fmt”           | Import Package | Export Package | Type    | Note                    |
+| Name                                | Extensions / “format”        | Import Package | Export Package | Type    | Note                    |
 | :---------------------------------- | :--------------------------- | :------------- | :------------- | :------ | :---------------------- |
 | Archive files (handled by tar)      | bzip2 / xz / gz / gzip / tar | utils          | utils          | Default |                         |
 | Zip files                           | zip                          | utils          | utils          | Default |                         |

@@ -113,7 +113,7 @@ feature_table$export_function[is.na(feature_table$export_function)] <- ""
 feature_table$type <- ifelse(feature_table$type %in% c("suggest"), "Suggest", "Default")
 feature_table <- feature_table[,c("format_name", "signature", "import_function", "export_function", "type", "note")]
 
-colnames(feature_table) <- c("Format", "Extensions / \"fmt\"", "Import Package", "Export Package", "Type", "Note")
+colnames(feature_table) <- c("Name", "Extensions / \"format\"", "Import Package", "Export Package", "Type", "Note")
 
 knitr::kable(feature_table)
 ```
