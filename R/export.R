@@ -82,37 +82,37 @@ export <- function(x, file, format, ...) {
     .check_file(file, single_only = TRUE)
     if (missing(file) && missing(format)) {
         stop("Must specify 'file' and/or 'format'")
-    } else if (!missing(file) && !missing(format)) {
+    }
+    if (!missing(file) && !missing(format)) {
         format <- tolower(format)
         cfile <- file
         f <- find_compress(file)
         file <- f$file
         compress <- f$compress
-    } else if (!missing(file) && missing(format)) {
+    }
+    if (!missing(file) && missing(format)) {
         cfile <- file
         f <- find_compress(file)
         file <- f$file
         compress <- f$compress
         format <- get_ext(file)
-    } else if (!missing(format)) {
+    }
+    if (!missing(format) && missing(file)) {
         format <- .standardize_format(format)
         file <- paste0(as.character(substitute(x)), ".", format)
         compress <- NA_character_
     }
     format <- .standardize_format(format)
     outfile <- file
-
-    data_name <- as.character(substitute(x))
-    if (!is.data.frame(x) & !is.matrix(x)) {
-        if (!format %in% c("xlsx", "html", "rdata", "rds", "json")) {
-            stop("'x' is not a data.frame or matrix")
-        }
-    } else if (is.matrix(x)) {
+    if (is.matrix(x)) {
         x <- as.data.frame(x)
+    }
+    if (!is.data.frame(x) && !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs")) {
+        stop("'x' is not a data.frame or matrix", call. = FALSE)
     }
     .create_directory_if_not_exists(file = file) ## fix 347
     if (format %in% c("gz", "gzip")) {
-        format <- tools::file_ext(tools::file_path_sans_ext(file, compression = FALSE))
+        format <- get_info(tools::file_path_sans_ext(file, compression = FALSE))$format
         file <- gzfile(file, "w")
         on.exit(close(file))
     }
