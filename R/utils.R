@@ -9,24 +9,43 @@
 #' get_ext("https://github.com/ropensci/readODS/raw/v2.1/starwars.ods")
 #' @export
 get_ext <- function(file) {
-    if (!is.character(file)) {
-        stop("'file' is not a string")
+    get_info(file)$ext
+}
+
+get_info <- function(file) {
+    .check_file(file, single_only = TRUE)
+    if (tolower(file) == "clipboard") {
+        return(.query_format_by_ext(ext = "clipboard", file = "clipboard"))
     }
     if (!grepl("^http.*://", file)) {
-        fmt <- tools::file_ext(file)
-    } else if (grepl("^http.*://", file)) {
-        parsed <- strsplit(strsplit(file, "?", fixed = TRUE)[[1]][1], "/", fixed = TRUE)[[1]]
-        file <- parsed[length(parsed)]
-        fmt <- tools::file_ext(file)
-        get_type(fmt)
-    }
-    if (file == "clipboard") {
-        return("clipboard")
-    } else if (fmt == "") {
-        stop("'file' has no extension", call. = FALSE)
+        ext <- tolower(tools::file_ext(file))
     } else {
-        return(tolower(fmt))
+        parsed <- strsplit(strsplit(file, "?", fixed = TRUE)[[1]][1], "/", fixed = TRUE)[[1]]
+        url_file <- parsed[length(parsed)]
+        ext <- tolower(tools::file_ext(url_file))
     }
+    if (ext == "") {
+        stop("'file' has no extension", call. = FALSE)
+    }
+    return(.query_format_by_ext(ext = ext, file = file))
+}
+
+.query_format_by_ext <- function(ext, file) {
+    unique_rio_formats <- unique(rio_formats[,c(-8)])
+    if (file == "clipboard") {
+        output <- as.list(unique_rio_formats[unique_rio_formats$format == "clipboard",])
+        output$file <- file
+        output$ext <- "clipboard" ## for backward compatibility with <= 0.5.30
+        return(output)
+    }
+    ## TODO google sheets
+    matched_formats <- unique_rio_formats[unique_rio_formats$input == ext, ]
+    if (nrow(matched_formats) == 0) {
+        return(list(ext = ext, format = NA, format_name = NA, import_function = NA, export_function = NA, file = file))
+    }
+    output <- as.list(matched_formats)
+    output$file <- file
+    return(output)
 }
 
 get_type <- function(fmt) {

@@ -270,7 +270,7 @@
         "note": ""
     },
     {
-        "input": "csv",
+        "input": "googlesheets",
         "format": "csv",
         "ext": "",
         "type": "import",
