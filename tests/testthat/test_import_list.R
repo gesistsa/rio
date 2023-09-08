@@ -27,6 +27,17 @@ test_that("Import multiple HTML tables in import_list()", {
     expect_true(identical(names(dat[[2]]), names(iris)))
 })
 
+test_that("Import multiple HTML tables in import_list() but with htm #350", {
+    temphtm <- tempfile(fileext = ".htm")
+    file.copy("../testdata/twotables.html", temphtm)
+    dat <- import_list(temphtm)
+    expect_true(identical(dim(dat[[1]]), dim(mtcars)))
+    expect_true(identical(names(dat[[1]]), names(mtcars)))
+    expect_true(identical(dim(dat[[2]]), dim(iris)))
+    expect_true(identical(names(dat[[2]]), names(iris)))
+})
+
+
 test_that("import_list() preserves 'which' names when specified", {
     export(list(a = mtcars, b = iris), "foo.xlsx")
     expect_true(identical(names(import_list("foo.xlsx")), c("a", "b")))

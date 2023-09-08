@@ -2,8 +2,8 @@ context("Errors")
 library("datasets")
 
 test_that("Function suggestions for unsupported export", {
-    expect_error(export(data.frame(1), "test.jpg"), 
-                 "jpg format not supported. Consider using the 'jpeg::writeJPEG()' function", 
+    expect_error(export(data.frame(1), "test.jpg"),
+                 "jpg format not supported. Consider using the 'jpeg::writeJPEG()' function",
                  fixed = TRUE)
 })
 
@@ -11,7 +11,7 @@ test_that("Error for unsupported file types", {
     writeLines("123", con = "test.faketype")
     expect_error(import("test.faketype"), "Format not supported")
     expect_error(export(mtcars, "mtcars.faketype"), "Format not supported")
-    expect_equal(get_type("faketype"), "faketype")
+    expect_equal(.standardize_format("faketype"), "faketype")
     expect_error(get_ext("noextension"), "'file' has no extension")
     unlink("test.faketype")
 })

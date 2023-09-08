@@ -3,38 +3,38 @@ remote_to_local <- function(file, format) {
         # handle google sheets urls
         if (grepl("docs\\.google\\.com/spreadsheets", file)) {
             file <- convert_google_url(file, export_as = "csv")
-            fmt <- "csv"
+            format <- "csv"
         } else {
             # try to extract format from URL
-            fmt <- try(get_ext(file), silent = TRUE)
-            if (inherits(fmt, "try-error")) {
-                fmt <- "TMP"
+            format <- try(get_info(file)$format, silent = TRUE)
+            if (inherits(format, "try-error")) {
+                format <- "TMP"
             }
         }
     } else {
         # handle google sheets urls
         if (grepl("docs\\.google\\.com/spreadsheets", file)) {
-            fmt <- get_type(format)
-            if (fmt %in% c("csv", "tsv", "xlsx", "ods")) {
-                file <- convert_google_url(file, export_as = fmt)
-                fmt <- fmt
+            format <- .standardize_format(format)
+            if (format %in% c("csv", "tsv", "xlsx", "ods")) {
+                file <- convert_google_url(file, export_as = format)
+                format <- format
             } else {
                 file <- convert_google_url(file, export_as = "csv")
-                fmt <- "csv"
+                format <- "csv"
             }
         } else {
-            fmt <- get_type(format)
+            format <- .standardize_format(format)
         }
     }
     # save file locally
-    temp_file <- tempfile(fileext = paste0(".", fmt))
+    temp_file <- tempfile(fileext = paste0(".", format))
     u <- curl::curl_fetch_memory(file)
     writeBin(object = u$content, con = temp_file)
 
-    if (fmt == "TMP") {
+    if (format == "TMP") {
         # try to extract format from curl's final URL
-        fmt <- try(get_ext(u$url), silent = TRUE)
-        if (inherits(fmt, "try-error")) {
+        format <- try(get_info(u$url)$format, silent = TRUE)
+        if (inherits(format, "try-error")) {
             # try to extract format from headers
             h1 <- curl::parse_headers(u$headers)
             # check `Content-Disposition` header
@@ -59,7 +59,7 @@ remote_to_local <- function(file, format) {
             #    ## PARSE MIME TYPE
             # }
         } else {
-            f <- sub("TMP$", fmt, temp_file)
+            f <- sub("TMP$", format, temp_file)
             file.copy(from = temp_file, to = f)
             unlink(temp_file)
             temp_file <- f

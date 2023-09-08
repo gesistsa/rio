@@ -1,18 +1,14 @@
 find_compress <- function(f) {
     if (grepl("zip$", f)) {
-        file <- sub("\\.zip$", "", f)
-        compress <- "zip"
-    } else if (grepl("tar\\.gz$", f)) {
-        file <- sub("\\.tar\\.gz$", "", f)
-        compress <- "tar"
-    } else if (grepl("tar$", f)) {
-        file <- sub("\\.tar$", "", f)
-        compress <- "tar"
-    } else {
-        file <- f
-        compress <- NA_character_
+        return(list(file = sub("\\.zip$", "", f), compress = "zip"))
     }
-    return(list(file = file, compress = compress))
+    if (grepl("tar\\.gz$", f)) {
+        return(list(file = sub("\\.tar\\.gz$", "", f), compress = "tar"))
+    }
+    if (grepl("tar$", f)) {
+        return(list(file = sub("\\.tar$", "", f), compress = "tar"))
+    }
+    return(list(file = f, compress = NA_character_))
 }
 
 compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2", "xz")) {

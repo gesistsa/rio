@@ -18,31 +18,19 @@
 
 ## @rdname extensions
 .import.default <- function(file, ...) {
-    x <- gettext("%s format not supported. Consider using the '%s()' function")
-    xA <- gettext("Import support for the %s format is exported by the %s package. Run 'library(%s)' then try again.")
-    fmt <- tools::file_ext(file)
-    out <- switch(fmt,
-        bean = sprintf(xA, fmt, "ledger", "ledger"),
-        beancount = sprintf(xA, fmt, "ledger", "ledger"),
-        bib = sprintf(x, fmt, "bib2df::bib2df"),
-        bmp = sprintf(x, fmt, "bmp::read.bmp"),
-        doc = sprintf(x, fmt, "docxtractr::docx_extract_all_tbls"),
-        docx = sprintf(x, fmt, "docxtractr::docx_extract_all_tbls"),
-        gexf = sprintf(x, fmt, "rgexf::read.gexf"),
-        gnumeric = sprintf(x, fmt, "gnumeric::read.gnumeric.sheet"),
-        hledger = sprintf(xA, fmt, "ledger", "ledger"),
-        jpeg = sprintf(x, fmt, "jpeg::readJPEG"),
-        jpg = sprintf(x, fmt, "jpeg::readJPEG"),
-        ledger = sprintf(xA, fmt, "ledger", "ledger"),
-        npy = sprintf(x, fmt, "RcppCNPy::npyLoad"),
-        pdf = sprintf(x, fmt, "tabulizer::extract_tables"),
-        png = sprintf(x, fmt, "png::readPNG"),
-        sdmx = sprintf(x, fmt, "sdmx::readSDMX"),
-        sss = sprintf(x, fmt, "sss::read.sss"),
-        tiff = sprintf(x, fmt, "tiff::readTIFF"),
-        gettext("Format not supported")
-    )
-    stop(out, call. = FALSE)
+    fileinfo <- get_info(file)
+    if (is.na(fileinfo$type) || is.na(fileinfo$import_function) || fileinfo$import_function == "") {
+        stop("Format not supported", call. = FALSE)
+    }
+    if (fileinfo$type == "known") {
+        stop(sprintf(gettext("%s format not supported. Consider using the '%s()' function"),
+                     fileinfo$format, fileinfo$import_function), call. = FALSE)
+    }
+    if (fileinfo$type == "enhance") {
+        pkg <- stringi::stri_extract_first(fileinfo$import_function, regex = "[a-zA-Z0-9\\.]+")
+        stop(sprintf(gettext("Import support for the %s format is exported by the %s package. Run 'library(%s)' then try again."),
+                     fileinfo$format, pkg, pkg), call. = FALSE)
+    }
 }
 
 ## @rdname extensions
@@ -52,16 +40,12 @@
 
 ## @rdname extensions
 .export.default <- function(file, x, ...) {
-    x <- gettext("%s format not supported. Consider using the '%s()' function")
-    fmt <- tools::file_ext(file)
-    out <- switch(fmt,
-        gexf = sprintf(x, fmt, "rgexf::write.gexf"),
-        jpg = sprintf(x, fmt, "jpeg::writeJPEG"),
-        npy = sprintf(x, fmt, "RcppCNPy::npySave"),
-        png = sprintf(x, fmt, "png::writePNG"),
-        tiff = sprintf(x, fmt, "tiff::writeTIFF"),
-        xpt = sprintf(x, fmt, "SASxport::write.xport"),
-        gettext("Format not supported")
-    )
-    stop(out, call. = FALSE)
+    fileinfo <- get_info(file)
+    if (is.na(fileinfo$type) || is.na(fileinfo$export_function) || fileinfo$export_function == "") {
+        stop("Format not supported", call. = FALSE)
+    }
+    if (fileinfo$type == "known") {
+        stop(sprintf(gettext("%s format not supported. Consider using the '%s()' function"),
+                     fileinfo$format, fileinfo$export_function), call. = FALSE)
+    }
 }

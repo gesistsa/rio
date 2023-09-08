@@ -28,20 +28,20 @@
     },
     {
         "input": "gz",
-        "format": "tar",
+        "format": "gzip",
         "type": "archive",
-        "format_name": "Archive files (handled by tar)",
-        "import_function": "utils::untar",
-        "export_function": "utils::tar",
+        "format_name": "Gzip files",
+        "import_function": "base::gzfile",
+        "export_function": "base::gzfile",
         "note": ""
     },
     {
         "input": "gzip",
-        "format": "tar",
+        "format": "gzip",
         "type": "archive",
-        "format_name": "Archive files (handled by tar)",
-        "import_function": "utils::untar",
-        "export_function": "utils::tar",
+        "format_name": "Gzip files",
+        "import_function": "base::gzfile",
+        "export_function": "base::gzfile",
         "note": ""
     },
     {
@@ -243,7 +243,7 @@
         "note": ""
     },
     {
-        "input": "csv",
+        "input": "googlesheets",
         "format": "csv",
         "type": "import",
         "format_name": "Google Sheets",
@@ -257,7 +257,7 @@
         "type": "known",
         "format_name": "Graph Exchange XML Format",
         "import_function": "rgexf::read.gexf",
-        "export_function": "",
+        "export_function": "rgexf::write.gexf",
         "note": ""
     },
     {
@@ -293,7 +293,7 @@
         "type": "known",
         "format_name": "JPEG images",
         "import_function": "jpeg::readJPEG",
-        "export_function": "",
+        "export_function": "jpeg::writeJPEG",
         "note": ""
     },
     {
@@ -302,7 +302,7 @@
         "type": "known",
         "format_name": "JPEG images",
         "import_function": "jpeg::readJPEG",
-        "export_function": "",
+        "export_function": "jpeg::writeJPEG",
         "note": ""
     },
     {
@@ -374,7 +374,7 @@
         "type": "known",
         "format_name": "PNG images",
         "import_function": "png::readPNG",
-        "export_function": "",
+        "export_function": "png::writePNG",
         "note": ""
     },
     {
@@ -383,7 +383,7 @@
         "type": "known",
         "format_name": "Pickled Numpy arrays",
         "import_function": "RcppCNPy::npyLoad",
-        "export_function": "",
+        "export_function": "RcppCNPy::npySave",
         "note": ""
     },
     {
@@ -514,7 +514,7 @@
     },
     {
         "input": "por",
-        "format": "spss",
+        "format": "por",
         "type": "import",
         "format_name": "SPSS Portable",
         "import_function": "haven::read_por",
@@ -626,7 +626,7 @@
         "type": "known",
         "format_name": "TIFF images",
         "import_function": "tiff::readTIFF",
-        "export_function": "",
+        "export_function": "tiff::writeTIFF",
         "note": ""
     },
     {
@@ -635,11 +635,11 @@
         "type": "known",
         "format_name": "TIFF images",
         "import_function": "tiff::readTIFF",
-        "export_function": "",
+        "export_function": "tiff::writeTIFF",
         "note": ""
     },
     {
-        "input": "\\t",
+        "input": "\t",
         "format": "tsv",
         "type": "import",
         "format_name": "Tab-separated data",
