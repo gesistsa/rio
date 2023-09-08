@@ -8,10 +8,12 @@ NAMESPACE: R/*
 README.md: README.Rmd
 	Rscript -e "knitr::knit('README.Rmd')"
 
+R/sysdata.rda: data-raw/single.json
+	Rscript data-raw/convert.R
 README.html: README.md
 	pandoc -o README.html README.md
 
-../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE README.md R/* man/* tests/testthat/* po/R-rio.pot
+../$(pkg)*.tar.gz: DESCRIPTION NAMESPACE README.md R/* man/* tests/testthat/* po/R-rio.pot R/sysdata.rda
 	cd ../ && R CMD build $(pkg)
 
 build: ../$(pkg)*.tar.gz
