@@ -1,7 +1,7 @@
 [
     {
         "input": "parquet",
-        "fmt": "parquet",
+        "format": "parquet",
         "ext": "parquet",
         "type": "suggest",
         "format_name": "Apache Arrow (Parquet)",
@@ -11,7 +11,7 @@
     },
     {
         "input": "bzip2",
-        "fmt": "tar",
+        "format": "tar",
         "ext": "bzip2",
         "type": "archive",
         "format_name": "Archive files (handled by tar)",
@@ -21,7 +21,7 @@
     },
     {
         "input": "xz",
-        "fmt": "tar",
+        "format": "tar",
         "ext": "xz",
         "type": "archive",
         "format_name": "Archive files (handled by tar)",
@@ -31,7 +31,7 @@
     },
     {
         "input": "gz",
-        "fmt": "tar",
+        "format": "tar",
         "ext": "gz",
         "type": "archive",
         "format_name": "Archive files (handled by tar)",
@@ -41,7 +41,7 @@
     },
     {
         "input": "gzip",
-        "fmt": "tar",
+        "format": "tar",
         "ext": "gzip",
         "type": "archive",
         "format_name": "Archive files (handled by tar)",
@@ -51,7 +51,7 @@
     },
     {
         "input": "tar",
-        "fmt": "tar",
+        "format": "tar",
         "ext": "tar",
         "type": "archive",
         "format_name": "Archive files (handled by tar)",
@@ -61,7 +61,7 @@
     },
     {
         "input": "bmp",
-        "fmt": "bmp",
+        "format": "bmp",
         "ext": "bmp",
         "type": "known",
         "format_name": "BMP images",
@@ -71,7 +71,7 @@
     },
     {
         "input": "bib",
-        "fmt": "bib",
+        "format": "bib",
         "ext": "bib",
         "type": "known",
         "format_name": "BibTeX files",
@@ -81,7 +81,7 @@
     },
     {
         "input": "bibtex",
-        "fmt": "bib",
+        "format": "bib",
         "ext": "bib",
         "type": "known",
         "format_name": "BibTeX files",
@@ -91,7 +91,7 @@
     },
     {
         "input": "csvy",
-        "fmt": "csvy",
+        "format": "csvy",
         "ext": "csvy",
         "type": "import",
         "format_name": "CSVY (CSV + YAML metadata header)",
@@ -101,7 +101,7 @@
     },
     {
         "input": "clipboard",
-        "fmt": "clipboard",
+        "format": "clipboard",
         "ext": "",
         "type": "suggest",
         "format_name": "Clipboard",
@@ -111,7 +111,7 @@
     },
     {
         "input": "csv",
-        "fmt": "csv",
+        "format": "csv",
         "ext": "csv",
         "type": "import",
         "format_name": "Comma-separated data",
@@ -121,7 +121,7 @@
     },
     {
         "input": ";",
-        "fmt": "csv2",
+        "format": "csv2",
         "ext": "csv2",
         "type": "import",
         "format_name": "Comma-separated data (European)",
@@ -131,7 +131,7 @@
     },
     {
         "input": "csv2",
-        "fmt": "csv2",
+        "format": "csv2",
         "ext": "csv2",
         "type": "import",
         "format_name": "Comma-separated data (European)",
@@ -141,7 +141,7 @@
     },
     {
         "input": "dif",
-        "fmt": "dif",
+        "format": "dif",
         "ext": "dif",
         "type": "import",
         "format_name": "Data Interchange Format",
@@ -151,7 +151,7 @@
     },
     {
         "input": "eviews",
-        "fmt": "eviews",
+        "format": "eviews",
         "ext": "eviews",
         "type": "suggest",
         "format_name": "EViews",
@@ -161,7 +161,7 @@
     },
     {
         "input": "wf1",
-        "fmt": "eviews",
+        "format": "eviews",
         "ext": "eviews",
         "type": "suggest",
         "format_name": "EViews",
@@ -171,7 +171,7 @@
     },
     {
         "input": "epiinfo",
-        "fmt": "rec",
+        "format": "rec",
         "ext": "rec",
         "type": "import",
         "format_name": "Epiinfo",
@@ -181,7 +181,7 @@
     },
     {
         "input": "rec",
-        "fmt": "rec",
+        "format": "rec",
         "ext": "rec",
         "type": "import",
         "format_name": "Epiinfo",
@@ -191,7 +191,7 @@
     },
     {
         "input": "excel",
-        "fmt": "xlsx",
+        "format": "xlsx",
         "ext": "xlsx",
         "type": "import",
         "format_name": "Excel",
@@ -201,7 +201,7 @@
     },
     {
         "input": "xls",
-        "fmt": "xls",
+        "format": "xls",
         "ext": "xls",
         "type": "import",
         "format_name": "Excel (Legacy)",
@@ -211,7 +211,7 @@
     },
     {
         "input": "xlsx",
-        "fmt": "xlsx",
+        "format": "xlsx",
         "ext": "xlsx",
         "type": "import",
         "format_name": "Excel",
@@ -221,7 +221,7 @@
     },
     {
         "input": "fst",
-        "fmt": "fst",
+        "format": "fst",
         "ext": "fst",
         "type": "suggest",
         "format_name": "Fast Storage",
@@ -231,7 +231,7 @@
     },
     {
         "input": "feather",
-        "fmt": "feather",
+        "format": "feather",
         "ext": "feather",
         "type": "suggest",
         "format_name": "Feather R/Python interchange format",
@@ -241,7 +241,7 @@
     },
     {
         "input": "fwf",
-        "fmt": "fwf",
+        "format": "fwf",
         "ext": "fwf",
         "type": "import",
         "format_name": "Fixed-width format data",
@@ -251,7 +251,7 @@
     },
     {
         "input": "fortran",
-        "fmt": "fortran",
+        "format": "fortran",
         "ext": "",
         "type": "import",
         "format_name": "Fortran data",
@@ -261,7 +261,7 @@
     },
     {
         "input": "gnumeric",
-        "fmt": "gnumeric",
+        "format": "gnumeric",
         "ext": "gnumeric",
         "type": "known",
         "format_name": "Gnumeric",
@@ -271,7 +271,7 @@
     },
     {
         "input": "csv",
-        "fmt": "csv",
+        "format": "csv",
         "ext": "",
         "type": "import",
         "format_name": "Google Sheets",
@@ -281,7 +281,7 @@
     },
     {
         "input": "gexf",
-        "fmt": "gexf",
+        "format": "gexf",
         "ext": "gexf",
         "type": "known",
         "format_name": "Graph Exchange XML Format",
@@ -291,7 +291,7 @@
     },
     {
         "input": "pzfx",
-        "fmt": "pzfx",
+        "format": "pzfx",
         "ext": "pzfx",
         "type": "suggest",
         "format_name": "Graphpad Prism",
@@ -301,7 +301,7 @@
     },
     {
         "input": "htm",
-        "fmt": "html",
+        "format": "html",
         "ext": "html",
         "type": "suggest",
         "format_name": "HTML Tables",
@@ -311,7 +311,7 @@
     },
     {
         "input": "html",
-        "fmt": "html",
+        "format": "html",
         "ext": "html",
         "type": "suggest",
         "format_name": "HTML Tables",
@@ -321,7 +321,7 @@
     },
     {
         "input": "jpeg",
-        "fmt": "jpg",
+        "format": "jpg",
         "ext": "jpg",
         "type": "known",
         "format_name": "JPEG images",
@@ -331,7 +331,7 @@
     },
     {
         "input": "jpg",
-        "fmt": "jpg",
+        "format": "jpg",
         "ext": "jpg",
         "type": "known",
         "format_name": "JPEG images",
@@ -341,7 +341,7 @@
     },
     {
         "input": "json",
-        "fmt": "json",
+        "format": "json",
         "ext": "json",
         "type": "suggest",
         "format_name": "JSON",
@@ -351,7 +351,7 @@
     },
     {
         "input": "mat",
-        "fmt": "matlab",
+        "format": "matlab",
         "ext": "matlab",
         "type": "suggest",
         "format_name": "Matlab",
@@ -361,7 +361,7 @@
     },
     {
         "input": "matlab",
-        "fmt": "matlab",
+        "format": "matlab",
         "ext": "matlab",
         "type": "suggest",
         "format_name": "Matlab",
@@ -371,7 +371,7 @@
     },
     {
         "input": "minitab",
-        "fmt": "mtp",
+        "format": "mtp",
         "ext": "mtp",
         "type": "import",
         "format_name": "Minitab",
@@ -381,7 +381,7 @@
     },
     {
         "input": "mtp",
-        "fmt": "mtp",
+        "format": "mtp",
         "ext": "mtp",
         "type": "import",
         "format_name": "Minitab",
@@ -391,7 +391,7 @@
     },
     {
         "input": "ods",
-        "fmt": "ods",
+        "format": "ods",
         "ext": "ods",
         "type": "suggest",
         "format_name": "OpenDocument Spreadsheet",
@@ -401,7 +401,7 @@
     },
     {
         "input": "pdf",
-        "fmt": "pdf",
+        "format": "pdf",
         "ext": "pdf",
         "type": "known",
         "format_name": "PDF files",
@@ -411,7 +411,7 @@
     },
     {
         "input": "png",
-        "fmt": "png",
+        "format": "png",
         "ext": "png",
         "type": "known",
         "format_name": "PNG images",
@@ -421,7 +421,7 @@
     },
     {
         "input": "npy",
-        "fmt": "npy",
+        "format": "npy",
         "ext": "npy",
         "type": "known",
         "format_name": "Pickled Numpy arrays",
@@ -431,7 +431,7 @@
     },
     {
         "input": "|",
-        "fmt": "psv",
+        "format": "psv",
         "ext": "psv",
         "type": "import",
         "format_name": "Pipe-separated data",
@@ -441,7 +441,7 @@
     },
     {
         "input": "psv",
-        "fmt": "psv",
+        "format": "psv",
         "ext": "psv",
         "type": "import",
         "format_name": "Pipe-separated data",
@@ -451,7 +451,7 @@
     },
     {
         "input": "beancount",
-        "fmt": "ledger",
+        "format": "ledger",
         "ext": "ledger",
         "type": "enhance",
         "format_name": "Plain text accounting format",
@@ -461,7 +461,7 @@
     },
     {
         "input": "hledger",
-        "fmt": "ledger",
+        "format": "ledger",
         "ext": "ledger",
         "type": "enhance",
         "format_name": "Plain text accounting format",
@@ -471,7 +471,7 @@
     },
     {
         "input": "ledger",
-        "fmt": "ledger",
+        "format": "ledger",
         "ext": "ledger",
         "type": "enhance",
         "format_name": "Plain text accounting format",
@@ -481,7 +481,7 @@
     },
     {
         "input": "bean",
-        "fmt": "ledger",
+        "format": "ledger",
         "ext": "ledger",
         "type": "enhance",
         "format_name": "Plain text accounting format",
@@ -491,7 +491,7 @@
     },
     {
         "input": "r",
-        "fmt": "r",
+        "format": "r",
         "ext": "r",
         "type": "import",
         "format_name": "R syntax",
@@ -501,7 +501,7 @@
     },
     {
         "input": "sas",
-        "fmt": "sas7bdat",
+        "format": "sas7bdat",
         "ext": "sas7bdat",
         "type": "import",
         "format_name": "SAS",
@@ -511,7 +511,7 @@
     },
     {
         "input": "sas7bdat",
-        "fmt": "sas7bdat",
+        "format": "sas7bdat",
         "ext": "sas7bdat",
         "type": "import",
         "format_name": "SAS",
@@ -521,7 +521,7 @@
     },
     {
         "input": "xport",
-        "fmt": "xpt",
+        "format": "xpt",
         "ext": "xpt",
         "type": "import",
         "format_name": "SAS XPORT",
@@ -531,7 +531,7 @@
     },
     {
         "input": "xpt",
-        "fmt": "xpt",
+        "format": "xpt",
         "ext": "xpt",
         "type": "import",
         "format_name": "SAS XPORT",
@@ -541,7 +541,7 @@
     },
     {
         "input": "sav",
-        "fmt": "sav",
+        "format": "sav",
         "ext": "sav",
         "type": "import",
         "format_name": "SPSS",
@@ -551,7 +551,7 @@
     },
     {
         "input": "spss",
-        "fmt": "sav",
+        "format": "sav",
         "ext": "sav",
         "type": "import",
         "format_name": "SPSS",
@@ -561,7 +561,7 @@
     },
     {
         "input": "zsav",
-        "fmt": "zsav",
+        "format": "zsav",
         "ext": "zsav",
         "type": "import",
         "format_name": "SPSS (compressed)",
@@ -571,7 +571,7 @@
     },
     {
         "input": "por",
-        "fmt": "spss",
+        "format": "spss",
         "ext": "spss",
         "type": "import",
         "format_name": "SPSS Portable",
@@ -581,7 +581,7 @@
     },
     {
         "input": "rda",
-        "fmt": "rdata",
+        "format": "rdata",
         "ext": "rdata",
         "type": "import",
         "format_name": "Saved R objects",
@@ -591,7 +591,7 @@
     },
     {
         "input": "rdata",
-        "fmt": "rdata",
+        "format": "rdata",
         "ext": "rdata",
         "type": "import",
         "format_name": "Saved R objects",
@@ -601,7 +601,7 @@
     },
     {
         "input": "rds",
-        "fmt": "rds",
+        "format": "rds",
         "ext": "rds",
         "type": "import",
         "format_name": "Serialized R objects",
@@ -611,7 +611,7 @@
     },
     {
         "input": "qs",
-        "fmt": "qs",
+        "format": "qs",
         "ext": "qs",
         "type": "suggest",
         "format_name": "Serialized R objects (Quick)",
@@ -621,7 +621,7 @@
     },
     {
         "input": "xml",
-        "fmt": "xml",
+        "format": "xml",
         "ext": "xml",
         "type": "suggest",
         "format_name": "Shallow XML documents",
@@ -631,7 +631,7 @@
     },
     {
         "input": "sss",
-        "fmt": "sss",
+        "format": "sss",
         "ext": "sss",
         "type": "known",
         "format_name": "Standard Survey Structure (Triple-S)",
@@ -641,7 +641,7 @@
     },
     {
         "input": "dta",
-        "fmt": "dta",
+        "format": "dta",
         "ext": "dta",
         "type": "import",
         "format_name": "Stata",
@@ -651,7 +651,7 @@
     },
     {
         "input": "stata",
-        "fmt": "dta",
+        "format": "dta",
         "ext": "dta",
         "type": "import",
         "format_name": "Stata",
@@ -661,7 +661,7 @@
     },
     {
         "input": "sdmx",
-        "fmt": "sdmx",
+        "format": "sdmx",
         "ext": "sdmx",
         "type": "known",
         "format_name": "Statistical Data and Metadata eXchange",
@@ -671,7 +671,7 @@
     },
     {
         "input": "syd",
-        "fmt": "syd",
+        "format": "syd",
         "ext": "syd",
         "type": "import",
         "format_name": "Systat",
@@ -681,7 +681,7 @@
     },
     {
         "input": "systat",
-        "fmt": "syd",
+        "format": "syd",
         "ext": "syd",
         "type": "import",
         "format_name": "Systat",
@@ -691,7 +691,7 @@
     },
     {
         "input": "tif",
-        "fmt": "tiff",
+        "format": "tiff",
         "ext": "tiff",
         "type": "known",
         "format_name": "TIFF images",
@@ -701,7 +701,7 @@
     },
     {
         "input": "tiff",
-        "fmt": "tiff",
+        "format": "tiff",
         "ext": "tiff",
         "type": "known",
         "format_name": "TIFF images",
@@ -711,7 +711,7 @@
     },
     {
         "input": "\\t",
-        "fmt": "tsv",
+        "format": "tsv",
         "ext": "tsv",
         "type": "import",
         "format_name": "Tab-separated data",
@@ -721,7 +721,7 @@
     },
     {
         "input": "tsv",
-        "fmt": "tsv",
+        "format": "tsv",
         "ext": "tsv",
         "type": "import",
         "format_name": "Tab-separated data",
@@ -731,7 +731,7 @@
     },
     {
         "input": "txt",
-        "fmt": "tsv",
+        "format": "tsv",
         "ext": "tsv",
         "type": "import",
         "format_name": "Tab-separated data",
@@ -741,7 +741,7 @@
     },
     {
         "input": "dump",
-        "fmt": "dump",
+        "format": "dump",
         "ext": "dump",
         "type": "import",
         "format_name": "Text Representations of R Objects",
@@ -751,7 +751,7 @@
     },
     {
         "input": "arff",
-        "fmt": "arff",
+        "format": "arff",
         "ext": "arff",
         "type": "import",
         "format_name": "Weka Attribute-Relation File Format",
@@ -761,7 +761,7 @@
     },
     {
         "input": "weka",
-        "fmt": "arff",
+        "format": "arff",
         "ext": "arff",
         "type": "import",
         "format_name": "Weka Attribute-Relation File Format",
@@ -771,7 +771,7 @@
     },
     {
         "input": "dbf",
-        "fmt": "dbf",
+        "format": "dbf",
         "ext": "dbf",
         "type": "import",
         "format_name": "XBASE database files",
@@ -781,7 +781,7 @@
     },
     {
         "input": "yaml",
-        "fmt": "yml",
+        "format": "yml",
         "ext": "yml",
         "type": "suggest",
         "format_name": "YAML",
@@ -791,7 +791,7 @@
     },
     {
         "input": "yml",
-        "fmt": "yml",
+        "format": "yml",
         "ext": "yml",
         "type": "suggest",
         "format_name": "YAML",
@@ -801,7 +801,7 @@
     },
     {
         "input": "zip",
-        "fmt": "zip",
+        "format": "zip",
         "ext": "zip",
         "type": "archive",
         "format_name": "Zip files",
@@ -811,7 +811,7 @@
     },
     {
         "input": ",",
-        "fmt": "csv",
+        "format": "csv",
         "ext": "csv",
         "type": "import",
         "format_name": "Comma-separated data",

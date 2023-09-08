@@ -53,7 +53,7 @@ object (not just a data frame).
 \item Feather R/Python interchange format (.feather), using \code{\link[arrow:write_feather]{arrow::write_feather()}}
 \item Fast storage (.fst), using \code{\link[fst:write_fst]{fst::write.fst()}}
 \item JSON (.json), using \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \url{https://arxiv.org/abs/1403.2805}.
-\item Matlab (.mat), using \code{\link[rmatio:write.mat]{rmatio::write.mat()}}
+\item Matlab (.mat), using \code{\link[rmatio:write.mat-methods]{rmatio::write.mat()}}
 \item OpenDocument Spreadsheet (.ods), using \code{\link[readODS:write_ods]{readODS::write_ods()}}. (Currently only single-sheet exports are supported.)
 \item HTML (.html), using a custom method based on \code{\link[xml2:xml_replace]{xml2::xml_add_child()}} to create a simple HTML table and \code{\link[xml2:write_xml]{xml2::write_xml()}} to write to disk.
 \item XML (.xml), using a custom method based on \code{\link[xml2:xml_replace]{xml2::xml_add_child()}} to create a simple XML tree and \code{\link[xml2:write_xml]{xml2::write_xml()}} to write to disk.
