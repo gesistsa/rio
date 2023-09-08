@@ -11,9 +11,12 @@
 #' @examples
 #' ## For demo, a temp. file path is created with the file extension .xlsx
 #' xlsx_file <- tempfile(fileext = ".xlsx")
-#' export(list(mtcars1 = mtcars[1:10,],
-#'             mtcars2 = mtcars[11:20,],
-#'             mtcars3 = mtcars[21:32,]),
+#' export(
+#'     list(
+#'         mtcars1 = mtcars[1:10, ],
+#'         mtcars2 = mtcars[11:20, ],
+#'         mtcars3 = mtcars[21:32, ]
+#'     ),
 #'     xlsx_file
 #' )
 #'
@@ -27,67 +30,47 @@
 #' @seealso [import()], [export_list()], [export()]
 #' @export
 import_list <-
-function(file,
-         setclass,
-         which,
-         rbind = FALSE,
-         rbind_label = "_file",
-         rbind_fill = TRUE,
-         ...) {
-    .check_file(file, single_only = FALSE)
-    if (missing(setclass)) {
-        setclass <- NULL
-    }
-    ## special cases
-    if (length(file) == 1) {
-        x <- .read_file_as_list(file = file, which = which, setclass = setclass, rbind = rbind, rbind_label = rbind_label, ...)
-    } else {
-        ## note the plural
-        x <- .read_multiple_files_as_list(files = file, setclass = setclass, rbind = rbind, rbind_label = rbind_label, ...)
-    }
-    # optionally rbind
-    if (isTRUE(rbind)) {
-        if (length(x) == 1) {
-            x <- x[[1L]]
-        } else {
-            x2 <- try(data.table::rbindlist(x, fill = rbind_fill), silent = TRUE)
-            if (inherits(x2, "try-error")) {
-                warning("Attempt to rbindlist() the data did not succeed. List returned instead.")
-                return(x)
-            } else {
-                x <- x2
-            }
-        }
-        ## set class
-        a <- list(...)
-        if (is.null(setclass)) {
-            if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
-                x <- set_class(x, class = "data.table")
-            } else {
-                x <- set_class(x, class = "data.frame")
-            }
-        } else {
-            if ("data.table" %in% names(a) && isTRUE(a[["data.table"]])) {
-                if (setclass != "data.table") {
-                    warning(sprintf("'data.table = TRUE' argument overruled. Using setclass = '%s'", setclass))
-                    x <- set_class(x, class = setclass)
-                } else {
-                    x <- set_class(x, class = "data.table")
-                }
-            } else {
-                x <- set_class(x, class = setclass)
-            }
-        }
-    }
+    function(file,
+             setclass = getOption("rio.import.class", "data.frame"),
+             which,
+             rbind = FALSE,
+             rbind_label = "_file",
+             rbind_fill = TRUE,
+             ...) {
+        .check_file(file, single_only = FALSE)
 
-    return(x)
-}
+        ## special cases
+        if (length(file) == 1) {
+            x <- .read_file_as_list(file = file, which = which, setclass = setclass, rbind = rbind, rbind_label = rbind_label, ...)
+        } else {
+            ## note the plural
+            x <- .read_multiple_files_as_list(files = file, setclass = setclass, rbind = rbind, rbind_label = rbind_label, ...)
+        }
+        # optionally rbind
+        if (isTRUE(rbind)) {
+            if (length(x) == 1) {
+                x <- x[[1L]]
+            } else {
+                x2 <- try(data.table::rbindlist(x, fill = rbind_fill), silent = TRUE)
+                if (inherits(x2, "try-error")) {
+                    warning("Attempt to rbindlist() the data did not succeed. List returned instead.")
+                    return(x)
+                } else {
+                    x <- x2
+                }
+            }
+            ## set class
+            x <- set_class(x, class = setclass)
+        }
+
+        return(x)
+    }
 
 .strip_exts <- function(file) {
     vapply(file, function(x) tools::file_path_sans_ext(basename(x)), character(1))
 }
 
-.read_multiple_files_as_list <- function(files, setclass, rbind, rbind_label,...) {
+.read_multiple_files_as_list <- function(files, setclass, rbind, rbind_label, ...) {
     names(files) <- .strip_exts(files)
     x <- lapply(files, function(thisfile) {
         out <- try(import(thisfile, setclass = setclass, ...), silent = TRUE)
@@ -103,7 +86,7 @@ function(file,
     return(x)
 }
 
-.read_file_as_list <- function(file, which, setclass, rbind, rbind_label,...) {
+.read_file_as_list <- function(file, which, setclass, rbind, rbind_label, ...) {
     if (grepl("^http.*://", file)) {
         file <- remote_to_local(file)
     }
@@ -124,12 +107,13 @@ function(file,
             which <- seq_along(tables)
         }
         whichnames <- vapply(xml2::xml_attrs(tables[which]),
-                             function(x) if ("class" %in% names(x)) x["class"] else "",
-                             FUN.VALUE = character(1))
+            function(x) if ("class" %in% names(x)) x["class"] else "",
+            FUN.VALUE = character(1)
+        )
         names(which) <- whichnames
     }
-    if (get_info(file)$format %in% c("xls","xlsx")) {
-        ##.check_pkg_availability("readxl")
+    if (get_info(file)$format %in% c("xls", "xlsx")) {
+        ## .check_pkg_availability("readxl")
         whichnames <- readxl::excel_sheets(path = file)
         if (missing(which)) {
             which <- seq_along(whichnames)

@@ -4,14 +4,25 @@
 \alias{import}
 \title{Import}
 \usage{
-import(file, format, setclass, which, ...)
+import(
+  file,
+  format,
+  setclass = getOption("rio.import.class", "data.frame"),
+  which,
+  ...
+)
 }
 \arguments{
 \item{file}{A character string naming a file, URL, or single-file .zip or .tar archive.}
 
 \item{format}{An optional character string code of file format, which can be used to override the format inferred from \code{file}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), and \dQuote{|} (for pipe-separated values).}
 
-\item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, the return object is always a \dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or \dQuote{tibble} (if using dplyr) or \dQuote{data.table} (if using data.table). Other values are ignored, such that a data.frame is returned.}
+\item{setclass}{An optional character vector specifying one or more classes
+to set on the import. By default, the return object is always a
+\dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or
+\dQuote{tibble} (if using dplyr) or \dQuote{data.table} (if using
+data.table). Other values are ignored, such that a data.frame is returned.
+The parameter takes precedents over parameters in \dots which set a different class.}
 
 \item{which}{This argument is used to control import from multi-object files; as a rule \code{import} only ever returns a single data frame (use \code{\link[=import_list]{import_list()}} to import multiple data frames from a multi-object file). If \code{file} is a compressed directory, \code{which} can be either a character string specifying a filename or an integer specifying which file (in locale sort order) to extract from the compressed directory. For Excel spreadsheets, this can be used to specify a sheet name or number. For .Rdata files, this can be an object name. For HTML files, it identifies which table to extract (from document order). Ignored otherwise. A character string value will be used as a regular expression, such that the extracted file is the first match of the regular expression against the file names in the archive.}
 
@@ -106,6 +117,11 @@ import(csv_file, setclass = "tbl_df")
 ## pass arguments to underlying import function
 ## data.table::fread is the underlying import function and `nrows` is its argument
 import(csv_file, nrows = 20)
+
+## data.table::fread has an argument `data.table` to set the class explicitely to data.table. The
+## argument setclass, however, takes precedents over such undocumented features.
+class(import(csv_file, setclass = "tibble", data.table = TRUE))
+
 }
 \seealso{
 \code{\link[=import_list]{import_list()}}, \code{\link[=characterize]{characterize()}}, \code{\link[=gather_attrs]{gather_attrs()}}, \code{\link[=export]{export()}}, \code{\link[=convert]{convert()}}
