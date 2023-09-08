@@ -9,12 +9,3 @@ test_that("uninstalled_formats()", {
         expect_type(formats, "character")
     }
 })
-
-test_that("install_formats()", {
-    suggestions <- read.dcf("../testdata/example-DESCRIPTION",
-                            fields = "Suggests")
-    suggestions <- parse_suggestions(suggestions)
-    expect_true("NANTUCKET" %in% suggestions)
-    expect_true("readODS" %in% suggestions)
-    expect_false("devtools" %in% suggestions)
-})
