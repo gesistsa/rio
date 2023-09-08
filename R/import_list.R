@@ -107,17 +107,17 @@ function(file,
     if (grepl("^http.*://", file)) {
         file <- remote_to_local(file)
     }
-    if (get_ext(file) == "rdata") {
+    if (get_info(file)$format == "rdata") {
         e <- new.env()
         load(file, envir = e)
         return(as.list(e))
     }
-    if (!get_ext(file) %in% c("html", "xlsx", "xls", "zip")) {
+    if (!get_info(file)$format %in% c("html", "xlsx", "xls", "zip")) {
         which <- 1
         whichnames <- NULL
     }
     ## getting list of `whichnames`
-    if (get_ext(file) == "html") {
+    if (get_info(file)$format == "html") {
         .check_pkg_availability("xml2")
         tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
         if (missing(which)) {
@@ -128,7 +128,7 @@ function(file,
                              FUN.VALUE = character(1))
         names(which) <- whichnames
     }
-    if (get_ext(file) %in% c("xls","xlsx")) {
+    if (get_info(file)$format %in% c("xls","xlsx")) {
         ##.check_pkg_availability("readxl")
         whichnames <- readxl::excel_sheets(path = file)
         if (missing(which)) {
@@ -140,7 +140,7 @@ function(file,
             whichnames <- whichnames[which]
         }
     }
-    if (get_ext(file) %in% c("zip")) {
+    if (get_info(file)$format %in% c("zip")) {
         if (missing(which)) {
             whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
             which <- seq_along(whichnames)

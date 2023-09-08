@@ -257,7 +257,7 @@
         "type": "known",
         "format_name": "Graph Exchange XML Format",
         "import_function": "rgexf::read.gexf",
-        "export_function": "",
+        "export_function": "rgexf::write.gexf",
         "note": ""
     },
     {
@@ -293,7 +293,7 @@
         "type": "known",
         "format_name": "JPEG images",
         "import_function": "jpeg::readJPEG",
-        "export_function": "",
+        "export_function": "jpeg::writeJPEG",
         "note": ""
     },
     {
@@ -302,7 +302,7 @@
         "type": "known",
         "format_name": "JPEG images",
         "import_function": "jpeg::readJPEG",
-        "export_function": "",
+        "export_function": "jpeg::writeJPEG",
         "note": ""
     },
     {
@@ -374,7 +374,7 @@
         "type": "known",
         "format_name": "PNG images",
         "import_function": "png::readPNG",
-        "export_function": "",
+        "export_function": "png::writePNG",
         "note": ""
     },
     {
@@ -383,7 +383,7 @@
         "type": "known",
         "format_name": "Pickled Numpy arrays",
         "import_function": "RcppCNPy::npyLoad",
-        "export_function": "",
+        "export_function": "RcppCNPy::npySave",
         "note": ""
     },
     {
@@ -626,7 +626,7 @@
         "type": "known",
         "format_name": "TIFF images",
         "import_function": "tiff::readTIFF",
-        "export_function": "",
+        "export_function": "tiff::writeTIFF",
         "note": ""
     },
     {
@@ -635,7 +635,7 @@
         "type": "known",
         "format_name": "TIFF images",
         "import_function": "tiff::readTIFF",
-        "export_function": "",
+        "export_function": "tiff::writeTIFF",
         "note": ""
     },
     {
