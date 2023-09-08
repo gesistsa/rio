@@ -6,7 +6,7 @@
 \usage{
 import_list(
   file,
-  setclass,
+  setclass = getOption("rio.import.class", "data.frame"),
   which,
   rbind = FALSE,
   rbind_label = "_file",
@@ -17,7 +17,12 @@ import_list(
 \arguments{
 \item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip file, or HTML file), or a vector of file paths for multiple files to be imported.}
 
-\item{setclass}{An optional character vector specifying one or more classes to set on the import. By default, the return object is always a \dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or \dQuote{tibble} (if using dplyr) or \dQuote{data.table} (if using data.table). Other values are ignored, such that a data.frame is returned.}
+\item{setclass}{An optional character vector specifying one or more classes
+to set on the import. By default, the return object is always a
+\dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or
+\dQuote{tibble} (if using dplyr) or \dQuote{data.table} (if using
+data.table). Other values are ignored, such that a data.frame is returned.
+The parameter takes precedents over parameters in \dots which set a different class.}
 
 \item{which}{If \code{file} is a single file path, this specifies which objects should be extracted (passed to \code{\link[=import]{import()}}'s \code{which} argument). Ignored otherwise.}
 
@@ -38,9 +43,12 @@ Use \code{\link[=import]{import()}} to import a list of data frames from a vecto
 \examples{
 ## For demo, a temp. file path is created with the file extension .xlsx
 xlsx_file <- tempfile(fileext = ".xlsx")
-export(list(mtcars1 = mtcars[1:10,],
-            mtcars2 = mtcars[11:20,],
-            mtcars3 = mtcars[21:32,]),
+export(
+    list(
+        mtcars1 = mtcars[1:10, ],
+        mtcars2 = mtcars[11:20, ],
+        mtcars3 = mtcars[21:32, ]
+    ),
     xlsx_file
 )
 
