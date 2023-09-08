@@ -4,6 +4,7 @@
 * Add support for `qs` #275 h/t David Schoch
 * Use `arrow` to import / export `feather` #340
 * `export_list` can write multiple data frames to a single archive file (e.g. zip, tar) or a directory #346 h/t David Schoch
+* `get_info` is added #350
 * Bug fixes
    - ... is correctly passed for exporting ODS and feather #318
    - POTENTIALLY BREAKING: JSON are exported in UTF-8 by default; solved encoding issues on
@@ -20,6 +21,7 @@
    - remove all @importFrom #325 h/t David Schoch
    - rearrange "Package Philosophy" as a Vignette #320
    - Create a single source of truth about all import and export functions #313
+   - Clarify all concepts: now there is only `format` #351
 * New authors
    - David Schoch @schochastics 
 
