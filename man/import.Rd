@@ -122,6 +122,7 @@ import(csv_file, nrows = 20)
 ## argument setclass, however, takes precedents over such undocumented features.
 class(import(csv_file, setclass = "tibble", data.table = TRUE))
 
+## the default import class can be set with options(rio.import.class = "data.table") or option(rio.import.class = "tibble")
 }
 \seealso{
 \code{\link[=import_list]{import_list()}}, \code{\link[=characterize]{characterize()}}, \code{\link[=gather_attrs]{gather_attrs()}}, \code{\link[=export]{export()}}, \code{\link[=convert]{convert()}}

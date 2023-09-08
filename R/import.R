@@ -97,6 +97,7 @@
 #' ## argument setclass, however, takes precedents over such undocumented features.
 #' class(import(csv_file, setclass = "tibble", data.table = TRUE))
 #'
+#' ## the default import class can be set with options(rio.import.class = "data.table") or option(rio.import.class = "tibble")
 #' @seealso [import_list()], [characterize()], [gather_attrs()], [export()], [convert()]
 #' @export
 import <- function(file, format, setclass = getOption("rio.import.class", "data.frame"), which, ...) {
