@@ -33,7 +33,7 @@ uninstalled_formats <- function() {
     ## common_suggestions <- c("bit64", "datasets", "devtools", "knitr", "magrittr", "testthat")
     ## suggestions <- setdiff(suggestions, common_suggestions)
     all_functions <- unlist(rio_formats[rio_formats$type == "suggest", c("import_function", "export_function")], use.names = FALSE)
-    suggestions <- unique(na.omit(stringi::stri_extract_first(all_functions, regex = "[a-zA-Z0-9\\.]+")))
+    suggestions <- unique(stats::na.omit(stringi::stri_extract_first(all_functions, regex = "[a-zA-Z0-9\\.]+")))
     # which are not installed
     unlist(lapply(suggestions, function(x) {
         if (length(find.package(x, quiet = TRUE))) {
