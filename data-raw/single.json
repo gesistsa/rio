@@ -28,20 +28,20 @@
     },
     {
         "input": "gz",
-        "format": "tar",
+        "format": "gzip",
         "type": "archive",
-        "format_name": "Archive files (handled by tar)",
-        "import_function": "utils::untar",
-        "export_function": "utils::tar",
+        "format_name": "Gzip files",
+        "import_function": "base::gzfile",
+        "export_function": "base::gzfile",
         "note": ""
     },
     {
         "input": "gzip",
-        "format": "tar",
+        "format": "gzip",
         "type": "archive",
-        "format_name": "Archive files (handled by tar)",
-        "import_function": "utils::untar",
-        "export_function": "utils::tar",
+        "format_name": "Gzip files",
+        "import_function": "base::gzfile",
+        "export_function": "base::gzfile",
         "note": ""
     },
     {
@@ -639,7 +639,7 @@
         "note": ""
     },
     {
-        "input": "\\t",
+        "input": "\t",
         "format": "tsv",
         "type": "import",
         "format_name": "Tab-separated data",

@@ -14,7 +14,7 @@ remote_to_local <- function(file, format) {
     } else {
         # handle google sheets urls
         if (grepl("docs\\.google\\.com/spreadsheets", file)) {
-            fmt <- get_type(format)
+            fmt <- .standardize_format(format)
             if (fmt %in% c("csv", "tsv", "xlsx", "ods")) {
                 file <- convert_google_url(file, export_as = fmt)
                 fmt <- fmt
@@ -23,7 +23,7 @@ remote_to_local <- function(file, format) {
                 fmt <- "csv"
             }
         } else {
-            fmt <- get_type(format)
+            fmt <- .standardize_format(format)
         }
     }
     # save file locally

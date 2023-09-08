@@ -110,20 +110,17 @@ import <- function(file, format, setclass, which, ...) {
         file <- parse_tar(file, which = which)
     }
     if (missing(format)) {
-        fmt <- get_ext(file)
-        if (fmt %in% c("gz", "gzip")) {
-            fmt <- tools::file_ext(tools::file_path_sans_ext(file, compression = FALSE))
+        format <- get_info(file)$format
+        if (format %in% c("gz", "gzip")) {
+            format <- get_info(tools::file_path_sans_ext(file, compression = FALSE))$format
             file <- gzfile(file)
-        } else {
-            fmt <- get_type(fmt)
         }
     } else {
-        fmt <- get_type(format)
+        ## format such as "|"
+        format <- .standardize_format(format)
     }
-
     args_list <- list(...)
-
-    class(file) <- c(paste0("rio_", fmt), class(file))
+    class(file) <- c(paste0("rio_", format), class(file))
     if (missing(which)) {
         x <- .import(file = file, ...)
     } else {
