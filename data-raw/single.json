@@ -571,8 +571,8 @@
     },
     {
         "input": "por",
-        "format": "spss",
-        "ext": "spss",
+        "format": "por",
+        "ext": "por",
         "type": "import",
         "format_name": "SPSS Portable",
         "import_function": "haven::read_por",
