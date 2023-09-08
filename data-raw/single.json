@@ -2,7 +2,6 @@
     {
         "input": "parquet",
         "format": "parquet",
-        "ext": "parquet",
         "type": "suggest",
         "format_name": "Apache Arrow (Parquet)",
         "import_function": "arrow::read_parquet",
@@ -12,7 +11,6 @@
     {
         "input": "bzip2",
         "format": "tar",
-        "ext": "bzip2",
         "type": "archive",
         "format_name": "Archive files (handled by tar)",
         "import_function": "utils::untar",
@@ -22,7 +20,6 @@
     {
         "input": "xz",
         "format": "tar",
-        "ext": "xz",
         "type": "archive",
         "format_name": "Archive files (handled by tar)",
         "import_function": "utils::untar",
@@ -32,7 +29,6 @@
     {
         "input": "gz",
         "format": "tar",
-        "ext": "gz",
         "type": "archive",
         "format_name": "Archive files (handled by tar)",
         "import_function": "utils::untar",
@@ -42,7 +38,6 @@
     {
         "input": "gzip",
         "format": "tar",
-        "ext": "gzip",
         "type": "archive",
         "format_name": "Archive files (handled by tar)",
         "import_function": "utils::untar",
@@ -52,7 +47,6 @@
     {
         "input": "tar",
         "format": "tar",
-        "ext": "tar",
         "type": "archive",
         "format_name": "Archive files (handled by tar)",
         "import_function": "utils::untar",
@@ -62,7 +56,6 @@
     {
         "input": "bmp",
         "format": "bmp",
-        "ext": "bmp",
         "type": "known",
         "format_name": "BMP images",
         "import_function": "bmp::read.bmp",
@@ -72,7 +65,6 @@
     {
         "input": "bib",
         "format": "bib",
-        "ext": "bib",
         "type": "known",
         "format_name": "BibTeX files",
         "import_function": "bib2df::bib2df",
@@ -82,7 +74,6 @@
     {
         "input": "bibtex",
         "format": "bib",
-        "ext": "bib",
         "type": "known",
         "format_name": "BibTeX files",
         "import_function": "bib2df::bib2df",
@@ -92,7 +83,6 @@
     {
         "input": "csvy",
         "format": "csvy",
-        "ext": "csvy",
         "type": "import",
         "format_name": "CSVY (CSV + YAML metadata header)",
         "import_function": "data.table::fread",
@@ -102,7 +92,6 @@
     {
         "input": "clipboard",
         "format": "clipboard",
-        "ext": "",
         "type": "suggest",
         "format_name": "Clipboard",
         "import_function": "clipr::read_clip_tbl",
@@ -112,7 +101,6 @@
     {
         "input": "csv",
         "format": "csv",
-        "ext": "csv",
         "type": "import",
         "format_name": "Comma-separated data",
         "import_function": "data.table::fread",
@@ -122,7 +110,6 @@
     {
         "input": ";",
         "format": "csv2",
-        "ext": "csv2",
         "type": "import",
         "format_name": "Comma-separated data (European)",
         "import_function": "data.table::fread",
@@ -132,7 +119,6 @@
     {
         "input": "csv2",
         "format": "csv2",
-        "ext": "csv2",
         "type": "import",
         "format_name": "Comma-separated data (European)",
         "import_function": "data.table::fread",
@@ -142,7 +128,6 @@
     {
         "input": "dif",
         "format": "dif",
-        "ext": "dif",
         "type": "import",
         "format_name": "Data Interchange Format",
         "import_function": "utils::read.DIF",
@@ -152,7 +137,6 @@
     {
         "input": "eviews",
         "format": "eviews",
-        "ext": "eviews",
         "type": "suggest",
         "format_name": "EViews",
         "import_function": "hexView::readEViews",
@@ -162,7 +146,6 @@
     {
         "input": "wf1",
         "format": "eviews",
-        "ext": "eviews",
         "type": "suggest",
         "format_name": "EViews",
         "import_function": "hexView::readEViews",
@@ -172,7 +155,6 @@
     {
         "input": "epiinfo",
         "format": "rec",
-        "ext": "rec",
         "type": "import",
         "format_name": "Epiinfo",
         "import_function": "foreign::read.epiinfo",
@@ -182,7 +164,6 @@
     {
         "input": "rec",
         "format": "rec",
-        "ext": "rec",
         "type": "import",
         "format_name": "Epiinfo",
         "import_function": "foreign::read.epiinfo",
@@ -192,7 +173,6 @@
     {
         "input": "excel",
         "format": "xlsx",
-        "ext": "xlsx",
         "type": "import",
         "format_name": "Excel",
         "import_function": "readxl::read_xlsx",
@@ -202,7 +182,6 @@
     {
         "input": "xls",
         "format": "xls",
-        "ext": "xls",
         "type": "import",
         "format_name": "Excel (Legacy)",
         "import_function": "readxl::read_xls",
@@ -212,7 +191,6 @@
     {
         "input": "xlsx",
         "format": "xlsx",
-        "ext": "xlsx",
         "type": "import",
         "format_name": "Excel",
         "import_function": "readxl::read_xlsx",
@@ -222,7 +200,6 @@
     {
         "input": "fst",
         "format": "fst",
-        "ext": "fst",
         "type": "suggest",
         "format_name": "Fast Storage",
         "import_function": "fst::read.fst",
@@ -232,7 +209,6 @@
     {
         "input": "feather",
         "format": "feather",
-        "ext": "feather",
         "type": "suggest",
         "format_name": "Feather R/Python interchange format",
         "import_function": "arrow::read_feather",
@@ -242,7 +218,6 @@
     {
         "input": "fwf",
         "format": "fwf",
-        "ext": "fwf",
         "type": "import",
         "format_name": "Fixed-width format data",
         "import_function": "utils::read.table",
@@ -252,7 +227,6 @@
     {
         "input": "fortran",
         "format": "fortran",
-        "ext": "",
         "type": "import",
         "format_name": "Fortran data",
         "import_function": "utils::read.fortran",
@@ -262,7 +236,6 @@
     {
         "input": "gnumeric",
         "format": "gnumeric",
-        "ext": "gnumeric",
         "type": "known",
         "format_name": "Gnumeric",
         "import_function": "gnumeric::read.gnumeric.sheet",
@@ -272,7 +245,6 @@
     {
         "input": "googlesheets",
         "format": "csv",
-        "ext": "",
         "type": "import",
         "format_name": "Google Sheets",
         "import_function": "data.table::fread",
@@ -282,7 +254,6 @@
     {
         "input": "gexf",
         "format": "gexf",
-        "ext": "gexf",
         "type": "known",
         "format_name": "Graph Exchange XML Format",
         "import_function": "rgexf::read.gexf",
@@ -292,7 +263,6 @@
     {
         "input": "pzfx",
         "format": "pzfx",
-        "ext": "pzfx",
         "type": "suggest",
         "format_name": "Graphpad Prism",
         "import_function": "pzfx::read_pzfx",
@@ -302,7 +272,6 @@
     {
         "input": "htm",
         "format": "html",
-        "ext": "html",
         "type": "suggest",
         "format_name": "HTML Tables",
         "import_function": "xml2::read_html",
@@ -312,7 +281,6 @@
     {
         "input": "html",
         "format": "html",
-        "ext": "html",
         "type": "suggest",
         "format_name": "HTML Tables",
         "import_function": "xml2::read_html",
@@ -322,7 +290,6 @@
     {
         "input": "jpeg",
         "format": "jpg",
-        "ext": "jpg",
         "type": "known",
         "format_name": "JPEG images",
         "import_function": "jpeg::readJPEG",
@@ -332,7 +299,6 @@
     {
         "input": "jpg",
         "format": "jpg",
-        "ext": "jpg",
         "type": "known",
         "format_name": "JPEG images",
         "import_function": "jpeg::readJPEG",
@@ -342,7 +308,6 @@
     {
         "input": "json",
         "format": "json",
-        "ext": "json",
         "type": "suggest",
         "format_name": "JSON",
         "import_function": "jsonlite::fromJSON",
@@ -352,7 +317,6 @@
     {
         "input": "mat",
         "format": "matlab",
-        "ext": "matlab",
         "type": "suggest",
         "format_name": "Matlab",
         "import_function": "rmatio::read.mat",
@@ -362,7 +326,6 @@
     {
         "input": "matlab",
         "format": "matlab",
-        "ext": "matlab",
         "type": "suggest",
         "format_name": "Matlab",
         "import_function": "rmatio::read.mat",
@@ -372,7 +335,6 @@
     {
         "input": "minitab",
         "format": "mtp",
-        "ext": "mtp",
         "type": "import",
         "format_name": "Minitab",
         "import_function": "foreign::read.mtp",
@@ -382,7 +344,6 @@
     {
         "input": "mtp",
         "format": "mtp",
-        "ext": "mtp",
         "type": "import",
         "format_name": "Minitab",
         "import_function": "foreign::read.mtp",
@@ -392,7 +353,6 @@
     {
         "input": "ods",
         "format": "ods",
-        "ext": "ods",
         "type": "suggest",
         "format_name": "OpenDocument Spreadsheet",
         "import_function": "readODS::read_ods",
@@ -402,7 +362,6 @@
     {
         "input": "pdf",
         "format": "pdf",
-        "ext": "pdf",
         "type": "known",
         "format_name": "PDF files",
         "import_function": "tabulizer::extract_tables",
@@ -412,7 +371,6 @@
     {
         "input": "png",
         "format": "png",
-        "ext": "png",
         "type": "known",
         "format_name": "PNG images",
         "import_function": "png::readPNG",
@@ -422,7 +380,6 @@
     {
         "input": "npy",
         "format": "npy",
-        "ext": "npy",
         "type": "known",
         "format_name": "Pickled Numpy arrays",
         "import_function": "RcppCNPy::npyLoad",
@@ -432,7 +389,6 @@
     {
         "input": "|",
         "format": "psv",
-        "ext": "psv",
         "type": "import",
         "format_name": "Pipe-separated data",
         "import_function": "data.table::fread",
@@ -442,7 +398,6 @@
     {
         "input": "psv",
         "format": "psv",
-        "ext": "psv",
         "type": "import",
         "format_name": "Pipe-separated data",
         "import_function": "data.table::fread",
@@ -452,7 +407,6 @@
     {
         "input": "beancount",
         "format": "ledger",
-        "ext": "ledger",
         "type": "enhance",
         "format_name": "Plain text accounting format",
         "import_function": "ledger::register",
@@ -462,7 +416,6 @@
     {
         "input": "hledger",
         "format": "ledger",
-        "ext": "ledger",
         "type": "enhance",
         "format_name": "Plain text accounting format",
         "import_function": "ledger::register",
@@ -472,7 +425,6 @@
     {
         "input": "ledger",
         "format": "ledger",
-        "ext": "ledger",
         "type": "enhance",
         "format_name": "Plain text accounting format",
         "import_function": "ledger::register",
@@ -482,7 +434,6 @@
     {
         "input": "bean",
         "format": "ledger",
-        "ext": "ledger",
         "type": "enhance",
         "format_name": "Plain text accounting format",
         "import_function": "ledger::register",
@@ -492,7 +443,6 @@
     {
         "input": "r",
         "format": "r",
-        "ext": "r",
         "type": "import",
         "format_name": "R syntax",
         "import_function": "base::dget",
@@ -502,7 +452,6 @@
     {
         "input": "sas",
         "format": "sas7bdat",
-        "ext": "sas7bdat",
         "type": "import",
         "format_name": "SAS",
         "import_function": "haven::read_sas",
@@ -512,7 +461,6 @@
     {
         "input": "sas7bdat",
         "format": "sas7bdat",
-        "ext": "sas7bdat",
         "type": "import",
         "format_name": "SAS",
         "import_function": "haven::read_sas",
@@ -522,7 +470,6 @@
     {
         "input": "xport",
         "format": "xpt",
-        "ext": "xpt",
         "type": "import",
         "format_name": "SAS XPORT",
         "import_function": "haven::read_xpt",
@@ -532,7 +479,6 @@
     {
         "input": "xpt",
         "format": "xpt",
-        "ext": "xpt",
         "type": "import",
         "format_name": "SAS XPORT",
         "import_function": "haven::read_xpt",
@@ -542,7 +488,6 @@
     {
         "input": "sav",
         "format": "sav",
-        "ext": "sav",
         "type": "import",
         "format_name": "SPSS",
         "import_function": "haven::read_sav",
@@ -552,7 +497,6 @@
     {
         "input": "spss",
         "format": "sav",
-        "ext": "sav",
         "type": "import",
         "format_name": "SPSS",
         "import_function": "haven::read_sav",
@@ -562,7 +506,6 @@
     {
         "input": "zsav",
         "format": "zsav",
-        "ext": "zsav",
         "type": "import",
         "format_name": "SPSS (compressed)",
         "import_function": "haven::read_sav",
@@ -572,7 +515,6 @@
     {
         "input": "por",
         "format": "por",
-        "ext": "por",
         "type": "import",
         "format_name": "SPSS Portable",
         "import_function": "haven::read_por",
@@ -582,7 +524,6 @@
     {
         "input": "rda",
         "format": "rdata",
-        "ext": "rdata",
         "type": "import",
         "format_name": "Saved R objects",
         "import_function": "base::load",
@@ -592,7 +533,6 @@
     {
         "input": "rdata",
         "format": "rdata",
-        "ext": "rdata",
         "type": "import",
         "format_name": "Saved R objects",
         "import_function": "base::load",
@@ -602,7 +542,6 @@
     {
         "input": "rds",
         "format": "rds",
-        "ext": "rds",
         "type": "import",
         "format_name": "Serialized R objects",
         "import_function": "base::readRDS",
@@ -612,7 +551,6 @@
     {
         "input": "qs",
         "format": "qs",
-        "ext": "qs",
         "type": "suggest",
         "format_name": "Serialized R objects (Quick)",
         "import_function": "qs::qread",
@@ -622,7 +560,6 @@
     {
         "input": "xml",
         "format": "xml",
-        "ext": "xml",
         "type": "suggest",
         "format_name": "Shallow XML documents",
         "import_function": "xml2::read_xml",
@@ -632,7 +569,6 @@
     {
         "input": "sss",
         "format": "sss",
-        "ext": "sss",
         "type": "known",
         "format_name": "Standard Survey Structure (Triple-S)",
         "import_function": "sss::read.sss",
@@ -642,7 +578,6 @@
     {
         "input": "dta",
         "format": "dta",
-        "ext": "dta",
         "type": "import",
         "format_name": "Stata",
         "import_function": "haven::read_dta",
@@ -652,7 +587,6 @@
     {
         "input": "stata",
         "format": "dta",
-        "ext": "dta",
         "type": "import",
         "format_name": "Stata",
         "import_function": "haven::read_dta",
@@ -662,7 +596,6 @@
     {
         "input": "sdmx",
         "format": "sdmx",
-        "ext": "sdmx",
         "type": "known",
         "format_name": "Statistical Data and Metadata eXchange",
         "import_function": "sdmx::readSDMX",
@@ -672,7 +605,6 @@
     {
         "input": "syd",
         "format": "syd",
-        "ext": "syd",
         "type": "import",
         "format_name": "Systat",
         "import_function": "foreign::read.systat",
@@ -682,7 +614,6 @@
     {
         "input": "systat",
         "format": "syd",
-        "ext": "syd",
         "type": "import",
         "format_name": "Systat",
         "import_function": "foreign::read.systat",
@@ -692,7 +623,6 @@
     {
         "input": "tif",
         "format": "tiff",
-        "ext": "tiff",
         "type": "known",
         "format_name": "TIFF images",
         "import_function": "tiff::readTIFF",
@@ -702,7 +632,6 @@
     {
         "input": "tiff",
         "format": "tiff",
-        "ext": "tiff",
         "type": "known",
         "format_name": "TIFF images",
         "import_function": "tiff::readTIFF",
@@ -712,7 +641,6 @@
     {
         "input": "\\t",
         "format": "tsv",
-        "ext": "tsv",
         "type": "import",
         "format_name": "Tab-separated data",
         "import_function": "data.table::fread",
@@ -722,7 +650,6 @@
     {
         "input": "tsv",
         "format": "tsv",
-        "ext": "tsv",
         "type": "import",
         "format_name": "Tab-separated data",
         "import_function": "data.table::fread",
@@ -732,7 +659,6 @@
     {
         "input": "txt",
         "format": "tsv",
-        "ext": "tsv",
         "type": "import",
         "format_name": "Tab-separated data",
         "import_function": "data.table::fread",
@@ -742,7 +668,6 @@
     {
         "input": "dump",
         "format": "dump",
-        "ext": "dump",
         "type": "import",
         "format_name": "Text Representations of R Objects",
         "import_function": "base::dump",
@@ -752,7 +677,6 @@
     {
         "input": "arff",
         "format": "arff",
-        "ext": "arff",
         "type": "import",
         "format_name": "Weka Attribute-Relation File Format",
         "import_function": "foreign::read.arff",
@@ -762,7 +686,6 @@
     {
         "input": "weka",
         "format": "arff",
-        "ext": "arff",
         "type": "import",
         "format_name": "Weka Attribute-Relation File Format",
         "import_function": "foreign::read.arff",
@@ -772,7 +695,6 @@
     {
         "input": "dbf",
         "format": "dbf",
-        "ext": "dbf",
         "type": "import",
         "format_name": "XBASE database files",
         "import_function": "foreign::read.dbf",
@@ -782,7 +704,6 @@
     {
         "input": "yaml",
         "format": "yml",
-        "ext": "yml",
         "type": "suggest",
         "format_name": "YAML",
         "import_function": "yaml::read_yaml",
@@ -792,7 +713,6 @@
     {
         "input": "yml",
         "format": "yml",
-        "ext": "yml",
         "type": "suggest",
         "format_name": "YAML",
         "import_function": "yaml::read_yaml",
@@ -802,7 +722,6 @@
     {
         "input": "zip",
         "format": "zip",
-        "ext": "zip",
         "type": "archive",
         "format_name": "Zip files",
         "import_function": "utils::unzip",
@@ -812,7 +731,6 @@
     {
         "input": ",",
         "format": "csv",
-        "ext": "csv",
         "type": "import",
         "format_name": "Comma-separated data",
         "import_function": "data.table::fread",

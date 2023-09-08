@@ -38,7 +38,7 @@ suppressPackageStartupMessages(library(data.table))
 ```
 
 ```{r featuretable, echo = FALSE}
-rf <- data.table(rio:::rio_formats)[!input %in% c(",", ";", "|", "\\t") & type %in% c("import", "suggest", "archive"), !"ext"]
+rf <- data.table(rio:::rio_formats)[!input %in% c(",", ";", "|", "\\t") & type %in% c("import", "suggest", "archive"),]
 short_rf <- rf[, paste(input, collapse = " / "), by = format_name]
 type_rf <- unique(rf[,c("format_name", "type", "import_function", "export_function", "note")])
 
