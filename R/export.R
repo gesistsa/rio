@@ -95,7 +95,7 @@ export <- function(x, file, format, ...) {
         f <- find_compress(file)
         file <- f$file
         compress <- f$compress
-        format <- get_ext(file)
+        format <- get_info(file)$input ## this line is slight confusing
     }
     if (!missing(format) && missing(file)) {
         format <- .standardize_format(format)
