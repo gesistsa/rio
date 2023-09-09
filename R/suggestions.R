@@ -19,19 +19,6 @@ install_formats <- function(...) {
 }
 
 uninstalled_formats <- function() {
-    # Suggested packages (robust to changes in DESCRIPTION file)
-    # Instead of flagging *new* suggestions by hand, this method only requires
-    # flagging *non-import* suggestions (such as `devtools`, `knitr`, etc.).
-    # This could be even more robust if the call to `install_formats()` instead
-    # wrapped a call to `<devools|remotes>::install_deps(dependencies =
-    # "Suggests")`, since this retains the package versioning (e.g. `xml2 (>=
-    # 1.2.0)`) suggested in the `DESCRIPTION` file. However, this seems a bit
-    # recursive, as `devtools` or `remotes` are often also in the `Suggests`
-    # field.
-    ## suggestions <- read.dcf(system.file("DESCRIPTION", package = utils::packageName(), mustWork = TRUE), fields = "Suggests")
-    ## suggestions <- parse_suggestions(suggestions)
-    ## common_suggestions <- c("bit64", "datasets", "devtools", "knitr", "magrittr", "testthat")
-    ## suggestions <- setdiff(suggestions, common_suggestions)
     all_functions <- unlist(rio_formats[rio_formats$type == "suggest", c("import_function", "export_function")], use.names = FALSE)
     suggestions <- unique(stats::na.omit(stringi::stri_extract_first(all_functions, regex = "[a-zA-Z0-9\\.]+")))
     # which are not installed
@@ -44,9 +31,3 @@ uninstalled_formats <- function() {
     }))
 }
 
-## parse_suggestions <- function(suggestions) {
-##     suggestions <- unlist(strsplit(suggestions, split = ",|, |\n"))
-##     suggestions <- gsub("\\s*\\(.*\\)", "", suggestions)
-##     suggestions <- sort(suggestions[suggestions != ""])
-##     suggestions
-## }
