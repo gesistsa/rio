@@ -5,6 +5,7 @@
 * Use `arrow` to import / export `feather` #340
 * `export_list` can write multiple data frames to a single archive file (e.g. zip, tar) or a directory #346 h/t David Schoch
 * `get_info` is added #350
+* POTENTIALLY BREAKING: `setclass` parameter is now authoritative. Therefore: `import("starwars.csv", data.table = TRUE, setclass = "tibble")` will return a tibble (unlike previous versions where a data.table is returned). The default class is data frame. You can either explicitly use the `setclass` parameter; or set the option: `options(rio.import.class = "data.table")`. h/t David Schoch #336
 * Bug fixes
    - ... is correctly passed for exporting ODS and feather #318
    - POTENTIALLY BREAKING: JSON are exported in UTF-8 by default; solved encoding issues on
