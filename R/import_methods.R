@@ -311,22 +311,16 @@ import_delim <-
 }
 
 #' @export
-.import.rio_xlsx <- function(file, which = 1, readxl = TRUE, ...) {
-    if (isTRUE(readxl)) {
-        .check_pkg_availability("readxl")
-        arg_reconcile(readxl::read_xlsx,
-            path = file, ..., sheet = which,
-            .docall = TRUE,
-            .remap = c(colNames = "col_names", na.strings = "na")
-        )
-    } else {
-        .check_pkg_availability("openxlsx")
-        arg_reconcile(openxlsx::read.xlsx,
-            xlsxFile = file, ..., sheet = which,
-            .docall = TRUE,
-            .remap = c(col_names = "colNames", na = "na.strings")
-        )
+.import.rio_xlsx <- function(file, which = 1, readxl = lifecycle::deprecated(), ...) {
+    if (lifecycle::is_present(readxl)) {
+        lifecycle::deprecate_warn(
+                       when = "0.5.31",
+                       what = "import(readxl)",
+                       details = "xlsx will always be read by `readxl`. The parameter `readxl` will be dropped in v2.0.0.")
     }
+    arg_reconcile(readxl::read_xlsx,
+            path = file, ..., sheet = which,
+            .docall = TRUE)
 }
 
 #' @export

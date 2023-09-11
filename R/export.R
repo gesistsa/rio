@@ -21,7 +21,7 @@
 #'     \item SPSS (.sav), using [haven::write_sav()]
 #'     \item SPSS compressed (.zsav), using [haven::write_sav()]
 #'     \item Stata (.dta), using [haven::write_dta()]. Note that variable/column names containing dots (.) are not allowed and will produce an error.
-#'     \item Excel (.xlsx), using [openxlsx::write.xlsx()]. Existing workbooks are overwritten unless `which` is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the `which` sheet does not, data are added as a new sheet to the existing workbook. `x` can also be a list of data frames; the list entry names are used as sheet names.
+#'     \item Excel (.xlsx), using [writexl::write_xlsx()]. `x` can also be a list of data frames; the list entry names are used as sheet names.
 #'     \item R syntax object (.R), using [base::dput()] (by default) or [base::dump()] (if `format = 'dump'`)
 #'     \item Saved R objects (.RData,.rda), using [base::save()]. In this case, `x` can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding `envir` argument is specified.
 #'     \item Serialized R objects (.rds), using [base::saveRDS()]. In this case, `x` can be any serializable R object.
