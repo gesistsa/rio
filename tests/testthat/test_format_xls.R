@@ -5,6 +5,16 @@ test_that("Export to Excel (.xlsx)", {
     expect_true(export(iris, "iris.xlsx") %in% dir())
 })
 
+test_that("Expert to Excel (.xlsx) a list", {
+    tempxlsx <- tempfile(fileext = ".xlsx")
+    export(list(
+    mtcars3 = mtcars[1:10, ],
+    mtcars2 = mtcars[11:20, ],
+    mtcars1 = mtcars[21:32, ]
+), tempxlsx)
+    expect_equal(readxl::excel_sheets(tempxlsx), c("mtcars3", "mtcars2", "mtcars1"))
+})
+
 test_that("readxl is deprecated", {
     lifecycle::expect_deprecated(import("iris.xlsx", readxl = TRUE))
     lifecycle::expect_deprecated(import("iris.xlsx", readxl = FALSE))
