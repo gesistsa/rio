@@ -15,6 +15,21 @@ test_that("Expert to Excel (.xlsx) a list", {
     expect_equal(readxl::excel_sheets(tempxlsx), c("mtcars3", "mtcars2", "mtcars1"))
 })
 
+test_that("Is `sheet` passed?", {
+    tempxlsx <- tempfile(fileext = ".xlsx")
+    export(list(
+    mtcars3 = mtcars[1:10, ],
+    mtcars2 = mtcars[11:20, ],
+    mtcars1 = mtcars[21:32, ]
+), tempxlsx)
+    expect_equal(readxl::excel_sheets(tempxlsx), c("mtcars3", "mtcars2", "mtcars1"))
+    content <- import(tempxlsx, sheet = "mtcars2")
+    expect_equal(content$mpg, mtcars[11:20, ]$mpg)
+    content <- import(tempxlsx, which = 2)
+    expect_equal(content$mpg, mtcars[11:20, ]$mpg)
+})
+
+
 test_that("readxl is deprecated", {
     lifecycle::expect_deprecated(import("iris.xlsx", readxl = TRUE))
     lifecycle::expect_deprecated(import("iris.xlsx", readxl = FALSE))
