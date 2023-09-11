@@ -83,21 +83,13 @@ export <- function(x, file, format, ...) {
     if (missing(file) && missing(format)) {
         stop("Must specify 'file' and/or 'format'")
     }
-    if (!missing(file) && !missing(format)) {
-        format <- tolower(format)
+    if (!missing(file)) {
         cfile <- file
         f <- find_compress(file)
         file <- f$file
         compress <- f$compress
-    }
-    if (!missing(file) && missing(format)) {
-        cfile <- file
-        f <- find_compress(file)
-        file <- f$file
-        compress <- f$compress
-        format <- get_info(file)$input ## this line is slight confusing
-    }
-    if (!missing(format) && missing(file)) {
+        format <- ifelse(isFALSE(missing(format)), tolower(format), get_info(file)$input)
+    } else {
         format <- .standardize_format(format)
         file <- paste0(as.character(substitute(x)), ".", format)
         compress <- NA_character_
