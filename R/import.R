@@ -26,7 +26,7 @@
 #'     \item SPSS compressed (.zsav), using [haven::read_sav()].
 #'     \item Stata (.dta), using [haven::read_dta()]. If `haven = FALSE`, [foreign::read.dta()] can be used.
 #'     \item SPSS Portable Files (.por), using [haven::read_por()].
-#'     \item Excel (.xls and .xlsx), using [readxl::read_excel()]. Use `which` to specify a sheet number. For .xlsx files, it is possible to set `readxl = FALSE`, so that [openxlsx::read.xlsx()] can be used instead of readxl (the default).
+#'     \item Excel (.xls and .xlsx), using [readxl::read_xlsx()] or [readxl::read_xls()]. Use `which` to specify a sheet number.
 #'     \item R syntax object (.R), using [base::dget()]
 #'     \item Saved R objects (.RData,.rda), using [base::load()] for single-object .Rdata files. Use `which` to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame).
 #'     \item Serialized R objects (.rds), using [base::readRDS()]. This can be any R object (not just a data frame).

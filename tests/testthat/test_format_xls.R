@@ -3,7 +3,11 @@ require("datasets")
 
 test_that("Export to Excel (.xlsx)", {
     expect_true(export(iris, "iris.xlsx") %in% dir())
-    expect_true(export(mtcars, "iris.xlsx", which = 2) %in% dir())
+})
+
+test_that("readxl is deprecated", {
+    lifecycle::expect_deprecated(import("iris.xlsx", readxl = TRUE))
+    lifecycle::expect_deprecated(import("iris.xlsx", readxl = FALSE))
 })
 
 test_that("Import from Excel (.xlsx)", {
