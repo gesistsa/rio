@@ -137,18 +137,20 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 
 #' @export
 .export.rio_rdata <- function(file, x, ...) {
-    if (is.data.frame(x)) {
-        return(save(x, file = file, ...))
-    } else if (is.list(x)) {
-        e <- as.environment(x)
-        save(list = names(x), file = file, envir = e, ...)
-    } else if (is.environment(x)) {
-        save(list = ls(x), file = file, envir = x, ...)
-    } else if (is.character(x)) {
-        save(list = x, file = file, ...)
-    } else {
+    if (isFALSE(is.data.frame(x)) && isFALSE(is.list(x)) && isFALSE(is.environment(x)) && isFALSE(is.character(x))) {
         stop("'x' must be a data.frame, list, or environment")
     }
+    if (is.data.frame(x)) {
+        return(save(x, file = file, ...))
+    }
+    if (is.list(x)) {
+        e <- as.environment(x)
+        return(save(list = names(x), file = file, envir = e, ...))
+    }
+    if (is.environment(x)) {
+        return(save(list = ls(x), file = file, envir = x, ...))
+    }
+    return(save(list = x, file = file, ...)) ## characters, but is this doing what it does?
 }
 
 #' @export
