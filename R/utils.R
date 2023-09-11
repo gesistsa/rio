@@ -46,9 +46,9 @@ get_ext <- function(file) {
 
 
 .query_format <- function(input, file) {
-    unique_rio_formats <- unique(rio_formats[,colnames(rio_formats) != "note"])
+    unique_rio_formats <- unique(rio_formats[, colnames(rio_formats) != "note"])
     if (file == "clipboard") {
-        output <- as.list(unique_rio_formats[unique_rio_formats$format == "clipboard",])
+        output <- as.list(unique_rio_formats[unique_rio_formats$format == "clipboard", ])
         output$file <- file
         return(output)
     }
@@ -113,4 +113,30 @@ escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&a
         dir.create(file_dir, recursive = TRUE)
     }
     invisible(NULL)
+}
+
+.create_outfiles <- function(file, x) {
+    names_x <- names(x)
+    if (length(file) == 1L) {
+        if (!grepl("%s", file, fixed = TRUE)) {
+            stop("'file' must have a %s placeholder")
+        }
+        if (is.null(names_x)) {
+            return(sprintf(file, seq_along(x)))
+        }
+        if (any(nchar(names_x) == 0)) {
+            stop("All elements of 'x' must be named or all must be unnamed")
+        }
+        if (anyDuplicated(names_x)) {
+            stop("Names of elements in 'x' are not unique")
+        }
+        return(sprintf(file, names_x))
+    }
+    if (length(x) != length(file)) {
+        stop("'file' must be same length as 'x', or a single pattern with a %s placeholder")
+    }
+    if (anyDuplicated(file)) {
+        stop("File names are not unique")
+    }
+    return(file)
 }

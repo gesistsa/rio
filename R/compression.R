@@ -47,48 +47,34 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
     return(cfile)
 }
 
-
-parse_zip <- function(file, which, ...) {
-    d <- tempfile()
-    dir.create(d)
-    file_list <- utils::unzip(file, list = TRUE)
-    if (missing(which)) {
-        which <- 1
-        if (nrow(file_list) > 1) {
-            warning(sprintf("Zip archive contains multiple files. Attempting first file."))
-        }
-    }
-    if (is.numeric(which)) {
-        utils::unzip(file, files = file_list$Name[which], exdir = d)
-        file.path(d, file_list$Name[which])
+parse_archive <- function(file, which, file_type, ...) {
+    if (file_type == "zip") {
+        file_list <- utils::unzip(file, list = TRUE)$Name
+        extract_func <- utils::unzip
+    } else if (file_type == "tar") {
+        file_list <- utils::untar(file, list = TRUE)
+        extract_func <- utils::untar
     } else {
-        if (substring(which, 1, 1) != "^") {
-            which2 <- paste0("^", which)
-        }
-        utils::unzip(file, files = file_list$Name[grep(which2, file_list$Name)[1]], exdir = d)
-        file.path(d, which)
+        stop("Unsupported file_type. Use 'zip' or 'tar'.")
     }
-}
 
-parse_tar <- function(file, which, ...) {
     d <- tempfile()
     dir.create(d)
-    on.exit(unlink(d))
-    file_list <- utils::untar(file, list = TRUE)
+
     if (missing(which)) {
-        which <- 1
         if (length(file_list) > 1) {
-            warning(sprintf("Tar archive contains multiple files. Attempting first file."))
+            warning(sprintf("%s archive contains multiple files. Attempting first file.", file_type))
         }
+        which <- 1
     }
+
     if (is.numeric(which)) {
-        utils::untar(file, files = file_list[which], exdir = d)
-        file.path(d, file_list[which])
-    } else {
-        if (substring(which, 1, 1) != "^") {
-            which2 <- paste0("^", which)
-        }
-        utils::untar(file, files = file_list[grep(which2, file_list)[1]], exdir = d)
-        file.path(d, which)
+        extract_func(file, files = file_list[which], exdir = d)
+        return(file.path(d, file_list[which]))
     }
+    if (substring(which, 1, 1) != "^") {
+        which2 <- paste0("^", which)
+    }
+    extract_func(file, files = file_list[grep(which2, file_list)[1]], exdir = d)
+    return(file.path(d, which))
 }
