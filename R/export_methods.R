@@ -219,34 +219,8 @@ export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
 }
 
 #' @export
-.export.rio_xlsx <- function(file, x, which, ...) {
-    dots <- list(...)
-    if (!missing(which)) {
-        if (file.exists(file)) {
-            wb <- openxlsx::loadWorkbook(file = file)
-            sheets <- openxlsx::getSheetNames(file = file)
-            if (is.numeric(which)) {
-                if (which <= length(sheets)) {
-                    which <- sheets[which]
-                } else {
-                    which <- paste("Sheet", length(sheets) + 1L)
-                }
-            }
-            if (!which %in% sheets) {
-                openxlsx::addWorksheet(wb, sheet = which)
-            } else {
-                openxlsx::removeWorksheet(wb, sheet = which)
-                openxlsx::addWorksheet(wb, sheet = which)
-                openxlsx::worksheetOrder(wb) <- sheets
-            }
-            openxlsx::writeData(wb, sheet = which, x = x)
-            openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
-        } else {
-            openxlsx::write.xlsx(x = x, file = file, sheetName = which, ...)
-        }
-    } else {
-        openxlsx::write.xlsx(x = x, file = file, ...)
-    }
+.export.rio_xlsx <- function(file, x, ...) {
+    writexl::write_xlsx(x = x, path = file, ...)
 }
 
 #' @export

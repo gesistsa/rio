@@ -37,7 +37,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
 \item SPSS (.sav), using \code{\link[haven:read_spss]{haven::write_sav()}}
 \item SPSS compressed (.zsav), using \code{\link[haven:read_spss]{haven::write_sav()}}
 \item Stata (.dta), using \code{\link[haven:read_dta]{haven::write_dta()}}. Note that variable/column names containing dots (.) are not allowed and will produce an error.
-\item Excel (.xlsx), using \code{\link[openxlsx:write.xlsx]{openxlsx::write.xlsx()}}. Existing workbooks are overwritten unless \code{which} is specified, in which case only the specified sheet (if it exists) is overwritten. If the file exists but the \code{which} sheet does not, data are added as a new sheet to the existing workbook. \code{x} can also be a list of data frames; the list entry names are used as sheet names.
+\item Excel (.xlsx), using \code{\link[writexl:write_xlsx]{writexl::write_xlsx()}}. \code{x} can also be a list of data frames; the list entry names are used as sheet names.
 \item R syntax object (.R), using \code{\link[base:dput]{base::dput()}} (by default) or \code{\link[base:dump]{base::dump()}} (if \code{format = 'dump'})
 \item Saved R objects (.RData,.rda), using \code{\link[base:save]{base::save()}}. In this case, \code{x} can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding \code{envir} argument is specified.
 \item Serialized R objects (.rds), using \code{\link[base:readRDS]{base::saveRDS()}}. In this case, \code{x} can be any serializable R object.
