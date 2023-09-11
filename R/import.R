@@ -110,15 +110,15 @@ import <- function(file, format, setclass = getOption("rio.import.class", "data.
     }
     if (grepl("\\.zip$", file)) {
         if (missing(which)) {
-            file <- parse_zip(file)
+            file <- parse_archive(file, file_type = "zip")
         } else {
-            file <- parse_zip(file, which = which)
+            file <- parse_archive(file, which = which, file_type = "zip")
         }
     } else if (grepl("\\.tar", file)) {
         if (missing(which)) {
             which <- 1
         }
-        file <- parse_tar(file, which = which)
+        file <- parse_archive(file, which = which, file_type = "tar")
     }
     if (missing(format)) {
         format <- get_info(file)$format
