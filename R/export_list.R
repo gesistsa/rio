@@ -52,32 +52,8 @@ export_list <- function(x, file, archive = "", ...) {
         stop("'x' must be a list. Perhaps you want export()?")
     }
 
-    if (is.null(file)) {
-        stop("'file' must be a character vector")
-    } else if (length(file) == 1L) {
-        if (!grepl("%s", file, fixed = TRUE)) {
-            stop("'file' must have a %s placeholder")
-        }
-        if (is.null(names(x))) {
-            outfiles <- sprintf(file, seq_along(x))
-        } else {
-            if (any(nchar(names(x))) == 0) {
-                stop("All elements of 'x' must be named or all must be unnamed")
-            }
-            if (anyDuplicated(names(x))) {
-                stop("Names of elements in 'x' are not unique")
-            }
-            outfiles <- sprintf(file, names(x))
-        }
-    } else {
-        if (length(x) != length(file)) {
-            stop("'file' must be same length as 'x', or a single pattern with a %s placeholder")
-        }
-        if (anyDuplicated(file)) {
-            stop("File names are not unique")
-        }
-        outfiles <- file
-    }
+    outfiles <- .create_outfiles(file, names(x))
+
     if (is.na(archive_format$compress) && archive_format$file != "") {
         outfiles <- file.path(archive_format$file, outfiles)
     }
