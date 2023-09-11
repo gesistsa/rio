@@ -52,7 +52,7 @@ export_list <- function(x, file, archive = "", ...) {
         stop("'x' must be a list. Perhaps you want export()?")
     }
 
-    outfiles <- .create_outfiles(file, names(x))
+    outfiles <- .create_outfiles(file, x)
 
     if (is.na(archive_format$compress) && archive_format$file != "") {
         outfiles <- file.path(archive_format$file, outfiles)

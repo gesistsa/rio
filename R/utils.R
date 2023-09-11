@@ -115,7 +115,8 @@ escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&a
     invisible(NULL)
 }
 
-.create_outfiles <- function(file, names_x) {
+.create_outfiles <- function(file, x) {
+    names_x <- names(x)
     if (length(file) == 1L) {
         if (!grepl("%s", file, fixed = TRUE)) {
             stop("'file' must have a %s placeholder")
