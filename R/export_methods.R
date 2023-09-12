@@ -1,32 +1,18 @@
-export_delim <- function(file, x, fwrite = TRUE, sep = "\t", row.names = FALSE,
+export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", row.names = FALSE,
                          col.names = TRUE, append = FALSE, ...) {
-    if (isTRUE(fwrite) & !inherits(file, "connection")) {
-        if (isTRUE(append)) {
-            data.table::fwrite(x,
-                file = file, sep = sep, row.names = row.names,
-                col.names = FALSE, append = TRUE, ...
-            )
-        } else {
-            data.table::fwrite(x,
-                file = file, sep = sep, row.names = row.names,
-                col.names = col.names, append = FALSE, ...
-            )
-        }
+    if (lifecycle::is_present(fwrite)) {
+        lifecycle::deprecate_warn(when = "0.5.31", what = "export(fwrite)", details = "plain text files will always be written with `data.table::fwrite`. The parameter `fwrite` will be dropped in v2.0.0.")
+    }
+    if (isTRUE(append)) {
+        data.table::fwrite(x,
+            file = file, sep = sep, row.names = row.names,
+            col.names = FALSE, append = TRUE, ...
+        )
     } else {
-        if (isTRUE(fwrite) & inherits(file, "connection")) {
-            message("data.table::fwrite() does not support writing to connections. Using utils::write.table() instead.")
-        }
-        if (isTRUE(append)) {
-            utils::write.table(x,
-                file = file, sep = sep, row.names = row.names,
-                col.names = FALSE, append = TRUE, ...
-            )
-        } else {
-            utils::write.table(x,
-                file = file, sep = sep, row.names = row.names,
-                col.names = col.names, append = FALSE, ...
-            )
-        }
+        data.table::fwrite(x,
+            file = file, sep = sep, row.names = row.names,
+            col.names = col.names, append = FALSE, ...
+        )
     }
 }
 
