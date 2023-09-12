@@ -117,6 +117,29 @@ test_that("URL #294", {
     expect_true("Africa" %in% x2[[2]]$continent)
 })
 
+test_that("Universal dummy `which` #326", {
+    formats <- c("xlsx", "dta", "sav", "csv", "csv2")
+    for (format in formats) {
+        tempzip <- tempfile(fileext = paste0(".", format, ".zip"))
+        rio::export(mtcars, tempzip, format = format)
+        expect_warning(rio::import(tempzip), NA)
+        expect_warning(rio::import_list(tempzip), NA)
+    }
+})
+
+test_that("Universal dummy `which` (Suggests) #326", {
+    skip_if_not_installed("qs")
+    skip_if_not_installed("arrow")
+    skip_if_not_installed("ods")
+    formats <- c("qs", "parquet", "ods")
+    for (format in formats) {
+        tempzip <- tempfile(fileext = paste0(".", format, ".zip"))
+        rio::export(mtcars, tempzip, format = format)
+        expect_warning(rio::import(tempzip), NA)
+        expect_warning(rio::import_list(tempzip), NA)
+    }
+})
+
 unlink("data.rdata")
 unlink("mtcars.rds")
 unlink("mtcars.csv.zip")

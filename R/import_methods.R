@@ -211,7 +211,7 @@ import_delim <-
 
 #' @export
 .import.rio_dta <- function(file, haven = TRUE,
-                            convert.factors = FALSE, ...) {
+                            convert.factors = FALSE, which = 1, ...) {
     if (isTRUE(haven)) {
         arg_reconcile(haven::read_dta,
             file = file, ..., .docall = TRUE,
@@ -466,7 +466,7 @@ extract_html_row <- function(x, empty_value) {
 }
 
 #' @export
-.import.rio_qs <- function(file, ...) {
+.import.rio_qs <- function(file, which = 1, ...) {
     .check_pkg_availability("qs")
     qs::qread(file = file, ...)
 }
