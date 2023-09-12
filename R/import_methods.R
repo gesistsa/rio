@@ -4,7 +4,7 @@ import_delim <-
         arg_reconcile(data.table::fread,
             input = file, sep = sep, header = header,
             stringsAsFactors = stringsAsFactors,
-            data.table = TRUE, ..., .docall = TRUE
+            data.table = FALSE, ..., .docall = TRUE
         )
     }
 
