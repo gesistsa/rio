@@ -1,36 +1,13 @@
 import_delim <-
-    function(file, which = 1, fread = TRUE, sep = "auto",
-             header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
-        if (isTRUE(fread) & !inherits(file, "connection")) {
-            arg_reconcile(data.table::fread,
-                input = file, sep = sep, header = header,
-                stringsAsFactors = stringsAsFactors,
-                data.table = data.table, ..., .docall = TRUE
-            )
-        } else {
-            if (isTRUE(fread) & inherits(file, "connection")) {
-                message("data.table::fread() does not support reading from connections. Using utils::read.table() instead.")
-            }
-            if (missing(sep) || is.null(sep) || sep == "auto") {
-                if (inherits(file, "rio_csv")) {
-                    sep <- ","
-                } else if (inherits(file, "rio_csv2")) {
-                    sep <- ";"
-                } else if (inherits(file, "rio_psv")) {
-                    sep <- "|"
-                } else {
-                    sep <- "\t"
-                }
-            }
-            if (missing(header) || is.null(header) || header == "auto") {
-                header <- TRUE
-            }
-            arg_reconcile(utils::read.table,
-                file = file, sep = sep, header = header,
-                stringsAsFactors = stringsAsFactors, ..., .docall = TRUE
-            )
-        }
+    function(file, which = 1, sep = "auto",
+             header = "auto", stringsAsFactors = FALSE, ...) {
+        arg_reconcile(data.table::fread,
+            input = file, sep = sep, header = header,
+            stringsAsFactors = stringsAsFactors,
+            data.table = TRUE, ..., .docall = TRUE
+        )
     }
+
 
 
 #' @export
@@ -40,33 +17,51 @@ import_delim <-
 }
 
 #' @export
-.import.rio_tsv <- function(file, sep = "auto", which = 1, fread = TRUE, dec = if (sep %in% c("\t", "auto")) "." else ",", ...) {
-    import_delim(file = file, sep = sep, fread = fread, dec = dec, ...)
+.import.rio_tsv <- function(file, sep = "auto", which = 1, fread = lifecycle::deprecated(), dec = if (sep %in% c("\t", "auto")) "." else ",", ...) {
+    if (lifecycle::is_present(fread)) {
+        lifecycle::deprecate_warn(when = "0.5.31", what = "import(fread)", details = "tsv will always be read by `data.table:fread()`. The parameter `fread` will be dropped in v2.0.0.")
+    }
+    import_delim(file = file, sep = sep, dec = dec, ...)
 }
 
 #' @export
-.import.rio_txt <- function(file, sep = "auto", which = 1, fread = TRUE, dec = if (sep %in% c(",", "auto")) "." else ",", ...) {
-    import_delim(file = file, sep = sep, fread = fread, dec = dec, ...)
+.import.rio_txt <- function(file, sep = "auto", which = 1, fread = lifecycle::deprecated(), dec = if (sep %in% c(",", "auto")) "." else ",", ...) {
+    if (lifecycle::is_present(fread)) {
+        lifecycle::deprecate_warn(when = "0.5.31", what = "import(fread)", details = "txt will always be read by `data.table:fread()`. The parameter `fread` will be dropped in v2.0.0.")
+    }
+    import_delim(file = file, sep = sep, dec = dec, ...)
 }
 
 #' @export
-.import.rio_csv <- function(file, sep = ",", which = 1, fread = TRUE, dec = if (sep %in% c(",", "auto")) "." else ",", ...) {
-    import_delim(file = file, sep = if (sep == ",") "auto" else sep, fread = fread, dec = dec, ...)
+.import.rio_csv <- function(file, sep = ",", which = 1, fread = lifecycle::deprecated(), dec = if (sep %in% c(",", "auto")) "." else ",", ...) {
+    if (lifecycle::is_present(fread)) {
+        lifecycle::deprecate_warn(when = "0.5.31", what = "import(fread)", details = "csv will always be read by `data.table:fread()`. The parameter `fread` will be dropped in v2.0.0.")
+    }
+    import_delim(file = file, sep = if (sep == ",") "auto" else sep, dec = dec, ...)
 }
 
 #' @export
-.import.rio_csv2 <- function(file, sep = ";", which = 1, fread = TRUE, dec = if (sep %in% c(";", "auto")) "," else ".", ...) {
-    import_delim(file = file, sep = if (sep == ";") "auto" else sep, fread = fread, dec = dec, ...)
+.import.rio_csv2 <- function(file, sep = ";", which = 1, fread = lifecycle::deprecated(), dec = if (sep %in% c(";", "auto")) "," else ".", ...) {
+    if (lifecycle::is_present(fread)) {
+        lifecycle::deprecate_warn(when = "0.5.31", what = "import(fread)", details = "csv2 will always be read by `data.table:fread()`. The parameter `fread` will be dropped in v2.0.0.")
+    }
+    import_delim(file = file, sep = if (sep == ";") "auto" else sep, dec = dec, ...)
 }
 
 #' @export
-.import.rio_csvy <- function(file, sep = ",", which = 1, fread = TRUE, dec = if (sep %in% c(",", "auto")) "." else ",", yaml = TRUE, ...) {
-    import_delim(file = file, sep = if (sep == ",") "auto" else sep, fread = fread, dec = dec, yaml = yaml, ...)
+.import.rio_csvy <- function(file, sep = ",", which = 1, fread = lifecycle::deprecated(), dec = if (sep %in% c(",", "auto")) "." else ",", yaml = TRUE, ...) {
+    if (lifecycle::is_present(fread)) {
+        lifecycle::deprecate_warn(when = "0.5.31", what = "import(fread)", details = "csvy will always be read by `data.table:fread()`. The parameter `fread` will be dropped in v2.0.0.")
+    }
+    import_delim(file = file, sep = if (sep == ",") "auto" else sep, dec = dec, yaml = yaml, ...)
 }
 
 #' @export
-.import.rio_psv <- function(file, sep = "|", which = 1, fread = TRUE, dec = if (sep %in% c("|", "auto")) "." else ",", ...) {
-    import_delim(file = file, sep = if (sep == "|") "auto" else sep, fread = fread, dec = dec, ...)
+.import.rio_psv <- function(file, sep = "|", which = 1, fread = lifecycle::deprecated(), dec = if (sep %in% c("|", "auto")) "." else ",", ...) {
+    if (lifecycle::is_present(fread)) {
+        lifecycle::deprecate_warn(when = "0.5.31", what = "import(fread)", details = "psv will always be read by `data.table:fread()`. The parameter `fread` will be dropped in v2.0.0.")
+    }
+    import_delim(file = file, sep = if (sep == "|") "auto" else sep, dec = dec, ...)
 }
 
 #' @export
@@ -314,13 +309,15 @@ import_delim <-
 .import.rio_xlsx <- function(file, which = 1, readxl = lifecycle::deprecated(), ...) {
     if (lifecycle::is_present(readxl)) {
         lifecycle::deprecate_warn(
-                       when = "0.5.31",
-                       what = "import(readxl)",
-                       details = "xlsx will always be read by `readxl`. The parameter `readxl` will be dropped in v2.0.0.")
+            when = "0.5.31",
+            what = "import(readxl)",
+            details = "xlsx will always be read by `readxl`. The parameter `readxl` will be dropped in v2.0.0."
+        )
     }
     arg_reconcile(readxl::read_xlsx,
-            path = file, ..., sheet = which,
-            .docall = TRUE)
+        path = file, ..., sheet = which,
+        .docall = TRUE
+    )
 }
 
 #' @export
