@@ -161,22 +161,15 @@ import_delim <-
 }
 
 #' @export
-.import.rio_dta <- function(file, haven = TRUE,
-                            convert.factors = FALSE, which = 1, ...) {
-    if (isTRUE(haven)) {
-        arg_reconcile(haven::read_dta,
-            file = file, ..., .docall = TRUE,
-            .finish = standardize_attributes
-        )
-    } else {
-        out <- arg_reconcile(foreign::read.dta,
-            file = file,
-            convert.factors = convert.factors, ..., .docall = TRUE
-        )
-        attr(out, "expansion.fields") <- NULL
-        attr(out, "time.stamp") <- NULL
-        standardize_attributes(out)
+.import.rio_dta <- function(file, haven = lifecycle::deprecated(),
+                            convert.factors = lifecycle::deprecated(), which = 1, ...) {
+    if (lifecycle::is_present(haven) || lifecycle::is_present(convert.factors)) {
+        lifecycle::deprecate_warn(when = "0.5.31", what = "import(haven)", details = "dta will always be read by `haven`. The parameter `haven` will be dropped in v2.0.0.")
     }
+    arg_reconcile(haven::read_dta,
+        file = file, ..., .docall = TRUE,
+        .finish = standardize_attributes
+    )
 }
 
 #' @export
@@ -190,15 +183,11 @@ import_delim <-
 }
 
 #' @export
-.import.rio_sav <- function(file, which = 1, haven = TRUE, to.data.frame = TRUE, use.value.labels = FALSE, ...) {
-    if (isTRUE(haven)) {
-        standardize_attributes(haven::read_sav(file = file))
-    } else {
-        standardize_attributes(foreign::read.spss(
-            file = file, to.data.frame = to.data.frame,
-            use.value.labels = use.value.labels, ...
-        ))
+.import.rio_sav <- function(file, which = 1, haven = lifecycle::deprecated(), to.data.frame = lifecycle::deprecated(), use.value.labels = lifecycle::deprecated(), ...) {
+    if (lifecycle::is_present(haven) || lifecycle::is_present(to.data.frame) || lifecycle::is_present(use.value.labels)) {
+        lifecycle::deprecate_warn(when = "0.5.31", what = "import(haven)", details = "sav will always be read by `haven`. The parameter `haven` will be dropped in v2.0.0.")
     }
+    standardize_attributes(haven::read_sav(file = file))
 }
 
 #' @export
@@ -217,12 +206,11 @@ import_delim <-
 }
 
 #' @export
-.import.rio_xpt <- function(file, which = 1, haven = TRUE, ...) {
-    if (isTRUE(haven)) {
-        standardize_attributes(haven::read_xpt(file = file, ...))
-    } else {
-        foreign::read.xport(file = file)
+.import.rio_xpt <- function(file, which = 1, haven = lifecycle::deprecated(), ...) {
+    if (lifecycle::is_present(haven)) {
+        lifecycle::deprecate_warn(when = "0.5.31", what = "import(haven)", details = "xpt will always be read by `haven`. The parameter `haven` will be dropped in v2.0.0.")
     }
+    standardize_attributes(haven::read_xpt(file = file, ...))
 }
 
 #' @export
