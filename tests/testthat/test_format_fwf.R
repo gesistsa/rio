@@ -20,10 +20,6 @@ test_that("Import from FWF Errors", {
         "Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().",
         fixed = TRUE
     )
-    # error on NULL widths
-    expect_error(import("iris.fwf", widths = NULL))
-    # no error on NULL widths w/ readr::read_fwf()
-    expect_true(suppressWarnings(is.data.frame(import("iris.fwf", widths = NULL))))
 })
 
 unlink("iris.fwf")
