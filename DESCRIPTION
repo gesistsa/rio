@@ -52,7 +52,8 @@ Imports:
     tibble,
     stringi,
     writexl,
-    lifecycle
+    lifecycle,
+    R.utils
 Suggests:
     datasets,
     bit64,
