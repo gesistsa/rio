@@ -72,63 +72,19 @@ import_delim <-
              header = FALSE,
              col.names,
              comment = "#",
-             readr = FALSE,
+             readr = lifecycle::deprecated(),
              progress = getOption("verbose", FALSE),
              ...) {
+        if (lifecycle::is_present(readr)) {
+            lifecycle::deprecate_warn(when = "0.5.31", what = "import(readr)", details = "fwt will always be read without `readr`. The parameter `readr` will be dropped in v2.0.0.")
+        }
         if (missing(widths)) {
             stop("Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().")
         }
-        a <- list(...)
-        if (isTRUE(readr)) {
-            .check_pkg_availability("readr")
-            if (is.null(widths)) {
-                if (!missing(col.names)) {
-                    widths <- readr::fwf_empty(file = file, col_names = col.names)
-                } else {
-                    widths <- readr::fwf_empty(file = file)
-                }
-                readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
-            } else if (is.numeric(widths)) {
-                if (any(widths < 0)) {
-                    if (!"col_types" %in% names(a)) {
-                        col_types <- rep("?", length(widths))
-                        col_types[widths < 0] <- "?"
-                        col_types <- paste0(col_types, collapse = "")
-                    }
-                    if (!missing(col.names)) {
-                        widths <- readr::fwf_widths(abs(widths), col_names = col.names)
-                    } else {
-                        widths <- readr::fwf_widths(abs(widths))
-                    }
-                    readr::read_fwf(
-                        file = file, col_positions = widths,
-                        col_types = col_types, progress = progress,
-                        comment = comment, ...
-                    )
-                } else {
-                    if (!missing(col.names)) {
-                        widths <- readr::fwf_widths(abs(widths), col_names = col.names)
-                    } else {
-                        widths <- readr::fwf_widths(abs(widths))
-                    }
-                    readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
-                }
-            } else if (is.list(widths)) {
-                if (!c("begin", "end") %in% names(widths)) {
-                    if (!missing(col.names)) {
-                        widths <- readr::fwf_widths(widths, col_names = col.names)
-                    } else {
-                        widths <- readr::fwf_widths(widths)
-                    }
-                }
-                readr::read_fwf(file = file, col_positions = widths, progress = progress, comment = comment, ...)
-            }
+        if (!missing(col.names)) {
+            read.fwf2(file = file, widths = widths, header = header, col.names = col.names, ...)
         } else {
-            if (!missing(col.names)) {
-                read.fwf2(file = file, widths = widths, header = header, col.names = col.names, ...)
-            } else {
-                read.fwf2(file = file, widths = widths, header = header, ...)
-            }
+            read.fwf2(file = file, widths = widths, header = header, ...)
         }
     }
 
