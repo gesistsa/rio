@@ -22,5 +22,10 @@ test_that("Import from FWF Errors", {
     )
 })
 
+test_that("readr is deprecated", {
+    lifecycle::expect_deprecated(import("iris.fwf", widths = c(3, 3, 3, 3, 1), readr = TRUE))
+    lifecycle::expect_deprecated(import("iris.fwf", widths = c(3, 3, 3, 3, 1), readr = FALSE))
+})
+
 unlink("iris.fwf")
 unlink("iris.txt")

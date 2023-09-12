@@ -44,7 +44,7 @@ test_that("Import from CSV (read.csv)", {
 })
 
 test_that("Import from CSV (fread)", {
-    expect_true(is.data.frame(import("iris.csv", format = "csv2", fread = TRUE)))
+    expect_true(is.data.frame(import("iris.csv", format = "csv2")))
 })
 
 test_that("Export to TSV with CSV extension", {
@@ -59,6 +59,12 @@ test_that("Import from TSV with CSV extension", {
     expect_true(ncol(import("iris.csv", format = "csv")) == 5L)
     expect_true(ncol(import("iris.csv", sep = "auto")) == 5L)
 })
+
+test_that("fread is deprecated", {
+    lifecycle::expect_deprecated(import("iris.csv", fread = TRUE))
+    lifecycle::expect_deprecated(import("iris.csv", fread = FALSE))
+})
+
 
 unlink("iris.csv")
 unlink("iris2.csv")

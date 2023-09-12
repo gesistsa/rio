@@ -9,24 +9,27 @@ test_that("Export to Stata", {
 })
 
 test_that("Import from Stata (read_dta)", {
-    expect_true(is.data.frame(import("mtcars.dta", haven = TRUE)))
+    expect_true(is.data.frame(import("mtcars.dta")))
     # arguments ignored
-    expect_warning(import("mtcars.dta", haven = TRUE, extraneous.argument = TRUE))
+    expect_warning(import("mtcars.dta", extraneous.argument = TRUE))
     # tell arg_reconcile() to not show warnings
     expect_silent(import("mtcars.dta",
-        haven = TRUE,
         extraneous.argument = TRUE, .warn = FALSE
     ))
 })
 
 test_that("Import from Stata with extended Haven features (read_dta)", {
     expect_true(is.data.frame(mtcars_wtam <- import("mtcars.dta",
-        haven = TRUE,
         col_select = c("wt", "am"),
         n_max = 10
     )))
     expect_identical(c(10L, 2L), dim(mtcars_wtam))
     expect_identical(c("wt", "am"), names(mtcars_wtam))
+})
+
+test_that("haven is deprecated", {
+    lifecycle::expect_deprecated(import("mtcars.dta", haven = TRUE))
+    lifecycle::expect_deprecated(import("mtcars.dta", haven = FALSE))
 })
 
 unlink("mtcars.dta")

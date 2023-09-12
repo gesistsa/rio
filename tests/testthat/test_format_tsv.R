@@ -9,4 +9,9 @@ test_that("Import from TSV", {
     expect_true(is.data.frame(import("iris.tsv")))
 })
 
+test_that("fread is deprecated", {
+    lifecycle::expect_deprecated(import("iris.tsv", fread = TRUE))
+    lifecycle::expect_deprecated(import("iris.tsv", fread = FALSE))
+})
+
 unlink("iris.tsv")
