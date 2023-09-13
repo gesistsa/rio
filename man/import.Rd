@@ -20,7 +20,7 @@ import(
 \item{setclass}{An optional character vector specifying one or more classes
 to set on the import. By default, the return object is always a
 \dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or
-\dQuote{tibble} (if using tibble), \dQuote{arrow_table} (if using arrow table) or \dQuote{data.table} (if using
+\dQuote{tibble} (if using tibble), \dQuote{arrow}, \dQuote{arrow_table} (if using arrow table) or \dQuote{data.table} (if using
 data.table). Other values are ignored, such that a data.frame is returned.
 The parameter takes precedents over parameters in \dots which set a different class.}
 
@@ -40,14 +40,14 @@ This function imports a data frame or matrix from a data file with the file form
 \code{import} supports the following file formats:
 
 \itemize{
-\item Comma-separated data (.csv), using \code{\link[data.table:fread]{data.table::fread()}} or, if \code{fread = FALSE}, \code{\link[utils:read.table]{utils::read.table()}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
-\item Pipe-separated data (.psv), using \code{\link[data.table:fread]{data.table::fread()}} or, if \code{fread = FALSE}, \code{\link[utils:read.table]{utils::read.table()}} with \code{sep = '|'}, \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
-\item Tab-separated data (.tsv), using \code{\link[data.table:fread]{data.table::fread()}} or, if \code{fread = FALSE}, \code{\link[utils:read.table]{utils::read.table()}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
-\item SAS (.sas7bdat), using \code{\link[haven:read_sas]{haven::read_sas()}}.
-\item SAS XPORT (.xpt), using \code{\link[haven:read_xpt]{haven::read_xpt()}} or, if \code{haven = FALSE}, \code{\link[foreign:read.xport]{foreign::read.xport()}}.
-\item SPSS (.sav), using \code{\link[haven:read_spss]{haven::read_sav()}}. If \code{haven = FALSE}, \code{\link[foreign:read.spss]{foreign::read.spss()}} can be used.
+\item Comma-separated data (.csv), using \code{\link[data.table:fread]{data.table::fread()}}
+\item Pipe-separated data (.psv), using \code{\link[data.table:fread]{data.table::fread()}}
+\item Tab-separated data (.tsv), using \code{\link[data.table:fread]{data.table::fread()}}
+\item SAS (.sas7bdat), using \code{\link[haven:read_sas]{haven::read_sas()}}
+\item SAS XPORT (.xpt), using \code{\link[haven:read_xpt]{haven::read_xpt()}}
+\item SPSS (.sav), using \code{\link[haven:read_spss]{haven::read_sav()}}
 \item SPSS compressed (.zsav), using \code{\link[haven:read_spss]{haven::read_sav()}}.
-\item Stata (.dta), using \code{\link[haven:read_dta]{haven::read_dta()}}. If \code{haven = FALSE}, \code{\link[foreign:read.dta]{foreign::read.dta()}} can be used.
+\item Stata (.dta), using \code{\link[haven:read_dta]{haven::read_dta()}}
 \item SPSS Portable Files (.por), using \code{\link[haven:read_spss]{haven::read_por()}}.
 \item Excel (.xls and .xlsx), using \code{\link[readxl:read_excel]{readxl::read_xlsx()}} or \code{\link[readxl:read_excel]{readxl::read_xls()}}. Use \code{which} to specify a sheet number.
 \item R syntax object (.R), using \code{\link[base:dput]{base::dget()}}
@@ -63,7 +63,7 @@ object (not just a data frame).
 \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign:read.arff]{foreign::read.arff()}}
 \item Data Interchange Format (.dif), using \code{\link[utils:read.DIF]{utils::read.DIF()}}
 \item Fortran data (no recognized extension), using \code{\link[utils:read.fortran]{utils::read.fortran()}}
-\item Fixed-width format data (.fwf), using a faster version of \code{\link[utils:read.fwf]{utils::read.fwf()}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}. If \code{readr = TRUE}, import will be performed using \code{\link[readr:read_fwf]{readr::read_fwf()}}, where \code{widths} should be: \code{NULL}, a vector of column widths, or the output of \code{\link[readr:read_fwf]{readr::fwf_empty()}}, \code{\link[readr:read_fwf]{readr::fwf_widths()}}, or \code{\link[readr:read_fwf]{readr::fwf_positions()}}.
+\item Fixed-width format data (.fwf), using a faster version of \code{\link[utils:read.fwf]{utils::read.fwf()}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}
 \item gzip comma-separated data (.csv.gz), using \code{\link[utils:read.table]{utils::read.table()}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
 \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table:fread]{data.table::fread()}}.
 \item Apache Arrow Parquet (.parquet), using \code{\link[arrow:read_parquet]{arrow::read_parquet()}}

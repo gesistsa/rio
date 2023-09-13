@@ -29,9 +29,9 @@ The output file can be to a compressed directory, simply by adding an appropriat
 \code{export} supports many file formats. See the documentation for the underlying export functions for optional arguments that can be passed via \code{...}
 
 \itemize{
-\item Comma-separated data (.csv), using \code{\link[data.table:fwrite]{data.table::fwrite()}} or, if \code{fwrite = TRUE}, \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}.
-\item Pipe-separated data (.psv), using \code{\link[data.table:fwrite]{data.table::fwrite()}} or, if \code{fwrite = TRUE}, \code{\link[utils:write.table]{utils::write.table()}} with \code{sep = '|'} and \code{row.names = FALSE}.
-\item Tab-separated data (.tsv), using \code{\link[data.table:fwrite]{data.table::fwrite()}} or, if \code{fwrite = TRUE}, \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}.
+\item Comma-separated data (.csv), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
+\item Pipe-separated data (.psv), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
+\item Tab-separated data (.tsv), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
 \item SAS (.sas7bdat), using \code{\link[haven:write_sas]{haven::write_sas()}}.
 \item SAS XPORT (.xpt), using \code{\link[haven:read_xpt]{haven::write_xpt()}}.
 \item SPSS (.sav), using \code{\link[haven:read_spss]{haven::write_sav()}}

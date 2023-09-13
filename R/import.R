@@ -17,14 +17,14 @@
 #' `import` supports the following file formats:
 #'
 #' \itemize{
-#'     \item Comma-separated data (.csv), using [data.table::fread()] or, if `fread = FALSE`, [utils::read.table()] with `row.names = FALSE` and `stringsAsFactors = FALSE`
-#'     \item Pipe-separated data (.psv), using [data.table::fread()] or, if `fread = FALSE`, [utils::read.table()] with `sep = '|'`, `row.names = FALSE` and `stringsAsFactors = FALSE`
-#'     \item Tab-separated data (.tsv), using [data.table::fread()] or, if `fread = FALSE`, [utils::read.table()] with `row.names = FALSE` and `stringsAsFactors = FALSE`
-#'     \item SAS (.sas7bdat), using [haven::read_sas()].
-#'     \item SAS XPORT (.xpt), using [haven::read_xpt()] or, if `haven = FALSE`, [foreign::read.xport()].
-#'     \item SPSS (.sav), using [haven::read_sav()]. If `haven = FALSE`, [foreign::read.spss()] can be used.
+#'     \item Comma-separated data (.csv), using [data.table::fread()]
+#'     \item Pipe-separated data (.psv), using [data.table::fread()]
+#'     \item Tab-separated data (.tsv), using [data.table::fread()]
+#'     \item SAS (.sas7bdat), using [haven::read_sas()]
+#'     \item SAS XPORT (.xpt), using [haven::read_xpt()]
+#'     \item SPSS (.sav), using [haven::read_sav()]
 #'     \item SPSS compressed (.zsav), using [haven::read_sav()].
-#'     \item Stata (.dta), using [haven::read_dta()]. If `haven = FALSE`, [foreign::read.dta()] can be used.
+#'     \item Stata (.dta), using [haven::read_dta()]
 #'     \item SPSS Portable Files (.por), using [haven::read_por()].
 #'     \item Excel (.xls and .xlsx), using [readxl::read_xlsx()] or [readxl::read_xls()]. Use `which` to specify a sheet number.
 #'     \item R syntax object (.R), using [base::dget()]
@@ -40,7 +40,7 @@
 #'     \item Weka Attribute-Relation File Format (.arff), using [foreign::read.arff()]
 #'     \item Data Interchange Format (.dif), using [utils::read.DIF()]
 #'     \item Fortran data (no recognized extension), using [utils::read.fortran()]
-#'     \item Fixed-width format data (.fwf), using a faster version of [utils::read.fwf()] that requires a `widths` argument and by default in rio has `stringsAsFactors = FALSE`. If `readr = TRUE`, import will be performed using [readr::read_fwf()], where `widths` should be: `NULL`, a vector of column widths, or the output of [readr::fwf_empty()], [readr::fwf_widths()], or [readr::fwf_positions()].
+#'     \item Fixed-width format data (.fwf), using a faster version of [utils::read.fwf()] that requires a `widths` argument and by default in rio has `stringsAsFactors = FALSE`
 #'     \item gzip comma-separated data (.csv.gz), using [utils::read.table()] with `row.names = FALSE` and `stringsAsFactors = FALSE`
 #'     \item [CSVY](https://github.com/csvy) (CSV with a YAML metadata header) using [data.table::fread()].
 #'     \item Apache Arrow Parquet (.parquet), using [arrow::read_parquet()]
