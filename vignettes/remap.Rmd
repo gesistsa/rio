@@ -1,0 +1,70 @@
+---
+title: "remap"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{remap}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Remapping
+
+There are two conventions of arguments among the underlying functions used by `rio`. Let's call them *Base Convention* and *"Tidy" Convention*.
+
+| Convention | file location | selection of sheet | header      | examples                                                     |
+|------------|---------------|--------------------|-------------|--------------------------------------------------------------|
+| Base       | `file`        | `which`            | `header`    | `clipr::read_clip_tbl`                                       |
+| "Tidy"     | `path`        | `sheet`            | `col_names` | `readxl::read_xlsx`, `readxl::read_xls`, `readODS::read_ods` |
+
+`rio` can map Base Convention into "Tidy" Convention (but not vice versa).
+
+```{r map1}
+library(rio)
+export(list("mtcars" = mtcars, "iris" = iris), "example.xlsx")
+import("example.xlsx", which = "mtcars")
+```
+
+But you can still use the "Tidy" Convention, if the underlying function supports it.
+
+```{r map2}
+import("example.xlsx", sheet = "mtcars")
+```
+
+# Ellipsis or "dot dot dot"
+
+Additional parameters are usually passed to the underlying function as ellipsis (`...`).
+
+```{r map3}
+## n_max is an argument of readxl::read_xlsx
+import("example.xlsx", sheet = "iris", n_max = 10)
+```
+
+Parameters that the underlying function do not recognize are silently ignored by default.
+
+```{r map4}
+import("example.xlsx", sheet = "iris", n_max = 10, pizza = "pineapple")
+```
+
+If you don't like this behavior, please change the option `rio.ignoreunusedargs` to `FALSE`, i.e. `option(rio.ignoreunusedargs = FALSE)`.
+
+```r
+options(rio.ignoreunusedargs = FALSE)
+import("example.xlsx", sheet = "iris", n_max = 10, pizza = "pineapple")
+```
+
+```{r map5, error = TRUE, echo = FALSE}
+R.utils::withOptions({
+    import("example.xlsx", sheet = "iris", n_max = 10, pizza = "pineapple")
+}, rio.ignoreunusedargs = FALSE)
+```
+
+```{r, echo = FALSE, results = 'hide'}
+unlink("example.xlsx")
+```
