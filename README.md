@@ -142,7 +142,6 @@ The full list of supported formats is below:
 | Data Interchange Format             | dif                   | utils          |                | Default |                         |
 | Epiinfo                             | epiinfo / rec         | foreign        |                | Default |                         |
 | Excel                               | excel / xlsx          | readxl         | writexl        | Default |                         |
-| Excel                               | excel / xlsx          | readxl         | openxlsx       | Default |                         |
 | Excel (Legacy)                      | xls                   | readxl         |                | Default |                         |
 | Feather R/Python interchange format | feather               | arrow          | arrow          | Default |                         |
 | Fixed-width format data             | fwf                   | utils          | utils          | Default |                         |
