@@ -7,6 +7,7 @@
 * `get_info` is added #350
 * POTENTIALLY BREAKING: `setclass` parameter is now authoritative. Therefore: `import("starwars.csv", data.table = TRUE, setclass = "tibble")` will return a tibble (unlike previous versions where a data.table is returned). The default class is data frame. You can either explicitly use the `setclass` parameter; or set the option: `options(rio.import.class = "data.table")`. h/t David Schoch #336
 * Use `writexl` instead of `openxlsx`. Option to read xlsx with `openxlsx` (i.e. `import("starwars.xlsx", readxl = FALSE)`) is always `TRUE`. The ability to overwrite an existing sheet in an existing xlsx file is also removed. It is against the design principle of `rio`.
+* POTENTIALLY BREAKING: The following options are deprecated: `import(fread)`, `import(readr = TRUE)`, `import(haven)`, `import(readxl)` and `export(fwrite)`. import will almost use `data.table`, `haven`, `readxl`, and internal function (for fwf) to import and export data. Currently, those options stay for backward compatibility but will be removed in v2.0.0. #343 h/t David Schoch 
 * Bug fixes
    - ... is correctly passed for exporting ODS and feather #318
    - POTENTIALLY BREAKING: JSON are exported in UTF-8 by default; solved encoding issues on
