@@ -378,6 +378,9 @@ extract_html_row <- function(x, empty_value) {
 .import.rio_pzfx <- function(file, which = 1, ...) {
     .check_pkg_availability("pzfx")
     dots <- list(...)
+    if ("path" %in% names(dots)) {
+        dots[["path"]] <- NULL
+    }
     if ("table" %in% names(dots)) {
         which <- dots[["table"]]
         dots[["table"]] <- NULL
