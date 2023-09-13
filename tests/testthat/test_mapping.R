@@ -15,13 +15,16 @@ test_that("mapping; both base and tidy conventions work", {
 test_that("Unused arguments are by default ignored silently", {
     tempxlsx <- tempfile(fileext = ".xlsx")
     export(list("mtcars" = mtcars, "iris" = iris), tempxlsx)
-    expect_error(y <- import(tempxlsx, n_max = 42, whatever = TRUE), NA)
+    expect_error(y <- import(tempxlsx, n_max = 42, whatever = TRUE, sheet = 2), NA)
 })
 
 test_that("Unused arguments with option", {
     tempxlsx <- tempfile(fileext = ".xlsx")
     export(list("mtcars" = mtcars, "iris" = iris), tempxlsx)
     expect_error(R.utils::withOptions({
-        expect_error(y <- import(tempxlsx, n_max = 42, whatever = TRUE), NA)
+        y <- import(tempxlsx, n_max = 42, whatever = TRUE)
     }, rio.ignoreunusedargs = FALSE))
+    expect_error(R.utils::withOptions({
+        y <- import(tempxlsx, n_max = 42, sheet = 2, whatever = TRUE)
+    }, rio.ignoreunusedargs = FALSE), "whatever") ## not sheet
 })

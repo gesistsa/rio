@@ -7,13 +7,18 @@
 
 .remap_tidy_convention <- function(func, file, which, header, ...) {
     dots <- list(...)
+    if ("path" %in% names(dots)) {
+        dots[["path"]] <- NULL
+    }
     if ("sheet" %in% names(dots)) {
         which <- dots[["sheet"]]
+        dots[["sheet"]] <- NULL
     }
     if ("col_names" %in% names(dots)) {
         header <- dots[["col_names"]]
+        dots[["col_names"]] <- NULL
     }
-    .docall(func, ..., args = list(path = file, sheet = which, col_names = header))
+    .docall(func, args = c(dots, list(path = file, sheet = which, col_names = header)))
 }
 
 import_delim <- function(file, which = 1, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
@@ -375,8 +380,9 @@ extract_html_row <- function(x, empty_value) {
     dots <- list(...)
     if ("table" %in% names(dots)) {
         which <- dots[["table"]]
+        dots[["table"]] <- NULL
     }
-    .docall(pzfx::read_pzfx, ..., args = list(path = file, table = which))
+    .docall(pzfx::read_pzfx, args = c(dots, list(path = file, table = which)))
 }
 
 #' @export
