@@ -1,7 +1,8 @@
-import_delim <- function(file, which = 1, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
-    R.utils::doCall(data.table::fread, ..., args = list(input = file, sep = sep, header = header,
-                  stringsAsFactors = stringsAsFactors,
-                  data.table = data.table))
+.docall <- function(.fcn, ..., args = NULL, alwaysArgs = NULL, .functions = list(.fcn),
+                    .ignoreUnusedArgs = TRUE) {
+    ## the same as R.utils::doCall, only with default option
+    R.utils::doCall(.fcn = .fcn, ..., args = args, alwaysArgs = alwaysArgs, .functions = .functions,
+                    .ignoreUnusedArgs = getOption("rio.ignoreunusedargs", default = TRUE))
 }
 
 .remap_tidy_convention <- function(func, file, which, header, ...) {
@@ -12,7 +13,13 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
     if ("col_names" %in% names(dots)) {
         header <- dots[["col_names"]]
     }
-    R.utils::doCall(func, ..., args = list(path = file, sheet = which, col_names = header))
+    .docall(func, ..., args = list(path = file, sheet = which, col_names = header))
+}
+
+import_delim <- function(file, which = 1, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
+    .docall(data.table::fread, ..., args = list(input = file, sep = sep, header = header,
+                  stringsAsFactors = stringsAsFactors,
+                  data.table = data.table))
 }
 
 #' @export
@@ -171,7 +178,7 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
     if (lifecycle::is_present(haven) || lifecycle::is_present(convert.factors)) {
         lifecycle::deprecate_warn(when = "0.5.31", what = "import(haven)", details = "dta will always be read by `haven`. The parameter `haven` will be dropped in v2.0.0.")
     }
-    standardize_attributes(R.utils::doCall(haven::read_dta, ..., args = list(file = file)))
+    standardize_attributes(.docall(haven::read_dta, ..., args = list(file = file)))
 }
 
 #' @export
@@ -369,7 +376,7 @@ extract_html_row <- function(x, empty_value) {
     if ("table" %in% names(dots)) {
         which <- dots[["table"]]
     }
-    R.utils::doCall(pzfx::read_pzfx, ..., args = list(path = file, table = which))
+    .docall(pzfx::read_pzfx, ..., args = list(path = file, table = which))
 }
 
 #' @export
