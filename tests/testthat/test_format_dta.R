@@ -11,10 +11,9 @@ test_that("Export to Stata", {
 test_that("Import from Stata (read_dta)", {
     expect_true(is.data.frame(import("mtcars.dta")))
     # arguments ignored
-    expect_warning(import("mtcars.dta", extraneous.argument = TRUE))
-    # tell arg_reconcile() to not show warnings
+    expect_error(import("mtcars.dta", extraneous.argument = TRUE), NA)
     expect_silent(import("mtcars.dta",
-        extraneous.argument = TRUE, .warn = FALSE
+        extraneous.argument = TRUE
     ))
 })
 

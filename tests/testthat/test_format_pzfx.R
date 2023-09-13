@@ -15,6 +15,8 @@ test_that("Import from pzfx", {
   # write_pzfx(..., row_names=FALSE) which is the default in the export
   # method, but it is not default in pzfx::write_pzfx()
   expect_true(identical(dim(import("iris.pzfx")), dim(iris_numeric)))
+  expect_true(identical(dim(import("iris.pzfx", which = "Data 1")), dim(iris_numeric)))
+  expect_true(identical(dim(import("iris.pzfx", table = "Data 1")), dim(iris_numeric)))
 })
 
 unlink("iris.pzfx")

@@ -1,14 +1,19 @@
-import_delim <-
-    function(file, which = 1, sep = "auto",
-             header = "auto", stringsAsFactors = FALSE, ...) {
-        arg_reconcile(data.table::fread,
-            input = file, sep = sep, header = header,
-            stringsAsFactors = stringsAsFactors,
-            data.table = FALSE, ..., .docall = TRUE
-        )
+import_delim <- function(file, which = 1, sep = "auto", header = "auto", stringsAsFactors = FALSE, data.table = FALSE, ...) {
+    R.utils::doCall(data.table::fread, ..., args = list(input = file, sep = sep, header = header,
+                  stringsAsFactors = stringsAsFactors,
+                  data.table = data.table))
+}
+
+.remap_tidy_convention <- function(func, file, which, header, ...) {
+    dots <- list(...)
+    if ("sheet" %in% names(dots)) {
+        which <- dots[["sheet"]]
     }
-
-
+    if ("col_names" %in% names(dots)) {
+        header <- dots[["col_names"]]
+    }
+    R.utils::doCall(func, ..., args = list(path = file, sheet = which, col_names = header))
+}
 
 #' @export
 .import.rio_dat <- function(file, which = 1, ...) {
@@ -166,10 +171,7 @@ import_delim <-
     if (lifecycle::is_present(haven) || lifecycle::is_present(convert.factors)) {
         lifecycle::deprecate_warn(when = "0.5.31", what = "import(haven)", details = "dta will always be read by `haven`. The parameter `haven` will be dropped in v2.0.0.")
     }
-    arg_reconcile(haven::read_dta,
-        file = file, ..., .docall = TRUE,
-        .finish = standardize_attributes
-    )
+    standardize_attributes(R.utils::doCall(haven::read_dta, ..., args = list(file = file)))
 }
 
 #' @export
@@ -240,17 +242,12 @@ import_delim <-
 }
 
 #' @export
-.import.rio_xls <- function(file, which = 1, ...) {
-    .check_pkg_availability("readxl")
-    arg_reconcile(readxl::read_xls,
-        path = file, ..., sheet = which,
-        .docall = TRUE,
-        .remap = c(colNames = "col_names", na.strings = "na")
-    )
+.import.rio_xls <- function(file, which = 1, header = TRUE, ...) {
+    .remap_tidy_convention(readxl::read_xls, file = file, which = which, header = header, ...)
 }
 
 #' @export
-.import.rio_xlsx <- function(file, which = 1, readxl = lifecycle::deprecated(), ...) {
+.import.rio_xlsx <- function(file, which = 1, header = TRUE, readxl = lifecycle::deprecated(), ...) {
     if (lifecycle::is_present(readxl)) {
         lifecycle::deprecate_warn(
             when = "0.5.31",
@@ -258,10 +255,7 @@ import_delim <-
             details = "xlsx will always be read by `readxl`. The parameter `readxl` will be dropped in v2.0.0."
         )
     }
-    arg_reconcile(readxl::read_xlsx,
-        path = file, ..., sheet = which,
-        .docall = TRUE
-    )
+    .remap_tidy_convention(readxl::read_xlsx, file = file, which = which, header = header, ...)
 }
 
 #' @export
@@ -275,17 +269,7 @@ import_delim <-
 #' @export
 .import.rio_ods <- function(file, which = 1, header = TRUE, ...) {
     .check_pkg_availability("readODS")
-    dots <- list(...)
-    if ("sheet" %in% names(dots)) {
-        which <- dots[["sheet"]]
-        dots[["sheet"]] <- NULL
-    }
-    if ("col_names" %in% names(dots)) {
-        header <- dots[["col_names"]]
-        dots[["col_names"]] <- NULL
-    }
-    R.utils::doCall(readODS::read_ods, args = list(path = file, sheet = which, col_names = header),
-                    dots)
+    .remap_tidy_convention(readODS::read_ods, file = file, which = which, header = header, ...)
 }
 
 #' @export
@@ -381,7 +365,11 @@ extract_html_row <- function(x, empty_value) {
 #' @export
 .import.rio_pzfx <- function(file, which = 1, ...) {
     .check_pkg_availability("pzfx")
-    pzfx::read_pzfx(path = file, table = which, ...)
+    dots <- list(...)
+    if ("table" %in% names(dots)) {
+        which <- dots[["table"]]
+    }
+    R.utils::doCall(pzfx::read_pzfx, ..., args = list(path = file, table = which))
 }
 
 #' @export
