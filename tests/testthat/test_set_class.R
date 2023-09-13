@@ -35,3 +35,9 @@ test_that("Set object class as arrow table", {
     expect_true(inherits(import("mtcars.csv", data.table = TRUE, setclass = "arrow"), "ArrowTabular"))
     unlink("mtcars.csv")
 })
+
+test_that("ArrowTabular can be exported", {
+    expect_error(export(mtcars_arrow, "mtcars.csv"), NA) ## no concept of rownames
+    expect_true(inherits(import("mtcars.csv"), "data.frame"))
+    unlink("mtcars.csv")
+})
