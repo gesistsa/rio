@@ -275,33 +275,17 @@ import_delim <-
 #' @export
 .import.rio_ods <- function(file, which = 1, header = TRUE, ...) {
     .check_pkg_availability("readODS")
-    "read_ods" <- readODS::read_ods
-    a <- list(...)
-    if ("sheet" %in% names(a)) {
-        which <- a[["sheet"]]
-        a[["sheet"]] <- NULL
+    dots <- list(...)
+    if ("sheet" %in% names(dots)) {
+        which <- dots[["sheet"]]
+        dots[["sheet"]] <- NULL
     }
-    if ("col_names" %in% names(a)) {
-        header <- a[["col_names"]]
-        a[["col_names"]] <- NULL
+    if ("col_names" %in% names(dots)) {
+        header <- dots[["col_names"]]
+        dots[["col_names"]] <- NULL
     }
-    frml <- formals(readODS::read_ods)
-    unused <- setdiff(names(a), names(frml))
-    if ("path" %in% names(a)) {
-        unused <- c(unused, "path")
-        a[["path"]] <- NULL
-    }
-    if (length(unused) > 0) {
-        warning(
-            "The following arguments were ignored for read_ods:\n",
-            paste(unused, collapse = ", ")
-        )
-    }
-    a <- a[intersect(names(a), names(frml))]
-    do.call(
-        "read_ods",
-        c(list(path = file, sheet = which, col_names = header), a)
-    )
+    R.utils::doCall(readODS::read_ods, args = list(path = file, sheet = which, col_names = header),
+                    dots)
 }
 
 #' @export
