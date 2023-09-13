@@ -2,13 +2,11 @@ context("Set object class")
 library("datasets")
 mtcars_tibble <- tibble::as_tibble(mtcars)
 mtcars_datatable <- data.table::as.data.table(mtcars)
-mtcars_arrow <- arrow::arrow_table(mtcars)
 
 test_that("Set object class", {
     expect_true(inherits(set_class(mtcars), "data.frame"))
     expect_true(inherits(set_class(mtcars_tibble), "data.frame"))
     expect_true(inherits(set_class(mtcars_datatable), "data.frame"))
-    expect_false(inherits(set_class(mtcars_arrow), "data.frame")) ## arrow table is not data.frame
     expect_true(inherits(set_class(mtcars, class = "fakeclass"), "data.frame"))
     expect_true(!"fakeclass" %in% class(set_class(mtcars, class = "fakeclass")))
 })
@@ -28,6 +26,9 @@ test_that("Set object class as data.table", {
 })
 
 test_that("Set object class as arrow table", {
+    skip_if(getRversion() <= "4.2")
+    mtcars_arrow <- arrow::arrow_table(mtcars)
+    expect_false(inherits(set_class(mtcars_arrow), "data.frame")) ## arrow table is not data.frame
     expect_true(inherits(set_class(mtcars, class = "arrow"), "ArrowTabular"))
     expect_true(inherits(set_class(mtcars, class = "arrow_table"), "ArrowTabular"))
     export(mtcars, "mtcars.csv")
@@ -37,6 +38,8 @@ test_that("Set object class as arrow table", {
 })
 
 test_that("ArrowTabular can be exported", {
+    skip_if(getRversion() <= "4.2")
+    mtcars_arrow <- arrow::arrow_table(mtcars)
     expect_error(export(mtcars_arrow, "mtcars.csv"), NA) ## no concept of rownames
     expect_true(inherits(import("mtcars.csv"), "data.frame"))
     unlink("mtcars.csv")
