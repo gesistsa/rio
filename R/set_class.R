@@ -11,7 +11,17 @@ set_class <- function(x, class = NULL) {
         return(.ensure_tibble(x))
     }
 
+    if (any(c("arrow", "arrow_table") %in% class)) {
+        return(.ensure_arrow(x))
+    }
     return(.ensure_data_frame(x))
+}
+
+.ensure_arrow <- function(x) {
+    if (inherits(x, "ArrowTabular")) {
+        return(x)
+    }
+    return(arrow::arrow_table(x))
 }
 
 .ensure_data_table <- function(x) {

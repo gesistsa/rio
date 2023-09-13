@@ -96,7 +96,7 @@ export <- function(x, file, format, ...) {
     }
     format <- .standardize_format(format)
     outfile <- file
-    if (is.matrix(x)) {
+    if (is.matrix(x) || inherits(x, "ArrowTabular")) {
         x <- as.data.frame(x)
     }
     if (!is.data.frame(x) && !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs")) {

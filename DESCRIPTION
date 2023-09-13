@@ -1,7 +1,7 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 0.5.32
+Version: 0.5.33
 Authors@R: c(person("Jason", "Becker", role = "aut", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = c("aut", "cre"), email = "chainsawtiney@gmail.com",
 	     	     comment = c(ORCID = "0000-0002-6232-7530")),
@@ -49,6 +49,7 @@ Imports:
     curl (>= 0.6),
     data.table (>= 1.11.2),
     readxl (>= 0.1.1),
+    arrow (>= 0.17.0),
     tibble,
     stringi,
     writexl,
@@ -60,7 +61,6 @@ Suggests:
     testthat,
     knitr,
     magrittr,
-    arrow (>= 0.17.0),
     clipr,
     fst,
     hexView,
