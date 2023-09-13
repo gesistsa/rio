@@ -105,8 +105,6 @@ export <- function(x, file, format, ...) {
     .create_directory_if_not_exists(file = file) ## fix 347
     if (format %in% c("gz", "gzip")) {
         format <- get_info(tools::file_path_sans_ext(file, compression = FALSE))$format
-        file <- gzfile(file, "w")
-        on.exit(close(file))
     }
     class(file) <- c(paste0("rio_", format), class(file))
     .export(file = file, x = x, ...)

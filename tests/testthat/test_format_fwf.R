@@ -7,29 +7,24 @@ test_that("Export to FWF", {
 })
 
 test_that("Import from FWF (read.fwf)", {
-    expect_true(is.data.frame(import("iris.fwf", widths = c(3,3,3,3,1))))
-    expect_true(is.data.frame(import("iris.fwf", widths = list(c(3,3,3,3,1)))))
-    expect_true(is.data.frame(import("iris.fwf", widths = c(3,3,3,3,1), col.names = names(iris))))
-    expect_true(is.data.frame(import("iris.fwf", widths = c(3,3,3,3,1), col.names = names(iris), readr = TRUE)))
-    expect_true(is.data.frame(import("iris.txt", widths = c(3,3,3,3,1), format = "fwf")))
-})
-
-test_that("Import from FWF (read_fwf)", {
-    expect_true(is.data.frame(import("iris.fwf", widths = c(3,3,3,3,1), readr = TRUE)))
-    expect_true(is.data.frame(import("iris.txt", widths = c(3,3,3,3,1), format = "fwf", readr = TRUE)))
+    expect_true(is.data.frame(import("iris.fwf", widths = c(3, 3, 3, 3, 1))))
+    expect_true(is.data.frame(import("iris.fwf", widths = list(c(3, 3, 3, 3, 1)))))
+    expect_true(is.data.frame(import("iris.fwf", widths = c(3, 3, 3, 3, 1), col.names = names(iris))))
+    expect_true(is.data.frame(import("iris.txt", widths = c(3, 3, 3, 3, 1), format = "fwf")))
     # negative column widths
-    expect_true(is.data.frame(import("iris.fwf", widths = c(-3,3,3,3,1), readr = FALSE)))
-    expect_true(is.data.frame(import("iris.fwf", widths = c(-3,3,3,3,1), readr = TRUE)))
+    expect_true(is.data.frame(import("iris.fwf", widths = c(-3, 3, 3, 3, 1))))
 })
 
 test_that("Import from FWF Errors", {
     expect_error(import("iris.fwf"),
-                 "Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().",
-                 fixed = TRUE)
-    # error on NULL widths
-    expect_error(import("iris.fwf", widths = NULL, readr = FALSE))
-    # no error on NULL widths w/ readr::read_fwf()
-    expect_true(suppressWarnings(is.data.frame(import("iris.fwf", widths = NULL, readr = TRUE))))
+        "Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().",
+        fixed = TRUE
+    )
+})
+
+test_that("readr is deprecated", {
+    lifecycle::expect_deprecated(import("iris.fwf", widths = c(3, 3, 3, 3, 1), readr = TRUE))
+    lifecycle::expect_deprecated(import("iris.fwf", widths = c(3, 3, 3, 3, 1), readr = FALSE))
 })
 
 unlink("iris.fwf")

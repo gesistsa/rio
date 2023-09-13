@@ -124,7 +124,7 @@ import <- function(file, format, setclass = getOption("rio.import.class", "data.
         format <- get_info(file)$format
         if (format %in% c("gz", "gzip")) {
             format <- get_info(tools::file_path_sans_ext(file, compression = FALSE))$format
-            file <- gzfile(file)
+            # file <- gzfile(file)
         }
     } else {
         ## format such as "|"
