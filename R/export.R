@@ -13,9 +13,9 @@
 #' `export` supports many file formats. See the documentation for the underlying export functions for optional arguments that can be passed via `...`
 #'
 #' \itemize{
-#'     \item Comma-separated data (.csv), using [data.table::fwrite()] or, if `fwrite = TRUE`, [utils::write.table()] with `row.names = FALSE`.
-#'     \item Pipe-separated data (.psv), using [data.table::fwrite()] or, if `fwrite = TRUE`, [utils::write.table()] with `sep = '|'` and `row.names = FALSE`.
-#'     \item Tab-separated data (.tsv), using [data.table::fwrite()] or, if `fwrite = TRUE`, [utils::write.table()] with `row.names = FALSE`.
+#'     \item Comma-separated data (.csv), using [data.table::fwrite()]
+#'     \item Pipe-separated data (.psv), using [data.table::fwrite()]
+#'     \item Tab-separated data (.tsv), using [data.table::fwrite()]
 #'     \item SAS (.sas7bdat), using [haven::write_sas()].
 #'     \item SAS XPORT (.xpt), using [haven::write_xpt()].
 #'     \item SPSS (.sav), using [haven::write_sav()]
