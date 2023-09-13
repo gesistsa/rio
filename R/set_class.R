@@ -21,7 +21,7 @@ set_class <- function(x, class = NULL) {
     if (inherits(x, "ArrowTabular")) {
         return(x)
     }
-    return(arrow::as_arrow_table(x))
+    return(arrow::arrow_table(x))
 }
 
 .ensure_data_table <- function(x) {

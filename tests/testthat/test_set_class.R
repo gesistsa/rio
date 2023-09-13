@@ -2,7 +2,7 @@ context("Set object class")
 library("datasets")
 mtcars_tibble <- tibble::as_tibble(mtcars)
 mtcars_datatable <- data.table::as.data.table(mtcars)
-mtcars_arrow <- arrow::as_arrow_table(mtcars)
+mtcars_arrow <- arrow::arrow_table(mtcars)
 
 test_that("Set object class", {
     expect_true(inherits(set_class(mtcars), "data.frame"))
