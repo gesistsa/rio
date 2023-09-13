@@ -1,0 +1,52 @@
+---
+title: "Working with labelled data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with labelled data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Formats SAS, SPSS, and Stata  use `haven` as import and export functions. And these formats can have the so-called labelled data. For more information, please read `vignette("semantics", "haven")`. Here, we provide a quick guide on how to work with labelled data using `rio`.
+
+You can use `haven::labelled()` to create labelled data.
+
+```{r}
+gender <- haven::labelled(
+                     c("M", "F", "F", "F", "M"),
+                     c(Male = "M", Female = "F"))
+```
+
+Or directly using `attrs`
+
+```{r}
+rating <- sample(1:5)
+attr(rating, "labels") <-  c(c(Good = 1, Bad = 5))
+```
+
+```{r}
+mydata <- data.frame(gender, rating)
+```
+
+Round trip: The data labels are retained. But they are at the variable level.
+
+```{r}
+export(mydata, "mydata.sav")
+restored_data <- rio::import("mydata.sav")
+str(restored_data)
+```
+
+`rio::gather_attrs()` converts attributes to the data.frame level
+
+```{r}
+g <- rio::gather_attrs(restored_data)
+str(g)
+attr(g, "labels")
+```
