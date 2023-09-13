@@ -176,7 +176,7 @@
         "type": "import",
         "format_name": "Excel",
         "import_function": "readxl::read_xlsx",
-        "export_function": "openxlsx::write.xlsx",
+        "export_function": "writexl::write_xlsx",
         "note": ""
     },
     {

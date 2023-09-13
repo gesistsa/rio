@@ -141,6 +141,7 @@ The full list of supported formats is below:
 | Comma-separated data (European)     | csv2                  | data.table     | data.table     | Default |                         |
 | Data Interchange Format             | dif                   | utils          |                | Default |                         |
 | Epiinfo                             | epiinfo / rec         | foreign        |                | Default |                         |
+| Excel                               | excel / xlsx          | readxl         | writexl        | Default |                         |
 | Excel                               | excel / xlsx          | readxl         | openxlsx       | Default |                         |
 | Excel (Legacy)                      | xls                   | readxl         |                | Default |                         |
 | Feather R/Python interchange format | feather               | arrow          | arrow          | Default |                         |
