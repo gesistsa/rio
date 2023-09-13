@@ -1,8 +1,8 @@
 ---
-title: "remap"
+title: "Remapping and Ellipsis"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{remap}
+  %\VignetteIndexEntry{Remapping and Ellipsis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
