@@ -55,3 +55,7 @@ g <- rio::gather_attrs(restored_data)
 str(g)
 attr(g, "labels")
 ```
+
+```{r include = FALSE}
+unlink("mydata.sav")
+```
