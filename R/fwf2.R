@@ -50,5 +50,5 @@ read.fwf2 <- function(file, widths, header = FALSE, sep = "\t", skip = 0, n = -1
     } else {
         text <- vapply(raw, doone, character(1))
     }
-    utils::read.table(text = text, header = header, sep = sep, quote = quote, stringsAsFactors = stringsAsFactors, ...)
+    .docall(utils::read.table, ..., args = list(text = text, header = header, sep = sep, quote = quote, stringsAsFactors = stringsAsFactors))
 }

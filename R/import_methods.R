@@ -107,15 +107,12 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 
 #' @export
 .import.rio_r <- function(file, which = 1, ...) {
-    dget(file = file, ...)
+    .docall(dget, ..., args = list(file = file))
 }
 
 #' @export
 .import.rio_dump <- function(file, which = 1, envir = new.env(), ...) {
     source(file = file, local = envir)
-    if (length(list(...)) > 0) {
-        warning("File imported using load. Arguments to '...' ignored.")
-    }
     if (missing(which)) {
         if (length(ls(envir)) > 1) {
             warning("Dump file contains multiple objects. Returning first object.")
@@ -131,18 +128,12 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 
 #' @export
 .import.rio_rds <- function(file, which = 1, ...) {
-    if (length(list(...)) > 0) {
-        warning("File imported using readRDS. Arguments to '...' ignored.")
-    }
     readRDS(file = file)
 }
 
 #' @export
 .import.rio_rdata <- function(file, which = 1, envir = new.env(), ...) {
     load(file = file, envir = envir)
-    if (length(list(...)) > 0) {
-        warning("File imported using load. Arguments to '...' ignored.")
-    }
     if (missing(which)) {
         if (length(ls(envir)) > 1) {
             warning("Rdata file contains multiple objects. Returning first object.")
@@ -161,13 +152,13 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 
 #' @export
 .import.rio_feather <- function(file, which = 1, ...) {
-    arrow::read_feather(file = file, ...)
+    .docall(arrow::read_feather, ..., args = list(file = file))
 }
 
 #' @export
 .import.rio_fst <- function(file, which = 1, ...) {
     .check_pkg_availability("fst")
-    fst::read.fst(path = file, ...)
+    .docall(fst::read.fst, ..., args = list(path = file))
 }
 
 #' @export
@@ -187,12 +178,12 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 
 #' @export
 .import.rio_dbf <- function(file, which = 1, as.is = TRUE, ...) {
-    foreign::read.dbf(file = file, as.is = as.is)
+    .docall(foreign::read.dbf, ..., args = list(file = file, as.is = as.is))
 }
 
 #' @export
 .import.rio_dif <- function(file, which = 1, ...) {
-    utils::read.DIF(file = file, ...)
+    .docall(utils::read.DIF, ..., args = list(file = file))
 }
 
 #' @export
@@ -200,22 +191,22 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
     if (lifecycle::is_present(haven) || lifecycle::is_present(to.data.frame) || lifecycle::is_present(use.value.labels)) {
         lifecycle::deprecate_warn(when = "0.5.31", what = "import(haven)", details = "sav will always be read by `haven`. The parameter `haven` will be dropped in v2.0.0.")
     }
-    standardize_attributes(haven::read_sav(file = file))
+    standardize_attributes(.docall(haven::read_sav, ..., args = list(file = file)))
 }
 
 #' @export
 .import.rio_zsav <- function(file, which = 1, ...) {
-    standardize_attributes(haven::read_sav(file = file))
+    standardize_attributes(.docall(haven::read_sav, ..., args = list(file = file)))
 }
 
 #' @export
 .import.rio_spss <- function(file, which = 1, ...) {
-    standardize_attributes(haven::read_por(file = file))
+    standardize_attributes(.docall(haven::read_por, ..., args = list(file = file)))
 }
 
 #' @export
 .import.rio_sas7bdat <- function(file, which = 1, column.labels = FALSE, ...) {
-    standardize_attributes(haven::read_sas(data_file = file, ...))
+    standardize_attributes(.docall(haven::read_sas, ..., args = list(data_file = file)))
 }
 
 #' @export
@@ -223,33 +214,33 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
     if (lifecycle::is_present(haven)) {
         lifecycle::deprecate_warn(when = "0.5.31", what = "import(haven)", details = "xpt will always be read by `haven`. The parameter `haven` will be dropped in v2.0.0.")
     }
-    standardize_attributes(haven::read_xpt(file = file, ...))
+    standardize_attributes(.docall(haven::read_xpt, ..., args = list(file = file)))
 }
 
 #' @export
 .import.rio_mtp <- function(file, which = 1, ...) {
-    foreign::read.mtp(file = file, ...)
+    .docall(foreign::read.mtp, ..., args = list(file = file))
 }
 
 #' @export
 .import.rio_syd <- function(file, which = 1, ...) {
-    foreign::read.systat(file = file, to.data.frame = TRUE, ...)
+    .docall(foreign::read.systat, ..., args = list(file = file, to.data.frame = TRUE))
 }
 
 #' @export
 .import.rio_json <- function(file, which = 1, ...) {
     .check_pkg_availability("jsonlite")
-    jsonlite::fromJSON(txt = file, ...)
+    .docall(jsonlite::fromJSON, ..., args = list(txt = file))
 }
 
 #' @export
 .import.rio_rec <- function(file, which = 1, ...) {
-    foreign::read.epiinfo(file = file, ...)
+    .docall(foreign::read.epiinfo, ..., args = list(file = file))
 }
 
 #' @export
 .import.rio_arff <- function(file, which = 1, ...) {
-    foreign::read.arff(file = file)
+    .docall(foreign::read.arff, ..., args = list(file = file))
 }
 
 #' @export
@@ -274,7 +265,7 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
     if (missing(style)) {
         stop("Import of Fortran format data requires a 'style' argument. See ? utils::read.fortran().")
     }
-    utils::read.fortran(file = file, format = style, ...)
+    .docall(utils::read.fortran, ..., args = list(file = file, format = style))
 }
 
 #' @export
@@ -358,19 +349,19 @@ extract_html_row <- function(x, empty_value) {
 #' @export
 .import.rio_yml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
     .check_pkg_availability("yaml")
-    as.data.frame(yaml::read_yaml(file, ...), stringsAsFactors = stringsAsFactors)
+    as.data.frame(.docall(yaml::read_yaml, ..., args = list(file = file)), stringsAsFactors = stringsAsFactors)
 }
 
 #' @export
 .import.rio_eviews <- function(file, which = 1, ...) {
     .check_pkg_availability("hexView")
-    hexView::readEViews(file, ...)
+    .docall(hexView::readEViews, ..., args = list(filename = file))
 }
 
 #' @export
 .import.rio_clipboard <- function(file = "clipboard", which = 1, header = TRUE, sep = "\t", ...) {
     .check_pkg_availability("clipr")
-    clipr::read_clip_tbl(x = clipr::read_clip(), header = header, sep = sep, ...)
+    .docall(clipr::read_clip_tbl, ..., args = list(x = clipr::read_clip(), header = header, sep = sep))
 }
 
 #' @export
@@ -388,12 +379,12 @@ extract_html_row <- function(x, empty_value) {
 }
 
 #' @export
-.import.rio_parquet <- function(file, which = 1, as_data_frame = TRUE, ...) {
-    arrow::read_parquet(file = file, as_data_frame = TRUE, ...)
+.import.rio_parquet <- function(file, which = 1, ...) {
+    .docall(arrow::read_parquet, ..., args = list(file = file, as_data_frame = TRUE))
 }
 
 #' @export
 .import.rio_qs <- function(file, which = 1, ...) {
     .check_pkg_availability("qs")
-    qs::qread(file = file, ...)
+    .docall(qs::qread, ..., args = list(file = file))
 }

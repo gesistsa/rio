@@ -3,17 +3,9 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
     if (lifecycle::is_present(fwrite)) {
         lifecycle::deprecate_warn(when = "0.5.31", what = "export(fwrite)", details = "plain text files will always be written with `data.table::fwrite`. The parameter `fwrite` will be dropped in v2.0.0.")
     }
-    if (isTRUE(append)) {
-        data.table::fwrite(x,
-            file = file, sep = sep, row.names = row.names,
-            col.names = FALSE, append = TRUE, ...
-        )
-    } else {
-        data.table::fwrite(x,
-            file = file, sep = sep, row.names = row.names,
-            col.names = col.names, append = FALSE, ...
-        )
-    }
+    .docall(data.table::fwrite, ...,
+            args = list(x = x, file = file, sep = sep, row.names = row.names,
+                        col.names = ifelse(append, FALSE, col.names), append = append))
 }
 
 #' @export
@@ -100,25 +92,24 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
         }
     }
     .write_as_utf8(paste0("#", utils::capture.output(utils::write.csv(dict, row.names = FALSE, quote = FALSE))), file = file, sep = "\n")
-    utils::write.table(dat,
-        file = file, append = TRUE, row.names = row.names, sep = sep, quote = quote,
-        col.names = col.names, ...
-    )
+    .docall(utils::write.table, ...,
+            args = list(x = dat, file = file, append = TRUE, row.names = row.names, sep = sep, quote = quote,
+                        col.names = col.names))
 }
 
 #' @export
 .export.rio_r <- function(file, x, ...) {
-    dput(x, file = file, ...)
+    .docall(dput, ..., args = list(x = x, file = file))
 }
 
 #' @export
 .export.rio_dump <- function(file, x, ...) {
-    dump(as.character(substitute(x)), file = file, ...)
+    dump(as.character(substitute(x)), file = file)
 }
 
 #' @export
 .export.rio_rds <- function(file, x, ...) {
-    saveRDS(object = x, file = file, ...)
+    .docall(saveRDS, ..., args = list(object = x, file = file))
 }
 
 #' @export
@@ -144,76 +135,76 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
 
 #' @export
 .export.rio_feather <- function(file, x, ...) {
-    arrow::write_feather(x = x, sink = file, ...)
+    .docall(arrow::write_feather, ..., args = list(x = x, sink = file))
 }
 
 #' @export
 .export.rio_fst <- function(file, x, ...) {
     .check_pkg_availability("fst")
-    fst::write.fst(x = x, path = file, ...)
+    .docall(fst::write.fst, ..., args = list(x = x, path = file))
 }
 
 #' @export
 .export.rio_matlab <- function(file, x, ...) {
     .check_pkg_availability("rmatio")
-    rmatio::write.mat(object = x, filename = file, ...)
+    .docall(rmatio::write.mat, ..., args = list(object = x, filename = file))
 }
 
 #' @export
 .export.rio_sav <- function(file, x, ...) {
     x <- restore_labelled(x)
-    haven::write_sav(data = x, path = file, ...)
+    .docall(haven::write_sav, ..., args = list(data = x, path = file))
 }
 
 #' @export
 .export.rio_zsav <- function(file, x, compress = TRUE, ...) {
     x <- restore_labelled(x)
-    haven::write_sav(data = x, path = file, compress = compress, ...)
+    .docall(haven::write_sav, ..., args = list(data = x, path = file, compress = compress))
 }
 
 #' @export
 .export.rio_dta <- function(file, x, ...) {
     x <- restore_labelled(x)
-    haven::write_dta(data = x, path = file, ...)
+    .docall(haven::write_dta, ..., args = list(data = x, path = file))
 }
 
 #' @export
 .export.rio_sas7bdat <- function(file, x, ...) {
     x <- restore_labelled(x)
-    haven::write_sas(data = x, path = file, ...)
+    .docall(haven::write_sas, ..., args = list(data = x, path = file))
 }
 
 #' @export
 .export.rio_xpt <- function(file, x, ...) {
     x <- restore_labelled(x)
-    haven::write_xpt(data = x, path = file, ...)
+    .docall(haven::write_xpt, ..., args = list(data = x, path = file))
 }
 
 #' @export
 .export.rio_dbf <- function(file, x, ...) {
-    foreign::write.dbf(dataframe = x, file = file, ...)
+    .docall(foreign::write.dbf, ..., args = list(dataframe = x, file = file))
 }
 
 #' @export
 .export.rio_json <- function(file, x, ...) {
     .check_pkg_availability("jsonlite")
-    .write_as_utf8(jsonlite::toJSON(x, ...), file = file)
+    .write_as_utf8(.docall(jsonlite::toJSON, ..., args = list(x = x)), file = file)
 }
 
 #' @export
 .export.rio_arff <- function(file, x, ...) {
-    foreign::write.arff(x = x, file = file, ...)
+    .docall(foreign::write.arff, ..., args = list(x = x, file = file))
 }
 
 #' @export
 .export.rio_xlsx <- function(file, x, ...) {
-    writexl::write_xlsx(x = x, path = file, ...)
+    .docall(writexl::write_xlsx, ..., args = list(x = x, path = file))
 }
 
 #' @export
 .export.rio_ods <- function(file, x, ...) {
     .check_pkg_availability("readODS")
-    readODS::write_ods(x = x, path = file, ...)
+    .docall(readODS::write_ods, ..., args = list(x = x, path = file))
 }
 
 #' @export
@@ -237,7 +228,7 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
             xml2::xml_add_child(tab, xml2::read_xml(paste0(twrap(paste0(twrap(unlist(x[[i]][j, , drop = TRUE]), "td"), collapse = ""), "tr"), "\n")))
         }
     }
-    xml2::write_xml(html, file = file, ...)
+    .docall(xml2::write_xml, ..., args = list(x = html, file = file))
 }
 
 #' @export
@@ -262,34 +253,34 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
         }
     }
 
-    xml2::write_xml(xml, file = file, ...)
+    .docall(xml2::write_xml, ..., args = list(x = xml, file = file))
 }
 
 #' @export
 .export.rio_yml <- function(file, x, ...) {
     .check_pkg_availability("yaml")
-    yaml::write_yaml(x, file = file, ...)
+    .docall(yaml::write_yaml, ..., args = list(x = x, file = file))
 }
 
 #' @export
 .export.rio_clipboard <- function(file, x, row.names = FALSE, col.names = TRUE, sep = "\t", ...) {
     .check_pkg_availability("clipr")
-    clipr::write_clip(content = x, row.names = row.names, col.names = col.names, sep = sep, ...)
+    .docall(clipr::write_clip, ..., args = list(content = x, row.names = row.names, col.names = col.names, sep = sep))
 }
 
 #' @export
 .export.rio_pzfx <- function(file, x, ..., row_names = FALSE) {
     .check_pkg_availability("pzfx")
-    pzfx::write_pzfx(x = x, path = file, ..., row_names = row_names)
+    .docall(pzfx::write_pzfx, ..., args = list(x = x, path = file, row_names = row_names))
 }
 
 #' @export
 .export.rio_parquet <- function(file, x, ...) {
-    arrow::write_parquet(x = x, sink = file, ...)
+    .docall(arrow::write_parquet, ..., args = list(x = x, sink = file))
 }
 
 #' @export
 .export.rio_qs <- function(file, x, ...) {
     .check_pkg_availability("qs")
-    qs::qsave(x = x, file = file, ...)
+    .docall(qs::qsave, ..., args = list(x = x, file = file))
 }
