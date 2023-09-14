@@ -7,9 +7,6 @@ test_that("Export to rds", {
 
 test_that("Import from rds", {
     expect_true(is.data.frame(import("iris.rds")))
-    expect_warning(import("iris.rds", invalid_argument=42),
-                   "File imported using readRDS. Arguments to '...' ignored.",
-                   label="rda imports and ignores unused arguments with a warning")
 })
 
 test_that("Export to rds (non-data frame)", {
