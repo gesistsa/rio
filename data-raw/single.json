@@ -360,6 +360,15 @@
         "note": ""
     },
     {
+        "input": "fods",
+        "format": "fods",
+        "type": "suggest",
+        "format_name": "OpenDocument Spreadsheet (Flat)",
+        "import_function": "readODS::read_fods",
+        "export_function": "readODS::write_fods",
+        "note": ""
+    },
+    {
         "input": "pdf",
         "format": "pdf",
         "type": "known",

@@ -171,6 +171,7 @@ The full list of supported formats is below:
 | JSON                                | json                  | jsonlite       | jsonlite       | Suggest |                         |
 | Matlab                              | mat / matlab          | rmatio         | rmatio         | Suggest |                         |
 | OpenDocument Spreadsheet            | ods                   | readODS        | readODS        | Suggest |                         |
+| OpenDocument Spreadsheet (Flat)     | fods                  | readODS        | readODS        | Suggest |                         |
 | Serialized R objects (Quick)        | qs                    | qs             | qs             | Suggest |                         |
 | Shallow XML documents               | xml                   | xml2           | xml2           | Suggest |                         |
 | YAML                                | yaml / yml            | yaml           | yaml           | Suggest |                         |

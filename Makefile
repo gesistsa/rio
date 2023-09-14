@@ -10,6 +10,7 @@ README.md: README.Rmd
 
 R/sysdata.rda: data-raw/single.json
 	Rscript data-raw/convert.R
+	Rscript -e "devtools::build_readme()"	
 README.html: README.md
 	pandoc -o README.html README.md
 
