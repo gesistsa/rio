@@ -208,6 +208,12 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
 }
 
 #' @export
+.export.rio_fods <- function(file, x, ...) {
+    .check_pkg_availability("readODS")
+    .docall(readODS::write_fods, ..., args = list(x = x, path = file))
+}
+
+#' @export
 .export.rio_html <- function(file, x, ...) {
     .check_pkg_availability("xml2")
     html <- xml2::read_html("<!doctype html><html><head>\n<title>R Exported Data</title>\n</head><body>\n</body>\n</html>")

@@ -275,6 +275,12 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 #' @export
+.import.rio_fods <- function(file, which = 1, header = TRUE, ...) {
+    .check_pkg_availability("readODS")
+    .remap_tidy_convention(readODS::read_fods, file = file, which = which, header = header, ...)
+}
+
+#' @export
 .import.rio_xml <- function(file, which = 1, stringsAsFactors = FALSE, ...) {
     .check_pkg_availability("xml2")
     x <- xml2::as_list(xml2::read_xml(unclass(file)))[[1L]]

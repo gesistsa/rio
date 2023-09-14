@@ -1,7 +1,7 @@
 #' @rdname export
 #' @title Export
 #' @description Write data.frame to a file
-#' @param x A data frame or matrix to be written into a file. Exceptions to this rule are that `x` can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use [export_list()] instead.
+#' @param x A data frame or matrix to be written into a file. Exceptions to this rule are that `x` can be a list of data frames if the output file format is an OpenDocument Spreadsheet (.ods, .fods), Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use [export_list()] instead.
 #' @param file A character string naming a file. Must specify `file` and/or `format`.
 #' @param format An optional character string containing the file format, which can be used to override the format inferred from `file` or, in lieu of specifying `file`, a file with the symbol name of `x` and the specified file extension will be created. Must specify `file` and/or `format`. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for [base::dump()].
 #' @param \dots Additional arguments for the underlying export functions. This can be used to specify non-standard arguments. See examples.
@@ -38,7 +38,7 @@
 #'     \item Fast storage (.fst), using [fst::write.fst()]
 #'     \item JSON (.json), using [jsonlite::toJSON()]. In this case, `x` can be a variety of R objects, based on class mapping conventions in this paper: [https://arxiv.org/abs/1403.2805](https://arxiv.org/abs/1403.2805).
 #'     \item Matlab (.mat), using [rmatio::write.mat()]
-#'     \item OpenDocument Spreadsheet (.ods), using [readODS::write_ods()]. (Currently only single-sheet exports are supported.)
+#'     \item OpenDocument Spreadsheet (.ods, .fods), using [readODS::write_ods()] or [readODS::write_fods()].
 #'     \item HTML (.html), using a custom method based on [xml2::xml_add_child()] to create a simple HTML table and [xml2::write_xml()] to write to disk.
 #'     \item XML (.xml), using a custom method based on [xml2::xml_add_child()] to create a simple XML tree and [xml2::write_xml()] to write to disk.
 #'     \item YAML (.yml), using [yaml::write_yaml()], default to write the content with UTF-8. Might not work on some older systems, e.g. default Windows locale for R <= 4.2.
@@ -99,7 +99,7 @@ export <- function(x, file, format, ...) {
     if (is.matrix(x) || inherits(x, "ArrowTabular")) {
         x <- as.data.frame(x)
     }
-    if (!is.data.frame(x) && !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs")) {
+    if (!is.data.frame(x) && !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs", "fods", "ods")) {
         stop("'x' is not a data.frame or matrix", call. = FALSE)
     }
     .create_directory_if_not_exists(file = file) ## fix 347

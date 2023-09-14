@@ -72,7 +72,7 @@ object (not just a data frame).
 \item JSON (.json), using \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}
 \item Matlab (.mat), using \code{\link[rmatio:read.mat]{rmatio::read.mat()}}
 \item EViews (.wf1), using \code{\link[hexView:readEViews]{hexView::readEViews()}}
-\item OpenDocument Spreadsheet (.ods), using \code{\link[readODS:read_ods]{readODS::read_ods()}}.  Use \code{which} to specify a sheet number.
+\item OpenDocument Spreadsheet (.ods, .fods), using \code{\link[readODS:read_ods]{readODS::read_ods()}} or \code{\link[readODS:read_ods]{readODS::read_fods()}}.  Use \code{which} to specify a sheet number.
 \item Single-table HTML documents (.html), using \code{\link[xml2:read_xml]{xml2::read_html()}}. There is no standard HTML table and we have only tested this with HTML tables exported with this package. HTML tables will only be read correctly if the HTML file can be converted to a list via \code{\link[xml2:as_list]{xml2::as_list()}}. This import feature is not robust, especially for HTML tables in the wild. Please use a proper web scraping framework, e.g. \code{rvest}.
 \item Shallow XML documents (.xml), using \code{\link[xml2:read_xml]{xml2::read_xml()}}. The data structure will only be read correctly if the XML file can be converted to a list via \code{\link[xml2:as_list]{xml2::as_list()}}.
 \item YAML (.yml), using \code{\link[yaml:yaml.load]{yaml::yaml.load()}}
@@ -122,7 +122,8 @@ import(csv_file, nrows = 20)
 ## argument setclass, however, takes precedents over such undocumented features.
 class(import(csv_file, setclass = "tibble", data.table = TRUE))
 
-## the default import class can be set with options(rio.import.class = "data.table") or option(rio.import.class = "tibble")
+## the default import class can be set with options(rio.import.class = "data.table")
+## option(rio.import.class = "tibble"), or option(rio.import.class = "arrow")
 }
 \seealso{
 \code{\link[=import_list]{import_list()}}, \code{\link[=characterize]{characterize()}}, \code{\link[=gather_attrs]{gather_attrs()}}, \code{\link[=export]{export()}}, \code{\link[=convert]{convert()}}

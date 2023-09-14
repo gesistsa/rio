@@ -7,7 +7,7 @@
 export(x, file, format, ...)
 }
 \arguments{
-\item{x}{A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use \code{\link[=export_list]{export_list()}} instead.}
+\item{x}{A data frame or matrix to be written into a file. Exceptions to this rule are that \code{x} can be a list of data frames if the output file format is an OpenDocument Spreadsheet (.ods, .fods), Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use \code{\link[=export_list]{export_list()}} instead.}
 
 \item{file}{A character string naming a file. Must specify \code{file} and/or \code{format}.}
 
@@ -54,7 +54,7 @@ object (not just a data frame).
 \item Fast storage (.fst), using \code{\link[fst:write_fst]{fst::write.fst()}}
 \item JSON (.json), using \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \url{https://arxiv.org/abs/1403.2805}.
 \item Matlab (.mat), using \code{\link[rmatio:write.mat-methods]{rmatio::write.mat()}}
-\item OpenDocument Spreadsheet (.ods), using \code{\link[readODS:write_ods]{readODS::write_ods()}}. (Currently only single-sheet exports are supported.)
+\item OpenDocument Spreadsheet (.ods, .fods), using \code{\link[readODS:write_ods]{readODS::write_ods()}} or \code{\link[readODS:write_ods]{readODS::write_fods()}}.
 \item HTML (.html), using a custom method based on \code{\link[xml2:xml_replace]{xml2::xml_add_child()}} to create a simple HTML table and \code{\link[xml2:write_xml]{xml2::write_xml()}} to write to disk.
 \item XML (.xml), using a custom method based on \code{\link[xml2:xml_replace]{xml2::xml_add_child()}} to create a simple XML tree and \code{\link[xml2:write_xml]{xml2::write_xml()}} to write to disk.
 \item YAML (.yml), using \code{\link[yaml:write_yaml]{yaml::write_yaml()}}, default to write the content with UTF-8. Might not work on some older systems, e.g. default Windows locale for R <= 4.2.

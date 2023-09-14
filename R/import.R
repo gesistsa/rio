@@ -49,7 +49,7 @@
 #'     \item JSON (.json), using [jsonlite::fromJSON()]
 #'     \item Matlab (.mat), using [rmatio::read.mat()]
 #'     \item EViews (.wf1), using [hexView::readEViews()]
-#'     \item OpenDocument Spreadsheet (.ods), using [readODS::read_ods()].  Use `which` to specify a sheet number.
+#'     \item OpenDocument Spreadsheet (.ods, .fods), using [readODS::read_ods()] or [readODS::read_fods()].  Use `which` to specify a sheet number.
 #'     \item Single-table HTML documents (.html), using [xml2::read_html()]. There is no standard HTML table and we have only tested this with HTML tables exported with this package. HTML tables will only be read correctly if the HTML file can be converted to a list via [xml2::as_list()]. This import feature is not robust, especially for HTML tables in the wild. Please use a proper web scraping framework, e.g. `rvest`.
 #'     \item Shallow XML documents (.xml), using [xml2::read_xml()]. The data structure will only be read correctly if the XML file can be converted to a list via [xml2::as_list()].
 #'     \item YAML (.yml), using [yaml::yaml.load()]
@@ -97,7 +97,8 @@
 #' ## argument setclass, however, takes precedents over such undocumented features.
 #' class(import(csv_file, setclass = "tibble", data.table = TRUE))
 #'
-#' ## the default import class can be set with options(rio.import.class = "data.table") or option(rio.import.class = "tibble")
+#' ## the default import class can be set with options(rio.import.class = "data.table")
+#' ## option(rio.import.class = "tibble"), or option(rio.import.class = "arrow")
 #' @seealso [import_list()], [characterize()], [gather_attrs()], [export()], [convert()]
 #' @export
 import <- function(file, format, setclass = getOption("rio.import.class", "data.frame"), which, ...) {
