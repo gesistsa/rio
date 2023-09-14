@@ -19,7 +19,6 @@ unlink("mtcars.rds")
 unlink("mtcars.R")
 unlink("mtcars.RData")
 test_that("Data identical (R formats), feather", {
-    skip_if_not_installed(pkg="feather")
     expect_equivalent(import(export(mtcars, "mtcars.feather")), mtcars)
     unlink("mtcars.feather")
 })

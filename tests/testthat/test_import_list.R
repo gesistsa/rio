@@ -129,8 +129,6 @@ test_that("Universal dummy `which` #326", {
 
 test_that("Universal dummy `which` (Suggests) #326", {
     skip_if_not_installed("qs")
-    skip_if_not_installed("arrow")
-    skip_if_not_installed("ods")
     formats <- c("qs", "parquet", "ods")
     for (format in formats) {
         tempzip <- tempfile(fileext = paste0(".", format, ".zip"))
