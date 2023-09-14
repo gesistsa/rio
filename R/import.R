@@ -102,7 +102,7 @@
 #' @export
 import <- function(file, format, setclass = getOption("rio.import.class", "data.frame"), which, ...) {
     .check_file(file, single_only = TRUE)
-    if (grepl("^http.*://", file)) {
+    if (R.utils::isUrl(file)) {
         file <- remote_to_local(file, format = format)
     }
     if ((file != "clipboard") && !file.exists(file)) {
