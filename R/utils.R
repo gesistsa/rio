@@ -25,7 +25,7 @@ get_info <- function(file) {
     if (tolower(file) == "clipboard") {
         return(.query_format(input = "clipboard", file = "clipboard"))
     }
-    if (!grepl("^http.*://", file)) {
+    if (isFALSE(R.utils::isUrl(file))) {
         ext <- tolower(tools::file_ext(file))
     } else {
         parsed <- strsplit(strsplit(file, "?", fixed = TRUE)[[1]][1], "/", fixed = TRUE)[[1]]
@@ -108,10 +108,7 @@ escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&a
 }
 
 .create_directory_if_not_exists <- function(file) {
-    file_dir <- dirname(normalizePath(file, mustWork = FALSE))
-    if (!dir.exists(file_dir)) {
-        dir.create(file_dir, recursive = TRUE)
-    }
+    R.utils::mkdirs(dirname(normalizePath(file, mustWork = FALSE)))
     invisible(NULL)
 }
 

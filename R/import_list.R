@@ -87,7 +87,7 @@ import_list <-
 }
 
 .read_file_as_list <- function(file, which, setclass, rbind, rbind_label, ...) {
-    if (grepl("^http.*://", file)) {
+    if (R.utils::isUrl(file)) {
         file <- remote_to_local(file)
     }
     if (get_info(file)$format == "rdata") {

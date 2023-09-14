@@ -11,23 +11,13 @@
 #' @export
 install_formats <- function(...) {
     to_install <- uninstalled_formats()
-
-    if (length(to_install)) {
-        utils::install.packages(to_install, ...)
-    }
+    utils::install.packages(to_install, ...)
     invisible(TRUE)
 }
 
 uninstalled_formats <- function() {
     all_functions <- unlist(rio_formats[rio_formats$type == "suggest", c("import_function", "export_function")], use.names = FALSE)
     suggestions <- unique(stats::na.omit(stringi::stri_extract_first(all_functions, regex = "[a-zA-Z0-9\\.]+")))
-    # which are not installed
-    unlist(lapply(suggestions, function(x) {
-        if (length(find.package(x, quiet = TRUE))) {
-            NULL
-        } else {
-            x
-        }
-    }))
+    ## which are not installed
+    suggestions[!R.utils::isPackageInstalled(suggestions)]
 }
-
