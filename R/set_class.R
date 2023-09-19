@@ -12,6 +12,8 @@ set_class <- function(x, class = NULL) {
     }
 
     if (any(c("arrow", "arrow_table") %in% class)) {
+        ## because setclass can be used without import, must check again
+        .check_pkg_availability("arrow")
         return(.ensure_arrow(x))
     }
     return(.ensure_data_frame(x))

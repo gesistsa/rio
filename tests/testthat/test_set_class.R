@@ -27,6 +27,7 @@ test_that("Set object class as data.table", {
 
 test_that("Set object class as arrow table", {
     skip_if(getRversion() <= "4.2")
+    skip_if_not_installed("arrow")
     mtcars_arrow <- arrow::arrow_table(mtcars)
     expect_false(inherits(set_class(mtcars_arrow), "data.frame")) ## arrow table is not data.frame
     expect_true(inherits(set_class(mtcars, class = "arrow"), "ArrowTabular"))
@@ -39,8 +40,19 @@ test_that("Set object class as arrow table", {
 
 test_that("ArrowTabular can be exported", {
     skip_if(getRversion() <= "4.2")
+    skip_if_not_installed("arrow")
     mtcars_arrow <- arrow::arrow_table(mtcars)
     expect_error(export(mtcars_arrow, "mtcars.csv"), NA) ## no concept of rownames
     expect_true(inherits(import("mtcars.csv"), "data.frame"))
     unlink("mtcars.csv")
+})
+
+test_that("Simulate arrow is not installed, #376", {
+    ## although this is pretty meaningless
+    with_mocked_bindings({
+        export(mtcars, "mtcars.csv")
+        expect_error(import("mtcars.csv", setclass = "arrow"), "Suggested package")
+    }, .check_pkg_availability = function(pkg, lib.loc = NULL) {
+        stop("Suggested package `", pkg, "` is not available. Please install it individually or use `install_formats()`", call. = FALSE)
+    })
 })

@@ -6,7 +6,7 @@
 #' @param setclass An optional character vector specifying one or more classes
 #' to set on the import. By default, the return object is always a
 #' \dQuote{data.frame}. Allowed values include \dQuote{tbl_df}, \dQuote{tbl}, or
-#' \dQuote{tibble} (if using tibble), \dQuote{arrow}, \dQuote{arrow_table} (if using arrow table) or \dQuote{data.table} (if using
+#' \dQuote{tibble} (if using tibble), \dQuote{arrow}, \dQuote{arrow_table} (if using arrow table; the suggested package `arrow` must be installed) or \dQuote{data.table} (if using
 #' data.table). Other values are ignored, such that a data.frame is returned.
 #' The parameter takes precedents over parameters in \dots which set a different class.
 #' @param which This argument is used to control import from multi-object files; as a rule `import` only ever returns a single data frame (use [import_list()] to import multiple data frames from a multi-object file). If `file` is a compressed directory, `which` can be either a character string specifying a filename or an integer specifying which file (in locale sort order) to extract from the compressed directory. For Excel spreadsheets, this can be used to specify a sheet name or number. For .Rdata files, this can be an object name. For HTML files, it identifies which table to extract (from document order). Ignored otherwise. A character string value will be used as a regular expression, such that the extracted file is the first match of the regular expression against the file names in the archive.
@@ -102,6 +102,9 @@
 #' @seealso [import_list()], [characterize()], [gather_attrs()], [export()], [convert()]
 #' @export
 import <- function(file, format, setclass = getOption("rio.import.class", "data.frame"), which, ...) {
+    if (setclass %in% c("arrow", "arrow_table")) {
+        .check_pkg_availability("arrow")
+    }
     .check_file(file, single_only = TRUE)
     if (R.utils::isUrl(file)) {
         file <- remote_to_local(file, format = format)
