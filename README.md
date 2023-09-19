@@ -135,7 +135,6 @@ The full list of supported formats is below:
 | Archive files (handled by tar)      | bzip2 / xz / tar      | utils          | utils          | Default |                         |
 | Gzip files                          | gz / gzip             | base           | base           | Default |                         |
 | Zip files                           | zip                   | utils          | utils          | Default |                         |
-| Apache Arrow (Parquet)              | parquet               | arrow          | arrow          | Default |                         |
 | CSVY (CSV + YAML metadata header)   | csvy                  | data.table     | data.table     | Default |                         |
 | Comma-separated data                | csv                   | data.table     | data.table     | Default |                         |
 | Comma-separated data (European)     | csv2                  | data.table     | data.table     | Default |                         |
@@ -143,7 +142,6 @@ The full list of supported formats is below:
 | Epiinfo                             | epiinfo / rec         | foreign        |                | Default |                         |
 | Excel                               | excel / xlsx          | readxl         | writexl        | Default |                         |
 | Excel (Legacy)                      | xls                   | readxl         |                | Default |                         |
-| Feather R/Python interchange format | feather               | arrow          | arrow          | Default |                         |
 | Fixed-width format data             | fwf                   | utils          | utils          | Default |                         |
 | Fortran data                        | fortran               | utils          |                | Default | No recognized extension |
 | Google Sheets                       | googlesheets          | data.table     |                | Default | As comma-separated data |
@@ -163,9 +161,11 @@ The full list of supported formats is below:
 | Text Representations of R Objects   | dump                  | base           | base           | Default |                         |
 | Weka Attribute-Relation File Format | arff / weka           | foreign        | foreign        | Default |                         |
 | XBASE database files                | dbf                   | foreign        | foreign        | Default |                         |
+| Apache Arrow (Parquet)              | parquet               | arrow          | arrow          | Suggest |                         |
 | Clipboard                           | clipboard             | clipr          | clipr          | Suggest | default is tsv          |
 | EViews                              | eviews / wf1          | hexView        |                | Suggest |                         |
 | Fast Storage                        | fst                   | fst            | fst            | Suggest |                         |
+| Feather R/Python interchange format | feather               | arrow          | arrow          | Suggest |                         |
 | Graphpad Prism                      | pzfx                  | pzfx           | pzfx           | Suggest |                         |
 | HTML Tables                         | htm / html            | xml2           | xml2           | Suggest |                         |
 | JSON                                | json                  | jsonlite       | jsonlite       | Suggest |                         |

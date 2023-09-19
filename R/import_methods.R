@@ -152,6 +152,7 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 
 #' @export
 .import.rio_feather <- function(file, which = 1, ...) {
+    .check_pkg_availability("arrow")
     .docall(arrow::read_feather, ..., args = list(file = file))
 }
 
@@ -386,6 +387,7 @@ extract_html_row <- function(x, empty_value) {
 
 #' @export
 .import.rio_parquet <- function(file, which = 1, ...) {
+    .check_pkg_availability("arrow")
     .docall(arrow::read_parquet, ..., args = list(file = file, as_data_frame = TRUE))
 }
 

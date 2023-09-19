@@ -2,7 +2,7 @@
     {
         "input": "parquet",
         "format": "parquet",
-        "type": "import",
+        "type": "suggest",
         "format_name": "Apache Arrow (Parquet)",
         "import_function": "arrow::read_parquet",
         "export_function": "arrow::write_parquet",
@@ -209,7 +209,7 @@
     {
         "input": "feather",
         "format": "feather",
-        "type": "import",
+        "type": "suggest",
         "format_name": "Feather R/Python interchange format",
         "import_function": "arrow::read_feather",
         "export_function": "arrow::write_feather",
