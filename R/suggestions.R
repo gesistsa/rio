@@ -16,8 +16,7 @@ install_formats <- function(...) {
 }
 
 uninstalled_formats <- function() {
-    all_functions <- unlist(rio_formats[rio_formats$type == "suggest", c("import_function", "export_function")], use.names = FALSE)
-    suggestions <- unique(stats::na.omit(stringi::stri_extract_first(all_functions, regex = "[a-zA-Z0-9\\.]+")))
+    suggested_packages <- attr(rio_formats, "suggested_packages")
     ## which are not installed
-    suggestions[!R.utils::isPackageInstalled(suggestions)]
+    suggested_packages[!R.utils::isPackageInstalled(suggested_packages)]
 }

@@ -1,3 +1,5 @@
+* Move `stringi` to Suggests to reduce compilation time. Add an attribution to the internal data to list out all required packages #378
+
 # rio 1.0.1
 
 * POTENTIALLY BREAKING: Due to compiling time concerns, roll back the decision to move `arrow` to `Imports`. It is now `Suggests`. `setclass = "arrow"` works if `arrow` is installed. #315 #376

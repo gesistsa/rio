@@ -12,7 +12,7 @@
                      fileinfo$format, fileinfo$import_function), call. = FALSE)
     }
     if (fileinfo$type == "enhance") {
-        pkg <- stringi::stri_extract_first(fileinfo$import_function, regex = "[a-zA-Z0-9\\.]+")
+        pkg <- strsplit(fileinfo$import_function, "::")[[1]][1]
         stop(sprintf(gettext("Import support for the %s format is exported by the %s package. Run 'library(%s)' then try again."),
                      fileinfo$format, pkg, pkg), call. = FALSE)
     }

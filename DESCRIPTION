@@ -50,7 +50,6 @@ Imports:
     data.table (>= 1.11.2),
     readxl (>= 0.1.1),
     tibble,
-    stringi,
     writexl,
     lifecycle,
     R.utils
@@ -72,7 +71,8 @@ Suggests:
     xml2 (>= 1.2.0),
     yaml,
     qs,
-    arrow (>= 0.17.0)
+    arrow (>= 0.17.0),
+    stringi
 License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8
