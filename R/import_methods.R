@@ -81,29 +81,43 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
     import_delim(file = file, sep = if (sep == "|") "auto" else sep, dec = dec, ...)
 }
 
-#' @export
-.import.rio_fwf <-
-    function(file,
-             which = 1,
-             widths,
-             header = FALSE,
-             col.names,
-             comment = "#",
-             readr = lifecycle::deprecated(),
-             progress = getOption("verbose", FALSE),
-             ...) {
-        if (lifecycle::is_present(readr)) {
-            lifecycle::deprecate_warn(when = "0.5.31", what = "import(readr)", details = "fwt will always be read without `readr`. The parameter `readr` will be dropped in v2.0.0.")
-        }
-        if (missing(widths)) {
-            stop("Import of fixed-width format data requires a 'widths' argument. See ? read.fwf().")
-        }
-        if (!missing(col.names)) {
-            read.fwf2(file = file, widths = widths, header = header, col.names = col.names, ...)
-        } else {
-            read.fwf2(file = file, widths = widths, header = header, ...)
-        }
+.get_col_position <- function(file, widths, col_names, col_position) {
+    if (missing(col_names)) {
+        col_names <- NULL
     }
+    if (!is.null(col_position)) {
+        return(col_position)
+    }
+    if (is.list(widths) && isFALSE(c("begin", "end") %in% names(widths))) {
+        return(readr::fwf_widths(widths, col_names = col_names))
+    }
+    if (isTRUE(is.numeric(widths))) {
+        return(readr::fwf_widths(abs(widths), col_names = col_names))
+    }
+    return(readr::fwf_empty(file = file, col_names = col_names))
+}
+
+.fix_col_types <- function(col_types, widths) {
+    if (isFALSE(is.numeric(widths))) {
+        return(col_types)
+    }
+    col_types <- rep("?", length(widths))
+    col_types[widths < 0] <- "?"
+    col_types <- paste0(col_types, collapse = "")
+    return(col_types)
+}
+
+#' @export
+.import.rio_fwf <- function(file, which = 1, widths = NULL, col_names, col_types = NULL, col_positions, col.names, col_position = NULL, ...) {
+    if (!missing(col.names)) {
+        col_names <- col.names
+    }
+    col_positions <- .get_col_position(file = file, widths = widths, col_names = col_names, col_position = col_position)
+    if (!is.null(widths) && !is.null(col_types)) {
+        col_types <- .fix_col_types(col_types, widths)
+    }
+    .docall(readr::read_fwf, ..., args = list(file = file, col_positions = col_positions, col_types = col_types))
+}
 
 #' @export
 .import.rio_r <- function(file, which = 1, ...) {

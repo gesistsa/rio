@@ -52,7 +52,8 @@ Imports:
     tibble,
     writexl,
     lifecycle,
-    R.utils
+    R.utils,
+    readr
 Suggests:
     datasets,
     bit64,
@@ -65,7 +66,6 @@ Suggests:
     jsonlite,
     pzfx,
     readODS (>= 2.1.0),
-    readr,
     rmarkdown,
     rmatio,
     xml2 (>= 1.2.0),
