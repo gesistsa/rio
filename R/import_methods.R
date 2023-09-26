@@ -108,7 +108,7 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 #' @export
-.import.rio_fwf <- function(file, which = 1, widths = NULL, col_names, col_types = NULL, col_positions, col.names, col_position = NULL, ...) {
+.import.rio_fwf <- function(file, which = 1, widths = NULL, col_names, col_types = NULL, col_positions, col.names, col_position = NULL, comment = "#", ...) {
     if (!missing(col.names)) {
         col_names <- col.names
     }
@@ -116,7 +116,7 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
     if (!is.null(widths) && !is.null(col_types)) {
         col_types <- .fix_col_types(col_types, widths)
     }
-    .docall(readr::read_fwf, ..., args = list(file = file, col_positions = col_positions, col_types = col_types))
+    .docall(readr::read_fwf, ..., args = list(file = file, col_positions = col_positions, col_types = col_types, comment = comment))
 }
 
 #' @export
