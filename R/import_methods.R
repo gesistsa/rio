@@ -109,7 +109,11 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 
 #' @export
 .import.rio_fwf <- function(file, which = 1, widths = NULL, col_names, col_types = NULL, col_positions, col.names, col_position = NULL, comment = "#", ...) {
+    if (!is.null(widths)) {
+        lifecycle::deprecate_warn(when = "1.0.2", what = "import(widths)", details = "`widths` is kept for backward compatibility. Please use `col_positions` or unset `widths` to allow automatic guessing, see `?readr::read_fwf`. The parameter `widths` will be dropped in v2.0.0.")
+    }
     if (!missing(col.names)) {
+        lifecycle::deprecate_warn(when = "1.0.2", what = "import(widths)", details = "`col.names` is kept for backward compatibility. Please use `col_names`. The parameter `col.names` will be dropped in v2.0.0.")
         col_names <- col.names
     }
     col_positions <- .get_col_position(file = file, widths = widths, col_names = col_names, col_position = col_position)
