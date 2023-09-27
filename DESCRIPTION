@@ -1,7 +1,7 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(person("Jason", "Becker", role = "aut", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = c("aut", "cre"), email = "chainsawtiney@gmail.com",
 	     	     comment = c(ORCID = "0000-0002-6232-7530")),
@@ -52,7 +52,8 @@ Imports:
     tibble,
     writexl,
     lifecycle,
-    R.utils
+    R.utils,
+    readr
 Suggests:
     datasets,
     bit64,
@@ -65,7 +66,6 @@ Suggests:
     jsonlite,
     pzfx,
     readODS (>= 2.1.0),
-    readr,
     rmarkdown,
     rmatio,
     xml2 (>= 1.2.0),
