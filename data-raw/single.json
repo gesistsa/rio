@@ -220,7 +220,7 @@
         "format": "fwf",
         "type": "import",
         "format_name": "Fixed-width format data",
-        "import_function": "utils::read.table",
+        "import_function": "readr::read_fwf",
         "export_function": "utils::write.table",
         "note": ""
     },
