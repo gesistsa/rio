@@ -1,7 +1,7 @@
 #' @rdname export
 #' @title Export
 #' @description Write data.frame to a file
-#' @param x A data frame or matrix to be written into a file. Exceptions to this rule are that `x` can be a list of data frames if the output file format is an OpenDocument Spreadsheet (.ods, .fods), Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use [export_list()] instead.
+#' @param x A data frame, matrix or a single-item list of data frame to be written into a file. Exceptions to this rule are that `x` can be a list of multiple data frames if the output file format is an OpenDocument Spreadsheet (.ods, .fods), Excel .xlsx workbook, .Rdata file, or HTML file, or a variety of R objects if the output file format is RDS or JSON. See examples.) To export a list of data frames to multiple files, use [export_list()] instead.
 #' @param file A character string naming a file. Must specify `file` and/or `format`.
 #' @param format An optional character string containing the file format, which can be used to override the format inferred from `file` or, in lieu of specifying `file`, a file with the symbol name of `x` and the specified file extension will be created. Must specify `file` and/or `format`. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), \dQuote{|} (for pipe-separated values), and \dQuote{dump} for [base::dump()].
 #' @param \dots Additional arguments for the underlying export functions. This can be used to specify non-standard arguments. See examples.
@@ -98,6 +98,10 @@ export <- function(x, file, format, ...) {
     outfile <- file
     if (is.matrix(x) || inherits(x, "ArrowTabular")) {
         x <- as.data.frame(x)
+    }
+    if (!is.data.frame(x) && is.list(x) && length(x) == 1 && is.data.frame(x[[1]]) &&
+        !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs", "fods", "ods")) {
+        x <- x[[1]] ## fix 385
     }
     if (!is.data.frame(x) && !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs", "fods", "ods")) {
         stop("'x' is not a data.frame or matrix", call. = FALSE)

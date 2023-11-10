@@ -35,6 +35,18 @@ test_that("export_list() works", {
     expect_error(export_list(mylist, file = c("mtcars1.csv", "mtcars1.csv", "mtcars3.csv")), label = "export_list() fails with duplicated data frame names")
 })
 
+test_that("List length of one, #385", {
+    example1 <- list("iris" = iris)
+    tempfile <- tempfile(fileext = ".csv")
+    expect_error(export(example1, tempfile), NA)
+    tempfile <- tempfile(fileext = ".xlsx")
+    expect_error(export(example1, tempfile), NA)
+    expect_equal(readxl::excel_sheets(tempfile), "iris") ## name is retained
+    tempfile <- tempfile(fileext = ".rds")
+    expect_error(export(example1, tempfile), NA)
+    expect_true(is.list(readRDS(tempfile)) && !is.data.frame(readRDS(tempfile)))
+})
+
 unlink("mtcars.xlsx")
 unlink("mtcars1.csv")
 unlink("mtcars2.csv")
