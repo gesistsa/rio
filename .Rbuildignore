@@ -44,3 +44,5 @@
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^codemeta\.json$
+^_pkgdown\.yml$
+^pkgdown$
