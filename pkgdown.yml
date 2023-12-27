@@ -1,0 +1,14 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  extension: extension.html
+  labelled: labelled.html
+  philosophy: philosophy.html
+  remap: remap.html
+  rio: rio.html
+last_built: 2023-12-27T13:48Z
+urls:
+  reference: http://gesistsa.github.io/rio/reference
+  article: http://gesistsa.github.io/rio/articles
+
