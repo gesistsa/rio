@@ -8,6 +8,7 @@
 #' @param \dots Additional arguments passed to [import()]. Behavior may be unexpected if files are of different formats.
 #' @inheritParams import
 #' @return If `rbind=FALSE` (the default), a list of a data frames. Otherwise, that list is passed to [data.table::rbindlist()] with `fill = TRUE` and returns a data frame object of class set by the `setclass` argument; if this operation fails, the list is returned.
+#' @details When file is a vector of file paths and any files are missing, those files are ignored (with warnings) and this function will not raise any error.
 #' @examples
 #' ## For demo, a temp. file path is created with the file extension .xlsx
 #' xlsx_file <- tempfile(fileext = ".xlsx")
@@ -25,46 +26,37 @@
 #' # import all worksheets, the return value is a list
 #' import_list(xlsx_file)
 #'
-#' # import and rbind all worksheets, the return valye is a data frame
+#' # import and rbind all worksheets, the return value is a data frame
 #' import_list(xlsx_file, rbind = TRUE)
 #' @seealso [import()], [export_list()], [export()]
 #' @export
-import_list <-
-    function(file,
-             setclass = getOption("rio.import.class", "data.frame"),
-             which,
-             rbind = FALSE,
-             rbind_label = "_file",
-             rbind_fill = TRUE,
-             ...) {
-        .check_file(file, single_only = FALSE)
-
-        ## special cases
-        if (length(file) == 1) {
-            x <- .read_file_as_list(file = file, which = which, setclass = setclass, rbind = rbind, rbind_label = rbind_label, ...)
-        } else {
-            ## note the plural
-            x <- .read_multiple_files_as_list(files = file, setclass = setclass, rbind = rbind, rbind_label = rbind_label, ...)
-        }
-        # optionally rbind
-        if (isTRUE(rbind)) {
-            if (length(x) == 1) {
-                x <- x[[1L]]
-            } else {
-                x2 <- try(data.table::rbindlist(x, fill = rbind_fill), silent = TRUE)
-                if (inherits(x2, "try-error")) {
-                    warning("Attempt to rbindlist() the data did not succeed. List returned instead.")
-                    return(x)
-                } else {
-                    x <- x2
-                }
-            }
-            ## set class
-            x <- set_class(x, class = setclass)
-        }
-
-        return(x)
+import_list <- function(file, setclass = getOption("rio.import.class", "data.frame"), which, rbind = FALSE,
+                        rbind_label = "_file", rbind_fill = TRUE, ...) {
+    .check_file(file, single_only = FALSE)
+    ## special cases
+    if (length(file) == 1) {
+        x <- .read_file_as_list(file = file, which = which, setclass = setclass, rbind = rbind, rbind_label = rbind_label, ...)
+    } else {
+        ## note the plural
+        x <- .read_multiple_files_as_list(files = file, setclass = setclass, rbind = rbind, rbind_label = rbind_label, ...)
     }
+    ## optionally rbind
+    if (isTRUE(rbind)) {
+        if (length(x) == 1) {
+            x <- x[[1L]]
+        } else {
+            x2 <- try(data.table::rbindlist(x, fill = rbind_fill), silent = TRUE)
+            if (inherits(x2, "try-error")) {
+                warning("Attempt to rbindlist() the data did not succeed. List returned instead.", call. = FALSE)
+                return(x)
+            } else {
+                x <- x2
+            }
+        }
+        x <- set_class(x, class = setclass)
+    }
+    return(x)
+}
 
 .strip_exts <- function(file) {
     vapply(file, function(x) tools::file_path_sans_ext(basename(x)), character(1))
@@ -75,8 +67,9 @@ import_list <-
     x <- lapply(files, function(thisfile) {
         out <- try(import(thisfile, setclass = setclass, ...), silent = TRUE)
         if (inherits(out, "try-error")) {
-            warning(sprintf("Import failed for %s", thisfile))
-            out <- NULL
+            warning(sprintf("Import failed for %s", thisfile), call. = FALSE)
+            ##out <- NULL
+            return(NULL)
         } else if (isTRUE(rbind)) {
             out[[rbind_label]] <- thisfile
         }

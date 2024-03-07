@@ -140,6 +140,16 @@ test_that("Universal dummy `which` (Suggests) #326", {
     }
 })
 
+test_that("Informative message when files are not found #389", {
+    expect_warning(import_list(c("mtcars.rds", "nonexisting.rds")), "^Import failed for nonexisting")
+})
+
+test_that("Missing files and rbind", {
+    expect_warning(x <- import_list(c("mtcars.rds", "nonexisting.rds"), rbind = TRUE), "^Import failed for nonexisting")
+    expect_warning(x <- import_list(c("nonexisting.rds", "nonexisting2.rds"), rbind = TRUE), "^Import failed for nonexisting")
+    expect_true(is.data.frame(x))
+})
+
 unlink("data.rdata")
 unlink("mtcars.rds")
 unlink("mtcars.csv.zip")
