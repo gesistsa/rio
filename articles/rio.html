@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Import, Export, and Convert Data Files</h1>
             
-            <h4 data-toc-skip class="date">2023-12-27</h4>
+            <h4 data-toc-skip class="date">2024-03-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gesistsa/rio/blob/HEAD/vignettes/rio.Rmd" class="external-link"><code>vignettes/rio.Rmd</code></a></small>
       <div class="d-none name"><code>rio.Rmd</code></div>
@@ -517,7 +517,7 @@ infers the file format from the file’s extension and calls the
 appropriate data import function for you, returning a simple data.frame.
 This works for any for the formats listed above.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gesistsa/rio" class="external-link">"rio"</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://gesistsa.github.io/rio" class="external-link">"rio"</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"mtcars.csv"</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"mtcars.rds"</span><span class="op">)</span></span>
@@ -574,7 +574,7 @@ never seems to be a development priority to have functions to export to
 the formats used by other applications. That said, <strong>rio</strong>
 currently supports the following formats:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gesistsa/rio" class="external-link">"rio"</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://gesistsa.github.io/rio" class="external-link">"rio"</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/export.html">export</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mtcars.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/export.html">export</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mtcars.rds"</span><span class="op">)</span></span>

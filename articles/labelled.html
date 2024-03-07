@@ -96,7 +96,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/gesistsa/rio" class="external-link">rio</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gesistsa.github.io/rio" class="external-link">rio</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org" class="external-link">haven</a></span><span class="op">)</span></span></code></pre></div>
 <p>Formats SAS, SPSS, and Stata use <code>haven</code> as import and
 export functions. And these formats can have the so-called labelled
@@ -126,7 +126,7 @@ variable level.</p>
 <span><span class="co">#&gt;   ..- attr(*, "format.spss")= chr "A1"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:2] "M" "F"</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "Male" "Female"</span></span>
-<span><span class="co">#&gt;  $ rating: num  4 5 1 2 3</span></span>
+<span><span class="co">#&gt;  $ rating: num  4 3 2 1 5</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "format.spss")= chr "F8.0"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named num [1:2] 1 5</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "Good" "Bad"</span></span></code></pre></div>
@@ -139,7 +139,7 @@ data.frame level</p>
 <span><span class="co">#&gt;  $ gender: chr  "M" "F" "F" "F" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:2] "M" "F"</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "Male" "Female"</span></span>
-<span><span class="co">#&gt;  $ rating: num  4 5 1 2 3</span></span>
+<span><span class="co">#&gt;  $ rating: num  4 3 2 1 5</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named num [1:2] 1 5</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "Good" "Bad"</span></span>
 <span><span class="co">#&gt;  - attr(*, "format.spss")=List of 2</span></span>

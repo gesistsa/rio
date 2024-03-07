@@ -127,7 +127,7 @@
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"gesistsa/rio"</span><span class="op">)</span></span></code></pre></div>
 <p>Optional: Installation of additional formats (see below: <strong>Supported file formats</strong>)</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/gesistsa/rio" class="external-link">rio</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gesistsa.github.io/rio" class="external-link">rio</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/install_formats.html">install_formats</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -139,32 +139,32 @@
 </h3>
 <p>Importing data is handled with one function, <code><a href="reference/import.html">import()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gesistsa/rio" class="external-link">"rio"</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://gesistsa.github.io/rio" class="external-link">"rio"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/import.html">import</a></span><span class="op">(</span><span class="st">"starwars.xlsx"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">##                  Name homeworld species</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 1      Luke Skywalker  Tatooine   Human</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 2               C-3PO  Tatooine   Human</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 3               R2-D2  Alderaan   Human</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 4         Darth Vader  Tatooine   Human</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 5         Leia Organa  Tatooine   Human</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 6           Owen Lars  Tatooine   Human</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  Beru Whitesun lars   Stewjon   Human</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 8               R5-D4  Tatooine   Human</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   Biggs Darklighter  Kashyyyk Wookiee</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 10     Obi-Wan Kenobi  Corellia   Human</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">##                  Name homeworld species</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="do">## 1      Luke Skywalker  Tatooine   Human</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="do">## 2               C-3PO  Tatooine   Human</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">## 3               R2-D2  Alderaan   Human</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="do">## 4         Darth Vader  Tatooine   Human</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="do">## 5         Leia Organa  Tatooine   Human</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="do">## 6           Owen Lars  Tatooine   Human</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="do">## 7  Beru Whitesun lars   Stewjon   Human</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="do">## 8               R5-D4  Tatooine   Human</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="do">## 9   Biggs Darklighter  Kashyyyk Wookiee</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="do">## 10     Obi-Wan Kenobi  Corellia   Human</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/import.html">import</a></span><span class="op">(</span><span class="st">"starwars.csv"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">##                  Name homeworld species</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 1      Luke Skywalker  Tatooine   Human</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 2               C-3PO  Tatooine   Human</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 3               R2-D2  Alderaan   Human</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 4         Darth Vader  Tatooine   Human</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 5         Leia Organa  Tatooine   Human</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 6           Owen Lars  Tatooine   Human</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  Beru Whitesun lars   Stewjon   Human</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 8               R5-D4  Tatooine   Human</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   Biggs Darklighter  Kashyyyk Wookiee</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 10     Obi-Wan Kenobi  Corellia   Human</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="do">##                  Name homeworld species</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="do">## 1      Luke Skywalker  Tatooine   Human</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="do">## 2               C-3PO  Tatooine   Human</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="do">## 3               R2-D2  Alderaan   Human</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="do">## 4         Darth Vader  Tatooine   Human</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="do">## 5         Leia Organa  Tatooine   Human</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="do">## 6           Owen Lars  Tatooine   Human</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="do">## 7  Beru Whitesun lars   Stewjon   Human</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="do">## 8               R5-D4  Tatooine   Human</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="do">## 9   Biggs Darklighter  Kashyyyk Wookiee</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="do">## 10     Obi-Wan Kenobi  Corellia   Human</span></span></code></pre></div>
 <p>Note: Because of inconsistencies across underlying packages, the data.frame returned by <code>import</code> might vary slightly (in variable classes and attributes) depending on file type.</p>
 </div>
 <div class="section level3">
@@ -566,7 +566,7 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/convert.html">convert</a></span><span class="op">(</span><span class="st">"mtcars.sav"</span>, <span class="st">"mtcars.dta"</span><span class="op">)</span></span></code></pre></div>
 <p>It is also possible to use <strong>rio</strong> on the command-line by calling <code>Rscript</code> with the <code>-e</code> (expression) argument. For example, to convert a file from Stata (.dta) to comma-separated values (.csv), simply do the following:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Rscript <span class="sc">-</span>e <span class="st">"rio::convert('iris.dta', 'iris.csv')"</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>Rscript <span class="sc">-</span>e <span class="st">"rio::convert('iris.dta', 'iris.csv')"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="id__list">*_list<a class="anchor" aria-label="anchor" href="#id__list"></a>
@@ -574,30 +574,30 @@
 <p><code><a href="reference/import_list.html">import_list()</a></code> allows users to import a list of data frames from a multi-object file (such as an Excel workbook, .Rdata file, zip directory, or HTML file):</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/import_list.html">import_list</a></span><span class="op">(</span><span class="st">"mtcars.xlsx"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## List of 2</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ mtcars:'data.frame':  32 obs. of  11 variables:</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ mpg : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ cyl : num [1:32] 6 6 4 6 8 6 8 4 4 6 ...</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ disp: num [1:32] 160 160 108 258 360 ...</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ hp  : num [1:32] 110 110 93 110 175 105 245 62 95 123 ...</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ drat: num [1:32] 3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ wt  : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ qsec: num [1:32] 16.5 17 18.6 19.4 17 ...</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ vs  : num [1:32] 0 0 1 1 0 1 0 1 1 1 ...</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ am  : num [1:32] 1 1 1 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ gear: num [1:32] 4 4 4 3 3 3 3 4 4 4 ...</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ carb: num [1:32] 4 4 1 1 2 1 4 2 2 4 ...</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ iris  :'data.frame':  150 obs. of  5 variables:</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ Sepal.Length: num [1:150] 5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ Sepal.Width : num [1:150] 3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ Petal.Length: num [1:150] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ Petal.Width : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ Species     : chr [1:150] "setosa" "setosa" "setosa" "setosa" ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="do">## List of 2</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="do">##  $ mtcars:'data.frame':  32 obs. of  11 variables:</span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="do">##   ..$ mpg : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="do">##   ..$ cyl : num [1:32] 6 6 4 6 8 6 8 4 4 6 ...</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="do">##   ..$ disp: num [1:32] 160 160 108 258 360 ...</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="do">##   ..$ hp  : num [1:32] 110 110 93 110 175 105 245 62 95 123 ...</span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="do">##   ..$ drat: num [1:32] 3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="do">##   ..$ wt  : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...</span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="do">##   ..$ qsec: num [1:32] 16.5 17 18.6 19.4 17 ...</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="do">##   ..$ vs  : num [1:32] 0 0 1 1 0 1 0 1 1 1 ...</span></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="do">##   ..$ am  : num [1:32] 1 1 1 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="do">##   ..$ gear: num [1:32] 4 4 4 3 3 3 3 4 4 4 ...</span></span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="do">##   ..$ carb: num [1:32] 4 4 1 1 2 1 4 2 2 4 ...</span></span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="do">##  $ iris  :'data.frame':  150 obs. of  5 variables:</span></span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="do">##   ..$ Sepal.Length: num [1:150] 5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...</span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a><span class="do">##   ..$ Sepal.Width : num [1:150] 3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...</span></span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="do">##   ..$ Petal.Length: num [1:150] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...</span></span>
+<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a><span class="do">##   ..$ Petal.Width : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...</span></span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a><span class="do">##   ..$ Species     : chr [1:150] "setosa" "setosa" "setosa" "setosa" ...</span></span></code></pre></div>
 <p><code><a href="reference/export_list.html">export_list()</a></code> makes it easy to export a list of (possibly named) data frames to multiple files:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/export_list.html">export_list</a></span><span class="op">(</span><span class="va">m</span>, <span class="st">"%s.tsv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mtcars.tsv"</span>, <span class="st">"iris.tsv"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">dir</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="do">## [1] TRUE TRUE</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">

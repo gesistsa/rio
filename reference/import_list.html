@@ -116,6 +116,10 @@ The parameter takes precedents over parameters in ... which set a different clas
 <p>If <code>rbind=FALSE</code> (the default), a list of a data frames. Otherwise, that list is passed to <code><a href="https://rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">data.table::rbindlist()</a></code> with <code>fill = TRUE</code> and returns a data frame object of class set by the <code>setclass</code> argument; if this operation fails, the list is returned.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>When file is a vector of file paths and any files are missing, those files are ignored (with warnings) and this function will not raise any error.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="import.html">import()</a></code>, <code><a href="export_list.html">export_list()</a></code>, <code><a href="export.html">export()</a></code></p></div>
     </div>
@@ -190,7 +194,7 @@ The parameter takes precedents over parameters in ... which set a different clas
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># import and rbind all worksheets, the return valye is a data frame</span></span></span>
+<span class="r-in"><span><span class="co"># import and rbind all worksheets, the return value is a data frame</span></span></span>
 <span class="r-in"><span><span class="fu">import_list</span><span class="op">(</span><span class="va">xlsx_file</span>, rbind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mpg cyl  disp  hp drat    wt  qsec vs am gear carb _file</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4     1</span>
