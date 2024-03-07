@@ -42,6 +42,9 @@ set_class <- function(x, class = NULL) {
 
 .ensure_data_frame <- function(x) {
     out <- structure(x, class = "data.frame")
+    if (nrow(out) == 0) {
+        return(out)
+    }
     if (!length(rownames(out))) {
         rownames(out) <- as.character(seq_len(length(out[, 1L, drop = TRUE])))
     }

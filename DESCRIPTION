@@ -76,6 +76,6 @@ Suggests:
 License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Roxygen: list(markdown = TRUE)
 Config/Needs/website: gesistsa/tsatemplate

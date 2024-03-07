@@ -40,6 +40,9 @@ If \code{rbind=FALSE} (the default), a list of a data frames. Otherwise, that li
 \description{
 Use \code{\link[=import]{import()}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zipped directory in a zip file, or HTML file)
 }
+\details{
+When file is a vector of file paths and any files are missing, those files are ignored (with warnings) and this function will not raise any error.
+}
 \examples{
 ## For demo, a temp. file path is created with the file extension .xlsx
 xlsx_file <- tempfile(fileext = ".xlsx")
@@ -57,7 +60,7 @@ import(xlsx_file, sheet = "mtcars1")
 # import all worksheets, the return value is a list
 import_list(xlsx_file)
 
-# import and rbind all worksheets, the return valye is a data frame
+# import and rbind all worksheets, the return value is a data frame
 import_list(xlsx_file, rbind = TRUE)
 }
 \seealso{
