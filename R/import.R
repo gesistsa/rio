@@ -98,7 +98,7 @@
 #' class(import(csv_file, setclass = "tibble", data.table = TRUE))
 #'
 #' ## the default import class can be set with options(rio.import.class = "data.table")
-#' ## option(rio.import.class = "tibble"), or option(rio.import.class = "arrow")
+#' ## options(rio.import.class = "tibble"), or options(rio.import.class = "arrow")
 #' @seealso [import_list()], [characterize()], [gather_attrs()], [export()], [convert()]
 #' @export
 import <- function(file, format, setclass = getOption("rio.import.class", "data.frame"), which, ...) {

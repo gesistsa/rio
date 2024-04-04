@@ -52,7 +52,7 @@ Parameters that the underlying function do not recognize are silently ignored by
 import("example.xlsx", sheet = "iris", n_max = 10, pizza = "pineapple")
 ```
 
-If you don't like this behavior, please change the option `rio.ignoreunusedargs` to `FALSE`, i.e. `option(rio.ignoreunusedargs = FALSE)`.
+If you don't like this behavior, please change the option `rio.ignoreunusedargs` to `FALSE`, i.e. `options(rio.ignoreunusedargs = FALSE)`.
 
 ```r
 options(rio.ignoreunusedargs = FALSE)
