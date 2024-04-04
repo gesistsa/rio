@@ -72,7 +72,8 @@ Suggests:
     yaml,
     qs,
     arrow (>= 0.17.0),
-    stringi
+    stringi,
+    withr
 License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8
