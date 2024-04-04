@@ -123,7 +123,7 @@ import(csv_file, nrows = 20)
 class(import(csv_file, setclass = "tibble", data.table = TRUE))
 
 ## the default import class can be set with options(rio.import.class = "data.table")
-## option(rio.import.class = "tibble"), or option(rio.import.class = "arrow")
+## options(rio.import.class = "tibble"), or options(rio.import.class = "arrow")
 }
 \seealso{
 \code{\link[=import_list]{import_list()}}, \code{\link[=characterize]{characterize()}}, \code{\link[=gather_attrs]{gather_attrs()}}, \code{\link[=export]{export()}}, \code{\link[=convert]{convert()}}
