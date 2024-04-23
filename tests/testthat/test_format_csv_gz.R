@@ -1,12 +1,7 @@
-context(".csv.gz imports/exports")
-require("datasets")
-
-test_that("Export to csv.gz", {
-    expect_true(export(iris, "iris.csv.gz") %in% dir())
+test_that("Export to and import from csv.gz", {
+    withr::with_tempfile("iris_file", fileext = ".csv.gz", code = {
+        export(iris, iris_file)
+        expect_true(file.exists(iris_file))
+        expect_true(is.data.frame(import(iris_file)))
+    })
 })
-
-test_that("Import from csv.gz", {
-    expect_true(inherits(import("iris.csv.gz"), "data.frame"))
-})
-
-unlink("iris.csv.gz")
