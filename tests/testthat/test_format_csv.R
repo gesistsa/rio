@@ -1,19 +1,21 @@
-context("CSV imports/exports")
 require("datasets")
 
 test_that("Export to CSV", {
-    expect_true(export(iris, "iris.csv") %in% dir())
-    unlink("iris.csv")
+    withr::with_tempfile("iris_file", fileext = ".csv", code = {
+        export(iris, iris_file)
+        expect_true(file.exists(iris_file))
+    })
 })
 
 test_that("Export (Append) to CSV", {
-    export(iris, "iris.csv")
-    nlines <- length(readLines("iris.csv"))
-    export(iris, "iris.csv", append = FALSE)
-    expect_true(identical(length(readLines("iris.csv")), nlines))
-    export(iris, "iris.csv", append = TRUE)
-    expect_true(identical(length(readLines("iris.csv")), (2L*nlines)-1L))
-    unlink("iris.csv")
+    withr::with_tempfile("iris_file", fileext = ".csv", code = {
+        export(iris, iris_file)
+        nlines <- length(readLines(iris_file))
+        export(iris, iris_file, append = FALSE)
+        expect_true(identical(length(readLines(iris_file)), nlines))
+        export(iris, iris_file, append = TRUE)
+        expect_true(identical(length(readLines(iris_file)), (2L * nlines) - 1L))
+    })
 })
 
 test_that("Import from CSV", {
@@ -22,49 +24,43 @@ test_that("Import from CSV", {
 })
 
 test_that("Import from (European-style) CSV with semicolon separator", {
-    write.table(iris, "iris2.csv", dec = ",", sep = ";", row.names = FALSE)
-    expect_true("iris2.csv" %in% dir())
-    # import works (even if column classes are incorrect)
-    expect_true(is.data.frame(import("iris2.csv", header = TRUE)))
-    iris_imported <- import("iris2.csv", format = ";", header = TRUE)
-    # import works with correct, numeric column classes
-    expect_true(is.data.frame(iris_imported))
-    expect_true(is.numeric(iris_imported[["Sepal.Length"]]))
+    withr::with_tempfile("iris_file", fileext = ".csv", code = {
+        write.table(iris, iris_file, dec = ",", sep = ";", row.names = FALSE)
+        expect_true(file.exists(iris_file))
+        ## import works (even if column classes are incorrect)
+        expect_true(is.data.frame(import(iris_file, header = TRUE)))
+        iris_imported <- import(iris_file, format = ";", header = TRUE)
+        ## import works with correct, numeric column classes
+        expect_true(is.data.frame(iris_imported))
+        expect_true(is.numeric(iris_imported[["Sepal.Length"]]))
+    })
 })
 
-
-context("CSV (.csv2) imports/exports")
-
-test_that("Export to CSV", {
-    expect_true(export(iris, "iris.csv", format = "csv2") %in% dir())
+test_that("Export to and Import from CSV2", {
+    withr::with_tempfile("iris_file", fileext = ".csv", code = {
+        export(iris, iris_file, format = "csv2")
+        expect_true(file.exists(iris_file))
+        expect_true(is.data.frame(import(iris_file, format = "csv2")))
+    })
 })
 
-test_that("Import from CSV (read.csv)", {
-    expect_true(is.data.frame(import("iris.csv", format = "csv2")))
-})
-
-test_that("Import from CSV (fread)", {
-    expect_true(is.data.frame(import("iris.csv", format = "csv2")))
-})
-
-test_that("Export to TSV with CSV extension", {
-    expect_true(export(iris, "iris.csv", format = "tsv") %in% dir())
-})
-
-test_that("Import from TSV with CSV extension", {
-    expect_true(ncol(import("iris.csv")) == 5L)
-    expect_true(ncol(import("iris.csv", format = "tsv")) == 5L)
-    expect_true(ncol(import("iris.csv", format = "tsv", sep = "\t")) == 5L)
-    expect_true(ncol(import("iris.csv", sep = ",")) == 5L) # use `data.table::fread(sep = "auto")` even if `sep` set explicitly to ","
-    expect_true(ncol(import("iris.csv", format = "csv")) == 5L)
-    expect_true(ncol(import("iris.csv", sep = "auto")) == 5L)
+test_that("Export to and Import from TSV with CSV extension", {
+    withr::with_tempfile("iris_file", fileext = ".csv", code = {
+        export(iris, iris_file, format = "tsv")
+        expect_true(file.exists(iris_file))
+        expect_true(ncol(import(iris_file)) == 5L)
+        expect_true(ncol(import(iris_file, format = "tsv")) == 5L)
+        expect_true(ncol(import(iris_file, format = "tsv", sep = "\t")) == 5L)
+        expect_true(ncol(import(iris_file, sep = ",")) == 5L) # use `data.table::fread(sep = "auto")` even if `sep` set explicitly to ","
+        expect_true(ncol(import(iris_file, format = "csv")) == 5L)
+        expect_true(ncol(import(iris_file, sep = "auto")) == 5L)
+    })
 })
 
 test_that("fread is deprecated", {
-    lifecycle::expect_deprecated(import("iris.csv", fread = TRUE))
-    lifecycle::expect_deprecated(import("iris.csv", fread = FALSE))
+    withr::with_tempfile("iris_file", fileext = ".csv", code = {
+        export(iris, iris_file)
+        lifecycle::expect_deprecated(import(iris_file, fread = TRUE))
+        lifecycle::expect_deprecated(import(iris_file, fread = FALSE))
+    })
 })
-
-
-unlink("iris.csv")
-unlink("iris2.csv")
