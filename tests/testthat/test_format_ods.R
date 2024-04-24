@@ -1,8 +1,6 @@
-context("ODS imports/exports")
-require("datasets")
+skip_if_not_installed("readODS")
 
 test_that("Import from ODS", {
-    skip_if_not_installed(pkg="readODS")
     ods0 <- import("../testdata/mtcars.ods")
     expect_error(ods <- import("../testdata/mtcars.ods",
                                sheet = 1, col_names = TRUE,
@@ -14,35 +12,39 @@ test_that("Import from ODS", {
     expect_equivalent(ods, mtcars, label = "ODS import returns correct values")
 })
 
-test_that("Export to ODS", {
-    skip_if_not_installed(pkg="readODS")
-    expect_true(export(iris, "iris.ods") %in% dir())
+test_that("Export to and import from ODS", {
+    withr::with_tempfile("iris_file", fileext = ".ods", code = {
+        export(iris, iris_file)
+        expect_true(file.exists(iris_file))
+        expect_true(is.data.frame(import(iris_file)))
+    })
 })
 
 test_that("... correctly passed #318", {
-    skip_if_not_installed(pkg = "readODS")
-    x <- tempfile(fileext = ".ods")
-    rio::export(mtcars, file = x, sheet = "mtcars")
-    expect_equal(readODS::list_ods_sheets(x), "mtcars")
+    withr::with_tempfile("mtcars_file", fileext = ".ods", code = {
+        export(iris, mtcars_file, sheet = "mtcars")
+        expect_equal(readODS::list_ods_sheets(mtcars_file), "mtcars")
+    })
 })
 
 test_that("Export and Import FODS", {
-    skip_if_not_installed(pkg = "readODS")
-    x <- tempfile(fileext = ".fods")
-    rio::export(mtcars, file = x, sheet = "mtcars")
-    expect_equal(readODS::list_fods_sheets(x), "mtcars")
-    expect_error(y <- import(x), NA)
-    expect_true(is.data.frame(y))
+    withr::with_tempfile("fods_file", fileext = ".fods", code = {
+        export(iris, fods_file)
+        expect_true(file.exists(fods_file))
+        expect_true(is.data.frame(import(fods_file)))
+        export(iris, fods_file, sheet = "mtcars")
+        expect_equal(readODS::list_fods_sheets(fods_file), "mtcars")
+        expect_error(y <- import(fods_file), NA)
+        expect_true(is.data.frame(y))
+
+    })
 })
 
 test_that("Export list of data frames", {
-    skip_if_not_installed(pkg = "readODS")
-    dfs <- list("cars" = mtcars, "flowers" = iris)
-    x1 <- tempfile(fileext = ".ods")
-    x2 <- tempfile(fileext = ".fods")
-    expect_error(export(dfs, x1), NA)
-    expect_error(export(dfs, x2), NA)
-    expect_equal(import(x1, which = "flowers"), import(x2, which = "flowers"))
+    withr::with_tempfile("ods_files", fileext = c(".ods", ".fods"), code = {
+        dfs <- list("cars" = mtcars, "flowers" = iris)
+        expect_error(export(dfs, ods_files[1]), NA)
+        expect_error(export(dfs, ods_files[2]), NA)
+        expect_equal(import(ods_files[1], which = "flowers"), import(ods_files[2], which = "flowers"))
+    })
 })
-
-unlink("iris.ods")
