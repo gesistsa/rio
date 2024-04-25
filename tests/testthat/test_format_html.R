@@ -23,9 +23,9 @@ test_that("Export to and import from HTML", {
 test_that("Export to HTML with ampersands",{
     withr::with_tempfile("iris_file", fileext = ".html", code = {
 
-        iris$`R & D` <- paste(sample(letters,nrow(iris),rep = TRUE),
+        iris$`R & D` <- paste(sample(letters,nrow(iris), replace = TRUE),
                               "&",
-                              sample(LETTERS,nrow(iris),rep = TRUE))
+                              sample(LETTERS,nrow(iris), replace = TRUE))
         export(iris, iris_file)
         expect_true(file.exists(iris_file),
                     label = "export to html with ampersands works")
