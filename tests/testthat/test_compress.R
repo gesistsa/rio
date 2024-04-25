@@ -9,6 +9,7 @@ test_that("Recognize compressed file types", {
 })
 
 test_that("Export to compressed (zip) / import", {
+    skip_if(getRversion() <= "4.0")
     ##formats <- c("zip", "tar", "gzip", "bzip2", "xz")
     formats <- c("zip", "tar") ## 395 #396
     for (format in formats) {
