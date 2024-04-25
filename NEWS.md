@@ -3,6 +3,7 @@
 * Move `stringi` to Suggests to reduce compilation time. Add an attribution to the internal data to list out all required packages #378
 * Move `readr` to Imports for `fwf`. `readr` is a dependency of `haven` so it does not increase the number of dependencies. Remove the original `read.fwf2` which doesn't guess `widths`. Keep the `widths` and `col.names` to maintain compatibility. #381
 * Add (back) a pkgdown website: [https://gesistsa.github.io/rio/](https://gesistsa.github.io/rio/)
+* Update all test cases #380
 
 # rio 1.0.1
 
