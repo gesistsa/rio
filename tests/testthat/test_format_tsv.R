@@ -1,17 +1,15 @@
-context("TSV imports/exports")
-require("datasets")
-
-test_that("Export to TSV", {
-    expect_true(export(iris, "iris.tsv") %in% dir())
-})
-
-test_that("Import from TSV", {
-    expect_true(is.data.frame(import("iris.tsv")))
+test_that("Export to and import from TSV", {
+    withr::with_tempfile("iris_file", fileext = ".tsv", code = {
+        export(iris, iris_file)
+        expect_true(file.exists(iris_file))
+        expect_true(is.data.frame(import(iris_file)))
+    })
 })
 
 test_that("fread is deprecated", {
-    lifecycle::expect_deprecated(import("iris.tsv", fread = TRUE))
-    lifecycle::expect_deprecated(import("iris.tsv", fread = FALSE))
+    withr::with_tempfile("iris_file", fileext = ".tsv", code = {
+        export(iris, iris_file)
+        lifecycle::expect_deprecated(import(iris_file, fread = TRUE))
+        lifecycle::expect_deprecated(import(iris_file, fread = FALSE))
+    })
 })
-
-unlink("iris.tsv")

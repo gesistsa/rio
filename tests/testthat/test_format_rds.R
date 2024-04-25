@@ -1,19 +1,16 @@
-context("Rds imports/exports")
-require("datasets")
-
-test_that("Export to rds", {
-    expect_true(export(iris, "iris.rds") %in% dir())
-})
-
-test_that("Import from rds", {
-    expect_true(is.data.frame(import("iris.rds")))
+test_that("Export to and import from rds", {
+    withr::with_tempfile("iris_file", fileext = ".rds", code = {
+        export(iris, iris_file)
+        expect_true(file.exists(iris_file))
+        expect_true(is.data.frame(import(iris_file)))
+    })
 })
 
 test_that("Export to rds (non-data frame)", {
-    expect_true(export(list(1:10, letters), "list.rds") %in% dir())
-    expect_true(inherits(import("list.rds"), "list"))
-    expect_true(length(import("list.rds")) == 2L)
+    withr::with_tempfile("list_file", fileext = ".rds", code = {
+        export(list(1:10, letters), list_file)
+        expect_true(file.exists(list_file))
+        expect_true(inherits(import(list_file), "list"))
+        expect_true(length(import(list_file)) == 2L)
+    })
 })
-
-unlink("iris.rds")
-unlink("list.rds")
