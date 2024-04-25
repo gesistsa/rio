@@ -1,5 +1,3 @@
-context("Remote Files")
-
 test_that("Import Remote Stata File", {
     f <- try(import("http://www.stata-press.com/data/r13/auto.dta"))
     if (!inherits(f, "try-error")) {

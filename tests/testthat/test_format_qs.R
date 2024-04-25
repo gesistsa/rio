@@ -1,13 +1,9 @@
-context("qs import/export")
-require("datasets")
+skip_if_not_installed("qs")
 
-test_that("Export to qs", {
-    skip_if_not_installed(pkg = "qs")
-    expect_true(export(iris, "iris.qs") %in% dir())
+test_that("Export to and import from qs", {
+    withr::with_tempfile("iris_file", fileext = ".qs", code = {
+        export(iris, iris_file)
+        expect_true(file.exists(iris_file))
+        expect_true(is.data.frame(import(iris_file)))
+    })
 })
-
-test_that("Import from qs", {
-    skip_if_not_installed(pkg = "qs")
-    expect_true(is.data.frame(import("iris.qs")))
-})
-unlink("iris.qs")

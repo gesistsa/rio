@@ -8,23 +8,33 @@ test_that("Recognize compressed file types", {
     expect_true(is.na(rio:::find_compress("file.notcompressed")$compress))
 })
 
-test_that("Export to compressed (zip)", {
-    e1 <- export(iris, "iris.csv.zip")
-    expect_true(e1 %in% dir())
+test_that("Export to compressed (zip) / import", {
+    withr::with_tempfile("iris_path", fileext = ".csv.zip", code = {
+        e1 <- export(iris, iris_path)
+        expect_true(file.exists(iris_path))
+        expect_true(is.data.frame(import(iris_path)))
+        expect_true(is.data.frame(import(iris_path)))
+        expect_true(is.data.frame(import(iris_path, which = 1)))
+        base_file_name <- gsub("\\.zip", "", basename(iris_path))
+        expect_true(is.data.frame(import(iris_path, which = base_file_name)))
+    })
 })
 
 test_that("Export to compressed (tar)", {
-    e2 <- export(iris, "iris.csv.tar")
-    expect_true(e2 %in% dir())
+    withr::with_tempfile("iris_path", fileext = ".csv.tar", code = {
+        e2 <- export(iris, iris_path)
+        expect_true(file.exists(iris_path))
+        ## tar export does not work due to: https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16716
+        ##expect_true(is.data.frame(import("iris.csv.tar")))
+    })
 })
 
-test_that("Import from compressed", {
-    expect_true(is.data.frame(import("iris.csv.zip")))
-    expect_true(is.data.frame(import("iris.csv.zip", which = 1)))
-    expect_true(is.data.frame(import("iris.csv.zip", which = "iris.csv")))
-    # tar export does not work due to: https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16716
-    #expect_true(is.data.frame(import("iris.csv.tar")))
-})
+## test_that("Import from compressed", {
+##     expect_true(is.data.frame(import("iris.csv.zip")))
+##     expect_true(is.data.frame(import("iris.csv.zip", which = 1)))
+##     expect_true(is.data.frame(import("iris.csv.zip", which = "iris.csv")))
+##     # tar export does not work due to: https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16716
+##     #expect_true(is.data.frame(import("iris.csv.tar")))
+## })
 
-unlink("iris.csv.zip")
-unlink("iris.csv.tar")
+## unlink("iris.csv.tar")

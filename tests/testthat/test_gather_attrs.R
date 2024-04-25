@@ -1,4 +1,3 @@
-context("Gather attrs")
 e <- try(import("http://www.stata-press.com/data/r13/auto.dta"))
 
 if (!inherits(e, "try-error")) {
@@ -45,7 +44,4 @@ if (!inherits(e, "try-error")) {
     test_that("spread_attrs() fails on non-data frame", {
         expect_error(spread_attrs(letters))
     })
-
-    rm(e)
-
 }

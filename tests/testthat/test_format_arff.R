@@ -1,12 +1,7 @@
-context("Weka (.arff) imports/exports")
-require("datasets")
-
-test_that("Export to Weka", {
-    expect_true(export(iris, "iris.arff") %in% dir())
+test_that("Weka (.arff) imports/exports", {
+    withr::with_tempfile("iris_file", fileext = ".arff", code = {
+        export(iris, iris_file)
+        expect_true(file.exists(iris_file))
+        expect_true(is.data.frame(import(iris_file)))
+    })
 })
-
-test_that("Import from Weka", {
-    expect_true(is.data.frame(import("iris.arff")))
-})
-
-unlink("iris.arff")

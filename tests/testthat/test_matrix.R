@@ -1,15 +1,10 @@
-context("Matrix imports/exports")
-require("datasets")
-
-test_that("Export matrix to CSV", {
-    expect_true(export(warpbreaks, "temp1.csv") %in% dir())
-    expect_true(export(as.matrix(warpbreaks), "temp2.csv") %in% dir())
+test_that("Export matrix to and import from CSV", {
+    withr::with_tempfile("temp_files", fileext = c(".csv", ".csv"), code = {
+        export(warpbreaks, temp_files[1])
+        export(as.matrix(warpbreaks), temp_files[2])
+        expect_true(file.exists(temp_files[1]))
+        expect_true(file.exists(temp_files[2]))
+        expect_true(identical(import(temp_files[1], colClasses = rep("character", 3)),
+                              import(temp_files[2], colClasses = rep("character", 3))))
+    })
 })
-
-test_that("Import from matrix export", {
-    expect_true(identical(import("temp1.csv", colClasses = rep("character", 3)), 
-                          import("temp2.csv", colClasses = rep("character", 3))))
-})
-
-unlink("temp1.csv")
-unlink("temp2.csv")

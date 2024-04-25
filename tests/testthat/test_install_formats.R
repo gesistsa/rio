@@ -1,5 +1,3 @@
-context("Install uninstalled formats")
-
 test_that("uninstalled_formats()", {
     skip_on_cran()
     formats <- uninstalled_formats()

@@ -1,18 +1,17 @@
-context("PSV imports/exports")
-require("datasets")
-
-test_that("Export to PSV", {
-    expect_true(export(iris, "iris.psv") %in% dir())
+test_that("Export to and import from PSV", {
+    withr::with_tempfile("iris_file", fileext = ".psv", code = {
+        export(iris, iris_file)
+        expect_true(file.exists(iris_file))
+        expect_true(is.data.frame(import(iris_file)))
+    })
 })
 
-test_that("Import from PSV", {
-    expect_true(is.data.frame(import("iris.psv")))
-})
 
 test_that("fread is deprecated", {
-    lifecycle::expect_deprecated(import("iris.psv", fread = TRUE))
-    lifecycle::expect_deprecated(import("iris.psv", fread = FALSE))
+    withr::with_tempfile("iris_file", fileext = ".psv", code = {
+        export(iris, iris_file)
+        lifecycle::expect_deprecated(import(iris_file, fread = TRUE))
+        lifecycle::expect_deprecated(import(iris_file, fread = FALSE))
+    })
+
 })
-
-
-unlink("iris.psv")

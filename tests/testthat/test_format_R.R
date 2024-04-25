@@ -1,15 +1,15 @@
-context("R dump imports/exports")
 require("datasets")
 
-test_that("Export to .R dump file", {
-    expect_true(export(iris, "iris.R") %in% dir())
-    expect_true(export(iris, "iris.dump") %in% dir())
-})
+test_that("Export / Import to .R dump file", {
+    withr::with_tempfile("iris_file", fileext = ".R", code = {
+        export(iris, iris_file)
+        expect_true(file.exists(iris_file))
+        expect_true(is.data.frame(import(iris_file)))
 
-test_that("Import from .R dump file", {
-    expect_true(is.data.frame(import("iris.R")))
-    expect_true(is.data.frame(import("iris.dump")))
+    })
+    withr::with_tempfile("iris_file", fileext = ".dump", code = {
+        export(iris, iris_file)
+        expect_true(file.exists(iris_file))
+        expect_true(is.data.frame(import(iris_file)))
+    })
 })
-
-unlink("iris.R")
-unlink("iris.dump")

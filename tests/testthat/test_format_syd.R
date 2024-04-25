@@ -1,6 +1,5 @@
-context("Systat (.syd) imports/exports")
+skip_if_not_installed("foreign")
 
 test_that("Import from Systat", {
-    skip_if_not_installed("foreign")
-    expect_true(inherits(import(system.file("files/Iris.syd", package="foreign")[1]), "data.frame"))
+    expect_true(is.data.frame(import(system.file("files/Iris.syd", package = "foreign")[1])))
 })
