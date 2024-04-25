@@ -1,3 +1,5 @@
+# rio 1.0.2
+
 * For missing files in `import_list` it gives more informative warnings fix #389
 * Single-item list of data frames can be exported fix #385
 * Move `stringi` to Suggests to reduce compilation time. Add an attribution to the internal data to list out all required packages #378

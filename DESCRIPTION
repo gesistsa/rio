@@ -36,7 +36,7 @@ Description: Streamlined data import and export by making assumptions that
     directly without explicit decompression, and fast import packages are used where
     appropriate. An additional convenience function, 'convert()', provides a simple
     method for converting between file types.
-URL: https://gesistsa.github.io/rio, https://github.com/gesistsa/rio
+URL: https://gesistsa.github.io/rio/, https://github.com/gesistsa/rio
 BugReports: https://github.com/gesistsa/rio/issues
 Depends:
     R (>= 3.6)
