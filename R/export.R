@@ -84,7 +84,7 @@ export <- function(x, file, format, ...) {
         stop("Must specify 'file' and/or 'format'")
     }
     if (!missing(file)) {
-        cfile <- file
+        compress_filename <- file
         f <- find_compress(file)
         file <- f$file
         compress <- f$compress
@@ -113,9 +113,9 @@ export <- function(x, file, format, ...) {
     class(file) <- c(paste0("rio_", format), class(file))
     .export(file = file, x = x, ...)
     if (!is.na(compress)) {
-        cfile <- compress_out(cfile = cfile, filename = file, type = compress)
+        compress_filename <- compress_out(compress_filename = compress_filename, filename = file, type = compress)
         unlink(file)
-        return(invisible(cfile))
+        return(invisible(compress_filename))
     }
     invisible(unclass(outfile))
 }

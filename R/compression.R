@@ -11,16 +11,16 @@ find_compress <- function(f) {
     return(list(file = f, compress = NA_character_))
 }
 
-compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2", "xz")) {
+compress_out <- function(compress_filename, filename, type = c("zip", "tar", "gzip", "bzip2", "xz")) {
     type <- ext <- match.arg(type)
     if (ext %in% c("gzip", "bzip2", "xz")) {
         ext <- paste0("tar")
     }
-    if (missing(cfile)) {
-        cfile <- paste0(filename, ".", ext)
-        cfile2 <- paste0(basename(filename), ".", ext)
+    if (missing(compress_filename)) {
+        compress_filename <- paste0(filename, ".", ext)
+        temp_compress_filename <- paste0(basename(filename), ".", ext)
     } else {
-        cfile2 <- basename(cfile)
+        temp_compress_filename <- basename(compress_filename)
     }
     filename <- normalizePath(filename)
     tmp <- tempfile()
@@ -31,20 +31,20 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
     on.exit(setwd(wd), add = TRUE)
     setwd(tmp)
     if (type == "zip") {
-        o <- utils::zip(cfile2, files = basename(filename))
+        o <- utils::zip(temp_compress_filename, files = basename(filename))
     } else {
         if (type == "tar") {
             type <- "none"
         }
-        o <- utils::tar(cfile2, files = basename(filename), compression = type)
+        o <- utils::tar(temp_compress_filename, files = basename(filename), compression = type)
     }
     setwd(wd)
     if (o != 0) {
-        stop(sprintf("File compression failed for %s!", cfile))
+        stop(sprintf("File compression failed for %s!", compress_filename))
     }
-    file.copy(from = file.path(tmp, cfile2), to = cfile, overwrite = TRUE)
-    unlink(file.path(tmp, cfile2))
-    return(cfile)
+    file.copy(from = file.path(tmp, temp_compress_filename), to = compress_filename, overwrite = TRUE)
+    unlink(file.path(tmp, temp_compress_filename))
+    return(compress_filename)
 }
 
 parse_archive <- function(file, which, file_type, ...) {
