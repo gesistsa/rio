@@ -1,11 +1,11 @@
 find_compress <- function(f) {
-    if (grepl("zip$", f)) {
+    if (grepl("\\.zip$", f)) {
         return(list(file = sub("\\.zip$", "", f), compress = "zip"))
     }
-    if (grepl("tar\\.gz$", f)) {
+    if (grepl("\\.tar\\.gz$", f)) {
         return(list(file = sub("\\.tar\\.gz$", "", f), compress = "tar"))
     }
-    if (grepl("tar$", f)) {
+    if (grepl("\\.tar$", f)) {
         return(list(file = sub("\\.tar$", "", f), compress = "tar"))
     }
     return(list(file = f, compress = NA_character_))
