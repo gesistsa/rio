@@ -1,36 +1,23 @@
 remote_to_local <- function(file, format) {
-    if (missing(format)) {
-        # handle google sheets urls
-        if (grepl("docs\\.google\\.com/spreadsheets", file)) {
-            file <- convert_google_url(file, export_as = "csv")
+    if (grepl("docs\\.google\\.com/spreadsheets", file)) {
+        if (missing(format) || (!missing(format) && !format %in% c("csv", "tsv", "xlsx", "ods"))) {
             format <- "csv"
-        } else {
-            # try to extract format from URL
-            format <- try(get_info(file)$format, silent = TRUE)
-            if (inherits(format, "try-error")) {
-                format <- "TMP"
-            }
+        }
+        file <- convert_google_url(file, export_as = format)
+    }
+    if (missing(format)) {
+        ## try to extract format from URL
+        format <- try(get_info(file)$format, silent = TRUE)
+        if (inherits(format, "try-error")) {
+            format <- "TMP"
         }
     } else {
-        # handle google sheets urls
-        if (grepl("docs\\.google\\.com/spreadsheets", file)) {
-            format <- .standardize_format(format)
-            if (format %in% c("csv", "tsv", "xlsx", "ods")) {
-                file <- convert_google_url(file, export_as = format)
-                format <- format
-            } else {
-                file <- convert_google_url(file, export_as = "csv")
-                format <- "csv"
-            }
-        } else {
-            format <- .standardize_format(format)
-        }
+        format <- .standardize_format(format)
     }
     # save file locally
     temp_file <- tempfile(fileext = paste0(".", format))
     u <- curl::curl_fetch_memory(file)
     writeBin(object = u$content, con = temp_file)
-
     if (format == "TMP") {
         # try to extract format from curl's final URL
         format <- try(get_info(u$url)$format, silent = TRUE)

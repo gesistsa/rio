@@ -6,7 +6,7 @@ test_that("Import Remote Stata File", {
 })
 
 test_that("Import Remote GitHub File", {
-    rfile <- "https://raw.githubusercontent.com/leeper/rio/master/inst/examples/no_header.csv"
+    rfile <- "https://raw.githubusercontent.com/gesistsa/rio/master/inst/examples/no_header.csv"
     rfile_imported1 <- try(import(rfile))
     if (!inherits(rfile_imported1, "try-error")) {
         expect_true(inherits(rfile_imported1, "data.frame"), label = "Import remote file (implied format)")
