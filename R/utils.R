@@ -44,7 +44,6 @@ get_ext <- function(file) {
     get_info(file)$input
 }
 
-
 .query_format <- function(input, file) {
     unique_rio_formats <- unique(rio_formats[, colnames(rio_formats) != "note"])
     if (file == "clipboard") {
