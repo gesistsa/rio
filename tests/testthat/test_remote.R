@@ -23,19 +23,16 @@ test_that("Import Remote GitHub File", {
         expect_true(file.exists(lfile), label = "Remote file copied successfully")
         expect_true(inherits(import(lfile), "data.frame"), label = "Import local copy successfully")
     }
+    ## short url
+    payload <- try(import("https://is.gd/NLAxtg"))
+    if (!inherits(payload, "try-error")) {
+        expect_true(inherits(payload, "data.frame"), label = "Import remote file (explicit format)")
+    }
     ## no extension
     noextension_url <- "https://github.com/gesistsa/rio/raw/main/tests/testdata/iris_no_extension_xls"
     expect_error(import(noextension_url))
     expect_error(import(noextension_url, format = "xls"), NA)
 })
-
-## test_that("Import Remote File from Shortened URL", {
-##     skip_if_not_installed(pkg = "data.table")
-##     shorturl <- try(import("https://raw.githubusercontent.com/gesistsa/rio/main/tests/testdata/example.csvy"))
-##     if (!inherits(shorturl, "try-error")) {
-##         expect_true(inherits(shorturl, "data.frame"), label = "Import remote file")
-##     }
-## })
 
 test_that("Import from Google Sheets", {
     googleurl1 <- "https://docs.google.com/spreadsheets/d/1I9mJsS5QnXF2TNNntTy-HrcdHmIF9wJ8ONYvEJTXSNo/edit#gid=0"

@@ -3,7 +3,7 @@ remote_to_local <- function(file, format) {
         if (missing(format) || (!missing(format) && !format %in% c("csv", "tsv", "xlsx", "ods"))) {
             format <- "csv"
         }
-        file <- convert_google_url(file, export_as = format)
+        file <- .convert_google_url(file, export_as = format)
     }
     if (missing(format)) {
         ## try to extract format from URL, see below
@@ -26,7 +26,7 @@ remote_to_local <- function(file, format) {
         unlink(temp_file)
         return(renamed_file)
     }
-    ## try to extract format from headers
+    ## try to extract format from headers: read #403 about whether this code is doing anything
     h1 <- curl::parse_headers(u$headers)
     ## check `Content-Disposition` header
     if (!any(grepl("^Content-Disposition", h1))) {
@@ -45,7 +45,7 @@ remote_to_local <- function(file, format) {
     }
 }
 
-convert_google_url <- function(url, export_as = "csv") {
+.convert_google_url <- function(url, export_as = "csv") {
     ## convert a google sheets url to google csv export URL
     ## extract the doc-id and append /export?format = csv to it. (default)
     google_key <- regmatches(url, regexpr("[[:alnum:]_-]{30,}", url))
