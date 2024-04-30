@@ -26,7 +26,7 @@ test_that("Import Remote GitHub File", {
     ## short url
     payload <- try(import("https://is.gd/NLAxtg"))
     if (!inherits(payload, "try-error")) {
-        expect_true(inherits(payload, "data.frame"), label = "Import remote file (explicit format)")
+        expect_true(inherits(payload, "data.frame"), label = "Import remote file from shorten url (implied format)")
     }
     ## no extension
     noextension_url <- "https://github.com/gesistsa/rio/raw/main/tests/testdata/iris_no_extension_xls"
