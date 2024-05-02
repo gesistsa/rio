@@ -16,11 +16,11 @@ test_that("Not support other gz format export for now ref #399", {
 
 test_that("Not support other gz format import for now ref #399", {
     withr::with_tempfile("iris_file", fileext = ".sav", code = {
-        export(iris, tmp)
+        export(iris, iris_file)
         ## compress it
-        R.utils::gzip(tmp, overwrite = TRUE)
-        expect_true(file.exists(paste0(tmp, ".gz")))
-        expect_true(R.utils::isGzipped(paste0(tmp, ".gz"), method = "content"))
-        expect_error(import(paste0(tmp, ".gz")))
+        R.utils::gzip(iris_file, overwrite = TRUE)
+        expect_true(file.exists(paste0(iris_file, ".gz")))
+        expect_true(R.utils::isGzipped(paste0(iris_file, ".gz"), method = "content"))
+        expect_error(import(paste0(iris_file, ".gz")))
     })
 })
