@@ -110,6 +110,7 @@ The parameter takes precedents over parameters in ... which set a different clas
     <p>This function imports a data frame or matrix from a data file with the file format based on the file extension (or the manually specified format, if <code>format</code> is specified).</p>
 <p><code>import</code> supports the following file formats:</p>
 <ul><li><p>Comma-separated data (.csv), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
+<li><p>gzip comma-separated data (.csv.gz), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
 <li><p>Pipe-separated data (.psv), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
 <li><p>Tab-separated data (.tsv), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
 <li><p>SAS (.sas7bdat), using <code><a href="https://haven.tidyverse.org/reference/read_sas.html" class="external-link">haven::read_sas()</a></code></p></li>
@@ -133,7 +134,6 @@ object (not just a data frame).</p></li>
 <li><p>Data Interchange Format (.dif), using <code><a href="https://rdrr.io/r/utils/read.DIF.html" class="external-link">utils::read.DIF()</a></code></p></li>
 <li><p>Fortran data (no recognized extension), using <code><a href="https://rdrr.io/r/utils/read.fortran.html" class="external-link">utils::read.fortran()</a></code></p></li>
 <li><p>Fixed-width format data (.fwf), using a faster version of <code><a href="https://rdrr.io/r/utils/read.fwf.html" class="external-link">utils::read.fwf()</a></code> that requires a <code>widths</code> argument and by default in rio has <code>stringsAsFactors = FALSE</code></p></li>
-<li><p>gzip comma-separated data (.csv.gz), using <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">utils::read.table()</a></code> with <code>row.names = FALSE</code> and <code>stringsAsFactors = FALSE</code></p></li>
 <li><p><a href="https://github.com/csvy" class="external-link">CSVY</a> (CSV with a YAML metadata header) using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code>.</p></li>
 <li><p>Apache Arrow Parquet (.parquet), using <code><a href="https://arrow.apache.org/docs/r/reference/read_parquet.html" class="external-link">arrow::read_parquet()</a></code></p></li>
 <li><p>Feather R/Python interchange format (.feather), using <code><a href="https://arrow.apache.org/docs/r/reference/read_feather.html" class="external-link">arrow::read_feather()</a></code></p></li>
