@@ -14,6 +14,7 @@
 #'
 #' \itemize{
 #'     \item Comma-separated data (.csv), using [data.table::fwrite()]
+#'     \item gzip comma-separated data (.csv.gz), using [data.table::fwrite()]
 #'     \item Pipe-separated data (.psv), using [data.table::fwrite()]
 #'     \item Tab-separated data (.tsv), using [data.table::fwrite()]
 #'     \item SAS (.sas7bdat), using [haven::write_sas()].
@@ -31,7 +32,6 @@
 #'     \item "XBASE" database files (.dbf), using [foreign::write.dbf()]
 #'     \item Weka Attribute-Relation File Format (.arff), using [foreign::write.arff()]
 #'     \item Fixed-width format data (.fwf), using [utils::write.table()] with `row.names = FALSE`, `quote = FALSE`, and `col.names = FALSE`
-#'     \item gzip comma-separated data (.csv.gz), using [utils::write.table()] with `row.names = FALSE`
 #'     \item [CSVY](https://github.com/csvy) (CSV with a YAML metadata header) using [data.table::fwrite()].
 #'     \item Apache Arrow Parquet (.parquet), using [arrow::write_parquet()]
 #'     \item Feather R/Python interchange format (.feather), using [arrow::write_feather()]

@@ -30,6 +30,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
 
 \itemize{
 \item Comma-separated data (.csv), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
+\item gzip comma-separated data (.csv.gz), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
 \item Pipe-separated data (.psv), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
 \item Tab-separated data (.tsv), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
 \item SAS (.sas7bdat), using \code{\link[haven:write_sas]{haven::write_sas()}}.
@@ -47,7 +48,6 @@ object (not just a data frame).
 \item "XBASE" database files (.dbf), using \code{\link[foreign:write.dbf]{foreign::write.dbf()}}
 \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign:write.arff]{foreign::write.arff()}}
 \item Fixed-width format data (.fwf), using \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
-\item gzip comma-separated data (.csv.gz), using \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}
 \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table:fwrite]{data.table::fwrite()}}.
 \item Apache Arrow Parquet (.parquet), using \code{\link[arrow:write_parquet]{arrow::write_parquet()}}
 \item Feather R/Python interchange format (.feather), using \code{\link[arrow:write_feather]{arrow::write_feather()}}
