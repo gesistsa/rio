@@ -2,20 +2,22 @@ find_compress <- function(f) {
     if (grepl("\\.zip$", f)) {
         return(list(file = sub("\\.zip$", "", f), compress = "zip"))
     }
-    if (grepl("\\.tar\\.gz$", f)) {
-        return(list(file = sub("\\.tar\\.gz$", "", f), compress = "tar"))
-    }
+    ## if (grepl("\\.tar\\.gz$", f)) {
+    ##     return(list(file = sub("\\.tar\\.gz$", "", f), compress = "tar"))
+    ## }
     if (grepl("\\.tar$", f)) {
         return(list(file = sub("\\.tar$", "", f), compress = "tar"))
     }
     return(list(file = f, compress = NA_character_))
 }
 
-compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2", "xz")) {
+## KEEPING OLD CODE FOR LATER REIMPLEMENTATION for gzip and bzip2 #400
+##compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2", "xz")) {
+compress_out <- function(cfile, filename, type = c("zip", "tar")) {
     type <- ext <- match.arg(type)
-    if (ext %in% c("gzip", "bzip2", "xz")) {
-        ext <- paste0("tar")
-    }
+    ## if (ext %in% c("gzip", "bzip2", "xz")) {
+    ##     ext <- paste0("tar")
+    ## }
     if (missing(cfile)) {
         cfile <- paste0(filename, ".", ext)
         cfile2 <- paste0(basename(filename), ".", ext)
@@ -32,11 +34,15 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2"
     setwd(tmp)
     if (type == "zip") {
         o <- utils::zip(cfile2, files = basename(filename))
-    } else {
-        if (type == "tar") {
-            type <- "none"
-        }
-        o <- utils::tar(cfile2, files = basename(filename), compression = type)
+    }
+    ## } else {
+    ##     if (type == "tar") {
+    ##         type <- "none"
+    ##     }
+    ##     o <- utils::tar(cfile2, files = basename(filename), compression = type)
+    ## }
+    if (type == "tar") {
+        o <- utils::tar(cfile2, files = basename(filename), compression = "none")
     }
     setwd(wd)
     if (o != 0) {
