@@ -41,6 +41,7 @@ This function imports a data frame or matrix from a data file with the file form
 
 \itemize{
 \item Comma-separated data (.csv), using \code{\link[data.table:fread]{data.table::fread()}}
+\item gzip comma-separated data (.csv.gz), using \code{\link[data.table:fread]{data.table::fread()}}
 \item Pipe-separated data (.psv), using \code{\link[data.table:fread]{data.table::fread()}}
 \item Tab-separated data (.tsv), using \code{\link[data.table:fread]{data.table::fread()}}
 \item SAS (.sas7bdat), using \code{\link[haven:read_sas]{haven::read_sas()}}
@@ -64,7 +65,6 @@ object (not just a data frame).
 \item Data Interchange Format (.dif), using \code{\link[utils:read.DIF]{utils::read.DIF()}}
 \item Fortran data (no recognized extension), using \code{\link[utils:read.fortran]{utils::read.fortran()}}
 \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils:read.fwf]{utils::read.fwf()}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}
-\item gzip comma-separated data (.csv.gz), using \code{\link[utils:read.table]{utils::read.table()}} with \code{row.names = FALSE} and \code{stringsAsFactors = FALSE}
 \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table:fread]{data.table::fread()}}.
 \item Apache Arrow Parquet (.parquet), using \code{\link[arrow:read_parquet]{arrow::read_parquet()}}
 \item Feather R/Python interchange format (.feather), using \code{\link[arrow:read_feather]{arrow::read_feather()}}

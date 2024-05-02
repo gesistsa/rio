@@ -18,6 +18,7 @@
 #'
 #' \itemize{
 #'     \item Comma-separated data (.csv), using [data.table::fread()]
+#'     \item gzip comma-separated data (.csv.gz), using [data.table::fread()]
 #'     \item Pipe-separated data (.psv), using [data.table::fread()]
 #'     \item Tab-separated data (.tsv), using [data.table::fread()]
 #'     \item SAS (.sas7bdat), using [haven::read_sas()]
@@ -41,7 +42,6 @@
 #'     \item Data Interchange Format (.dif), using [utils::read.DIF()]
 #'     \item Fortran data (no recognized extension), using [utils::read.fortran()]
 #'     \item Fixed-width format data (.fwf), using a faster version of [utils::read.fwf()] that requires a `widths` argument and by default in rio has `stringsAsFactors = FALSE`
-#'     \item gzip comma-separated data (.csv.gz), using [utils::read.table()] with `row.names = FALSE` and `stringsAsFactors = FALSE`
 #'     \item [CSVY](https://github.com/csvy) (CSV with a YAML metadata header) using [data.table::fread()].
 #'     \item Apache Arrow Parquet (.parquet), using [arrow::read_parquet()]
 #'     \item Feather R/Python interchange format (.feather), using [arrow::read_feather()]
