@@ -9,42 +9,6 @@
         "note": ""
     },
     {
-        "input": "bzip2",
-        "format": "tar",
-        "type": "archive",
-        "format_name": "Archive files (handled by tar)",
-        "import_function": "utils::untar",
-        "export_function": "utils::tar",
-        "note": ""
-    },
-    {
-        "input": "xz",
-        "format": "tar",
-        "type": "archive",
-        "format_name": "Archive files (handled by tar)",
-        "import_function": "utils::untar",
-        "export_function": "utils::tar",
-        "note": ""
-    },
-    {
-        "input": "gz",
-        "format": "gzip",
-        "type": "archive",
-        "format_name": "Gzip files",
-        "import_function": "base::gzfile",
-        "export_function": "base::gzfile",
-        "note": ""
-    },
-    {
-        "input": "gzip",
-        "format": "gzip",
-        "type": "archive",
-        "format_name": "Gzip files",
-        "import_function": "base::gzfile",
-        "export_function": "base::gzfile",
-        "note": ""
-    },
-    {
         "input": "tar",
         "format": "tar",
         "type": "archive",
@@ -106,6 +70,15 @@
         "import_function": "data.table::fread",
         "export_function": "data.table::fwrite",
         "note": ""
+    },
+    {
+        "input": "gz",
+        "format": "gz",
+        "type": "archive",
+        "format_name": "Compressed CSV",
+        "import_function": "data.table::fread",
+        "export_function": "data.table::fwrite",
+        "note": "Only csv.gz is supported"
     },
     {
         "input": ";",

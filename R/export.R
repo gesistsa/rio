@@ -106,10 +106,13 @@ export <- function(x, file, format, ...) {
     if (!is.data.frame(x) && !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs", "fods", "ods")) {
         stop("'x' is not a data.frame or matrix", call. = FALSE)
     }
-    .create_directory_if_not_exists(file = file) ## fix 347
-    if (format %in% c("gz", "gzip")) {
+    if (format %in% c("gz")) {
         format <- get_info(tools::file_path_sans_ext(file, compression = FALSE))$format
+        if (format != "csv") {
+            stop("gz is only supported for csv (for now).", call. = FALSE)
+        }
     }
+    .create_directory_if_not_exists(file = file) ## fix 347
     class(file) <- c(paste0("rio_", format), class(file))
     .export(file = file, x = x, ...)
     if (!is.na(compress)) {
