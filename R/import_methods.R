@@ -129,39 +129,75 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 #' @export
-.import.rio_dump <- function(file, which = 1, envir = new.env(), ...) {
-    source(file = file, local = envir)
-    if (missing(which)) {
-        if (length(ls(envir)) > 1) {
-            warning("Dump file contains multiple objects. Returning first object.")
-        }
-        which <- 1
+.import.rio_dump <- function(file, which = 1, envir = new.env(), trust = TRUE, ...) {
+    if (!isTRUE(trust)) {
+        lifecycle::deprecate_warn(
+          when = "2.0.0",
+          what = "import(trust)",
+          details = "Trust will be set to FALSE by default for rdata, RDS, and dump."
+        )
     }
-    if (is.numeric(which)) {
-        get(ls(envir)[which], envir)
-    } else {
-        get(ls(envir)[grep(which, ls(envir))[1]], envir)
-    }
+
+    if (isTRUE(trust)) {
+      source(file = file, local = envir)
+      if (missing(which)) {
+          if (length(ls(envir)) > 1) {
+              warning("Dump file contains multiple objects. Returning first object.")
+          }
+          which <- 1
+      }
+      if (is.numeric(which)) {
+          get(ls(envir)[which], envir)
+      } else {
+          get(ls(envir)[grep(which, ls(envir))[1]], envir)
+      }
+  } else {
+    stop("Dump files may execute arbitrary code. Only load dump files that you personally generated or can trust the origin.")
+  }
 }
 
 #' @export
-.import.rio_rds <- function(file, which = 1, ...) {
+.import.rio_rds <- function(file, which = 1, trust = TRUE, ...) {
+    if (!isTRUE(trust)) {
+        lifecycle::deprecate_warn(
+          when = "2.0.0",
+          what = "import(trust)",
+          details = "Trust will be set to FALSE by default for rdata, RDS, and dump."
+        )
+    }
+
+    if (isTRUE(trust)) {
     readRDS(file = file)
+    } else {
+      stop("RDS files may execute arbitrary code. Only load RDS files that you personally generated or can trust the origin.")
+    }
 }
 
 #' @export
-.import.rio_rdata <- function(file, which = 1, envir = new.env(), ...) {
-    load(file = file, envir = envir)
-    if (missing(which)) {
-        if (length(ls(envir)) > 1) {
+.import.rio_rdata <- function(file, which = 1, envir = new.env(), trust = TRUE, ...) {
+    if (!isTRUE(trust)) {
+        lifecycle::deprecate_warn(
+          when = "2.0.0",
+          what = "import(trust)",
+          details = "Trust will be set to FALSE by default for rdata, RDS, and dump."
+        )
+      }
+
+    if (trust) {
+      load(file = file, envir = envir)
+      if (missing(which)) {
+          if (length(ls(envir)) > 1) {
             warning("Rdata file contains multiple objects. Returning first object.")
-        }
+          }
         which <- 1
-    }
-    if (is.numeric(which)) {
+      }
+      if (is.numeric(which)) {
         get(ls(envir)[which], envir)
-    } else {
+      } else {
         get(ls(envir)[grep(which, ls(envir))[1]], envir)
+      }
+    } else {
+      stop("RData files may execute arbitrary code. Only load RData files that you personally generated or can trust the origin.")
     }
 }
 
