@@ -14,3 +14,14 @@ test_that("Export to rds (non-data frame)", {
         expect_true(length(import(list_file)) == 2L)
     })
 })
+
+test_that("Deprecation of untrusted rds", {
+    withr::with_tempfile("iris_file", fileext = ".rds", code = {
+      export(iris, iris_file)
+      ## expect deprecation to work
+      lifecycle::expect_deprecated(import(iris_file), regexp = "set to FALSE by default")
+      ## expect false to error
+      expect_error(import(iris_file, trust = FALSE))
+  })
+})
+

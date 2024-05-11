@@ -124,19 +124,26 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 #' @export
-.import.rio_r <- function(file, which = 1, ...) {
+.import.rio_r <- function(file, which = 1, trust = TRUE, ...) {
+    lifecycle::deprecate_warn(
+      when = "2.0.0",
+      what = "import(trust)",
+      details = "Trust will be set to FALSE by default for rdata, RDS, and dump."
+    )
+    if (isTRUE(trust)) {
     .docall(dget, ..., args = list(file = file))
+    } else {
+        stop("Dump files may execute arbitrary code. Only load dump files that you personally generated or can trust the origin.")
+    }
 }
 
 #' @export
 .import.rio_dump <- function(file, which = 1, envir = new.env(), trust = TRUE, ...) {
-    if (!isTRUE(trust)) {
-        lifecycle::deprecate_warn(
-          when = "2.0.0",
-          what = "import(trust)",
-          details = "Trust will be set to FALSE by default for rdata, RDS, and dump."
-        )
-    }
+    lifecycle::deprecate_warn(
+      when = "2.0.0",
+      what = "import(trust)",
+      details = "Trust will be set to FALSE by default for rdata, RDS, and dump."
+    )
 
     if (isTRUE(trust)) {
       source(file = file, local = envir)
@@ -158,13 +165,11 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 
 #' @export
 .import.rio_rds <- function(file, which = 1, trust = TRUE, ...) {
-    if (!isTRUE(trust)) {
-        lifecycle::deprecate_warn(
-          when = "2.0.0",
-          what = "import(trust)",
-          details = "Trust will be set to FALSE by default for rdata, RDS, and dump."
-        )
-    }
+    lifecycle::deprecate_warn(
+      when = "2.0.0",
+      what = "import(trust)",
+      details = "Trust will be set to FALSE by default for rdata, RDS, and dump."
+    )
 
     if (isTRUE(trust)) {
     readRDS(file = file)
@@ -175,14 +180,11 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 
 #' @export
 .import.rio_rdata <- function(file, which = 1, envir = new.env(), trust = TRUE, ...) {
-    if (!isTRUE(trust)) {
-        lifecycle::deprecate_warn(
-          when = "2.0.0",
-          what = "import(trust)",
-          details = "Trust will be set to FALSE by default for rdata, RDS, and dump."
-        )
-      }
-
+    lifecycle::deprecate_warn(
+      when = "2.0.0",
+      what = "import(trust)",
+      details = "Trust will be set to FALSE by default for rdata, RDS, and dump."
+    )
     if (trust) {
       load(file = file, envir = envir)
       if (missing(which)) {
