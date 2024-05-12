@@ -54,14 +54,16 @@ compress_out <- function(cfile, filename, type = c("zip", "tar")) {
 }
 
 parse_archive <- function(file, which, file_type, ...) {
+    if (!file_type %in% c("zip", "tar")) {
+        stop("Unsupported file_type. Use 'zip' or 'tar'.")
+    }
     if (file_type == "zip") {
         file_list <- utils::unzip(file, list = TRUE)$Name
         extract_func <- utils::unzip
-    } else if (file_type == "tar") {
+    }
+    if (file_type == "tar") {
         file_list <- utils::untar(file, list = TRUE)
         extract_func <- utils::untar
-    } else {
-        stop("Unsupported file_type. Use 'zip' or 'tar'.")
     }
 
     d <- tempfile()
