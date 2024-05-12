@@ -2,9 +2,9 @@ find_compress <- function(f) {
     if (grepl("\\.zip$", f)) {
         return(list(file = sub("\\.zip$", "", f), compress = "zip"))
     }
-    ## if (grepl("\\.tar\\.gz$", f)) {
-    ##     return(list(file = sub("\\.tar\\.gz$", "", f), compress = "tar"))
-    ## }
+    if (grepl("\\.tar\\.gz$", f)) {
+        return(list(file = sub("\\.tar\\.gz$", "", f), compress = "tar.gz"))
+    }
     if (grepl("\\.tar$", f)) {
         return(list(file = sub("\\.tar$", "", f), compress = "tar"))
     }
@@ -13,7 +13,7 @@ find_compress <- function(f) {
 
 ## KEEPING OLD CODE FOR LATER REIMPLEMENTATION for gzip and bzip2 #400
 ##compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2", "xz")) {
-compress_out <- function(cfile, filename, type = c("zip", "tar")) {
+compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz")) {
     type <- ext <- match.arg(type)
     ## if (ext %in% c("gzip", "bzip2", "xz")) {
     ##     ext <- paste0("tar")
@@ -35,14 +35,11 @@ compress_out <- function(cfile, filename, type = c("zip", "tar")) {
     if (type == "zip") {
         o <- utils::zip(cfile2, files = basename(filename))
     }
-    ## } else {
-    ##     if (type == "tar") {
-    ##         type <- "none"
-    ##     }
-    ##     o <- utils::tar(cfile2, files = basename(filename), compression = type)
-    ## }
     if (type == "tar") {
         o <- utils::tar(cfile2, files = basename(filename), compression = "none")
+    }
+    if (type == "tar.gz") {
+        o <- utils::tar(cfile2, files = basename(filename), compression = "gzip")
     }
     setwd(wd)
     if (o != 0) {
@@ -54,14 +51,14 @@ compress_out <- function(cfile, filename, type = c("zip", "tar")) {
 }
 
 parse_archive <- function(file, which, file_type, ...) {
-    if (!file_type %in% c("zip", "tar")) {
-        stop("Unsupported file_type. Use 'zip' or 'tar'.")
+    if (!file_type %in% c("zip", "tar", "tar.gz")) {
+        stop("Unsupported file_type. Use 'zip', 'tar', or 'tar.gz'.")
     }
     if (file_type == "zip") {
         file_list <- utils::unzip(file, list = TRUE)$Name
         extract_func <- utils::unzip
     }
-    if (file_type == "tar") {
+    if (file_type %in% c("tar", "tar.gz")) {
         file_list <- utils::untar(file, list = TRUE)
         extract_func <- utils::untar
     }
