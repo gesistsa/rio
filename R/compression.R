@@ -8,12 +8,15 @@ find_compress <- function(f) {
     if (grepl("\\.tar$", f)) {
         return(list(file = sub("\\.tar$", "", f), compress = "tar"))
     }
+    if (grepl("\\.gzip$", f)) {
+        return(list(file = sub("\\.gzip$", "", f), compress = "gzip"))
+    }
     return(list(file = f, compress = NA_character_))
 }
 
 ## KEEPING OLD CODE FOR LATER REIMPLEMENTATION for gzip and bzip2 #400
 ##compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2", "xz")) {
-compress_out <- function(cfile, filename, type = c("zip", "tar")) {
+compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip")) {
     type <- ext <- match.arg(type)
     ## if (ext %in% c("gzip", "bzip2", "xz")) {
     ##     ext <- paste0("tar")
@@ -25,6 +28,9 @@ compress_out <- function(cfile, filename, type = c("zip", "tar")) {
         cfile2 <- basename(cfile)
     }
     filename <- normalizePath(filename)
+    if (type == "gzip") {
+        return(.compress_rutils(filename, cfile, ext = ext))
+    }
     tmp <- tempfile()
     dir.create(tmp)
     on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
@@ -83,4 +89,11 @@ parse_archive <- function(file, which, file_type, ...) {
     }
     extract_func(file, files = file_list[grep(which2, file_list)[1]], exdir = d)
     return(file.path(d, which))
+}
+
+.compress_rutils <- function(filename, cfile, ext, remove = TRUE, FUN = gzfile) {
+    ## Caution: Please note that remove = TRUE by default, it will delete `filename`!
+    tmp_cfile <- R.utils::compressFile(filename = filename, ext = ext, FUN = FUN, overwrite = TRUE, remove = remove)
+    file.copy(from = tmp_cfile, to = cfile, overwrite = TRUE)
+    return(cfile)
 }
