@@ -2,6 +2,12 @@ find_compress <- function(f) {
     if (grepl("\\.zip$", f)) {
         return(list(file = sub("\\.zip$", "", f), compress = "zip"))
     }
+    if (grepl("\\.tar$", f)) {
+        return(list(file = sub("\\.tar$", "", f), compress = "tar"))
+    }
+    if (grepl("\\.tar.gz$", f)) {
+        return(list(file = sub("\\.tar$", "", f), compress = "tar.gz"))
+    }
     ## if (grepl("\\.tar\\.gz$", f)) {
     ##     return(list(file = sub("\\.tar\\.gz$", "", f), compress = "tar"))
     ## }
@@ -94,6 +100,9 @@ parse_archive <- function(file, which, file_type, ...) {
 .compress_rutils <- function(filename, cfile, ext, remove = TRUE, FUN = gzfile) {
     ## Caution: Please note that remove = TRUE by default, it will delete `filename`!
     tmp_cfile <- R.utils::compressFile(filename = filename, ext = ext, FUN = FUN, overwrite = TRUE, remove = remove)
+    if (tmp_cfile == cfile) {
+        return(cfile)
+    }
     file.copy(from = tmp_cfile, to = cfile, overwrite = TRUE)
     return(cfile)
 }

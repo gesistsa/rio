@@ -3,11 +3,10 @@ context("Compressed files")
 test_that("Recognize compressed file types", {
     expect_true(rio:::find_compress("file.zip")$compress == "zip")
     expect_true(rio:::find_compress("file.tar")$compress == "tar")
+    expect_true(rio:::find_compress("file.gzip")$compress == "gzip")
     ## expect_true(rio:::find_compress("file.tar.gz")$compress == "tar")
     expect_true(is.na(rio:::find_compress("file.gz")$compress))
     expect_true(is.na(rio:::find_compress("file.notcompressed")$compress))
-    ## #395
-    expect_true(is.na(rio:::find_compress("file.gzip")$compress)) ## NA for now
 })
 
 test_that("Export to compressed (zip) / import", {
