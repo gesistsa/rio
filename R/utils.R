@@ -136,3 +136,17 @@ escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&a
     }
     return(file)
 }
+
+.check_trust <- function(trust, format) {
+    if (is.null(trust)) {
+        lifecycle::deprecate_warn(
+                       when = "1.0.3",
+                       what = "import(trust = 'should be explicit for serialization formats')",
+                       details = paste0("Missing `trust` will be set to FALSE by default for ", format, " in 2.0.0."))
+        trust <- TRUE ## Change this for version 2.0.0
+    }
+    if (isFALSE(trust)) {
+        stop(format, " files may execute arbitary code. Only load ", format, " files that you personally generated or can trust the origin.", call. = FALSE)
+    }
+    NULL
+}

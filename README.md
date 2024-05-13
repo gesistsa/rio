@@ -132,7 +132,7 @@ The full list of supported formats is below:
 
 | Name                                | Extensions / “format” | Import Package | Export Package | Type    | Note                     |
 | :---------------------------------- | :-------------------- | :------------- | :------------- | :------ | :----------------------- |
-| Archive files (handled by tar)      | tar                   | utils          | utils          | Default |                          |
+| Archive files (handled by tar)      | tar / tar.gz          | utils          | utils          | Default |                          |
 | Compressed CSV                      | gz                    | data.table     | data.table     | Default | Only csv.gz is supported |
 | Zip files                           | zip                   | utils          | utils          | Default |                          |
 | CSVY (CSV + YAML metadata header)   | csvy                  | data.table     | data.table     | Default |                          |

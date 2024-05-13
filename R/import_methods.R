@@ -124,12 +124,14 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 #' @export
-.import.rio_r <- function(file, which = 1, ...) {
+.import.rio_r <- function(file, which = 1, trust = getOption("rio.import.trust", default = NULL), ...) {
+    .check_trust(trust, format = ".R")
     .docall(dget, ..., args = list(file = file))
 }
 
 #' @export
-.import.rio_dump <- function(file, which = 1, envir = new.env(), ...) {
+.import.rio_dump <- function(file, which = 1, envir = new.env(), trust = getOption("rio.import.trust", default = NULL), ...) {
+    .check_trust(trust, format = "dump")
     source(file = file, local = envir)
     if (missing(which)) {
         if (length(ls(envir)) > 1) {
@@ -145,23 +147,25 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 #' @export
-.import.rio_rds <- function(file, which = 1, ...) {
+.import.rio_rds <- function(file, which = 1, trust = getOption("rio.import.trust", default = NULL), ...) {
+    .check_trust(trust, format = "RDS")
     readRDS(file = file)
 }
 
 #' @export
-.import.rio_rdata <- function(file, which = 1, envir = new.env(), ...) {
+.import.rio_rdata <- function(file, which = 1, envir = new.env(), trust = getOption("rio.import.trust", default = NULL), ...) {
+    .check_trust(trust, format = "RData")
     load(file = file, envir = envir)
     if (missing(which)) {
         if (length(ls(envir)) > 1) {
-            warning("Rdata file contains multiple objects. Returning first object.")
+          warning("Rdata file contains multiple objects. Returning first object.")
         }
-        which <- 1
+      which <- 1
     }
     if (is.numeric(which)) {
-        get(ls(envir)[which], envir)
+      get(ls(envir)[which], envir)
     } else {
-        get(ls(envir)[grep(which, ls(envir))[1]], envir)
+      get(ls(envir)[grep(which, ls(envir))[1]], envir)
     }
 }
 
