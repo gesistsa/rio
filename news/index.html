@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rio</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +56,10 @@
       <small>Source: <a href="https://github.com/gesistsa/rio/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.3" id="rio-103">rio 1.0.3<a class="anchor" aria-label="anchor" href="#rio-103"></a></h2>
+<ul><li>Adds <code>trust</code> parameter to functions that are used to load various R environment formats (<code>.R</code>, <code>.Rds</code>, <code>.Rdata</code>, etc). This parameter is defaulted to <code>TRUE</code> today to ensure backwards compatibility. A deprecation notice warns this will default to <code>FALSE</code> in <code>rio</code> 2.0. We are informing users that these data types should only be loaded from trusted sources, which should be affirmatively attested to.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.2" id="rio-102">rio 1.0.2<a class="anchor" aria-label="anchor" href="#rio-102"></a></h2>
 <ul><li>For missing files in <code>import_list</code> it gives more informative warnings fix <a href="https://github.com/gesistsa/rio/issues/389" class="external-link">#389</a></li>
