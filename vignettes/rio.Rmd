@@ -69,7 +69,6 @@ Additionally, any format that is not supported by **rio** but that has a known R
 library("rio")
 
 export(mtcars, "mtcars.csv")
-export(mtcars, "mtcars.rds")
 export(mtcars, "mtcars.dta")
 export(mtcars, "mtcars_noext", format = "csv")
 ```
@@ -78,12 +77,10 @@ export(mtcars, "mtcars_noext", format = "csv")
 library("rio")
 
 x <- import("mtcars.csv")
-y <- import("mtcars.rds")
-z <- import("mtcars.dta")
+y <- import("mtcars.dta")
 
 # confirm identical
 all.equal(x, y, check.attributes = FALSE)
-all.equal(x, z, check.attributes = FALSE)
 ```
 
 If for some reason a file does not have an extension, or has a file extension that does not match its actual type, you can manually specify a file format to override the format inference step. For example, we can read in a CSV file that does not have a file extension by specifying `csv`:
@@ -95,7 +92,6 @@ head(import("mtcars_noext", format = "csv"))
 
 ```{r, echo=FALSE, results='hide'}
 unlink("mtcars.csv")
-unlink("mtcars.rds")
 unlink("mtcars.dta")
 unlink("mtcars_noext")
 ```
@@ -110,7 +106,6 @@ str(import_list(dir()), 1)
 
 Similarly, some single-file formats (e.g. Excel Workbooks, Zip directories, HTML files, etc.) can contain multiple data sets. Because `import()` is type safe, always returning a data frame, importing from these formats requires specifying a `which` argument to `import()` to dictate which data set (worksheet, file, table, etc.) to import (the default being `which = 1`). But `import_list()` can be used to import all (or only a specified subset, again via `which`) of data objects from these types of files.
 
-
 ## Data Export
 
 The export capabilities of **rio** are somewhat more limited than the import capabilities, given the availability of different functions in various R packages and because import functions are often written to make use of data from other applications and it never seems to be a development priority to have functions to export to the formats used by other applications. That said, **rio** currently supports the following formats:
@@ -120,7 +115,6 @@ The export capabilities of **rio** are somewhat more limited than the import cap
 library("rio")
 
 export(mtcars, "mtcars.csv")
-export(mtcars, "mtcars.rds")
 export(mtcars, "mtcars.dta")
 ```
 
@@ -141,21 +135,11 @@ Some file formats (e.g., Excel workbooks, Rdata files) can support multiple data
 export(list(mtcars = mtcars, iris = iris), "multi.xlsx")
 ```
 
-```{r}
-# export to an .Rdata file
-## as a named list
-export(list(mtcars = mtcars, iris = iris), "multi.rdata")
-
-## as a character vector
-export(c("mtcars", "iris"), "multi.rdata")
-```
-
 It is also possible to use the new (as of v0.6.0) function `export_list()` to write a list of data frames to multiple files using either a vector of file names or a file pattern:
 
 ```{r}
 export_list(list(mtcars = mtcars, iris = iris), "%s.tsv")
 ```
-
 
 ## File Conversion
 
@@ -203,11 +187,8 @@ Rscript -e "rio::convert('mtcars.dta', 'mtcars.csv')"
 
 ```{r, echo=FALSE, results='hide'}
 unlink("mtcars.csv")
-unlink("mtcars.rds")
-unlink("mtcars.rdata")
 unlink("mtcars.dta")
 unlink("multi.xlsx")
-unlink("multi.rdata")
 unlink("mtcars2.dta")
 unlink("mtcars.tsv")
 unlink("iris.tsv")

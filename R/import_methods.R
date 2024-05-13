@@ -124,13 +124,13 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 #' @export
-.import.rio_r <- function(file, which = 1, trust = TRUE, ...) {
+.import.rio_r <- function(file, which = 1, trust = getOption("rio.import.trust", default = NULL), ...) {
     .check_trust(trust, format = ".R")
     .docall(dget, ..., args = list(file = file))
 }
 
 #' @export
-.import.rio_dump <- function(file, which = 1, envir = new.env(), trust = TRUE, ...) {
+.import.rio_dump <- function(file, which = 1, envir = new.env(), trust = getOption("rio.import.trust", default = NULL), ...) {
     .check_trust(trust, format = "dump")
     source(file = file, local = envir)
     if (missing(which)) {
@@ -147,13 +147,13 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 #' @export
-.import.rio_rds <- function(file, which = 1, trust = TRUE, ...) {
-    .check_trust(trust, format = "Rds")
+.import.rio_rds <- function(file, which = 1, trust = getOption("rio.import.trust", default = NULL), ...) {
+    .check_trust(trust, format = "RDS")
     readRDS(file = file)
 }
 
 #' @export
-.import.rio_rdata <- function(file, which = 1, envir = new.env(), trust = TRUE, ...) {
+.import.rio_rdata <- function(file, which = 1, envir = new.env(), trust = getOption("rio.import.trust", default = NULL), ...) {
     .check_trust(trust, format = "RData")
     load(file = file, envir = envir)
     if (missing(which)) {
