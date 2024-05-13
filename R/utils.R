@@ -136,3 +136,16 @@ escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&a
     }
     return(file)
 }
+
+.check_trust <- function(trust, format) {
+    lifecycle::deprecate_warn(
+      when = "2.0.0",
+      what = "import(trust)",
+      details = paste0("Trust will be set to FALSE by default for ", format, ".")
+    )
+    if (isFALSE(trust)) {
+        stop(format, "files may execute arbitary code. Only load", format, "files that you personally generated or can trust the origin.", call. = FALSE)
+    }
+    NULL
+}
+

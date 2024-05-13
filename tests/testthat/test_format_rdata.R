@@ -26,6 +26,13 @@ test_that("Export to and import from Rdata", {
         ## expect error otherwise
         expect_error(export(iris$Species, iris_file))
     })
+    withr::with_tempfile("iris_file", fileext = ".Rdata", code = {
+        export(iris, iris_file)
+        ## expect deprecation to work
+        lifecycle::expect_deprecated(import(iris_file), regexp = "set to FALSE by default")
+        ## expect false to error
+        expect_error(import(iris_file, trust = FALSE))
+    })
 })
 
 test_that("Export to and import from rda", {
