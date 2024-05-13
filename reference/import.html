@@ -120,9 +120,9 @@ The parameter takes precedents over parameters in ... which set a different clas
 <li><p>Stata (.dta), using <code><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">haven::read_dta()</a></code></p></li>
 <li><p>SPSS Portable Files (.por), using <code><a href="https://haven.tidyverse.org/reference/read_spss.html" class="external-link">haven::read_por()</a></code>.</p></li>
 <li><p>Excel (.xls and .xlsx), using <code><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">readxl::read_xlsx()</a></code> or <code><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">readxl::read_xls()</a></code>. Use <code>which</code> to specify a sheet number.</p></li>
-<li><p>R syntax object (.R), using <code><a href="https://rdrr.io/r/base/dput.html" class="external-link">base::dget()</a></code></p></li>
-<li><p>Saved R objects (.RData,.rda), using <code><a href="https://rdrr.io/r/base/load.html" class="external-link">base::load()</a></code> for single-object .Rdata files. Use <code>which</code> to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame).</p></li>
-<li><p>Serialized R objects (.rds), using <code><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">base::readRDS()</a></code>. This can be any R object (not just a data frame).</p></li>
+<li><p>R syntax object (.R), using <code><a href="https://rdrr.io/r/base/dput.html" class="external-link">base::dget()</a></code>, see <code>trust</code> below.</p></li>
+<li><p>Saved R objects (.RData,.rda), using <code><a href="https://rdrr.io/r/base/load.html" class="external-link">base::load()</a></code> for single-object .Rdata files. Use <code>which</code> to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame), see <code>trust</code> below.</p></li>
+<li><p>Serialized R objects (.rds), using <code><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">base::readRDS()</a></code>. This can be any R object (not just a data frame), see <code>trust</code> below.</p></li>
 <li><p>Serialized R objects (.qs), using <code><a href="https://rdrr.io/pkg/qs/man/qread.html" class="external-link">qs::qread()</a></code>, which is
 significantly faster than .rds. This can be any R
 object (not just a data frame).</p></li>
@@ -150,10 +150,15 @@ object (not just a data frame).</p></li>
 <li><p>GraphPad Prism (.pzfx) using <code><a href="https://rdrr.io/pkg/pzfx/man/read_pzfx.html" class="external-link">pzfx::read_pzfx()</a></code></p></li>
 </ul><p><code>import</code> attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for <code>mtcars$mpg</code> is stored in <code>attributes(mtcars$mpg)</code> rather than <code>attributes(mtcars)</code>). If you would prefer these attributes to be stored at the data.frame-level (i.e., in <code>attributes(mtcars)</code>), see <code><a href="gather_attrs.html">gather_attrs()</a></code>.</p>
 <p>After importing metadata-rich file formats (e.g., from Stata or SPSS), it may be helpful to recode labelled variables to character or factor using <code><a href="characterize.html">characterize()</a></code> or <code><a href="characterize.html">factorize()</a></code> respectively.</p>
+<p>For serialization formats (.R, .RDS, and .RData), please note that you should only load these files from trusted sources. It is because these formats are not necessarily for storing rectangular data and can also be used to store many things, e.g. code. Importing these files could lead to arbitary code execution. Please read the security principles by the R Project (Plummer, 2024). When importing these files via <code>rio</code>, you should affirm that you trust these files, i.e. <code>trust = TRUE</code>. See example below. If this affirmation is missing, the current version assumes <code>trust</code> to be true for backward compatibility and a deprecation notice will be printed. In the next major release (2.0.0), you must explicitly affirm your trust when importing these files.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>For csv and txt files with row names exported from <code><a href="export.html">export()</a></code>, it may be helpful to specify <code>row.names</code> as the column of the table which contain row names. See example below.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Plummer, M (2024). Statement on CVE-2024-27322. <a href="https://blog.r-project.org/2024/05/10/statement-on-cve-2024-27322/" class="external-link">https://blog.r-project.org/2024/05/10/statement-on-cve-2024-27322/</a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -548,6 +553,165 @@ object (not just a data frame).</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## the default import class can be set with options(rio.import.class = "data.table")</span></span></span>
 <span class="r-in"><span><span class="co">## options(rio.import.class = "tibble"), or options(rio.import.class = "arrow")</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Security</span></span></span>
+<span class="r-in"><span><span class="va">rds_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".rds"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="export.html">export</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">rds_file</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## You should only import serialized formats from trusted sources</span></span></span>
+<span class="r-in"><span><span class="co">## In this case, you can trust it because it's generated by you.</span></span></span>
+<span class="r-in"><span><span class="fu">import</span><span class="op">(</span><span class="va">rds_file</span>, trust <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1            5.1         3.5          1.4         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2            4.9         3.0          1.4         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3            4.7         3.2          1.3         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4            4.6         3.1          1.5         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5            5.0         3.6          1.4         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6            5.4         3.9          1.7         0.4     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7            4.6         3.4          1.4         0.3     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8            5.0         3.4          1.5         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9            4.4         2.9          1.4         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10           4.9         3.1          1.5         0.1     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11           5.4         3.7          1.5         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12           4.8         3.4          1.6         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13           4.8         3.0          1.4         0.1     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14           4.3         3.0          1.1         0.1     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15           5.8         4.0          1.2         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16           5.7         4.4          1.5         0.4     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17           5.4         3.9          1.3         0.4     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18           5.1         3.5          1.4         0.3     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19           5.7         3.8          1.7         0.3     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20           5.1         3.8          1.5         0.3     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21           5.4         3.4          1.7         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22           5.1         3.7          1.5         0.4     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23           4.6         3.6          1.0         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24           5.1         3.3          1.7         0.5     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25           4.8         3.4          1.9         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26           5.0         3.0          1.6         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27           5.0         3.4          1.6         0.4     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28           5.2         3.5          1.5         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29           5.2         3.4          1.4         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30           4.7         3.2          1.6         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31           4.8         3.1          1.6         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32           5.4         3.4          1.5         0.4     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33           5.2         4.1          1.5         0.1     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34           5.5         4.2          1.4         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35           4.9         3.1          1.5         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36           5.0         3.2          1.2         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37           5.5         3.5          1.3         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38           4.9         3.6          1.4         0.1     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39           4.4         3.0          1.3         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40           5.1         3.4          1.5         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41           5.0         3.5          1.3         0.3     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42           4.5         2.3          1.3         0.3     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43           4.4         3.2          1.3         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44           5.0         3.5          1.6         0.6     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45           5.1         3.8          1.9         0.4     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46           4.8         3.0          1.4         0.3     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47           5.1         3.8          1.6         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48           4.6         3.2          1.4         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49           5.3         3.7          1.5         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50           5.0         3.3          1.4         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51           7.0         3.2          4.7         1.4 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52           6.4         3.2          4.5         1.5 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53           6.9         3.1          4.9         1.5 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54           5.5         2.3          4.0         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55           6.5         2.8          4.6         1.5 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56           5.7         2.8          4.5         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57           6.3         3.3          4.7         1.6 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58           4.9         2.4          3.3         1.0 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59           6.6         2.9          4.6         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60           5.2         2.7          3.9         1.4 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61           5.0         2.0          3.5         1.0 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62           5.9         3.0          4.2         1.5 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63           6.0         2.2          4.0         1.0 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64           6.1         2.9          4.7         1.4 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65           5.6         2.9          3.6         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66           6.7         3.1          4.4         1.4 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67           5.6         3.0          4.5         1.5 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68           5.8         2.7          4.1         1.0 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69           6.2         2.2          4.5         1.5 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70           5.6         2.5          3.9         1.1 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71           5.9         3.2          4.8         1.8 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72           6.1         2.8          4.0         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73           6.3         2.5          4.9         1.5 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74           6.1         2.8          4.7         1.2 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75           6.4         2.9          4.3         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76           6.6         3.0          4.4         1.4 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77           6.8         2.8          4.8         1.4 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78           6.7         3.0          5.0         1.7 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79           6.0         2.9          4.5         1.5 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80           5.7         2.6          3.5         1.0 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81           5.5         2.4          3.8         1.1 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82           5.5         2.4          3.7         1.0 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83           5.8         2.7          3.9         1.2 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84           6.0         2.7          5.1         1.6 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85           5.4         3.0          4.5         1.5 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86           6.0         3.4          4.5         1.6 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87           6.7         3.1          4.7         1.5 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88           6.3         2.3          4.4         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89           5.6         3.0          4.1         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90           5.5         2.5          4.0         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91           5.5         2.6          4.4         1.2 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92           6.1         3.0          4.6         1.4 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93           5.8         2.6          4.0         1.2 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94           5.0         2.3          3.3         1.0 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95           5.6         2.7          4.2         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96           5.7         3.0          4.2         1.2 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97           5.7         2.9          4.2         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98           6.2         2.9          4.3         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99           5.1         2.5          3.0         1.1 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100          5.7         2.8          4.1         1.3 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101          6.3         3.3          6.0         2.5  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102          5.8         2.7          5.1         1.9  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103          7.1         3.0          5.9         2.1  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104          6.3         2.9          5.6         1.8  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105          6.5         3.0          5.8         2.2  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106          7.6         3.0          6.6         2.1  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107          4.9         2.5          4.5         1.7  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108          7.3         2.9          6.3         1.8  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109          6.7         2.5          5.8         1.8  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110          7.2         3.6          6.1         2.5  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111          6.5         3.2          5.1         2.0  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112          6.4         2.7          5.3         1.9  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113          6.8         3.0          5.5         2.1  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114          5.7         2.5          5.0         2.0  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115          5.8         2.8          5.1         2.4  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116          6.4         3.2          5.3         2.3  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117          6.5         3.0          5.5         1.8  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 118          7.7         3.8          6.7         2.2  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119          7.7         2.6          6.9         2.3  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120          6.0         2.2          5.0         1.5  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121          6.9         3.2          5.7         2.3  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122          5.6         2.8          4.9         2.0  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123          7.7         2.8          6.7         2.0  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124          6.3         2.7          4.9         1.8  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125          6.7         3.3          5.7         2.1  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126          7.2         3.2          6.0         1.8  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127          6.2         2.8          4.8         1.8  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128          6.1         3.0          4.9         1.8  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129          6.4         2.8          5.6         2.1  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130          7.2         3.0          5.8         1.6  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131          7.4         2.8          6.1         1.9  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132          7.9         3.8          6.4         2.0  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133          6.4         2.8          5.6         2.2  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134          6.3         2.8          5.1         1.5  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135          6.1         2.6          5.6         1.4  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136          7.7         3.0          6.1         2.3  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137          6.3         3.4          5.6         2.4  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 138          6.4         3.1          5.5         1.8  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139          6.0         3.0          4.8         1.8  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140          6.9         3.1          5.4         2.1  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 141          6.7         3.1          5.6         2.4  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142          6.9         3.1          5.1         2.3  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143          5.8         2.7          5.1         1.9  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144          6.8         3.2          5.9         2.3  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145          6.7         3.3          5.7         2.5  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146          6.7         3.0          5.2         2.3  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147          6.3         2.5          5.0         1.9  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148          6.5         3.0          5.2         2.0  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149          6.2         3.4          5.4         2.3  virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150          5.9         3.0          5.1         1.8  virginica</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
