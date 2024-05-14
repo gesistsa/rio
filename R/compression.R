@@ -74,7 +74,7 @@ parse_archive <- function(file, which, file_type, ...) {
     }
     if (file_type %in% c("gzip", "bzip2")) {
         ## it doesn't have the same interface as unzip
-        return(.parse_rutils(filename = file, which = which, file_type = file_type))
+        return(.parse_rutils(filename = file, file_type = file_type))
     }
     if (file_type == "zip") {
         file_list <- utils::unzip(file, list = TRUE)$Name
@@ -117,13 +117,7 @@ parse_archive <- function(file, which, file_type, ...) {
     return(cfile)
 }
 
-.parse_rutils <- function(filename, which, file_type) {
-    if (is.null(which)) {
-        which <- 1
-    }
-    if (which != 1) {
-        warnings("The parameter `which` has no effect for this compressed file_type ", file_type, ".",  call. = FALSE)
-    }
+.parse_rutils <- function(filename, file_type) {
     if (file_type == "gzip") {
         decompression_fun <- gzfile
     }
