@@ -25,19 +25,9 @@ find_compress <- function(f) {
     return(list(file = f, compress = NA_character_))
 }
 
-## KEEPING OLD CODE FOR LATER REIMPLEMENTATION for gzip and bzip2 #400
-##compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2", "xz")) {
 compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "gzip", "bzip2")) {
     type <- ext <- match.arg(type)
-    ## if (ext %in% c("gzip", "bzip2", "xz")) {
-    ##     ext <- paste0("tar")
-    ## }
-    if (missing(cfile)) {
-        cfile <- paste0(filename, ".", ext)
-        cfile2 <- paste0(basename(filename), ".", ext)
-    } else {
-        cfile2 <- basename(cfile)
-    }
+    cfile2 <- basename(cfile)
     filename <- normalizePath(filename)
     if (type %in% c("gzip", "bzip2")) {
         return(.compress_rutils(filename, cfile, ext = ext))
@@ -68,10 +58,10 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "gzip
 }
 
 parse_archive <- function(file, which, file_type, ...) {
-    supported_formats <- c("zip", "tar", "tar.gz", "gzip", "bzip2")
-    if (!file_type %in% supported_formats) {
-        stop("Unsupported file_type. Use ", paste(supported_formats, collapse = ", "), call. = FALSE)
-    }
+    ## supported_formats <- c("zip", "tar", "tar.gz", "gzip", "bzip2")
+    ## if (!file_type %in% supported_formats) {
+    ##     stop("Unsupported file_type. Use ", paste(supported_formats, collapse = ", "), call. = FALSE)
+    ## }
     if (file_type %in% c("gzip", "bzip2")) {
         ## it doesn't have the same interface as unzip
         return(.parse_rutils(filename = file, file_type = file_type))
