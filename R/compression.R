@@ -9,14 +9,25 @@ find_compress <- function(f) {
         return(list(file = sub("\\.tar$", "", f), compress = "tar"))
     }
     if (grepl("\\.gzip$", f)) {
+        ## weird
         return(list(file = sub("\\.gzip$", "", f), compress = "gzip"))
+    }
+    if (grepl("\\.gz$", f)) {
+        return(list(file = sub("\\.gz$", "", f), compress = "gzip"))
+    }
+    if (grepl("\\.bz2$", f)) {
+        return(list(file = sub("\\.bz2$", "", f), compress = "bzip2"))
+    }
+    if (grepl("\\.bzip2$", f)) {
+        ## weird
+        return(list(file = sub("\\.bzip2$", "", f), compress = "bzip2"))
     }
     return(list(file = f, compress = NA_character_))
 }
 
 ## KEEPING OLD CODE FOR LATER REIMPLEMENTATION for gzip and bzip2 #400
 ##compress_out <- function(cfile, filename, type = c("zip", "tar", "gzip", "bzip2", "xz")) {
-compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "gzip")) {
+compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "gzip", "bzip2")) {
     type <- ext <- match.arg(type)
     ## if (ext %in% c("gzip", "bzip2", "xz")) {
     ##     ext <- paste0("tar")
@@ -28,7 +39,7 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "gzip
         cfile2 <- basename(cfile)
     }
     filename <- normalizePath(filename)
-    if (type == "gzip") {
+    if (type %in% c("gzip", "bzip2")) {
         return(.compress_rutils(filename, cfile, ext = ext))
     }
     tmp <- tempfile()
@@ -57,8 +68,13 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "gzip
 }
 
 parse_archive <- function(file, which, file_type, ...) {
-    if (!file_type %in% c("zip", "tar", "tar.gz")) {
-        stop("Unsupported file_type. Use 'zip', 'tar', or 'tar.gz'.")
+    supported_formats <- c("zip", "tar", "tar.gz", "gzip", "bzip2")
+    if (!file_type %in% supported_formats) {
+        stop("Unsupported file_type. Use ", paste(supported_formats, collapse = ", "), call. = FALSE)
+    }
+    if (file_type %in% c("gzip", "bzip2")) {
+        ## it doesn't have the same interface as unzip
+        return(.parse_rutils(filename = file, which = which, file_type = file_type))
     }
     if (file_type == "zip") {
         file_list <- utils::unzip(file, list = TRUE)$Name
@@ -92,10 +108,30 @@ parse_archive <- function(file, which, file_type, ...) {
 
 .compress_rutils <- function(filename, cfile, ext, remove = TRUE, FUN = gzfile) {
     ## Caution: Please note that remove = TRUE by default, it will delete `filename`!
+    if (ext == "bzip2") {
+        FUN <- bzfile
+    }
     tmp_cfile <- R.utils::compressFile(filename = filename, ext = ext, FUN = FUN, overwrite = TRUE, remove = remove)
     if (tmp_cfile == cfile) {
         return(cfile)
     }
     file.copy(from = tmp_cfile, to = cfile, overwrite = TRUE)
     return(cfile)
+}
+
+.parse_rutils <- function(filename, which, file_type) {
+    if (is.null(which)) {
+        which <- 1
+    }
+    if (which != 1) {
+        warnings("The parameter `which` has no effect for this compressed file_type ", file_type, ".",  call. = FALSE)
+    }
+    if (file_type == "gzip") {
+        decompression_fun <- gzfile
+    }
+    if (file_type == "bzip2") {
+        decompression_fun <- bzfile
+    }
+    destname <- tempfile()
+    R.utils::decompressFile(filename = filename, destname = destname, temporary = TRUE, remove = FALSE, overwrite = TRUE, FUN = decompression_fun, ext = file_type)
 }

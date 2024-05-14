@@ -124,26 +124,23 @@ import <- function(file, format, setclass = getOption("rio.import.class", "data.
     if ((file != "clipboard") && !file.exists(file)) {
         stop("No such file: ", file, call. = FALSE)
     }
-    if (grepl("\\.zip$", file)) {
-        if (missing(which)) {
-            file <- parse_archive(file, file_type = "zip")
-        } else {
-            file <- parse_archive(file, which = which, file_type = "zip")
-        }
-    } else if (grepl("\\.tar", file)) {
-        if (missing(which)) {
-            which <- 1
-        }
-        file <- parse_archive(file, which = which, file_type = "tar")
+    ## compressed file, f is a pretty bad name; but export() uses it.
+    f <- find_compress(file)
+    if (!is.na(f$compress)) {
+        cfile <- file
+        file <- f$file
+        which <- ifelse(missing(which), 1, which)
+        format <- ifelse(isFALSE(missing(format)), tolower(format), get_info(file)$input)
+        file <- parse_archive(cfile, which = which, file_type = f$compress)
     }
     if (missing(format)) {
         format <- get_info(file)$format
-        if (format %in% c("gz")) {
-            format <- get_info(tools::file_path_sans_ext(file, compression = FALSE))$format
-            if (format != "csv") {
-                stop("gz is only supported for csv (for now).", call. = FALSE)
-            }
-        }
+        ## if (format %in% c("gz")) {
+        ##     format <- get_info(tools::file_path_sans_ext(file, compression = FALSE))$format
+        ##     if (format != "csv") {
+        ##         stop("gz is only supported for csv (for now).", call. = FALSE)
+        ##     }
+        ## }
     } else {
         ## format such as "|"
         format <- .standardize_format(format)
