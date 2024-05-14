@@ -3,8 +3,8 @@ test_that("Export to and import from Rdata", {
         ## data frame
         export(iris, iris_file)
         expect_true(file.exists(iris_file))
-        expect_true(is.data.frame(import(iris_file)))
-        expect_true(is.data.frame(import(iris_file, which = 1)))
+        expect_true(is.data.frame(import(iris_file, trust = TRUE)))
+        expect_true(is.data.frame(import(iris_file, which = 1, trust = TRUE)))
     })
     withr::with_tempfile("iris_file", fileext = ".Rdata", code = {
         ## environment
@@ -12,15 +12,15 @@ test_that("Export to and import from Rdata", {
         e$iris <- iris
         export(e, iris_file)
         expect_true(file.exists(iris_file))
-        expect_true(is.data.frame(import(iris_file)))
-        expect_true(is.data.frame(import(iris_file, which = 1)))
+        expect_true(is.data.frame(import(iris_file, trust = TRUE)))
+        expect_true(is.data.frame(import(iris_file, which = 1, trust = TRUE)))
     })
     withr::with_tempfile("iris_file", fileext = ".Rdata", code = {
         ## character
         export("iris", iris_file)
         expect_true(file.exists(iris_file))
-        expect_true(is.data.frame(import(iris_file)))
-        expect_true(is.data.frame(import(iris_file, which = 1)))
+        expect_true(is.data.frame(import(iris_file, trust = TRUE)))
+        expect_true(is.data.frame(import(iris_file, which = 1, trust = TRUE)))
     })
     withr::with_tempfile("iris_file", fileext = ".Rdata", code = {
         ## expect error otherwise
@@ -33,8 +33,8 @@ test_that("Export to and import from rda", {
         ## data frame
         export(iris, iris_file)
         expect_true(file.exists(iris_file))
-        expect_true(is.data.frame(import(iris_file)))
-        expect_true(is.data.frame(import(iris_file, which = 1)))
+        expect_true(is.data.frame(import(iris_file, trust = TRUE)))
+        expect_true(is.data.frame(import(iris_file, which = 1, trust = TRUE)))
     })
     withr::with_tempfile("iris_file", fileext = ".rda", code = {
         ## environment
@@ -42,15 +42,15 @@ test_that("Export to and import from rda", {
         e$iris <- iris
         export(e, iris_file)
         expect_true(file.exists(iris_file))
-        expect_true(is.data.frame(import(iris_file)))
-        expect_true(is.data.frame(import(iris_file, which = 1)))
+        expect_true(is.data.frame(import(iris_file, trust = TRUE)))
+        expect_true(is.data.frame(import(iris_file, which = 1, trust = TRUE)))
     })
     withr::with_tempfile("iris_file", fileext = ".rda", code = {
         ## character
         export("iris", iris_file)
         expect_true(file.exists(iris_file))
-        expect_true(is.data.frame(import(iris_file)))
-        expect_true(is.data.frame(import(iris_file, which = 1)))
+        expect_true(is.data.frame(import(iris_file, trust = TRUE)))
+        expect_true(is.data.frame(import(iris_file, which = 1, trust = TRUE)))
     })
     withr::with_tempfile("iris_file", fileext = ".rda", code = {
         ## expect error otherwise

@@ -1,9 +1,9 @@
 test_that("Data identical (import_list)", {
     withr::with_tempfile("mtcars_file", fileext = ".rds", code = {
         export(mtcars, mtcars_file)
-        expect_equivalent(import_list(rep(mtcars_file, 2)), list(mtcars, mtcars))
+        expect_equivalent(import_list(rep(mtcars_file, 2), trust = TRUE), list(mtcars, mtcars))
         mdat <- rbind(mtcars, mtcars)
-        dat <- import_list(rep(mtcars_file, 2), rbind = TRUE)
+        dat <- import_list(rep(mtcars_file, 2), rbind = TRUE, trust = TRUE)
         expect_true(ncol(dat) == ncol(mdat) + 1)
         expect_true(nrow(dat) == nrow(mdat))
         expect_true("_file" %in% names(dat))
@@ -13,7 +13,7 @@ test_that("Data identical (import_list)", {
 test_that("Import multi-object .Rdata in import_list()", {
     withr::with_tempfile("rdata_file", fileext = ".rdata", code = {
         export(list(mtcars = mtcars, iris = iris), rdata_file)
-        dat <- import_list(rdata_file)
+        dat <- import_list(rdata_file, trust = TRUE)
         expect_true(identical(dat[[1]], mtcars))
         expect_true(identical(dat[[2]], iris))
     })
@@ -57,7 +57,7 @@ test_that("import_list() preserves 'which' names when specified", {
 test_that("Import single file via import_list()", {
     withr::with_tempfile("data_file", fileext = ".rds", code = {
         export(mtcars, data_file)
-        expect_true(identical(import_list(data_file, rbind = TRUE), mtcars))
+        expect_true(identical(import_list(data_file, rbind = TRUE, trust = TRUE), mtcars))
     })
 })
 
@@ -74,9 +74,9 @@ test_that("Import single file from zip via import_list()", {
 test_that("Using setclass in import_list()", {
     withr::with_tempfile("data_file", fileext = ".rds", code = {
         export(mtcars, data_file)
-        dat1 <- import_list(rep(data_file, 2), setclass = "data.table", rbind = TRUE)
+        dat1 <- import_list(rep(data_file, 2), setclass = "data.table", rbind = TRUE, trust = TRUE)
         expect_true(inherits(dat1, "data.table"))
-        dat2 <- import_list(rep(data_file, 2), setclass = "tbl", rbind = TRUE)
+        dat2 <- import_list(rep(data_file, 2), setclass = "tbl", rbind = TRUE, trust = TRUE)
         expect_true(inherits(dat2, "tbl"))
     })
 })
@@ -157,7 +157,7 @@ test_that("Informative message when files are not found #389", {
         export(mtcars, mtcars_file)
         expect_true(file.exists(mtcars_file))
         expect_false(file.exists("nonexisting.rds"))
-        expect_warning(import_list(c(mtcars_file, "nonexisting.rds")), "^Import failed for nonexisting")
+        expect_warning(import_list(c(mtcars_file, "nonexisting.rds"), trust = TRUE), "^Import failed for nonexisting")
     })
 })
 
@@ -167,8 +167,8 @@ test_that("Missing files and rbind", {
         expect_true(file.exists(mtcars_file))
         expect_false(file.exists("nonexisting.rds"))
         expect_false(file.exists("nonexisting2.rds"))
-        expect_warning(x <- import_list(c(mtcars_file, "nonexisting.rds"), rbind = TRUE), "^Import failed for nonexisting")
+        expect_warning(x <- import_list(c(mtcars_file, "nonexisting.rds"), rbind = TRUE, trust = TRUE), "^Import failed for nonexisting")
         expect_true(is.data.frame(x))
-        expect_warning(x <- import_list(c("nonexisting.rds", "nonexisting2.rds"), rbind = TRUE), "^Import failed for nonexisting")
+        expect_warning(x <- import_list(c("nonexisting.rds", "nonexisting2.rds"), rbind = TRUE, trust = TRUE), "^Import failed for nonexisting")
     })
 })
