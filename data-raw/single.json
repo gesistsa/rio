@@ -82,12 +82,39 @@
     },
     {
         "input": "gz",
-        "format": "gz",
+        "format": "gzip",
         "type": "archive",
-        "format_name": "Compressed CSV",
-        "import_function": "data.table::fread",
-        "export_function": "data.table::fwrite",
-        "note": "Only csv.gz is supported"
+        "format_name": "Gzip",
+        "import_function": "base::gzfile",
+        "export_function": "base::gzfile",
+        "note": ""
+    },
+    {
+        "input": "gzip",
+        "format": "gzip",
+        "type": "archive",
+        "format_name": "Gzip",
+        "import_function": "base::gzfile",
+        "export_function": "base::gzfile",
+        "note": ""
+    },
+    {
+        "input": "bz2",
+        "format": "bzip2",
+        "type": "archive",
+        "format_name": "Bzip2",
+        "import_function": "base::bzfile",
+        "export_function": "base::bzfile",
+        "note": ""
+    },
+    {
+        "input": "bzip2",
+        "format": "bzip2",
+        "type": "archive",
+        "format_name": "Bzip2",
+        "import_function": "base::bzfile",
+        "export_function": "base::bzfile",
+        "note": ""
     },
     {
         "input": ";",
