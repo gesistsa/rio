@@ -135,12 +135,6 @@ import <- function(file, format, setclass = getOption("rio.import.class", "data.
     }
     if (missing(format)) {
         format <- get_info(file)$format
-        ## if (format %in% c("gz")) {
-        ##     format <- get_info(tools::file_path_sans_ext(file, compression = FALSE))$format
-        ##     if (format != "csv") {
-        ##         stop("gz is only supported for csv (for now).", call. = FALSE)
-        ##     }
-        ## }
     } else {
         ## format such as "|"
         format <- .standardize_format(format)

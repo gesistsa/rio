@@ -11,7 +11,7 @@ test_that("Recognize compressed file types", {
 
 test_that("Export to compressed (zip, tar) / import", {
     skip_if(getRversion() <= "4.0")
-    formats <- c("zip", "tar", "tar.gz")
+    formats <- c("zip", "tar", "tar.gz", "tgz", "tar.bz2", "tbz2")
     for (format in formats) {
         withr::with_tempfile("iris_path", fileext = paste0(".csv.", format), code = {
             e1 <- export(iris, iris_path)
@@ -20,8 +20,11 @@ test_that("Export to compressed (zip, tar) / import", {
             expect_true(is.data.frame(import(iris_path, which = 1)))
             base_file_name <- gsub(paste0("\\.", format), "", basename(iris_path))
             expect_true(is.data.frame(import(iris_path, which = base_file_name)))
-            if (format == "tar.gz") {
+            if (format %in% c("tar.gz", "tgz")) {
                 expect_true(R.utils::isGzipped(iris_path, method = "content"))
+            }
+            if (format %in% c("tar.bzip2", "tbz2")) {
+                expect_true(R.utils::isBzipped(iris_path, method = "content"))
             }
         })
     }

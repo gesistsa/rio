@@ -5,6 +5,15 @@ find_compress <- function(f) {
     if (grepl("\\.tar\\.gz$", f)) {
         return(list(file = sub("\\.tar\\.gz$", "", f), compress = "tar.gz"))
     }
+    if (grepl(".tgz$", f)) {
+        return(list(file = sub("\\.tgz$", "", f), compress = "tar.gz"))
+    }
+    if (grepl("\\.tar\\.bz2$", f)) {
+        return(list(file = sub("\\.tar\\.bz2$", "", f), compress = "tar.bz2"))
+    }
+    if (grepl("\\.tbz2$", f)) {
+        return(list(file = sub("\\.tbz2$", "", f), compress = "tar.bz2"))
+    }
     if (grepl("\\.tar$", f)) {
         return(list(file = sub("\\.tar$", "", f), compress = "tar"))
     }
@@ -25,7 +34,7 @@ find_compress <- function(f) {
     return(list(file = f, compress = NA_character_))
 }
 
-compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "gzip", "bzip2")) {
+compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "tar.bz2", "gzip", "bzip2")) {
     type <- ext <- match.arg(type)
     cfile2 <- basename(cfile)
     filename <- normalizePath(filename)
@@ -47,6 +56,9 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "gzip
     }
     if (type == "tar.gz") {
         o <- utils::tar(cfile2, files = basename(filename), compression = "gzip")
+    }
+    if (type == "tar.bz2") {
+        o <- utils::tar(cfile2, files = basename(filename), compression = "bzip2")
     }
     setwd(wd)
     if (o != 0) {
@@ -70,7 +82,7 @@ parse_archive <- function(file, which, file_type, ...) {
         file_list <- utils::unzip(file, list = TRUE)$Name
         extract_func <- utils::unzip
     }
-    if (file_type %in% c("tar", "tar.gz")) {
+    if (file_type %in% c("tar", "tar.gz", "tar.bz2")) {
         file_list <- utils::untar(file, list = TRUE)
         extract_func <- utils::untar
     }

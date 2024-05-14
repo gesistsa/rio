@@ -27,6 +27,33 @@
         "note": ""
     },
     {
+        "input": "tgz",
+        "format": "tar",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
+        "input": "tar.bz2",
+        "format": "tar",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
+        "input": "tbz2",
+        "format": "tar",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
         "input": "bmp",
         "format": "bmp",
         "type": "known",
