@@ -75,7 +75,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>file</dt>
-<dd><p>A character string naming a file, URL, or single-file .zip or .tar archive.</p></dd>
+<dd><p>A character string naming a file, URL, or single-file (can be Gzip or Bzip2 compressed), .zip or .tar archive.</p></dd>
 
 
 <dt>format</dt>
@@ -110,7 +110,6 @@ The parameter takes precedents over parameters in ... which set a different clas
     <p>This function imports a data frame or matrix from a data file with the file format based on the file extension (or the manually specified format, if <code>format</code> is specified).</p>
 <p><code>import</code> supports the following file formats:</p>
 <ul><li><p>Comma-separated data (.csv), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
-<li><p>gzip comma-separated data (.csv.gz), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
 <li><p>Pipe-separated data (.psv), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
 <li><p>Tab-separated data (.tsv), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
 <li><p>SAS (.sas7bdat), using <code><a href="https://haven.tidyverse.org/reference/read_sas.html" class="external-link">haven::read_sas()</a></code></p></li>
