@@ -111,11 +111,9 @@ parse_archive <- function(file, which, file_type, ...) {
     if (ext == "bzip2") {
         FUN <- bzfile
     }
-    tmp_cfile <- R.utils::compressFile(filename = filename, ext = ext, FUN = FUN, overwrite = TRUE, remove = remove)
-    if (tmp_cfile == cfile) {
-        return(cfile)
-    }
+    tmp_cfile <- R.utils::compressFile(filename = filename, destname = tempfile(), ext = ext, FUN = FUN, overwrite = TRUE, remove = remove)
     file.copy(from = tmp_cfile, to = cfile, overwrite = TRUE)
+    unlink(tmp_cfile)
     return(cfile)
 }
 
