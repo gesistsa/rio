@@ -14,7 +14,6 @@
 #'
 #' \itemize{
 #'     \item Comma-separated data (.csv), using [data.table::fwrite()]
-#'     \item gzip comma-separated data (.csv.gz), using [data.table::fwrite()]
 #'     \item Pipe-separated data (.psv), using [data.table::fwrite()]
 #'     \item Tab-separated data (.tsv), using [data.table::fwrite()]
 #'     \item SAS (.sas7bdat), using [haven::write_sas()].

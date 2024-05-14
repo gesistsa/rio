@@ -70,10 +70,6 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "tar.
 }
 
 parse_archive <- function(file, which, file_type, ...) {
-    ## supported_formats <- c("zip", "tar", "tar.gz", "gzip", "bzip2")
-    ## if (!file_type %in% supported_formats) {
-    ##     stop("Unsupported file_type. Use ", paste(supported_formats, collapse = ", "), call. = FALSE)
-    ## }
     if (file_type %in% c("gzip", "bzip2")) {
         ## it doesn't have the same interface as unzip
         return(.parse_rutils(filename = file, file_type = file_type))
@@ -89,13 +85,6 @@ parse_archive <- function(file, which, file_type, ...) {
 
     d <- tempfile()
     dir.create(d)
-
-    ## if (missing(which)) {
-    ##     if (length(file_list) > 1) {
-    ##         warning(sprintf("%s archive contains multiple files. Attempting first file.", file_type))
-    ##     }
-    ##     which <- 1
-    ## }
 
     if (is.numeric(which)) {
         extract_func(file, files = file_list[which], exdir = d)

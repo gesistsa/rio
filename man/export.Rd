@@ -30,7 +30,6 @@ The output file can be to a compressed directory, simply by adding an appropriat
 
 \itemize{
 \item Comma-separated data (.csv), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
-\item gzip comma-separated data (.csv.gz), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
 \item Pipe-separated data (.psv), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
 \item Tab-separated data (.tsv), using \code{\link[data.table:fwrite]{data.table::fwrite()}}
 \item SAS (.sas7bdat), using \code{\link[haven:write_sas]{haven::write_sas()}}.
