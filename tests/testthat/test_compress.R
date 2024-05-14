@@ -33,11 +33,7 @@ test_that("Export to compressed (gz, bz2) / import", {
         withr::with_tempfile("iris_path", fileext = paste0(".csv.", format), code = {
             e1 <- export(iris, iris_path)
             expect_true(file.exists(iris_path))
-            ## expect_true(is.data.frame(import(iris_path)))
-            ## expect_true(is.data.frame(import(iris_path)))
-            ## expect_true(is.data.frame(import(iris_path, which = 1)))
-            ## base_file_name <- gsub(paste0("\\.", format), "", basename(iris_path))
-            ## expect_true(is.data.frame(import(iris_path, which = base_file_name)))
+            expect_true(is.data.frame(import(iris_path)))
             if (format %in% c("gzip", "gz")) {
                 expect_true(R.utils::isGzipped(iris_path, method = "content"))
             }
