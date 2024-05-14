@@ -8,10 +8,10 @@ test_that("Data identical (text formats)", {
 
 test_that("Data identical (R formats)", {
     withr::with_tempdir(code = {
-        expect_equivalent(import(export(mtcars, "mtcars.rds")), mtcars)
-        expect_equivalent(import(export(mtcars, "mtcars.R")), mtcars)
-        expect_equivalent(import(export(mtcars, "mtcars.RData")), mtcars)
-        expect_equivalent(import(export(mtcars, "mtcars.R", format = "dump")), mtcars)
+        expect_equivalent(import(export(mtcars, "mtcars.rds"), trust = TRUE), mtcars)
+        expect_equivalent(import(export(mtcars, "mtcars.R"), trust = TRUE), mtcars)
+        expect_equivalent(import(export(mtcars, "mtcars.RData"), trust = TRUE), mtcars)
+        expect_equivalent(import(export(mtcars, "mtcars.R", format = "dump"), trust = TRUE), mtcars)
     })
 })
 
