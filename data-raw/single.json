@@ -27,6 +27,33 @@
         "note": ""
     },
     {
+        "input": "tgz",
+        "format": "tar",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
+        "input": "tar.bz2",
+        "format": "tar",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
+        "input": "tbz2",
+        "format": "tar",
+        "type": "archive",
+        "format_name": "Archive files (handled by tar)",
+        "import_function": "utils::untar",
+        "export_function": "utils::tar",
+        "note": ""
+    },
+    {
         "input": "bmp",
         "format": "bmp",
         "type": "known",
@@ -82,12 +109,39 @@
     },
     {
         "input": "gz",
-        "format": "gz",
+        "format": "gzip",
         "type": "archive",
-        "format_name": "Compressed CSV",
-        "import_function": "data.table::fread",
-        "export_function": "data.table::fwrite",
-        "note": "Only csv.gz is supported"
+        "format_name": "Gzip",
+        "import_function": "base::gzfile",
+        "export_function": "base::gzfile",
+        "note": ""
+    },
+    {
+        "input": "gzip",
+        "format": "gzip",
+        "type": "archive",
+        "format_name": "Gzip",
+        "import_function": "base::gzfile",
+        "export_function": "base::gzfile",
+        "note": ""
+    },
+    {
+        "input": "bz2",
+        "format": "bzip2",
+        "type": "archive",
+        "format_name": "Bzip2",
+        "import_function": "base::bzfile",
+        "export_function": "base::bzfile",
+        "note": ""
+    },
+    {
+        "input": "bzip2",
+        "format": "bzip2",
+        "type": "archive",
+        "format_name": "Bzip2",
+        "import_function": "base::bzfile",
+        "export_function": "base::bzfile",
+        "note": ""
     },
     {
         "input": ";",

@@ -13,7 +13,7 @@ import(
 )
 }
 \arguments{
-\item{file}{A character string naming a file, URL, or single-file .zip or .tar archive.}
+\item{file}{A character string naming a file, URL, or single-file (can be Gzip or Bzip2 compressed), .zip or .tar archive.}
 
 \item{format}{An optional character string code of file format, which can be used to override the format inferred from \code{file}. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), and \dQuote{|} (for pipe-separated values).}
 
@@ -41,7 +41,6 @@ This function imports a data frame or matrix from a data file with the file form
 
 \itemize{
 \item Comma-separated data (.csv), using \code{\link[data.table:fread]{data.table::fread()}}
-\item gzip comma-separated data (.csv.gz), using \code{\link[data.table:fread]{data.table::fread()}}
 \item Pipe-separated data (.psv), using \code{\link[data.table:fread]{data.table::fread()}}
 \item Tab-separated data (.tsv), using \code{\link[data.table:fread]{data.table::fread()}}
 \item SAS (.sas7bdat), using \code{\link[haven:read_sas]{haven::read_sas()}}

@@ -1,7 +1,7 @@
 #' @rdname import
 #' @title Import
 #' @description Read in a data.frame from a file. Exceptions to this rule are Rdata, RDS, and JSON input file formats, which return the originally saved object without changing its class.
-#' @param file A character string naming a file, URL, or single-file .zip or .tar archive.
+#' @param file A character string naming a file, URL, or single-file (can be Gzip or Bzip2 compressed), .zip or .tar archive.
 #' @param format An optional character string code of file format, which can be used to override the format inferred from `file`. Shortcuts include: \dQuote{,} (for comma-separated values), \dQuote{;} (for semicolon-separated values), and \dQuote{|} (for pipe-separated values).
 #' @param setclass An optional character vector specifying one or more classes
 #' to set on the import. By default, the return object is always a
@@ -18,7 +18,6 @@
 #'
 #' \itemize{
 #'     \item Comma-separated data (.csv), using [data.table::fread()]
-#'     \item gzip comma-separated data (.csv.gz), using [data.table::fread()]
 #'     \item Pipe-separated data (.psv), using [data.table::fread()]
 #'     \item Tab-separated data (.tsv), using [data.table::fread()]
 #'     \item SAS (.sas7bdat), using [haven::read_sas()]
@@ -124,26 +123,17 @@ import <- function(file, format, setclass = getOption("rio.import.class", "data.
     if ((file != "clipboard") && !file.exists(file)) {
         stop("No such file: ", file, call. = FALSE)
     }
-    if (grepl("\\.zip$", file)) {
-        if (missing(which)) {
-            file <- parse_archive(file, file_type = "zip")
-        } else {
-            file <- parse_archive(file, which = which, file_type = "zip")
-        }
-    } else if (grepl("\\.tar", file)) {
-        if (missing(which)) {
-            which <- 1
-        }
-        file <- parse_archive(file, which = which, file_type = "tar")
+    ## compressed file, f is a pretty bad name; but export() uses it.
+    f <- find_compress(file)
+    if (!is.na(f$compress)) {
+        cfile <- file
+        file <- f$file
+        which <- ifelse(missing(which), 1, which)
+        format <- ifelse(isFALSE(missing(format)), tolower(format), get_info(file)$input)
+        file <- parse_archive(cfile, which = which, file_type = f$compress)
     }
     if (missing(format)) {
         format <- get_info(file)$format
-        if (format %in% c("gz")) {
-            format <- get_info(tools::file_path_sans_ext(file, compression = FALSE))$format
-            if (format != "csv") {
-                stop("gz is only supported for csv (for now).", call. = FALSE)
-            }
-        }
     } else {
         ## format such as "|"
         format <- .standardize_format(format)
