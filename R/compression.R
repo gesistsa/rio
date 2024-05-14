@@ -78,12 +78,12 @@ parse_archive <- function(file, which, file_type, ...) {
     d <- tempfile()
     dir.create(d)
 
-    if (missing(which)) {
-        if (length(file_list) > 1) {
-            warning(sprintf("%s archive contains multiple files. Attempting first file.", file_type))
-        }
-        which <- 1
-    }
+    ## if (missing(which)) {
+    ##     if (length(file_list) > 1) {
+    ##         warning(sprintf("%s archive contains multiple files. Attempting first file.", file_type))
+    ##     }
+    ##     which <- 1
+    ## }
 
     if (is.numeric(which)) {
         extract_func(file, files = file_list[which], exdir = d)

@@ -27,6 +27,22 @@ test_that("Export to compressed (zip, tar) / import", {
     }
 })
 
+test_that("Multi-item zip", {
+    formats <- c("zip")
+    for (format in formats) {
+        withr::with_tempfile("iris_path", fileext = paste0(".csv.", format), code = {
+            list_of_df <- list(mtcars1 = mtcars[1:10, ], mtcars2 = mtcars[11:20, ], mtcars3 = mtcars[21:32, ])
+            export_list(list_of_df, file = "%s.csv", archive = iris_path)
+            y <- import(iris_path)
+            expect_true(is.data.frame(y))
+            expect_silent(z1 <- import(iris_path, which = 1))
+            expect_silent(z2 <- import(iris_path, which = 2))
+            expect_true(identical(y, z1))
+            expect_false(identical(y, z2))
+        })
+    }
+})
+
 test_that("Export to compressed (gz, bz2) / import", {
     formats <- c("gz", "gzip", "bz2", "bzip2")
     for (format in formats) {
