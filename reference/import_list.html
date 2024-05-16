@@ -120,6 +120,14 @@ The parameter takes precedents over parameters in ... which set a different clas
     <p>When file is a vector of file paths and any files are missing, those files are ignored (with warnings) and this function will not raise any error.</p>
     </div>
     <div class="section level2">
+    <h2 id="trust">Trust<a class="anchor" aria-label="anchor" href="#trust"></a></h2>
+    <p>For serialization formats (.R, .RDS, and .RData), please note that you should only load these files from trusted sources. It is because these formats are not necessarily for storing rectangular data and can also be used to store many things, e.g. code. Importing these files could lead to arbitary code execution. Please read the security principles by the R Project (Plummer, 2024). When importing these files via <code>rio</code>, you should affirm that you trust these files, i.e. <code>trust = TRUE</code>. See example below. If this affirmation is missing, the current version assumes <code>trust</code> to be true for backward compatibility and a deprecation notice will be printed. In the next major release (2.0.0), you must explicitly affirm your trust when importing these files.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Plummer, M (2024). Statement on CVE-2024-27322. <a href="https://blog.r-project.org/2024/05/10/statement-on-cve-2024-27322/" class="external-link">https://blog.r-project.org/2024/05/10/statement-on-cve-2024-27322/</a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="import.html">import()</a></code>, <code><a href="export_list.html">export_list()</a></code>, <code><a href="export.html">export()</a></code></p></div>
     </div>
