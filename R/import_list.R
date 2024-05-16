@@ -84,6 +84,13 @@ import_list <- function(file, setclass = getOption("rio.import.class", "data.fra
         file <- remote_to_local(file)
     }
     if (get_info(file)$format == "rdata") {
+        dots <- list(...)
+        if ("trust" %in% names(dots)) {
+            trust <- dots[["trust"]]
+        } else {
+            trust <- getOption("rio.import.trust", default = NULL)
+        }
+        .check_trust(trust, format = "RData")
         e <- new.env()
         load(file, envir = e)
         return(as.list(e))
