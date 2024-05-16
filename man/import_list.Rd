@@ -43,6 +43,10 @@ Use \code{\link[=import]{import()}} to import a list of data frames from a vecto
 \details{
 When file is a vector of file paths and any files are missing, those files are ignored (with warnings) and this function will not raise any error.
 }
+\section{Trust}{
+For serialization formats (.R, .RDS, and .RData), please note that you should only load these files from trusted sources. It is because these formats are not necessarily for storing rectangular data and can also be used to store many things, e.g. code. Importing these files could lead to arbitary code execution. Please read the security principles by the R Project (Plummer, 2024). When importing these files via \code{rio}, you should affirm that you trust these files, i.e. \code{trust = TRUE}. See example below. If this affirmation is missing, the current version assumes \code{trust} to be true for backward compatibility and a deprecation notice will be printed. In the next major release (2.0.0), you must explicitly affirm your trust when importing these files.
+}
+
 \examples{
 ## For demo, a temp. file path is created with the file extension .xlsx
 xlsx_file <- tempfile(fileext = ".xlsx")
@@ -62,6 +66,9 @@ import_list(xlsx_file)
 
 # import and rbind all worksheets, the return value is a data frame
 import_list(xlsx_file, rbind = TRUE)
+}
+\references{
+Plummer, M (2024). Statement on CVE-2024-27322. \url{https://blog.r-project.org/2024/05/10/statement-on-cve-2024-27322/}
 }
 \seealso{
 \code{\link[=import]{import()}}, \code{\link[=export_list]{export_list()}}, \code{\link[=export]{export()}}

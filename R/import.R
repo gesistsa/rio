@@ -61,6 +61,7 @@
 #'
 #' After importing metadata-rich file formats (e.g., from Stata or SPSS), it may be helpful to recode labelled variables to character or factor using [characterize()] or [factorize()] respectively.
 #'
+#' # Trust
 #' For serialization formats (.R, .RDS, and .RData), please note that you should only load these files from trusted sources. It is because these formats are not necessarily for storing rectangular data and can also be used to store many things, e.g. code. Importing these files could lead to arbitary code execution. Please read the security principles by the R Project (Plummer, 2024). When importing these files via `rio`, you should affirm that you trust these files, i.e. `trust = TRUE`. See example below. If this affirmation is missing, the current version assumes `trust` to be true for backward compatibility and a deprecation notice will be printed. In the next major release (2.0.0), you must explicitly affirm your trust when importing these files.
 #'
 #' @note For csv and txt files with row names exported from [export()], it may be helpful to specify `row.names` as the column of the table which contain row names. See example below.

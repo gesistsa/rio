@@ -59,3 +59,22 @@ test_that("`trust` wont cause problems for other import methods", {
         expect_error(import(iris_file, trust = FALSE), NA)
     })
 })
+
+test_that("`trust` for import_list()", {
+    withr::with_tempfile("iris_file", fileext = ".rdata", code = {
+        export(iris, iris_file)
+        lifecycle::expect_deprecated(import_list(iris_file), regexp = "set to FALSE by default")
+        expect_silent(import_list(iris_file, trust = TRUE))
+        expect_error(import_list(iris_file, trust = FALSE))
+
+    })
+})
+
+test_that("`trust` wont cause problems for other formats in import_list", {
+    withr::with_tempfile("data_file", fileext = ".xlsx", code = {
+        export(list(a = mtcars, b = iris), data_file)
+        expect_silent(import(data_file))
+        expect_silent(import(data_file, trust = TRUE))
+        expect_error(import(data_file, trust = FALSE), NA)
+    })
+})

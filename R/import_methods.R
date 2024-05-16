@@ -153,9 +153,13 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 #' @export
-.import.rio_rdata <- function(file, which = 1, envir = new.env(), trust = getOption("rio.import.trust", default = NULL), ...) {
+.import.rio_rdata <- function(file, which = 1, envir = new.env(), trust = getOption("rio.import.trust", default = NULL), .return_everything = FALSE, ...) {
     .check_trust(trust, format = "RData")
     load(file = file, envir = envir)
+    if (isTRUE(.return_everything)) {
+        ## for import_list()
+        return(as.list(envir))
+    }
     if (missing(which)) {
         if (length(ls(envir)) > 1) {
           warning("Rdata file contains multiple objects. Returning first object.")
