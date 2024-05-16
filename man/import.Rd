@@ -83,12 +83,14 @@ object (not just a data frame).
 \code{import} attempts to standardize the return value from the various import functions to the extent possible, thus providing a uniform data structure regardless of what import package or function is used. It achieves this by storing any optional variable-related attributes at the variable level (i.e., an attribute for \code{mtcars$mpg} is stored in \code{attributes(mtcars$mpg)} rather than \code{attributes(mtcars)}). If you would prefer these attributes to be stored at the data.frame-level (i.e., in \code{attributes(mtcars)}), see \code{\link[=gather_attrs]{gather_attrs()}}.
 
 After importing metadata-rich file formats (e.g., from Stata or SPSS), it may be helpful to recode labelled variables to character or factor using \code{\link[=characterize]{characterize()}} or \code{\link[=factorize]{factorize()}} respectively.
-
-For serialization formats (.R, .RDS, and .RData), please note that you should only load these files from trusted sources. It is because these formats are not necessarily for storing rectangular data and can also be used to store many things, e.g. code. Importing these files could lead to arbitary code execution. Please read the security principles by the R Project (Plummer, 2024). When importing these files via \code{rio}, you should affirm that you trust these files, i.e. \code{trust = TRUE}. See example below. If this affirmation is missing, the current version assumes \code{trust} to be true for backward compatibility and a deprecation notice will be printed. In the next major release (2.0.0), you must explicitly affirm your trust when importing these files.
 }
 \note{
 For csv and txt files with row names exported from \code{\link[=export]{export()}}, it may be helpful to specify \code{row.names} as the column of the table which contain row names. See example below.
 }
+\section{Trust}{
+For serialization formats (.R, .RDS, and .RData), please note that you should only load these files from trusted sources. It is because these formats are not necessarily for storing rectangular data and can also be used to store many things, e.g. code. Importing these files could lead to arbitary code execution. Please read the security principles by the R Project (Plummer, 2024). When importing these files via \code{rio}, you should affirm that you trust these files, i.e. \code{trust = TRUE}. See example below. If this affirmation is missing, the current version assumes \code{trust} to be true for backward compatibility and a deprecation notice will be printed. In the next major release (2.0.0), you must explicitly affirm your trust when importing these files.
+}
+
 \examples{
 ## For demo, a temp. file path is created with the file extension .csv
 csv_file <- tempfile(fileext = ".csv")

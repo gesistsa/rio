@@ -7,6 +7,8 @@
 #' @param rbind_fill If `rbind = TRUE`, a logical indicating whether to set the `fill = TRUE` (and fill missing columns with `NA`).
 #' @param \dots Additional arguments passed to [import()]. Behavior may be unexpected if files are of different formats.
 #' @inheritParams import
+#' @inheritSection import Trust
+#' @inherit import references
 #' @return If `rbind=FALSE` (the default), a list of a data frames. Otherwise, that list is passed to [data.table::rbindlist()] with `fill = TRUE` and returns a data frame object of class set by the `setclass` argument; if this operation fails, the list is returned.
 #' @details When file is a vector of file paths and any files are missing, those files are ignored (with warnings) and this function will not raise any error.
 #' @examples
