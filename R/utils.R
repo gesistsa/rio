@@ -150,3 +150,11 @@ escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&a
     }
     NULL
 }
+
+.reset_which <- function(file_type, which) {
+    ## see #412
+    if (file_type %in% c("zip", "tar", "tar.gz", "tar.bz2")) {
+        return(1)
+    }
+    return(which)
+}

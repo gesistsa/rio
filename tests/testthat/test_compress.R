@@ -62,3 +62,30 @@ test_that("Export to compressed (gz, bz2) / import", {
         })
     }
 })
+
+test_that("Prevent the reuse of `which` for zip and tar", {
+    skip_if(getRversion() <= "4.0")
+    formats <- c("zip", "tar", "tar.gz", "tgz", "tar.bz2", "tbz2")
+    for (format in formats) {
+        withr::with_tempfile("data_path", fileext = paste0(".xlsx.", format), code = {
+            rio::export(list(some_iris = head(iris)), data_path)
+            expect_error(import(data_path), NA)
+            if (format == "zip") {
+                raw_file <- utils::unzip(data_path, list = TRUE)$Name[1]
+            } else {
+                raw_file <- utils::untar(data_path, list = TRUE)
+            }
+            expect_error(import(data_path, which = raw_file), NA)
+            expect_error(suppressWarnings(import(data_path, which = "some_iris")))
+        })
+    }
+    ## but not for non-archive format, e.g. .xlsx.gz
+    formats <- c("gz", "bz2")
+    for (format in formats) {
+        withr::with_tempfile("data_path", fileext = paste0(".xlsx.", format), code = {
+            rio::export(list(some_iris = head(iris)), data_path)
+            expect_error(import(data_path), NA)
+            expect_error(import(data_path, which = "some_iris"), NA)
+        })
+    }
+})
