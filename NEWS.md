@@ -3,6 +3,10 @@
 * Add `trust` parameter to functions that are used to load various R environment formats (`.R`, `.Rds`, `.Rdata`, etc). This parameter is defaulted to `TRUE` today to ensure backwards compatibility. A deprecation notice warns this will default to `FALSE` in `rio` 2.0. We are informing users that these data types should only be loaded from trusted sources, which should be affirmatively attested to.
 * Test and fix the compression mechanism: Gzip, Bzip2 are now working as expected.
 
+Bug fixes
+
+- Fix #412, prevent double usage of `which` for archive formats
+
 # rio 1.0.2
 
 * For missing files in `import_list` it gives more informative warnings fix #389
