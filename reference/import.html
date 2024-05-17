@@ -92,7 +92,7 @@ The parameter takes precedents over parameters in ... which set a different clas
 
 
 <dt>which</dt>
-<dd><p>This argument is used to control import from multi-object files; as a rule <code>import</code> only ever returns a single data frame (use <code><a href="import_list.html">import_list()</a></code> to import multiple data frames from a multi-object file). If <code>file</code> is a compressed directory, <code>which</code> can be either a character string specifying a filename or an integer specifying which file (in locale sort order) to extract from the compressed directory. For Excel spreadsheets, this can be used to specify a sheet name or number. For .Rdata files, this can be an object name. For HTML files, it identifies which table to extract (from document order). Ignored otherwise. A character string value will be used as a regular expression, such that the extracted file is the first match of the regular expression against the file names in the archive.</p></dd>
+<dd><p>This argument is used to control import from multi-object files; as a rule <code>import</code> only ever returns a single data frame (use <code><a href="import_list.html">import_list()</a></code> to import multiple data frames from a multi-object file). If <code>file</code> is an archive format (zip and tar), <code>which</code> can be either a character string specifying a filename or an integer specifying which file (in locale sort order) to extract from the compressed directory. But please see the section <code>which</code> below. For Excel spreadsheets, this can be used to specify a sheet name or number. For .Rdata files, this can be an object name. For HTML files, it identifies which table to extract (from document order). Ignored otherwise. A character string value will be used as a regular expression, such that the extracted file is the first match of the regular expression against the file names in the archive.</p></dd>
 
 
 <dt>...</dt>
@@ -157,6 +157,11 @@ object (not just a data frame).</p></li>
     <div class="section level2">
     <h2 id="trust">Trust<a class="anchor" aria-label="anchor" href="#trust"></a></h2>
     <p>For serialization formats (.R, .RDS, and .RData), please note that you should only load these files from trusted sources. It is because these formats are not necessarily for storing rectangular data and can also be used to store many things, e.g. code. Importing these files could lead to arbitary code execution. Please read the security principles by the R Project (Plummer, 2024). When importing these files via <code>rio</code>, you should affirm that you trust these files, i.e. <code>trust = TRUE</code>. See example below. If this affirmation is missing, the current version assumes <code>trust</code> to be true for backward compatibility and a deprecation notice will be printed. In the next major release (2.0.0), you must explicitly affirm your trust when importing these files.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="which">Which<a class="anchor" aria-label="anchor" href="#which"></a></h2>
+    <p>For compressed archives (zip and tar, where a compressed file can contain multiple files), it is possible to come to a situation where the parameter <code>which</code> is used twice to indicate two different concepts. For example, it is unclear for <code>.xlsx.zip</code>whether <code>which</code> refers to the selection of an exact file in the archive or the selection of an exact sheet in the decompressed Excel file. In these cases, <code>rio</code> assumes that <code>which</code> is only used for the selection of file. After the selection of file with <code>which</code>, <code>rio</code> will return the first item, e.g. the first sheet.</p>
+<p>Please note, however, <code>.gz</code> and <code>.bz2</code> (e.g. <code>.xlsx.gz</code>) are compressed, but not archive format. In those cases, <code>which</code> is used the same way as the non-compressed format, e.g. selection of sheet for Excel.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
