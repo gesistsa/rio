@@ -47,6 +47,12 @@ When file is a vector of file paths and any files are missing, those files are i
 For serialization formats (.R, .RDS, and .RData), please note that you should only load these files from trusted sources. It is because these formats are not necessarily for storing rectangular data and can also be used to store many things, e.g. code. Importing these files could lead to arbitary code execution. Please read the security principles by the R Project (Plummer, 2024). When importing these files via \code{rio}, you should affirm that you trust these files, i.e. \code{trust = TRUE}. See example below. If this affirmation is missing, the current version assumes \code{trust} to be true for backward compatibility and a deprecation notice will be printed. In the next major release (2.0.0), you must explicitly affirm your trust when importing these files.
 }
 
+\section{Which}{
+For compressed archives (zip and tar, where a compressed file can contain multiple files), it is possible to come to a situation where the parameter \code{which} is used twice to indicate two different concepts. For example, it is unclear for \code{.xlsx.zip}whether \code{which} refers to the selection of an exact file in the archive or the selection of an exact sheet in the decompressed Excel file. In these cases, \code{rio} assumes that \code{which} is only used for the selection of file. After the selection of file with \code{which}, \code{rio} will return the first item, e.g. the first sheet.
+
+Please note, however, \code{.gz} and \code{.bz2} (e.g. \code{.xlsx.gz}) are compressed, but not archive format. In those cases, \code{which} is used the same way as the non-compressed format, e.g. selection of sheet for Excel.
+}
+
 \examples{
 ## For demo, a temp. file path is created with the file extension .xlsx
 xlsx_file <- tempfile(fileext = ".xlsx")
