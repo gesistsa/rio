@@ -89,7 +89,8 @@ import_list <- function(file, setclass = getOption("rio.import.class", "data.fra
     if (get_info(file)$format == "rdata") {
         return(.import.rio_rdata(file = file, .return_everything = TRUE, ...))
     }
-    if (!get_info(file)$format %in% c("html", "xlsx", "xls", "zip")) {
+    archive_format <- find_compress(file)
+    if (!get_info(file)$format %in% c("html", "xlsx", "xls") && !archive_format$compress %in% c("zip", "tar", "tar.gz", "tar.bz2")) {
         which <- 1
         whichnames <- NULL
     }
@@ -118,16 +119,14 @@ import_list <- function(file, setclass = getOption("rio.import.class", "data.fra
             whichnames <- whichnames[which]
         }
     }
-    if (get_info(file)$format %in% c("zip")) {
+    if (archive_format$compress %in% c("zip", "tar", "tar.gz", "tar.bz2")) {
+        whichnames <- .list_archive(file, archive_format$compress)
         if (missing(which)) {
-            whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
             which <- seq_along(whichnames)
             names(which) <- .strip_exts(whichnames)
         } else if (is.character(which)) {
-            whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
             whichnames <- whichnames[whichnames %in% which]
         } else {
-            whichnames <- utils::unzip(file, list = TRUE)[, "Name"]
             names(which) <- .strip_exts(whichnames)
         }
     }
