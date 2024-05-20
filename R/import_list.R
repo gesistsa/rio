@@ -1,6 +1,6 @@
 #' @title Import list of data frames
-#' @description Use [import()] to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zipped directory in a zip file, or HTML file)
-#' @param file A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip file, or HTML file), or a vector of file paths for multiple files to be imported.
+#' @description Use [import()] to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, compressed directory in a zip file or tar archive, or HTML file)
+#' @param file A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip file, tar archive, or HTML file), or a vector of file paths for multiple files to be imported.
 #' @param which If `file` is a single file path, this specifies which objects should be extracted (passed to [import()]'s `which` argument). Ignored otherwise.
 #' @param rbind A logical indicating whether to pass the import list of data frames through [data.table::rbindlist()].
 #' @param rbind_label If `rbind = TRUE`, a character string specifying the name of a column to add to the data frame indicating its source file.
@@ -11,7 +11,7 @@
 #' @inheritSection import Which
 #' @inherit import references
 #' @return If `rbind=FALSE` (the default), a list of a data frames. Otherwise, that list is passed to [data.table::rbindlist()] with `fill = TRUE` and returns a data frame object of class set by the `setclass` argument; if this operation fails, the list is returned.
-#' @details When file is a vector of file paths and any files are missing, those files are ignored (with warnings) and this function will not raise any error.
+#' @details When file is a vector of file paths and any files are missing, those files are ignored (with warnings) and this function will not raise any error. For compressed files, the file name must also contain information about the file format of all compressed files, e.g. `files.csv.zip` for this function to work.
 #' @examples
 #' ## For demo, a temp. file path is created with the file extension .xlsx
 #' xlsx_file <- tempfile(fileext = ".xlsx")

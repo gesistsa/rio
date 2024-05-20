@@ -15,7 +15,7 @@ import_list(
 )
 }
 \arguments{
-\item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip file, or HTML file), or a vector of file paths for multiple files to be imported.}
+\item{file}{A character string containing a single file name for a multi-object file (e.g., Excel workbook, zip file, tar archive, or HTML file), or a vector of file paths for multiple files to be imported.}
 
 \item{setclass}{An optional character vector specifying one or more classes
 to set on the import. By default, the return object is always a
@@ -38,10 +38,10 @@ The parameter takes precedents over parameters in \dots which set a different cl
 If \code{rbind=FALSE} (the default), a list of a data frames. Otherwise, that list is passed to \code{\link[data.table:rbindlist]{data.table::rbindlist()}} with \code{fill = TRUE} and returns a data frame object of class set by the \code{setclass} argument; if this operation fails, the list is returned.
 }
 \description{
-Use \code{\link[=import]{import()}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, zipped directory in a zip file, or HTML file)
+Use \code{\link[=import]{import()}} to import a list of data frames from a vector of file names or from a multi-object file (Excel workbook, .Rdata file, compressed directory in a zip file or tar archive, or HTML file)
 }
 \details{
-When file is a vector of file paths and any files are missing, those files are ignored (with warnings) and this function will not raise any error.
+When file is a vector of file paths and any files are missing, those files are ignored (with warnings) and this function will not raise any error. For compressed files, the file name must also contain information about the file format of all compressed files, e.g. \code{files.csv.zip} for this function to work.
 }
 \section{Trust}{
 For serialization formats (.R, .RDS, and .RData), please note that you should only load these files from trusted sources. It is because these formats are not necessarily for storing rectangular data and can also be used to store many things, e.g. code. Importing these files could lead to arbitary code execution. Please read the security principles by the R Project (Plummer, 2024). When importing these files via \code{rio}, you should affirm that you trust these files, i.e. \code{trust = TRUE}. See example below. If this affirmation is missing, the current version assumes \code{trust} to be true for backward compatibility and a deprecation notice will be printed. In the next major release (2.0.0), you must explicitly affirm your trust when importing these files.
