@@ -70,11 +70,7 @@ test_that("Prevent the reuse of `which` for zip and tar", {
         withr::with_tempfile("data_path", fileext = paste0(".xlsx.", format), code = {
             rio::export(list(some_iris = head(iris)), data_path)
             expect_error(import(data_path), NA)
-            if (format == "zip") {
-                raw_file <- utils::unzip(data_path, list = TRUE)$Name[1]
-            } else {
-                raw_file <- utils::untar(data_path, list = TRUE)
-            }
+            raw_file <- .list_archive(data_path, find_compress(data_path)$compress)[1]
             expect_error(import(data_path, which = raw_file), NA)
             expect_error(suppressWarnings(import(data_path, which = "some_iris")))
         })

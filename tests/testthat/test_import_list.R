@@ -71,6 +71,30 @@ test_that("Import single file from zip via import_list()", {
     })
 })
 
+test_that("Import multiple files from zip / tar.gz via import_list()", {
+    withr::with_tempfile("data_file", fileext = ".csv.zip", code = {
+        mylist <- list(mtcars3 = mtcars[1:10, ], mtcars2 = mtcars[11:20, ], mtcars1 = mtcars[21:32, ])
+        expect_error(export_list(mylist, file = paste0("mtcars", 1:3, ".csv"), archive = data_file), NA)
+        expect_error(res <- import_list(data_file), NA)
+        expect_true(is.list(res))
+        expect_equal(length(res), 3)
+        expect_true(is.data.frame(res[[1]]))
+        expect_true(is.data.frame(res[[2]]))
+        expect_true(is.data.frame(res[[3]]))
+    })
+    withr::with_tempfile("data_file", fileext = ".csv.tar.gz", code = {
+        mylist <- list(mtcars3 = mtcars[1:10, ], mtcars2 = mtcars[11:20, ], mtcars1 = mtcars[21:32, ])
+        expect_error(export_list(mylist, file = paste0("mtcars", 1:3, ".csv"), archive = data_file), NA)
+        expect_error(res <- import_list(data_file), NA)
+        expect_true(is.list(res))
+        expect_equal(length(res), 3)
+        expect_true(is.data.frame(res[[1]]))
+        expect_true(is.data.frame(res[[2]]))
+        expect_true(is.data.frame(res[[3]]))
+    })
+})
+
+
 test_that("Using setclass in import_list()", {
     withr::with_tempfile("data_file", fileext = ".rds", code = {
         export(mtcars, data_file)
