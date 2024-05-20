@@ -37,6 +37,7 @@ test_that("export_list() works", {
 })
 
 test_that("archive formats, #415", {
+    skip_if(getRversion() <= "4.0")
     withr::with_tempdir({
         mylist <- list(mtcars3 = mtcars[1:10, ], mtcars2 = mtcars[11:20, ], mtcars1 = mtcars[21:32, ])
         expect_error(export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "archive.csv.gz"), "specified but format is not supported")
@@ -59,5 +60,13 @@ test_that("List length of one, #385", {
         tempfile <- tempfile(fileext = ".rds")
         expect_error(export(example1, tempfile), NA)
         expect_true(is.list(readRDS(tempfile)) && !is.data.frame(readRDS(tempfile)))
+    })
+})
+
+test_that("tar export error for R < 4.0.3", {
+    skip_if(getRversion() >= "4.0.3")
+    withr::with_tempdir({
+        mylist <- list(mtcars3 = mtcars[1:10, ], mtcars2 = mtcars[11:20, ], mtcars1 = mtcars[21:32, ])
+        expect_error(export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "archive.csv.tar"), "^Exporting")
     })
 })

@@ -55,6 +55,7 @@ export_list <- function(x, file, archive = "", ...) {
     if (inherits(x, "data.frame")) {
         stop("'x' must be a list. Perhaps you want export()?", call. = FALSE)
     }
+    .check_tar_support(archive_format$compress, getRversion())
 
     outfiles <- .create_outfiles(file, x)
 

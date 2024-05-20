@@ -93,6 +93,7 @@ export <- function(x, file, format, ...) {
         file <- paste0(as.character(substitute(x)), ".", format)
         compress <- NA_character_
     }
+    .check_tar_support(compress, getRversion())
     format <- .standardize_format(format)
     outfile <- file
     if (is.matrix(x) || inherits(x, "ArrowTabular")) {
