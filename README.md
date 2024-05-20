@@ -88,10 +88,6 @@ import("starwars.csv")
     ## 9   Biggs Darklighter  Kashyyyk Wookiee
     ## 10     Obi-Wan Kenobi  Corellia   Human
 
-Note: Because of inconsistencies across underlying packages, the
-data.frame returned by `import` might vary slightly (in variable classes
-and attributes) depending on file type.
-
 ### Export
 
 Exporting data is handled with one function, `export()`:
@@ -103,8 +99,8 @@ export(mtcars, "mtcars.sav") # SPSS
 ```
 
 A particularly useful feature of rio is the ability to import from and
-export to compressed (e.g., zip) directories, saving users the extra
-step of compressing a large exported file, e.g.:
+export to compressed archives (e.g., zip), saving users the extra step
+of compressing a large exported file, e.g.:
 
 ``` r
 export(mtcars, "mtcars.tsv.zip")
@@ -246,11 +242,13 @@ c("mtcars.tsv", "iris.tsv") %in% dir()
 
 ### GUIs
 
+  - [**datamods**](https://cran.r-project.org/package=datamods) provides
+    Shiny modules for importing data via `rio`.
   - [**rioweb**](https://github.com/lbraglia/rioweb) that provides
-    access to the file conversion features of rio.
+    access to the file conversion features of `rio`.
   - [**GREA**](https://github.com/Stan125/GREA/) is an RStudio add-in
     that provides an interactive interface for reading in data using
-    rio.
+    `rio`.
 
 ### Similar packages
 
