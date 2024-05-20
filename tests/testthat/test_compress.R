@@ -85,3 +85,21 @@ test_that("Prevent the reuse of `which` for zip and tar", {
         })
     }
 })
+
+test_that(".check_tar_support ref #421", {
+    expect_error(.check_tar_support("tar", R_system_version("4.0.2")), "^Exporting")
+    expect_error(.check_tar_support("tar.gz", R_system_version("4.0.2")), "^Exporting")
+    expect_error(.check_tar_support("tar.bz2", R_system_version("4.0.2")), "^Exporting")
+    expect_error(.check_tar_support("tar", R_system_version("4.0.3")), NA)
+    expect_error(.check_tar_support("tar.gz", R_system_version("4.0.3")), NA)
+    expect_error(.check_tar_support("tar.bz2", R_system_version("4.0.3")), NA)
+    expect_error(.check_tar_support("zip", R_system_version("4.0.2")), NA)
+    expect_error(.check_tar_support(NA, R_system_version("4.0.2")), NA)
+})
+
+test_that("tar export error for R < 4.0.3", {
+    skip_if(getRversion() >= "4.0.3")
+    withr::with_tempfile("iris_path", fileext = paste0(".csv.", "tar"), code = {
+        expect_error(export(iris, iris_path), "^Exporting")
+    })
+})

@@ -128,3 +128,10 @@ parse_archive <- function(file, which, file_type, ...) {
     destname <- tempfile()
     R.utils::decompressFile(filename = filename, destname = destname, temporary = TRUE, remove = FALSE, overwrite = TRUE, FUN = decompression_fun, ext = file_type)
 }
+
+.check_tar_support <- function(file_type, rversion) {
+    if (file_type %in% c("tar", "tar.gz", "tar.bz2") && rversion < "4.0.3") {
+        stop("Exporting to tar formats is not supported for this version of R.", call. = FALSE)
+    }
+    NULL
+}
