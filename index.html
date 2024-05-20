@@ -151,7 +151,6 @@
 <span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="do">## 8               R5-D4  Tatooine   Human</span></span>
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="do">## 9   Biggs Darklighter  Kashyyyk Wookiee</span></span>
 <span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="do">## 10     Obi-Wan Kenobi  Corellia   Human</span></span></code></pre></div>
-<p>Note: Because of inconsistencies across underlying packages, the data.frame returned by <code>import</code> might vary slightly (in variable classes and attributes) depending on file type.</p>
 </div>
 <div class="section level3">
 <h3 id="export">Export<a class="anchor" aria-label="anchor" href="#export"></a>
@@ -161,7 +160,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/export.html">export</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mtcars.csv"</span><span class="op">)</span> <span class="co"># comma-separated values</span></span>
 <span><span class="fu"><a href="reference/export.html">export</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mtcars.rds"</span><span class="op">)</span> <span class="co"># R serialized</span></span>
 <span><span class="fu"><a href="reference/export.html">export</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mtcars.sav"</span><span class="op">)</span> <span class="co"># SPSS</span></span></code></pre></div>
-<p>A particularly useful feature of rio is the ability to import from and export to compressed (e.g., zip) directories, saving users the extra step of compressing a large exported file, e.g.:</p>
+<p>A particularly useful feature of rio is the ability to import from and export to compressed archives (e.g., zip), saving users the extra step of compressing a large exported file, e.g.:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/export.html">export</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mtcars.tsv.zip"</span><span class="op">)</span></span></code></pre></div>
 <p><code><a href="reference/export.html">export()</a></code> can also write multiple data frames to respective sheets of an Excel workbook or an HTML file:</p>
@@ -602,9 +601,11 @@
 </h3>
 <ul>
 <li>
-<a href="https://github.com/lbraglia/rioweb" class="external-link"><strong>rioweb</strong></a> that provides access to the file conversion features of rio.</li>
+<a href="https://cran.r-project.org/package=datamods" class="external-link"><strong>datamods</strong></a> provides Shiny modules for importing data via <code>rio</code>.</li>
 <li>
-<a href="https://github.com/Stan125/GREA/" class="external-link"><strong>GREA</strong></a> is an RStudio add-in that provides an interactive interface for reading in data using rio.</li>
+<a href="https://github.com/lbraglia/rioweb" class="external-link"><strong>rioweb</strong></a> that provides access to the file conversion features of <code>rio</code>.</li>
+<li>
+<a href="https://github.com/Stan125/GREA/" class="external-link"><strong>GREA</strong></a> is an RStudio add-in that provides an interactive interface for reading in data using <code>rio</code>.</li>
 </ul>
 </div>
 <div class="section level3">
