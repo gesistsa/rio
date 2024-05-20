@@ -75,14 +75,12 @@ parse_archive <- function(file, which, file_type, ...) {
         return(.parse_rutils(filename = file, file_type = file_type))
     }
     if (file_type == "zip") {
-        file_list <- utils::unzip(file, list = TRUE)$Name
         extract_func <- utils::unzip
     }
     if (file_type %in% c("tar", "tar.gz", "tar.bz2")) {
-        file_list <- utils::untar(file, list = TRUE)
         extract_func <- utils::untar
     }
-
+    file_list <- .list_archive(file, file_type)
     d <- tempfile()
     dir.create(d)
 
@@ -95,6 +93,18 @@ parse_archive <- function(file, which, file_type, ...) {
     }
     extract_func(file, files = file_list[grep(which2, file_list)[1]], exdir = d)
     return(file.path(d, which))
+}
+
+.list_archive <- function(file, file_type = c("zip", "tar", "tar.gz", "tar.bz2")) {
+    ## just a simple wrapper to unify the interface of utils::unzip and utils::untar
+    file_type <- match.arg(file_type)
+    if (file_type == "zip") {
+        file_list <- utils::unzip(file, list = TRUE)$Name
+    }
+    if (file_type %in% c("tar", "tar.gz", "tar.bz2")) {
+        file_list <- utils::untar(file, list = TRUE)
+    }
+    return(file_list)
 }
 
 .compress_rutils <- function(filename, cfile, ext, remove = TRUE, FUN = gzfile) {

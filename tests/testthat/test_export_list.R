@@ -36,6 +36,18 @@ test_that("export_list() works", {
     })
 })
 
+test_that("archive formats, #415", {
+    withr::with_tempdir({
+        mylist <- list(mtcars3 = mtcars[1:10, ], mtcars2 = mtcars[11:20, ], mtcars1 = mtcars[21:32, ])
+        expect_error(export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "archive.csv.gz"), "specified but format is not supported")
+        expect_error(export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "archive.csv.bz2"), "specified but format is not supported")
+        expect_error(export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "archive.csv.zip"), NA)
+        expect_error(export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "archive.csv.tar"), NA)
+        expect_error(export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "archive.csv.tar.gz"), NA)
+        expect_error(export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "archive.csv.tar.bz2"), NA)
+    })
+})
+
 test_that("List length of one, #385", {
     withr::with_tempdir({
         example1 <- list("iris" = iris)

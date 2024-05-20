@@ -6,6 +6,7 @@
 Bug fixes
 
 - Fix #412, prevent double usage of `which` for archive formats
+- Fix #415, both `import_list()` and `export_list()` support tar archives.
 
 # rio 1.0.2
 
