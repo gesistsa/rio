@@ -30,6 +30,8 @@ unlink(c(csv_file, rds_file, sav_file, dta_file))
 
 }
 \references{
+\href{https://cran.r-project.org/package=datamods}{datamods} provides Shiny modules for importing data via \code{rio}.
+
 \href{https://github.com/Stan125/GREA}{GREA} provides an RStudio add-in to import data using rio.
 }
 \seealso{
