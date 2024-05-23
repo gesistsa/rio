@@ -1,7 +1,7 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 1.0.3
+Version: 1.1.0
 Authors@R: c(person("Jason", "Becker", role = "aut", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = c("aut", "cre"), email = "chainsawtiney@gmail.com",
 	     	     comment = c(ORCID = "0000-0002-6232-7530")),
@@ -30,12 +30,11 @@ Authors@R: c(person("Jason", "Becker", role = "aut", email = "jason@jbecker.co")
              )
 Description: Streamlined data import and export by making assumptions that
     the user is probably willing to make: 'import()' and 'export()' determine
-    the data structure from the file extension, reasonable defaults are used for
-    data import and export (e.g., 'stringsAsFactors=FALSE'), web-based import is
-    natively supported (including from SSL/HTTPS), compressed files can be read
-    directly without explicit decompression, and fast import packages are used where
-    appropriate. An additional convenience function, 'convert()', provides a simple
-    method for converting between file types.
+    the data format from the file extension, reasonable defaults are used for
+    data import and export, web-based import is natively supported (including
+    from SSL/HTTPS), compressed files can be read directly, and fast import
+    packages are used where appropriate. An additional convenience function,
+    'convert()', provides a simple method for converting between file types.
 URL: https://gesistsa.github.io/rio/, https://github.com/gesistsa/rio
 BugReports: https://github.com/gesistsa/rio/issues
 Depends:
