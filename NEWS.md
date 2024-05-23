@@ -1,3 +1,7 @@
+# rio 1.1.0
+
+* CRAN release
+
 # rio 1.0.3
 
 * Add `trust` parameter to functions that are used to load various R environment formats (`.R`, `.Rds`, `.Rdata`, etc). This parameter is defaulted to `TRUE` today to ensure backwards compatibility. A deprecation notice warns this will default to `FALSE` in `rio` 2.0. We are informing users that these data types should only be loaded from trusted sources, which should be affirmatively attested to.
