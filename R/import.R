@@ -135,8 +135,8 @@ import <- function(file, format, setclass = getOption("rio.import.class", "data.
         cfile <- file
         file <- f$file
         which <- ifelse(missing(which), 1, which)
-        format <- ifelse(isFALSE(missing(format)), tolower(format), get_info(file)$input)
         file <- parse_archive(cfile, which = which, file_type = f$compress)
+        format <- .get_compressed_format(cfile, file, f$compress, format)
         ## reset which if `file` is zip or tar. #412
         which <- .reset_which(file_type = f$compress, which = which)
     }

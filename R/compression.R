@@ -135,3 +135,11 @@ parse_archive <- function(file, which, file_type, ...) {
     }
     NULL
 }
+
+.get_compressed_format <- function(cfile, file, file_type, format) {
+    if (file_type %in% c("gzip", "bzip2")) {
+        return(ifelse(isFALSE(missing(format)), tolower(format), get_info(find_compress(cfile)$file)$input))
+    }
+    ## zip or tar formats, use the decompressed file path
+    return(ifelse(isFALSE(missing(format)), tolower(format), get_info(file)$input))
+}

@@ -1,3 +1,9 @@
+# rio 1.1.1
+
+Bus fixes
+
+* Fix #425 for archive formats, the file extension of the input file is determined by the compressed file (like prior rio 1.1.0)
+
 # rio 1.1.0
 
 * CRAN release
