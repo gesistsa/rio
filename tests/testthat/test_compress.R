@@ -105,7 +105,7 @@ test_that("tar export error for R < 4.0.3", {
 })
 
 test_that("Wild zip and tar ref $425", {
-    skip_if(getRversion() >= "4.0.3")
+    skip_if(getRversion() < "4.0.3")
     withr::with_tempfile("test_files", fileext = c(".csv", ".zip"), code = {
         filename <- test_files[1]
         zip_file <- test_files[2]
