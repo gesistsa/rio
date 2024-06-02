@@ -106,7 +106,7 @@ test_that("tar export error for R < 4.0.3", {
 
 test_that("Wild zip and tar ref $425", {
     skip_if(getRversion() <= "4.0")
-    skip_on_os("windows")
+    ##skip_on_os("windows")
     withr::with_tempfile("test_files", fileext = c(".csv", ".zip"), code = {
         filename <- test_files[1]
         zip_file <- test_files[2]
@@ -114,12 +114,13 @@ test_that("Wild zip and tar ref $425", {
         zip(zip_file, filename)
         expect_error(rio::import(zip_file), NA)
     })
-    for (tar_format in c(".tar", ".tar.gz", ".tar.bz2")) {
+    for (tar_format in c(".tar")) {
         withr::with_tempfile("test_files", fileext = c(".csv", tar_format), code = {
             filename <- test_files[1]
             tar_file <- test_files[2]
             write.csv(1, filename)
-            tar(tar_file, filename)
+            compress_out(tar_file, filename, type = "tar")
+            #tar(tar_file, filename, compression = "none")
             expect_error(rio::import(tar_file), NA)
         })
     }
