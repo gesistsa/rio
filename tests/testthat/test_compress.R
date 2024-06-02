@@ -114,13 +114,12 @@ test_that("Wild zip and tar ref $425", {
         zip(zip_file, filename)
         expect_error(rio::import(zip_file), NA)
     })
-    for (tar_format in c(".tar")) {
-        withr::with_tempfile("test_files", fileext = c(".csv", tar_format), code = {
+    for (tar_format in c("tar", "tar.gz", "tar.bz2")) {
+        withr::with_tempfile("test_files", fileext = c(".csv", paste0(".", tar_format)), code = {
             filename <- test_files[1]
             tar_file <- test_files[2]
             write.csv(1, filename)
-            compress_out(tar_file, filename, type = "tar")
-            #tar(tar_file, filename, compression = "none")
+            compress_out(tar_file, filename, type = tar_format)
             expect_error(rio::import(tar_file), NA)
         })
     }
