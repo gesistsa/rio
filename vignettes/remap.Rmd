@@ -59,7 +59,7 @@ options(rio.ignoreunusedargs = FALSE)
 import("example.xlsx", sheet = "iris", n_max = 10, pizza = "pineapple")
 ```
 
-```{r map5, error = TRUE, echo = FALSE}
+```{r map5, error = TRUE, echo = FALSE, purl = FALSE}
 R.utils::withOptions({
     import("example.xlsx", sheet = "iris", n_max = 10, pizza = "pineapple")
 }, rio.ignoreunusedargs = FALSE)
