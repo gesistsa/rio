@@ -29,7 +29,7 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 
 #' @export
 .import.rio_dat <- function(file, which = 1, ...) {
-    message(sprintf("Ambiguous file format ('.dat'), but attempting 'data.table::fread(\"%s\")'", file))
+    message(sprintf("Ambiguous file format ('.dat'), but attempting 'data.table::fread(\"%s\")'\n", file))
     import_delim(file = file, ...)
 }
 
