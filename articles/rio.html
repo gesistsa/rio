@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Import, Export, and Convert Data Files</h1>
             
-            <h4 data-toc-skip class="date">2024-06-05</h4>
+            <h4 data-toc-skip class="date">2024-06-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gesistsa/rio/blob/HEAD/vignettes/rio.Rmd" class="external-link"><code>vignettes/rio.Rmd</code></a></small>
       <div class="d-none name"><code>rio.Rmd</code></div>
@@ -138,14 +138,14 @@ packages the first time you use <strong>rio</strong> via:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/install_formats.html">install_formats</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The full list of supported formats is below:</p>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
-<col width="26%">
-<col width="26%">
-<col width="11%">
-<col width="11%">
+<col width="25%">
+<col width="25%">
+<col width="10%">
+<col width="10%">
 <col width="5%">
-<col width="17%">
+<col width="21%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Name</th>
@@ -189,6 +189,14 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left"></td>
 </tr>
 <tr class="odd">
+<td align="left">Ambiguous file format</td>
+<td align="left">dat</td>
+<td align="left">data.table</td>
+<td align="left"></td>
+<td align="left">Default</td>
+<td align="left">Attempt as delimited text data</td>
+</tr>
+<tr class="even">
 <td align="left">CSVY (CSV + YAML metadata header)</td>
 <td align="left">csvy</td>
 <td align="left">data.table</td>
@@ -196,7 +204,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Comma-separated data</td>
 <td align="left">csv</td>
 <td align="left">data.table</td>
@@ -204,7 +212,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Comma-separated data (European)</td>
 <td align="left">csv2</td>
 <td align="left">data.table</td>
@@ -212,7 +220,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Data Interchange Format</td>
 <td align="left">dif</td>
 <td align="left">utils</td>
@@ -220,7 +228,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Epiinfo</td>
 <td align="left">epiinfo / rec</td>
 <td align="left">foreign</td>
@@ -228,7 +236,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Excel</td>
 <td align="left">excel / xlsx</td>
 <td align="left">readxl</td>
@@ -236,7 +244,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Excel (Legacy)</td>
 <td align="left">xls</td>
 <td align="left">readxl</td>
@@ -244,7 +252,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Fixed-width format data</td>
 <td align="left">fwf</td>
 <td align="left">readr</td>
@@ -252,7 +260,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Fortran data</td>
 <td align="left">fortran</td>
 <td align="left">utils</td>
@@ -260,7 +268,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left">No recognized extension</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Google Sheets</td>
 <td align="left">googlesheets</td>
 <td align="left">data.table</td>
@@ -268,7 +276,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left">As comma-separated data</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Minitab</td>
 <td align="left">minitab / mtp</td>
 <td align="left">foreign</td>
@@ -276,7 +284,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Pipe-separated data</td>
 <td align="left">psv</td>
 <td align="left">data.table</td>
@@ -284,7 +292,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">R syntax</td>
 <td align="left">r</td>
 <td align="left">base</td>
@@ -292,7 +300,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SAS</td>
 <td align="left">sas / sas7bdat</td>
 <td align="left">haven</td>
@@ -300,7 +308,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left">Export is deprecated</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SAS XPORT</td>
 <td align="left">xport / xpt</td>
 <td align="left">haven</td>
@@ -308,7 +316,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SPSS</td>
 <td align="left">sav / spss</td>
 <td align="left">haven</td>
@@ -316,7 +324,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SPSS (compressed)</td>
 <td align="left">zsav</td>
 <td align="left">haven</td>
@@ -324,7 +332,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SPSS Portable</td>
 <td align="left">por</td>
 <td align="left">haven</td>
@@ -332,7 +340,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Saved R objects</td>
 <td align="left">rda / rdata</td>
 <td align="left">base</td>
@@ -340,7 +348,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Serialized R objects</td>
 <td align="left">rds</td>
 <td align="left">base</td>
@@ -348,7 +356,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Stata</td>
 <td align="left">dta / stata</td>
 <td align="left">haven</td>
@@ -356,7 +364,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Systat</td>
 <td align="left">syd / systat</td>
 <td align="left">foreign</td>
@@ -364,7 +372,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Tab-separated data</td>
 <td align="left">/ tsv / txt</td>
 <td align="left">data.table</td>
@@ -372,7 +380,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Text Representations of R Objects</td>
 <td align="left">dump</td>
 <td align="left">base</td>
@@ -380,7 +388,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Weka Attribute-Relation File Format</td>
 <td align="left">arff / weka</td>
 <td align="left">foreign</td>
@@ -388,7 +396,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">XBASE database files</td>
 <td align="left">dbf</td>
 <td align="left">foreign</td>
@@ -396,7 +404,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Apache Arrow (Parquet)</td>
 <td align="left">parquet</td>
 <td align="left">arrow</td>
@@ -404,7 +412,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Clipboard</td>
 <td align="left">clipboard</td>
 <td align="left">clipr</td>
@@ -412,7 +420,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left">default is tsv</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">EViews</td>
 <td align="left">eviews / wf1</td>
 <td align="left">hexView</td>
@@ -420,7 +428,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Fast Storage</td>
 <td align="left">fst</td>
 <td align="left">fst</td>
@@ -428,7 +436,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Feather R/Python interchange format</td>
 <td align="left">feather</td>
 <td align="left">arrow</td>
@@ -436,7 +444,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Graphpad Prism</td>
 <td align="left">pzfx</td>
 <td align="left">pzfx</td>
@@ -444,7 +452,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">HTML Tables</td>
 <td align="left">htm / html</td>
 <td align="left">xml2</td>
@@ -452,7 +460,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">JSON</td>
 <td align="left">json</td>
 <td align="left">jsonlite</td>
@@ -460,7 +468,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Matlab</td>
 <td align="left">mat / matlab</td>
 <td align="left">rmatio</td>
@@ -468,7 +476,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">OpenDocument Spreadsheet</td>
 <td align="left">ods</td>
 <td align="left">readODS</td>
@@ -476,7 +484,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">OpenDocument Spreadsheet (Flat)</td>
 <td align="left">fods</td>
 <td align="left">readODS</td>
@@ -484,7 +492,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Serialized R objects (Quick)</td>
 <td align="left">qs</td>
 <td align="left">qs</td>
@@ -492,7 +500,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Shallow XML documents</td>
 <td align="left">xml</td>
 <td align="left">xml2</td>
@@ -500,7 +508,7 @@ packages the first time you use <strong>rio</strong> via:</p>
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">YAML</td>
 <td align="left">yaml / yml</td>
 <td align="left">yaml</td>
