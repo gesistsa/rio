@@ -1,6 +1,12 @@
+# rio 1.1.1.999 (development)
+
+Bug fixes
+
+* Fix #430 Add back support for `.dat`
+
 # rio 1.1.1
 
-Bus fixes
+Bug fixes
 
 * Fix #425 for archive formats, the file extension of the input file is determined by the compressed file (like prior rio 1.1.0)
 

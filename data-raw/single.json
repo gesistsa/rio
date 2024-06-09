@@ -781,6 +781,15 @@
         "import_function": "data.table::fread",
         "export_function": "data.table::fwrite",
         "note": ""
+    },
+    {
+        "input": "dat",
+        "format": "dat",
+        "type": "import",
+        "format_name": "Ambiguous file format",
+        "import_function": "data.table::fread",
+        "export_function": "",
+        "note": "Attempt as delimited text data"
     }
 ]
 

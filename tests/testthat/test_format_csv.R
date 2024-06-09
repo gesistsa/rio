@@ -64,3 +64,13 @@ test_that("fread is deprecated", {
         lifecycle::expect_deprecated(import(iris_file, fread = FALSE))
     })
 })
+
+test_that("dat (ambiguous file format) will be attempted #430", {
+    withr::with_tempfile("iris_file", fileext = ".dat", code = {
+        readr::write_delim(iris, file = iris_file)
+        expect_error(suppressMessages(import(iris_file)), NA)
+        expect_message(z <- import(iris_file))
+        ## export is not supported though
+        expect_error(export(iris, iris_file))
+    })
+})
