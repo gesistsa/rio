@@ -322,10 +322,10 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
             out
         }
     }
-    if (!isTRUE(stringsAsFactors)) {
-        d[] <- lapply(d, tc2)
-    } else {
+    if (isTRUE(stringsAsFactors)) {
         d[] <- lapply(d, utils::type.convert)
+    } else {
+        d[] <- lapply(d, tc2)
     }
     d
 }
@@ -339,7 +339,7 @@ extract_html_row <- function(x, empty_value) {
     ## will be dropped and the table will not be generated).  Note that this more
     ## complex code for finding the length is required because of html like
     ## <td><br/></td>
-    unlist_length <- vapply(lapply(to_extract, unlist), length, integer(1))
+    unlist_length <- lengths(lapply(to_extract, unlist))
     to_extract[unlist_length == 0] <- list(empty_value)
     unlist(to_extract)
 }
@@ -349,12 +349,12 @@ extract_html_row <- function(x, empty_value) {
     # find all tables
     tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
     if (which > length(tables)) {
-        stop(paste0("Requested table exceeds number of tables found in file (", length(tables), ")!"))
+        stop("Requested table exceeds number of tables found in file (", length(tables), ")!")
     }
     x <- xml2::as_list(tables[[which]])
     if ("tbody" %in% names(x)) {
         # Note that "tbody" may be specified multiple times in a valid html table
-        x <- unlist(x[names(x) %in% "tbody"], recursive = FALSE)
+        x <- unlist(x[names(x) == "tbody"], recursive = FALSE)
     }
     # loop row-wise over the table and then rbind()
     ## check for table header to use as column names

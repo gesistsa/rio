@@ -120,7 +120,7 @@ escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&a
         if (is.null(names_x)) {
             return(sprintf(file, seq_along(x)))
         }
-        if (any(nchar(names_x) == 0)) {
+        if (!all(nzchar(names_x))) {
             stop("All elements of 'x' must be named or all must be unnamed")
         }
         if (anyDuplicated(names_x)) {

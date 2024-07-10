@@ -16,13 +16,13 @@ standardize_attributes <- function(dat) {
             attr(out[[i]], "labels") <- attr(out[[i]], "value.labels", exact = TRUE)
             attr(out[[i]], "value.labels") <- NULL
         }
-        if (any(grepl("haven_labelled", class(out[[i]])))) {
+        if (any(grepl("haven_labelled", class(out[[i]]), fixed = TRUE))) {
             out[[i]] <- unclass(out[[i]])
         }
         if ("var.labels" %in% names(a)) {
             attr(out[[i]], "label") <- a$var.labels[i]
         }
-        if (any(grepl("$format", names(a)))) {
+        if (any(grepl("$format", names(a), fixed = TRUE))) {
             attr(out[[i]], "format") <- a[[grep("$format", names(a))[1L]]][i]
         }
         if ("types" %in% names(a)) {

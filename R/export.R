@@ -106,7 +106,7 @@ export <- function(x, file, format, ...) {
     if (!is.data.frame(x) && !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs", "fods", "ods")) {
         stop("'x' is not a data.frame or matrix", call. = FALSE)
     }
-    if (format %in% c("gz")) {
+    if (format == "gz") {
         format <- get_info(tools::file_path_sans_ext(file, compression = FALSE))$format
         if (format != "csv") {
             stop("gz is only supported for csv (for now).", call. = FALSE)

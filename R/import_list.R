@@ -52,9 +52,8 @@ import_list <- function(file, setclass = getOption("rio.import.class", "data.fra
             if (inherits(x2, "try-error")) {
                 warning("Attempt to rbindlist() the data did not succeed. List returned instead.", call. = FALSE)
                 return(x)
-            } else {
-                x <- x2
             }
+            x <- x2
         }
         x <- set_class(x, class = setclass)
     }
