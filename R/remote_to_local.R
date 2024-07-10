@@ -1,5 +1,5 @@
 remote_to_local <- function(file, format) {
-    if (grepl("docs\\.google\\.com/spreadsheets", file)) {
+    if (grepl("docs.google.com/spreadsheets", file, fixed = TRUE)) {
         if (missing(format) || (!missing(format) && !format %in% c("csv", "tsv", "xlsx", "ods"))) {
             format <- "csv"
         }
@@ -32,7 +32,7 @@ remote_to_local <- function(file, format) {
     if (!any(grepl("^Content-Disposition", h1))) {
         stop("Unrecognized file format. Try specifying with the format argument.")
     }
-    h <- h1[grep("filename", h1)]
+    h <- h1[grep("filename", h1, fixed = TRUE)]
     if (length(h)) {
         f <- regmatches(h, regexpr("(?<=\")(.*)(?<!\")", h, perl = TRUE))
         if (!length(f)) {
