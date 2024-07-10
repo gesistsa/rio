@@ -322,10 +322,10 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
             out
         }
     }
-    if (!isTRUE(stringsAsFactors)) {
-        d[] <- lapply(d, tc2)
-    } else {
+    if (isTRUE(stringsAsFactors)) {
         d[] <- lapply(d, utils::type.convert)
+    } else {
+        d[] <- lapply(d, tc2)
     }
     d
 }
