@@ -354,7 +354,7 @@ extract_html_row <- function(x, empty_value) {
     x <- xml2::as_list(tables[[which]])
     if ("tbody" %in% names(x)) {
         # Note that "tbody" may be specified multiple times in a valid html table
-        x <- unlist(x[names(x) %in% "tbody"], recursive = FALSE)
+        x <- unlist(x[names(x) == "tbody"], recursive = FALSE)
     }
     # loop row-wise over the table and then rbind()
     ## check for table header to use as column names
