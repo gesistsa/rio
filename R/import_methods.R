@@ -349,7 +349,7 @@ extract_html_row <- function(x, empty_value) {
     # find all tables
     tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
     if (which > length(tables)) {
-        stop(paste0("Requested table exceeds number of tables found in file (", length(tables), ")!"))
+        stop("Requested table exceeds number of tables found in file (", length(tables), ")!")
     }
     x <- xml2::as_list(tables[[which]])
     if ("tbody" %in% names(x)) {

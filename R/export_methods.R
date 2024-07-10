@@ -82,13 +82,14 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
         message("Columns:")
         message(paste0(utils::capture.output(dict), collapse = "\n"))
         if (sep == "") {
-            message(paste0(
+            message(
                 "\nRead in with:\n",
                 'import("', file, '",\n',
                 "       widths = c(", paste0(n, collapse = ","), "),\n",
                 '       col.names = c("', paste0(names(n), collapse = '","'), '"),\n',
-                '       colClasses = c("', paste0(col_classes, collapse = '","'), '"))\n'
-            ), domain = NA)
+                '       colClasses = c("', paste0(col_classes, collapse = '","'), '"))\n',
+                domain = NA
+            )
         }
     }
     .write_as_utf8(paste0("#", utils::capture.output(utils::write.csv(dict, row.names = FALSE, quote = FALSE))), file = file, sep = "\n")

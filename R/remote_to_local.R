@@ -38,7 +38,7 @@ remote_to_local <- function(file, format) {
         if (!length(f)) {
             f <- regmatches(h, regexpr("(?<=filename=)(.*)", h, perl = TRUE))
         }
-        f <- paste0(dirname(temp_file), "/", f)
+        f <- file.path(dirname(temp_file), f)
         file.copy(from = temp_file, to = f)
         unlink(temp_file)
         return(f)
