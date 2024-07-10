@@ -240,7 +240,6 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
 #' @export
 .export.rio_xml <- function(file, x, ...) {
     .check_pkg_availability("xml2")
-    root <- ""
     xml <- xml2::read_xml(paste0("<", as.character(substitute(x)), ">\n</", as.character(substitute(x)), ">\n"))
     att <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
     for (a in seq_along(att)) {

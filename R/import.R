@@ -146,7 +146,6 @@ import <- function(file, format, setclass = getOption("rio.import.class", "data.
         ## format such as "|"
         format <- .standardize_format(format)
     }
-    args_list <- list(...)
     class(file) <- c(paste0("rio_", format), class(file))
     if (missing(which)) {
         x <- .import(file = file, ...)
