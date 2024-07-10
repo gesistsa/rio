@@ -339,7 +339,7 @@ extract_html_row <- function(x, empty_value) {
     ## will be dropped and the table will not be generated).  Note that this more
     ## complex code for finding the length is required because of html like
     ## <td><br/></td>
-    unlist_length <- vapply(lapply(to_extract, unlist), length, integer(1))
+    unlist_length <- lengths(lapply(to_extract, unlist))
     to_extract[unlist_length == 0] <- list(empty_value)
     unlist(to_extract)
 }

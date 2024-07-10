@@ -28,7 +28,7 @@ gather_attrs <- function(x) {
         }
         rm(f)
     }
-    if (any(vapply(varattrs, length, integer(1)))) {
+    if (any(lengths(varattrs))) {
         attrnames <- sort(unique(unlist(lapply(varattrs, names))))
         outattrs <- stats::setNames(lapply(attrnames, function(z) {
             stats::setNames(lapply(varattrs, `[[`, z), names(x))
