@@ -1,5 +1,7 @@
 # rio 1.1.1.999 (development)
 
+* Fix lintr issues #434 (h/t @bisaloo Hugo Gruson)
+
 Bug fixes
 
 * Fix #430 Add back support for `.dat`
