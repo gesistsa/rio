@@ -1,69 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://gesistsa.github.io/rio/404.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/articles/extension.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/articles/labelled.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/articles/philosophy.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/articles/remap.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/articles/rio.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/authors.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/index.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/news/index.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/characterize.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/convert.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/export.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/export_list.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/gather_attrs.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/get_info.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/import.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/import_list.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/install_formats.html</loc>
-  </url>
-  <url>
-    <loc>http://gesistsa.github.io/rio/reference/rio.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>http://gesistsa.github.io/rio/404.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/CONTRIBUTING.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/articles/extension.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/articles/index.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/articles/labelled.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/articles/philosophy.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/articles/remap.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/articles/rio.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/authors.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/index.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/news/index.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/characterize.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/convert.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/export.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/export_list.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/gather_attrs.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/get_info.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/import.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/import_list.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/index.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/install_formats.html</loc></url>
+<url><loc>http://gesistsa.github.io/rio/reference/rio.html</loc></url>
 </urlset>
+
