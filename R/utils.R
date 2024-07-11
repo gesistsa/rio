@@ -103,6 +103,9 @@ escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&a
     if (isFALSE(length(file) == 1) && single_only) {
         stop("Invalid `file` argument: `file` must be single", call. = FALSE)
     }
+    if (any(is.na(file))) {
+        stop("Invalid `file` argument: `file` must not be NA", call. = FALSE)
+    }
     invisible(NULL)
 }
 
