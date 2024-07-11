@@ -46,7 +46,7 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "tar.
     on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
     file.copy(from = filename, to = file.path(tmp, basename(filename)), overwrite = TRUE)
     wd <- getwd()
-    on.exit(setwd(wd), add = TRUE)
+    on.exit(setwd(wd), add = TRUE) ## for security, see #438 and #319
     setwd(tmp)
     if (type == "zip") {
         o <- utils::zip(cfile2, files = basename(filename))
@@ -60,6 +60,7 @@ compress_out <- function(cfile, filename, type = c("zip", "tar", "tar.gz", "tar.
     if (type == "tar.bz2") {
         o <- utils::tar(cfile2, files = basename(filename), compression = "bzip2")
     }
+    setwd(wd) ## see #438
     if (o != 0) {
         stop(sprintf("File compression failed for %s!", cfile))
     }

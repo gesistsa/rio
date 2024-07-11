@@ -124,3 +124,16 @@ test_that("Wild zip and tar ref $425", {
         })
     }
 })
+
+test_that("Relative path #438", {
+    ## see test_export_list.R
+    withr::with_tempdir({
+        mylist <- list(
+            mtcars3 = mtcars[1:10, ],
+            mtcars2 = mtcars[11:20, ],
+            mtcars1 = mtcars[21:32, ]
+        )
+        rio::export_list(mylist, file = paste0("file_", 1:3, ".csv"), archive = "arch/archive.zip")
+        expect_true(file.exists("arch/archive.zip"))
+    })
+})
