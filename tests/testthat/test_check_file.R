@@ -8,6 +8,10 @@ test_that(".check_file", {
     expect_error(.check_file(data))
     expect_error(.check_file(iris))
     expect_error(.check_file(c("a.csv", "b.csv")))
+    expect_error(.check_file(NA))
+    expect_error(.check_file(NA_character_))
+    expect_error(.check_file(c(NA, "a.csv")))
+    expect_error(.check_file(c(NA_character_, "a.csv")))
     expect_error(.check_file("a.csv"), NA)
     expect_error(.check_file(), NA)
     ## single_only FALSE

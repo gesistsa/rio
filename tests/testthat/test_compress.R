@@ -137,3 +137,11 @@ test_that("Relative path #438", {
         expect_true(file.exists("arch/archive.zip"))
     })
 })
+
+test_that("Integration test #435", {
+    ## filter out all NA cases so that #437 works
+    withr::with_tempfile("iris_path", fileext = "csv.zip", code = {
+        expect_error(rio::export(iris, NA), "must be character") ## strange to be honest
+        expect_error(rio::export(iris, NA_character_), "must not be NA")
+    })
+})
