@@ -1,33 +1,33 @@
 find_compress <- function(f) {
-    if (grepl("\\.zip$", f)) {
+    if (endsWith(f, ".zip")) {
         return(list(file = sub("\\.zip$", "", f), compress = "zip"))
     }
-    if (grepl("\\.tar\\.gz$", f)) {
+    if (endsWith(f, ".tar.gz")) {
         return(list(file = sub("\\.tar\\.gz$", "", f), compress = "tar.gz"))
     }
-    if (grepl(".tgz$", f)) {
+    if (endsWith(f, ".tgz")) {
         return(list(file = sub("\\.tgz$", "", f), compress = "tar.gz"))
     }
-    if (grepl("\\.tar\\.bz2$", f)) {
+    if (endsWith(f, ".tar.bz2")) {
         return(list(file = sub("\\.tar\\.bz2$", "", f), compress = "tar.bz2"))
     }
-    if (grepl("\\.tbz2$", f)) {
+    if (endsWith(f, ".tbz2")) {
         return(list(file = sub("\\.tbz2$", "", f), compress = "tar.bz2"))
     }
-    if (grepl("\\.tar$", f)) {
+    if (endsWith(f, ".tar")) {
         return(list(file = sub("\\.tar$", "", f), compress = "tar"))
     }
-    if (grepl("\\.gzip$", f)) {
+    if (endsWith(f, ".gzip")) {
         ## weird
         return(list(file = sub("\\.gzip$", "", f), compress = "gzip"))
     }
-    if (grepl("\\.gz$", f)) {
+    if (endsWith(f, ".gz")) {
         return(list(file = sub("\\.gz$", "", f), compress = "gzip"))
     }
-    if (grepl("\\.bz2$", f)) {
+    if (endsWith(f, ".bz2")) {
         return(list(file = sub("\\.bz2$", "", f), compress = "bzip2"))
     }
-    if (grepl("\\.bzip2$", f)) {
+    if (endsWith(f, ".bzip2")) {
         ## weird
         return(list(file = sub("\\.bzip2$", "", f), compress = "bzip2"))
     }
