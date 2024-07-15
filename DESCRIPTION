@@ -53,7 +53,8 @@ Imports:
     writexl,
     lifecycle,
     R.utils,
-    readr
+    readr,
+    nanoparquet
 Suggests:
     datasets,
     bit64,

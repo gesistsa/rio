@@ -65,7 +65,7 @@ object (not just a data frame).
 \item Fortran data (no recognized extension), using \code{\link[utils:read.fortran]{utils::read.fortran()}}
 \item Fixed-width format data (.fwf), using a faster version of \code{\link[utils:read.fwf]{utils::read.fwf()}} that requires a \code{widths} argument and by default in rio has \code{stringsAsFactors = FALSE}
 \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table:fread]{data.table::fread()}}.
-\item Apache Arrow Parquet (.parquet), using \code{\link[arrow:read_parquet]{arrow::read_parquet()}}
+\item Apache Arrow Parquet (.parquet), using \code{\link[nanoparquet:read_parquet]{nanoparquet::read_parquet()}}
 \item Feather R/Python interchange format (.feather), using \code{\link[arrow:read_feather]{arrow::read_feather()}}
 \item Fast storage (.fst), using \code{\link[fst:write_fst]{fst::read.fst()}}
 \item JSON (.json), using \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}

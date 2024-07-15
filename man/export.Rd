@@ -48,7 +48,7 @@ object (not just a data frame).
 \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign:write.arff]{foreign::write.arff()}}
 \item Fixed-width format data (.fwf), using \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}
 \item \href{https://github.com/csvy}{CSVY} (CSV with a YAML metadata header) using \code{\link[data.table:fwrite]{data.table::fwrite()}}.
-\item Apache Arrow Parquet (.parquet), using \code{\link[arrow:write_parquet]{arrow::write_parquet()}}
+\item Apache Arrow Parquet (.parquet), using \code{\link[nanoparquet:write_parquet]{nanoparquet::write_parquet()}}
 \item Feather R/Python interchange format (.feather), using \code{\link[arrow:write_feather]{arrow::write_feather()}}
 \item Fast storage (.fst), using \code{\link[fst:write_fst]{fst::write.fst()}}
 \item JSON (.json), using \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}. In this case, \code{x} can be a variety of R objects, based on class mapping conventions in this paper: \url{https://arxiv.org/abs/1403.2805}.

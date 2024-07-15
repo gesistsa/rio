@@ -1,6 +1,8 @@
 # rio 1.1.1.999 (development)
 
 * Fix lintr issues #434 (h/t @bisaloo Hugo Gruson)
+* Drop support for R < 4.0.0 see #436
+* Add support for parquet in the import tier using `nanoparquet` see rio 1.0.1 below.
 
 Bug fixes
 

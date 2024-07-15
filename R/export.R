@@ -32,7 +32,7 @@
 #'     \item Weka Attribute-Relation File Format (.arff), using [foreign::write.arff()]
 #'     \item Fixed-width format data (.fwf), using [utils::write.table()] with `row.names = FALSE`, `quote = FALSE`, and `col.names = FALSE`
 #'     \item [CSVY](https://github.com/csvy) (CSV with a YAML metadata header) using [data.table::fwrite()].
-#'     \item Apache Arrow Parquet (.parquet), using [arrow::write_parquet()]
+#'     \item Apache Arrow Parquet (.parquet), using [nanoparquet::write_parquet()]
 #'     \item Feather R/Python interchange format (.feather), using [arrow::write_feather()]
 #'     \item Fast storage (.fst), using [fst::write.fst()]
 #'     \item JSON (.json), using [jsonlite::toJSON()]. In this case, `x` can be a variety of R objects, based on class mapping conventions in this paper: [https://arxiv.org/abs/1403.2805](https://arxiv.org/abs/1403.2805).
