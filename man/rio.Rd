@@ -61,6 +61,7 @@ Other contributors:
   \item Nathan Day \email{nathancday@gmail.com} [contributor]
   \item Bill Denney \email{wdenney@humanpredictions.com} (\href{https://orcid.org/0000-0002-5759-428X}{ORCID}) [contributor]
   \item Alex Bokov \email{alex.bokov@gmail.com} (\href{https://orcid.org/0000-0002-0511-9815}{ORCID}) [contributor]
+  \item Hugo Gruson (\href{https://orcid.org/0000-0002-4094-1476}{ORCID}) [contributor]
 }
 
 }

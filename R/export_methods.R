@@ -282,7 +282,7 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
 
 #' @export
 .export.rio_parquet <- function(file, x, ...) {
-    .docall(arrow::write_parquet, ..., args = list(x = x, sink = file))
+    .docall(nanoparquet::write_parquet, ..., args = list(x = x, file = file))
 }
 
 #' @export

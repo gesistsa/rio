@@ -133,6 +133,7 @@ The full list of supported formats is below:
 | Gzip                                | gz / gzip                           | base           | base           | Default |                                |
 | Zip files                           | zip                                 | utils          | utils          | Default |                                |
 | Ambiguous file format               | dat                                 | data.table     |                | Default | Attempt as delimited text data |
+| Apache Arrow (Parquet)              | parquet                             | nanoparquet    | nanoparquet    | Default |                                |
 | CSVY (CSV + YAML metadata header)   | csvy                                | data.table     | data.table     | Default |                                |
 | Comma-separated data                | csv                                 | data.table     | data.table     | Default |                                |
 | Comma-separated data (European)     | csv2                                | data.table     | data.table     | Default |                                |
@@ -159,7 +160,6 @@ The full list of supported formats is below:
 | Text Representations of R Objects   | dump                                | base           | base           | Default |                                |
 | Weka Attribute-Relation File Format | arff / weka                         | foreign        | foreign        | Default |                                |
 | XBASE database files                | dbf                                 | foreign        | foreign        | Default |                                |
-| Apache Arrow (Parquet)              | parquet                             | arrow          | arrow          | Suggest |                                |
 | Clipboard                           | clipboard                           | clipr          | clipr          | Suggest | default is tsv                 |
 | EViews                              | eviews / wf1                        | hexView        |                | Suggest |                                |
 | Fast Storage                        | fst                                 | fst            | fst            | Suggest |                                |
