@@ -1,4 +1,4 @@
-# rio 1.1.1.999 (development)
+# rio 1.2.0
 
 * Fix lintr issues #434 (h/t @bisaloo Hugo Gruson)
 * Drop support for R < 4.0.0 see #436
