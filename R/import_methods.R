@@ -413,7 +413,7 @@ extract_html_row <- function(x, empty_value) {
 
 #' @export
 .import.rio_parquet <- function(file, which = 1, ...) {
-    #.check_pkg_availability("arrow")
+    .check_pkg_availability("nanoparquet")
     .docall(nanoparquet::read_parquet, ..., args = list(file = file, options = nanoparquet::parquet_options(class = "data.frame")))
 }
 

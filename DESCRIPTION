@@ -1,7 +1,7 @@
 Package: rio
 Type: Package
 Title: A Swiss-Army Knife for Data I/O
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: c(person("Jason", "Becker", role = "aut", email = "jason@jbecker.co"),
              person("Chung-hong", "Chan", role = c("aut", "cre"), email = "chainsawtiney@gmail.com",
 	     	     comment = c(ORCID = "0000-0002-6232-7530")),
@@ -53,8 +53,7 @@ Imports:
     writexl,
     lifecycle,
     R.utils,
-    readr,
-    nanoparquet
+    readr
 Suggests:
     datasets,
     bit64,
@@ -74,7 +73,8 @@ Suggests:
     qs,
     arrow (>= 0.17.0),
     stringi,
-    withr
+    withr,
+    nanoparquet
 License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8
