@@ -2,7 +2,7 @@
     {
         "input": "parquet",
         "format": "parquet",
-        "type": "import",
+        "type": "suggest",
         "format_name": "Apache Arrow (Parquet)",
         "import_function": "nanoparquet::read_parquet",
         "export_function": "nanoparquet::write_parquet",

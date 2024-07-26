@@ -53,8 +53,7 @@ Imports:
     writexl,
     lifecycle,
     R.utils,
-    readr,
-    nanoparquet
+    readr
 Suggests:
     datasets,
     bit64,
@@ -74,7 +73,8 @@ Suggests:
     qs,
     arrow (>= 0.17.0),
     stringi,
-    withr
+    withr,
+    nanoparquet
 License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8

@@ -1,3 +1,7 @@
+# rio 1.2.1
+
+* Roll back the decision to add parquet in the import tier see #455 #315
+
 # rio 1.2.0
 
 * Fix lintr issues #434 (h/t @bisaloo Hugo Gruson)

@@ -1,4 +1,4 @@
-skip_if_not_installed("arrow")
+skip_if_not_installed("nanoparquet")
 skip_on_os("mac") ## apache/arrow#40991
 
 test_that("Export to and import from parquet", {
