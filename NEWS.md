@@ -1,3 +1,7 @@
+# rio 1.2.2
+
+* Fix #447 - remove an ancient artefact of Vignette generation, h/t Tim Taylor for the help.
+
 # rio 1.2.1
 
 * Roll back the decision to add parquet in the import tier see #455 #315
