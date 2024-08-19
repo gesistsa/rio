@@ -21,7 +21,7 @@ The idea behind **rio** is to simplify the process of importing data into R and 
 
 The core advantage of **rio** is that it makes assumptions that the user is probably willing to make. Specifically, **rio** uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, **rio** allows almost all common data formats to be read with the same function.
 
-By making import and export easy, it's an obvious next step to also use R as a simple data conversion utility. Transferring data files between various proprietary formats is always a pain and often expensive. The `convert` function therefore combines `import` and `export` to easily convert between file formats (thus providing a FOSS replacement for programs like [Stat/Transfer](https://stattransfer.com/) or [Sledgehammer](https://www.mtna.us/#/products/sledgehammer)).
+By making import and export easy, it's an obvious next step to also use R as a simple data conversion utility. Transferring data files between various proprietary formats is always a pain and often expensive. The `convert` function therefore combines `import` and `export` to easily convert between file formats (thus providing a FOSS replacement for programs like Stat/Transfer or Sledgehammer.
 
 ## Supported file formats
 
