@@ -2,7 +2,7 @@ test_that("Deprecation of untrusted dump", {
     withr::with_tempfile("iris_file", fileext = ".dump", code = {
       export(iris, iris_file)
       ## expect deprecation to work
-      lifecycle::expect_deprecated(import(iris_file), regexp = "set to FALSE by default")
+      expect_warning(import(iris_file), regexp = "set to FALSE by default")
       ## expect false to error
       expect_error(import(iris_file, trust = FALSE))
   })
@@ -12,7 +12,7 @@ test_that("Deprecation of untrusted Rdata", {
     withr::with_tempfile("iris_file", fileext = ".Rdata", code = {
         export(iris, iris_file)
         ## expect deprecation to work
-        lifecycle::expect_deprecated(import(iris_file), regexp = "set to FALSE by default")
+        expect_warning(import(iris_file), regexp = "set to FALSE by default")
         ## expect false to error
         expect_error(import(iris_file, trust = FALSE))
     })
@@ -22,7 +22,7 @@ test_that("Deprecation of untrusted rds", {
     withr::with_tempfile("iris_file", fileext = ".rds", code = {
       export(iris, iris_file)
       ## expect deprecation to work
-      lifecycle::expect_deprecated(import(iris_file), regexp = "set to FALSE by default")
+      expect_warning(import(iris_file), regexp = "set to FALSE by default")
       ## expect false to error
       expect_error(import(iris_file, trust = FALSE))
   })
@@ -63,7 +63,7 @@ test_that("`trust` wont cause problems for other import methods", {
 test_that("`trust` for import_list()", {
     withr::with_tempfile("iris_file", fileext = ".rdata", code = {
         export(iris, iris_file)
-        lifecycle::expect_deprecated(import_list(iris_file), regexp = "set to FALSE by default")
+        expect_warning(import_list(iris_file), regexp = "set to FALSE by default")
         expect_silent(import_list(iris_file, trust = TRUE))
         expect_error(import_list(iris_file, trust = FALSE))
 
