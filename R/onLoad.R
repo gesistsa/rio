@@ -2,8 +2,8 @@
     if (interactive()) {
         w <- uninstalled_formats()
         if (length(w)) {
-            msg <- "The following rio suggested packages are not installed: %s\nUse 'install_formats()' to install them"
-            packageStartupMessage(sprintf(msg, toString(sQuote(w))))
+            msg <- "Some optional R packages were not installed and therefore some file formats are not supported. Check file support with show_unsupported_formats()"
+            packageStartupMessage(msg)
         }
     }
 }
