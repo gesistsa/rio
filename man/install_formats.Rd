@@ -2,18 +2,21 @@
 % Please edit documentation in R/suggestions.R
 \name{install_formats}
 \alias{install_formats}
+\alias{show_unsupported_formats}
 \title{Install rio's \sQuote{Suggests} Dependencies}
 \usage{
 install_formats(...)
+
+show_unsupported_formats()
 }
 \arguments{
 \item{\dots}{Additional arguments passed to \code{\link[utils:install.packages]{utils::install.packages()}}.}
 }
 \value{
-\code{NULL}
+For \code{show_unsupported_formats()}, if there is any missing unsupported formats, it return TRUE invisibly; otherwise FALSE. For \code{install_formats()} it returns TRUE invisibly if the installation is succuessful; otherwise errors.
 }
 \description{
-This function installs various \sQuote{Suggests} dependencies for rio that expand its support to the full range of support import and export formats. These packages are not installed or loaded by default in order to create a slimmer and faster package build, install, and load.
+Not all suggested packages are installed by default. These packages are not installed or loaded by default in order to create a slimmer and faster package build, install, and load. Use \code{show_unsupported_formats()} to check all unsupported formats. \code{install_formats()} installs all missing \sQuote{Suggests} dependencies for rio that expand its support to the full range of support import and export formats.
 }
 \examples{
 \donttest{
