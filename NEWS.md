@@ -1,3 +1,7 @@
+# rio 1.2.3
+
+* Fix #453, don't nudge the user to install all suggested packages
+
 # rio 1.2.2
 
 * Fix #447 - remove an ancient artefact of Vignette generation, h/t Tim Taylor for the help.

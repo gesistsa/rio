@@ -117,8 +117,15 @@ export(list(mtcars = mtcars, iris = iris), file = "mtcars.xlsx")
 
 **rio** supports a wide range of file formats. To keep the package slim,
 several formats are supported via “Suggests” packages, which are not
-installed (or loaded) by default. To ensure rio is fully functional,
-install these packages the first time you use **rio** via:
+installed (or loaded) by default. You can check which formats are
+**not** supported via:
+
+``` r
+show_unsupported_formats()
+```
+
+You can install the suggested packages individually, depending your own
+needs. If you want to install all suggested packages:
 
 ``` r
 install_formats()
