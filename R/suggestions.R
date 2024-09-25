@@ -22,6 +22,7 @@ uninstalled_formats <- function() {
 }
 
 #' @rdname install_formats
+#' @export
 show_unsupported_formats <- function() {
     ## default_formats <- sort(unique(rio_formats$format[rio_formats$type == "import"]))
     suggested_formats <- rio_formats[rio_formats$type == "suggest",]
