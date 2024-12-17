@@ -1,3 +1,9 @@
+# rio 1.2.4
+
+Bug fixes
+
+* Fix #458, custom S3 import and export functions work again
+
 # rio 1.2.3
 
 * Fix #453, don't nudge the user to install all suggested packages
