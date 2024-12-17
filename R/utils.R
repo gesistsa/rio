@@ -62,11 +62,7 @@ get_ext <- function(file) {
 }
 
 .standardize_format <- function(input) {
-    info <- .query_format(input, "")
-    if (is.na(info$format)) {
-        return(input)
-    }
-    info$format
+    .query_format(input, "")$format
 }
 
 twrap <- function(value, tag) {
