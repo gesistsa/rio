@@ -3,8 +3,8 @@
 }
 
 .import.default <- function(file, ...) {
-    fileinfo <- get_info(file)
-    if (is.na(fileinfo$type) || is.na(fileinfo$import_function) || fileinfo$import_function == "") {
+    fileinfo <- get_info(file) ## S3 can't be dispatched
+    if (fileinfo$type == "unknown" || is.na(fileinfo$import_function) || fileinfo$import_function == "") {
         stop("Format not supported", call. = FALSE)
     }
     if (fileinfo$type == "known") {
@@ -24,7 +24,7 @@
 
 .export.default <- function(file, x, ...) {
     fileinfo <- get_info(file)
-    if (is.na(fileinfo$type) || is.na(fileinfo$export_function) || fileinfo$export_function == "") {
+    if (fileinfo$type == "unknown" || is.na(fileinfo$export_function) || fileinfo$export_function == "") {
         stop("Format not supported", call. = FALSE)
     }
     if (fileinfo$type == "known") {
