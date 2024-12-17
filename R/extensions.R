@@ -3,8 +3,7 @@
 }
 
 .import.default <- function(file, ...) {
-    ## S3 can't be dispatched
-    fileinfo <- get_info(file)
+    fileinfo <- get_info(file) ## S3 can't be dispatched
     if (fileinfo$type == "unknown" || is.na(fileinfo$import_function) || fileinfo$import_function == "") {
         stop("Format not supported", call. = FALSE)
     }
