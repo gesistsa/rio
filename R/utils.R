@@ -54,7 +54,7 @@ get_ext <- function(file) {
     ## TODO google sheets
     matched_formats <- unique_rio_formats[unique_rio_formats$input == input, ]
     if (nrow(matched_formats) == 0) {
-        return(list(input = input, format = NA, type = NA, format_name = NA, import_function = NA, export_function = NA, file = file))
+        return(list(input = input, format = input, type = "unknown", format_name = NA, import_function = NA, export_function = NA, file = file))
     }
     output <- as.list(matched_formats)
     output$file <- file
