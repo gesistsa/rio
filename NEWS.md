@@ -1,5 +1,7 @@
 # rio 1.2.4
 
+* Fix #463, export_list also allows ods and fods
+
 Bug fixes
 
 * Fix #458, custom S3 import and export functions work again
