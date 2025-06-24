@@ -5,7 +5,9 @@
 
 [![CRAN
 Version](https://www.r-pkg.org/badges/version/rio)](https://cran.r-project.org/package=rio)
-![Downloads](https://cranlogs.r-pkg.org/badges/rio) <!-- badges: end -->
+![Downloads](https://cranlogs.r-pkg.org/badges/rio) [![Codecov test
+coverage](https://codecov.io/gh/gesistsa/rio/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/rio)
+<!-- badges: end -->
 
 ## Overview
 
