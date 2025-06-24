@@ -54,6 +54,23 @@ test_that("import_list() preserves 'which' names when specified", {
     })
 })
 
+test_that("import_list() preserves 'which' names when specified ods", {
+    skip_if_not_installed("readODS")
+    withr::with_tempfile("data_file", fileext = ".ods", code = {
+        export(list(a = mtcars, b = iris), data_file)
+        expect_true(identical(names(import_list(data_file)), c("a", "b")))
+        expect_true(identical(names(import_list(data_file, which = 1)), "a"))
+        expect_true(identical(names(import_list(data_file, which = "a")), "a"))
+        expect_true(identical(names(import_list(data_file, which = 2)), "b"))
+        expect_true(identical(names(import_list(data_file, which = "b")), "b"))
+        expect_true(identical(names(import_list(data_file, which = 1:2)), c("a", "b")))
+        expect_true(identical(names(import_list(data_file, which = 2:1)), c("b", "a")))
+        expect_true(identical(names(import_list(data_file, which = c("a", "b"))), c("a", "b")))
+        expect_true(identical(names(import_list(data_file, which = c("b", "a"))), c("b", "a")))
+    })
+})
+
+
 test_that("Import single file via import_list()", {
     withr::with_tempfile("data_file", fileext = ".rds", code = {
         export(mtcars, data_file)
@@ -113,14 +130,24 @@ test_that("Object names are preserved by import_list()", {
         export(list(mtcars1 = mtcars[1:10,],
                     mtcars2 = mtcars[11:20,],
                     mtcars3 = mtcars[21:32,]), "mtcars.xlsx")
+        export(list(mtcars1 = mtcars[1:10,],
+                    mtcars2 = mtcars[11:20,],
+                    mtcars3 = mtcars[21:32,]), "mtcars.ods")
+        export(list(mtcars1 = mtcars[1:10,],
+                    mtcars2 = mtcars[11:20,],
+                    mtcars3 = mtcars[21:32,]), "mtcars.fods")
         export(mtcars[1:10,],  "mtcars1.csv")
         export(mtcars[11:20,], "mtcars2.tsv")
         export(mtcars[21:32,], "mtcars3.csv")
         expected_names <- c("mtcars1", "mtcars2", "mtcars3")
         dat_xls <- import_list("mtcars.xlsx")
         dat_csv <- import_list(c("mtcars1.csv","mtcars2.tsv","mtcars3.csv"))
+        dat_ods <- import_list("mtcars.ods")
+        dat_fods <- import_list("mtcars.fods")
         expect_identical(names(dat_xls), expected_names)
         expect_identical(names(dat_csv), expected_names)
+        expect_identical(names(dat_ods), expected_names)
+        expect_identical(names(dat_fods), expected_names)
     })
 })
 
@@ -154,7 +181,8 @@ test_that("URL #294", {
 })
 
 test_that("Universal dummy `which` #326", {
-    formats <- c("xlsx", "dta", "sav", "csv", "csv2")
+    skip_if_not_installed("readODS")
+    formats <- c("ods", "fods", "xlsx", "dta", "sav", "csv", "csv2")
     for (format in formats) {
         withr::with_tempfile("tempzip", fileext = paste0(".", format, ".zip"), code = {
             rio::export(mtcars, tempzip, format = format)
