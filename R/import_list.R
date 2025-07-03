@@ -82,19 +82,25 @@ import_list <- function(file, setclass = getOption("rio.import.class", "data.fra
 }
 
 .read_file_as_list <- function(file, which, setclass, rbind, rbind_label, ...) {
+    ## respect the `format` argument, if given
+    if ("format" %in% ...names()) {
+      format <- list(...)[["format"]]
+    } else {
+      format <- get_info(file)$format
+    }
     if (R.utils::isUrl(file)) {
         file <- remote_to_local(file)
     }
-    if (get_info(file)$format == "rdata") {
+    if (format == "rdata") {
         return(.import.rio_rdata(file = file, .return_everything = TRUE, ...))
     }
     archive_format <- find_compress(file)
-    if (!get_info(file)$format %in% c("html", "xlsx", "xls", "ods", "fods") && !archive_format$compress %in% c("zip", "tar", "tar.gz", "tar.bz2")) {
+    if (!format %in% c("html", "xlsx", "xls", "ods", "fods") && !archive_format$compress %in% c("zip", "tar", "tar.gz", "tar.bz2")) {
         which <- 1
         whichnames <- NULL
     }
     ## getting list of `whichnames`
-    if (get_info(file)$format == "html") {
+    if (format == "html") {
         .check_pkg_availability("xml2")
         tables <- xml2::xml_find_all(xml2::read_html(unclass(file)), ".//table")
         if (missing(which)) {
@@ -106,10 +112,10 @@ import_list <- function(file, setclass = getOption("rio.import.class", "data.fra
         )
         names(which) <- whichnames
     }
-    if (get_info(file)$format %in% c("xls", "xlsx", "ods", "fods")) {
+    if (format %in% c("xls", "xlsx", "ods", "fods")) {
         ## .check_pkg_availability("readxl")
         sheet_func <- readxl::excel_sheets
-        if (get_info(file)$format %in% c("ods", "fods")) {
+        if (format %in% c("ods", "fods")) {
             .check_pkg_availability("readODS")
             sheet_func <- readODS::list_ods_sheets
         }
