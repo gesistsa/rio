@@ -54,10 +54,10 @@ test_that("Import from Excel (.xlsm)", {
   expect_true(is.data.frame(import("../testdata/example.xlsm", sheet = 1, format = "xlsx")))
   expect_true(is.data.frame(import("../testdata/example.xlsm", which = 1, format = "xlsx")))
   expect_equal(
-    import_list("../testdata/example.xlsm", which = 1, format = "xlsx"),
+    import_list("../testdata/example.xlsm", format = "xlsx"),
     list(
-      data.frame(A = 1),
-      data.frame(B = 2)
+      Sheet1 = data.frame(A = 1),
+      Sheet2 = data.frame(B = 2)
     )
   )
 })
