@@ -288,6 +288,9 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 #' @export
+.import.rio_xlsm <- .import.rio_xlsx
+
+#' @export
 .import.rio_fortran <- function(file, which = 1, style, ...) {
     if (missing(style)) {
         stop("Import of Fortran format data requires a 'style' argument. See ? utils::read.fortran().")

@@ -95,7 +95,7 @@ import_list <- function(file, setclass = getOption("rio.import.class", "data.fra
         return(.import.rio_rdata(file = file, .return_everything = TRUE, ...))
     }
     archive_format <- find_compress(file)
-    if (!format %in% c("html", "xlsx", "xls", "ods", "fods") && !archive_format$compress %in% c("zip", "tar", "tar.gz", "tar.bz2")) {
+    if (!format %in% c("html", "xlsx", "xls", "xlsm", "ods", "fods") && !archive_format$compress %in% c("zip", "tar", "tar.gz", "tar.bz2")) {
         which <- 1
         whichnames <- NULL
     }
@@ -112,7 +112,7 @@ import_list <- function(file, setclass = getOption("rio.import.class", "data.fra
         )
         names(which) <- whichnames
     }
-    if (format %in% c("xls", "xlsx", "ods", "fods")) {
+    if (format %in% c("xls", "xlsx", "xlsm","ods", "fods")) {
         ## .check_pkg_availability("readxl")
         sheet_func <- readxl::excel_sheets
         if (format %in% c("ods", "fods")) {
