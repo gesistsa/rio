@@ -149,6 +149,7 @@ The full list of supported formats is below:
 | Epiinfo                             | epiinfo / rec                       | foreign        |                | Default |                                |
 | Excel                               | excel / xlsx                        | readxl         | writexl        | Default |                                |
 | Excel (Legacy)                      | xls                                 | readxl         |                | Default |                                |
+| Excel (Read only)                   | xlsm / xltx / xltm                  | readxl         |                | Default |                                |
 | Fixed-width format data             | fwf                                 | readr          | utils          | Default |                                |
 | Fortran data                        | fortran                             | utils          |                | Default | No recognized extension        |
 | Google Sheets                       | googlesheets                        | data.table     |                | Default | As comma-separated data        |

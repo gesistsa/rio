@@ -234,6 +234,33 @@
         "note": ""
     },
     {
+        "input": "xlsm",
+        "format": "xlsm",
+        "type": "import",
+        "format_name": "Excel (Read only)",
+        "import_function": "readxl::read_xlsx",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "xltx",
+        "format": "xlsm",
+        "type": "import",
+        "format_name": "Excel (Read only)",
+        "import_function": "readxl::read_xlsx",
+        "export_function": "",
+        "note": ""
+    },
+    {
+        "input": "xltm",
+        "format": "xlsm",
+        "type": "import",
+        "format_name": "Excel (Read only)",
+        "import_function": "readxl::read_xlsx",
+        "export_function": "",
+        "note": ""
+    },
+    {
         "input": "fst",
         "format": "fst",
         "type": "suggest",
