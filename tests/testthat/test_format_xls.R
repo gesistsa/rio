@@ -49,3 +49,15 @@ test_that("Import from Excel (.xls)", {
     expect_true(is.data.frame(import("../testdata/iris.xls", sheet = 1)))
     expect_true(is.data.frame(import("../testdata/iris.xls", which = 1)))
 })
+
+test_that("Import from Excel (.xlsm)", {
+  expect_true(is.data.frame(import("../testdata/example.xlsm", sheet = 1, format = "xlsx")))
+  expect_true(is.data.frame(import("../testdata/example.xlsm", which = 1, format = "xlsx")))
+  expect_equal(
+    import_list("../testdata/example.xlsm", format = "xlsx"),
+    list(
+      Sheet1 = data.frame(A = 1),
+      Sheet2 = data.frame(B = 2)
+    )
+  )
+})

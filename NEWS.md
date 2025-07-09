@@ -5,6 +5,7 @@
 Bug fixes
 
 * Fix #458, custom S3 import and export functions work again
+* Fix #467, Respect the format argument to import_list(), h/t Bill Denney #468
 
 # rio 1.2.3
 
