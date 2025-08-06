@@ -162,7 +162,7 @@ The full list of supported formats is below:
 | SPSS (compressed) | zsav | haven | haven | Default |  |
 | SPSS Portable | por | haven |  | Default |  |
 | Saved R objects | rda / rdata | base | base | Default |  |
-| Serialized R objects | rds / qs2 | base | base | Default |  |
+| Serialized R objects | rds | base | base | Default |  |
 | Stata | dta / stata | haven | haven | Default |  |
 | Systat | syd / systat | foreign |  | Default |  |
 | Tab-separated data | / tsv / txt | data.table | data.table | Default |  |
@@ -180,8 +180,8 @@ The full list of supported formats is below:
 | Matlab | mat / matlab | rmatio | rmatio | Suggest |  |
 | OpenDocument Spreadsheet | ods | readODS | readODS | Suggest |  |
 | OpenDocument Spreadsheet (Flat) | fods | readODS | readODS | Suggest |  |
-| Serialized R objects | rds / qs2 | qs2 | qs2 | Suggest | Replaces {qs} package which will be deprecated. |
-| Serialized R objects (Quick) | qs | qs | qs | Suggest |  |
+| Serialized R objects (qs) | qs | qs | qs | Suggest |  |
+| Serialized R objects (qs2) | qs2 | qs2 | qs2 | Suggest | Replaces {qs} package which will be deprecated. |
 | Shallow XML documents | xml | xml2 | xml2 | Suggest |  |
 | YAML | yaml / yml | yaml | yaml | Suggest |  |
 
