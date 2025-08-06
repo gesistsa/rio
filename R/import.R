@@ -33,6 +33,7 @@
 #'     \item Serialized R objects (.qs), using [qs::qread()], which is
 #'     significantly faster than .rds. This can be any R
 #'     object (not just a data frame).
+#'     \item Serialized R objects (.qs2), using [qs2::qs_read()]. This is the future-proof successor to using (.qs).
 #'     \item Epiinfo (.rec), using [foreign::read.epiinfo()]
 #'     \item Minitab (.mtp), using [foreign::read.mtp()]
 #'     \item Systat (.syd), using [foreign::read.systat()]
@@ -154,7 +155,7 @@ import <- function(file, format, setclass = getOption("rio.import.class", "data.
     }
 
     # if R serialized object, just return it without setting object class
-    if (inherits(file, c("rio_rdata", "rio_rds", "rio_json", "rio_qs")) && !inherits(x, "data.frame")) {
+    if (inherits(file, c("rio_rdata", "rio_rds", "rio_json", "rio_qs", "rio_qs2")) && !inherits(x, "data.frame")) {
         return(x)
     }
     # otherwise, make sure it's a data frame (or requested class)

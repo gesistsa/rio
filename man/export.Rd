@@ -44,6 +44,7 @@ The output file can be to a compressed directory, simply by adding an appropriat
 \item Serialized R objects (.qs), using \code{\link[qs:qsave]{qs::qsave()}}, which is
 significantly faster than .rds. This can be any R
 object (not just a data frame).
+\item Serialized R objects (.qs2), using \code{\link[qs2:qs_save]{qs2::qs_save()}}. This is the future-proof successor to using (.qs).
 \item "XBASE" database files (.dbf), using \code{\link[foreign:write.dbf]{foreign::write.dbf()}}
 \item Weka Attribute-Relation File Format (.arff), using \code{\link[foreign:write.arff]{foreign::write.arff()}}
 \item Fixed-width format data (.fwf), using \code{\link[utils:write.table]{utils::write.table()}} with \code{row.names = FALSE}, \code{quote = FALSE}, and \code{col.names = FALSE}

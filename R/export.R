@@ -28,6 +28,7 @@
 #'     \item Serialized R objects (.qs), using [qs::qsave()], which is
 #'     significantly faster than .rds. This can be any R
 #'     object (not just a data frame).
+#'     \item Serialized R objects (.qs2), using [qs2::qs_save()]. This is the future-proof successor to using (.qs).
 #'     \item "XBASE" database files (.dbf), using [foreign::write.dbf()]
 #'     \item Weka Attribute-Relation File Format (.arff), using [foreign::write.arff()]
 #'     \item Fixed-width format data (.fwf), using [utils::write.table()] with `row.names = FALSE`, `quote = FALSE`, and `col.names = FALSE`
@@ -100,10 +101,10 @@ export <- function(x, file, format, ...) {
         x <- as.data.frame(x)
     }
     if (!is.data.frame(x) && is.list(x) && length(x) == 1 && is.data.frame(x[[1]]) &&
-        !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs", "fods", "ods")) {
+        !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs", "qs2", "fods", "ods")) {
         x <- x[[1]] ## fix 385
     }
-    if (!is.data.frame(x) && !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs", "fods", "ods")) {
+    if (!is.data.frame(x) && !format %in% c("xlsx", "html", "rdata", "rds", "json", "qs", "qs2", "fods", "ods")) {
         stop("'x' is not a data.frame or matrix", call. = FALSE)
     }
     if (format == "gz") {

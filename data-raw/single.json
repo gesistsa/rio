@@ -624,10 +624,19 @@
         "input": "qs",
         "format": "qs",
         "type": "suggest",
-        "format_name": "Serialized R objects (Quick)",
+        "format_name": "Serialized R objects (qs)",
         "import_function": "qs::qread",
         "export_function": "qs::qsave",
         "note": ""
+    },
+    {
+        "input": "qs2",
+        "format": "qs2",
+        "type": "suggest",
+        "format_name": "Serialized R objects (qs2)",
+        "import_function": "qs2::qs_save",
+        "export_function": "qs2::qs_read",
+        "note": "Replaces {qs} package which will be deprecated."
     },
     {
         "input": "xml",
