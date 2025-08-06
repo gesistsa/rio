@@ -290,3 +290,9 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
     .check_pkg_availability("qs")
     .docall(qs::qsave, ..., args = list(x = x, file = file))
 }
+
+#' @export
+.export.rio_qs2 <- function(file, x, ...) {
+    .check_pkg_availability("qs2")
+    .docall(qs2::qs_save, ..., args = list(object = x, file = file))
+}

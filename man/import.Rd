@@ -56,6 +56,7 @@ This function imports a data frame or matrix from a data file with the file form
 \item Serialized R objects (.qs), using \code{\link[qs:qread]{qs::qread()}}, which is
 significantly faster than .rds. This can be any R
 object (not just a data frame).
+\item Serialized R objects (.qs2), using \code{\link[qs2:qs_read]{qs2::qs_read()}}. This is the future-proof successor to using (.qs).
 \item Epiinfo (.rec), using \code{\link[foreign:read.epiinfo]{foreign::read.epiinfo()}}
 \item Minitab (.mtp), using \code{\link[foreign:read.mtp]{foreign::read.mtp()}}
 \item Systat (.syd), using \code{\link[foreign:read.systat]{foreign::read.systat()}}

@@ -194,10 +194,11 @@ test_that("Universal dummy `which` #326", {
 
 test_that("Universal dummy `which` (Suggests) #326", {
     skip_if_not_installed("qs")
+    skip_if_not_installed("qs2")
     skip_if_not_installed("arrow")
     skip_if_not_installed("readODS")
     skip_on_os("mac") ## apache/arrow#40991
-    formats <- c("qs", "parquet", "ods")
+    formats <- c("qs", "qs2", "parquet", "ods")
     for (format in formats) {
         withr::with_tempfile("tempzip", fileext = paste0(".", format, ".zip"), code = {
             rio::export(mtcars, tempzip, format = format)

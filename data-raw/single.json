@@ -630,6 +630,15 @@
         "note": ""
     },
     {
+        "input": "qs2",
+        "format": "qs2",
+        "type": "suggest",
+        "format_name": "Serialized R objects (Quick & Future-Proof)",
+        "import_function": "qs2::qs_save",
+        "export_function": "qs2::qs_read",
+        "note": "Replaces {qs} package which will be deprecated."
+    },
+    {
         "input": "xml",
         "format": "xml",
         "type": "suggest",

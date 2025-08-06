@@ -74,7 +74,8 @@ Suggests:
     arrow (>= 0.17.0),
     stringi,
     withr,
-    nanoparquet
+    nanoparquet,
+    qs2 (>= 0.1.5)
 License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8
