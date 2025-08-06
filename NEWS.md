@@ -1,6 +1,7 @@
 # rio 1.2.4
 
 * Fix #463, export_list also allows ods and fods
+* Fix #417, add qs2 support, h/t Jacob Mears #472
 
 Bug fixes
 
