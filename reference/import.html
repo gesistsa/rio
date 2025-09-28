@@ -36,7 +36,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Import</h1>
-      <small class="dont-index">Source: <a href="https://github.com/gesistsa/rio/blob/main/R/import.R" class="external-link"><code>R/import.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/gesistsa/rio/blob/v1.2.4/R/import.R" class="external-link"><code>R/import.R</code></a></small>
       <div class="d-none name"><code>import.Rd</code></div>
     </div>
 
@@ -92,9 +92,9 @@ The parameter takes precedents over parameters in ... which set a different clas
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function imports a data frame or matrix from a data file with the file format based on the file extension (or the manually specified format, if <code>format</code> is specified).</p>
 <p><code>import</code> supports the following file formats:</p>
-<ul><li><p>Comma-separated data (.csv), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
-<li><p>Pipe-separated data (.psv), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
-<li><p>Tab-separated data (.tsv), using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code></p></li>
+<ul><li><p>Comma-separated data (.csv), using <code><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">data.table::fread()</a></code></p></li>
+<li><p>Pipe-separated data (.psv), using <code><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">data.table::fread()</a></code></p></li>
+<li><p>Tab-separated data (.tsv), using <code><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">data.table::fread()</a></code></p></li>
 <li><p>SAS (.sas7bdat), using <code><a href="https://haven.tidyverse.org/reference/read_sas.html" class="external-link">haven::read_sas()</a></code></p></li>
 <li><p>SAS XPORT (.xpt), using <code><a href="https://haven.tidyverse.org/reference/read_xpt.html" class="external-link">haven::read_xpt()</a></code></p></li>
 <li><p>SPSS (.sav), using <code><a href="https://haven.tidyverse.org/reference/read_spss.html" class="external-link">haven::read_sav()</a></code></p></li>
@@ -117,7 +117,7 @@ object (not just a data frame).</p></li>
 <li><p>Data Interchange Format (.dif), using <code><a href="https://rdrr.io/r/utils/read.DIF.html" class="external-link">utils::read.DIF()</a></code></p></li>
 <li><p>Fortran data (no recognized extension), using <code><a href="https://rdrr.io/r/utils/read.fortran.html" class="external-link">utils::read.fortran()</a></code></p></li>
 <li><p>Fixed-width format data (.fwf), using a faster version of <code><a href="https://rdrr.io/r/utils/read.fwf.html" class="external-link">utils::read.fwf()</a></code> that requires a <code>widths</code> argument and by default in rio has <code>stringsAsFactors = FALSE</code></p></li>
-<li><p><a href="https://github.com/csvy" class="external-link">CSVY</a> (CSV with a YAML metadata header) using <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code>.</p></li>
+<li><p><a href="https://github.com/csvy" class="external-link">CSVY</a> (CSV with a YAML metadata header) using <code><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">data.table::fread()</a></code>.</p></li>
 <li><p>Apache Arrow Parquet (.parquet), using <code><a href="https://nanoparquet.r-lib.org/reference/read_parquet.html" class="external-link">nanoparquet::read_parquet()</a></code></p></li>
 <li><p>Feather R/Python interchange format (.feather), using <code><a href="https://arrow.apache.org/docs/r/reference/read_feather.html" class="external-link">arrow::read_feather()</a></code></p></li>
 <li><p>Fast storage (.fst), using <code><a href="http://www.fstpackage.org/reference/write_fst.html" class="external-link">fst::read.fst()</a></code></p></li>

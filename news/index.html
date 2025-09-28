@@ -36,12 +36,13 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/gesistsa/rio/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/gesistsa/rio/blob/v1.2.4/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.2.4" id="rio-124">rio 1.2.4<a class="anchor" aria-label="anchor" href="#rio-124"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.2.4" id="rio-124">rio 1.2.4<a class="anchor" aria-label="anchor" href="#rio-124"></a></h2><p class="text-muted">CRAN release: 2025-09-26</p>
 <ul><li>Fix <a href="https://github.com/gesistsa/rio/issues/463" class="external-link">#463</a>, export_list also allows ods and fods</li>
+<li>Fix <a href="https://github.com/gesistsa/rio/issues/417" class="external-link">#417</a>, add qs2 support, h/t Jacob Mears <a href="https://github.com/gesistsa/rio/issues/472" class="external-link">#472</a></li>
 </ul><p>Bug fixes</p>
 <ul><li>Fix <a href="https://github.com/gesistsa/rio/issues/458" class="external-link">#458</a>, custom S3 import and export functions work again</li>
 <li>Fix <a href="https://github.com/gesistsa/rio/issues/467" class="external-link">#467</a>, Respect the format argument to import_list(), h/t Bill Denney <a href="https://github.com/gesistsa/rio/issues/468" class="external-link">#468</a></li>
@@ -176,7 +177,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.23" id="rio-0523">rio 0.5.23<a class="anchor" aria-label="anchor" href="#rio-0523"></a></h2>
-<ul><li>CSVY support is now provided by <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code> and <code><a href="https://rdatatable.gitlab.io/data.table/reference/fwrite.html" class="external-link">data.table::fwrite()</a></code>, providing significant performance gains.</li>
+<ul><li>CSVY support is now provided by <code><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">data.table::fread()</a></code> and <code><a href="https://rdrr.io/pkg/data.table/man/fwrite.html" class="external-link">data.table::fwrite()</a></code>, providing significant performance gains.</li>
 <li>Added an internal <code>arg_reconcile()</code> function to streamline the task of removing/renaming arguments for compatibility with various functions (<a href="https://github.com/gesistsa/rio/issues/245" class="external-link">#245</a>, Alex Bokov)</li>
 </ul></div>
     <div class="section level2">
@@ -264,7 +265,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.7" id="rio-057">rio 0.5.7<a class="anchor" aria-label="anchor" href="#rio-057"></a></h2>
-<ul><li>Import of files with the ambiguous .dat extension, which are typically text-delimited files, are now passed to <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code> with a message. Export to the format remains unsupported. (<a href="https://github.com/gesistsa/rio/issues/98" class="external-link">#98</a>, <a href="https://github.com/gesistsa/rio/issues/155" class="external-link">#155</a>)</li>
+<ul><li>Import of files with the ambiguous .dat extension, which are typically text-delimited files, are now passed to <code><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">data.table::fread()</a></code> with a message. Export to the format remains unsupported. (<a href="https://github.com/gesistsa/rio/issues/98" class="external-link">#98</a>, <a href="https://github.com/gesistsa/rio/issues/155" class="external-link">#155</a>)</li>
 <li>Added support for export to SAS XPORT format (via <code><a href="https://haven.tidyverse.org/reference/read_xpt.html" class="external-link">haven::write_xpt()</a></code>). (<a href="https://github.com/gesistsa/rio/issues/157" class="external-link">#157</a>)</li>
 <li>Switched default import package for SAS XPORT format to <code><a href="https://haven.tidyverse.org/reference/read_xpt.html" class="external-link">haven::read_xpt()</a></code> with a <code>haven = FALSE</code> toggle restoring the previous default behavior using <code>foreign::read.xpt()</code>. (<a href="https://github.com/gesistsa/rio/issues/157" class="external-link">#157</a>)</li>
 </ul></div>
@@ -582,7 +583,7 @@
 <li>Added support for export to simple XML documents. (<a href="https://github.com/gesistsa/rio/issues/12" class="external-link">#12</a>)</li>
 <li>Added support for import from simple XML documents via <code>XML::xmlToDataFrame</code>. (<a href="https://github.com/gesistsa/rio/issues/12" class="external-link">#12</a>)</li>
 <li>Added support for import from ODS spreadsheet formats. (<a href="https://github.com/gesistsa/rio/issues/12" class="external-link">#12</a>, h/t Chung-hong Chan)</li>
-<li>Use <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread</a></code> by default for reading delimited files. (<a href="https://github.com/gesistsa/rio/issues/3" class="external-link">#3</a>)</li>
+<li>Use <code><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">data.table::fread</a></code> by default for reading delimited files. (<a href="https://github.com/gesistsa/rio/issues/3" class="external-link">#3</a>)</li>
 <li>Added support for import and export of <code>dput</code> and <code>dget</code> objects. (<a href="https://github.com/gesistsa/rio/issues/10" class="external-link">#10</a>)</li>
 <li>Added support for reading from compressed archives (.zip and .tar). (<a href="https://github.com/gesistsa/rio/issues/7" class="external-link">#7</a>)</li>
 <li>Added support for writing to fixed-width format. (<a href="https://github.com/gesistsa/rio/issues/8" class="external-link">#8</a>)</li>
