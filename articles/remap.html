@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rio</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Remapping and Ellipsis</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/gesistsa/rio/blob/v1.2.4/vignettes/remap.Rmd" class="external-link"><code>vignettes/remap.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/gesistsa/rio/blob/main/vignettes/remap.Rmd" class="external-link"><code>vignettes/remap.Rmd</code></a></small>
       <div class="d-none name"><code>remap.Rmd</code></div>
     </div>
 
@@ -228,7 +228,8 @@ i.e. <code>options(rio.ignoreunusedargs = FALSE)</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>rio.ignoreunusedargs <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"example.xlsx"</span>, sheet <span class="op">=</span> <span class="st">"iris"</span>, n_max <span class="op">=</span> <span class="fl">10</span>, pizza <span class="op">=</span> <span class="st">"pineapple"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in (function (path, sheet = NULL, range = NULL, col_names = TRUE, : unused argument (pizza = "pineapple")</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> unused argument (pizza = "pineapple")</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

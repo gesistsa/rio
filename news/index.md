@@ -1,0 +1,1070 @@
+# Changelog
+
+## rio 1.2.5
+
+- Fix [\#473](https://github.com/gesistsa/rio/issues/473), remove
+  support for `qs`
+
+## rio 1.2.4
+
+CRAN release: 2025-09-26
+
+- Fix [\#463](https://github.com/gesistsa/rio/issues/463), export_list
+  also allows ods and fods
+- Fix [\#417](https://github.com/gesistsa/rio/issues/417), add qs2
+  support, h/t Jacob Mears
+  [\#472](https://github.com/gesistsa/rio/issues/472)
+
+Bug fixes
+
+- Fix [\#458](https://github.com/gesistsa/rio/issues/458), custom S3
+  import and export functions work again
+- Fix [\#467](https://github.com/gesistsa/rio/issues/467), Respect the
+  format argument to import_list(), h/t Bill Denney
+  [\#468](https://github.com/gesistsa/rio/issues/468)
+
+## rio 1.2.3
+
+CRAN release: 2024-09-25
+
+- Fix [\#453](https://github.com/gesistsa/rio/issues/453), don’t nudge
+  the user to install all suggested packages
+- Fix [\#451](https://github.com/gesistsa/rio/issues/451), don’t nudge
+  the user to report issues about the trust parameter
+
+## rio 1.2.2
+
+CRAN release: 2024-08-19
+
+- Fix [\#447](https://github.com/gesistsa/rio/issues/447) - remove an
+  ancient artefact of Vignette generation, h/t Tim Taylor for the help.
+
+## rio 1.2.1
+
+CRAN release: 2024-07-26
+
+- Roll back the decision to add parquet in the import tier see
+  [\#455](https://github.com/gesistsa/rio/issues/455)
+  [\#315](https://github.com/gesistsa/rio/issues/315)
+
+## rio 1.2.0
+
+CRAN release: 2024-07-24
+
+- Fix lintr issues [\#434](https://github.com/gesistsa/rio/issues/434)
+  (h/t [@bisaloo](https://github.com/bisaloo) Hugo Gruson)
+- Drop support for R \< 4.0.0 see
+  [\#436](https://github.com/gesistsa/rio/issues/436)
+- Add support for parquet in the import tier using `nanoparquet` see rio
+  1.0.1 below.
+
+Bug fixes
+
+- Fix [\#430](https://github.com/gesistsa/rio/issues/430) Add back
+  support for `.dat`
+
+## rio 1.1.1
+
+CRAN release: 2024-06-05
+
+Bug fixes
+
+- Fix [\#425](https://github.com/gesistsa/rio/issues/425) for archive
+  formats, the file extension of the input file is determined by the
+  compressed file (like prior rio 1.1.0)
+
+## rio 1.1.0
+
+CRAN release: 2024-05-23
+
+- CRAN release
+
+## rio 1.0.3
+
+- Add `trust` parameter to functions that are used to load various R
+  environment formats (`.R`, `.Rds`, `.Rdata`, etc). This parameter is
+  defaulted to `TRUE` today to ensure backwards compatibility. A
+  deprecation notice warns this will default to `FALSE` in `rio` 2.0. We
+  are informing users that these data types should only be loaded from
+  trusted sources, which should be affirmatively attested to.
+- Test and fix the compression mechanism: Gzip, Bzip2 are now working as
+  expected.
+
+Bug fixes
+
+- Fix [\#412](https://github.com/gesistsa/rio/issues/412), prevent
+  double usage of `which` for archive formats
+- Fix [\#415](https://github.com/gesistsa/rio/issues/415), both
+  [`import_list()`](http://gesistsa.github.io/rio/reference/import_list.md)
+  and
+  [`export_list()`](http://gesistsa.github.io/rio/reference/export_list.md)
+  support tar archives.
+- Fix [\#421](https://github.com/gesistsa/rio/issues/421), tar export is
+  only supported by R \>= 4.0.3.
+
+## rio 1.0.2
+
+- For missing files in `import_list` it gives more informative warnings
+  fix [\#389](https://github.com/gesistsa/rio/issues/389)
+- Single-item list of data frames can be exported fix
+  [\#385](https://github.com/gesistsa/rio/issues/385)
+- Move `stringi` to Suggests to reduce compilation time. Add an
+  attribution to the internal data to list out all required packages
+  [\#378](https://github.com/gesistsa/rio/issues/378)
+- Move `readr` to Imports for `fwf`. `readr` is a dependency of `haven`
+  so it does not increase the number of dependencies. Remove the
+  original `read.fwf2` which doesn’t guess `widths`. Keep the `widths`
+  and `col.names` to maintain compatibility.
+  [\#381](https://github.com/gesistsa/rio/issues/381)
+- Add (back) a pkgdown website: <https://gesistsa.github.io/rio/>
+- Update all test cases
+  [\#380](https://github.com/gesistsa/rio/issues/380)
+
+## rio 1.0.1
+
+CRAN release: 2023-09-19
+
+- POTENTIALLY BREAKING: Due to compiling time concerns, roll back the
+  decision to move `arrow` to `Imports`. It is now `Suggests`.
+  `setclass = "arrow"` works if `arrow` is installed.
+  [\#315](https://github.com/gesistsa/rio/issues/315)
+  [\#376](https://github.com/gesistsa/rio/issues/376)
+
+## rio 1.0.0
+
+CRAN release: 2023-09-14
+
+- Stop loading the entire namespace of a suggested package when it is
+  available [\#296](https://github.com/gesistsa/rio/issues/296)
+- Unexport objects: `.import`, `.export`, `is_file_text`; remove
+  documentation for `arg_reconcile`
+  [\#321](https://github.com/gesistsa/rio/issues/321)
+- Update Examples to make them more realistic
+  [\#327](https://github.com/gesistsa/rio/issues/327)
+- Add support for `qs`
+  [\#275](https://github.com/gesistsa/rio/issues/275) h/t David Schoch
+- Use `arrow` to import / export `feather`
+  [\#340](https://github.com/gesistsa/rio/issues/340)
+- `export_list` can write multiple data frames to a single archive file
+  (e.g. zip, tar) or a directory
+  [\#346](https://github.com/gesistsa/rio/issues/346) h/t David Schoch
+- `get_info` is added
+  [\#350](https://github.com/gesistsa/rio/issues/350)
+- POTENTIALLY BREAKING: `setclass` parameter is now authoritative.
+  Therefore:
+  `import("starwars.csv", data.table = TRUE, setclass = "tibble")` will
+  return a tibble (unlike previous versions where a data.table is
+  returned). The default class is data frame. You can either explicitly
+  use the `setclass` parameter; or set the option:
+  `options(rio.import.class = "data.table")`. h/t David Schoch
+  [\#336](https://github.com/gesistsa/rio/issues/336)
+- Parquet and feather are now formats supported out of the box; Possible
+  to setclass to `arrow` / `arrow_table`; ArrowTabular class can be
+  exported [\#315](https://github.com/gesistsa/rio/issues/315)
+- Add “extension”, “labelled” vignettes
+- Support readODS 2.1.0 features such as reading and writing Flat ODS;
+  export Multiple data frames
+  [\#358](https://github.com/gesistsa/rio/issues/358)
+- POTENTIALLY BREAKING: Use `writexl` instead of `openxlsx`. Option to
+  read xlsx with `openxlsx`
+  (i.e. `import("starwars.xlsx", readxl = FALSE)`) is always `TRUE`. The
+  ability to overwrite an existing sheet in an existing xlsx file is
+  also removed. It is against the design principle of `rio`.
+- POTENTIALLY BREAKING: The following options are deprecated:
+  `import(fread)`, `import(readr = TRUE)`, `import(haven)`,
+  `import(readxl)` and `export(fwrite)`. import will almost use
+  `data.table`, `haven`, `readxl`, and internal function (for fwf) to
+  import and export data. Currently, those options stay for backward
+  compatibility but will be removed in v2.0.0.
+  [\#343](https://github.com/gesistsa/rio/issues/343) h/t David Schoch
+- POTENTIALLY BREAKING: `...` is handled differently. Underlying
+  functions using “Tidy” convention
+  (e.g. [`readxl::read_xlsx()`](https://readxl.tidyverse.org/reference/read_excel.html))
+  can use “Base Convention” (See the new vignette: `remap`). Unused
+  arguments passed to the underlying function as `...` are silently
+  ignored by default. A new option `rio.ignoreunusedargs` is added to
+  control this behavior.
+  [\#326](https://github.com/gesistsa/rio/issues/326)
+- Bug fixes
+  - … is correctly passed for exporting ODS and feather
+    [\#318](https://github.com/gesistsa/rio/issues/318)
+  - POTENTIALLY BREAKING: JSON are exported in UTF-8 by default; solved
+    encoding issues on Windows R \< 4.2. This won’t affect any modern R
+    installation where UTF-8 is the default.
+    [\#318](https://github.com/gesistsa/rio/issues/318)
+  - POTENTIALLY BREAKING: YAML are exported using yaml::write_yaml().
+    But it can’t pass the UTF-8 check on older systems. Disclaimer
+    added. [\#318](https://github.com/gesistsa/rio/issues/318)
+  - More check for the `file` argument
+    [\#301](https://github.com/gesistsa/rio/issues/301)
+  - `import_list` works with single Excel/HTML/Zip online
+    [\#294](https://github.com/gesistsa/rio/issues/294)
+  - Correct XML/HTML escaping
+    [\#303](https://github.com/gesistsa/rio/issues/303)
+  - Create directory if it doesn’t exist
+    [\#347](https://github.com/gesistsa/rio/issues/347)
+- Declutter
+  - remove the obsolete data.table option
+    [\#323](https://github.com/gesistsa/rio/issues/323)
+  - write all documentation blocks in markdown
+    [\#311](https://github.com/gesistsa/rio/issues/311)
+  - remove all [@importFrom](https://github.com/importFrom)
+    [\#325](https://github.com/gesistsa/rio/issues/325) h/t David Schoch
+  - rearrange “Package Philosophy” as a Vignette
+    [\#320](https://github.com/gesistsa/rio/issues/320)
+  - Create a single source of truth about all import and export
+    functions [\#313](https://github.com/gesistsa/rio/issues/313)
+  - Clarify all concepts: now there is only `format`
+    [\#351](https://github.com/gesistsa/rio/issues/351)
+- New authors
+  - David Schoch [@schochastics](https://github.com/schochastics)
+
+## rio 0.5.30
+
+CRAN release: 2023-08-29
+
+- Maintenance release: new maintainer
+- Mark `.sas7bdat` as deprecated
+- Change the minimum R version to 3.6
+
+## rio 0.5.29
+
+CRAN release: 2021-11-22
+
+- fixes for CRAN
+
+## rio 0.5.28
+
+- Various fixes to tests, examples, and documentation for CRAN.
+- Temporarily disabled some tests that failed on Mac M1s.
+
+## rio 0.5.27
+
+CRAN release: 2021-06-21
+
+- Documentation fixes for CRAN.
+
+## rio 0.5.26
+
+CRAN release: 2021-03-01
+
+- Added support for “zsav” format.
+  ([\#273](https://github.com/gesistsa/rio/issues/273))
+
+## rio 0.5.25
+
+- Modified tests per email request from CRAN.
+- Added `coerce_character` argument (default FALSE) to
+  [`factorize()`](http://gesistsa.github.io/rio/reference/characterize.md)
+  to enable coercing character columns to factor.
+  ([\#278](https://github.com/gesistsa/rio/issues/278))
+
+## rio 0.5.24
+
+- Fix handling of “label” and “labels” attributes when exporting using
+  haven methods (SPSS, Stata, SAS).
+  ([\#268](https://github.com/gesistsa/rio/issues/268), h/t Ruben
+  Arslan)
+- Fix (a different bug?) handling factors by haven::labelled()
+  ([\#271](https://github.com/gesistsa/rio/issues/271), Alex Bokov)
+- HTML import can now handle multiple tbody elements within a single
+  table, a th element in a non-header row, and empty elements in either
+  the header or data.
+  ([\#260](https://github.com/gesistsa/rio/issues/260),
+  [\#263](https://github.com/gesistsa/rio/issues/263),
+  [\#264](https://github.com/gesistsa/rio/issues/264) Bill Denney)
+
+## rio 0.5.23
+
+- CSVY support is now provided by
+  [`data.table::fread()`](https://rdrr.io/pkg/data.table/man/fread.html)
+  and
+  [`data.table::fwrite()`](https://rdrr.io/pkg/data.table/man/fwrite.html),
+  providing significant performance gains.
+- Added an internal `arg_reconcile()` function to streamline the task of
+  removing/renaming arguments for compatibility with various functions
+  ([\#245](https://github.com/gesistsa/rio/issues/245), Alex Bokov)
+
+## rio 0.5.22
+
+- Added an
+  [`export_list()`](http://gesistsa.github.io/rio/reference/export_list.md)
+  function to write a list of data frames to multiple files using a
+  vector of file names or a file pattern.
+  ([\#207](https://github.com/gesistsa/rio/issues/207), h/t Bill Denney)
+- Added an `is_file_text()` function to determine whether a file is in a
+  plain-text format. Optionally narrower subsets of characters can be
+  specified, e.g. ASCII.
+  ([\#236](https://github.com/gesistsa/rio/issues/236) Alex Bokov)
+
+## rio 0.5.21
+
+- Added support for Apache Arrow (Parquet) files.
+  ([\#214](https://github.com/gesistsa/rio/issues/214))
+- Fix dropping of variable label in
+  [`characterize()`](http://gesistsa.github.io/rio/reference/characterize.md)
+  and
+  [`factorize()`](http://gesistsa.github.io/rio/reference/characterize.md).
+  ([\#204](https://github.com/gesistsa/rio/issues/204), h/t David
+  Armstrong)
+- [`import_list()`](http://gesistsa.github.io/rio/reference/import_list.md)
+  now returns a `filename` attribute for each data frame in the list
+  (when importing from multiple files), in order to distinguish files
+  with the same base name but different extensions (e.g.,
+  `import_list(c("foo.csv", "foo.tsv"))`).
+  ([\#208](https://github.com/gesistsa/rio/issues/208), h/t Vimal Rawat)
+- Import of DBF files now does not convert strings to factors.
+  ([\#202](https://github.com/gesistsa/rio/issues/202), h/t
+  [@jllipatz](https://github.com/jllipatz))
+- Implemented
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md) method
+  for .dump R files.
+  ([\#240](https://github.com/gesistsa/rio/issues/240))
+
+## rio 0.5.20
+
+- Additional pointers were added to indicate how to load .doc, .docx,
+  and .pdf files ([\#210](https://github.com/gesistsa/rio/issues/210),
+  h/t Bill Denney)
+- Ensure that tests only run if the corresponding package is installed.
+  (h/t Bill Denney)
+- Escape ampersands for html and xml export
+  ([\#234](https://github.com/gesistsa/rio/issues/234) Alex Bokov)
+
+## rio 0.5.19
+
+- Fix behavior of
+  [`export()`](http://gesistsa.github.io/rio/reference/export.md) to
+  plain text files when `append = TRUE`
+  ([\#201](https://github.com/gesistsa/rio/issues/201), h/t Julián
+  Urbano)
+- [`import_list()`](http://gesistsa.github.io/rio/reference/import_list.md)
+  now preserve names of Excel sheets, etc. when the ‘which’ argument is
+  specified. ([\#162](https://github.com/gesistsa/rio/issues/162), h/t
+  Danny Parsons)
+- Modify message and errors when working with unrecognized file formats.
+  ([\#195](https://github.com/gesistsa/rio/issues/195), h/t Trevor
+  Davis)
+- Add support for GraphPad Prism .pzfx files
+  ([\#205](https://github.com/gesistsa/rio/issues/205), h/t Bill Denney)
+
+## rio 0.5.18
+
+- Adjust
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md)/[`export()`](http://gesistsa.github.io/rio/reference/export.md)
+  for JSON file formats to allow non-data frame objects. Behavior
+  modeled after RDS format.
+  ([\#199](https://github.com/gesistsa/rio/issues/199) h/t Nathan Day)
+
+## rio 0.5.17
+
+- Fix
+  `the condition has length > 1 and only the first element will be used`
+  warning in `gather_attributes()`.
+  ([\#196](https://github.com/gesistsa/rio/issues/196), h/t Ruben
+  Arslan)
+
+## rio 0.5.16
+
+CRAN release: 2018-11-26
+
+- Fix
+  `the condition has length > 1 and only the first element will be used`
+  warning in `standardize_attributes()`.
+
+## rio 0.5.15
+
+CRAN release: 2018-11-25
+
+- Modified some further code to produce compatibility with haven 2.0.0
+  release. ([\#188](https://github.com/gesistsa/rio/issues/188))
+- Add some additional function suggestions for the ledger package.
+  ([\#190](https://github.com/gesistsa/rio/issues/190), h/t Trevor
+  Davis)
+
+## rio 0.5.14
+
+- Changes to
+  [`gather_attrs()`](http://gesistsa.github.io/rio/reference/gather_attrs.md)
+  for haven 2.0.0 release.
+  ([\#188](https://github.com/gesistsa/rio/issues/188))
+- Fixed a bug that generated a superfluous warning in
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md).
+- Some style guide changes to code.
+
+## rio 0.5.13
+
+- Allow [`import()`](http://gesistsa.github.io/rio/reference/import.md)
+  of objects other than data frames from R-serialized (.rds and .rdata)
+  files. Also, export of such objects to .rds files is supported, as
+  previously intended.
+  ([\#183](https://github.com/gesistsa/rio/issues/183), h/t Nicholas
+  Jhirad)
+- Added (suggests) support for import of EViews files using
+  [`hexView::readEViews()`](https://rdrr.io/pkg/hexView/man/readEViews.html).
+  ([\#163](https://github.com/gesistsa/rio/issues/163), h/t Boris
+  Demeshev)
+
+\# rio 0.5.12
+
+- Add better package specification to
+  [`install_formats()`](http://gesistsa.github.io/rio/reference/install_formats.md)
+  so that it reads from the `Suggests` field of the `DESCRIPTION` file.
+- Edit header of `README.Rmd` (and thusly `README.md`) to stop
+  complaining about a lack of title field.
+- Fix typo in `CONTRIBUTING.md` (line said “three arguments”, but only
+  listed two).
+
+## rio 0.5.11
+
+- Fixed a bug in
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md)
+  wherein matlab files were ignored unless `format` was specified, as
+  well as a related bug that made importing appear to fail for matlab
+  files. ([\#171](https://github.com/gesistsa/rio/issues/171))
+- Fixed a bug in
+  [`export()`](http://gesistsa.github.io/rio/reference/export.md)
+  wherein `format` was ignored.
+  ([\#99](https://github.com/gesistsa/rio/issues/99), h/t Sebastian
+  Sauer)
+- Fixed a bug in the importing of European-style semicolon-separated CSV
+  files. Added a test to ensure correct behavior.
+  ([\#159](https://github.com/gesistsa/rio/issues/159), h/t Kenneth
+  Rose)
+- Updated documentation to reflect recent changes to the xlsx
+  [`export()`](http://gesistsa.github.io/rio/reference/export.md)
+  method. ([\#156](https://github.com/gesistsa/rio/issues/156))
+
+## rio 0.5.10
+
+CRAN release: 2018-03-29
+
+- Removed some csvy-related tests, which were failing on CRAN.
+
+## rio 0.5.9
+
+CRAN release: 2018-02-01
+
+- Removed longstanding warnings from the tests of
+  [`export()`](http://gesistsa.github.io/rio/reference/export.md) to
+  fixed-width format.
+
+## rio 0.5.8
+
+- Export the
+  [`get_ext()`](http://gesistsa.github.io/rio/reference/get_info.md)
+  function. ([\#169](https://github.com/gesistsa/rio/issues/169))
+- Fix a bug related to an xml2 bug
+  ([\#168](https://github.com/gesistsa/rio/issues/168), h/t Jim Hester)
+- [`import_list()`](http://gesistsa.github.io/rio/reference/import_list.md)
+  gains improved file name handling.
+  ([\#164](https://github.com/gesistsa/rio/issues/164), h/t Ruaridh
+  Williamson)
+- Removed the `overwrite` argument from
+  [`export()`](http://gesistsa.github.io/rio/reference/export.md) method
+  for xlsx files. Instead, existing workbooks are always overwritten
+  unless which is specified, in which case only the specified sheet (if
+  it exists) is overwritten. If the file exists but the `which` sheet
+  does not, the data are added as a new sheet to the existing workbook.
+  ([\#156](https://github.com/gesistsa/rio/issues/156))
+
+## rio 0.5.7
+
+- Import of files with the ambiguous .dat extension, which are typically
+  text-delimited files, are now passed to
+  [`data.table::fread()`](https://rdrr.io/pkg/data.table/man/fread.html)
+  with a message. Export to the format remains unsupported.
+  ([\#98](https://github.com/gesistsa/rio/issues/98),
+  [\#155](https://github.com/gesistsa/rio/issues/155))
+- Added support for export to SAS XPORT format (via
+  [`haven::write_xpt()`](https://haven.tidyverse.org/reference/read_xpt.html)).
+  ([\#157](https://github.com/gesistsa/rio/issues/157))
+- Switched default import package for SAS XPORT format to
+  [`haven::read_xpt()`](https://haven.tidyverse.org/reference/read_xpt.html)
+  with a `haven = FALSE` toggle restoring the previous default behavior
+  using `foreign::read.xpt()`.
+  ([\#157](https://github.com/gesistsa/rio/issues/157))
+
+## rio 0.5.6
+
+- Fixed a bug in
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md) from
+  compressed files wherein the `which` argument did not necessarily
+  return the correct file if \>=2 files in the compressed folder.
+- Tweak handling of
+  [`export()`](http://gesistsa.github.io/rio/reference/export.md) to
+  xlsx workbooks when `which` is specified.
+  ([\#156](https://github.com/gesistsa/rio/issues/156))
+
+## rio 0.5.5
+
+CRAN release: 2017-06-18
+
+- Expanded test suite and increased test coverage, fixing a few tests
+  that were failing on certain CRAN builds.
+
+## rio 0.5.4
+
+- New functions
+  [`characterize()`](http://gesistsa.github.io/rio/reference/characterize.md)
+  and
+  [`factorize()`](http://gesistsa.github.io/rio/reference/characterize.md)
+  provide methods for converting “labelled” variables (e.g., from Stata
+  or SPSS) into character or factor variables using embedded metadata.
+  This can also be useful for exporting a metadata-rich file format into
+  a plain text file.
+  ([\#153](https://github.com/gesistsa/rio/issues/153))
+
+## rio 0.5.3
+
+- Fixed a bug in writing to .zip and .tar archives related to absolute
+  file paths.
+- Fixed some small bugs in
+  [`import_list()`](http://gesistsa.github.io/rio/reference/import_list.md)
+  and added tests for behavior.
+- Add .bib as known-unsupported format via `bib2df::bib2df()`.
+- Expanded test coverage.
+
+## rio 0.5.3
+
+- Fixed a bug in `.import.rio_xlsx()` when `readxl = FALSE`.
+  ([\#152](https://github.com/gesistsa/rio/issues/152), h/t Danny
+  Parsons)
+- Added a new function
+  [`spread_attrs()`](http://gesistsa.github.io/rio/reference/gather_attrs.md)
+  that reverses the
+  [`gather_attrs()`](http://gesistsa.github.io/rio/reference/gather_attrs.md)
+  operation.
+- Expanded test coverage.
+
+## rio 0.5.1
+
+- [`export()`](http://gesistsa.github.io/rio/reference/export.md) now
+  sets variables with a “labels” attribute to **haven**’s “labelled”
+  class.
+
+## rio 0.5.0
+
+CRAN release: 2017-04-28
+
+- CRAN Release.
+- Restored import of **openxlsx** so that writing to xlsx is supported
+  on install. ([\#150](https://github.com/gesistsa/rio/issues/150))
+
+## rio 0.4.28
+
+- Improved documentation of mapping between file format support and the
+  packages used for each format.
+  ([\#151](https://github.com/gesistsa/rio/issues/151), h/t Patrick
+  Kennedy)
+- [`import_list()`](http://gesistsa.github.io/rio/reference/import_list.md)
+  now returns a `NULL` entry for any failed imports, with a warning.
+  ([\#149](https://github.com/gesistsa/rio/issues/149))
+- [`import_list()`](http://gesistsa.github.io/rio/reference/import_list.md)
+  gains additional arguments `rbind_fill` and `rbind_label` to control
+  rbind-ing behavior.
+  ([\#149](https://github.com/gesistsa/rio/issues/149))
+
+## rio 0.4.27
+
+- Import to and export from the clipboard now relies on
+  [`clipr::read_clip()`](http://matthewlincoln.net/clipr/reference/read_clip.md)
+  and
+  [`clipr::write_clip()`](http://matthewlincoln.net/clipr/reference/write_clip.md),
+  respectively, thus (finally) providing Linux support.
+  ([\#105](https://github.com/gesistsa/rio/issues/105), h/t Matthew
+  Lincoln)
+- Added an `rbind` argument to
+  [`import_list()`](http://gesistsa.github.io/rio/reference/import_list.md).
+  ([\#149](https://github.com/gesistsa/rio/issues/149))
+- Added a `setclass` argument to
+  [`import_list()`](http://gesistsa.github.io/rio/reference/import_list.md),
+  ala the same in
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md).
+- Switched [`requireNamespace()`](https://rdrr.io/r/base/ns-load.html)
+  calls to `quietly = TRUE`.
+
+## rio 0.4.26
+
+- Further fixes to .csv.gz import/export.
+  ([\#146](https://github.com/gesistsa/rio/issues/146), h/t Trevor
+  Davis)
+
+## rio 0.4.25
+
+- Remove unecessary **urltools** dependency.
+- New function
+  [`import_list()`](http://gesistsa.github.io/rio/reference/import_list.md)
+  returns a list of data frames from a multi-object Excel Workbook,
+  .Rdata file, zip directory, or HTML file.
+  ([\#126](https://github.com/gesistsa/rio/issues/126),
+  [\#129](https://github.com/gesistsa/rio/issues/129))
+- [`export()`](http://gesistsa.github.io/rio/reference/export.md) can
+  now write a list of data frames to an Excel (.xlsx) workbook.
+  ([\#142](https://github.com/gesistsa/rio/issues/142), h/t Jeremy
+  Johnson)
+- [`export()`](http://gesistsa.github.io/rio/reference/export.md) can
+  now write a list of data frames to an HTML (.html) file.
+
+## rio 0.4.24
+
+- Verbosity of `export(format = "fwf")` now depends on
+  `options("verbose")`.
+- Fixed various errors, warnings, and messages in fixed-width format
+  tests.
+- Modified defaults and argument handling in internal function
+  `read_delim()`.
+- Fixed handling of “data.table”, “tibble”, and “data.frame” classes in
+  [`set_class()`](https://magrittr.tidyverse.org/reference/aliases.html).
+  ([\#144](https://github.com/gesistsa/rio/issues/144))
+
+## rio 0.4.23
+
+- Moved all non-critical format packages to Suggests, rather than
+  Imports. ([\#143](https://github.com/gesistsa/rio/issues/143))
+- Added support for Matlab formats.
+  ([\#78](https://github.com/gesistsa/rio/issues/78),
+  [\#98](https://github.com/gesistsa/rio/issues/98))
+- Added support for fst format.
+  ([\#138](https://github.com/gesistsa/rio/issues/138))
+
+## rio 0.4.22
+
+- Rearranged README.
+- Bumped readxl dependency to `>= 0.1.1`
+  ([\#130](https://github.com/gesistsa/rio/issues/130), h/t Yongfa Chen)
+- Pass explicit `excel_format` arguments when using **readxl**
+  functions. ([\#130](https://github.com/gesistsa/rio/issues/130))
+- Google Spreadsheets can now be imported using any of the allowed
+  formats (CSV, TSV, XLSX, ODS).
+- Added support for writing to ODS files via
+  [`readODS::write_ods()`](https://docs.ropensci.org/readODS/reference/write_ods.html).
+  ([\#96](https://github.com/gesistsa/rio/issues/96))
+
+## rio 0.4.21
+
+- Handle HTML tables with `<tbody>` elements. (h/t Mohamed Elgoussi)
+
+## rio 0.4.20
+
+- Fixed a big in the `.import.rio_xls()` and `.import.rio_xlsx()` where
+  the `sheet` argument would return an error.
+
+## rio 0.4.19
+
+- Fixed a bug in the import of delimited files when `fread = FALSE`.
+  ([\#133](https://github.com/gesistsa/rio/issues/133), h/t Christopher
+  Gandrud)
+
+## rio 0.4.18
+
+- With new data.table release, export using `fwrite()` is now the
+  default for text-based file formats.
+
+## rio 0.4.17
+
+- Fixed a bug in `.import.rio_xls()` wherein the `which` argument was
+  ignored. (h/t Mohamed Elgoussi)
+
+## rio 0.4.16
+
+CRAN release: 2016-09-25
+
+- Added support for importing from multi-table HTML files using the
+  `which` argument.
+  ([\#126](https://github.com/gesistsa/rio/issues/126))
+
+## rio 0.4.15
+
+- Improved behavior of
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md) and
+  [`export()`](http://gesistsa.github.io/rio/reference/export.md) with
+  respect to unrecognized file types.
+  ([\#124](https://github.com/gesistsa/rio/issues/124),
+  [\#125](https://github.com/gesistsa/rio/issues/125), h/t Jason Becker)
+- Added explicit tests of the S3 extension mechanism for `.import()` and
+  `.export()`.
+- Attempt to recognize compressed but non-archived file formats (e.g.,
+  “.csv.gz”). ([\#123](https://github.com/gesistsa/rio/issues/123), h/t
+  trevorld)
+
+## rio 0.4.14
+
+- Update import and export methods to use new xml2 for XML and HTML
+  export. ([\#86](https://github.com/gesistsa/rio/issues/86))
+
+## rio 0.4.13
+
+- Fix failing tests related to stricter variable name handling for Stata
+  files in development version of haven.
+  ([\#113](https://github.com/gesistsa/rio/issues/113), h/t Hadley
+  Wickham)
+- Added support for export of .sas7bdat files via haven
+  ([\#116](https://github.com/gesistsa/rio/issues/116))
+- Restored support for import from SPSS portable via haven
+  ([\#116](https://github.com/gesistsa/rio/issues/116))
+- Updated import methods to reflect changed formal argument names in
+  haven. ([\#116](https://github.com/gesistsa/rio/issues/116))
+- Converted to roxygen2 documentation and made NEWS an explicit markdown
+  file.
+
+## rio 0.4.12
+
+CRAN release: 2016-08-10
+
+- rio sets `options(datatable.fread.dec.experiment=FALSE)` during onLoad
+  to address a Unix-specific locale issue.
+
+## rio 0.4.11
+
+CRAN release: 2016-08-09
+
+- Note unsupported NumPy i/o via RcppCNPy.
+  ([\#112](https://github.com/gesistsa/rio/issues/112))
+- Fix import of European-style CSV files (sep = “,” and sep2 = “;”).
+  ([\#106](https://github.com/gesistsa/rio/issues/106),
+  [\#107](https://github.com/gesistsa/rio/issues/107), h/t Stani
+  Stadlmann)
+
+## rio 0.4.10
+
+- Changed feather Imports to Suggests to make rio installable on older R
+  versions. ([\#104](https://github.com/gesistsa/rio/issues/104))
+- Noted new RStudio add-in, GREA, that uses rio.
+  ([\#109](https://github.com/gesistsa/rio/issues/109))
+- Migrated CSVY-related code to separate package
+  (<https://github.com/leeper/csvy/>).
+  ([\#111](https://github.com/gesistsa/rio/issues/111))
+
+## rio 0.4.9
+
+- Removed unnecessary error in xlsx imports.
+  ([\#103](https://github.com/gesistsa/rio/issues/103), h/t Kevin
+  Wright)
+
+## rio 0.4.8
+
+CRAN release: 2016-06-14
+
+- Fixed a bug in the handling of “labelled” class variables imported
+  from haven. ([\#102](https://github.com/gesistsa/rio/issues/102), h/t
+  Pierre LaFortune)
+
+## rio 0.4.7
+
+- Improved use of the `sep` argument for import of delimited files.
+  ([\#99](https://github.com/gesistsa/rio/issues/99), h/t Danny Parsons)
+- Removed support for import of SPSS Portable (.por) files, given
+  deprecation from haven.
+  ([\#100](https://github.com/gesistsa/rio/issues/100))
+
+## rio 0.4.5
+
+CRAN release: 2016-05-20
+
+- Fixed other tests to remove (unimportant) warnings.
+- Fixed a failing test of file compression that was found in v0.4.3 on
+  some platforms.
+
+## rio 0.4.3
+
+CRAN release: 2016-05-19
+
+- Improved, generalized, tested, and expanded documentation of `which`
+  argument in
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md).
+- Expanded test suite and made some small fixes.
+
+## rio 0.4.2
+
+- Added support to import and export to `feather` data serialization
+  format. ([\#88](https://github.com/gesistsa/rio/issues/88), h/t Jason
+  Becker)
+
+## rio 0.4.1
+
+- Fixed behavior of
+  [`gather_attrs()`](http://gesistsa.github.io/rio/reference/gather_attrs.md)
+  on a data.frame with no attributes to gather.
+  ([\#94](https://github.com/gesistsa/rio/issues/94))
+- Removed unrecognized file format error for import from compressed
+  files. ([\#93](https://github.com/gesistsa/rio/issues/93))
+
+## rio 0.4.0
+
+CRAN release: 2016-05-01
+
+- CRAN Release.
+
+## rio 0.3.19
+
+- Added a
+  [`gather_attrs()`](http://gesistsa.github.io/rio/reference/gather_attrs.md)
+  function that moves variable-level attributes to the data.frame level.
+  ([\#80](https://github.com/gesistsa/rio/issues/80))
+- Added preliminary support for import from HTML tables
+  ([\#86](https://github.com/gesistsa/rio/issues/86))
+
+## rio 0.3.18
+
+- Added support for export to HTML tables.
+  ([\#86](https://github.com/gesistsa/rio/issues/86))
+
+## rio 0.3.17
+
+- Fixed a bug in import from remote URLs with incorrect file extensions.
+
+## rio 0.3.16
+
+- Added support for import from fixed-width format files via
+  [`readr::read_fwf()`](https://readr.tidyverse.org/reference/read_fwf.html)
+  with a specified `widths` argument. This may enable faster import of
+  these types of files and provides a base-like interface for working
+  with readr. ([\#48](https://github.com/gesistsa/rio/issues/48))
+
+## rio 0.3.15
+
+- Added support for import from and export to yaml.
+  ([\#83](https://github.com/gesistsa/rio/issues/83))
+- Fixed a bug when reading from an uncommented CSVY yaml header that
+  contained single-line comments.
+  ([\#84](https://github.com/gesistsa/rio/issues/84), h/t Tom Aldenberg)
+
+## rio 0.3.14
+
+- Diagnostic messages were cleaned up to facilitate translation.
+  ([\#57](https://github.com/gesistsa/rio/issues/57))
+
+## rio 0.3.12
+
+- `.import()` and `.export()` are now exported S3 generics and
+  documentation has been added to describe how to write rio extensions
+  for new file types. An example of this functionality is shown in the
+  new suggested “rio.db” package.
+
+## rio 0.3.11
+
+- [`import()`](http://gesistsa.github.io/rio/reference/import.md) now
+  uses xml2 to read XML structures and
+  [`export()`](http://gesistsa.github.io/rio/reference/export.md) uses a
+  custom method for writing to XML, thereby negating dependency on the
+  XML package. ([\#67](https://github.com/gesistsa/rio/issues/67))
+- Enhancements were made to import and export of CSVY to store attribute
+  metadata as variable-level attributes (like imports from binary file
+  formats).
+- [`import()`](http://gesistsa.github.io/rio/reference/import.md) gains
+  a `which` argument that is used to select which file to return from
+  within a compressed tar or zip archive.
+- Export to tar now tries to correct for bugs in
+  [`tar()`](https://rdrr.io/r/utils/tar.html) that are being fixed in
+  base R via
+  [PR#16716](https://bugs.r-project.org/show_bug.cgi?id=16716).
+
+## rio 0.3.10
+
+- Fixed a bug in
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md)
+  (introduced in [\#62](https://github.com/gesistsa/rio/issues/62),
+  7a7480e5) that prevented import from clipboard. (h/t Kevin Wright)
+- [`export()`](http://gesistsa.github.io/rio/reference/export.md)
+  returns a character string.
+  ([\#82](https://github.com/gesistsa/rio/issues/82))
+
+## rio 0.3.9
+
+- The use of
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md) for
+  SAS, Stata, and SPSS files has been streamlined. Regardless of whether
+  the `haven = TRUE` argument is used, the data.frame returned by
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md) should
+  now be (nearly) identical, with all attributes stored at the variable
+  rather than data.frame level. This is a non-backwards compatible
+  change. ([\#80](https://github.com/gesistsa/rio/issues/80))
+
+## rio 0.3.8
+
+- Fixed error in export to CSVY with a commented yaml header.
+  ([\#81](https://github.com/gesistsa/rio/issues/81), h/t Andrew
+  MacDonald)
+
+## rio 0.3.7
+
+- [`export()`](http://gesistsa.github.io/rio/reference/export.md) now
+  allows automatic file compression as tar, gzip, or zip using the
+  `file` argument (e.g., `export(iris, "iris.csv.zip")`).
+
+## rio 0.3.6
+
+- Expanded verbosity of
+  [`export()`](http://gesistsa.github.io/rio/reference/export.md) for
+  fixed-width format files and added a commented header containing
+  column class and width information.
+- Exporting factors to fixed-width format now saves those values as
+  integer rather than numeric.
+- Expanded test suite and separated tests into format-specific files.
+  ([\#51](https://github.com/gesistsa/rio/issues/51))
+
+## rio 0.3.5
+
+- Export of CSVY files now includes commenting the yaml header by
+  default. Import of CSVY accommodates this automatically.
+  ([\#74](https://github.com/gesistsa/rio/issues/74))
+
+## rio 0.3.3
+
+- Export of CSVY files and metadata now supported by
+  [`export()`](http://gesistsa.github.io/rio/reference/export.md).
+  ([\#73](https://github.com/gesistsa/rio/issues/73))
+- Import of CSVY files now stores dataset-level metadata in attributes
+  of the output data.frame.
+  ([\#73](https://github.com/gesistsa/rio/issues/73), h/t Tom Aldenberg)
+- When rio receives an unrecognized file format, it now issues a
+  message. The new internal `.import.default()` and `.export.default()`
+  then produce an error. This enables add-on packages to support
+  additional formats through new s3 methods of the form
+  `.import.rio_EXTENSION()` and `.export.rio_EXTENSION()`.
+
+## rio 0.3.2
+
+- Use S3 dispatch internally to call new (unexported) `.import()` and
+  `.export()` methods.
+  ([\#42](https://github.com/gesistsa/rio/issues/42), h/t Jason Becker)
+
+## rio 0.3.0
+
+CRAN release: 2016-01-14
+
+- Release to CRAN.
+- Set a default numerical precision (of 2 decimal places) for export to
+  fixed-width format.
+
+## rio 0.2.13
+
+- Import stats package for
+  [`na.omit()`](https://rdrr.io/r/stats/na.fail.html).
+
+## rio 0.2.11
+
+- Added support for direct import from Google Sheets.
+  ([\#60](https://github.com/gesistsa/rio/issues/60),
+  [\#63](https://github.com/gesistsa/rio/issues/63), h/t Chung-hong
+  Chan)
+
+## rio 0.2.7
+
+- Refactored remote file retrieval into separate (non-exported) function
+  used by
+  [`import()`](http://gesistsa.github.io/rio/reference/import.md).
+  ([\#62](https://github.com/gesistsa/rio/issues/62))
+- Added test sutie to test file conversion.
+- Expanded test suite to include test of all export formats.
+
+## rio 0.2.6
+
+- Cleaned up NAMESPACE file.
+
+## rio 0.2.5
+
+- If file format for a remote file cannot be identified from the
+  supplied URL or the final URL reported by
+  [`curl::curl_fetch_memory()`](https://jeroen.r-universe.dev/curl/reference/curl_fetch.html),
+  the HTTP headers are checked for a filename in the Content-Disposition
+  header. ([\#36](https://github.com/gesistsa/rio/issues/36))
+- Removed longurl dependency. This is no longer needed because we can
+  identify formats using curl’s url argument.
+- Fixed a bug related to importing European-style (“csv2”) format files.
+  ([\#44](https://github.com/gesistsa/rio/issues/44))
+- Updated CSVY import to embed variable-level metadata.
+  ([\#52](https://github.com/gesistsa/rio/issues/52))
+- Use `urltools::url_parse()` to extract file extensions from complex
+  URLs (e.g., those with query arguments).
+  ([\#56](https://github.com/gesistsa/rio/issues/56))
+- Fixed NAMESPACE notes for base packages.
+  ([\#58](https://github.com/gesistsa/rio/issues/58))
+
+## rio 0.2.4
+
+- Modified behavior so that files imported using haven now store
+  variable metadata at the data.frame level by default (unlike the
+  default behavior in haven, which can cause problems).
+  ([\#37](https://github.com/gesistsa/rio/issues/37), h/t Ista Zahn)
+- Added support for importing CSVY (<http://csvy.org/>) formatted files.
+  ([\#52](https://github.com/gesistsa/rio/issues/52))
+- Added import dependency on data.table 1.9.5.
+  ([\#39](https://github.com/gesistsa/rio/issues/39))
+
+## rio 0.2.2
+
+- Uses the longurl package to expand shortened URLs so that their file
+  type can be easily determined.
+
+## rio 0.2.1
+
+- Improved support for importing from compressed directories, especially
+  web-based compressed directories.
+  ([\#38](https://github.com/gesistsa/rio/issues/38))
+- Add import dependency on curl \>= 0.6 to facilitate content type
+  parsing and format inference from URL redirects.
+  ([\#36](https://github.com/gesistsa/rio/issues/36))
+- Add bit64 to `Suggests` to remove an `import` warning.
+
+## rio 0.2
+
+CRAN release: 2015-05-07
+
+- `import` always returns a data.frame, unless `setclass` is specified.
+  ([\#22](https://github.com/gesistsa/rio/issues/22))
+- Added support for import from legacy Excel (.xls) files
+  [`readxl::read_excel`](https://readxl.tidyverse.org/reference/read_excel.html),
+  making its use optional.
+  ([\#19](https://github.com/gesistsa/rio/issues/19))
+- Added support for import from and export to the system clipboard on
+  Windows and Mac OS.
+- Added support for export to simple XML documents.
+  ([\#12](https://github.com/gesistsa/rio/issues/12))
+- Added support for import from simple XML documents via
+  `XML::xmlToDataFrame`.
+  ([\#12](https://github.com/gesistsa/rio/issues/12))
+- Added support for import from ODS spreadsheet formats.
+  ([\#12](https://github.com/gesistsa/rio/issues/12), h/t Chung-hong
+  Chan)
+- Use
+  [`data.table::fread`](https://rdrr.io/pkg/data.table/man/fread.html)
+  by default for reading delimited files.
+  ([\#3](https://github.com/gesistsa/rio/issues/3))
+- Added support for import and export of `dput` and `dget` objects.
+  ([\#10](https://github.com/gesistsa/rio/issues/10))
+- Added support for reading from compressed archives (.zip and .tar).
+  ([\#7](https://github.com/gesistsa/rio/issues/7))
+- Added support for writing to fixed-width format.
+  ([\#8](https://github.com/gesistsa/rio/issues/8))
+- Set `stringsAsFactors = FALSE` as default for reading tabular data.
+  ([\#4](https://github.com/gesistsa/rio/issues/4))
+- Added support for HTTPS imports.
+  ([\#1](https://github.com/gesistsa/rio/issues/1), h/t Christopher
+  Gandrud)
+- Added support for automatic file naming in `export` based on object
+  name and file format.
+  ([\#5](https://github.com/gesistsa/rio/issues/5))
+- Exposed `convert` function.
+- Added vignette, knitr-generated README.md, and updated documentation.
+  ([\#2](https://github.com/gesistsa/rio/issues/2))
+- Added some non-exported functions to simplify argument passing and
+  streamline package API.
+  ([\#6](https://github.com/gesistsa/rio/issues/6))
+- Separated `import`, `export`, `convert`, and utilities into separate
+  source code files.
+- Expanded the set of supported file types/extensions, switched SPSS,
+  SAS, and Stata formats to **haven**, making its use optional.
+
+## rio 0.1.2
+
+CRAN release: 2013-09-04
+
+- Updated documentation and fixed a bug in csv import without header.
+
+## rio 0.1.1
+
+CRAN release: 2013-08-28
+
+- Initial release

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rio</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Import</h1>
-      <small class="dont-index">Source: <a href="https://github.com/gesistsa/rio/blob/v1.2.4/R/import.R" class="external-link"><code>R/import.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/gesistsa/rio/blob/main/R/import.R" class="external-link"><code>R/import.R</code></a></small>
       <div class="d-none name"><code>import.Rd</code></div>
     </div>
 
@@ -105,10 +105,7 @@ The parameter takes precedents over parameters in ... which set a different clas
 <li><p>R syntax object (.R), using <code><a href="https://rdrr.io/r/base/dput.html" class="external-link">base::dget()</a></code>, see <code>trust</code> below.</p></li>
 <li><p>Saved R objects (.RData,.rda), using <code><a href="https://rdrr.io/r/base/load.html" class="external-link">base::load()</a></code> for single-object .Rdata files. Use <code>which</code> to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame), see <code>trust</code> below.</p></li>
 <li><p>Serialized R objects (.rds), using <code><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">base::readRDS()</a></code>. This can be any R object (not just a data frame), see <code>trust</code> below.</p></li>
-<li><p>Serialized R objects (.qs), using <code><a href="https://rdrr.io/pkg/qs/man/qread.html" class="external-link">qs::qread()</a></code>, which is
-significantly faster than .rds. This can be any R
-object (not just a data frame).</p></li>
-<li><p>Serialized R objects (.qs2), using <code><a href="https://rdrr.io/pkg/qs2/man/qs_read.html" class="external-link">qs2::qs_read()</a></code>. This is the future-proof successor to using (.qs).</p></li>
+<li><p>Serialized R objects (.qs2), using <code><a href="https://rdrr.io/pkg/qs2/man/qs_read.html" class="external-link">qs2::qs_read()</a></code>.</p></li>
 <li><p>Epiinfo (.rec), using <code><a href="https://rdrr.io/pkg/foreign/man/read.epiinfo.html" class="external-link">foreign::read.epiinfo()</a></code></p></li>
 <li><p>Minitab (.mtp), using <code><a href="https://rdrr.io/pkg/foreign/man/read.mtp.html" class="external-link">foreign::read.mtp()</a></code></p></li>
 <li><p>Systat (.syd), using <code><a href="https://rdrr.io/pkg/foreign/man/read.systat.html" class="external-link">foreign::read.systat()</a></code></p></li>
@@ -127,7 +124,7 @@ object (not just a data frame).</p></li>
 <li><p>OpenDocument Spreadsheet (.ods, .fods), using <code><a href="https://docs.ropensci.org/readODS/reference/read_ods.html" class="external-link">readODS::read_ods()</a></code> or <code><a href="https://docs.ropensci.org/readODS/reference/read_ods.html" class="external-link">readODS::read_fods()</a></code>.  Use <code>which</code> to specify a sheet number.</p></li>
 <li><p>Single-table HTML documents (.html), using <code><a href="http://xml2.r-lib.org/reference/read_xml.html" class="external-link">xml2::read_html()</a></code>. There is no standard HTML table and we have only tested this with HTML tables exported with this package. HTML tables will only be read correctly if the HTML file can be converted to a list via <code>xml2::as_list()</code>. This import feature is not robust, especially for HTML tables in the wild. Please use a proper web scraping framework, e.g. <code>rvest</code>.</p></li>
 <li><p>Shallow XML documents (.xml), using <code><a href="http://xml2.r-lib.org/reference/read_xml.html" class="external-link">xml2::read_xml()</a></code>. The data structure will only be read correctly if the XML file can be converted to a list via <code>xml2::as_list()</code>.</p></li>
-<li><p>YAML (.yml), using <code><a href="https://rdrr.io/pkg/yaml/man/yaml.load.html" class="external-link">yaml::yaml.load()</a></code></p></li>
+<li><p>YAML (.yml), using <code><a href="https://yaml.r-lib.org/reference/yaml.load.html" class="external-link">yaml::yaml.load()</a></code></p></li>
 <li><p>Clipboard import, using <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">utils::read.table()</a></code> with <code>row.names = FALSE</code></p></li>
 <li><p>Google Sheets, as Comma-separated data (.csv)</p></li>
 <li><p>GraphPad Prism (.pzfx) using <code><a href="https://rdrr.io/pkg/pzfx/man/read_pzfx.html" class="external-link">pzfx::read_pzfx()</a></code></p></li>
