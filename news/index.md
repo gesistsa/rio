@@ -4,6 +4,7 @@
 
 - Fix [\#473](https://github.com/gesistsa/rio/issues/473), remove
   support for `qs`
+- Fix [\#481](https://github.com/gesistsa/rio/issues/481), remove `po`
 
 Bug fixes \* Fix [\#475](https://github.com/gesistsa/rio/issues/475),
 add missing package availability checks for export methods
