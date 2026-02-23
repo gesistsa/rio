@@ -27,7 +27,5 @@ Some specific types of changes that you might make are:
 
  3. Changes requiring a new package dependency should be discussed on the GitHub issues page before submitting a pull request.
  
- 4. Message translations. These are very appreciated! The format is a pain, but if you're doing this I'm assuming you're already familiar with it.
-
 Any questions you have can be opened as GitHub issues.
 

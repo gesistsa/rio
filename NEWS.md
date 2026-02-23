@@ -1,6 +1,7 @@
 # rio 1.2.5
 
 * Fix #473, remove support for `qs`
+* Fix #481, remove `po`
 
 Bug fixes
 * Fix #475, add missing package availability checks for export methods
