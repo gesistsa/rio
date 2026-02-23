@@ -53,10 +53,7 @@ This function imports a data frame or matrix from a data file with the file form
 \item R syntax object (.R), using \code{\link[base:dput]{base::dget()}}, see \code{trust} below.
 \item Saved R objects (.RData,.rda), using \code{\link[base:load]{base::load()}} for single-object .Rdata files. Use \code{which} to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame), see \code{trust} below.
 \item Serialized R objects (.rds), using \code{\link[base:readRDS]{base::readRDS()}}. This can be any R object (not just a data frame), see \code{trust} below.
-\item Serialized R objects (.qs), using \code{\link[qs:qread]{qs::qread()}}, which is
-significantly faster than .rds. This can be any R
-object (not just a data frame).
-\item Serialized R objects (.qs2), using \code{\link[qs2:qs_read]{qs2::qs_read()}}. This is the future-proof successor to using (.qs).
+\item Serialized R objects (.qs2), using \code{\link[qs2:qs_read]{qs2::qs_read()}}.
 \item Epiinfo (.rec), using \code{\link[foreign:read.epiinfo]{foreign::read.epiinfo()}}
 \item Minitab (.mtp), using \code{\link[foreign:read.mtp]{foreign::read.mtp()}}
 \item Systat (.syd), using \code{\link[foreign:read.systat]{foreign::read.systat()}}

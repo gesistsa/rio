@@ -421,12 +421,6 @@ extract_html_row <- function(x, empty_value) {
 }
 
 #' @export
-.import.rio_qs <- function(file, which = 1, ...) {
-    .check_pkg_availability("qs")
-    .docall(qs::qread, ..., args = list(file = file))
-}
-
-#' @export
 .import.rio_qs2 <- function(file, which = 1, ...) {
   .check_pkg_availability("qs2")
   .docall(qs2::qs_read, ..., args = list(file = file))

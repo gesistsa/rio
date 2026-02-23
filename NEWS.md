@@ -1,3 +1,7 @@
+# rio 1.2.5
+
+* Fix #473, remove support for `qs`
+
 # rio 1.2.4
 
 * Fix #463, export_list also allows ods and fods
