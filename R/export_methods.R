@@ -136,6 +136,7 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
 
 #' @export
 .export.rio_feather <- function(file, x, ...) {
+    .check_pkg_availability("arrow")
     .docall(arrow::write_feather, ..., args = list(x = x, sink = file))
 }
 
@@ -282,6 +283,7 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
 
 #' @export
 .export.rio_parquet <- function(file, x, ...) {
+    .check_pkg_availability("nanoparquet")
     .docall(nanoparquet::write_parquet, ..., args = list(x = x, file = file))
 }
 
