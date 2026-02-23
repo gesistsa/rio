@@ -5,6 +5,9 @@
 - Fix [\#473](https://github.com/gesistsa/rio/issues/473), remove
   support for `qs`
 
+Bug fixes \* Fix [\#475](https://github.com/gesistsa/rio/issues/475),
+add missing package availability checks for export methods
+
 ## rio 1.2.4
 
 CRAN release: 2025-09-26
