@@ -30,10 +30,7 @@
 #'     \item R syntax object (.R), using [base::dget()], see `trust` below.
 #'     \item Saved R objects (.RData,.rda), using [base::load()] for single-object .Rdata files. Use `which` to specify an object name for multi-object .Rdata files. This can be any R object (not just a data frame), see `trust` below.
 #'     \item Serialized R objects (.rds), using [base::readRDS()]. This can be any R object (not just a data frame), see `trust` below.
-#'     \item Serialized R objects (.qs), using [qs::qread()], which is
-#'     significantly faster than .rds. This can be any R
-#'     object (not just a data frame).
-#'     \item Serialized R objects (.qs2), using [qs2::qs_read()]. This is the future-proof successor to using (.qs).
+#'     \item Serialized R objects (.qs2), using [qs2::qs_read()].
 #'     \item Epiinfo (.rec), using [foreign::read.epiinfo()]
 #'     \item Minitab (.mtp), using [foreign::read.mtp()]
 #'     \item Systat (.syd), using [foreign::read.systat()]

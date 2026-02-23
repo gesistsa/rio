@@ -25,10 +25,7 @@
 #'     \item R syntax object (.R), using [base::dput()] (by default) or [base::dump()] (if `format = 'dump'`)
 #'     \item Saved R objects (.RData,.rda), using [base::save()]. In this case, `x` can be a data frame, a named list of objects, an R environment, or a character vector containing the names of objects if a corresponding `envir` argument is specified.
 #'     \item Serialized R objects (.rds), using [base::saveRDS()]. In this case, `x` can be any serializable R object.
-#'     \item Serialized R objects (.qs), using [qs::qsave()], which is
-#'     significantly faster than .rds. This can be any R
-#'     object (not just a data frame).
-#'     \item Serialized R objects (.qs2), using [qs2::qs_save()]. This is the future-proof successor to using (.qs).
+#'     \item Serialized R objects (.qs2), using [qs2::qs_save()].
 #'     \item "XBASE" database files (.dbf), using [foreign::write.dbf()]
 #'     \item Weka Attribute-Relation File Format (.arff), using [foreign::write.arff()]
 #'     \item Fixed-width format data (.fwf), using [utils::write.table()] with `row.names = FALSE`, `quote = FALSE`, and `col.names = FALSE`
