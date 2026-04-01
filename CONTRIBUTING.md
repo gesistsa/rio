@@ -1,3 +1,5 @@
+## Contributing to `rio`
+
 Contributions to **rio** are welcome from anyone and are best sent as pull requests on [the GitHub repository](https://github.com/gesistsa/rio/). This page provides some instructions to potential contributors about how to add to the package.
 
  1. Contributions can be submitted as [a pull request](https://help.github.com/articles/creating-a-pull-request/) on GitHub by forking or cloning the [repo](https://github.com/gesistsa/rio/), making changes and submitting the pull request.
