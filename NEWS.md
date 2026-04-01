@@ -1,3 +1,7 @@
+# rio 1.3.0
+
+* CRAN release
+
 # rio 1.2.5
 
 * Fix #473, remove support for `qs`
