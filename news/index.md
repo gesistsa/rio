@@ -1,5 +1,9 @@
 # Changelog
 
+## rio 1.3.0
+
+- CRAN release
+
 ## rio 1.2.5
 
 - Fix [\#473](https://github.com/gesistsa/rio/issues/473), remove

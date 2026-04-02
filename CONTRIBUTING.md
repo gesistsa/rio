@@ -1,5 +1,7 @@
 # NA
 
+## Contributing to `rio`
+
 Contributions to **rio** are welcome from anyone and are best sent as
 pull requests on [the GitHub
 repository](https://github.com/gesistsa/rio/). This page provides some

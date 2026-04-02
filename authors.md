@@ -46,7 +46,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/gesistsa/rio/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/gesistsa/rio/blob/v1.3.0/inst/CITATION)
 
 Chan C, Leeper T, Becker J, Schoch D (2023). *rio: A Swiss-army knife
 for data file I/O*. <https://cran.r-project.org/package=rio>.

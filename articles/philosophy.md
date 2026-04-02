@@ -91,5 +91,6 @@ is probably willing to make. Eight of these are important:
     infrastructure. This means that other packages can contain
     extensions to **rio** by registering S3 methods. These methods
     should take the form `.import.rio_X()` and `.export.rio_X()`, where
-    `X` is the file extension of a file type. An example is provided in
-    the [rio.db package](https://github.com/leeper/rio.db).
+    `X` is the file extension of a file type. Please refer to the
+    “Extending rio” vignette
+    ([`vignette(topic = "extension", package = "rio")`](http://gesistsa.github.io/rio/articles/extension.md)).
