@@ -87,7 +87,7 @@ parse_archive <- function(file, which, file_type, ...) {
         extract_func(file, files = file_list[which], exdir = d)
         return(file.path(d, file_list[which]))
     }
-    if (substring(which, 1, 1) != "^") {
+    if (!startsWith(which, "^")) {
         which2 <- paste0("^", which)
     }
     extract_func(file, files = file_list[grep(which2, file_list)[1]], exdir = d)
