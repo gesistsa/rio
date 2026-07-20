@@ -26,7 +26,7 @@ uninstalled_formats <- function() {
 show_unsupported_formats <- function() {
     ## default_formats <- sort(unique(rio_formats$format[rio_formats$type == "import"]))
     suggested_formats <- rio_formats[rio_formats$type == "suggest",]
-    suggested_formats$pkg <- vapply(strsplit(suggested_formats$import_function, "::"), FUN = `[`, FUN.VALUE = character(1), 1)
+    suggested_formats$pkg <- vapply(strsplit(suggested_formats$import_function, "::", fixed = TRUE), FUN = `[`, FUN.VALUE = character(1), 1)
     missing_pkgs <- uninstalled_formats()
     suggested_formats$installed <- vapply(suggested_formats$pkg, function(x) x %in% missing_pkgs, logical(1), USE.NAMES = FALSE)
     unsupported_formats <- suggested_formats[suggested_formats$installed,]

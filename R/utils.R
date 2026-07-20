@@ -25,7 +25,7 @@ get_info <- function(file) {
     if (tolower(file) == "clipboard") {
         return(.query_format(input = "clipboard", file = "clipboard"))
     }
-    if (isFALSE(R.utils::isUrl(file))) {
+    if (!R.utils::isUrl(file)) {
         ext <- tolower(tools::file_ext(file))
     } else {
         parsed <- strsplit(strsplit(file, "?", fixed = TRUE)[[1]][1], "/", fixed = TRUE)[[1]]
@@ -90,16 +90,16 @@ escape_xml <- function(x, replacement = c("&amp;", "&quot;", "&lt;", "&gt;", "&a
 
 .check_file <- function(file, single_only = TRUE) {
     ## check the `file` argument
-    if (isTRUE(missing(file))) { ## for the case of export(iris, format = "csv")
+    if (missing(file)) { ## for the case of export(iris, format = "csv")
         return(invisible(NULL))
     }
-    if (isFALSE(inherits(file, "character"))) {
+    if (!inherits(file, "character")) {
         stop("Invalid `file` argument: must be character", call. = FALSE)
     }
-    if (isFALSE(length(file) == 1) && single_only) {
+    if (length(file) != 1 && single_only) {
         stop("Invalid `file` argument: `file` must be single", call. = FALSE)
     }
-    if (any(is.na(file))) {
+    if (anyNA(file)) {
         stop("Invalid `file` argument: `file` must not be NA", call. = FALSE)
     }
     invisible(NULL)

@@ -87,7 +87,7 @@ parse_archive <- function(file, which, file_type, ...) {
         extract_func(file, files = file_list[which], exdir = d)
         return(file.path(d, file_list[which]))
     }
-    if (substring(which, 1, 1) != "^") {
+    if (!startsWith(which, "^")) {
         which2 <- paste0("^", which)
     }
     extract_func(file, files = file_list[grep(which2, file_list)[1]], exdir = d)
@@ -137,8 +137,8 @@ parse_archive <- function(file, which, file_type, ...) {
 
 .get_compressed_format <- function(cfile, file, file_type, format) {
     if (file_type %in% c("gzip", "bzip2")) {
-        return(ifelse(isFALSE(missing(format)), tolower(format), get_info(find_compress(cfile)$file)$input))
+        return(ifelse(!missing(format), tolower(format), get_info(find_compress(cfile)$file)$input))
     }
     ## zip or tar formats, use the decompressed file path
-    return(ifelse(isFALSE(missing(format)), tolower(format), get_info(file)$input))
+    return(ifelse(!missing(format), tolower(format), get_info(file)$input))
 }

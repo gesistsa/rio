@@ -46,7 +46,7 @@ set_class <- function(x, class = NULL) {
         return(out)
     }
     if (!length(rownames(out))) {
-        rownames(out) <- as.character(seq_len(length(out[, 1L, drop = TRUE])))
+        rownames(out) <- as.character(seq_along(out[, 1L, drop = TRUE]))
     }
     return(out)
 }
