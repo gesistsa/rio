@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>A Swiss-Army Knife for Data I/O • rio</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
 <link href="deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -165,7 +165,7 @@
 <col width="5%">
 <col width="22%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th align="left">Name</th>
 <th align="left">Extensions / “format”</th>
 <th align="left">Import Package</th>
@@ -174,7 +174,7 @@
 <th align="left">Note</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td align="left">Archive files (handled by tar)</td>
 <td align="left">tar / tar.gz / tgz / tar.bz2 / tbz2</td>
 <td align="left">utils</td>
@@ -182,7 +182,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Bzip2</td>
 <td align="left">bz2 / bzip2</td>
 <td align="left">base</td>
@@ -190,7 +190,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Gzip</td>
 <td align="left">gz / gzip</td>
 <td align="left">base</td>
@@ -198,7 +198,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Zip files</td>
 <td align="left">zip</td>
 <td align="left">utils</td>
@@ -206,7 +206,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Ambiguous file format</td>
 <td align="left">dat</td>
 <td align="left">data.table</td>
@@ -214,7 +214,7 @@
 <td align="left">Default</td>
 <td align="left">Attempt as delimited text data</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">CSVY (CSV + YAML metadata header)</td>
 <td align="left">csvy</td>
 <td align="left">data.table</td>
@@ -222,7 +222,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Comma-separated data</td>
 <td align="left">csv</td>
 <td align="left">data.table</td>
@@ -230,7 +230,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Comma-separated data (European)</td>
 <td align="left">csv2</td>
 <td align="left">data.table</td>
@@ -238,7 +238,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Data Interchange Format</td>
 <td align="left">dif</td>
 <td align="left">utils</td>
@@ -246,7 +246,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Epiinfo</td>
 <td align="left">epiinfo / rec</td>
 <td align="left">foreign</td>
@@ -254,7 +254,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Excel</td>
 <td align="left">excel / xlsx</td>
 <td align="left">readxl</td>
@@ -262,7 +262,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Excel (Legacy)</td>
 <td align="left">xls</td>
 <td align="left">readxl</td>
@@ -270,7 +270,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Excel (Read only)</td>
 <td align="left">xlsm / xltx / xltm</td>
 <td align="left">readxl</td>
@@ -278,7 +278,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Fixed-width format data</td>
 <td align="left">fwf</td>
 <td align="left">readr</td>
@@ -286,7 +286,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Fortran data</td>
 <td align="left">fortran</td>
 <td align="left">utils</td>
@@ -294,7 +294,7 @@
 <td align="left">Default</td>
 <td align="left">No recognized extension</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Google Sheets</td>
 <td align="left">googlesheets</td>
 <td align="left">data.table</td>
@@ -302,7 +302,7 @@
 <td align="left">Default</td>
 <td align="left">As comma-separated data</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Minitab</td>
 <td align="left">minitab / mtp</td>
 <td align="left">foreign</td>
@@ -310,7 +310,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Pipe-separated data</td>
 <td align="left">psv</td>
 <td align="left">data.table</td>
@@ -318,7 +318,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">R syntax</td>
 <td align="left">r</td>
 <td align="left">base</td>
@@ -326,7 +326,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">SAS</td>
 <td align="left">sas / sas7bdat</td>
 <td align="left">haven</td>
@@ -334,7 +334,7 @@
 <td align="left">Default</td>
 <td align="left">Export is deprecated</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">SAS XPORT</td>
 <td align="left">xport / xpt</td>
 <td align="left">haven</td>
@@ -342,7 +342,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">SPSS</td>
 <td align="left">sav / spss</td>
 <td align="left">haven</td>
@@ -350,7 +350,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">SPSS (compressed)</td>
 <td align="left">zsav</td>
 <td align="left">haven</td>
@@ -358,7 +358,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">SPSS Portable</td>
 <td align="left">por</td>
 <td align="left">haven</td>
@@ -366,7 +366,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Saved R objects</td>
 <td align="left">rda / rdata</td>
 <td align="left">base</td>
@@ -374,7 +374,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Serialized R objects</td>
 <td align="left">rds</td>
 <td align="left">base</td>
@@ -382,7 +382,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Stata</td>
 <td align="left">dta / stata</td>
 <td align="left">haven</td>
@@ -390,7 +390,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Systat</td>
 <td align="left">syd / systat</td>
 <td align="left">foreign</td>
@@ -398,7 +398,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Tab-separated data</td>
 <td align="left">/ tsv / txt</td>
 <td align="left">data.table</td>
@@ -406,7 +406,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Text Representations of R Objects</td>
 <td align="left">dump</td>
 <td align="left">base</td>
@@ -414,7 +414,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Weka Attribute-Relation File Format</td>
 <td align="left">arff / weka</td>
 <td align="left">foreign</td>
@@ -422,7 +422,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">XBASE database files</td>
 <td align="left">dbf</td>
 <td align="left">foreign</td>
@@ -430,7 +430,7 @@
 <td align="left">Default</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Apache Arrow (Parquet)</td>
 <td align="left">parquet</td>
 <td align="left">nanoparquet</td>
@@ -438,7 +438,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Clipboard</td>
 <td align="left">clipboard</td>
 <td align="left">clipr</td>
@@ -446,7 +446,7 @@
 <td align="left">Suggest</td>
 <td align="left">default is tsv</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">EViews</td>
 <td align="left">eviews / wf1</td>
 <td align="left">hexView</td>
@@ -454,7 +454,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Fast Storage</td>
 <td align="left">fst</td>
 <td align="left">fst</td>
@@ -462,7 +462,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Feather R/Python interchange format</td>
 <td align="left">feather</td>
 <td align="left">arrow</td>
@@ -470,7 +470,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Graphpad Prism</td>
 <td align="left">pzfx</td>
 <td align="left">pzfx</td>
@@ -478,7 +478,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">HTML Tables</td>
 <td align="left">htm / html</td>
 <td align="left">xml2</td>
@@ -486,7 +486,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">JSON</td>
 <td align="left">json</td>
 <td align="left">jsonlite</td>
@@ -494,7 +494,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Matlab</td>
 <td align="left">mat / matlab</td>
 <td align="left">rmatio</td>
@@ -502,7 +502,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">OpenDocument Spreadsheet</td>
 <td align="left">ods</td>
 <td align="left">readODS</td>
@@ -510,7 +510,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">OpenDocument Spreadsheet (Flat)</td>
 <td align="left">fods</td>
 <td align="left">readODS</td>
@@ -518,7 +518,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Serialized R objects (qs2)</td>
 <td align="left">qs2</td>
 <td align="left">qs2</td>
@@ -526,7 +526,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Shallow XML documents</td>
 <td align="left">xml</td>
 <td align="left">xml2</td>
@@ -534,7 +534,7 @@
 <td align="left">Suggest</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">YAML</td>
 <td align="left">yaml / yml</td>
 <td align="left">yaml</td>

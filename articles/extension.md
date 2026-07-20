@@ -1,6 +1,7 @@
 # Extending rio
 
 ``` r
+
 library(rio)
 ```
 
@@ -34,6 +35,7 @@ The following example shows how the arff import and export methods are
 implemented internally.
 
 ``` r
+
 .import.rio_arff <- function(file, which = 1, ...) {
     foreign::read.arff(file = file)
 }
@@ -48,6 +50,7 @@ This is the example from the `ledger` package (MIT) by Dr Trevor L David
 .
 
 ``` r
+
 .import.rio_ledger <- register # nolint
 register <- function(file, ..., toolchain = default_toolchain(file), date = NULL) {
     .assert_toolchain(toolchain)

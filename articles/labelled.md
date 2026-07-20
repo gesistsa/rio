@@ -1,6 +1,7 @@
 # Working with labelled data
 
 ``` r
+
 library(rio)
 library(haven)
 ```
@@ -17,6 +18,7 @@ You can use
 to create labelled data.
 
 ``` r
+
 gender <- haven::labelled(
                      c("M", "F", "F", "F", "M"),
                      c(Male = "M", Female = "F"))
@@ -25,11 +27,13 @@ gender <- haven::labelled(
 Or directly using `attrs`
 
 ``` r
+
 rating <- sample(1:5)
 attr(rating, "labels") <-  c(c(Good = 1, Bad = 5))
 ```
 
 ``` r
+
 mydata <- data.frame(gender, rating)
 ```
 
@@ -37,6 +41,7 @@ Round trip: The data labels are retained. But they are at the variable
 level.
 
 ``` r
+
 export(mydata, "mydata.sav")
 restored_data <- rio::import("mydata.sav")
 str(restored_data)
@@ -55,6 +60,7 @@ str(restored_data)
 converts attributes to the data.frame level
 
 ``` r
+
 g <- rio::gather_attrs(restored_data)
 str(g)
 #> 'data.frame':    5 obs. of  2 variables:

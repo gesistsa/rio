@@ -43,59 +43,60 @@ by default. To ensure rio is fully functional, install these packages
 the first time you use **rio** via:
 
 ``` r
+
 install_formats()
 ```
 
 The full list of supported formats is below:
 
-| Name                                | Extensions / “format”               | Import Package | Export Package | Type    | Note                           |
-|:------------------------------------|:------------------------------------|:---------------|:---------------|:--------|:-------------------------------|
-| Archive files (handled by tar)      | tar / tar.gz / tgz / tar.bz2 / tbz2 | utils          | utils          | Default |                                |
-| Bzip2                               | bz2 / bzip2                         | base           | base           | Default |                                |
-| Gzip                                | gz / gzip                           | base           | base           | Default |                                |
-| Zip files                           | zip                                 | utils          | utils          | Default |                                |
-| Ambiguous file format               | dat                                 | data.table     |                | Default | Attempt as delimited text data |
-| CSVY (CSV + YAML metadata header)   | csvy                                | data.table     | data.table     | Default |                                |
-| Comma-separated data                | csv                                 | data.table     | data.table     | Default |                                |
-| Comma-separated data (European)     | csv2                                | data.table     | data.table     | Default |                                |
-| Data Interchange Format             | dif                                 | utils          |                | Default |                                |
-| Epiinfo                             | epiinfo / rec                       | foreign        |                | Default |                                |
-| Excel                               | excel / xlsx                        | readxl         | writexl        | Default |                                |
-| Excel (Legacy)                      | xls                                 | readxl         |                | Default |                                |
-| Excel (Read only)                   | xlsm / xltx / xltm                  | readxl         |                | Default |                                |
-| Fixed-width format data             | fwf                                 | readr          | utils          | Default |                                |
-| Fortran data                        | fortran                             | utils          |                | Default | No recognized extension        |
-| Google Sheets                       | googlesheets                        | data.table     |                | Default | As comma-separated data        |
-| Minitab                             | minitab / mtp                       | foreign        |                | Default |                                |
-| Pipe-separated data                 | psv                                 | data.table     | data.table     | Default |                                |
-| R syntax                            | r                                   | base           | base           | Default |                                |
-| SAS                                 | sas / sas7bdat                      | haven          | haven          | Default | Export is deprecated           |
-| SAS XPORT                           | xport / xpt                         | haven          | haven          | Default |                                |
-| SPSS                                | sav / spss                          | haven          | haven          | Default |                                |
-| SPSS (compressed)                   | zsav                                | haven          | haven          | Default |                                |
-| SPSS Portable                       | por                                 | haven          |                | Default |                                |
-| Saved R objects                     | rda / rdata                         | base           | base           | Default |                                |
-| Serialized R objects                | rds                                 | base           | base           | Default |                                |
-| Stata                               | dta / stata                         | haven          | haven          | Default |                                |
-| Systat                              | syd / systat                        | foreign        |                | Default |                                |
-| Tab-separated data                  | / tsv / txt                         | data.table     | data.table     | Default |                                |
-| Text Representations of R Objects   | dump                                | base           | base           | Default |                                |
-| Weka Attribute-Relation File Format | arff / weka                         | foreign        | foreign        | Default |                                |
-| XBASE database files                | dbf                                 | foreign        | foreign        | Default |                                |
-| Apache Arrow (Parquet)              | parquet                             | nanoparquet    | nanoparquet    | Suggest |                                |
-| Clipboard                           | clipboard                           | clipr          | clipr          | Suggest | default is tsv                 |
-| EViews                              | eviews / wf1                        | hexView        |                | Suggest |                                |
-| Fast Storage                        | fst                                 | fst            | fst            | Suggest |                                |
-| Feather R/Python interchange format | feather                             | arrow          | arrow          | Suggest |                                |
-| Graphpad Prism                      | pzfx                                | pzfx           | pzfx           | Suggest |                                |
-| HTML Tables                         | htm / html                          | xml2           | xml2           | Suggest |                                |
-| JSON                                | json                                | jsonlite       | jsonlite       | Suggest |                                |
-| Matlab                              | mat / matlab                        | rmatio         | rmatio         | Suggest |                                |
-| OpenDocument Spreadsheet            | ods                                 | readODS        | readODS        | Suggest |                                |
-| OpenDocument Spreadsheet (Flat)     | fods                                | readODS        | readODS        | Suggest |                                |
-| Serialized R objects (qs2)          | qs2                                 | qs2            | qs2            | Suggest |                                |
-| Shallow XML documents               | xml                                 | xml2           | xml2           | Suggest |                                |
-| YAML                                | yaml / yml                          | yaml           | yaml           | Suggest |                                |
+| Name | Extensions / “format” | Import Package | Export Package | Type | Note |
+|:---|:---|:---|:---|:---|:---|
+| Archive files (handled by tar) | tar / tar.gz / tgz / tar.bz2 / tbz2 | utils | utils | Default |  |
+| Bzip2 | bz2 / bzip2 | base | base | Default |  |
+| Gzip | gz / gzip | base | base | Default |  |
+| Zip files | zip | utils | utils | Default |  |
+| Ambiguous file format | dat | data.table |  | Default | Attempt as delimited text data |
+| CSVY (CSV + YAML metadata header) | csvy | data.table | data.table | Default |  |
+| Comma-separated data | csv | data.table | data.table | Default |  |
+| Comma-separated data (European) | csv2 | data.table | data.table | Default |  |
+| Data Interchange Format | dif | utils |  | Default |  |
+| Epiinfo | epiinfo / rec | foreign |  | Default |  |
+| Excel | excel / xlsx | readxl | writexl | Default |  |
+| Excel (Legacy) | xls | readxl |  | Default |  |
+| Excel (Read only) | xlsm / xltx / xltm | readxl |  | Default |  |
+| Fixed-width format data | fwf | readr | utils | Default |  |
+| Fortran data | fortran | utils |  | Default | No recognized extension |
+| Google Sheets | googlesheets | data.table |  | Default | As comma-separated data |
+| Minitab | minitab / mtp | foreign |  | Default |  |
+| Pipe-separated data | psv | data.table | data.table | Default |  |
+| R syntax | r | base | base | Default |  |
+| SAS | sas / sas7bdat | haven | haven | Default | Export is deprecated |
+| SAS XPORT | xport / xpt | haven | haven | Default |  |
+| SPSS | sav / spss | haven | haven | Default |  |
+| SPSS (compressed) | zsav | haven | haven | Default |  |
+| SPSS Portable | por | haven |  | Default |  |
+| Saved R objects | rda / rdata | base | base | Default |  |
+| Serialized R objects | rds | base | base | Default |  |
+| Stata | dta / stata | haven | haven | Default |  |
+| Systat | syd / systat | foreign |  | Default |  |
+| Tab-separated data | / tsv / txt | data.table | data.table | Default |  |
+| Text Representations of R Objects | dump | base | base | Default |  |
+| Weka Attribute-Relation File Format | arff / weka | foreign | foreign | Default |  |
+| XBASE database files | dbf | foreign | foreign | Default |  |
+| Apache Arrow (Parquet) | parquet | nanoparquet | nanoparquet | Suggest |  |
+| Clipboard | clipboard | clipr | clipr | Suggest | default is tsv |
+| EViews | eviews / wf1 | hexView |  | Suggest |  |
+| Fast Storage | fst | fst | fst | Suggest |  |
+| Feather R/Python interchange format | feather | arrow | arrow | Suggest |  |
+| Graphpad Prism | pzfx | pzfx | pzfx | Suggest |  |
+| HTML Tables | htm / html | xml2 | xml2 | Suggest |  |
+| JSON | json | jsonlite | jsonlite | Suggest |  |
+| Matlab | mat / matlab | rmatio | rmatio | Suggest |  |
+| OpenDocument Spreadsheet | ods | readODS | readODS | Suggest |  |
+| OpenDocument Spreadsheet (Flat) | fods | readODS | readODS | Suggest |  |
+| Serialized R objects (qs2) | qs2 | qs2 | qs2 | Suggest |  |
+| Shallow XML documents | xml | xml2 | xml2 | Suggest |  |
+| YAML | yaml / yml | yaml | yaml | Suggest |  |
 
 Additionally, any format that is not supported by **rio** but that has a
 known R implementation will produce an informative error message
@@ -112,6 +113,7 @@ import function for you, returning a simple data.frame. This works for
 any for the formats listed above.
 
 ``` r
+
 library("rio")
 
 x <- import("mtcars.csv")
@@ -130,6 +132,7 @@ read in a CSV file that does not have a file extension by specifying
 `csv`:
 
 ``` r
+
 head(import("mtcars_noext", format = "csv"))
 ```
 
@@ -151,6 +154,7 @@ can be used to import a vector of file names into R. This works even if
 the files are different formats:
 
 ``` r
+
 str(import_list(dir()), 1)
 ```
 
@@ -177,6 +181,7 @@ other applications. That said, **rio** currently supports the following
 formats:
 
 ``` r
+
 library("rio")
 
 export(mtcars, "mtcars.csv")
@@ -191,6 +196,7 @@ code uses
 the results of a simple data transformation:
 
 ``` r
+
 library("magrittr")
 mtcars %>%
   subset(hp > 100) %>%
@@ -204,6 +210,7 @@ multiple data objects in a single file.
 supports output of multiple objects to these types of files:
 
 ``` r
+
 # export to sheets of an Excel workbook
 export(list(mtcars = mtcars, iris = iris), "multi.xlsx")
 ```
@@ -214,6 +221,7 @@ to write a list of data frames to multiple files using either a vector
 of file names or a file pattern:
 
 ``` r
+
 export_list(list(mtcars = mtcars, iris = iris), "%s.tsv")
 ```
 
@@ -237,6 +245,7 @@ just a thin wrapper for
 very easy to use. For example, we can convert
 
 ``` r
+
 # create file to convert
 export(mtcars, "mtcars.dta")
 
@@ -252,6 +261,7 @@ in a fixed-width format file and converting it to a comma-separated
 values file:
 
 ``` r
+
 # create an ambiguous file
 fwf <- tempfile(fileext = ".fwf")
 cat(file = fwf, "123456", "987654", sep = "\n")
@@ -288,6 +298,7 @@ identical(import(fwf, widths = c(1, 2, 3)), import(fwf, widths = c(1, -2, 3)))
     ## [1] FALSE
 
 ``` r
+
 # convert to CSV
 convert(fwf, "fwf.csv", in_opts = list(widths = c(1, 2, 3)))
 ```
@@ -301,6 +312,7 @@ convert(fwf, "fwf.csv", in_opts = list(widths = c(1, 2, 3)))
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
+
 import("fwf.csv") # check conversion
 ```
 

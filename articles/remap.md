@@ -6,15 +6,16 @@ There are two conventions of arguments among the underlying functions
 used by `rio`. Let’s call them *Base Convention* and *“Tidy”
 Convention*.
 
-| Convention | file location | selection of sheet | header      | examples                                                                                                                                                                                                                                      |
-|------------|---------------|--------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Base       | `file`        | `which`            | `header`    | [`clipr::read_clip_tbl`](http://matthewlincoln.net/clipr/reference/read_clip_tbl.md)                                                                                                                                                          |
-| “Tidy”     | `path`        | `sheet`            | `col_names` | [`readxl::read_xlsx`](https://readxl.tidyverse.org/reference/read_excel.html), [`readxl::read_xls`](https://readxl.tidyverse.org/reference/read_excel.html), [`readODS::read_ods`](https://docs.ropensci.org/readODS/reference/read_ods.html) |
+| Convention | file location | selection of sheet | header | examples |
+|----|----|----|----|----|
+| Base | `file` | `which` | `header` | [`clipr::read_clip_tbl`](http://matthewlincoln.net/clipr/reference/read_clip_tbl.md) |
+| “Tidy” | `path` | `sheet` | `col_names` | [`readxl::read_xlsx`](https://readxl.tidyverse.org/reference/read_excel.html), [`readxl::read_xls`](https://readxl.tidyverse.org/reference/read_excel.html), [`readODS::read_ods`](https://docs.ropensci.org/readODS/reference/read_ods.html) |
 
 `rio` can map Base Convention into “Tidy” Convention (but not vice
 versa).
 
 ``` r
+
 library(rio)
 export(list("mtcars" = mtcars, "iris" = iris), "example.xlsx")
 import("example.xlsx", which = "mtcars")
@@ -57,6 +58,7 @@ But you can still use the “Tidy” Convention, if the underlying function
 supports it.
 
 ``` r
+
 import("example.xlsx", sheet = "mtcars")
 #>     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #> 1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
@@ -99,6 +101,7 @@ Additional parameters are usually passed to the underlying function as
 ellipsis (`...`).
 
 ``` r
+
 ## n_max is an argument of readxl::read_xlsx
 import("example.xlsx", sheet = "iris", n_max = 10)
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -118,6 +121,7 @@ Parameters that the underlying function do not recognize are silently
 ignored by default.
 
 ``` r
+
 import("example.xlsx", sheet = "iris", n_max = 10, pizza = "pineapple")
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #> 1           5.1         3.5          1.4         0.2  setosa
@@ -137,6 +141,7 @@ If you don’t like this behavior, please change the option
 i.e. `options(rio.ignoreunusedargs = FALSE)`.
 
 ``` r
+
 options(rio.ignoreunusedargs = FALSE)
 import("example.xlsx", sheet = "iris", n_max = 10, pizza = "pineapple")
 ```
