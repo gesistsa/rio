@@ -115,7 +115,7 @@ export_delim <- function(file, x, fwrite = lifecycle::deprecated(), sep = "\t", 
 
 #' @export
 .export.rio_rdata <- function(file, x, ...) {
-    if (isFALSE(is.data.frame(x)) && isFALSE(is.list(x)) && isFALSE(is.environment(x)) && isFALSE(is.character(x))) {
+    if (!(is.data.frame(x) || is.list(x) || is.environment(x) || is.character(x))) {
         stop("'x' must be a data.frame, list, or environment")
     }
     if (is.data.frame(x)) {

@@ -98,7 +98,7 @@ import_delim <- function(file, which = 1, sep = "auto", header = "auto", strings
 }
 
 .fix_col_types <- function(col_types, widths) {
-    if (isFALSE(is.numeric(widths))) {
+    if (!is.numeric(widths)) {
         return(col_types)
     }
     col_types <- rep("?", length(widths))
