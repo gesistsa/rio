@@ -1,5 +1,5 @@
 standardize_attributes <- function(dat) {
-    out <- dat
+    out <- legacy_haven_meta(dat)
     a <- attributes(out)
     if ("variable.labels" %in% names(a)) {
         names(a)[names(a) == "variable.labels"] <- "var.labels"
@@ -12,6 +12,7 @@ standardize_attributes <- function(dat) {
     attr(out, "types") <- NULL
     attr(out, "label.table") <- NULL
     for (i in seq_along(out)) {
+        out[[i]] <- legacy_haven_meta(out[[i]])
         if ("value.labels" %in% names(attributes(out[[i]]))) {
             attr(out[[i]], "labels") <- attr(out[[i]], "value.labels", exact = TRUE)
             attr(out[[i]], "value.labels") <- NULL
@@ -33,6 +34,27 @@ standardize_attributes <- function(dat) {
         }
     }
     out
+}
+
+# Newer haven stores metadata in the S7 "haven_meta" attribute; convert it
+# back to the attributes set by earlier versions
+legacy_haven_meta <- function(x) {
+    meta <- attr(x, "haven_meta", exact = TRUE)
+    if (is.null(meta)) {
+        return(x)
+    }
+    attr(x, "haven_meta") <- NULL
+    if (is.data.frame(x)) {
+        attr(x, "notes") <- attr(meta, "notes", exact = TRUE)
+    } else {
+        vendor <- sub("^haven::meta_var_", "", class(meta)[1L])
+        attr(x, paste0("format.", vendor)) <- attr(meta, "format", exact = TRUE)
+        display_width <- attr(meta, "display_width", exact = TRUE)
+        if (!is.null(display_width) && display_width != 8L) {
+            attr(x, "display_width") <- display_width
+        }
+    }
+    x
 }
 
 restore_labelled <- function(x) {
