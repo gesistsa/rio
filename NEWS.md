@@ -1,3 +1,9 @@
+# rio 1.3.1
+
+* Code quality fixes h/t Hugo Gruson #486
+* Fixes for `haven`'s upcoming update h/t Hadley Wickam and his AI #488
+* CRAN release
+
 # rio 1.3.0
 
 * CRAN release
